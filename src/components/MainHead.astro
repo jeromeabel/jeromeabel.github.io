@@ -14,10 +14,13 @@ const {
     baseTitle = 'Jérôme Abel',
 	description = 'The portfolio of Jérôme Abel, a Front-end developer with a background in interactive & electronic arts',
     link = 'https://jeromeabel.github.io/',
-    image = "/img/social.jpg"
+    image = "/images/social.jpg"
 } = Astro.props as Props;
 
 const title = `${page} - ${baseTitle}`;
+
+const imageURL = new URL('/images/social.jpg', Astro.url);
+
 ---
 
         <meta charset="utf-8" />
@@ -46,12 +49,12 @@ const title = `${page} - ${baseTitle}`;
         <meta property="og:url" content={link}>
         <meta property="og:title" content={title}>
         <meta property="og:description" content={description}>
-        <meta property="og:image" content={image}>
+        <meta property="og:image" content={imageURL}>
 
         <!-- Twitter -->
         <meta property="twitter:card" content="summary_large_image">
         <meta property="twitter:url" content={link}>
         <meta property="twitter:title" content={title}>
         <meta property="twitter:description" content={description}>
-        <meta property="twitter:image" content={image}>
+        <meta property="twitter:image" content={imageURL}>
         
