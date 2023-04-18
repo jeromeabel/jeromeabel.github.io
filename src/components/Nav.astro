@@ -1,0 +1,23 @@
+---
+const links: {label:string, href:string}[] = [
+	{ label: 'Home', href: '/' },
+	{ label: 'Work', href: '/work/' },
+	{ label: 'About', href: '/about/' },
+];
+---
+<nav>
+    <ul>
+    { links.map(({ label, href }) => (
+        <li>
+			<a
+		    	aria-current={Astro.url.pathname === href}
+			    class:list={[ 'link', { 
+                    active: Astro.url.pathname === href || (href !== '/' && Astro.url.pathname.startsWith(href)),
+                    },]}
+				href={href}>
+                    {label}
+			</a>
+		</li>
+	))}
+    </ul>
+</nav>
