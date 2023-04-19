@@ -4,7 +4,7 @@ interface Props {
 	tagline?: string;
 }
 
-const { tagline, title } = Astro.props as Props;
+const { tagline, title } = Astro.props;
 ---
 <header>
 	<div class="stack gap-2">
@@ -12,6 +12,3 @@ const { tagline, title } = Astro.props as Props;
 		{tagline && <p class="tagline">{tagline}</p>}
 	</div>
 </header>
-<!-- <Pill><Icon icon="code" size="1.33em" /> Developer</Pill>
-<Pill><Icon icon="microphone-stage" size="1.33em" /> Speaker</Pill>
-<Pill><Icon icon="pencil-line" size="1.33em" /> Writer</Pill> -->

@@ -1,25 +1,19 @@
 ---
-import '../styles/global.css';
 
 export interface Props {
-	baseTitle?: string | undefined;
     page?: string |undefined;
 	description?: string | undefined;
-    url?: URL | string;
-    image?: string | undefined;
 }
 
 const {
-    baseTitle = 'Jérôme Abel',
 	page = 'Home',
 	description = 'The portfolio of Jérôme Abel, a Front-end developer with a background in interactive & electronic arts',
-    url = 'https://jeromeabel.github.io/',
-    image = "/social.jpg"
 } = Astro.props;
 
-const title = `${page} - ${baseTitle}`;
-const imageURL = new URL(image, Astro.url);
-const canonicalURL = Astro.props.url || new URL(Astro.url.pathname, Astro.site);
+const title = `${page} | Jérôme Abel`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const socialImageURL = new URL('/social.jpg', Astro.url);
+
 ---
 
         <meta charset="utf-8" />
@@ -48,12 +42,12 @@ const canonicalURL = Astro.props.url || new URL(Astro.url.pathname, Astro.site);
         <meta property="og:url" content={canonicalURL}>
         <meta property="og:title" content={title}>
         <meta property="og:description" content={description}>
-        <meta property="og:image" content={imageURL}>
+        <meta property="og:image" content={socialImageURL}>
 
         <!-- Twitter -->
         <meta property="twitter:card" content="summary_large_image">
         <meta property="twitter:url" content={canonicalURL}>
         <meta property="twitter:title" content={title}>
         <meta property="twitter:description" content={description}>
-        <meta property="twitter:image" content={imageURL}>
+        <meta property="twitter:image" content={socialImageURL}>
         
