@@ -5,19 +5,49 @@ const isActive = Astro.url.pathname === href || (href !== '/' && Astro.url.pathn
 
 ---								
 <a 
-    class={` ${isActive ? 'active' : ''} flex p-2 hover:border-b-2 hover:border-black border-b-2 border-white`} 
+    class={` ${isActive ? 'active' : ''} flex p-2 nav-link text-gray-500  border-transparent hover:border-b-2 hover:border-gray-500 border-b-2`} 
     aria-label={label} 
     href={href}>
     <Icon pack="mdi" name={icon} size={24} /> 
     <span class="sr-only">{label}</span>
-    <!-- { label.toUpperCase() } hover:bg-black hover:text-white -->
+    <!-- { label.toUpperCase() } hover:bg-black hover:text-white 
+    
+   -->
 </a>
 
 
 <style>
     .active {
-         /* background-color: black;
+         /* 
+         background-color: black;
         color:white; */
+        color: black;
         border-bottom: 2px solid black;
+        /* transform-origin: left; */
+        /* animation:animRotate 300ms 100ms ease-in-out both; */
+        /* animation:animBg 300ms 20ms ease-in-out both; */
     }
+
+    .nav-link:hover {
+        /* color:rgb(0, 255, 0);
+        transition: color 300ms; */
+    }
+
+	@keyframes animRotate {
+		from { 
+			transform: rotate(0);
+		}
+		to { 
+			transform: rotate(180deg);
+		}
+	}
+
+    	@keyframes animBg {
+		from { 
+			color:black;
+		}
+		to { 
+			color:rgb(0, 255, 0);
+		}
+	}
 </style>

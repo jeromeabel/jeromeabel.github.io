@@ -4,6 +4,33 @@ dependencies:
   '@astrojs/tailwind':
     specifier: ^3.1.1
     version: 3.1.1(astro@2.3.0)(tailwindcss@3.3.1)
+  '@fontsource/alegreya':
+    specifier: ^4.5.11
+    version: 4.5.11
+  '@fontsource/alegreya-sans':
+    specifier: ^4.5.11
+    version: 4.5.11
+  '@fontsource/bubbler-one':
+    specifier: ^4.5.10
+    version: 4.5.10
+  '@fontsource/lora':
+    specifier: ^4.5.13
+    version: 4.5.13
+  '@fontsource/philosopher':
+    specifier: ^4.5.11
+    version: 4.5.11
+  '@fontsource/roboto':
+    specifier: ^4.5.8
+    version: 4.5.8
+  '@fontsource/rubik':
+    specifier: ^4.5.14
+    version: 4.5.14
+  '@fontsource/rubik-beastly':
+    specifier: ^4.5.12
+    version: 4.5.12
+  add:
+    specifier: ^2.0.6
+    version: 2.0.6
   astro:
     specifier: ^2.3.0
     version: 2.3.0
@@ -570,6 +597,38 @@ packages:
     dev: false
     optional: true
 
+  /@fontsource/alegreya-sans@4.5.11:
+    resolution: {integrity: sha512-7J1Csa429q0FHIhFFQb5uVuYmjBEY4D/X2lupTtTEb0lwQmsa4wAWWvKgLHVGWEGmNBGFxRvzaGI4+aW7HZI0g==}
+    dev: false
+
+  /@fontsource/alegreya@4.5.11:
+    resolution: {integrity: sha512-5Coej7W5qCTfJxceDKaiRTzOY+Fnumo+g/plntZWda3EDXtdbeq3TjSMLEanKcqOX68rktUOgfHXeWgahjoLww==}
+    dev: false
+
+  /@fontsource/bubbler-one@4.5.10:
+    resolution: {integrity: sha512-VvBbH7DK7x1/4Sy0xZ5f4xgws8G3/7dWhsjSm6ujs4/0s9NbihfZfoL5fOzX1vWveSBIL26WzKVMLOCill4xOw==}
+    dev: false
+
+  /@fontsource/lora@4.5.13:
+    resolution: {integrity: sha512-SV8z2btHCVpjfyLpuqHNyKH56YuzJdv0tjqbi/Mb7hkXGWgz44RuGYSNAoYCes9y2fzJ2zpYUwfCrvcAEjDqMQ==}
+    dev: false
+
+  /@fontsource/philosopher@4.5.11:
+    resolution: {integrity: sha512-tA7Pj+3US7l1KP7LWPMnYuMzDYp6v6BUybv4y2bx5LtcQlt0fgkhBRXa/28sHZbMcN3ah0t7dsfbhs0olIJcJA==}
+    dev: false
+
+  /@fontsource/roboto@4.5.8:
+    resolution: {integrity: sha512-CnD7zLItIzt86q4Sj3kZUiLcBk1dSk81qcqgMGaZe7SQ1P8hFNxhMl5AZthK1zrDM5m74VVhaOpuMGIL4gagaA==}
+    dev: false
+
+  /@fontsource/rubik-beastly@4.5.12:
+    resolution: {integrity: sha512-DHayhEQLJ18RMa5B69g74lA/9HMGVKeP2AleEdlnn8ost0o5yluXNmvn7TShFvS3TVUdSdiidtQgkbg/kKNrtw==}
+    dev: false
+
+  /@fontsource/rubik@4.5.14:
+    resolution: {integrity: sha512-EvMK3kkeAgKkk8qAeT4PjpyAYyu72pIlJm+SXJ5vR/xhCX2yj2xoq3+YS38rPmPcCAnrAVONoQ3ezLxVm6jhBA==}
+    dev: false
+
   /@jridgewell/gen-mapping@0.3.3:
     resolution: {integrity: sha512-HLhSWOLRi875zjjMG/r+Nv0oCW8umGb0BgEhyX3dDX3egwZtB8PqLnjz3yedt8R5StBrzcg4aBpnh8UA9D1BoQ==}
     engines: {node: '>=6.0.0'}
@@ -751,6 +810,10 @@ packages:
     resolution: {integrity: sha512-xjIYgE8HBrkpd/sJqOGNspf8uHG+NOHGOw6a/Urj8taM2EXfdNAH2oFcPeIFfsv3+kz/mJrS5VuMqbNLjCa2vw==}
     engines: {node: '>=0.4.0'}
     hasBin: true
+    dev: false
+
+  /add@2.0.6:
+    resolution: {integrity: sha512-j5QzrmsokwWWp6kUcJQySpbG+xfOBqqKnup3OIk1pz+kB/80SLorZ9V8zHFLO92Lcd+hbvq8bT+zOGoPkmBV0Q==}
     dev: false
 
   /ansi-align@3.0.1:
