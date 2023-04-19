@@ -33,8 +33,10 @@ img {
 	max-width: 100%;
 	height: auto;
 }
-
-
+svg {
+    height: auto;
+    width: 100%;
+  }
 
 /* Utilities */
 .sr-only {

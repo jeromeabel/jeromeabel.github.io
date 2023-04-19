@@ -1,24 +1,18 @@
 ---
-const navLinks: {label:string, href:string}[] = [
-	{ label: 'Home', href: '/' },
-	{ label: 'Projects', href: '/projects/' },
-	{ label: 'About', href: '/about/' },
+import Container from "./Container.astro";
+import MenuLink from "./MenuLink.astro";
+
+const navLinks: {label:string, href:string, icon:string }[] = [
+	{ label: 'Home', href: '/',  icon: 'triangle'}, // home 
+	{ label: 'Projects', href: '/projects/',  icon: 'square' }, //view-grid
+	{ label: 'About', href: '/about/',  icon: 'circle'}, //information
 ];
+
 ---
-<nav>
-    <ul>
-    { navLinks.map(({ label, href }) => (
-        <li>
-			<a
-		    	aria-current={Astro.url.pathname === href}
-			    class:list={[ 
-					'link', 
-					{ active: Astro.url.pathname === href || (href !== '/' && Astro.url.pathname.startsWith(href)),},
-					]}
-				href={href}>
-                    {label}
-			</a>
-		</li>
-	))}
-    </ul>
+<nav class="flex items-center justify-between container mx-auto p-6">
+		<MenuLink link={navLinks[0]} />
+		<ul class="flex gap-6">
+			<li><MenuLink link={navLinks[1]} /></li>
+			<li><MenuLink link={navLinks[2]} /></li>
+		</ul>
 </nav>

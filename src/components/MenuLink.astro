@@ -1,0 +1,23 @@
+---
+import { Icon } from 'astro-icon';
+const { label, href, icon } = Astro.props.link;
+const isActive = Astro.url.pathname === href || (href !== '/' && Astro.url.pathname.startsWith(href));
+
+---								
+<a 
+    class={` ${isActive ? 'active' : ''} flex p-2 hover:border-b-2 hover:border-black border-b-2 border-white`} 
+    aria-label={label} 
+    href={href}>
+    <Icon pack="mdi" name={icon} size={24} /> 
+    <span class="sr-only">{label}</span>
+    <!-- { label.toUpperCase() } hover:bg-black hover:text-white -->
+</a>
+
+
+<style>
+    .active {
+         /* background-color: black;
+        color:white; */
+        border-bottom: 2px solid black;
+    }
+</style>
