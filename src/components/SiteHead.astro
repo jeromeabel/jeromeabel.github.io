@@ -10,16 +10,16 @@ export interface Props {
 }
 
 const {
-	page = 'Home',
     baseTitle = 'Jérôme Abel',
+	page = 'Home',
 	description = 'The portfolio of Jérôme Abel, a Front-end developer with a background in interactive & electronic arts',
     link = 'https://jeromeabel.github.io/',
     image = "/images/social.jpg"
-} = Astro.props as Props;
+} = Astro.props;
 
 const title = `${page} - ${baseTitle}`;
 
-const imageURL = new URL('/images/social.jpg', Astro.url);
+const imageURL = new URL(image, Astro.url);
 
 ---
 
