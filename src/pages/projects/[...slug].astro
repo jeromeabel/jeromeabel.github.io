@@ -19,12 +19,13 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
 
-<BaseLayout>
-	
+<BaseLayout page={entry.data.title} >
 	<main>
 		<h1>{entry.data.title}</h1>
-<p>{entry.data.description}</p>
-
+		<p>{entry.data.description}</p>
+		<section>
+			<Content />
+		</section>
 	</main>
 </BaseLayout>
 
