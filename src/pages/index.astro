@@ -5,6 +5,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
 import ProjectCard from '../components/ProjectCard.astro';
 import Grid from '../components/Grid.astro';
+import BgNoise from '../components/BgNoise.astro';
 
 // Filter "home" meta data and sort
 const projects = (await getCollection('projects'))
@@ -14,10 +15,8 @@ const projects = (await getCollection('projects'))
 ---
 
 <BaseLayout>
-	<Hero 
-		title="Hi, I'm Jérôme Abel"
-		tagline="A Front-end developer with a +10 years backgound in interactive and electronic arts."
-	/>
+	<BgNoise />
+	<Hero />
 	<main>
         <h1>Projects</h1>
 			<Grid variant="offset">

@@ -1,14 +1,49 @@
 ---
-interface Props {
-	title: string;
-	tagline?: string;
-}
+// interface Props {
+// 	title: string;
+// 	tagline?: string;
+// }
 
-const { tagline, title } = Astro.props;
+// const { tagline, title } = Astro.props;
 ---
-<header>
-	<div class="stack gap-2">
-		<h1 class="title">{title}</h1>
-		{tagline && <p class="tagline">{tagline}</p>}
+<header  class="h-4/5 grid place-items-center">
+	<div class="container mx-auto">
+		<div class="w-2/3 align-left">
+			<h1>Hi, I'm <strong>Jérôme Abel</strong></h1>
+			<p class="text-5xl italic font-brand pt-4">
+				A <span class="tagline">Front-End Developer</span> with a +10-year<br/>background in interactive arts
+			</p> 
+		</div>
 	</div>
 </header>
+
+<style>
+	.tagline {
+		display: inline-block;
+		position: relative;
+		font-weight: 400;
+	}
+
+	.tagline::before{
+		position: absolute;
+		content:"";
+		/* background-color:rgba(0, 255, 68, 0.391); */
+		background-color:rgba(255, 255, 255, 1);
+		bottom:1px;
+		left:0;
+		right:0;
+		height:50%;
+		z-index:-1;
+		transform-origin: left;
+		animation:scaleX 1s 500ms ease-in-out both;
+	}
+
+	@keyframes scaleX {
+		from { 
+			transform: scaleX(0);
+		}
+		to { 
+			transform: scaleX(100%);
+		}
+	}
+</style>
