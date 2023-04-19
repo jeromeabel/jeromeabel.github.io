@@ -5,7 +5,7 @@ export interface Props {
 	baseTitle?: string | undefined;
     page?: string |undefined;
 	description?: string | undefined;
-    link?: string | undefined;
+    url?: URL | string;
     image?: string | undefined;
 }
 
@@ -13,14 +13,13 @@ const {
     baseTitle = 'Jérôme Abel',
 	page = 'Home',
 	description = 'The portfolio of Jérôme Abel, a Front-end developer with a background in interactive & electronic arts',
-    link = 'https://jeromeabel.github.io/',
-    image = "/images/social.jpg"
+    url = 'https://jeromeabel.github.io/',
+    image = "/social.jpg"
 } = Astro.props;
 
 const title = `${page} - ${baseTitle}`;
-
 const imageURL = new URL(image, Astro.url);
-
+const canonicalURL = Astro.props.url || new URL(Astro.url.pathname, Astro.site);
 ---
 
         <meta charset="utf-8" />
@@ -46,14 +45,14 @@ const imageURL = new URL(image, Astro.url);
 
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="website">
-        <meta property="og:url" content={link}>
+        <meta property="og:url" content={canonicalURL}>
         <meta property="og:title" content={title}>
         <meta property="og:description" content={description}>
         <meta property="og:image" content={imageURL}>
 
         <!-- Twitter -->
         <meta property="twitter:card" content="summary_large_image">
-        <meta property="twitter:url" content={link}>
+        <meta property="twitter:url" content={canonicalURL}>
         <meta property="twitter:title" content={title}>
         <meta property="twitter:description" content={description}>
         <meta property="twitter:image" content={imageURL}>
