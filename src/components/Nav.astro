@@ -1,8 +1,7 @@
 ---
-import Container from "./Container.astro";
-import MenuLink from "./MenuLink.astro";
+import NavLink from "./NavLink.astro";
 
-const navLinks: {label:string, href:string, icon:string }[] = [
+const navData: {label:string, href:string, icon:string }[] = [
 	{ label: 'Home', href: '/',  icon: 'triangle'}, // home 
 	{ label: 'Projects', href: '/projects/',  icon: 'square' }, //view-grid
 	{ label: 'About', href: '/about/',  icon: 'circle'}, //information
@@ -10,9 +9,9 @@ const navLinks: {label:string, href:string, icon:string }[] = [
 
 ---
 <nav class="flex items-center justify-between container mx-auto p-6">
-		<MenuLink link={navLinks[0]} />
+		<NavLink link={navData[0]} />
 		<ul class="flex gap-6">
-			<li><MenuLink link={navLinks[1]} /></li>
-			<li><MenuLink link={navLinks[2]} /></li>
+			<li><NavLink link={navData[1]} /></li>
+			<li><NavLink link={navData[2]} /></li>
 		</ul>
 </nav>
