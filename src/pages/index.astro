@@ -17,7 +17,7 @@ const projects = (await getCollection('projects'))
 ---
 
 <HomeLayout>
-	<BgNoise />
+	<!-- <BgNoise /> -->
 	<div class="h-screen flex flex-col justify-between">
 		<Nav />
 		<Hero /> 	
@@ -25,7 +25,7 @@ const projects = (await getCollection('projects'))
 	</div>
 
 	<main>
-		<div class="container mx-auto mt-16">
+		<div class="container mx-auto mt-16" id="projects">
         	<h1>Projects</h1>
 			<Grid variant="offset">
 				{

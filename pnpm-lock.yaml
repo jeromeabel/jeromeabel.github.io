@@ -13,6 +13,18 @@ dependencies:
   '@fontsource/bubbler-one':
     specifier: ^4.5.10
     version: 4.5.10
+  '@fontsource/ibm-plex-mono':
+    specifier: ^4.5.13
+    version: 4.5.13
+  '@fontsource/ibm-plex-sans':
+    specifier: ^4.5.13
+    version: 4.5.13
+  '@fontsource/inter':
+    specifier: ^4.5.15
+    version: 4.5.15
+  '@fontsource/inter-tight':
+    specifier: ^4.5.2
+    version: 4.5.2
   '@fontsource/lora':
     specifier: ^4.5.13
     version: 4.5.13
@@ -607,6 +619,22 @@ packages:
 
   /@fontsource/bubbler-one@4.5.10:
     resolution: {integrity: sha512-VvBbH7DK7x1/4Sy0xZ5f4xgws8G3/7dWhsjSm6ujs4/0s9NbihfZfoL5fOzX1vWveSBIL26WzKVMLOCill4xOw==}
+    dev: false
+
+  /@fontsource/ibm-plex-mono@4.5.13:
+    resolution: {integrity: sha512-KAE7X2LgCV4X6p7vj1h2phRnhPX4YUa8FBAB0Jj9xW7Q+p+k2ce4HEAMJJ2RFHI075ClgQx+KZuDBNuiKgp5yw==}
+    dev: false
+
+  /@fontsource/ibm-plex-sans@4.5.13:
+    resolution: {integrity: sha512-7oDAqvuIArnMJck/JBqCnQZwqL4za+5xG+1Gu4enYbGcGqmUPktiuOy1i0N3XrzrNO70ZvsSt1Rdkxr2oemE6Q==}
+    dev: false
+
+  /@fontsource/inter-tight@4.5.2:
+    resolution: {integrity: sha512-AsPr+i64Rc9ZV0loMliOX3W+fMbOp8qfcDeYde/WLue8BRlOBisnUYpWuBvXeOwVC7A45O94rgoyvfkdclZT0Q==}
+    dev: false
+
+  /@fontsource/inter@4.5.15:
+    resolution: {integrity: sha512-FzleM9AxZQK2nqsTDtBiY0PMEVWvnKnuu2i09+p6DHvrHsuucoV2j0tmw+kAT3L4hvsLdAIDv6MdGehsPIdT+Q==}
     dev: false
 
   /@fontsource/lora@4.5.13:
