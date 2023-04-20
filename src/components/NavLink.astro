@@ -10,7 +10,7 @@ const isActive = Astro.url.pathname === href || (href !== '/' && Astro.url.pathn
     class={` ${isActive ? 'active' : ''} flex p-2 nav-link hover:bg-white`} 
     aria-label={label} 
     href={href}>
-    <Icon pack="mdi" name={icon} size={24}  /> 
+    <Icon pack="mdi" name={icon} size={24} /> 
     <span class="sr-only">{label}</span>
 </a> 
 
