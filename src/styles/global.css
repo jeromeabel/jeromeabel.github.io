@@ -1,13 +1,27 @@
 /* Global variables */
 
+/* "Alegreya"
+"Alegreya Sans" **
+"Rubik"
+"Rubik Beastly"
+"Philosopher"
+"Bubbler One"
+"Lora" **
+"Roboto"
+"IBM Plex Mono" **
+"IBM Plex Sans"
+"Inter" **
+"Inter Tight" */
+
+
 :root {
-    	/* Fonts */
+    /* Fonts */
 	--font-system: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
 		Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-	--font-body: 'Roboto', var(--font-system);
-		 /*"Alegreya Sans" */ 
-	--font-brand: 'Bubbler One', sans-serif;
-		/* Text Sizes */
+	--font-body: 'Lora', var(--font-system);
+	--font-brand: 'Bubbler One', var(--font-system);
+
+	/* Text Sizes */
 	--text-sm: 0.875rem;
 	--text-base: 1rem;
 	--text-md: 1.125rem;
@@ -18,6 +32,12 @@
 	--text-4xl: 3.5rem;
 	--text-5xl: 4.5rem;
 }
+
+
+* {
+	scroll-behavior: smooth;
+}
+
 
 html,
 body {
@@ -50,13 +70,11 @@ img {
 	height: auto;
 }
 /* svg {
+	padding:0;margin:0;
     height: auto;
     width: 100%;
-  } */
-
-
-  svg{padding:0;margin:0}
-
+  }
+  */
 
 h1,
 h2,
