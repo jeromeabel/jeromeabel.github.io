@@ -5,16 +5,17 @@
 // }
 
 // const { tagline, title } = Astro.props;
+
+import { Icon } from 'astro-icon';
+
 ---
-<header  class="h-4/5 grid place-items-center">
-	<div class="container mx-auto">
-		<div class="w-2/3 align-left">
+<header class="h-2/3 container mx-auto grid items-center">
+		<div class="w-2/3">
 			<h1>Hi, I'm <strong>Jérôme Abel</strong></h1>
 			<p class="text-5xl italic font-brand pt-4">
-				A <span class="tagline">Front-End Developer</span> with a +10-year<br/>background in interactive arts
+				A <span class="tagline">front-end developer</span> with 10+ years<br/>background in interactive arts
 			</p> 
 		</div>
-	</div>
 </header>
 
 <style>
@@ -35,7 +36,7 @@
 		height:50%;
 		z-index:-1;
 		transform-origin: left;
-		animation:scaleX 1s 500ms ease-in-out both;
+		animation:scaleX 1s 800ms ease-in-out both;
 	}
 
 	@keyframes scaleX {

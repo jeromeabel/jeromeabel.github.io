@@ -8,10 +8,12 @@ const navData: {label:string, href:string, icon:string }[] = [
 ];
 
 ---
-<nav class="flex items-center justify-between container mx-auto p-6">
-		<NavLink link={navData[0]} />
-		<ul class="flex gap-6">
-			<li><NavLink link={navData[1]} /></li>
-			<li><NavLink link={navData[2]} /></li>
-		</ul>
-</nav>
+<div class="h-24">
+	<nav class="static flex items-center justify-between container mx-auto h-full">
+			<NavLink link={navData[0]} />
+			<ul class="flex gap-6">
+				<li><NavLink link={navData[1]} /></li>
+				<li><NavLink link={navData[2]} /></li>
+			</ul>
+	</nav>
+</div>
