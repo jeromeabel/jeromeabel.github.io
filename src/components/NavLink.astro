@@ -2,19 +2,17 @@
 import { Icon } from 'astro-icon';
 const { label, href, icon } = Astro.props.link;
 const isActive = Astro.url.pathname === href || (href !== '/' && Astro.url.pathname.startsWith(href));
-
 ---								
 <a 
-    class={` ${isActive ? 'active' : ''} flex p-2 nav-link text-gray-500  border-transparent hover:border-b-2 hover:border-gray-500 border-b-2`} 
+    class={` ${isActive ? 'active' : ''} flex p-2 nav-link  border-transparent hover:border-b-2 hover:border-black border-b-2`} 
     aria-label={label} 
     href={href}>
     <Icon pack="mdi" name={icon} size={24} /> 
     <span class="sr-only">{label}</span>
-    <!-- { label.toUpperCase() } hover:bg-black hover:text-white 
-    
-   -->
 </a>
 
+    <!-- { label.toUpperCase() } hover:bg-black hover:text-white 
+   -->
 
 <style>
     .active {
@@ -24,7 +22,7 @@ const isActive = Astro.url.pathname === href || (href !== '/' && Astro.url.pathn
         color: black;
         border-bottom: 2px solid black;
         /* transform-origin: left; */
-        /* animation:animRotate 300ms 100ms ease-in-out both; */
+        animation:animRotate 330ms 50ms ease-in-out both;
         /* animation:animBg 300ms 20ms ease-in-out both; */
     }
 
