@@ -12,7 +12,7 @@ import Nav from '../components/Nav.astro';
 // Filter "home" meta data and sort
 const projects = (await getCollection('projects'))
 	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
-	.filter( ({data}) => data.home === true );
+	// .filter( ({data}) => data.home === true );
 
 ---
 
@@ -24,18 +24,14 @@ const projects = (await getCollection('projects'))
 		<ExploreLink />
 	</div>
 
-	<main>
-		<div class="container mx-auto mt-16" id="projects">
-        	<h1>Projects</h1>
-			<Grid variant="offset">
-				{
-					projects.map((project) => (
-						<li>
-							<ProjectCard project={project} />
-						</li>
-					))
-				}
+	<main class="border-t" id="projects">
+		<section class="container mx-auto my-8 border-white">
+        	<h2>Projects</h2>
+			<Grid>
+				{ projects.map( (project) => ( 
+					<ProjectCard project={project} /> 
+				))}
 			</Grid>
-		</div>
+		</section>
     </main>
 </HomeLayout>

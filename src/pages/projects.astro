@@ -15,15 +15,13 @@ const projects = (await getCollection('projects')).sort(
 	description="Learn about Jérôme Abel's most recent projects"
 >
 	<main>
-        <h1>Projects</h1>
-			<Grid variant="offset">
-				{
-					projects.map((project) => (
-						<li>
-							<ProjectCard project={project} />
-						</li>
-					))
-				}
+		<div class="container mx-auto my-8 border-white">
+        	<h2>Projects</h2>
+			<Grid>
+				{ projects.map( (project) => ( 
+					<ProjectCard project={project} /> 
+				))}
 			</Grid>
+		</div>
     </main>
 </BaseLayout>
