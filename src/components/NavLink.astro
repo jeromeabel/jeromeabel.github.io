@@ -3,15 +3,16 @@ import { Icon } from 'astro-icon';
 const { label, href, icon } = Astro.props.link;
 const isActive = Astro.url.pathname === href || (href !== '/' && Astro.url.pathname.startsWith(href));
 
-//border-transparent hover:border-4 hover:border-white border-4
+//border-transparent hover:border-4 hover:border-white border-4  hover:bg-white  class="drop-shadow-2xl"
+
 ---								
 <a 
-    class={` ${isActive ? 'active' : ''} flex p-2 nav-link hover:bg-white `} 
+    class={` ${isActive ? 'active' : ''} flex p-2 nav-link hover:bg-white`} 
     aria-label={label} 
     href={href}>
-    <Icon pack="mdi" name={icon} size={24} /> 
+    <Icon pack="mdi" name={icon} size={24}  /> 
     <span class="sr-only">{label}</span>
-</a>
+</a> 
 
     <!-- { label.toUpperCase() } hover:bg-black hover:text-white 
    -->
@@ -21,8 +22,9 @@ const isActive = Astro.url.pathname === href || (href !== '/' && Astro.url.pathn
          /* 
          background-color: black;
         color:white; */
-        color: black;
-        background-color: white;
+        /* color: black;*/
+        background-color: white; 
+        	/* filter: drop-shadow(0 25px 25px rgb(0 0 0 / 0.15)); */
         /* border: 4px solid white; */
         /* transform-origin: left; */
         /* animation:animRotate 330ms 50ms ease-in-out both; */
