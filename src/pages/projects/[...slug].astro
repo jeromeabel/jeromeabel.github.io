@@ -1,6 +1,9 @@
 ---
 import { CollectionEntry, getCollection } from 'astro:content';
 
+import { Icon } from 'astro-icon';
+
+
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 interface Props {
@@ -21,11 +24,63 @@ const { Content } = await entry.render();
 
 <BaseLayout page={entry.data.title} >
 	<main>
-		<h1>{entry.data.title}</h1>
-		<p>{entry.data.description}</p>
-		<section>
-			<Content />
-		</section>
+		<article class="container mx-auto">
+			<header class="my-8 flex justify-between items-center">
+				<div>
+					<h1>{entry.data.title}</h1>
+					<h2 class="text-4xl">{entry.data.description}</h2>
+				</div>
+				<div>
+					<ul class="flex">
+						{ entry.data.stack?.map( s => <li class="p-2">{s}</li>)}
+					</ul>
+				</div>
+			</header>
+
+			<img src={entry.data.img} alt={entry.data.img_alt || entry.data.title }  class="block w-full" />
+
+			<div class="flex justify-center my-6 gap-6">
+
+				<a href={entry.data.git} title={entry.data.title} class="bg-black font-brand text-white flex radius-2 py-1 px-4 text-xl gap-2 items-center rounded-xl">
+					<Icon pack="mdi" name="github" class="h-12" />
+					Code Github 
+				</a>
+
+			 { entry.data.link &&
+				(<a href={entry.data.link} title={entry.data.title} class="bg-black font-brand text-white flex radius-2 py-2 px-4 gap-2 items-center rounded-md">
+					<Icon pack="mdi" name="link" class="h-12" />
+					Demo
+				</a>)
+			 }
+			
+
+
+			</div>
+
+			<section class="my-16">
+				<Content />
+			</section>
+		</article>
 	</main>
 </BaseLayout>
+
+
+
+
+<style>
+
+	:global(h1),
+	:global(h2),
+	:global(h3),
+	:global(h4),
+	:global(h5) {
+		margin: 1.5rem 0;
+	}
+
+
+
+
+
+</style>
+
 
