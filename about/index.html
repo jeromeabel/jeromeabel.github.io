@@ -35,39 +35,46 @@
         <meta property="twitter:title" content="About - Jérôme Abel">
         <meta property="twitter:description" content="The portfolio of Jérôme Abel, a Front-end developer with a background in interactive &#38; electronic arts">
         <meta property="twitter:image" content="https://jeromeabel.github.io/social.jpg">
-	<link rel="stylesheet" href="https://jeromeabel.github.io/assets/about.5fd17b0d.css" />
-<link rel="stylesheet" href="https://jeromeabel.github.io/assets/about.fe24a1cd.css" /></head>
+	<link rel="stylesheet" href="https://jeromeabel.github.io/assets/about.58d44e52.css" />
+<link rel="stylesheet" href="https://jeromeabel.github.io/assets/about.28b43f46.css" /></head>
 	<body>
-        <div class="h-24">
+        <div class="h-24 ">
 	<nav class="static flex items-center justify-between container mx-auto h-full">
-			<a class="  flex p-2 nav-link hover:bg-white astro-2DWPSOWV" aria-label="Home" href="/">
-    <svg viewBox="0 0 24 24" class="astro-2DWPSOWV" width="24" height="24" astro-icon="mdi:triangle"><path fill="currentColor" d="M1 21h22L12 2"/></svg> 
-    <span class="sr-only astro-2DWPSOWV">Home</span>
-</a> 
-
-    <!-- { label.toUpperCase() } hover:bg-black hover:text-white 
-   -->
+			<!-- <NavLink link={navData[0]} />  border-b border-black-->
 			<ul class="flex gap-6">
-				<li><a class="  flex p-2 nav-link hover:bg-white astro-2DWPSOWV" aria-label="Projects" href="/projects/">
-    <svg viewBox="0 0 24 24" class="astro-2DWPSOWV" width="24" height="24" astro-icon="mdi:square"><path fill="currentColor" d="M3 3v18h18V3"/></svg> 
-    <span class="sr-only astro-2DWPSOWV">Projects</span>
+				<li><a class="  flex nav-link hover:border-b border-b-black  astro-2DWPSOWV" aria-label="Home" href="/">
+    <!-- <Icon pack="mdi" name={icon} class="h-6 mr-2" /> -->
+    HOME
+    <!-- <span class="sr-only">{label}</span> -->
 </a> 
 
     <!-- { label.toUpperCase() } hover:bg-black hover:text-white 
+        hover:transition-colors
    --></li>
-				<li><a class=" active flex p-2 nav-link hover:bg-white astro-2DWPSOWV" aria-label="About" href="/about/">
-    <svg viewBox="0 0 24 24" class="astro-2DWPSOWV" width="24" height="24" astro-icon="mdi:circle"><path fill="currentColor" d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2z"/></svg> 
-    <span class="sr-only astro-2DWPSOWV">About</span>
+				<li><a class="  flex nav-link hover:border-b border-b-black  astro-2DWPSOWV" aria-label="Projects" href="/projects/">
+    <!-- <Icon pack="mdi" name={icon} class="h-6 mr-2" /> -->
+    PROJECTS
+    <!-- <span class="sr-only">{label}</span> -->
 </a> 
 
     <!-- { label.toUpperCase() } hover:bg-black hover:text-white 
+        hover:transition-colors
+   --></li>
+				<li><a class=" active flex nav-link hover:border-b border-b-black  astro-2DWPSOWV" aria-label="About" href="/about/">
+    <!-- <Icon pack="mdi" name={icon} class="h-6 mr-2" /> -->
+    ABOUT
+    <!-- <span class="sr-only">{label}</span> -->
+</a> 
+
+    <!-- { label.toUpperCase() } hover:bg-black hover:text-white 
+        hover:transition-colors
    --></li>
 			</ul>
 	</nav>
 </div>
         
 	<main>
-		<div class="container mx-auto my-">
+		<div class="container mx-auto my-8">
 		<h1>About</h1>
 		<section>
 				<h2 class="section-title">Background</h2>
@@ -95,7 +102,7 @@
 		</div>
 	</main>
 
-        <footer class="py-16 mt-32  border-t   ">
+        <footer class="py-8 mt-16 bg-gray-200 self-end">
     <div class="container mx-auto">
         Jérôme Abel 2023 👉 - love - linkedin - github - framagit - email
     </div>
