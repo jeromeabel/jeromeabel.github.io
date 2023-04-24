@@ -1,17 +1,20 @@
 ---
+
 import NavLink from "./NavLink.astro";
 
 const navData: {label:string, href:string, icon:string }[] = [
-	{ label: 'Home', href: '/',  icon: 'triangle'}, // home 
-	{ label: 'Projects', href: '/projects/',  icon: 'square' }, //view-grid
-	{ label: 'About', href: '/about/',  icon: 'circle'}, //information
+	{ label: 'Home', href: '/',  icon: 'home'}, // home triangle
+	{ label: 'Projects', href: '/projects/',  icon: 'view-grid' }, //view-grid square
+	{ label: 'About', href: '/about/',  icon: 'information'}, //information circle
 ];
 
 ---
-<div class="h-24">
+
+<div class="h-24 ">
 	<nav class="static flex items-center justify-between container mx-auto h-full">
-			<NavLink link={navData[0]} />
+			<!-- <NavLink link={navData[0]} />  border-b border-black-->
 			<ul class="flex gap-6">
+				<li><NavLink link={navData[0]} /></li>
 				<li><NavLink link={navData[1]} /></li>
 				<li><NavLink link={navData[2]} /></li>
 			</ul>

@@ -9,18 +9,29 @@ const { data, slug } = Astro.props.project;
 // loading="lazy" decoding="async"
 ---
 <a href={`/projects/${slug}`}>
-	<article class="overflow-hidden h-96 relative
-	before:block before:absolute before:inset-0
-	before:bg-gradient-to-r before:from-blue-800 before:to-green-500 before:opacity-50
-	hover:before:opacity-90 hover:before:transition-opacity hover:before:duration-300">
+	<article 
+        class="
+        overflow-hidden 
+        h-96 
+        relative 
+        before:block 
+        before:absolute 
+        before:inset-0 
+        before:bg-gradient-to-r 
+        before:from-blue-800 
+        before:to-green-500 
+        before:opacity-20
+        hover:before:opacity-90 
+        hover:before:transition-opacity 
+        hover:before:duration-500
+        ">
 			<div class="absolute text-white inset-0 opacity-0 hover:transition-opacity hover:opacity-90 hover:duration-300 flex flex-col justify-center items-center">
-			<h3>{data.title}</h3>
-            <p class="w-1/2 mt-4">{data.description}</p>
+			<h3 >{data.title}</h3>
+            <p class="mt-4">{data.description}</p>
 		</div>
-		<img src={data.img} alt={data.img_alt || data.title }  class="block w-full h-full object-cover object-top " />
+		<img src={data.img} alt={data.img_alt || data.title }  class="block w-full h-full object-cover object-top" />
 	</article>
 </a>
-
 
 <!--
 before:-z-10

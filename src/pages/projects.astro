@@ -16,7 +16,7 @@ const projects = (await getCollection('projects')).sort(
 >
 	<main>
 		<div class="container mx-auto my-8 border-white">
-        	<h2>Projects</h2>
+        	<h1>Projects</h1>
 			<Grid>
 				{ projects.map( (project) => ( 
 					<ProjectCard project={project} /> 
