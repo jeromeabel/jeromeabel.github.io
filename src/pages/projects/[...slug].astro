@@ -22,7 +22,7 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
 
-<BaseLayout page={entry.data.title} >
+<BaseLayout page={entry.data.title} image={entry.data.img} description={`${entry.data.title} - ${entry.data.description}`}>
 	<main>
 		<article class="container mx-auto">
 			<header class="my-8 flex justify-between items-center">
@@ -37,27 +37,24 @@ const { Content } = await entry.render();
 				</div>
 			</header>
 
-			<img src={entry.data.img} alt={entry.data.img_alt || entry.data.title }  class="block w-full" />
+			<img src={entry.data.img_gradient} alt={entry.data.img_alt || entry.data.title }  class="block w-full" />
 
-			<div class="flex justify-center my-6 gap-6">
+			<div class="flex justify-center my-24 gap-6">
 
 				<a href={entry.data.git} title={entry.data.title} class="bg-black font-brand text-white flex radius-2 py-1 px-4 text-xl gap-2 items-center rounded-xl">
-					<Icon pack="mdi" name="github" class="h-12" />
 					Code Github 
+					<Icon pack="mdi" name="github" class="h-6" />
 				</a>
 
 			 { entry.data.link &&
-				(<a href={entry.data.link} title={entry.data.title} class="bg-black font-brand text-white flex radius-2 py-2 px-4 gap-2 items-center rounded-md">
-					<Icon pack="mdi" name="link" class="h-12" />
+				(<a href={entry.data.link} title={entry.data.title} class="bg-black font-brand text-white flex radius-2 py-1 px-4 text-xl gap-2 items-center rounded-xl">
 					Demo
+					<Icon pack="mdi" name="arrow-top-right-thin" class="h-6" />
 				</a>)
 			 }
-			
-
-
 			</div>
 
-			<section class="my-16">
+			<section class="my-24 max-w-lg mx-auto">
 				<Content />
 			</section>
 		</article>

@@ -1,18 +1,17 @@
 ---
 import '../styles/global.css';
-
-import "@fontsource/alegreya"
-import "@fontsource/alegreya-sans"
-import "@fontsource/rubik"
-import "@fontsource/rubik-beastly"
-import "@fontsource/philosopher"
+// import "@fontsource/alegreya"
+// import "@fontsource/alegreya-sans"
+// import "@fontsource/rubik"
+// import "@fontsource/rubik-beastly"
+// import "@fontsource/philosopher"
 import "@fontsource/bubbler-one"
 import "@fontsource/lora"
-import "@fontsource/roboto"
-import "@fontsource/ibm-plex-mono"
-import "@fontsource/ibm-plex-sans"
-import "@fontsource/inter"
-import "@fontsource/inter-tight"
+// import "@fontsource/roboto"
+// import "@fontsource/ibm-plex-mono"
+// import "@fontsource/ibm-plex-sans"
+// import "@fontsource/inter"
+// import "@fontsource/inter-tight"
 
 import BaseHead from "../components/BaseHead.astro";
 import Nav from "../components/Nav.astro";
@@ -21,13 +20,14 @@ import Footer from "../components/Footer.astro";
 export interface Props {
 	page?: string | undefined;
 	description?: string | undefined;
+	image?: string | undefined;
 }
 
-const { page, description } = Astro.props;
+const { page, description, image } = Astro.props;
 ---
 <html lang="en">
 	<head>
-		<BaseHead page={page} description={description} />
+		<BaseHead page={page} description={description} image={image} />
 	</head>
 	<body>
         <Nav />

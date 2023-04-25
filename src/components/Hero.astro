@@ -7,18 +7,37 @@
 // const { tagline, title } = Astro.props;
 
 import { Icon } from 'astro-icon';
+import HeroLink from './HeroLink.astro';
 
 ---
-<header class="h-2/3 container mx-auto grid items-center">
-		<div class="w-full md:w-2/3">
-			<h1>Hi, I'm <strong>Jérôme Abel</strong></h1>
-			<p class="text-6xl italic font-brand pt-4">
-				A <span class="tagline">front-end developer</span> with 10+ years<br/>background in interactive arts
-			</p> 
+<header class="h-full container mx-auto grid items-center">
+		<div class="w-full md:w-2/3 h-2/3 flex flex-col justify-evenly">
+			<div class="">
+				<h1 >Hi, I'm <strong>Jérôme Abel</strong></h1>
+				<p class="text-6xl italic font-brand pt-4">
+					A <span class="tagline">front-end developer</span> with 10+ years<br/>background in interactive arts
+				</p>
+			</div>
+			<div class="flex gap-16">
+				<HeroLink href="mailto:dev@jeromeabel.net" label="Email" />
+				<HeroLink href="https://github.com/jeromeabel" label="Github" />
+				<HeroLink href="https://www.linkedin.com/in/jerome-abel/" label="LinkedIn" />
+			</div>
 		</div>
 </header>
 
+<script>
+	
+</script>
 <style>
+	.title {
+		animation: animate1 300ms ease-in-out 0s both;
+	}
+
+	@keyframes animate1 {
+		from{transform: translateY(20%)}
+		to{transform: translateY(0);}
+	}
 	.tagline {
 		display: inline-block;
 		position: relative;
@@ -33,7 +52,7 @@ import { Icon } from 'astro-icon';
 		bottom:1px;
 		left:0;
 		right:0;
-		height:25%;
+		height:33%;
 		z-index:-1;
 		transform-origin: left;
 		animation:scaleX 1s 800ms ease-in-out both;

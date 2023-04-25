@@ -1,0 +1,36 @@
+---
+import { getCollection } from 'astro:content';
+
+import HomeLayout from "../layouts/HomeLayout.astro";
+import Hero from "../components/Hero.astro";
+import ProjectCard from '../components/ProjectCard.astro';
+import Grid from '../components/Grid.astro';
+import BgNoise from '../components/BgNoise.astro';
+import ExploreLink from '../components/ExploreLink.astro';
+import Nav from '../components/Nav.astro';
+
+// Filter "home" meta data and sort
+const projects = (await getCollection('projects'))
+	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+	// .filter( ({data}) => data.home === true );
+
+---
+
+<HomeLayout>
+	<BgNoise />
+	<div class="h-screen flex flex-col justify-between">
+		<Nav />
+		<Hero /> 	
+		<ExploreLink />
+	</div>
+
+	<main class="py-8  bg-opacity-20" id="projects">
+		<section class="container mx-auto py-16">
+			<Grid>
+				{ projects.map( (project) => ( 
+					<ProjectCard project={project} /> 
+				))}
+			</Grid>
+		</section>
+    </main>
+</HomeLayout>

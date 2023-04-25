@@ -1,0 +1,11 @@
+---
+import { Icon } from 'astro-icon';
+const { label, href } = Astro.props;
+---
+<a 
+    class="flex border-dotted border-b-2 hover:border-b border-b-black hover:border-solid py-1 transition-all" 
+    aria-label={label} 
+    href={href}>
+    { label }
+    <Icon pack="mdi" name="arrow-top-right" class="h-6 ml-2" />
+</a> 

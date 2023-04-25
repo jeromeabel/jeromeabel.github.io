@@ -2,6 +2,7 @@
 title: Kasa
 publishDate: 2023-01-30 00:00:00
 img: /images/kasa.png
+img_gradient: /images/kasa-gradient.png
 img_alt: Screenshot of the Kasa Website
 description: Develop a web application with React and React Router
 home: true
