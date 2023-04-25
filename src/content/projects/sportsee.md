@@ -2,6 +2,7 @@
 title: SportSee
 publishDate: 2023-02-10 00:00:00
 img: /images/sportsee.png
+img_gradient: /images/sportsee-gradient.png
 img_alt: Screenshot of the SportSee Website
 description: Develop a dashboard analytics with React and Recharts
 home: true

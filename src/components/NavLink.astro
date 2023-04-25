@@ -1,13 +1,13 @@
 ---
 import { Icon } from 'astro-icon';
-const { label, href, icon } = Astro.props.link;
+const { label, href, icon, highlight } = Astro.props.link;
 const isActive = Astro.url.pathname === href || (href !== '/' && Astro.url.pathname.startsWith(href));
 
 //border-transparent hover:border-4 hover:border-white border-4  hover:bg-white  class="drop-shadow-2xl"
 
 ---								
 <a 
-    class={` ${isActive ? 'active' : ''} flex nav-link hover:border-b border-b-black `} 
+    class={` ${isActive ? 'active' : ''} ${highlight ? 'highlight' : ''} py-1 flex nav-link border-b border-transparent hover:border-b-black  text-xl`} 
     aria-label={label} 
     href={href}>
     <!-- <Icon pack="mdi" name={icon} class="h-6 mr-2" /> -->
@@ -20,6 +20,18 @@ const isActive = Astro.url.pathname === href || (href !== '/' && Astro.url.pathn
    -->
 
 <style>
+    /* .highlight {
+        border:1px dashed black;
+        padding:0.25em 0.5em;
+    }
+
+    .highlight:hover {
+        border:1px solid black;
+    }
+
+     .highlight.active {
+        border:1px solid black;
+     } */
     .active {
         border-bottom: 1px solid black;
          /* 

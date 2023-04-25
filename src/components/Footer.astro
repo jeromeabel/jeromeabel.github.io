@@ -1,5 +1,21 @@
-<footer class="py-8 mt-16 bg-gray-200 self-end">
+---
+import IconLink from "./IconLink.astro";
+
+const links: {label:string, href:string, icon:string,  }[] = [
+	{ label: 'LinkedIn', href: 'https://www.linkedin.com/in/jerome-abel',  icon: 'linkedin'}, // home triangle
+	{ label: 'Github', href: 'https://github.com/jeromeabel',  icon: 'github' }, //view-grid square
+    { label: 'Framagit', href: 'https://framagit.org/jeromeabel',  icon: 'gitlab' }, //view-grid square
+	{ label: 'Email', href: 'mailto:dev@jeromeabel.net',  icon: 'email'}, //information circle
+];
+---
+
+<footer class="py-16 mt-16 self-end">
     <div class="container mx-auto">
-        Jérôme Abel 2023 👉 - love - linkedin - github - framagit - email
+        <div class="flex justify-between">
+            <div>👉 Jérôme Abel | 2023  </div>
+            <ul class="flex gap-6">
+            { links.map( link => <li><IconLink link={link} /></li>) }
+            </ul>
+        </div>
     </div>
 </footer>
