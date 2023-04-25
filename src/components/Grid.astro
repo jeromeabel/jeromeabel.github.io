@@ -2,4 +2,21 @@
 	<slot />
 </div>
 
+<style>
+			.grid.offset {
+			--row-offset: 7.5rem;
+			padding-bottom: var(--row-offset);
+		}
+
+		/* Shift first item in each row vertically to create staggered effect. */
+		.grid.offset > :global(:nth-child(odd)) {
+			transform: translateY(var(--row-offset));
+		}
+
+		/* If last row contains only one item, display it in the second column. */
+		.grid.offset > :global(:last-child:nth-child(odd)) {
+			grid-column: 2 / 3;
+			transform: none;
+		}
+</style>
 <!-- grid grid-cols-2 gap-16 -->
