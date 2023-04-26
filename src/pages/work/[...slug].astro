@@ -1,0 +1,59 @@
+---
+import { CollectionEntry, getCollection } from 'astro:content';
+import { Picture} from '@astrojs/image/components';
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import IconLabelLink from '../../components/IconLabelLink.astro';
+
+interface Props {
+	entry: CollectionEntry<'work'>;
+}
+
+export async function getStaticPaths() {
+	const works = await getCollection('work');
+	return works.map((entry) => ({
+		params: { slug: entry.slug },
+		props: { entry },
+	}));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<BaseLayout page={entry.data.title} image={entry.data.img} description={`${entry.data.title} - ${entry.data.description}`}>
+	<header class="mb-12">
+		<h1>{entry.data.title}</h1>
+		<p class="text-4xl font-brand">{entry.data.description}</p>
+	</header>
+
+	<Picture 
+		src={entry.data.img_gradient}
+		widths={[600, 900, 1200, 1500]}
+		sizes="(max-width: 800px) 90vw, 1500px"
+		formats={["avif", "webp", "png"]}
+		aspectRatio="16:9"
+		alt={entry.data.img_alt || entry.data.title }
+	/>
+		
+	<div class="flex justify-center my-24 gap-6">
+	{ entry.data.git && 
+		<IconLabelLink  href={entry.data.git} label="Code Github" icon="github" />
+	}
+	{ entry.data.link && 
+		<IconLabelLink  href={entry.data.link} label="Demo" icon="arrow-top-right" />
+	}
+	</div>
+
+	<section class="ok">
+		<Content />
+	</section>
+</BaseLayout>
+
+
+<style>
+:global(h2) {
+	margin: 1em 0 0.5em 0;
+}
+</style>
+

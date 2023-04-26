@@ -2,34 +2,17 @@
 import type { CollectionEntry } from 'astro:content';
 import { Image, Picture } from '@astrojs/image/components';
 
-
 interface Props {
-	project: CollectionEntry<'projects'>;
+	work: CollectionEntry<'work'>;
 }
 
-const { data, slug } = Astro.props.project;
-// loading="lazy" decoding="async"
+const { data, slug } = Astro.props.work;
+
 ---
-<a href={`/projects/${slug}`}>
+
+<a href={`/work/${slug}`}>
 	<article 
-        class="
-               overflow-hidden 
-                hover:shadow-2xl
-                transition-all
-                 hover:-translate-y-2 
-                 rounded-lg
-">
+        class="overflow-hidden hover:shadow-2xl transition-all hover:-translate-y-2 rounded-lg">
         <Picture src={data.img_gradient} widths={[200, 400, 800, 1200]}  aspectRatio="16:10" fit="contain" position="top" sizes="(max-width: 800px) 50vw, 800px;(max-width: 1200px) 50vw, 1200px" alt="descriptive text" />
 	</article>
 </a>
-
-<!--         <div class="absolute inset-0 bg-gradient-to-t from-white to-transparent hover:from-green-200 transition-all hover-shadow">
-              hover:-translate-y-2
-                hover:transition-transform
-            <div class="absolute inset-0">
-        <div class="absolute w-full ">
-            <h4>{data.title}</h4>
-            <p>{data.description}</p>
-        </div>
-        </div>
- -->
