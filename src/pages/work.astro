@@ -6,24 +6,18 @@ import ProjectCard from '../components/ProjectCard.astro';
 import Grid from '../components/Grid.astro';
 import BgNoise from '../components/BgNoise.astro';
 
-const projects = (await getCollection('projects')).sort(
+const works = (await getCollection('work')).sort(
 	(a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
 );
+
 ---
 
 <BaseLayout
-	page="Projects"
+	page="Works"
 	description="Learn about Jérôme Abel's most recent projects"
 >
-	<!-- <BgNoise /> -->
-
-	<main>
-		<div class="container mx-auto my-8">
-			<Grid>
-				{ projects.map( (project) => ( 
-					<ProjectCard project={project} /> 
-				))}
-			</Grid>
-		</div>
-    </main>
+	<BgNoise />
+	<Grid>
+		{ works.map( (work) => ( <ProjectCard work={work} /> ))}
+	</Grid>
 </BaseLayout>

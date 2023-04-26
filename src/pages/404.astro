@@ -1,0 +1,22 @@
+---
+import HomeLayout from '../layouts/HomeLayout.astro';
+import BgNoise from '../components/BgNoise.astro';
+import Nav from '../components/Nav.astro';
+import NavLink from '../components/NavLink.astro';
+
+const homeLink = { label: 'Return to the home page', href: '/',  icon: 'home', highlight: true}
+---
+
+<HomeLayout 
+	page="Not Found"
+	description="404 Error — this page was not found">
+	<BgNoise />
+	<main class="h-screen flex flex-col justify-between">
+		<Nav />
+		<header class="h-full container mx-auto flex flex-col items-center justify-center">
+			<h1>Error 404</h1>
+			<p class="text-6xl italic font-brand pt-4 pb-16">This page was not found, sorry</p>
+			<NavLink link={homeLink} />
+		</header> 	
+	</main>
+</HomeLayout>

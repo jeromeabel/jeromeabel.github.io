@@ -11,11 +11,8 @@ const links: {label:string, href:string, icon:string,  }[] = [
 
 <footer class="py-16 mt-16 self-end">
     <div class="container mx-auto">
-        <div class="flex justify-between">
-            <div>👉 Jérôme Abel | 2023  </div>
-            <ul class="flex gap-6">
+            <ul class="flex gap-4 justify-end">
             { links.map( link => <li><IconLink link={link} /></li>) }
             </ul>
-        </div>
     </div>
 </footer>
