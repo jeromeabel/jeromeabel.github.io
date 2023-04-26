@@ -1,0 +1,31 @@
+---
+import { Picture } from "@astrojs/image/components";
+const { src, alt } = Astro.props        
+---
+
+<Picture 
+        class="mx-auto rotate-x-1"
+        src={src} 
+        alt={alt}
+        widths={[600, 900, 1200, 1500]}
+        sizes="(max-width: 800px) 100vw, 50vw"
+        formats={["avif", "webp", "jpg"]}
+        />
+
+
+
+<!-- width={500} height={500}    
+                
+
+        	formats={["avif", "webp", "png"]}
+
+                <Picture src={hero} widths={[200, 400, 800]} sizes="(max-width: 800px) 100vw, 800px" alt="descriptive text" />
+
+
+        
+                fit="contain"
+
+sizes="(max-width: 800px) 90vw, 1200px"
+
+        sizes="(max-width: 800px) 100vw, 800px;(max-width: 1200px) 100vw, 1200px" 
+ -->
