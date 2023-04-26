@@ -1,17 +1,19 @@
 /* Global variables */
 
-/* "Alegreya"
-"Alegreya Sans" **
+/* 
+"Alegreya"
+"Alegreya Sans"
 "Rubik"
 "Rubik Beastly"
 "Philosopher"
 "Bubbler One"
-"Lora" **
+"Lora"
 "Roboto"
-"IBM Plex Mono" **
+"IBM Plex Mono"
 "IBM Plex Sans"
-"Inter" **
-"Inter Tight" */
+"Inter"
+"Inter Tight" 
+*/
 
 
 :root {
@@ -69,6 +71,7 @@ img {
 	max-width: 100%;
 	height: auto;
 }
+
 /* svg {
 	padding:0;margin:0;
     height: auto;
