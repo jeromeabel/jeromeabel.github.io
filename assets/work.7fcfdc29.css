@@ -1,0 +1,1 @@
+.grid:where(.astro-VC5TSDMU).offset{--row-offset: 7.5rem;padding-bottom:var(--row-offset)}.grid:where(.astro-VC5TSDMU).offset>:nth-child(odd){transform:translateY(var(--row-offset))}.grid:where(.astro-VC5TSDMU).offset>:last-child:nth-child(odd){grid-column:2 / 3;transform:none}
