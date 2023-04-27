@@ -1,18 +1,26 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { Image, Picture } from '@astrojs/image/components';
+import { Picture } from '@astrojs/image/components';
 
 interface Props {
 	work: CollectionEntry<'work'>;
 }
 
 const { data, slug } = Astro.props.work;
-
+const widths = [ 320, 640, 768, 1024, 1280, 1600 ];
+const sizes = "(min-width: 48em) 48em, 100vw";
 ---
 
 <a href={`/work/${slug}`}>
 	<article 
-        class="overflow-hidden hover:shadow-2xl transition-all hover:-translate-y-2 rounded-lg">
-        <Picture src={data.img_gradient} widths={[200, 400, 800, 1200]}  aspectRatio="16:10" fit="contain" position="top" sizes="(max-width: 800px) 50vw, 800px;(max-width: 1200px) 50vw, 1200px" alt="descriptive text" />
-	</article>
+        class="overflow-hidden hover:shadow-2xl transition-all hover:-translate-y-1 lg:hover:-translate-y-2 rounded lg:rounded-md xl:rounded-lg">
+        <Picture 
+			src={data.img_gradient} 
+			formats={["avif", "webp", "jpg"]}
+			widths={widths}
+        	sizes={sizes}
+			aspectRatio="16:10" 
+			fit="cover" 
+			alt={`Open the work ${data.title}`} />
+	</article> 
 </a>

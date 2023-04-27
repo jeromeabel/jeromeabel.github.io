@@ -1,17 +1,18 @@
 ---
+
 const { label, href, highlight } = Astro.props.link;
 const isActive = Astro.url.pathname === href || (href !== '/' && Astro.url.pathname.startsWith(href));
 
 ---								
 <a 
-    class={` ${isActive ? 'active' : ''} ${highlight ? 'highlight' : ''} py-1 flex font-brand border-b border-transparent hover:border-b-black  text-xl`} 
+    class={` ${isActive ? 'active' : ''} ${highlight ? 'highlight' : ''} py-1 align-baseline font-brand border-b border-transparent hover:border-b-black text-base md:text-xl`} 
     aria-label={label} 
     href={href}>
     { label.toUpperCase() }
 </a> 
 
 <style>
-  .highlight {
+   .highlight {
         border:1px dashed black;
         padding:0.25em 0.5em;
         border-radius: 10em;
@@ -19,11 +20,10 @@ const isActive = Astro.url.pathname === href || (href !== '/' && Astro.url.pathn
     .highlight:hover {
         border:1px double black;
     }
-     .highlight.active {
+    .highlight.active {
         border:1px solid black;
-     }
+    }
     .active {
         border-bottom: 1px solid black;
     }
-
 </style>

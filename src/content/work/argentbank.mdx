@@ -1,8 +1,8 @@
 ---
 title: ArgentBank
 publishDate: 2023-03-23 00:00:00
-img: /images/argentbank.png
-img_gradient: /images/argentbank-gradient.png
+img: /images/argentbank/window.png
+img_gradient: /images/argentbank/gradient.png
 img_alt: Screenshot of the ArgentBank Website
 description: Use an API for a bank account with React and Redux
 home: true
@@ -14,8 +14,13 @@ stack:
 - RTK-query
 ---
 
+import ContentTxt from '../../components/ContentTxt.astro'
+import ContentImg from '../../components/ContentImg.astro'
+import imgSwagger from "/public/images/argentbank/swagger.png"
+import { Code } from 'astro/components';
 
-<div class="max-w-lg mx-auto">
+<ContentTxt>
+
 This project is the n°13 of the OpenClassrooms Front-End learning path.
 
 ## Context
@@ -33,7 +38,7 @@ The backend is provided with a tiny data set of two users. My goals are :
 
 ## Structure
 
-```
+```bash
 ├── 📂 app
 │   ├── apiSlice.js
 │   ├── App.jsx
@@ -53,11 +58,5 @@ The backend is provided with a tiny data set of two users. My goals are :
 
 ## Documentation API
 
-
-</div>
-
-<div class="container mx-auto">
-
-![Argent Bank Swagger](/images/argentbank-swagger.png)
-
-</div>
+</ContentTxt>
+<ContentImg src={imgSwagger} alt="Swagger Documentation API" />

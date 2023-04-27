@@ -15,7 +15,6 @@
 "Inter Tight" 
 */
 
-
 :root {
     /* Fonts */
 	--font-system: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
@@ -35,16 +34,21 @@
 	--text-5xl: 4.5rem;
 }
 
-
 * {
 	scroll-behavior: smooth;
 }
 
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+	margin: 0;
+}
 
 html,
 body {
 	height: 100%;
-	overflow-x: hidden;
+	overflow-x: hidden;	
 }
 
 body {
@@ -60,12 +64,6 @@ body {
 	font-family: var(--font-brand);
 }
 
-*,
-*::after,
-*::before {
-	box-sizing: border-box;
-	margin: 0;
-}
 
 img {
 	max-width: 100%;
@@ -79,6 +77,8 @@ img {
   }
   */
 
+pre.astro-code { padding:1em; border-radius: 10px;}
+
 h1,
 h2,
 h3,
@@ -90,6 +90,7 @@ h5 {
 	color: var(--gray-100);
 }
 
+/*
 h1 {
 	font-size: var(--text-5xl);
 }
@@ -108,7 +109,8 @@ h4 {
 
 h5 {
 	font-size: var(--text-xl);
-}
+} 
+*/
 
 /* Utilities */
 .sr-only {
