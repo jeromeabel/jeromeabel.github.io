@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ProjectCard from '../components/ProjectCard.astro';
+import WorkCard from '../components/WorkCard.astro';
 import Grid from '../components/Grid.astro';
 import BgNoise from '../components/BgNoise.astro';
 
@@ -13,11 +13,11 @@ const works = (await getCollection('work')).sort(
 ---
 
 <BaseLayout
-	page="Works"
-	description="Learn about Jérôme Abel's most recent projects"
+	page="Work"
+	description="Learn about Jérôme Abel's most recent web projects"
 >
 	<BgNoise />
 	<Grid>
-		{ works.map( (work) => ( <ProjectCard work={work} /> ))}
+		{ works.map( (work) => ( <WorkCard work={work} /> ))}
 	</Grid>
 </BaseLayout>
