@@ -19,6 +19,9 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+
+const widths = [ 320, 640, 960, 1280, 1600, 1920, 2240, 2560 ];
+const sizes = "(min-width: 48em) 48em, 100vw";
 ---
 
 <BaseLayout page={entry.data.title} image={entry.data.img} description={`${entry.data.title} - ${entry.data.description}`}>
@@ -29,10 +32,13 @@ const { Content } = await entry.render();
 
 	<Picture 
 		src={entry.data.img_gradient}
-		widths={[600, 900, 1200, 1500]}
-		sizes="(max-width: 800px) 90vw, 1500px"
-		formats={["avif", "webp", "png"]}
+		widths={[600, 900, 1200, 1536]}
+		sizes="(max-width: 800px) 90vw, 1536px"
+		formats={["avif", "webp", "jpg"]}
 		aspectRatio="16:9"
+		class="w-full"
+		loading="eager"
+		decoding="auto"
 		alt={entry.data.img_alt || entry.data.title }
 	/>
 		
@@ -45,7 +51,7 @@ const { Content } = await entry.render();
 	}
 	</div>
 
-	<section class="ok">
+	<section class="text-xl">
 		<Content />
 	</section>
 </BaseLayout>
@@ -53,5 +59,6 @@ const { Content } = await entry.render();
 <style>
 :global(h2) {
 	margin: 1em 0 0.5em 0;
+	transform: translateX(-2em);
 }
 </style>

@@ -12,5 +12,9 @@ export default defineConfig({
   build: {
     assets: 'assets',
     assetsPrefix: 'https://jeromeabel.github.io'
-  }
+  },
+  // image: {
+  //   service: "astro/assets/services/sharp",
+  // },
 });
+
