@@ -5,16 +5,15 @@ import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://jeromeabel.github.io',
+  // site: 'https://jeromeabel.github.io',
+  site: 'https://dev.jeromeabel.net',
   integrations: [tailwind(), mdx(), image({
     serviceEntryPoint: '@astrojs/image/sharp'
   })],
   build: {
     assets: 'assets',
-    assetsPrefix: 'https://jeromeabel.github.io'
+    // assetsPrefix: 'https://jeromeabel.github.io'
+    assetsPrefix: 'https://dev.jeromeabel.net'
   },
-  // image: {
-  //   service: "astro/assets/services/sharp",
-  // },
 });
 

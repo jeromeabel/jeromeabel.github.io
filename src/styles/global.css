@@ -49,6 +49,9 @@ html,
 body {
 	height: 100%;
 	overflow-x: hidden;	
+	height: 100vh;
+	 /* fallback for Opera, IE and etc. */
+	height: 100dvh;
 }
 
 body {
