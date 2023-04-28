@@ -1,29 +1,55 @@
 ---
-
-const { label, href, highlight } = Astro.props.link;
+const { label, href, css, title } = Astro.props.link;
 const isActive = Astro.url.pathname === href || (href !== '/' && Astro.url.pathname.startsWith(href));
-
+const ariaLabel = title || label;
 ---								
-<a 
-    class={` ${isActive ? 'active' : ''} ${highlight ? 'highlight' : ''} py-1 align-baseline font-brand border-b border-transparent hover:border-b-black text-base md:text-xl`} 
-    aria-label={label} 
+<a  class={`
+        ${isActive ? 'active' : ''}
+        ${css}
+        block
+        relative
+        overflow-hidden
+        rounded-full 
+        font-brand
+        border-dashed
+        border-black
+        border
+        text-base
+        md:text-xl
+        px-4
+        py-2
+        `}
+    aria-label={`${ariaLabel} page`} 
+    title={`${ariaLabel} page`} 
     href={href}>
     { label.toUpperCase() }
 </a> 
 
 <style>
-   .highlight {
-        border:1px dashed black;
-        padding:0.25em 0.5em;
-        border-radius: 10em;
+    @keyframes rotation {
+        to { transform: rotate(20deg); }
     }
-    .highlight:hover {
-        border:1px double black;
+    .home {
+        border:none;
+        font-size: 2em;
+    }
+    .home:hover {
+        animation: rotation 300ms 10ms ease-in-out infinite alternate
     }
     .highlight.active {
-        border:1px solid black;
+        background-color: white;
     }
-    .active {
-        border-bottom: 1px solid black;
+    .highlight::before{
+        position: absolute;
+        content:"";
+        inset:0;
+        background-color: white;
+        z-index: -1;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: all 500ms;
+    }
+    .highlight:hover::before{
+        transform: scaleX(100%);
     }
 </style>

@@ -2,10 +2,10 @@
 
 import NavLink from "./NavLink.astro";
 
-const navData: {label:string, href:string, highlight?:boolean }[] = [
-	{ label: '🛆', href: '/'},
-	{ label: 'Work', href: '/work/', highlight: true },
-	{ label: 'About', href: '/about/', highlight: true},
+const navData: {label:string, href:string, css?:string, title?:string }[] = [
+	{ label: '👋', href: '/', css: 'home', title:'Home'}, // 👋 🛆
+	{ label: 'Work', href: '/work/', css:'highlight' },
+	{ label: 'About', href: '/about/', css:'highlight'},
 ];
 
 ---

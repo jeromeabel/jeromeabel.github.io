@@ -6,13 +6,13 @@ import HeroLink from './HeroLink.astro';
 
 <header class="h-full container mx-auto grid items-center">
 		<div class="m-w-full md:w-4/5 lg:w-2/3 h-2/3 flex flex-col justify-around md:justify-evenly">
-			<div>
+			<div class="title">
 				<h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl">Hi, I'm <strong>Jérôme Abel</strong></h1>
 				<p class="italic font-brand pt-4 w-full text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
 					A <span class="tagline">front-end developer</span> with 10+ years background in interactive arts
 				</p>
 			</div>
-			<div class="flex flex-col md:flex-row gap-4 md:gap-6 xl:gap-8">
+			<div class="flex flex-col md:flex-row gap-4 md:gap-6 xl:gap-8 title2">
 				<HeroLink href="mailto:dev@jeromeabel.net" label="Email" />
 				<HeroLink href="https://github.com/jeromeabel" label="Github" />
 				<HeroLink href="https://www.linkedin.com/in/jerome-abel/" label="LinkedIn" />
@@ -22,13 +22,19 @@ import HeroLink from './HeroLink.astro';
 
 <style>
 	.title {
-		animation: animate1 300ms ease-in-out 0s both;
+		animation: animTitle 1s  ease-in-out both;
 	}
 
-	@keyframes animate1 {
-		from{transform: translateY(20%)}
-		to{transform: translateY(0);}
+	.title2 {
+		animation: animTitle 1s 0.5s  ease-in-out both;
 	}
+
+
+	@keyframes animTitle {
+		from{opacity: 0;transform: translateY(20%)}
+		to{opacity: 1;transform: translateY(0);}
+	}
+
 	.tagline {
 		display: inline-block;
 		position: relative;
@@ -38,7 +44,6 @@ import HeroLink from './HeroLink.astro';
 	.tagline::before{
 		position: absolute;
 		content:"";
-		/* background-color:rgba(0, 195, 255, 0.261); */
 		background-color:rgba(255, 255, 255, 1);
 		bottom:1px;
 		left:0;
@@ -46,7 +51,7 @@ import HeroLink from './HeroLink.astro';
 		height:50%;
 		z-index:-1;
 		transform-origin: left;
-		animation:scaleX 1s 800ms ease-in-out both;
+		animation:scaleX 1.5s 1s ease-in-out both;
 	}
 
 	@keyframes scaleX {
