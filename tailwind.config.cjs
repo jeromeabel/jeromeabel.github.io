@@ -4,7 +4,7 @@ module.exports = {
 	theme: {
 		extend: {
 			height: {
-				screen: ['100vh /* fallback for Opera, IE and etc. */', '100dvh'],
+				// screen: ['100vh', '100dvh'],
 			}
     	},
 		container: {

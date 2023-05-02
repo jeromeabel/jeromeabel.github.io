@@ -16,7 +16,7 @@ const works = (await getCollection('work')).sort(
 	page="Work"
 	description="Learn about Jérôme Abel's most recent web projects"
 >
-	<BgNoise />
+	<!-- <BgNoise /> -->
 	<Grid>
 		{ works.map( (work) => ( <WorkCard work={work} /> ))}
 	</Grid>

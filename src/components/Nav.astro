@@ -4,14 +4,14 @@ import NavLink from "./NavLink.astro";
 
 const navData: {label:string, href:string, css?:string, title?:string }[] = [
 	{ label: '👋', href: '/', css: 'home', title:'Home'}, // 👋 🛆
-	{ label: 'Work', href: '/work/', css:'w' },
+	{ label: 'Work', href: '/work/', css:'highlight' },
 	{ label: 'About', href: '/about/', css:'highlight'},
 ];
 
 ---
 
-<div class="h-28">
-	<nav class="flex items-center justify-between container h-full">
+<div class="h-20 lg:h-28">
+	<nav class="container h-full flex items-center justify-between">
 			<NavLink link={navData[0]} /> 
 			<ul class="flex gap-6 items-center">
 				<li><NavLink link={navData[1]} /></li>

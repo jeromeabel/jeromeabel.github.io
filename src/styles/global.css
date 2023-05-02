@@ -35,7 +35,7 @@
 }
 
 * {
-	scroll-behavior: smooth;
+	/* scroll-behavior: smooth; */
 }
 
 *,
@@ -43,19 +43,22 @@
 *::before {
 	box-sizing: border-box;
 	margin: 0;
+	padding: 0;
+	/* outline:1px solid red; */
 }
 
 html,
 body {
-	height: 100%;
+	min-height: 100%;
 	overflow-x: hidden;	
-	height: 100vh;
-	 /* fallback for Opera, IE and etc. */
-	height: 100dvh;
+
+	/* fallback for Opera, IE and etc. */
+	/* min-height: 100vh; 
+	min-height: 100dvh;  */
 }
 
 body {
-	background-color:  #f4f4f4;
+	background-color:  #f2f2f2;
 	color: #1c1c1c; /* #3d4663 */
 	font-family: var(--font-body);
 	-webkit-font-smoothing: antialiased;
@@ -67,18 +70,18 @@ body {
 	font-family: var(--font-brand);
 }
 
-
 img {
 	max-width: 100%;
 	height: auto;
 }
 
-/* svg {
+/*
+svg {
 	padding:0;margin:0;
     height: auto;
     width: 100%;
   }
-  */
+*/
 
 pre.astro-code { padding:1em; border-radius: 10px;}
 
