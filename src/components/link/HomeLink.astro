@@ -15,10 +15,13 @@ const ariaLabel = title || label;
 
 <style>
     @keyframes rotation {
-        to { transform: rotate(20deg); }
+        to { transform: rotate(10deg); }
+    }
+    .anim {
+         transform: rotate(-20deg);
     }
     .anim:hover {
         animation: rotation 300ms 10ms ease-in-out infinite alternate;
-        animation-iteration-count: 4;
+        animation-iteration-count: 6;
     }
 </style>
