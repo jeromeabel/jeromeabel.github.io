@@ -25,21 +25,24 @@ const to_g = data.to_g || 'to-blue-500';
 
 ---
 
+<!-- bg-gradient-to-r 
+				${from_g}
+				${to_g} hover:shadow-2xl 
+			
+			transition-all 
+				hover:-translate-y-1 
+				lg:hover:-translate-y-2 -->
+
 <a href={`/work/${slug}`} 
 style=`animation-delay:${delay}ms` 
-class=`anim rounded 
+class=`anim 
+		rounded 
 				lg:rounded-md 
 				xl:rounded-lg
-				bg-gradient-to-r 
-				${from_g}
-				${to_g}
+				shadow-2xl
 				p-4
 				md:p-6 
 				lg:p-8
-				hover:shadow-2xl 
-				transition-all 
-				hover:-translate-y-1 
-				lg:hover:-translate-y-2 
 				overflow-hidden` >
 	<article>
         <Picture 
@@ -67,5 +70,9 @@ class=`anim rounded
 		transform: translateY(75px); 
 		opacity:0;
 		animation: anim-card 350ms ease-in-out both;
+	}
+
+	.anim:hover {
+		transform: scaleX(1.1); 
 	}
 </style>
