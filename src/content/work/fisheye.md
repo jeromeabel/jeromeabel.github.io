@@ -2,7 +2,7 @@
 title: Fisheye
 publishDate: 2022-10-04 00:00:00
 img: /images/fisheye/window.png
-img_gradient: /images/fisheye/gradient.png
+img_gradient: /images/fisheye/screen.png
 img_alt: Screenshot of the FishEye Website
 description: Create an accessible site for a platform of photographers
 home: true
