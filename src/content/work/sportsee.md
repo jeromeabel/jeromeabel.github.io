@@ -8,6 +8,8 @@ description: Develop a dashboard analytics with React and Recharts
 home: true
 git: https://github.com/jeromeabel/oc-p12-sportsee
 link: https://jeromeabel.github.io/oc-p12-sportsee/
+from_g: from-[#fe0000]
+to_g: to-[#0f1733]
 ---
 
 This project is the n°12 in the OpenClassrooms Front-End learning path. It combines a backend and a client side. The backend is provided. It is a simple API which serve data to the client via GET endpoints.

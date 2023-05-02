@@ -14,6 +14,8 @@ export const collections = {
       img_gradient: z.string(),
       img_alt: z.string().optional(),
       home: z.boolean().optional(),
+      from_g: z.string().optional(),
+      to_g: z.string().optional(),
     }),
   }),
 };
