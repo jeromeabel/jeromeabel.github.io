@@ -1,5 +1,4 @@
 ---
-import { getCollection } from 'astro:content';
 
 import HomeLayout from "../layouts/HomeLayout.astro";
 import Hero from "../components/Hero.astro";
@@ -10,8 +9,22 @@ import Nav from '../components/Nav.astro';
 
 <HomeLayout>
 	<BgNoise />
-	<main class="h-screen flex flex-col justify-between">
+	<main class="flex flex-col">
 		<Nav />
-		<Hero /> 	
+		<Hero />
 	</main>
 </HomeLayout>
+
+
+<style>
+	main {
+		min-height: calc(100vh - 6rem);
+		min-height: calc(100dvh - 6rem);
+	}
+	@media (min-height:768px){
+		main {
+			min-height: 100vh;
+			min-height: 100dvh;
+		}
+	}
+</style>
