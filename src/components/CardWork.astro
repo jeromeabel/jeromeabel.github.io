@@ -3,19 +3,25 @@ import type { CollectionEntry } from 'astro:content';
 import { Picture } from '@astrojs/image/components';
 
 interface Props {
-	work: CollectionEntry<'work'>;
+	work: CollectionEntry<'work'>,
+	index: number,
 }
 
 const { data, slug } = Astro.props.work;
+const { index } = Astro.props;
 
 // Setup Responsive widths : grid 1 or 2 columns, gap, container/padding
-const widths = [ 464, 576, 654, 704, 928, 1152, 1408, 1428 ]; 
-const sizes = "(max-width: 640px) calc(100vw - 4rem), (max-width: 768px) calc(100vw - 4rem), (max-width: 1024px) calc(50vw - 3rem), (max-width: 1280px) calc(50vw - 4rem ), calc(50vw - 2rem)"
+// const widths = [ 464, 576, 654, 704, 928, 1152, 1408, 1428 ]; 
+// const sizes = "(max-width: 640px) calc(100vw - 4rem), (max-width: 768px) calc(100vw - 4rem), (max-width: 1024px) calc(50vw - 3rem), (max-width: 1280px) calc(50vw - 4rem ), calc(50vw - 2rem)"
 // const sizes = "100vw"; // So Simple!
 
+
+const widths = [ 480, 640, 768, 1024, 1280, 1536, 1920 ]; 
+const sizes="(max-width: 1023px) 100vw, (max-width: 1536px) calc(50vw - 3rem), 768px"
+const delay = ((index + 1) * 250) + 100;
 ---
 
-<a href={`/work/${slug}`}>
+<a href={`/work/${slug}`} class="anim" style=`animation-delay:${delay}ms`>
 	<article class="overflow-hidden hover:shadow-2xl transition-all hover:-translate-y-1 lg:hover:-translate-y-2 rounded lg:rounded-md xl:rounded-lg">
         <Picture 
 			src={data.img_gradient} 
@@ -27,5 +33,20 @@ const sizes = "(max-width: 640px) calc(100vw - 4rem), (max-width: 768px) calc(10
 			loading="eager"
 			decoding="auto"
 			alt={`Open the work ${data.title}`} />
+			
 	</article> 
 </a>
+
+<style>
+	@keyframes anim-card {
+		to { 
+			transform: translateY(0);  
+			opacity:1
+		}
+	}
+	.anim {
+		transform: translateY(75px); 
+		opacity:0;
+		animation: anim-card 350ms ease-in-out both;
+	}
+</style>

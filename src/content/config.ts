@@ -13,7 +13,7 @@ export const collections = {
       img: z.string(),
       img_gradient: z.string(),
       img_alt: z.string().optional(),
-      home: z.boolean().optional()
+      home: z.boolean().optional(),
     }),
   }),
 };
