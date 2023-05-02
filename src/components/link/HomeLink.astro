@@ -1,0 +1,24 @@
+---
+
+import { Icon } from 'astro-icon';
+const { label, href, css, title, icon = ""} = Astro.props;
+const isActive = Astro.url.pathname === href || (href !== '/' && Astro.url.pathname.startsWith(href));
+const ariaLabel = title || label;
+
+---								
+<a  class={`${isActive ? 'active' : ''} p-2 anim text-base md:text-xl`}
+    aria-label={`${ariaLabel} page`} 
+    title={`${ariaLabel} page`} 
+    href={href}>
+    <Icon class="h-8 w-8" pack="mdi" name={icon} />
+</a> 
+
+<style>
+    @keyframes rotation {
+        to { transform: rotate(20deg); }
+    }
+    .anim:hover {
+        animation: rotation 300ms 10ms ease-in-out infinite alternate;
+        animation-iteration-count: 4;
+    }
+</style>

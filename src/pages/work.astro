@@ -1,10 +1,10 @@
 ---
 import { getCollection } from 'astro:content';
 
-import BaseLayout from '../layouts/BaseLayout.astro';
-import WorkCard from '../components/WorkCard.astro';
-import Grid from '../components/Grid.astro';
-import BgNoise from '../components/BgNoise.astro';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import CardWork from '@components/CardWork.astro';
+import Grid from '@components/Grid.astro';
+import BgNoise from '@components/BgNoise.astro';
 
 const works = (await getCollection('work')).sort(
 	(a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
@@ -18,6 +18,6 @@ const works = (await getCollection('work')).sort(
 >
 	<!-- <BgNoise /> -->
 	<Grid>
-		{ works.map( (work) => ( <WorkCard work={work} /> ))}
+		{ works.map( (work) => ( <CardWork work={work} /> ))}
 	</Grid>
 </BaseLayout>

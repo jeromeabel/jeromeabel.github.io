@@ -3,7 +3,7 @@ import '../styles/global.css';
 import "@fontsource/bubbler-one"
 import "@fontsource/ibm-plex-sans"
 
-import BaseHead from "../components/BaseHead.astro";
+import SiteHead from "@components/SiteHead.astro";
 
 export interface Props {
 	page?: string | undefined;
@@ -14,7 +14,7 @@ const { page, description } = Astro.props;
 ---
 <html lang="en">
 	<head>
-		<BaseHead page={page} description={description} />
+		<SiteHead page={page} description={description} />
 	</head>
 	<body>
         <slot />
