@@ -8,6 +8,8 @@ description: Develop a web application with React and React Router
 home: true
 git: https://github.com/jeromeabel/oc-p11-kasa
 link: https://jeromeabel.github.io/oc-p11-kasa
+from_g: from-[#fdffae]
+to_g: to-[#ff6060]
 ---
 
 This project is the n°11 in the OpenClassrooms Front-End learning path.

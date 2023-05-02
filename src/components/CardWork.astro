@@ -19,12 +19,31 @@ const { index } = Astro.props;
 const widths = [ 480, 640, 768, 1024, 1280, 1536, 1920 ]; 
 const sizes="(max-width: 1023px) 100vw, (max-width: 1536px) calc(50vw - 3rem), 768px"
 const delay = ((index + 1) * 250) + 100;
+
+const from_g = data.from_g || 'from-purple-500';
+const to_g = data.to_g || 'to-blue-500';
+
 ---
 
-<a href={`/work/${slug}`} class="anim" style=`animation-delay:${delay}ms`>
-	<article class="overflow-hidden hover:shadow-2xl transition-all hover:-translate-y-1 lg:hover:-translate-y-2 rounded lg:rounded-md xl:rounded-lg">
+<a href={`/work/${slug}`} 
+style=`animation-delay:${delay}ms` 
+class=`anim rounded 
+				lg:rounded-md 
+				xl:rounded-lg
+				bg-gradient-to-r 
+				${from_g}
+				${to_g}
+				p-4
+				md:p-6 
+				lg:p-8
+				hover:shadow-2xl 
+				transition-all 
+				hover:-translate-y-1 
+				lg:hover:-translate-y-2 
+				overflow-hidden` >
+	<article>
         <Picture 
-			src={data.img_gradient} 
+			src={data.img} 
 			formats={["avif", "webp", "jpg"]}
 			widths={widths}
         	sizes={sizes}
@@ -32,8 +51,8 @@ const delay = ((index + 1) * 250) + 100;
 			fit="inside"
 			loading="eager"
 			decoding="auto"
+			class="rounded" 
 			alt={`Open the work ${data.title}`} />
-			
 	</article> 
 </a>
 
