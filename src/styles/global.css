@@ -64,6 +64,7 @@ body {
 	-webkit-font-smoothing: antialiased;
 	line-height: 1.5;
 	font-size: 16px;
+	position: relative;
 }
 
 .font-brand {

@@ -7,6 +7,7 @@ import "@fontsource/ibm-plex-sans"
 import SiteHead from "@components/SiteHead.astro";
 import Navigation from "@components/Navigation.astro";
 import Footer from "@components/Footer.astro";
+import BgNoise from '@components/BgNoise.astro';
 
 export interface Props {
 	page?: string | undefined;
@@ -15,18 +16,33 @@ export interface Props {
 }
 
 const { page, description, image } = Astro.props;
+
 ---
+
 <html lang="en">
 	<head>
 		<SiteHead page={page} description={description} image={image} />
 	</head>
 	<body>
-        <Navigation />
-			<main>
-			<article class="container mx-auto my-8">
+		<!-- <BgNoise /> -->
+		<main class="flex flex-col pb-6 lg:pb-20">
+			<Navigation />
+			<div class="container py-none lg:py-6">
 				<slot />
-			</article>
-    	</main>
-        <Footer />
+			</div>
+		</main>
 	</body>
 </html>
+
+<style>
+	/* main {
+		min-height: calc(100vh - 6rem);
+		min-height: calc(100dvh - 6rem);
+	}
+	@media (min-height:768px){
+		main {
+			min-height: 100vh;
+			min-height: 100dvh;
+		}
+	} */
+</style>
