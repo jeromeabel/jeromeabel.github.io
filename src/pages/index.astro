@@ -1,20 +1,19 @@
 ---
 
-import HomeLayout from "../layouts/HomeLayout.astro";
-import Hero from "../components/Hero.astro";
-import BgNoise from '../components/BgNoise.astro';
-import Nav from '../components/Nav.astro';
+import HomeLayout from "@layouts/HomeLayout.astro";
+import Hero from "@components/Hero.astro";
+import BgNoise from '@components/BgNoise.astro';
+import Navigation from '@components/Navigation.astro';
 
 ---
 
 <HomeLayout>
 	<BgNoise />
 	<main class="flex flex-col">
-		<Nav />
+		<Navigation />
 		<Hero />
 	</main>
 </HomeLayout>
-
 
 <style>
 	main {

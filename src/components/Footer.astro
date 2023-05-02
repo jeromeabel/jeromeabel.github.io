@@ -1,5 +1,5 @@
 ---
-import IconLink from "./IconLink.astro";
+import SocialLink from "@components/link/SocialLink.astro";
 
 const links: {label:string, href:string, icon:string,  }[] = [
 	{ label: 'LinkedIn', href: 'https://www.linkedin.com/in/jerome-abel',  icon: 'linkedin'},
@@ -12,7 +12,10 @@ const links: {label:string, href:string, icon:string,  }[] = [
 <footer class="py-16 mt-16 self-end">
     <div class="container mx-auto">
             <ul class="flex gap-4 justify-end">
-            { links.map( link => <li><IconLink link={link} /></li>) }
+            { links.map( link => 
+                <li><SocialLink label={link.label} href={link.href} icon={link.icon} /></li>
+                )
+            }
             </ul>
     </div>
 </footer>

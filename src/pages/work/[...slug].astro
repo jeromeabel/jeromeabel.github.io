@@ -2,8 +2,8 @@
 import { CollectionEntry, getCollection } from 'astro:content';
 import { Picture} from '@astrojs/image/components';
 
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import IconLabelLink from '../../components/IconLabelLink.astro';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ButtonLink from '@components/link/ButtonLink.astro';
 
 interface Props {
 	entry: CollectionEntry<'work'>;
@@ -44,10 +44,10 @@ const sizes = "(min-width: 48em) 48em, 100vw";
 		
 	<div class="flex justify-center my-24 gap-6">
 	{ entry.data.git && 
-		<IconLabelLink  href={entry.data.git} label="Code Github" icon="github" />
+		<ButtonLink  href={entry.data.git} label="Code Github" icon="github" />
 	}
 	{ entry.data.link && 
-		<IconLabelLink  href={entry.data.link} label="Demo" icon="arrow-top-right" />
+		<ButtonLink  href={entry.data.link} label="Demo" icon="arrow-top-right" />
 	}
 	</div>
 
