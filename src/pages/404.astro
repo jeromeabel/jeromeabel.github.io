@@ -1,22 +1,33 @@
 ---
+
 import HomeLayout from '@layouts/HomeLayout.astro';
 import BgNoise from '@components/BgNoise.astro';
 import NavLink from '@components/link/NavLink.astro';
 import Navigation from '@components/Navigation.astro';
 
-const homeLink = { label: 'Return to the home page', href: '/',  icon: 'home', highlight: true}
 ---
 
-<HomeLayout 
-	page="Not Found"
-	description="404 Error — this page was not found">
+<HomeLayout page="Not Found" description="404 Error — this page was not found">
 	<BgNoise />
-	<main class="h-screen flex flex-col justify-between">
+	<main class="flex flex-col">
 		<Navigation />
-		<header class="h-full container mx-auto flex flex-col items-center justify-center">
-			<h1>Error 404</h1>
-			<p class="text-6xl italic font-brand pt-4 pb-16">This page was not found, sorry</p>
-			<NavLink link={homeLink} />
+		<header class="flex-1 container mx-auto mb-7 flex flex-col items-center justify-center">
+			<h1 class="text-5xl lg:text-8xl">Error 404</h1>
+			<p class="text-2xl lg:text-6xl italic font-brand pt-4 pb-8 lg:pb-16">This page was not found, sorry</p>
+			<NavLink label="Return to the home page" href="/" />
 		</header> 	
 	</main>
 </HomeLayout>
+
+<style>
+	main {
+		min-height: calc(100vh - 6rem);
+		min-height: calc(100dvh - 6rem);
+	}
+	@media (min-height:768px){
+		main {
+			min-height: 100vh;
+			min-height: 100dvh;
+		}
+	}
+</style>
