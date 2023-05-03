@@ -18,7 +18,7 @@ const { index } = Astro.props;
 
 const widths = [ 480, 640, 768, 1024, 1280, 1536, 1920 ]; 
 const sizes="(max-width: 1023px) 100vw, (max-width: 1536px) calc(50vw - 3rem), 768px"
-const delay = ((index + 1) * 250) + 100;
+const delay = ((index + 1) * 200) + 50;
 
 const from_g = data.from_g || 'from-purple-500';
 const to_g = data.to_g || 'to-blue-500';
@@ -31,20 +31,31 @@ const to_g = data.to_g || 'to-blue-500';
 			
 			transition-all 
 				hover:-translate-y-1 
-				lg:hover:-translate-y-2 -->
+				lg:hover:-translate-y-2 
+			
+					rounded 
+				lg:rounded-md 
+				xl:rounded-lg
+			
+			-->
+
 
 <a href={`/work/${slug}`} 
 style=`animation-delay:${delay}ms` 
-class=`anim 
-		rounded 
-				lg:rounded-md 
-				xl:rounded-lg
-				shadow-2xl
+class=`anim` >
+<article class="transition-transform 
+				hover:-translate-y-1
+				duration-300
+				lg:hover:-translate-y-2 
+				shadow-xl
+				hover:shadow-2xl
 				p-4
 				md:p-6 
 				lg:p-8
-				overflow-hidden` >
-	<article>
+				overflow-hidden
+				border
+				border-white
+				border-dashed">
         <Picture 
 			src={data.img} 
 			formats={["avif", "webp", "jpg"]}
@@ -56,23 +67,24 @@ class=`anim
 			decoding="auto"
 			class="rounded" 
 			alt={`Open the work ${data.title}`} />
-	</article> 
+				</article> 
+
 </a>
+
 
 <style>
 	@keyframes anim-card {
+		from {
+			opacity:0;
+			transform: translateY(25px); 
+		}
 		to { 
 			transform: translateY(0);  
 			opacity:1
 		}
 	}
 	.anim {
-		transform: translateY(75px); 
-		opacity:0;
-		animation: anim-card 350ms ease-in-out both;
-	}
-
-	.anim:hover {
-		transform: scaleX(1.1); 
+		animation: anim-card 300ms ease-in-out forwards;
+		
 	}
 </style>
