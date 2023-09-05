@@ -1,0 +1,55 @@
+---
+
+export interface Props {
+    page?: string |undefined;
+	description?: string | undefined;
+    image?: string | undefined
+}
+
+const {
+	page = 'Home',
+	description = 'Jérôme Abel Porfolio - Front-End Developer',
+    image = '/social.jpg'
+} = Astro.props;
+
+const title = `${page} - Jérôme Abel`;
+const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site);
+const socialImageURL = new URL(image, Astro.url);
+
+---
+
+        <meta charset="utf-8" />
+
+        <!-- Icon -->
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="manifest" href="/site.webmanifest">
+
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content={Astro.generator} />
+
+        <!-- Font preloads -->
+        <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin />
+        <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin />
+
+        <title>{title}</title>
+
+        <!-- Primary Meta Tags -->
+        <meta name="title" content={title}>
+        <meta name="description" content={description}>
+
+        <!-- Open Graph -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content={canonicalWebsiteURL}>
+        <meta property="og:title" content={title}>
+        <meta property="og:description" content={description}>
+        <meta property="og:image" content={socialImageURL}>
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content={canonicalWebsiteURL}>
+        <meta property="twitter:title" content={title}>
+        <meta property="twitter:description" content={description}>
+        <meta property="twitter:image" content={socialImageURL}>
+    

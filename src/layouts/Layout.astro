@@ -1,0 +1,25 @@
+---
+import SiteHead from "@components/SiteHead.astro";
+
+export interface Props {
+	page?: string | undefined;
+	description?: string | undefined;
+}
+
+const { page, description } = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<SiteHead page={page} description={description} />
+	</head>
+	<body>
+		<!-- <BgNoise /> -->
+		<main class="flex flex-col pb-6 lg:pb-20">
+			<!-- <Navigation /> -->
+			<div class="container py-none lg:py-6">
+				<slot />
+			</div>
+		</main>
+	</body>
+</html>
