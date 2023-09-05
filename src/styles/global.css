@@ -97,13 +97,13 @@ h5 {
 	color: var(--gray-100);
 }
 
-/*
 h1 {
 	font-size: var(--text-5xl);
 }
 
 h2 {
 	font-size: var(--text-4xl);
+	margin: 1em 0 0.5em 0;
 }
 
 h3 {
@@ -117,7 +117,7 @@ h4 {
 h5 {
 	font-size: var(--text-xl);
 } 
-*/
+
 
 /* Utilities */
 .sr-only {

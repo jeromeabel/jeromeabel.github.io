@@ -1,22 +1,26 @@
 ---
 title: SportSee
-publishDate: 2023-02-10 00:00:00
-img: /images/sportsee/window.png
-img_gradient: /images/sportsee/screen.png
+date: 2023-02-10
+img_grid: window.png
+img: /images/sportsee/screen.png
 img_alt: Screenshot of the SportSee Website
+abstract: "SportSee is a virtual sport coaching company. I developped the profile page of their website. It is a dashboard where user's data (calories, kilograms, etc.) are displayed by different kinds of charts : line, bars, radial and radar. The profile get these data from the API or a mocked file."
 description: Develop a dashboard analytics with React and Recharts
 home: true
 git: https://github.com/jeromeabel/oc-p12-sportsee
-link: https://jeromeabel.github.io/oc-p12-sportsee/
-from_g: from-[#fe0000]
-to_g: to-[#0f1733]
+demo: https://jeromeabel.github.io/oc-p12-sportsee/
+stack:
+- React
+- React-router
+- Recharts
+type: Education
 ---
 
 This project is the n°12 in the OpenClassrooms Front-End learning path. It combines a backend and a client side. The backend is provided. It is a simple API which serve data to the client via GET endpoints.
 
 ## Context
 
-SportSee is a virtual sport coaching company. I developped the profile page of their website. It is a dashboard where user's data (calories, kilograms, etc.) are displayed by different kinds of charts : line, bars, radial and radar. The profile get these data from the API or a mocked file.
+
 
 ## Tasks
 
@@ -27,9 +31,3 @@ SportSee is a virtual sport coaching company. I developped the profile page of t
 - [x] All User Stories
 - [x] Add Mock/Fetch API automatic selection
 - [x] Add two buttons in the Home page
-
-## Stack
-
-- React
-- React-router
-- Recharts
