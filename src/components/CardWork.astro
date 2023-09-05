@@ -15,17 +15,7 @@ const { index } = Astro.props;
 // const sizes = "(max-width: 640px) calc(100vw - 4rem), (max-width: 768px) calc(100vw - 4rem), (max-width: 1024px) calc(50vw - 3rem), (max-width: 1280px) calc(50vw - 4rem ), calc(50vw - 2rem)"
 // const sizes = "100vw"; // So Simple!
 
-
-const widths = [ 480, 640, 768, 1024, 1280, 1536, 1920 ]; 
-const sizes="(max-width: 1023px) 100vw, (max-width: 1536px) calc(50vw - 3rem), 768px"
-const delay = ((index + 1) * 200) + 50;
-
-const from_g = data.from_g || 'from-purple-500';
-const to_g = data.to_g || 'to-blue-500';
-
----
-
-<!-- bg-gradient-to-r 
+/*<!-- bg-gradient-to-r 
 				${from_g}
 				${to_g} hover:shadow-2xl 
 			
@@ -37,47 +27,62 @@ const to_g = data.to_g || 'to-blue-500';
 				lg:rounded-md 
 				xl:rounded-lg
 			
-			-->
+			-->*/
 
 
-<a href={`/work/${slug}`} 
-style=`animation-delay:${delay}ms` 
-class=`anim` >
-<article class="transition-transform 
+const widths = [ 480, 640, 768, 1024, 1280, 1536, 1920 ]; 
+const sizes="(max-width: 1023px) 100vw, (max-width: 1536px) calc(50vw - 3rem), 768px"
+const delay = ((index + 1) * 200) + 50;
+
+const from_g = data.from_g || 'from-purple-500';
+const to_g = data.to_g || 'to-blue-500';
+
+
+/* style=`animation-delay:${delay}ms` 
+class=`anim`
+
+
 				hover:-translate-y-1
 				duration-300
 				lg:hover:-translate-y-2 
-				shadow-xl
-				hover:shadow-2xl
+				shadow-lg
 				p-4
 				md:p-6 
 				lg:p-8
 				overflow-hidden
 				border
 				border-white
-				border-dashed">
+				border-dashed
+				*/
+
+---
+
+<a href={`/work/${slug}`} class="anim" style=`animation-delay:${delay}ms`  title="">
+	<article class="transition-transform 
+				hover:-translate-y-1
+				duration-300
+				lg:hover:-translate-y-2 
+				shadow-lg
+				overflow-hidden
+">
         <Picture 
 			src={data.img} 
 			formats={["avif", "webp", "jpg"]}
 			widths={widths}
         	sizes={sizes}
-			aspectRatio="16:10" 
+			aspectRatio="16:9" 
 			fit="inside"
 			loading="eager"
 			decoding="auto"
 			class="rounded" 
 			alt={`Open the work ${data.title}`} />
-				</article> 
-
+	</article> 
 </a>
 
 
 <style>
 	@keyframes anim-card {
-		from {
-			opacity:0;
-			transform: translateY(25px); 
-		}
+
 		to { 
 			transform: translateY(0);  
 			opacity:1
@@ -85,6 +90,7 @@ class=`anim` >
 	}
 	.anim {
 		animation: anim-card 300ms ease-in-out forwards;
-		
+		opacity:0;
+			transform: translateY(25px); 
 	}
 </style>

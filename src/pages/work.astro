@@ -6,7 +6,7 @@ import CardWork from '@components/CardWork.astro';
 import Grid from '@components/Grid.astro';
 
 const works = (await getCollection('work')).sort(
-	(a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+	(a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
 
 ---
@@ -16,5 +16,3 @@ const works = (await getCollection('work')).sort(
 		{ works.map( (work, index) => ( <CardWork work={work} index={index} /> ))}
 	</Grid>
 </BaseLayout>
-
-
