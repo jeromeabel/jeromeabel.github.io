@@ -1,10 +1,19 @@
 ---
 import HeaderLink from '@components/HeaderLink.astro';
+import { Icon } from 'astro-icon';
+
 ---
 
 <header class="border-b py-4">
   <nav class="container flex justify-between">
-    <HeaderLink label="Home" href="/" />
+    <a
+      href="/"
+      rel="prefetch"
+      title="Home"
+      class="p-2 w-14 h-14 text-black hover:text-gray-600 rounded-full grid place-items-center"
+    >
+      <Icon name="logo3" />
+    </a>
     <ul class="flex gap-6 items-center">
       <li><HeaderLink label="Work" href="/work/" /></li>
       <li><HeaderLink label="About" href="/about/" /></li>

@@ -14,17 +14,20 @@ export interface Props {
 const { page, description } = Astro.props;
 ---
 
-<html lang="en">
+<html
+  lang="en"
+  class="overflow-x-hidden break-words bg-zinc-50 text-stone-950 [color-scheme:dark] [word-break:break-word]"
+>
   <head>
     <SiteHead page={page} description={description} />
   </head>
   <body>
     <!-- <div class="flex flex-col h-screen"> -->
-      <Header />
-      <main class="container">
-        <slot />
-      </main>
-      <Footer />
+    <Header />
+    <main class="container">
+      <slot />
+    </main>
+    <Footer />
     <!-- </div> -->
   </body>
 </html>
