@@ -1,0 +1,13 @@
+---
+import HeaderLink from '@components/HeaderLink.astro';
+---
+
+<header class="border-b py-4">
+  <nav class="container flex justify-between">
+    <HeaderLink label="Home" href="/" />
+    <ul class="flex gap-6 items-center">
+      <li><HeaderLink label="Work" href="/work/" /></li>
+      <li><HeaderLink label="About" href="/about/" /></li>
+    </ul>
+  </nav>
+</header>

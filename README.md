@@ -7,6 +7,6 @@ Show my work in software
 - `pnpm install`
 - `pnpm dev`
 
-
 ## Author
+
 - Jérôme Abel
