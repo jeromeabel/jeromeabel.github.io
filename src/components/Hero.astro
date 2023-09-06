@@ -1,0 +1,52 @@
+---
+import BgNoise from '@components/BgNoise.astro';
+import Header from '@components/Header.astro';
+import CircleLink from '@components/CircleLink.astro';
+---
+
+<div class="h-4/5 relative grid place-items-center">
+  <!-- <Header /> -->
+  <BgNoise />
+
+  <div class="container">
+    <div class="w-2/3 flex flex-col gap-12">
+      <h1 class="text-7xl">
+        Hi, I'm <strong>Jérôme Abel</strong>
+      </h1>
+      <p class="italic font-heading text-6xl">
+        A <span class="tagline">front-end developer</span> with 10+ years
+        background in interactive arts
+      </p>
+    </div>
+  </div>
+
+  <CircleLink />
+</div>
+
+<style>
+  .tagline {
+    display: inline-block;
+    position: relative;
+    font-weight: 200;
+  }
+  .tagline::before {
+    position: absolute;
+    content: '';
+    background-color: rgba(255, 255, 255, 1);
+    bottom: 1px;
+    left: 0;
+    right: 0;
+    height: 50%;
+    z-index: -1;
+    transform-origin: left;
+    animation: scaleX 1.5s 1s ease-in-out both;
+  }
+  @keyframes scaleX {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(100%);
+    }
+  }
+</style>
