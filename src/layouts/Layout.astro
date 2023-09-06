@@ -1,6 +1,7 @@
 ---
 import Footer from '@components/Footer.astro';
 import Header from '@components/Header.astro';
+import Hero from '@components/Hero.astro';
 import SiteHead from '@components/SiteHead.astro';
 
 import '@fontsource/bubbler-one';
@@ -16,18 +17,17 @@ const { page, description } = Astro.props;
 
 <html
   lang="en"
-  class="overflow-x-hidden break-words bg-zinc-50 text-stone-950 [color-scheme:dark] [word-break:break-word]"
+  class="overflow-x-hidden break-words bg-zinc-50 text-stone-950"
 >
   <head>
     <SiteHead page={page} description={description} />
   </head>
-  <body>
-    <!-- <div class="flex flex-col h-screen"> -->
+  <body class="h-screen">
     <Header />
+    <Hero />
     <main class="container">
       <slot />
     </main>
     <Footer />
-    <!-- </div> -->
   </body>
 </html>
