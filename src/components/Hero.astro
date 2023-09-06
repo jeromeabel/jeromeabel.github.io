@@ -1,7 +1,8 @@
 ---
 import BgNoise from '@components/BgNoise.astro';
 import Header from '@components/Header.astro';
-import CircleLink from '@components/CircleLink.astro';
+import ExploreLink from '@components/ExploreLink.astro';
+import CTALink from '@components/CTALink.astro';
 ---
 
 <div class="h-4/5 relative grid place-items-center">
@@ -17,10 +18,13 @@ import CircleLink from '@components/CircleLink.astro';
         A <span class="tagline">front-end developer</span> with 10+ years
         background in interactive arts
       </p>
+      <div class="mt-10">
+        <CTALink label="Contact me" />
+      </div>
     </div>
   </div>
 
-  <CircleLink />
+  <ExploreLink />
 </div>
 
 <style>
