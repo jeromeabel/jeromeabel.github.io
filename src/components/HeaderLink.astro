@@ -14,7 +14,7 @@ const isActive = href === pathname || href === pathname.replace(/\/$/, '');
 
 <a
   href={href}
-  class:list={['text-2xl font-light', { active: isActive }]}
+  class:list={['', { active: isActive }]}
   {...props}
   aria-label={`${label} page`}
   title={`${label} page`}
