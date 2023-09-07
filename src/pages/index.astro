@@ -1,20 +1,25 @@
 ---
-import WorksList from '@components/WorksList.astro';
+import WorkCard from '@components/WorkCard.astro';
 import Layout from '@layouts/Layout.astro';
+import CTALink from '@components/CTALink.astro'
+
+import { getCollection } from 'astro:content';
+const works = (await getCollection('work')).sort(
+	(a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);  
+
 ---
 
 <Layout>
-  <div class="pt-24 pb-16">
-    <h2 id="works" class="text-2xl">Selected works</h2>
-    <WorksList />
+  <div class="py-16" id="works" >
+    <h2 class=" text-zinc-800 text-6xl font-heading mb-16">Selected works</h2>
+    
+    <div class="grid-cols-2 grid gap-8">
+      { works.map( (work, index) => ( <WorkCard work={work} index={index} /> ))}
+    </div>
+
+    <div class='align-middle text-center py-16'>
+    <CTALink label="Show more" />
+    </div>
   </div>
 </Layout>
-
-
-<style>
-
-* {
-	scroll-behavior: smooth;
-}
-
-</style>

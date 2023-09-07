@@ -1,5 +1,6 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
+import { Icon } from 'astro-icon';
 
 interface Props extends HTMLAttributes<'a'> {
   label: string;
@@ -7,25 +8,34 @@ interface Props extends HTMLAttributes<'a'> {
 
 const { href, label, ...props } = Astro.props;
 
+// <Icon name="fa:paper-plane" class="w-10" />
 ---
-<a href="" class="highlight rounded-full py-3 px-4 text-xl uppercase inline hover:text-black text-white hover:bg-white bg-black">{label}</a>
 
+<div class="relative  inline-block overflow-hidden rounded-full border-dashed border-black border ">
+  <a
+    href="mailto:dev@jeromeabel.net"
+    class="highlight block text-xl px-6 py-4 text-white bg-black"
+    >{label}</a
+  >
+  
+</div>
 
 <style>
-    .highlight.active {
-        background-color: white;
-    }
-    .highlight::before{
-        position: absolute;
-        content:"";
-        inset:0;
-        background-color: rgba(255,255,255,0.75);
-        z-index: -1;
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: transform 400ms ease-in-out;
-    }
-    .highlight:hover::before{
-        transform: scaleX(100%);
-    }
+  .highlight.active {
+    /* background-color: white; */
+  }
+  .highlight::before {
+    position: absolute;
+    content: '';
+    inset: 0;
+    background-color: rgba(255, 255, 255, 1);
+    /* background-color:white; */
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 400ms ease-in-out;
+  }
+  .highlight:hover::before {
+    transform: scaleX(100%);
+  }
 </style>
