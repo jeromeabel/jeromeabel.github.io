@@ -1,54 +1,63 @@
 ---
 title: ArgentBank
 date: 2023-03-23
-img_grid: /images/argentbank/window.png
-img: /images/argentbank/screen.png
-img_alt: Screenshot of the ArgentBank Website
+img: ../../assets/images/argentbank/screen.png
+img_preview: ../../assets/images/argentbank/preview.png
 description: Use an API for a bank account with React and Redux
 abstract: "I work at the Remede Agency, a web agency. We are developing a full-stack app for a new bank company, ArgentBank"
-home: true
 git: https://github.com/jeromeabel/oc-p13-argentbank
 stack:
 - React
 - React-router
-- Redux-toolkit
+- Redux-toolkit (RTK)
 - RTK-query
+- Formik
+- Toastify
+- Yup
+- Swagger
 type: Education
+home: true
+
 ---
 
+This project is the n°13 of the [OpenClassrooms Front-End learning path](https://openclassrooms.com/fr/paths/516-developpeur-dapplication-javascript-react).
 
-This project is the n°13 of the OpenClassrooms Front-End learning path.
+Main goals:
+- **Responsive** React App
+- **Phase 1** : Add an authentication system with Redux
+- **Phase 2** : Document the API with Swagger
 
-## Context
+
+## Authentication process
+
+Using Redux ToolKit, I followed some vertical architecture's principles : a slice per feature. 
+
+The first step of authentication was to add a private route with `React-Router`. The idea is to provide a conditional routing system which renders the Profile page if the user is logged or the Login page instead.
+
+![Login ArgentBank](../../assets/images/argentbank/login.jpg)
+
+The form validation was handled by `Formik` and `Yup`. A visual feedback from `Toastify` was added to provide a great user experience.
+
+When the form was successfully submitted, RTK stores a token from the server and use it in the Header of every API requests.
 
 
-## Tasks
+## Documentation the API
+We used Swagger to add API endpoints in the documentation
 
-The backend is provided with a tiny data set of two users. My goals are :
-- Build a responsive React App with three pages : home, signup and profile according to previous designs
-- Add an authentication system with Redux
-- Document the API with Swagger : phase 2 transactions
-  
+![Documentation Swagger](../../assets/images/argentbank/swagger.jpg)
 
-## Structure
 
-```bash
-├── 📂 app
-│   ├── apiSlice.js
-│   ├── App.jsx
-│   └── store.js
-├── 📂 features
-│   ├── authSlice.js
-│   └── userSlice.js
-├── 📂 pages
-│   ├── 📂 Error404
-│   ├── 📂 Home
-│   ├── 📂 Layout
-│   ├── 📂 Login
-│   └── 📂 Profile
-└── 📂 styles
-    └── *.scss
-```
+## Things I've Learned
 
-## Documentation API
+- Authenticate to an API
+- Model an API
+- Interact with an API
+- Implement a state manager in a React application
 
+I've written also two articles on LinkedIn and Github/gists to write down things I learned about RTK:
+
+- [Redux Toolkit Primer #2 - Cart 🛒](https://gist.github.com/jeromeabel/0c558273e5a59b6cc61dcfcab1c75099)
+- [RTK Query Primer](https://gist.github.com/jeromeabel/06aa57782012fe22be215f64dc0834b1)
+
+
+![Responsive screens ArgentBank App](../../assets/images/argentbank/screens.jpg)

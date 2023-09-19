@@ -5,10 +5,13 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['IBM Plex Sans', 'sans-serif'],
-        heading: ['Bubbler One', 'sans-serif'],
+        title: ['Bubbler One', 'sans-serif'],
       },
       container: {
         center: true,
+      },
+      animation: {
+        'bounce-slow': 'bounce 2.5s ease-in infinite',
       },
     },
   },
