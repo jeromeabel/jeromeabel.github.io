@@ -1,23 +1,15 @@
 ---
-import HeaderLink from '@components/HeaderLink.astro';
 import { Icon } from 'astro-icon';
+
+import NavLink from '@components/links/NavLink.astro';
 ---
 
-<header class="py-6 absolute top-0 w-full z-10">
-  <nav class="container flex justify-end">
-    <ul class="flex px-6 gap-12 items-center">
-      <li>
-        <a
-          href="/"
-          rel="prefetch"
-          title="Home"
-          class="p-2 w-14 h-14 text-black hover:text-gray-600 rounded-full grid place-items-center"
-        >
-          <Icon name="logo3" />
-        </a>
-      </li>
-      <li><HeaderLink label="Work" href="/work/" /></li>
-      <li><HeaderLink label="About" href="/about/" /></li>
+<header class="py-6">
+  <nav class="container">
+    <ul class="flex gap-10 justify-end">
+      <li><NavLink label="Home" href="/" /></li>
+      <li><NavLink label="Works" href="/works" /></li>
+      <li><NavLink label="About" href="/about" /></li>
     </ul>
   </nav>
 </header>

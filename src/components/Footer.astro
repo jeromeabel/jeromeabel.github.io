@@ -1,41 +1,7 @@
 ---
 const today = new Date();
-//bg-gradient-to-r from-zinc-200
-
-import IconLink from "@components/IconLink.astro"
 ---
 
-<footer class="py-16 mt-16 bg-stone-100">
-  <div class="container flex justify-evenly place-items-center">
-  <p>{today.getFullYear()} | Jérôme Abel</p>
-  <div class="flex align-end gap-5 place-items-center">
-    <IconLink icon="fa-brands:github" href="/#git" label="Github page" />
-    <IconLink icon="fa-brands:linkedin" href="/#linkedin" label="Github page" />
-    <IconLink icon="fa:envelope" href="mailto:dev@jeromeabel.net" label="Github page" />
-  </div>
-  </div>
+<footer class="">
+  <p>FOOTER</p>
 </footer>
-<style>
-  /* root {
-    --gray-gradient
-  }
-  footer {
-    padding: 2em 1em 6em 1em;
-    background: linear-gradient(var(--gray-gradient)) no-repeat;
-    color: rgb(var(--gray));
-    text-align: center;
-  } */
-  .social-links {
-    display: flex;
-    justify-content: center;
-    gap: 1em;
-    margin-top: 1em;
-  }
-  .social-links a {
-    text-decoration: none;
-    color: rgb(var(--gray));
-  }
-  .social-links a:hover {
-    color: rgb(var(--gray-dark));
-  }
-</style>
