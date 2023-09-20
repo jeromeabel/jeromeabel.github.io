@@ -1,30 +1,54 @@
 ---
-import { Icon } from 'astro-icon';
-import { Image } from 'astro:assets';
+import ExploreLink from '@components/links/ExploreLink.astro';
+import HeroText from '@components/hero/HeroText.astro';
+import HeroImage from '@components/hero/HeroImage.astro';
+import heroImage from '@assets/images/hero.png';
 
-import imageHero from '../assets/images/hero-600px.png';
+export const prerender = true;
 ---
 
-<section class="h-2/3 px-24 container ">
-    <div class="flex h-full justify-between items-center border">
-      <div class="flex-1">
-        <div class="flex flex-col gap-4">
-        <h1 class="text-4xl">
-          Hi! I'm Jerôme Abel
-        </h1>
-        <p class="text-4xl font-title  leading-tight">
-          A front-end developer with 10+ years<br />
-           background in interactive arts,<br />
-           living in France
-        </p>
-        <div class="flex gap-6 mt-10">
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-        </div>
-        </div>
-      </div>
+<section class="relative blo flex overflow-hidden flex-col py-32 container">
+  <HeroText />
+  <ExploreLink />
 
-    <Image src={imageHero} class="" alt="" />
-    </div>
+  <HeroImage />
 </section>
+
+<style>
+
+.blo {
+	    /* padding: 3rem max(5vw, calc((100% - 800px) / 2)); */
+	}
+  .hero {
+    aspect-ratio: 16/9;
+    display: flex;
+    overflow: hidden;
+    padding: 1rem 5% 40%;
+    position: relative;
+
+    /* justify-content: flex-start;
+    padding-left: 0%; */
+  }
+
+  /* .hero :not(.hero-image) {
+    position: relative;
+    z-index: 10;
+  }
+
+  .cta {
+    max-width: 400px;
+  } */
+
+  /* .hero h1 {
+    font-size: clamp(1.75rem, 10vw, 2.5rem);
+    margin: 0;
+  }
+
+  .hero p {
+    font-size: clamp(1rem, 5.75vw, 1.5rem);
+    line-height: 1.25;
+    margin: 0.5rem 0 0;
+  } */
+
+  
+</style>
