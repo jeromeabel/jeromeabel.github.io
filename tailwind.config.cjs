@@ -9,7 +9,7 @@ module.exports = {
       },
       container: {
         center: true,
-        padding: '1rem',
+        padding: '2rem',
       },
       animation: {
         'bounce-slow': 'bounce 2.5s ease-in infinite',
