@@ -1,0 +1,20 @@
+---
+import imageHero from '@assets/images/hero-600px.png';
+import { Image } from 'astro:assets';
+---
+<Image src={imageHero} class="hero-image border-green-400" alt="" />
+
+
+<style>
+    .hero-image {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    padding: 2rem;
+    object-fit:contain;
+    object-position: 100% 0%;
+    /* height: 135%;*/
+	width: 100%; 
+    z-index:-1;
+  }
+</style>

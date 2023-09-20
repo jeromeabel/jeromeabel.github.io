@@ -21,7 +21,7 @@ const { page, description } = Astro.props;
   <head>
     <SiteHead page={page} description={description} />
   </head>
-  <body class="h-screen">
+  <body class="min-h-screen">
     <Header />
     <slot />
     <Footer />
