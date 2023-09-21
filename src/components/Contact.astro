@@ -3,8 +3,9 @@ import IconLinkSmall from '@components/links/IconLinkSmall.astro';
 ---
 
 <section
-  class="mt-32 text-xl py-20 bg-white border-t-2 border-b-2 border-dashed border-black"
+  class="mt-32 text-xl py-20 border-t-2 border-b-2 border-dashed border-black relative"
 >
+  <div class="bgnoise"></div>
   <div class="container flex flex-col gap-8">
     <h2
       class="text-3xl uppercase font-extrabold tracking-[0.4rem] leading-none"
@@ -24,10 +25,37 @@ import IconLinkSmall from '@components/links/IconLinkSmall.astro';
     <div class="flex flex-col gap-2">
       <h3 class="text-slate-500">Follow</h3>
       <div class="flex gap-3">
-        <IconLinkSmall label="GitHub" href="https://github.com/jeromeabel" icon="github" />
-        <IconLinkSmall label="Framagit" href="https://framagit.org/jeromeabel" icon="mdi:gitlab"/>
-        <IconLinkSmall label="LinkedIn" href="https://www.linkedin.com/in/jerome-abel/" icon="linkedin" />
+        <IconLinkSmall
+          label="GitHub"
+          href="https://github.com/jeromeabel"
+          icon="github"
+        />
+        <IconLinkSmall
+          label="Framagit"
+          href="https://framagit.org/jeromeabel"
+          icon="mdi:gitlab"
+        />
+        <IconLinkSmall
+          label="LinkedIn"
+          href="https://www.linkedin.com/in/jerome-abel/"
+          icon="linkedin"
+        />
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  .bgnoise {
+    border: none;
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    filter: contrast(100%) brightness(3500%);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)),
+      linear-gradient(80deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0)),
+      linear-gradient(180deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)),
+      linear-gradient(240deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0)),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 148 148' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='6' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+</style>
