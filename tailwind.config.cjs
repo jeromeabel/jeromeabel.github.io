@@ -1,15 +1,28 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
+    screens: {
+      mobile: '640px',
+      tablet: '960px',
+      desktop: '1280px',
+    },
     extend: {
       fontFamily: {
-        sans: ['IBM Plex Sans', 'sans-serif'],
+        sans: ['IBM Plex Sans', ...defaultTheme.fontFamily.sans],
         title: ['Bubbler One', 'sans-serif'],
       },
       container: {
         center: true,
-        padding: '2rem',
+        padding: {
+          DEFAULT: '1rem',
+          sm: '2rem',
+          lg: '4rem',
+          xl: '5rem',
+          '2xl': '6rem',
+        },
       },
       animation: {
         'bounce-slow': 'bounce 2.5s ease-in infinite',
