@@ -4,51 +4,11 @@ import HeroText from '@components/hero/HeroText.astro';
 import HeroImage from '@components/hero/HeroImage.astro';
 import heroImage from '@assets/images/hero.png';
 
-export const prerender = true;
+// export const prerender = true;
 ---
 
-<section class="relative blo flex overflow-hidden flex-col py-32 container">
+<section class="relative container pt-24">
   <HeroText />
-  <ExploreLink />
-
   <HeroImage />
+  <ExploreLink />
 </section>
-
-<style>
-
-.blo {
-	    /* padding: 3rem max(5vw, calc((100% - 800px) / 2)); */
-	}
-  .hero {
-    aspect-ratio: 16/9;
-    display: flex;
-    overflow: hidden;
-    padding: 1rem 5% 40%;
-    position: relative;
-
-    /* justify-content: flex-start;
-    padding-left: 0%; */
-  }
-
-  /* .hero :not(.hero-image) {
-    position: relative;
-    z-index: 10;
-  }
-
-  .cta {
-    max-width: 400px;
-  } */
-
-  /* .hero h1 {
-    font-size: clamp(1.75rem, 10vw, 2.5rem);
-    margin: 0;
-  }
-
-  .hero p {
-    font-size: clamp(1rem, 5.75vw, 1.5rem);
-    line-height: 1.25;
-    margin: 0.5rem 0 0;
-  } */
-
-  
-</style>

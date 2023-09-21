@@ -1,0 +1,22 @@
+---
+import { getEntry } from 'astro:content';
+
+
+interface Props {
+  id:string
+}
+
+
+const { id } = Astro.props
+
+const work = await getEntry('works', id);
+
+
+//  title, img, link
+---
+
+<article class="flex-1 aspect-square bg-white">
+    <a href={'/works/' + work.slug}>
+    <img src={work.data.img_preview.src} />
+    </a>
+</article>

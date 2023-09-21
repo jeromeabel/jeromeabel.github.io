@@ -1,0 +1,20 @@
+---
+import WorkCard from '@components/WorkCard.astro';
+
+interface Props {
+  works: Array<string>;
+  title: string;
+  subtitle: string;
+  class: string;
+}
+const { works, title, subtitle, class: className } = Astro.props;
+---
+
+<section class="flex flex-col gap-8">
+  <h2 class="text-3xl uppercase font-extrabold tracking-[0.4rem] leading-none">
+    <span class={className}>{title}</span><br />{subtitle}
+  </h2>
+  <div class="flex gap-8 justify-between">
+    {works.map((work) => <WorkCard id={work} />)}
+  </div>
+</section>
