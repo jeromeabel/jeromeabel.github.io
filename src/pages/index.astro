@@ -3,16 +3,31 @@ import Hero from '@components/Hero.astro';
 import WorksPreview from '@components/WorksPreview.astro';
 import Layout from '@layouts/Layout.astro';
 import SecondaryLink from '@components/links/SecondaryLink.astro';
+import Contact from '@components/Contact.astro';
 ---
 
 <Layout>
   <Hero />
   <main class="container flex flex-col gap-32 mt-32">
-    <WorksPreview works={["hrnet", "argentbank"]} title="I build" subtitle="Websites" class="text-orange-500" />
-    <WorksPreview works={["la-forme", "logariat"]} title="I make" subtitle="Real-time applications" class="text-blue-500"  />
+    <WorksPreview
+      works={['hrnet', 'argentbank']}
+      title="I build"
+      subtitle="Websites"
+      class="text-orange-500"
+    />
+    <WorksPreview
+      works={['la-forme', 'logariat']}
+      title="I make"
+      subtitle="Real-time applications"
+      class="text-blue-500"
+    />
     <div class="flex justify-center">
-    <SecondaryLink label="Show All Works" href="/works" icon="icon_arrow_cross" />
+      <SecondaryLink
+        label="Show All Works"
+        href="/works"
+        icon="icon_arrow_cross"
+      />
     </div>
   </main>
-  <!-- <Contact /> -->
+  <Contact />
 </Layout>
