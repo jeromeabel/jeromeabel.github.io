@@ -1,8 +1,8 @@
 ---
 title: La Forme
 date: 2022-11-23
-img: ../../assets/images/logariat/screen.png
-img_preview: ../../assets/images/logariat/preview.png
+img: ../../assets/images/la-forme/screen.png
+img_preview: ../../assets/images/la-forme/preview.png
 description: La Forme is an audio-visual performance about digital and body topics
 abstract: "Develop a real-time application for an audio-visual performance about digital and body topics"
 git: https://framagit.org/afa/la-forme-live
