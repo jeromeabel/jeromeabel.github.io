@@ -1,7 +1,7 @@
 ---
 title: Logariat
 date: 2019-11-23
-img: ../../assets/images/logariat/screen.png
+img: ../../assets/images/logariat/screen.jpg
 img_preview: ../../assets/images/logariat/preview.png
 description: Logariat is an audiovisual performance on themes linked to digital technology and the body
 abstract: "Develop a real-time application for an audiovisual performance on themes linked to digital technology and the body."
