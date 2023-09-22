@@ -12,7 +12,6 @@ stack:
 - Arduino
 - Pure Data
 type: Art
-home: true
 ---
 
 > "Jérôme Abel mapped his route through the city on a superimposed map by marking the individual points with small transmitters. These points connected on the projection, creating a »shape of Neuss«.  On his tour through the city, the artist had collected a wide variety of fragments, such as stones, sand, plants, branches and also some Rhine water, put these things into previously constructed plexiglass tubes and now placed the materials piece by piece on thepanel.Gradually, a new image emerged, which began to interact with the previously found abstract, digital »shape of Neuss«. Every movement on the tabletop, every change in the constellation of materials and trans-mitters producedvisualand auditory efects. The interaction of the projection, the individual transmitters and the digital image and sound efects required special, newly created soft-ware that Jérôme Abel had programmed in preparation for [HANSEartWORKS](https://www.hanse.org/en/union-of-cities-the-hansa/working-groups/hanseartworks)."

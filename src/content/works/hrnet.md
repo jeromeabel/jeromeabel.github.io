@@ -15,11 +15,8 @@ stack:
 - React Hook Form
 - Zod
 - Tailwind CSS
-- Vite
 - Vitest
-- JSDoc
 type: Education
-home: true
 
 ---
 
@@ -81,14 +78,13 @@ Few methods used to get great results:
 - Analyze the performance of a web application
 - Produce technical documentation for an application
 
+
+## Posts
+
 I've written also three articles on LinkedIn and Github/gists about what I learned:
-- [Using React Context with Typescript - guide](https://gist.github.com/jeromeabel/4bdd305a39e5b14a26f971ddc36b3b2a)
-- Create A React Form With React-Hook-Form & TypeScript - Guide:
-	- [Gist](https://gist.github.com/jeromeabel/39bdc4fdfde32228483d3e9727a35cf3)
-	- [LinkedIn](https://www.linkedin.com/posts/jerome-abel_mini-guide-about-react-hook-form-activity-7074256576894644224-U4jw))
-- How to publish a React Typescript component on NPM with Vite
-	- [Gist](https://gist.github.com/jeromeabel/d9b8fc5eeb3e5b17c0d6f64a41087581)
-	- [LinkedIn](https://www.linkedin.com/posts/jerome-abel_create-a-react-library-with-vite-activity-7071727463571054592-EjNu)
+- [Using React Context with Typescript](https://gist.github.com/jeromeabel/4bdd305a39e5b14a26f971ddc36b3b2a)
+- [Create A React Form With React-Hook-Form & TypeScript](https://www.linkedin.com/posts/jerome-abel_mini-guide-about-react-hook-form-activity-7074256576894644224-U4jw)
+- [How to publish a React Typescript component on NPM with Vite](https://www.linkedin.com/posts/jerome-abel_create-a-react-library-with-vite-activity-7071727463571054592-EjNu)
 
 
 ![Responsive screens HRnet App](../../assets/images/hrnet/screens.png)

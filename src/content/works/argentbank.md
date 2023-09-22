@@ -16,7 +16,6 @@ stack:
 - Yup
 - Swagger
 type: Education
-home: true
 
 ---
 
