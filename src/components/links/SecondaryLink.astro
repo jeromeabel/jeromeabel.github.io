@@ -4,7 +4,7 @@ import Icon from 'astro-icon';
 
 interface Props extends HTMLAttributes<'a'> {
   label: string;
-  icon: string;
+  icon?: string;
 }
 
 const { label, icon, href, ...props } = Astro.props;
@@ -18,6 +18,6 @@ const { label, icon, href, ...props } = Astro.props;
   {...props}
 >
   {label}
-  <Icon name={icon} class="stroke-current fill-none h-6" />
+  {icon ? <Icon name={icon} class="stroke-current fill-none h-6" /> : null }
 </a>
 
