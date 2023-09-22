@@ -1,0 +1,33 @@
+---
+import { CollectionEntry, getCollection } from 'astro:content';
+import WorkHeader from '@components/work/WorkHeader.astro';
+import Layout from '@layouts/Layout.astro';
+
+interface Props {
+  entry: CollectionEntry<'works'>;
+}
+
+export async function getStaticPaths() {
+  const works = await getCollection('works');
+  return works.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+
+//<BaseLayout page={entry.data.title} image={entry.data.img} description={`${entry.data.title} - ${entry.data.description}`}>
+---
+
+<Layout>
+  <main class="container">
+    <WorkHeader data={entry.data} />
+	<img src={entry.data.img.src} />
+    <section class="">
+      <Content />
+    </section>
+  </main>
+</Layout>
