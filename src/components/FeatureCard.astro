@@ -1,0 +1,24 @@
+---
+import { getEntry } from 'astro:content';
+
+interface Props {
+  slug: string;
+}
+const { slug } = Astro.props;
+const entry = await getEntry('features', slug);
+const { Content, headings } = await entry?.render();
+
+---
+
+<article class="">
+  <div class="bg-gradient-to-r from-white from-50% aspect-[4/5] gap-12 px-16 pt-16 pb-12 flex flex-col">
+    <div class="flex-1 grid place-items-center">
+        <img src={entry?.data.img.src} class=""/>
+    </div>
+    <h2 class="font-title text-3xl uppercase tracking-wide" >{entry?.data.title}</h2>
+  </div>
+
+  <div class="prose-xl mt-12">
+    <Content />
+  </div>
+</article>

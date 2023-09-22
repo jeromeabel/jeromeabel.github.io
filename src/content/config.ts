@@ -1,5 +1,14 @@
 import { defineCollection, z } from 'astro:content';
 
+const featuresCollection = defineCollection({
+  type: 'content',
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      img: image()
+    }),
+});
+
 const worksCollection = defineCollection({
   type: 'content',
   schema: ({ image }) =>
@@ -19,10 +28,10 @@ const worksCollection = defineCollection({
       website: z.string().optional(),
       live: z.string().optional(),
       stack: z.array(z.string()).optional(),
-      home: z.boolean().optional(),
     }),
 });
 
 export const collections = {
   works: worksCollection,
+  features: featuresCollection,
 };

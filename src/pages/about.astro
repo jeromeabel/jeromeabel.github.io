@@ -1,12 +1,14 @@
 ---
 import PrimaryLinkSimple from '@components/links/PrimaryLinkSimple.astro';
 import Layout from '@layouts/Layout.astro';
+import FeatureCard from '@components/FeatureCard.astro';
+import Icon from 'astro-icon';
 ---
 
 <Layout>
-  <main class="container py-24 text-xl">
-    <header class="w-2/3 flex flex-col gap-8">
-      <h1 class="font-title text-6xl uppercase tracking-widest">Works</h1>
+  <main class="container py-24 text-xl flex flex-col gap-24">
+    <header class="w-2/3 flex flex-col gap-8 relative">
+      <h1 class="font-title text-6xl uppercase tracking-widest">About</h1>
       <p class="font-semibold">Art is beautiful, period.</p>
       <p>
         It can provide unique and multidimensional experiences, resonating with
@@ -15,14 +17,17 @@ import Layout from '@layouts/Layout.astro';
         frameworks, and a dozen programming languages. My artistic projects have
         been exhibited in Brussels, Dakar, Montreal, Dubrovnik, Neuss, Tunis,
         Dublin, Paris and more. It was a lot of fun with nice people! If this
-        side interests you, consider visiting my artistic projects on
-        jeromeabel.net.
+        side interests you, consider visiting my artistic projects on <a
+          href="https://jeromeabel.net"
+          target="_blank"
+          title="jeromeabel.net"
+          class="border-b border-black border-dashed">jeromeabel.net</a
+        >.
       </p>
       <p class="font-semibold">
         Software development is a collective and organic exploration of
         humanity.
       </p>
-
       <p>
         Today, I am fully launching into the field of web development with a
         first specialty in front-end. I just finished a year-long learning
@@ -32,13 +37,42 @@ import Layout from '@layouts/Layout.astro';
         and integration tests, modern JavaScript and design patterns, making web
         apps with React and Redux.
       </p>
-
       <p>
-        I look forward to growing in this field and meeting brilliant people and
+        <Icon name="fluent:handshake-24-regular" class="h-12 inline-block" /> I
+        look forward to growing in this field and meeting brilliant people and
         engineers!
       </p>
 
-      <PrimaryLinkSimple label="Download CV" href="/ABEL_Jerome_CV_fr.pdf" icon="carbon:download" />
+      <PrimaryLinkSimple
+        label="Download CV"
+        href="/ABEL_Jerome_CV_fr.pdf"
+        icon="carbon:download"
+      />
     </header>
+
+    <section class="mt-12">
+      <h2 class="font-title text-6xl uppercase tracking-widest">
+        My Way Of Doing
+      </h2>
+      <div class="grid grid-cols-3 gap-8 my-12">
+        <FeatureCard slug="user" />
+        <FeatureCard slug="creativity" />
+        <FeatureCard slug="quality" />
+      </div>
+    </section>
   </main>
+  <div class="bgradial"></div>
 </Layout>
+
+<style>
+  .bgradial {
+    position: absolute;
+    /* border: 1px solid red; */
+    top: 0;
+    left: 0;
+    width: 900px;
+    height: 900px;
+    background: radial-gradient(ellipse at 50% 30%, #ff8a044a, #f5ffe1 40%);
+    z-index: -10;
+  }
+</style>
