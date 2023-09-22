@@ -11,14 +11,15 @@ const { label, icon, href, ...props } = Astro.props;
 ---
 
 <a
-  class="hover-fx max-w-fit flex gap-6 px-6 items-center text-lg h-14 bg-black text-white rounded-full"
+  class="hover-fx max-w-fit flex gap-4 px-6 items-center text-lg h-14 bg-black text-white rounded-full"
   href={href}
   aria-label={`${label}`}
   title={`${label}`}
+  target="_blank"
   {...props}
 >
   {label}
-  <Icon name={icon} class="stroke-current fill-none w-12" />
+  <Icon name={icon} class="stroke-none fill-none w-6" />
 </a>
 
 <style>
