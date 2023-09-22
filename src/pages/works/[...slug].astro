@@ -18,16 +18,16 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 
-
 //<BaseLayout page={entry.data.title} image={entry.data.img} description={`${entry.data.title} - ${entry.data.description}`}>
 ---
 
 <Layout>
-  <main class="container">
+  <main class="container flex flex-col gap-12">
     <WorkHeader data={entry.data} />
-	<img src={entry.data.img.src} />
-    <section class="">
+    <img class="m-0 p-0" src={entry.data.img.src} />
+    <section class="mx-auto prose prose-xl prose-img:bg-stone-200 marker:text-black prose-marker:text-sky-40 prose-a:border-b hover:prose-a:border-solid  prose-a:no-underline prose-a:border-dashed prose-a:border-black">
       <Content />
     </section>
   </main>
 </Layout>
+
