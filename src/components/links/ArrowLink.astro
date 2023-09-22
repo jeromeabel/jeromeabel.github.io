@@ -1,9 +1,9 @@
 ---
 import { Icon } from 'astro-icon';
-const { label, href, css = 'text-base lg:text-xl'} = Astro.props;
+const { label, href, css = 'text-base'} = Astro.props;
 ---
 <a 
-    class=`flex justify-between ${css} border-dashed border-b border-b-black hover:border-solid transition-all py-1`
+    class=`flex justify-between ${css} border-dashed border max-w-fit rounded-full border-black hover:bg-white transition-all px-4 py-2`
     aria-label={label} 
     href={href}
     target="_blank">
