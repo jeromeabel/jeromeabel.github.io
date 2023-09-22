@@ -16,7 +16,6 @@ stack:
 - Pure Data
 - Python
 type: Art
-home: true
 ---
 
 Logariat is the desire to explore relationships:
