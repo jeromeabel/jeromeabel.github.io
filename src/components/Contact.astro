@@ -1,5 +1,6 @@
 ---
 import IconLinkSmall from '@components/links/IconLinkSmall.astro';
+import curveImg from '@assets/images/curve_arrow_text.svg'
 ---
 
 <section
@@ -35,11 +36,17 @@ import IconLinkSmall from '@components/links/IconLinkSmall.astro';
           href="https://framagit.org/jeromeabel"
           icon="mdi:gitlab"
         />
-        <IconLinkSmall
-          label="LinkedIn"
-          href="https://www.linkedin.com/in/jerome-abel/"
-          icon="linkedin"
-        />
+        <div class="relative">
+          <IconLinkSmall
+            label="LinkedIn"
+            href="https://www.linkedin.com/in/jerome-abel/"
+            icon="linkedin"
+            animate={true}
+          />
+          <div class="absolute w-72 -top-12 -right-[276px]">
+            <img src={curveImg.src} width="288" height="53" />
+          </div>
+        </div>
       </div>
     </div>
   </div>
