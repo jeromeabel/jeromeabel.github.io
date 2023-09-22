@@ -12,11 +12,6 @@ const worksCollection = defineCollection({
       img: image().refine((img) => img.width >= 500, {
         message: 'Cover image must be at least 500 pixels wide!',
       }),
-      // image: z.object({
-      //   url: z.string(),
-      //   alt: z.string(),
-      // }),
-      // img_preview: z.string(),
       description: z.string(),
       abstract: z.string(),
       type: z.string(),
