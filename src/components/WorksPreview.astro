@@ -1,5 +1,5 @@
 ---
-import WorkCard from '@components/WorkCard.astro';
+import WorkCard from '@components/work/WorkCard.astro';
 
 interface Props {
   works: Array<string>;
@@ -15,6 +15,6 @@ const { works, title, subtitle, class: className } = Astro.props;
     <span class={className}>{title}</span><br />{subtitle}
   </h2>
   <div class="flex gap-8 justify-between">
-    {works.map((work) => <WorkCard id={work} />)}
+    {works.map((work) => <WorkCard slug={work} />)}
   </div>
 </section>
