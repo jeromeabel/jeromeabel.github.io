@@ -1,0 +1,25 @@
+---
+import { getCollection } from 'astro:content';
+
+import Layout from '@layouts/Layout.astro';
+import WorkCard from '@components/work/WorkCard.astro';
+
+const works = await getCollection('works');
+---
+
+<Layout>
+  <main class="container py-24">
+    <header class="w-2/3 flex flex-col gap-8">
+      <h1 class="font-title text-6xl uppercase tracking-widest">Works</h1>
+      <p class="text-3xl tracking-wide">
+        Here you will find a list of my work in web development from my recent
+        Front-End Developer diploma and my artistic projects involving software
+        development.
+      </p>
+    </header>
+
+    <section class="grid grid-cols-3 gap-8 mt-24">
+        {works.map( (work) => (<WorkCard slug={work.slug} /> ))}
+    </section>
+  </main>
+</Layout>
