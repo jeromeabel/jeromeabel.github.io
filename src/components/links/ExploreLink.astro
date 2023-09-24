@@ -3,15 +3,15 @@ import Icon from 'astro-icon';
 ---
 
 <div
-  class="flex flex-col gap-2 lg:gap-4 items-center mt-16 lg:mt-24 border-black"
+  class="flex flex-col gap-2 lg:gap-4 items-center mt-16 lg:mt-24"
 >
   <Icon name="icon_big_arrow" class="h-24 lg:h-36 anim-arrow" />
-  <a class="font-title text-lg lg:text-2xl p-2" href="/#explore">EXPLORE</a>
+  <a class="block font-title text-lg lg:text-2xl p-2" href="/#explore" title="Explore works">EXPLORE</a>
 </div>
 
 <style>
   .anim-arrow {
-    animation: animY 1.5s ease-in-out alternate infinite;
+    animation: animY 1.2s ease-in-out alternate infinite;
   }
 
   @keyframes animY {
