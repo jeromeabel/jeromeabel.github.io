@@ -17,6 +17,8 @@ const { label, icon, href, ...props } = Astro.props;
   title={`${label}`}
   target="_blank"
   {...props}
+  target="_blank"
+  rel="nofollow noopener noreferrer"
 >
   {label}
   <Icon name={icon} class="stroke-none fill-none w-6" />
