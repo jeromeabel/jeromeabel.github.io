@@ -21,7 +21,7 @@ const { Content } = await entry.render();
 //<BaseLayout page={entry.data.title} image={entry.data.img} description={`${entry.data.title} - ${entry.data.description}`}>
 ---
 
-<Layout>
+<Layout page={entry.data.title} description={entry.data.description}>
   <main class="container flex flex-col gap-12 py-24">
     <WorkHeader data={entry.data} />
     <img class="m-0 p-0" src={entry.data.img.src} />
