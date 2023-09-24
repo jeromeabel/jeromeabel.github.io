@@ -2,10 +2,10 @@
 const today = new Date();
 ---
 
-<footer class="py-16 bg-white">
-  <div class="container flex justify-between">
+<footer class="py-8 sm:py-16 bg-white text-base lg:text-lg">
+  <div class="container flex flex-col gap-8 sm:flex-row justify-between">
     <p>Jérôme Abel - {today.getFullYear()}</p>
-    <div class="flex gap-4 socials">
+    <div class="flex flex-col sm:flex-row gap-2 sm:gap-4">
       <a
         href="mailto:dev@jeromeabel.net"
         title="Email"
@@ -14,11 +14,10 @@ const today = new Date();
       >
       <a
         href="https://www.linkedin.com/in/jerome-abel/"
-        title="github"
+        title="LinkedIn"
         target="_blank"
         rel="nofollow noopener noreferrer">LinkedIn</a
       >
-
       <a
         href="https://github.com/jeromeabel"
         title="Github"
@@ -44,6 +43,7 @@ const today = new Date();
 <style>
   a {
     border-bottom: 1px dashed black;
+    max-width: fit-content;
   }
 
   a:hover {
