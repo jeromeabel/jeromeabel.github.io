@@ -11,13 +11,12 @@ const { label, icon, href, ...props } = Astro.props;
 ---
 
 <a
-  class="hover-fx max-w-fit flex gap-2 px-6 items-center text-base h-12 bg-black text-white rounded-full"
+  class="hover-fx max-w-fit flex gap-2 px-6 items-center text-base py-3 bg-black text-white rounded-full"
   href={href}
   aria-label={`${label}`}
   title={`${label}`}
   target="_blank"
   {...props}
-  target="_blank"
   rel="nofollow noopener noreferrer"
 >
   {label}
@@ -30,9 +29,11 @@ const { label, icon, href, ...props } = Astro.props;
     background-size: 0 100%;
     background-repeat: no-repeat;
     transition: 0.4s;
+    border:none;
   }
   .hover-fx:hover {
     background-size: 100% 100%;
     color: black;
+    border:none;
   }
 </style>
