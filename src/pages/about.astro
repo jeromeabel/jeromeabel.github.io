@@ -6,9 +6,9 @@ import Icon from 'astro-icon';
 ---
 
 <Layout page="About" description="About Jérôme Abel, my may of doing">
-  <main class="container py-24 text-xl flex flex-col gap-24">
-    <header class="w-2/3 flex flex-col gap-8 relative">
-      <h1 class="font-title text-6xl uppercase tracking-widest">About</h1>
+  <main class="container py-8 lg:py-24 text-xl flex flex-col gap-24">
+    <header class="w-full lg:w-2/3 flex flex-col gap-6 sm:gap-8 relative">
+      <h1 class="font-title text-4xl sm:text-5xl lg:text-6xl uppercase tracking-widest">About</h1>
       <p class="font-semibold">Art is beautiful, period.</p>
       <p>
         It can provide unique and multidimensional experiences, resonating with
@@ -38,9 +38,9 @@ import Icon from 'astro-icon';
         apps with React and Redux.
       </p>
       <p>
-        <Icon name="fluent:handshake-24-regular" class="h-12 inline-block" /> I
-        look forward to growing in this field and meeting brilliant people and
-        engineers!
+         I
+        look forward to growing in this field with brilliant people and
+        engineers! <Icon name="fluent:handshake-24-regular" class="h-10 inline-block" />
       </p>
 
       <PrimaryLinkSimple
@@ -50,11 +50,11 @@ import Icon from 'astro-icon';
       />
     </header>
 
-    <section class="mt-12">
-      <h2 class="font-title text-6xl uppercase tracking-widest">
+    <section class="mt-0 lg:mt-12">
+      <h2 class="font-title text-4xl sm:text-5xl lg:text-6xl uppercase tracking-widest">
         My Way Of Doing
       </h2>
-      <div class="grid grid-cols-3 gap-8 my-12">
+      <div class="grid grid-cols-1 lg:grid-cols-3">
         <FeatureCard slug="user" />
         <FeatureCard slug="creativity" />
         <FeatureCard slug="quality" />
@@ -78,7 +78,6 @@ import Icon from 'astro-icon';
   a {
     border-bottom: 1px dashed black;
   }
-
   a:hover {
     border-bottom: 1px solid black;
   }
