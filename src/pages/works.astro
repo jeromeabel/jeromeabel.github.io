@@ -8,17 +8,17 @@ const works = await getCollection('works');
 ---
 
 <Layout page="Works" description='Works of Jérôme Abel, Web & Softwares'>
-  <main class="container py-24">
-    <header class="w-2/3 flex flex-col gap-8">
-      <h1 class="font-title text-6xl uppercase tracking-widest">Works</h1>
-      <p class="text-3xl tracking-wide">
+  <main class="container py-8 lg:py-24">
+    <header class="w-full lg:w-2/3 flex flex-col gap-2 lg:gap-8">
+      <h1 class="font-title text-4xl sm:text-5xl lg:text-6xl uppercase tracking-widest">Works</h1>
+      <p class="text-xl sm:text-2xl lg:text-3xl leading-tight lg:leading-normal tracking-wide">
         Here you will find a list of my work in web development from my recent
-        Front-End Developer diploma and my artistic projects involving software
+        Front-End Developer certification and my artistic projects involving software
         development.
       </p>
     </header>
 
-    <section class="grid grid-cols-3 gap-8 mt-24">
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8 lg:mt-24">
         {works.map( (work) => (<WorkCard slug={work.slug} /> ))}
     </section>
   </main>
