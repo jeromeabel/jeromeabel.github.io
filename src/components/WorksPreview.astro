@@ -10,11 +10,11 @@ interface Props {
 const { works, title, subtitle, class: className } = Astro.props;
 ---
 
-<section class="flex flex-col gap-8">
-  <h2 class="text-3xl uppercase font-extrabold tracking-[0.4rem] leading-none">
+<section class="flex flex-col gap-4 lg:gap-8">
+  <h2 class="text-xl lg:text-3xl uppercase font-semibold lg:font-extrabold tracking-[0.2em] lg:tracking-[0.4rem] leading-none">
     <span class={className}>{title}</span><br />{subtitle}
   </h2>
-  <div class="flex gap-8 justify-between">
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-8">
     {works.map((work) => <WorkCard slug={work} />)}
   </div>
 </section>
