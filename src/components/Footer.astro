@@ -6,7 +6,11 @@ const today = new Date();
   <div class="container flex justify-between">
     <p>Jérôme Abel - {today.getFullYear()}</p>
     <div class="flex gap-4 socials">
-      <a href="mailto:dev@jeromeabel.net" title="Email" target="_blank" rel="nofollow noopener noreferrer">Email</a
+      <a
+        href="mailto:dev@jeromeabel.net"
+        title="Email"
+        target="_blank"
+        rel="nofollow noopener noreferrer">Email</a
       >
       <a
         href="https://www.linkedin.com/in/jerome-abel/"
@@ -38,7 +42,11 @@ const today = new Date();
 </footer>
 
 <style>
-  .socials > a {
+  a {
     border-bottom: 1px dashed black;
+  }
+
+  a:hover {
+    border-bottom: 1px solid black;
   }
 </style>
