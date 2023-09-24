@@ -12,7 +12,7 @@ const work = await getEntry('works', slug);
 ---
 
 <article class="aspect-square bg-white group overflow-hidden">
-  <a href={'/works/' + work?.slug} class="relative">
+  <a href={'/works/' + work?.slug} title={`Open project ${work?.data.title}`} class="relative">
     <img src={work?.data.img_preview.src} class="scale-100 group-hover:scale-105 transition-transform duration-1000" />
     <div class="absolute inset-0 grid place-items-center bg-black bg-opacity-0 group-hover:bg-opacity-80 duration-500 transition-all">
       <div

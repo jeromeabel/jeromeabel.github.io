@@ -6,7 +6,8 @@ const { label, href, css = 'text-base'} = Astro.props;
     class=`flex justify-between ${css} border-dashed border max-w-fit rounded-full border-black hover:bg-white transition-all px-4 py-2`
     aria-label={label} 
     href={href}
-    target="_blank">
+    target="_blank"
+    rel="nofollow noopener noreferrer">
     { label }
     <Icon name="mdi:arrow-top-right" class="h-6 ml-1" />
 </a> 

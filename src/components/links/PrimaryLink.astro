@@ -16,6 +16,8 @@ const { label, icon, href, ...props } = Astro.props;
   aria-label={`${label}`}
   title={`${label}`}
   {...props}
+  target="_blank"
+  rel="nofollow noopener noreferrer"
 >
   {label}
   <Icon name={icon} class="stroke-current fill-none w-12" />
