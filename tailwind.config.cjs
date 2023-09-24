@@ -5,9 +5,9 @@ module.exports = {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
     screens: {
-      mobile: '640px',
-      tablet: '960px',
-      desktop: '1280px',
+      sm: '640px',
+      md: '960px',
+      lg: '1280px',
     },
     extend: {
       fontFamily: {
