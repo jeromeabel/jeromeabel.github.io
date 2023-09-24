@@ -5,10 +5,20 @@ const { data } = Astro.props;
 const year = new Date(data.date).getFullYear();
 ---
 
-<header class="w-2/3 flex flex-col gap-6">
-  <h1 class="font-title text-6xl uppercase tracking-widest">{data.title}</h1>
-  <p class="text-3xl tracking-wide">{data.abstract}</p>
-  <table class="min-w-fit prose prose-td:py-4 font-light mt-6 border-b border-black">
+<header class="w-full lg:w-2/3 flex flex-col gap-4 lg:gap-8">
+  <h1
+    class="font-title text-4xl sm:text-5xl lg:text-6xl uppercase tracking-widest"
+  >
+    {data.title}
+  </h1>
+  <p
+    class="text-xl sm:text-2xl lg:text-3xl leading-tight lg:leading-normal tracking-wide"
+  >
+    {data.abstract}
+  </p>
+  <table
+    class="min-w-full prose lg:prose-td:py-4 font-light mt-2 sm:mt-6 border-b border-black"
+  >
     <tbody class="prose-tr:border-gray-600">
       <tr><td class="font-semibold">TYPE</td><td>{data.type}</td></tr>
       <tr><td class="font-semibold">DATE</td><td>{year}</td></tr>
