@@ -5,6 +5,7 @@ import Footer from '@components/Footer.astro';
 
 import '@fontsource/bubbler-one';
 import '@fontsource/ibm-plex-sans';
+import { ViewTransitions } from 'astro:transitions';
 
 export interface Props {
   page?: string | undefined;
@@ -22,6 +23,7 @@ const { page, description } = Astro.props;
     <SiteHead page={page} description={description} />
   </head>
   <body class="min-h-screen">
+    <ViewTransitions />
     <Header />
     <slot />
     <Footer />
