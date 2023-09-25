@@ -2,7 +2,7 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
 import WorkHeader from '@components/work/WorkHeader.astro';
 import Layout from '@layouts/Layout.astro';
-import SecondaryLink from "@components/links/SecondaryLink.astro"
+import SecondaryLink from '@components/links/SecondaryLink.astro';
 import WorkNavigation from '@components/work/WorkNavigation.astro';
 
 interface Props {
@@ -10,7 +10,6 @@ interface Props {
   next: CollectionEntry<'works'>;
   prev: CollectionEntry<'works'>;
 }
-
 
 export async function getStaticPaths() {
   const works = await getCollection('works');
@@ -28,7 +27,7 @@ export async function getStaticPaths() {
   }));
 }
 
-const { entry, prev, next} = Astro.props;
+const { entry, prev, next } = Astro.props;
 const { Content } = await entry.render();
 ---
 
