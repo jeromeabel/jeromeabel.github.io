@@ -2,7 +2,7 @@
 title: Logariat
 date: 2019-11-23
 img: ../../assets/images/logariat/screen.jpg
-img_preview: ../../assets/images/logariat/preview.png
+img_preview: ../../assets/images/logariat/preview.jpg
 description: Logariat is an audiovisual performance on themes linked to digital technology and the body
 abstract: "Develop a real-time application for an audiovisual performance on themes linked to digital technology and the body."
 git: https://framagit.org/chateaucarbone/logariat
@@ -28,7 +28,7 @@ A black human figure sits on an unpleasant chair. Bright lines outline its skele
 
 The video projection is divided into three zones, a triptych of writing, body and images. The writing area is rather austere, in the form of a terminal or forms. The body is represented by real-time physical signals coming from sensors on the performer's body. The third zone leaves room for the generation of organic forms between camouflage, scar and artificial forms of physical modeling of trajectories, density, microscopic worlds, etc.
 
-![Logariat storyboard](../../assets/images/logariat/screens.png)
+![Logariat storyboard](../../assets/images/logariat/screens.jpg)
 
 ## What I've learned
 
