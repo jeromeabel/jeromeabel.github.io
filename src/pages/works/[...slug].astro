@@ -2,31 +2,45 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
 import WorkHeader from '@components/work/WorkHeader.astro';
 import Layout from '@layouts/Layout.astro';
+import SecondaryLink from "@components/links/SecondaryLink.astro"
+import WorkNavigation from '@components/work/WorkNavigation.astro';
 
 interface Props {
   entry: CollectionEntry<'works'>;
+  next: CollectionEntry<'works'>;
+  prev: CollectionEntry<'works'>;
 }
+
 
 export async function getStaticPaths() {
   const works = await getCollection('works');
-  return works.map((entry) => ({
+  const numberOfWorks = works.length;
+
+  //prev: // If the current post is the oldest
+  //next: // If the current post is the newest
+  return works.map((entry, i) => ({
     params: { slug: entry.slug },
-    props: { entry },
+    props: {
+      entry,
+      prev: i + 1 === numberOfWorks ? null : works[i + 1],
+      next: i === 0 ? null : works[i - 1],
+    },
   }));
 }
 
-const { entry } = Astro.props;
+const { entry, prev, next} = Astro.props;
 const { Content } = await entry.render();
 ---
 
 <Layout page={entry.data.title} description={entry.data.description}>
   <main class="container flex flex-col gap-8 py-8 lg:gap-12 lg:py-24">
     <WorkHeader data={entry.data} />
-    <img src={entry.data.img.src}  alt={`Screen of ${entry.data.title}`} />
+    <img src={entry.data.img.src} alt={`Screen of ${entry.data.title}`} />
     <section
       class="mx-auto prose sm:prose-xl lg:prose-2xl prose-a:no-underline prose-a:border-b hover:prose-a:border-solid prose-a:border-dashed prose-a:border-black prose-img:bg-stone-200 marker:text-black prose-marker:text-sky-40"
     >
       <Content />
+      <WorkNavigation {next} {prev} />
     </section>
   </main>
 </Layout>
