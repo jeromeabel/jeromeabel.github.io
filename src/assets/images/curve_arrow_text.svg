@@ -1,1 +1,151 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="300.31" height="64.911" viewBox="0 0 79.457 17.174"><defs><marker id="a" orient="auto" refX="0" refY="0" style="overflow:visible"><g style="fill:#1a1a1a;fill-opacity:1;stroke:#1a1a1a;stroke-opacity:1"><path d="M-3.805-3.959.544 0M-1.287-3.959 3.062 0M1.305-3.959 5.654 0M-3.805 4.178.544.22M-1.287 4.178 3.062.22M1.305 4.178 5.654.22" style="fill:none;fill-rule:evenodd;stroke:context-stroke;stroke-width:.8;stroke-linecap:round" transform="scale(-1.2)"/></g></marker></defs><path d="M142.571 145.873c6.415-10.389 18.725-11.965 33.985-5.487" style="fill:none;stroke:#1a1a1a;stroke-width:.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#a)" transform="translate(-141.098 -136.394)"/><text xml:space="preserve" x="190.917" y="125.697" style="font-style:normal;font-weight:400;font-size:6.35px;line-height:1.25;font-family:sans-serif;fill:#000;fill-opacity:1;stroke:none;stroke-width:.264583" transform="rotate(5.056 1474.078 -1666.097)"><tspan x="190.917" y="125.697" style="font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:6.35px;font-family:&quot;Bubbler One&quot;;-inkscape-font-specification:&quot;Bubbler One&quot;;stroke-width:.264583">I post weekly</tspan><tspan x="190.917" y="133.724" style="font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:6.35px;font-family:&quot;Bubbler One&quot;;-inkscape-font-specification:&quot;Bubbler One&quot;;stroke-width:.264583">about arts &amp; tech</tspan></text></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   inkscape:export-ydpi="96"
+   inkscape:export-xdpi="96"
+   inkscape:export-filename="/home/jr/dev/emploi/visuels/png/curve_arrow.png"
+   sodipodi:docname="curve_arrow_text.svg"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   id="svg2635"
+   version="1.1"
+   viewBox="0 0 64.560543 15.518901"
+   height="58.65411"
+   width="244.00835"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview2637"
+     pagecolor="#c0c0c0"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="true"
+     inkscape:document-units="px"
+     showgrid="false"
+     lock-margins="true"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     units="px"
+     inkscape:zoom="1.8494692"
+     inkscape:cx="94.351396"
+     inkscape:cy="93.270005"
+     inkscape:window-width="1920"
+     inkscape:window-height="1029"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     inkscape:showpageshadow="false" />
+  <defs
+     id="defs2632">
+    <marker
+       style="overflow:visible"
+       id="Tail"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Tail"
+       inkscape:isstock="true">
+      <g
+         transform="scale(-1.2)"
+         id="g149287">
+        <path
+           style="fill:none;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.8;stroke-linecap:round"
+           d="M -3.8048674,-3.9585227 0.54352094,0"
+           id="path149275" />
+        <path
+           style="fill:none;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.8;stroke-linecap:round"
+           d="M -1.2866832,-3.9585227 3.0617053,0"
+           id="path149277" />
+        <path
+           style="fill:none;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.8;stroke-linecap:round"
+           d="M 1.3053582,-3.9585227 5.6537466,0"
+           id="path149279" />
+        <path
+           style="fill:none;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.8;stroke-linecap:round"
+           d="M -3.8048674,4.1775838 0.54352094,0.21974226"
+           id="path149281" />
+        <path
+           style="fill:none;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.8;stroke-linecap:round"
+           d="M -1.2866832,4.1775838 3.0617053,0.21974226"
+           id="path149283" />
+        <path
+           style="fill:none;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.8;stroke-linecap:round"
+           d="M 1.3053582,4.1775838 5.6537466,0.21974226"
+           id="path149285" />
+      </g>
+    </marker>
+    <marker
+       style="overflow:visible"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Tail9761"
+       inkscape:isstock="true"
+       id="Tail9761">
+      <g
+         transform="scale(-1.2)"
+         id="g1380"
+         style="fill:#1a1a1a;fill-opacity:1;stroke:#1a1a1a;stroke-opacity:1">
+        <path
+           style="fill:none;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.8;stroke-linecap:round"
+           d="M -3.8048674,-3.9585227 0.54352094,0"
+           id="path1368" />
+        <path
+           style="fill:none;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.8;stroke-linecap:round"
+           d="M -1.2866832,-3.9585227 3.0617053,0"
+           id="path1370" />
+        <path
+           style="fill:none;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.8;stroke-linecap:round"
+           d="M 1.3053582,-3.9585227 5.6537466,0"
+           id="path1372" />
+        <path
+           style="fill:none;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.8;stroke-linecap:round"
+           d="M -3.8048674,4.1775838 0.54352094,0.21974226"
+           id="path1374" />
+        <path
+           style="fill:none;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.8;stroke-linecap:round"
+           d="M -1.2866832,4.1775838 3.0617053,0.21974226"
+           id="path1376" />
+        <path
+           style="fill:none;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.8;stroke-linecap:round"
+           d="M 1.3053582,4.1775838 5.6537466,0.21974226"
+           id="path1378" />
+      </g>
+    </marker>
+  </defs>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-153.45231,-139.63414)">
+    <path
+       style="fill:none;stroke:#1a1a1a;stroke-width:0.191768px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Tail9761)"
+       d="m 154.52954,149.10457 c 4.33791,-7.7136 11.76471,-10.27648 21.94374,-6.53516"
+       id="path52076"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:6.35px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="188.94112"
+       y="129.657"
+       id="text3384"
+       transform="rotate(4.478703)"><tspan
+         sodipodi:role="line"
+         id="tspan3382"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.35px;font-family:'Bubbler One';-inkscape-font-specification:'Bubbler One';stroke-width:0.264583"
+         x="188.94112"
+         y="129.657">I post weekly</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.35px;font-family:'Bubbler One';-inkscape-font-specification:'Bubbler One';stroke-width:0.264583"
+         x="188.94112"
+         y="137.68401"
+         id="tspan3722">about arts &amp; tech</tspan></text>
+  </g>
+</svg>
