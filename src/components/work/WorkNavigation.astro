@@ -10,7 +10,7 @@ const { prev, next } = Astro.props;
   <div class="">
     {
       prev ? (
-        <a href={prev?.slug} class={aStyle}>
+        <a href={prev?.slug} class={aStyle} aria-label={prev?.data.title} title={prev?.data.title}>
           <Icon name="ph:arrow-left-light" class={iconStyle} />
           {prev?.data.title}
         </a>
@@ -21,7 +21,7 @@ const { prev, next } = Astro.props;
   <div class="self-end">
     {
       next ? (
-        <a href={next?.slug} class={aStyle}>
+        <a href={next?.slug} class={aStyle} aria-label={next?.data.title} title={next?.data.title}>
           {next?.data.title}
           <Icon name="ph:arrow-right-light" class={iconStyle} />
         </a>
