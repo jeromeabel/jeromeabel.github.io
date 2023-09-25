@@ -6,21 +6,16 @@ import { Image } from 'astro:assets';
 ---
 
 <Layout page="Error 404" description="Error page">
-  <main class="container h-[500px]">
-    <div class="flex flex-col justify-center gap-12 items-center h-full">
-      <Image src={img404} alt="Error 404 illustration" />
+  <main class="p-8 grid items-center">
+    <div class="flex flex-col justify-center gap-8 sm:gap-12 items-center">
+      <Image src={img404} alt="" />
+      <h2 class="text-xl sm:text-2xl">Page Not Found</h2>
       <SecondaryLink label="Return to home" href="/" />
     </div>
   </main>
 </Layout>
 
 <style>
-  /* html,
-  body {
-    height: 100%;
-    overflow-x: hidden;
-  } */
-
   body {
     display: flex;
     flex-direction: column;
