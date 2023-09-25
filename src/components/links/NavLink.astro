@@ -8,7 +8,10 @@ interface Props extends HTMLAttributes<'a'> {
 const { href, label, ...props } = Astro.props;
 
 const { pathname } = Astro.url;
-const isActive = href === pathname || href === pathname.replace(/\/$/, '');
+// const isActive = href === pathname || href === pathname.replace(/\/$/, '');
+const currentPath = `/${pathname.split('/')[1].trim()}`; // remove the first "/"
+const isActive =
+  href === currentPath || href === currentPath.replace(/\/$/, '');
 ---
 
 <a
