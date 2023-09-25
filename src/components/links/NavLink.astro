@@ -16,7 +16,7 @@ const isActive =
 
 <a
   href={href}
-  class:list={['text-xl text-zinc-400 hover:text-black', { active: isActive }]}
+  class:list={['text-xl text-zinc-600 hover:text-black hover:border-b border-black', { active: isActive }]}
   {...props}
   aria-label={`${label} page`}
   title={`${label} page`}
@@ -27,5 +27,6 @@ const isActive =
 <style>
   a.active {
     color: black;
+    border-bottom: 1px solid black;
   }
 </style>
