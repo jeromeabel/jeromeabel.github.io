@@ -37,7 +37,7 @@ const { Content } = await entry.render();
     <WorkHeader data={entry.data} />
     <Image src={entry.data.img} alt={`${entry.data.title} project`} />
     <section
-      class="md:max-auto prose sm:prose-xl lg:prose-2xl prose-a:no-underline prose-a:border-b hover:prose-a:border-solid prose-a:border-dashed prose-a:border-black prose-img:bg-stone-200 marker:text-black prose-marker:text-sky-40"
+      class="md:max-auto prose sm:prose-xl lg:prose-2xl prose-a:no-underline prose-a:border-b hover:prose-a:border-solid prose-a:border-dashed prose-a:border-black prose-img:bg-stone-200 marker:text-black"
     >
       <Content />
       <WorkNavigation {next} {prev} />
