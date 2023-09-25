@@ -27,6 +27,7 @@ const worksCollection = defineCollection({
       git: z.string().optional(),
       website: z.string().optional(),
       live: z.string().optional(),
+      video: z.string().optional(),
       stack: z.array(z.string()).optional(),
     }),
 });
