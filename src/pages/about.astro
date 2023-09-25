@@ -71,20 +71,25 @@ import Icon from 'astro-icon';
       </div>
     </section>
   </main>
-  <div class="bgradial"></div>
+  <div class="absolute inset-0 w-screen aspect-square -z-10 bg-[radial-gradient(ellipse_at_10%_40%,_#ff8a0460_0%,#f5ffe1_35%)] sm:bg-[radial-gradient(ellipse_at_20%_30%,_#ff8a0460_0%,#f5ffe1_25%)] md:bg-[radial-gradient(ellipse_at_20%_20%,_#ff8a0460_0%,#f5ffe1_15%)]"></div>
 </Layout>
 
 <style>
   .bgradial {
-    position: absolute;
-    /* border: 1px solid red; */
-    top: 0;
-    left: 0;
-    width: 900px;
-    height: 900px;
-    background: radial-gradient(ellipse at 50% 30%, #ff8a044a, #f5ffe1 40%);
-    z-index: -10;
+
   }
+
+
+       /* background: radial-gradient(ellipse at 50% 30%, #ff8a044a, #f5ffe1 40%); */
+
+  /* mobile first
+ @media screen (min-width:600px) {
+    .bg-radial {
+     background-color:blueviolet;
+    }
+  } */
+
+
   a {
     border-bottom: 1px dashed black;
   }
