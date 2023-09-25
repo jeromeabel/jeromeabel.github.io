@@ -1,8 +1,9 @@
 ---
 import { type CollectionEntry, getCollection } from 'astro:content';
-import WorkHeader from '@components/work/WorkHeader.astro';
+import { Image } from 'astro:assets';
+
 import Layout from '@layouts/Layout.astro';
-import SecondaryLink from '@components/links/SecondaryLink.astro';
+import WorkHeader from '@components/work/WorkHeader.astro';
 import WorkNavigation from '@components/work/WorkNavigation.astro';
 
 interface Props {
@@ -34,7 +35,7 @@ const { Content } = await entry.render();
 <Layout page={entry.data.title} description={entry.data.description}>
   <main class="container flex flex-col gap-8 py-8 lg:gap-12 lg:py-24">
     <WorkHeader data={entry.data} />
-    <img src={entry.data.img.src} alt={`Screen of ${entry.data.title}`} />
+    <Image src={entry.data.img} alt={`${entry.data.title} project`} />
     <section
       class="mx-auto prose sm:prose-xl lg:prose-2xl prose-a:no-underline prose-a:border-b hover:prose-a:border-solid prose-a:border-dashed prose-a:border-black prose-img:bg-stone-200 marker:text-black prose-marker:text-sky-40"
     >

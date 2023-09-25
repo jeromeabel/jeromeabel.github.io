@@ -1,5 +1,6 @@
 ---
 import { getEntry } from 'astro:content';
+import { Image } from 'astro:assets';
 import Icon from 'astro-icon';
 
 interface Props {
@@ -13,7 +14,7 @@ const work = await getEntry('works', slug);
 
 <article class="aspect-square bg-white group overflow-hidden">
   <a href={'/works/' + work?.slug} title={`Open project ${work?.data.title}`} class="relative">
-    <img src={work?.data.img_preview.src} class="scale-100 group-hover:scale-110 transition-transform duration-1000" />
+    { work ? <Image src={work.data.img_preview} class="scale-100 group-hover:scale-110 transition-transform duration-1000" alt={`${work?.data.title} preview`} /> : null }
     <div class="absolute inset-0 grid place-items-center bg-black bg-opacity-0 group-hover:bg-opacity-80 duration-500 transition-all">
       <div
         class="flex-col gap-6 flex opacity-0 group-hover:opacity-100 duration-500 "
