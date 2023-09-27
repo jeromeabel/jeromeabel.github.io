@@ -44,7 +44,7 @@ const publishedDate = new Date(entry.data.date);
     <WorkHeader data={entry.data} />
     <Image src={entry.data.img} alt={`${entry.data.title} project`} />
     <section
-      class="md:max-auto prose sm:prose-xl lg:prose-2xl text-xl leading-normal prose-headings:font-semibold prose-a:no-underline prose-a:border-b hover:prose-a:border-solid prose-a:border-dashed prose-a:border-black prose-img:bg-stone-200 marker:text-black"
+      class="md:max-auto prose sm:prose-xl lg:prose-2xl prose-p:leading-normal prose-li:leading-normal prose-headings:font-semibold prose-a:no-underline prose-a:border-b hover:prose-a:border-solid prose-a:border-dashed prose-a:border-black prose-img:bg-stone-200 marker:text-black"
     >
       <Content />
       <WorkNavigation {next} {prev} />

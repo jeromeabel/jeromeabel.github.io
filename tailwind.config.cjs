@@ -12,7 +12,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['IBM Plex Sans', ...defaultTheme.fontFamily.sans],
-        title: ['Bubbler One', 'sans-serif'],
+        title: ['Bubbler One', ...defaultTheme.fontFamily.sans],
       },
       container: {
         center: true,
@@ -27,7 +27,16 @@ module.exports = {
       animation: {
         'bounce-slow': 'bounce 2.5s ease-in infinite',
       },
+      typography: {
+        DEFAULT: {
+          // Custom CSS here ↓
+          css: {
+            // color: '#333',
+            // 'ul, li, p': { lineHeight: '1.5rem' },
+          },
+        },
+      },
     },
   },
-  plugins: [require('@tailwindcss/typography'),],
+  plugins: [require('@tailwindcss/typography')],
 };
