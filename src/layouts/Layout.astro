@@ -3,10 +3,10 @@ import SiteHead from '@components/SiteHead.astro';
 import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
 
-import '@fontsource/bubbler-one';
-import '@fontsource/ibm-plex-sans';
-import "@fontsource/ibm-plex-sans/300.css";
-import "@fontsource/ibm-plex-sans/600.css";
+// import '@fontsource/bubbler-one';
+import '@fontsource/ibm-plex-sans/400.css';
+import '@fontsource/ibm-plex-sans/300.css';
+import '@fontsource/ibm-plex-sans/600.css';
 
 import { ViewTransitions } from 'astro:transitions';
 
@@ -27,6 +27,14 @@ const { page, description, publishedDate = new Date() } = Astro.props;
   class="overflow-x-hidden bg-[#f5ffe1] break-words motion-safe:scroll-smooth"
 >
   <head>
+    <link
+      rel="preload"
+      href="/bubbler-one-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
     <SiteHead {page} {description} {publishedDate} />
   </head>
   <body class="min-h-screen">
@@ -34,9 +42,17 @@ const { page, description, publishedDate = new Date() } = Astro.props;
     <Header />
     <slot />
     <Footer />
-  </body>
+  </body><style is:global>
+    /* @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@0,300;0,400;0,600&display=swap'); */
+  </style>
 </html>
 
 <style is:global>
-/* @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@0,300;0,400;0,600&display=swap'); */
+  @font-face {
+  font-family: 'Bubbler One';
+  src: url('/bubbler-one-latin-400-normal.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 </style>

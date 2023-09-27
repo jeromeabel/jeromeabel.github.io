@@ -10,7 +10,7 @@ const {
   page = 'Home',
   description = "I'm Jérôme Abel, a front-end developer and digital artist. Let's talk together to build amazing apps and websites.",
   image = '/jeromeabel-social.png',
-  publishedDate = new Date()
+  publishedDate = new Date(),
 } = Astro.props;
 
 const title = `${page} - Jérôme Abel`;
@@ -24,20 +24,21 @@ function formatDateToCustomPattern(date: Date) {
   const hours = String(date.getHours()).padStart(2, '0');
   const minutes = String(date.getMinutes()).padStart(2, '0');
   const seconds = String(date.getSeconds()).padStart(2, '0');
-  const offsetHours = String(Math.floor(date.getTimezoneOffset() / 60)).padStart(2, '0');
+  const offsetHours = String(
+    Math.floor(date.getTimezoneOffset() / 60),
+  ).padStart(2, '0');
   const offsetMinutes = String(date.getTimezoneOffset() % 60).padStart(2, '0');
   const offsetSign = date.getTimezoneOffset() < 0 ? '+' : '-';
 
   return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${offsetSign}${offsetHours}${offsetMinutes}`;
 }
 
-
 // const publishedDateString = publishedDate.toISOString();
 const publishedDateString = formatDateToCustomPattern(publishedDate);
 // pattern: "YYYY-MM-DDTHH:mm:ss-hhmm"
 // <meta property="og:published_date” content={publishedDateString} />
-
 ---
+
 <meta charset="utf-8" />
 
 <!-- Icon -->
@@ -53,15 +54,18 @@ const publishedDateString = formatDateToCustomPattern(publishedDate);
 <!-- Primary Meta Tags -->
 <meta name="title" content={title} />
 <meta name="description" content={description} />
-<meta name="author" content="Jérôme Abel">
+<meta name="author" content="Jérôme Abel" />
 <link rel="canonical" href={canonicalWebsiteURL} />
 
 <meta http-equiv="Cache-control" content="public" />
 <meta http-equiv="Expires" content="259200" />
 <meta name="revisit-after" content="5 days" />
 <meta name="robots" content="index, follow" />
-<meta name="keywords" content="web, frontend, front-end, creative coder, web developer, frontend developer, media artist, astro, react, javascript, css, tailwind, reactjs, astrojs, frontend engineer, clean architecture">
-<meta property=”article:published_time” content={publishedDateString} />
+<meta
+  name="keywords"
+  content="web, frontend, front-end, creative coder, web developer, frontend developer, media artist, astro, react, javascript, css, tailwind, reactjs, astrojs, frontend engineer, clean architecture"
+/>
+<meta property="”article:published_time”" content={publishedDateString} />
 
 <!-- Open Graph -->
 <meta property="og:site_name" content="Jérôme Abel Developer" />
@@ -70,8 +74,8 @@ const publishedDateString = formatDateToCustomPattern(publishedDate);
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={socialImageURL} />
-<meta property="og:image:width" content="1200"/>
-<meta property="og:image:height" content="628"/>
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="628" />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
@@ -79,3 +83,5 @@ const publishedDateString = formatDateToCustomPattern(publishedDate);
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={socialImageURL} />
+
+
