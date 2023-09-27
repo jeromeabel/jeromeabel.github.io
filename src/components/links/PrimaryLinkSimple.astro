@@ -29,11 +29,16 @@ const { label, icon, href, ...props } = Astro.props;
     background-size: 0 100%;
     background-repeat: no-repeat;
     transition: 0.4s;
-    border:none;
+    border: none;
   }
   .hover-fx:hover {
     background-size: 100% 100%;
     color: black;
-    border:none;
+    border: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hover-fx {
+      transition: none;
+    }
   }
 </style>
