@@ -13,6 +13,12 @@ import Icon from 'astro-icon';
   .anim-arrow {
     animation: animY 1.2s ease-in-out alternate infinite;
   }
+  
+  @media (prefers-reduced-motion: reduce) {
+  .anim-arrow {
+    animation: none;
+  }
+}
 
   @keyframes animY {
     from {

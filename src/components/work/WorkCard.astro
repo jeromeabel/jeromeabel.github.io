@@ -14,14 +14,14 @@ const work = await getEntry('works', slug);
 
 <article class="aspect-square bg-white group overflow-hidden">
   <a href={'/works/' + work?.slug} title={`Open project ${work?.data.title}`} class="relative">
-    { work ? <Image src={work.data.img_preview} class="scale-100 group-hover:scale-110 transition-transform duration-1000" alt={`${work?.data.title} preview`} /> : null }
-    <div class="absolute inset-0 grid place-items-center bg-black bg-opacity-0 group-hover:bg-opacity-80 duration-500 transition-all">
+    { work ? <Image src={work.data.img_preview} class="scale-100 motion-safe:group-hover:scale-110 transition-transform duration-1000" alt={`${work?.data.title} preview`} /> : null }
+    <div class="absolute inset-0 grid place-items-center bg-black bg-opacity-0 group-hover:bg-opacity-80 duration-500 motion-reduce:transition-all">
       <div
         class="flex-col gap-6 flex opacity-0 group-hover:opacity-100 duration-500 "
       >
         <Icon
           name="icon_big_arrow_cross"
-          class="h-24 sm:h-20 lg:h-32 -rotate-45 group-hover:rotate-0 transition-transform delay-100 duration-500"
+          class="h-24 sm:h-20 lg:h-32 motion-safe:-rotate-45 group-hover:rotate-0 transition-all delay-100 duration-500"
         />
         <p class="text-white text-4xl lg:text-6xl font-title">{work?.data.title}</p>
       </div>
