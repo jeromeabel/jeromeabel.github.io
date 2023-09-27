@@ -5,6 +5,9 @@ import Footer from '@components/Footer.astro';
 
 import '@fontsource/bubbler-one';
 import '@fontsource/ibm-plex-sans';
+import "@fontsource/ibm-plex-sans/300.css";
+import "@fontsource/ibm-plex-sans/600.css";
+
 import { ViewTransitions } from 'astro:transitions';
 
 export interface Props {
@@ -35,5 +38,5 @@ const { page, description, publishedDate = new Date() } = Astro.props;
 </html>
 
 <style is:global>
-    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
-  </style>
+/* @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@0,300;0,400;0,600&display=swap'); */
+</style>
