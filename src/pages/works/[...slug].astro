@@ -5,6 +5,7 @@ import { Image } from 'astro:assets';
 import Layout from '@layouts/Layout.astro';
 import WorkHeader from '@components/work/WorkHeader.astro';
 import WorkNavigation from '@components/work/WorkNavigation.astro';
+import { DataCollectionEntryParseError } from 'node_modules/astro/dist/core/errors/errors-data';
 
 interface Props {
   entry: CollectionEntry<'works'>;
@@ -30,9 +31,15 @@ export async function getStaticPaths() {
 
 const { entry, prev, next } = Astro.props;
 const { Content } = await entry.render();
+
+const publishedDate = new Date(entry.data.date);
 ---
 
-<Layout page={entry.data.title} description={entry.data.description}>
+<Layout
+  page={entry.data.title}
+  description={entry.data.description}
+  {publishedDate}
+>
   <main class="container flex flex-col gap-8 py-8 lg:gap-12 lg:py-24">
     <WorkHeader data={entry.data} />
     <Image src={entry.data.img} alt={`${entry.data.title} project`} />
