@@ -17,7 +17,7 @@ const { page, description } = Astro.props;
 
 <html
   lang="en"
-  class="overflow-x-hidden bg-[#f5ffe1] break-words scroll-smooth"
+  class="overflow-x-hidden bg-[#f5ffe1] break-words motion-safe:scroll-smooth"
 >
   <head>
     <SiteHead page={page} description={description} />
