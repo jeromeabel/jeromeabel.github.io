@@ -42,15 +42,14 @@ const { page, description, publishedDate = new Date() } = Astro.props;
     <Header />
     <slot />
     <Footer />
-  </body><style is:global>
-    /* @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@0,300;0,400;0,600&display=swap'); */
-  </style>
+  </body>
 </html>
 
 <style is:global>
   @font-face {
   font-family: 'Bubbler One';
-  src: url('/bubbler-one-latin-400-normal.woff2') format('woff2');
+  src: url('/bubbler-one-latin-400-normal.woff2') format('woff2'),
+  url('/bubbler-one-latin-400-normal.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
