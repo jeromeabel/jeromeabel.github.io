@@ -1,0 +1,70 @@
+---
+import type { ImageOutputFormat } from 'astro';
+import { getImage } from 'astro:assets';
+
+type TResponsiveImage = {
+  src: ImageMetadata;
+  placeholder: ImageMetadata;
+  loading?: string;
+  class?: string;
+  alt: string;
+  format?: ImageOutputFormat;
+  sizes: number[];
+};
+
+async function generateResponsiveImage({
+  src,
+  format,
+  sizes,
+}: Omit<TResponsiveImage, 'alt' | 'placeholder' | 'class'>) {
+  const imgSrcSet = sizes.map(async (size) => {
+    const image = await getImage({ src, width: size, format });
+    return `${image.src} ${size}w`;
+  });
+
+  const imgSrc = await getImage({ src, width: Math.max(...sizes), format });
+
+  return {
+    srcSet: await Promise.all(imgSrcSet),
+    imgSrc: imgSrc.src,
+  };
+}
+
+const { src, sizes, format, alt, placeholder, loading = "lazy", class: classString } = Astro.props;
+
+const { srcSet: srcSetAvif, imgSrc: imgSrcAvif } = await generateResponsiveImage({ src, sizes, format:"avif" });
+const { srcSet: srcSetWebp, imgSrc: imgSrcWebp } = await generateResponsiveImage({ src, sizes, format:"webp" });
+// const { srcSet: srcSetJpg, imgSrc: imgSrcJpg } = await generateResponsiveImage({ src, sizes, format:"jpg" });
+
+// <img srcset={srcSet.join(', ')} alt={al/t} src={imgSrc} />
+/*
+srcset="100.avif 100w, 200.avif 200w, 400.avif 400w, 800.avif 800w
+<img src="image.png" srcset="100.png 100w, 200.png 200w, 400.png 400w, 800.png 800w"
+    sizes="(max-width: 800px) 100vw, 50vw"
+    style="width: 100%; aspect-ratio: 4/3"
+    loading="lazy"
+    decoding="async"
+    alt=""
+  />
+
+      sizes="(max-width: 800px) 100vw, 50vw"
+
+      style="width: 100%; aspect-ratio: 16/9"
+
+  */
+---
+<picture >
+  <source type="image/avif" srcset={srcSetAvif.join(', ')} />
+  <source type="image/webp" srcset={srcSetWebp.join(', ')} />
+  <img src={placeholder.src}
+    class={classString}
+    style="width: 100%"
+    loading="eager"
+    decoding="async"
+    alt={alt}
+    width={src.width}
+    height={src.height}
+  />
+</picture>
+
+

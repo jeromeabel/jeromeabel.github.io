@@ -2,6 +2,7 @@
 import { getEntry } from 'astro:content';
 import { Image } from 'astro:assets';
 import Icon from 'astro-icon';
+import ResponsiveImage from '@components/ResponsiveImage.astro';
 
 interface Props {
   slug: string;
@@ -10,6 +11,14 @@ interface Props {
 const { slug } = Astro.props;
 
 const work = await getEntry('works', slug);
+
+/*
+        <Image
+          src={work.data.img_preview}
+          class="scale-100 motion-safe:group-hover:scale-110 transition-transform duration-1000"
+          alt={`${work?.data.title} preview`}
+        />
+        */
 ---
 
 <a
@@ -17,13 +26,13 @@ const work = await getEntry('works', slug);
   title={`Open project ${work?.data.title}`}
   class="relative shadow-lg focus:outline-2 outline-black outline-offset-4"
 >
-  <article
-    class="aspect-square bg-white group overflow-hidden "
-  >
+  <article class="aspect-square bg-white group overflow-hidden">
     {
       work ? (
-        <Image
+        <ResponsiveImage
           src={work.data.img_preview}
+          placeholder={work.data.img_blur}
+          sizes={[1200, 900, 600, 400]}
           class="scale-100 motion-safe:group-hover:scale-110 transition-transform duration-1000"
           alt={`${work?.data.title} preview`}
         />
