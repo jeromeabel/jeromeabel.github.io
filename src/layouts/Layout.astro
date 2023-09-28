@@ -15,16 +15,16 @@ export interface Props {
   page?: string | undefined;
   description?: string | undefined;
   publishedDate?: Date | undefined;
-  // image?: string | undefined;
   image?: ImageMetadata | undefined;
 }
 
 const { page, description, publishedDate, image } = Astro.props;
+
 ---
 
 <html
   lang="en"
-  class="overflow-x-hidden bg-[#f5ffe1] break-words motion-safe:scroll-smooth"
+  class="overflow-x-hidden  bg-[#f5ffe1]  break-words motion-safe:scroll-smooth"
 >
   <head>
     <link rel="preload" href="/bubbler-one-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
