@@ -3,6 +3,7 @@ import ArrowLink from '@components/links/ArrowLink.astro';
 const { data } = Astro.props;
 
 const year = new Date(data.date).getFullYear();
+const dateISOString = new Date(data.date).toISOString().slice(0,10);
 ---
 
 <header class="w-full lg:w-2/3 flex flex-col gap-4 lg:gap-8">
@@ -21,7 +22,7 @@ const year = new Date(data.date).getFullYear();
   >
     <tbody class="prose-tr:border-gray-600">
       <tr><td class="font-semibold">TYPE</td><td>{data.type}</td></tr>
-      <tr><td class="font-semibold">DATE</td><td>{year}</td></tr>
+      <tr><td class="font-semibold">DATE</td><td><time datetime={dateISOString}>{year}</time></td></tr>
       <tr
         ><td class="font-semibold">STACK</td><td class="capitalize"
           >{data?.stack.join(', ')}</td
