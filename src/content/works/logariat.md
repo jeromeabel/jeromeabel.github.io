@@ -3,6 +3,7 @@ title: Logariat
 date: 2019-11-23
 img: ../../assets/images/logariat/screen.jpg
 img_preview: ../../assets/images/logariat/preview.jpg
+img_blur: ../../assets/images/blur.jpg
 description: Logariat is an audiovisual performance on themes linked to digital technology and the body
 abstract: "Develop a real-time application for an audiovisual performance on themes linked to digital technology and the body."
 git: https://framagit.org/chateaucarbone/logariat

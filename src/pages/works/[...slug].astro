@@ -5,6 +5,7 @@ import { Image } from 'astro:assets';
 import Layout from '@layouts/Layout.astro';
 import WorkHeader from '@components/work/WorkHeader.astro';
 import WorkNavigation from '@components/work/WorkNavigation.astro';
+import ResponsiveImage from '@components/ResponsiveImage.astro';
 
 interface Props {
   entry: CollectionEntry<'works'>;
@@ -40,7 +41,14 @@ const publishedDate = new Date(entry.data.date);
 >
   <main class="container flex flex-col gap-8 py-8 lg:gap-12 lg:py-24">
     <WorkHeader data={entry.data} />
-    <Image src={entry.data.img} alt={`${entry.data.title} project`} />
+    <!-- <Image src={entry.data.img} alt={`${entry.data.title} project`} /> -->
+    <ResponsiveImage
+      src={entry.data.img}
+      placeholder={entry.data.img_blur}
+      alt={`${entry.data.title} project`}
+      sizes={[1600, 1200, 800, 600]}
+      loading="eager"
+    />
     <section
       class="md:max-auto prose sm:prose-xl lg:prose-2xl prose-p:leading-normal prose-li:leading-normal prose-headings:font-semibold prose-a:no-underline prose-a:border-b hover:prose-a:border-solid prose-a:border-dashed prose-a:border-black prose-img:bg-stone-200 marker:text-black"
     >
