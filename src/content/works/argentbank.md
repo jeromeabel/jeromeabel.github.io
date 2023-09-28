@@ -2,7 +2,7 @@
 title: ArgentBank
 date: 2023-03-23
 img: ../../assets/images/argentbank/screen.png
-img_preview: ../../assets/images/argentbank/preview.png
+img_preview: ../../assets/images/argentbank/preview-min.png
 description: Use an API for a bank account with React and Redux
 abstract: "I work at the Remede Agency, a web agency. We are developing a full-stack app for a new bank company, ArgentBank"
 git: https://github.com/jeromeabel/oc-p13-argentbank
