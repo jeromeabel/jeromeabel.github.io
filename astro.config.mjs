@@ -10,7 +10,7 @@ export default defineConfig({
   build: {
     assets: 'assets',
     // assetsPrefix: 'https://jeromeabel.github.io',
-    assetsPrefix: 'https://dev.jeromeabel.net'
+    // assetsPrefix: 'https://dev.jeromeabel.net'
   },
   markdown: {
     rehypePlugins: [
