@@ -1,6 +1,8 @@
 import { defineConfig } from 'astro/config';
 import rehypeExternalLinks from 'rehype-external-links';
 import tailwind from '@astrojs/tailwind';
+import lqip from 'vite-plugin-lqip';
+
 
 // https://astro.build/config
 export default defineConfig({
@@ -19,5 +21,8 @@ export default defineConfig({
         { target: '_blank', rel: ['nofollow, noopener, noreferrer'] },
       ],
     ],
+  },
+  vite: {
+    plugins: [lqip()],
   },
 });

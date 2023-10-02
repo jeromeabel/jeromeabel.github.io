@@ -1,0 +1,13 @@
+---
+const { title, id } = Astro.props;
+---
+
+<div class="max-w-2xl min-w-fit">
+  <h3 
+  class="text-lg lg:text-3xl uppercase font-semibold lg:font-extrabold tracking-wide sm:tracking-[0.2em] lg:tracking-[0.4rem] leading-none"
+>
+    <span class="text-stone-500 text-4xl font-title font-extrabold">{id}. </span>
+    {title}</h3><p class="mt-3 text-xl">
+    <slot />
+  </p>
+</div>
