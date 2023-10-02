@@ -1,9 +1,9 @@
 ---
 title: HRnet
 date: 2023-06-09
-img: ../../assets/images/hrnet/screen.jpg
-img_preview: ../../assets/images/hrnet/preview.png
-img_blur: ../../assets/images/blur.jpg
+img: ./screen.jpg
+img_preview: ./preview.png
+img_blur: ./blur.jpg
 description: Develop a new version of HRnet, an employee management application, with React and a custom component published on NPM.
 abstract: "WealthHealth is a large financial company that uses an internal employee management application: HRnet. I built a efficient and modern version in React instead of JQuery. I've also published a npm package to display data into tables `ja-react-table`."
 git: https://github.com/jeromeabel/oc-p14-hrnet
@@ -39,7 +39,7 @@ To handle the form validation, I've used the combination of Zod and React Hook F
 
 ## Publish A Package On NPM
 
-![React Table Component](../../assets/images/hrnet/table.png)
+![React Table Component](./table.png)
 
 The [ja-react-table](https://www.npmjs.com/package/ja-react-table) is component which display data into a table and provide features as sort, search and pagination.
 
@@ -54,14 +54,14 @@ I've worked to make it handle generic types, like this
 ```
 
 Integrations tests are made using Vitest. The component is well tested before any publication:
-![React Table Component Coverage](../../assets/images/hrnet/coverage.png)
+![React Table Component Coverage](./coverage.png)
 
 
 ## Performance Report
 
 The Lighthouse dev tool is used to show differences between the old and newest version. I've deployed the project on Github Page, but also on an [Apache server](https://jeromeabel.net/oc-p14-hrnet/) to handle correct routing with Lightouse and enable cache and compression in order to get more realistic results.
 
-![Performance score](../../assets/images/hrnet/performance.png)
+![Performance score](./performance.png)
 
 Few methods used to get great results:
 
@@ -88,4 +88,4 @@ I've written also three articles on LinkedIn and Github/gists about what I learn
 - [How to publish a React Typescript component on NPM with Vite](https://www.linkedin.com/posts/jerome-abel_create-a-react-library-with-vite-activity-7071727463571054592-EjNu)
 
 
-![Responsive screens HRnet App](../../assets/images/hrnet/screens.png)
+![Responsive screens HRnet App](./screens.png)
