@@ -1,9 +1,9 @@
 ---
 title: ArgentBank
 date: 2023-03-23
-img: ../../assets/images/argentbank/screen.png
-img_preview: ../../assets/images/argentbank/preview-min.png
-img_blur: ../../assets/images/blur.jpg
+img: ./screen.png
+img_preview: ./preview-min.png
+img_blur: ./blur.jpg
 description: Use an API for a bank account with React and Redux
 abstract: "I work at the Remede Agency, a web agency. We are developing a full-stack app for a new bank company, ArgentBank"
 git: https://github.com/jeromeabel/oc-p13-argentbank
@@ -34,7 +34,7 @@ Using Redux ToolKit, I followed some vertical architecture's principles : a slic
 
 The first step of authentication was to add a private route with `React-Router`. The idea is to provide a conditional routing system which renders the Profile page if the user is logged or the Login page instead.
 
-![Login ArgentBank](../../assets/images/argentbank/login.png)
+![Login ArgentBank](./login.png)
 
 The form validation was handled by `Formik` and `Yup`. A visual feedback from `Toastify` was added to provide a great user experience.
 
@@ -44,7 +44,7 @@ When the form was successfully submitted, RTK stores a token from the server and
 ## Documentation the API
 We used Swagger to add API endpoints in the documentation
 
-![Documentation Swagger](../../assets/images/argentbank/swagger.png)
+![Documentation Swagger](./swagger.png)
 
 
 ## Things I've Learned
@@ -60,4 +60,4 @@ I've written also two articles on LinkedIn and Github/gists to write down things
 - [RTK Query Primer](https://gist.github.com/jeromeabel/06aa57782012fe22be215f64dc0834b1)
 
 
-![Responsive screens ArgentBank App](../../assets/images/argentbank/screens.png)
+![Responsive screens ArgentBank App](./screens.png)

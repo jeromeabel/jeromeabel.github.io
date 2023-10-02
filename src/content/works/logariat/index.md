@@ -1,9 +1,9 @@
 ---
 title: Logariat
 date: 2019-11-23
-img: ../../assets/images/logariat/screen.jpg
-img_preview: ../../assets/images/logariat/preview.jpg
-img_blur: ../../assets/images/blur.jpg
+img: ./screen.jpg
+img_preview: ./preview.jpg
+img_blur: ./blur.jpg
 description: Logariat is an audiovisual performance on themes linked to digital technology and the body
 abstract: "Develop a real-time application for an audiovisual performance on themes linked to digital technology and the body."
 git: https://framagit.org/chateaucarbone/logariat
@@ -25,15 +25,15 @@ Logariat is the desire to explore relationships:
 
 A black human figure sits on an unpleasant chair. Bright lines outline its skeleton. A keyboard is placed in front, a light screen represents that of a computer. The only physical action is that he writes on a keyboard.
 
-![Logariat Close-Up](../../assets/images/logariat/logariat-01.jpg)
+![Logariat Close-Up](./logariat-01.jpg)
 
 The video projection is divided into three zones, a triptych of writing, body and images. The writing area is rather austere, in the form of a terminal or forms. The body is represented by real-time physical signals coming from sensors on the performer's body. The third zone leaves room for the generation of organic forms between camouflage, scar and artificial forms of physical modeling of trajectories, density, microscopic worlds, etc.
 
-![Logariat storyboard](../../assets/images/logariat/screens.jpg)
+![Logariat storyboard](./screens.jpg)
 
 ## What I've learned
 
 The challenge was to connect all these technologies together. All show monitoring is written in Bash and all sensors communicate to all open programs. Node is ultimately the heart of the program, it allows you to connect all the elements together, such as receiving data from biological sensors, the camera, the keyboard.
 
-![Logariat storyboard](../../assets/images/logariat/tech.png)
+![Logariat storyboard](./tech.png)
 
