@@ -1,0 +1,63 @@
+---
+import skillsSVG from '@assets/images/skills.svg';
+import { Image } from 'astro:assets';
+import SkillsText from '@components/hero/SkillsText.astro';
+//bg-[1e1f28]
+---
+
+<section class="flex flex-col gap-4 lg:gap-8 bg-[#000] text-white py-16">
+  <div class="container">
+    <h2
+      class="text-xl lg:text-3xl uppercase font-semibold lg:font-extrabold tracking-widest sm:tracking-[0.2em] lg:tracking-[0.4rem] leading-none"
+    >
+      Let's Work<br />Together
+    </h2>
+
+    <div class="angry-grid py-16">
+      <Image id="item-0" src={skillsSVG} alt="my skills" />
+      <SkillsText title="Design" id="01">
+        Along the design process, interviews and specification are stored in
+        Markdown files and mermaid diagrams. Obsidian is my knowledge managment
+        system to connect things together. It's time to sketch those ideas in
+        mockups and prototypes with Figma and Inkscape.
+      </SkillsText>
+      <SkillsText title="Setup" id="02">
+        Along the design process, interviews and specification are stored in
+        Markdown files and mermaid diagrams. Obsidian is my knowledge managment
+        system to connect things together. It's time to sketch those ideas in
+        mockups and prototypes with Figma and Inkscape.
+      </SkillsText>
+      <SkillsText title="Code" id="03">
+        Along the design process, interviews and specification are stored in
+        Markdown files and mermaid diagrams. Obsidian is my knowledge managment
+        system to connect things together. It's time to sketch those ideas in
+        mockups and prototypes with Figma and Inkscape.
+      </SkillsText>
+    </div>
+  </div>
+</section>
+
+
+<style>
+.angry-grid {
+  justify-content: start;
+    align-items: center;
+   display: grid; 
+   grid-template-rows: auto auto auto;
+   grid-template-columns: auto auto;
+   column-gap: 6em;
+/* row-gap: 4em; */
+  
+}
+
+  
+#item-0 {
+    
+   grid-row-start: 1;
+   grid-column-start: 1;
+   grid-row-end: 4;
+   grid-column-end: 2;
+}
+</style>
+
+=
