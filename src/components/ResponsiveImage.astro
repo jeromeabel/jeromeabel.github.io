@@ -30,24 +30,33 @@ async function generateResponsiveImage({
   };
 }
 
-const { src, sizes, format, alt, placeholder, loading = "lazy", class: classString } = Astro.props;
+const {
+  src,
+  sizes,
+  format,
+  alt,
+  placeholder,
+  loading = 'lazy',
+  class: classString,
+} = Astro.props;
 
-const { srcSet: srcSetAvif, imgSrc: imgSrcAvif } = await generateResponsiveImage({ src, sizes, format:"avif" });
-const { srcSet: srcSetWebp, imgSrc: imgSrcWebp } = await generateResponsiveImage({ src, sizes, format:"webp" });
-
+const { srcSet: srcSetAvif, imgSrc: imgSrcAvif } =
+  await generateResponsiveImage({ src, sizes, format: 'avif' });
+const { srcSet: srcSetWebp, imgSrc: imgSrcWebp } =
+  await generateResponsiveImage({ src, sizes, format: 'webp' });
 ---
-<picture >
+
+<picture>
   <source type="image/avif" srcset={srcSetAvif.join(', ')} />
   <source type="image/webp" srcset={srcSetWebp.join(', ')} />
-  <img src={placeholder.src}
+  <img
+    src={src.src}
     class={classString}
-    style="width: 100%"
-    loading={loading}
-    decoding="async"
-    alt={alt}
+    {alt}
     width={src.width}
     height={src.height}
+    {loading}
+    decoding="async"
+    style={`background-image: url(${placeholder.src}); background-repeat: no-repeat;background-size: cover`}
   />
 </picture>
-
-
