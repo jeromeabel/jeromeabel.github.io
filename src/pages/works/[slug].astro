@@ -30,6 +30,8 @@ const { entry, prev, next } = Astro.props;
 const { Content } = await entry.render();
 
 const publishedDate = new Date(entry.data.date);
+
+import imgBlur from '@assets/images/blur.jpg'
 ---
 
 <Layout
@@ -42,7 +44,7 @@ const publishedDate = new Date(entry.data.date);
     <WorkHeader data={entry.data} />
     <ResponsiveImage
       src={entry.data.img}
-      placeholder={entry.data.img_blur}
+      placeholder={imgBlur}
       alt={`${entry.data.title} project`}
       sizes={[1600, 1200, 800, 600]}
       loading="eager"
