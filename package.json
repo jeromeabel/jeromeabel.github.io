@@ -16,7 +16,7 @@
     "@astrojs/tailwind": "^5.0.0",
     "@fontsource/bubbler-one": "^5.0.8",
     "@fontsource/ibm-plex-sans": "^5.0.11",
-    "astro": "^3.0.8",
+    "astro": "^3.2.2",
     "rehype-external-links": "^3.0.0",
     "sharp": "^0.32.5",
     "tailwindcss": "^3.0.24",
