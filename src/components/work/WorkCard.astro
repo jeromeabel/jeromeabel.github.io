@@ -22,7 +22,7 @@ const work = await getEntry('works', slug);
       work ? (
         <ResponsiveImage
           src={work.data.img_preview}
-          placeholder={work.data.img_blur}
+          placeholder={work.data.img_placeholder}
           sizes={[1200, 900, 600, 400]}
           class="scale-100 motion-safe:group-hover:scale-110 transition-transform duration-1000"
           loading="lazy"

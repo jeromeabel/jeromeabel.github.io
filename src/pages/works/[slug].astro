@@ -31,9 +31,6 @@ const { Content } = await entry.render();
 
 const publishedDate = new Date(entry.data.date);
 
-import imgBlur from '@assets/images/blur.jpg'
-
-
 ---
 
 <Layout
@@ -46,7 +43,7 @@ import imgBlur from '@assets/images/blur.jpg'
     <WorkHeader data={entry.data} />
     <ResponsiveImage
       src={entry.data.img}
-      placeholder={imgBlur}
+      placeholder={entry.data.img_placeholder}
       alt={`${entry.data.title} project`}
       sizes={[1600, 1200, 800, 600]}
       loading="eager"
