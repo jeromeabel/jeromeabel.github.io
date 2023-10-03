@@ -3,13 +3,13 @@ import { Image } from 'astro:assets';
 const { title, id, image } = Astro.props;
 ---
 
-<div class="max-w-2xl min-w-fit reveal reveal-bottom">
+<div class="md:max-w-lg lg:max-w-xl reveal reveal-bottom ">
     <h3
       class="text-lg lg:text-2xl uppercase font-semibold lg:font-extrabold tracking-wide sm:tracking-[0.2em] lg:tracking-[0.3rem] leading-none"
     >
       <span class="text-stone-500 text-xl ">{id}.&nbsp;</span>{title}
     </h3>
-    <p class="my-3 text-xl">
+    <p class="my-3 text-xl lg:text-2xl leading-normal">
       <slot />
     </p>
     <Image class="block md:hidden" src={image} alt={`${title} Skills`} />
