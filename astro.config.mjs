@@ -6,12 +6,12 @@ import lqip from 'vite-plugin-lqip';
 
 // https://astro.build/config
 export default defineConfig({
-  // site: 'https://jeromeabel.github.io', // for new URL
-  site: 'https://dev.jeromeabel.net',
+  site: 'https://jeromeabel.github.io',
+  // site: 'https://dev.jeromeabel.net',
   integrations: [tailwind()],
   build: {
     assets: 'assets',
-    // assetsPrefix: 'https://jeromeabel.github.io',
+   assetsPrefix: 'https://jeromeabel.github.io',
     // assetsPrefix: 'https://dev.jeromeabel.net'
   },
   markdown: {
