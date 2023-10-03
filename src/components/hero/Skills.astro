@@ -2,10 +2,15 @@
 import skillsSVG from '@assets/images/skills.svg';
 import { Image } from 'astro:assets';
 import SkillsText from '@components/hero/SkillsText.astro';
+
+import skillsFlatDesign from "@assets/images/skills_design_flat.svg"
+import skillsFlatFront from "@assets/images/skills_front_flat.svg"
+import skillsFlatEnv from "@assets/images/skills_env_flat.svg"
+
 //bg-[1e1f28]
 ---
 
-<section class="flex flex-col gap-4 lg:gap-8 bg-[#000] text-white py-16">
+<section class="flex flex-col gap-4 lg:gap-8 bg-[#1e1f28] text-white py-16">
   <div class="container">
     <h2
       class="text-xl lg:text-3xl uppercase font-semibold lg:font-extrabold tracking-widest sm:tracking-[0.2em] lg:tracking-[0.4rem] leading-none"
@@ -13,21 +18,21 @@ import SkillsText from '@components/hero/SkillsText.astro';
       Let's Work<br />Together
     </h2>
 
-    <div class="angry-grid py-16">
-      <Image id="item-0" src={skillsSVG} alt="my skills" />
-      <SkillsText title="Design" id="01">
+    <div class="grid grid-rows-3 grid-flow-col gap-16 lg:gap-4 py-8 md:py-16 items-center">
+      <Image class="row-span-3 hidden md:block reveal" src={skillsSVG} alt="my skills" />
+      <SkillsText title="Design" id="01" image={skillsFlatDesign}>
         Along the design process, interviews and specification are stored in
         Markdown files and mermaid diagrams. Obsidian is my knowledge managment
         system to connect things together. It's time to sketch those ideas in
         mockups and prototypes with Figma and Inkscape.
       </SkillsText>
-      <SkillsText title="Setup" id="02">
+      <SkillsText title="Setup" id="02" image={skillsFlatEnv}>
         Along the design process, interviews and specification are stored in
         Markdown files and mermaid diagrams. Obsidian is my knowledge managment
         system to connect things together. It's time to sketch those ideas in
         mockups and prototypes with Figma and Inkscape.
       </SkillsText>
-      <SkillsText title="Code" id="03">
+      <SkillsText title="Front-End" id="03" image={skillsFlatFront}>
         Along the design process, interviews and specification are stored in
         Markdown files and mermaid diagrams. Obsidian is my knowledge managment
         system to connect things together. It's time to sketch those ideas in
@@ -36,28 +41,3 @@ import SkillsText from '@components/hero/SkillsText.astro';
     </div>
   </div>
 </section>
-
-
-<style>
-.angry-grid {
-  justify-content: start;
-    align-items: center;
-   display: grid; 
-   grid-template-rows: auto auto auto;
-   grid-template-columns: auto auto;
-   column-gap: 6em;
-/* row-gap: 4em; */
-  
-}
-
-  
-#item-0 {
-    
-   grid-row-start: 1;
-   grid-column-start: 1;
-   grid-row-end: 4;
-   grid-column-end: 2;
-}
-</style>
-
-=
