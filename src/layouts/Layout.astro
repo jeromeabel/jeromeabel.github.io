@@ -3,6 +3,8 @@ import SiteHead from '@components/SiteHead.astro';
 import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
 
+
+
 // import '@fontsource/bubbler-one';
 import '@fontsource/ibm-plex-sans/400.css';
 import '@fontsource/ibm-plex-sans/300.css';
@@ -19,15 +21,22 @@ export interface Props {
 }
 
 const { page, description, publishedDate, image } = Astro.props;
-
+//f5ffe1
+//fff4bd
 ---
 
 <html
   lang="en"
-  class="overflow-x-hidden  bg-[#f5ffe1]  break-words motion-safe:scroll-smooth"
+  class="overflow-x-hidden bg-[#f5ffe1] break-words motion-safe:scroll-smooth"
 >
   <head>
-    <link rel="preload" href="/bubbler-one-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link
+      rel="preload"
+      href="/bubbler-one-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <SiteHead {page} {description} {publishedDate} {image} />
   </head>
   <body class="min-h-screen">
@@ -48,4 +57,46 @@ const { page, description, publishedDate, image } = Astro.props;
       font-style: normal;
       font-display: swap;
     }
+  .reveal {
+      opacity: 0;
+      transition: opacity 0.75s 0.1s ease-in-out, transform 0.75s 0.1s ease-in-out;
+  }
+
+  .reveal.reveal-bottom {
+      transform: translateY(5rem);
+    }
+
+    .reveal.reveal-bottom.reveal-anim {
+      transform: translateY(0);
+    }
+
+    .reveal-anim {
+       opacity: 1;
+    }
+
   </style>
+
+  <script>
+      const animations = [...document.querySelectorAll('.reveal')]
+
+  // create observer
+  /*
+  const callback = entries => {
+    entries.forEach(entry => {
+  */
+  const callback = (entries: any[]) => {
+    entries.forEach((entry: { isIntersecting: any; target: { classList: { add: (arg0: string) => void; remove: (arg0: string) => void } }; boundingClientRect: { top: number } }) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('reveal-anim')
+      }
+      
+      if (!entry.isIntersecting && entry.boundingClientRect.top > 0) {
+        entry.target.classList.remove('reveal-anim')
+      }
+    })
+  }
+  const observer = new IntersectionObserver(callback)
+
+  // observe boxes
+  animations.forEach(animation => observer.observe(animation))
+  </script>
