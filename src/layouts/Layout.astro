@@ -3,14 +3,11 @@ import SiteHead from '@components/SiteHead.astro';
 import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
 
-
-
 // import '@fontsource/bubbler-one';
 import '@fontsource/ibm-plex-sans/400.css';
 import '@fontsource/ibm-plex-sans/300.css';
 import '@fontsource/ibm-plex-sans/600.css';
 
-import { ViewTransitions } from 'astro:transitions';
 import type { ImageMetadata } from 'astro';
 
 export interface Props {
@@ -21,8 +18,6 @@ export interface Props {
 }
 
 const { page, description, publishedDate, image } = Astro.props;
-//f5ffe1
-//fff4bd
 ---
 
 <html
@@ -40,14 +35,16 @@ const { page, description, publishedDate, image } = Astro.props;
     <SiteHead {page} {description} {publishedDate} {image} />
   </head>
   <body class="min-h-screen">
-    <ViewTransitions />
     <Header />
     <slot />
     <Footer />
   </body>
-</html>
+  </html>
 
-<style is:global>
+  
+  <script src="../scripts/scrollAnim.js"></script>
+
+  <style is:global>
     @font-face {
       font-family: 'Bubbler One';
       src:
@@ -57,12 +54,15 @@ const { page, description, publishedDate, image } = Astro.props;
       font-style: normal;
       font-display: swap;
     }
-  .reveal {
-      opacity: 0;
-      transition: opacity 0.75s 0.1s ease-in-out, transform 0.75s 0.1s ease-in-out;
-  }
 
-  .reveal.reveal-bottom {
+    .reveal {
+      opacity:0;
+      transition:
+        opacity 0.75s 0.1s ease-in-out,
+        transform 0.75s 0.1s ease-in-out; 
+    }
+
+    .reveal.reveal-bottom {
       transform: translateY(5rem);
     }
 
@@ -70,33 +70,21 @@ const { page, description, publishedDate, image } = Astro.props;
       transform: translateY(0);
     }
 
-    .reveal-anim {
-       opacity: 1;
+    @media (prefers-reduced-motion: no-preference) {
+      .reveal-anim {
+        opacity: 1;
+        /* animation: animBottom 2s forwards; */
+      }
     }
 
+    @keyframes animBottom {
+      from {
+        opacity: 0;
+        transform: translateY(5rem);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   </style>
-
-  <script>
-      const animations = [...document.querySelectorAll('.reveal')]
-
-  // create observer
-  /*
-  const callback = entries => {
-    entries.forEach(entry => {
-  */
-  const callback = (entries: any[]) => {
-    entries.forEach((entry: { isIntersecting: any; target: { classList: { add: (arg0: string) => void; remove: (arg0: string) => void } }; boundingClientRect: { top: number } }) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('reveal-anim')
-      }
-      
-      if (!entry.isIntersecting && entry.boundingClientRect.top > 0) {
-        entry.target.classList.remove('reveal-anim')
-      }
-    })
-  }
-  const observer = new IntersectionObserver(callback)
-
-  // observe boxes
-  animations.forEach(animation => observer.observe(animation))
-  </script>
