@@ -3,14 +3,12 @@ import skillsSVG from '@assets/images/skills.svg';
 import { Image } from 'astro:assets';
 import SkillsText from '@components/hero/SkillsText.astro';
 
-import skillsFlatDesign from "@assets/images/skills_design_flat.svg"
-import skillsFlatFront from "@assets/images/skills_front_flat.svg"
-import skillsFlatEnv from "@assets/images/skills_env_flat.svg"
-
-//bg-[1e1f28]
+import skillsFlatDesign from '@assets/images/skills_design_flat.svg';
+import skillsFlatFront from '@assets/images/skills_front_flat.svg';
+import skillsFlatEnv from '@assets/images/skills_env_flat.svg';
 ---
 
-<section class="flex flex-col gap-4 lg:gap-8 bg-[#1e1f28] text-white py-16">
+<section class="flex flex-col gap-4 lg:gap-8 bg-black text-white py-16">
   <div class="container">
     <h2
       class="text-xl lg:text-3xl uppercase font-semibold lg:font-extrabold tracking-widest sm:tracking-[0.2em] lg:tracking-[0.4rem] leading-none"
@@ -18,8 +16,14 @@ import skillsFlatEnv from "@assets/images/skills_env_flat.svg"
       Let's Work<br />Together
     </h2>
 
-    <div class="grid grid-rows-3 grid-flow-col gap-16 lg:gap-4 py-8 md:py-16 items-center">
-      <Image class="row-span-3 hidden md:block reveal" src={skillsSVG} alt="my skills" />
+    <div
+      class="grid grid-rows-3 grid-flow-col gap-16 lg:gap-4 py-8 md:py-16 items-center"
+    >
+      <Image
+        class="row-span-3 hidden md:block reveal"
+        src={skillsSVG}
+        alt="my skills"
+      />
       <SkillsText title="Design" id="01" image={skillsFlatDesign}>
         Along the design process, interviews and specification are stored in
         Markdown files and mermaid diagrams. Obsidian is my knowledge managment
@@ -41,3 +45,4 @@ import skillsFlatEnv from "@assets/images/skills_env_flat.svg"
     </div>
   </div>
 </section>
+
