@@ -14,6 +14,10 @@ module.exports = {
         sans: ['IBM Plex Sans', ...defaultTheme.fontFamily.sans],
         title: ['Bubbler One', ...defaultTheme.fontFamily.sans],
       },
+      colors: {
+        black: '#1E1E1E', //1E1E1E, 1e1f28, 0E1613
+        white: '#FAFAFA',
+      },
       container: {
         center: true,
         padding: {
