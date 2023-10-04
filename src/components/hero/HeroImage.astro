@@ -2,4 +2,6 @@
 import imageHero from '@assets/images/hero.svg';
 import { Image } from 'astro:assets';
 ---
-<Image loading="eager" src={imageHero} class="absolute top-16 -z-10 object-contain hidden lg:block right-0" alt="" />
+<div class="relative hidden md:block">
+<Image loading="eager" src={imageHero} class="-top-8 -right-8 lg:-top-16 lg:-right-24 absolute -z-10" alt="" />
+</div>
