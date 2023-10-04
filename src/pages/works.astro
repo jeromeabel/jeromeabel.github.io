@@ -27,7 +27,7 @@ const works = await getCollection('works');
     <section
       class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8 lg:mt-24"
     >
-      {works.map((work) => <WorkCard slug={work.slug} />)}
+      {works.map((work) => <WorkCard slug={work.slug} layout={3} />)}
     </section>
   </main>
 </Layout>

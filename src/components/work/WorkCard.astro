@@ -5,9 +5,10 @@ import ResponsiveImage from '@components/ResponsiveImage.astro';
 
 interface Props {
   slug: string;
+  layout?: number
 }
 
-const { slug } = Astro.props;
+const { slug, layout = 2} = Astro.props;
 
 const work = await getEntry('works', slug);
 ---
@@ -23,9 +24,10 @@ const work = await getEntry('works', slug);
         <ResponsiveImage
           src={work.data.img_preview}
           placeholder={work.data.img_placeholder}
-          sizes={[1200, 900, 600, 400]}
+          sizes={[1200, 1000, 900, 600]}
           class="scale-100 motion-safe:group-hover:scale-110 transition-transform duration-1000"
           loading="lazy"
+          {layout}
           alt={`${work?.data.title} preview`}
         />
       ) : null
