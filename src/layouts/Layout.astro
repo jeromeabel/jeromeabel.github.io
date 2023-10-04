@@ -38,53 +38,43 @@ const { page, description, publishedDate, image } = Astro.props;
     <Header />
     <slot />
     <Footer />
+    <script src="../scripts/revealAnim.ts"></script>
+
+    <style is:global>
+      @font-face {
+        font-family: 'Bubbler One';
+        src:
+          url('/bubbler-one-latin-400-normal.woff2') format('woff2'),
+          url('/bubbler-one-latin-400-normal.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .reveal {
+          opacity: 1;
+          transition-property: none;
+        }
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        .reveal {
+          opacity: 0;
+          transition:
+            opacity 0.75s 0.1s ease-in-out,
+            transform 0.75s 0.1s ease-in-out;
+        }
+        .reveal-anim {
+          opacity: 1;
+        }
+        .reveal.reveal-bottom {
+          transform: translateY(5rem);
+        }
+        .reveal.reveal-bottom.reveal-anim {
+          transform: translateY(0);
+        }
+      }
+    </style>
   </body>
-  </html>
-
-  
-  <script src="../scripts/revealAnim.ts"></script>
-
-  <style is:global>
-    @font-face {
-      font-family: 'Bubbler One';
-      src:
-        url('/bubbler-one-latin-400-normal.woff2') format('woff2'),
-        url('/bubbler-one-latin-400-normal.woff') format('woff');
-      font-weight: normal;
-      font-style: normal;
-      font-display: swap;
-    }
-
-    .reveal {
-      opacity:0;
-      transition:
-        opacity 0.75s 0.1s ease-in-out,
-        transform 0.75s 0.1s ease-in-out; 
-    }
-
-    .reveal.reveal-bottom {
-      transform: translateY(5rem);
-    }
-
-    .reveal.reveal-bottom.reveal-anim {
-      transform: translateY(0);
-    }
-
-    @media (prefers-reduced-motion: no-preference) {
-      .reveal-anim {
-        opacity: 1;
-        /* animation: animBottom 2s forwards; */
-      }
-    }
-
-    @keyframes animBottom {
-      from {
-        opacity: 0;
-        transform: translateY(5rem);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  </style>
+</html>
