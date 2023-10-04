@@ -2,8 +2,10 @@
 title: HRnet
 date: 2023-06-09
 img: ./screen.jpg
-img_preview: ./preview.jpg
 img_placeholder: ./small.jpg
+img_preview: ./preview.jpg
+img_preview_placeholder: ./preview-small.jpg
+img_social: ./social.jpg
 description: Develop a new version of HRnet, an employee management application, with React and a custom component published on NPM.
 abstract: "WealthHealth is a large financial company that uses an internal employee management application: HRnet. I built a efficient and modern version in React instead of JQuery. I've also published a npm package to display data into tables `ja-react-table`."
 git: https://github.com/jeromeabel/oc-p14-hrnet
