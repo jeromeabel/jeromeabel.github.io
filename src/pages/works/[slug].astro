@@ -37,7 +37,7 @@ const publishedDate = new Date(entry.data.date);
   page={entry.data.title}
   description={entry.data.description}
   {publishedDate}
-  image={entry.data.img}
+  image={entry.data.img_social || entry.data.img}
 >
   <main class="container flex flex-col gap-8 py-8 lg:gap-12 lg:py-24">
     <WorkHeader data={entry.data} />
