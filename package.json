@@ -27,7 +27,6 @@
     "astro-icon": "^0.8.1",
     "gh-pages": "^6.0.0",
     "prettier": "^3.0.3",
-    "prettier-plugin-astro": "^0.12.0",
-    "vite-plugin-lqip": "^0.0.3"
+    "prettier-plugin-astro": "^0.12.0"
   }
 }
