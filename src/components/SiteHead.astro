@@ -11,7 +11,7 @@ export interface Props {
 
 const defaultImage: ImageMetadata = {
   src:"/jeromeabel-social.png",
-  width:1200,
+  width: 1200,
   height: 628,
   format: 'png'
 }
@@ -65,6 +65,7 @@ const publishedDateString = publishedDate.toISOString().slice(0,10);
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={socialImageURL} />
+<meta property="og:image:alt" content={title} />
 <meta property="og:image:width" content={image.width.toString()} />
 <meta property="og:image:height" content={image.height.toString()} />
 
@@ -73,3 +74,4 @@ const publishedDateString = publishedDate.toISOString().slice(0,10);
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={socialImageURL} />
+<meta property="twitter:image:alt" content={title} />
