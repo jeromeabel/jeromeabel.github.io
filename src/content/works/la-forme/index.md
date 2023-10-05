@@ -1,6 +1,6 @@
 ---
 title: La Forme
-date: 2022-11-23
+date: 2022-05-29
 img: ./screen.jpg
 img_placeholder: ./small.jpg
 img_preview: ./preview.jpg
