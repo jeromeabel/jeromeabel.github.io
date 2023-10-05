@@ -15,7 +15,7 @@ const prevURL = `/works/${prev?.slug}`;
   <div>
     {
       prev ? (
-        <a href={prevURL} class={aStyle} aria-label={prev?.data.title} title={`Next: ${prev?.data.title}`}>
+        <a href={prevURL} class={aStyle} aria-label={prev?.data.title} title={`Previous: ${prev?.data.title}`}>
           <Icon name="ion:ios-arrow-thin-left" class={iconStyle} />
           {prev?.data.title}
         </a>
