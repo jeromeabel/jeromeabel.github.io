@@ -2,7 +2,7 @@
 title: ArgentBank
 date: 2023-03-23
 img: ./screen.png
-img_placeholder: ./small.jpg
+img_placeholder: ./small.png
 img_preview: ./preview.png
 img_preview_placeholder: ./preview-small.jpg
 img_social: ./social.jpg
@@ -46,7 +46,7 @@ When the form was successfully submitted, RTK stores a token from the server and
 ## Documentation the API
 We used Swagger to add API endpoints in the documentation
 
-![Documentation Swagger](./swagger.png)
+![Documentation Swagger](./swagger.jpg)
 
 
 ## Things I've Learned

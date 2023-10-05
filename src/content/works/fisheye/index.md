@@ -26,3 +26,8 @@ Create an accessible site for a platform of photographers :
 
 - Modernize the FishEye photographers website into a dynamic site with Javascript: design patterns, json, modal, gallery, sorting
 - Make it accessible: focus, keyboard navigation, ARIA
+
+![Modal Contact Form](./contact.jpg)
+
+![Modal Slideshow](./slideshow.jpg)
+
