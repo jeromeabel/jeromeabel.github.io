@@ -8,7 +8,7 @@ img_preview_placeholder: ./preview-small.jpg
 img_social: ./social.jpg
 description: The Malinette is a free and open source framework to make interactive and multimedia projects. It is used by artists, students and teachers in labs, schools, colleges or faculties.
 abstract: "The Malinette is a free and open source framework to make interactive and multimedia projects. It is used by artists, students and teachers in labs, schools, colleges or faculties."
-git: https://git.framasoft.org/malinette
+git: https://framagit.org/malinette
 website: https://malinette.info/en/
 video: https://www.youtube.com/watch?v=bhKK9LBlwG
 stack: 
@@ -24,7 +24,19 @@ The graphical interface is based on the fantastic Pure Data language and the wor
 We design a wood box shaped like a book to make it portable. It contains an electronic board Arduino and a coherent set of five sensors and five actuators. You can be build the box in a Fablab near you.
 
 
-
+<p>La Malinette is a pedagogical tool under free license to discover and learn to build interactive systems. Inside, there are a software and electronic devices, an Arduino board and a set of sensors and actuators.</p>
+<p>This project is developped and produced by the Reso-nance numérique collective since 2012. It is used in education (schools, colleges, faculties), and also as a tool to make artistic pieces. The learning way is experimental, transdisciplinary and fun. Since 2016, we are sustained by Carasso Fundation.</p>
+<p>The principle is to split an interactive chain in three parts : the inputs, the processings and the outputs. We use the analogy with the human perception to understand how work interactive systems and create newest.</p>
+</div><div class="w3-half w3-padding-large"><h2>Aims</h2>
+<ul>
+<li>Give a free and accessible solution for learning interactive chain, Pure Data and Arduino more easily.</li>
+<li>Replace proprietary solutions (Lego, Picaxe, …) in schools (!) which are more expensive, less pedagogicals (a simple sensor can be hidden in a box) and non evolutive because intended for age groups. We can make an opposite bet : allow students from 6th Grade to start on tools which can progress until PHD.</li>
+<li>Develop a modular tool to allow teachers to create their owns Practical Works.</li>
+<li>Promote an active way by using these common technics, creating, experimenting ideas and mini projects with two or three with the teacher.</li>
+<li>Promote a transdiciplinary approach by cross-reference art, science, litterature, sport fields.</li>
+<li>Select a coherent set of sensors, actuators and software bricks to offer a large range of combinations, and prototype rapidly. Some future extensions could be made on educational themes.</li>
+</ul>
+</div>
 
 
 ## Hardware
