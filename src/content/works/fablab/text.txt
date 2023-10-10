@@ -1,0 +1,29 @@
+
+WEB
+Forms ajax/sqlite/boostrap, onepage, rss, 
+
+
+PYTHON - META CRISTAL Blender Game Engine
+OSCeleton | Delicode NI mate
+http://reso-nance.org/wiki/projets/meta-cristal/accueil
+https://reso-nance.org/wiki/logiciels/blender/bge-python/accueil
+><p>Plusieurs tableaux sont proposés autour d’un cristal magique, Le cristal sort physiquement de l’écran comme une interface entre le monde imaginaire des super-héros et le monde réel. Une histoire s’esquisse entre les spectateurs et le cristal. Celui-ci leur donne un super-pouvoir, celui d’agir sur des éléments du décor avec leurs mouvements.</p>
+<p>En co-conception avec le pôle action culturelle et pédagogique de la bibliothèque, nous proposons ici une création interactive reposant sur l’usage de la caméra Xtion (caméra infrarouge type Kinect) et du logiciel libre Blender 3D dédié à la création 3D. Blender offre les fonctionnalités nécessaires à la fois au vidéo-mapping et au jeu vidéo, ouvrant un vaste terrain de création. Étant libre, il nous permet de l’utiliser comme support pédagogique pour la vidéo, la conception 3D, l’interactivité et le traitement temps réel.</p>
+</div><div class="w3-half w3-padding-large"><h2>Exhibition</h2>
+<ul>
+<li>"Et si les super-héros …", 19 march &gt; 4 june 2016, Bibliothèque Départementale des Bouches-du-Rhône Gaston Deferre.</li>
+
+
+
+XBEE
+https://player.vimeo.com/video/106574642
+Les modules XBee sont une solution pour transmettre des données sans-fils, par ondes radio
+https://github.com/faitmain/faitmain.org/blob/master/src/volume-2/xbee-arduino.rst
+http://reso-nance.org/wiki/materiel/xbee/accueil
+
+
+
+ATELIERS: drawbot, animabot
+FESTIVALS
+Karma, 
+
