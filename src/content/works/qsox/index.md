@@ -6,8 +6,8 @@ img_placeholder: ./screens-small.jpg
 img_preview: ./preview.png
 img_preview_placeholder: ./preview-small.jpg
 img_social: ./social.png
-description: As a software developer for the CICM Research Center, I developed QSox, an open source digital multiplateform audio editor. It posesses a graphic interface and it is directed towards the batch processing of digital audio files.
-abstract: As a software developer for the CICM Research Center, I developed QSox, an open source digital multiplateform audio editor. It posesses a graphic interface and it is directed towards the batch processing of digital audio files.
+description: As a software developer for the CICM Research Center, I developed QSox, an open source cross-platform digital audio editor. It has a graphical interface and is geared towards batch processing of digital audio files.
+abstract: As a software developer for the CICM Research Center, I developed QSox, an open source cross-platform digital audio editor. It has a graphical interface and is geared towards batch processing of digital audio files.
 git: https://sourceforge.net/projects/qsox/
 website: https://revues.mshparisnord.fr/rfim/index.php?id=145
 video: https://vimeo.com/872515089

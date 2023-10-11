@@ -6,8 +6,8 @@ img_placeholder: ./screens-small.jpg
 img_preview: ./preview.png
 img_preview_placeholder: ./preview-small.jpg
 img_social: ./social.png
-description: Mon site
-abstract: Mon site de la balle
+description: As a front-end developer, I designed and created this portfolio site to provide a great user experience and showcase my ability to build high-quality websites.
+abstract: As a front-end developer, I designed and created this portfolio site to provide a great user experience and showcase my ability to build high-quality websites.
 git: https://github.com/jeromeabel/jeromeabel.github.io
 stack: 
 - Astro
