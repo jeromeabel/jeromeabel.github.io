@@ -57,8 +57,6 @@ The **scenario**:
 
 ### 1.2. The solution
 
-Link: [Code](https://framagit.org/craslab/espace-sensitif)
-
 The software was written in [Pure Data](https://puredata.info/). Is is well-know language to create multimedia projects. The network features are also very convenient. 
 
 The only missing point was the User Interface. So, I've developed **[pd-gem-ui](https://framagit.org/craslab/pd-gem-ui)**, a Pure Data library to handle all user interactions and display features needed as the graph oscilloscope.
@@ -69,6 +67,7 @@ To select an actuator, the user interface displays a set of buttons, then render
 
 ![Craslab Screen](./craslab-screen.jpg)
 
+Link: [Code](https://framagit.org/craslab/espace-sensitif)
 
 ## 2. Valise pédagogique interactive
 
@@ -86,8 +85,6 @@ It allows artists but also all audiences, including children, to discover the te
 
 ### 2.2. The solution
 
-Links: [Code](https://framagit.org/craslab/valise-pedagogique-interactive), [Video](https://vimeo.com/871774295)
-
 ![Valise](./valise.jpg)
 
 The project is also about a "mobile" hardware set, avaiblable in Dakar and Bamako. 
@@ -98,13 +95,15 @@ The project is also about a "mobile" hardware set, avaiblable in Dakar and Bamak
 - As in the previous project, I continued to develop the **pd-gem-ui** library to create views and graphical components
 - Particular attention was paid to the consistency of the experience on the three main platforms: Linux, Max OS, Windows.
 
+Links: [Code](https://framagit.org/craslab/valise-pedagogique-interactive), [Video](https://vimeo.com/871774295)
+
 ## 3. Things I've learned
 
-- As my first real-world project, I gained experiences with network settings
-- The project evolved during my computer science training. I was a playground to use P.O.O concepts learned in school: abstraction, inheritance, common interface
-- I used Git for the first time through Gitorious, a deadly code hosting website.
-- I worked on maintaining and improving the four versions of the software
-- I gained experiences in Pure Data and deprecated things like "Pd-extended"
-- I developed some funny media actuators like this 3D feedback effect :
+- As my first real project, I gained experience on setting up a local network
+- The project evolved in parallel with my training in IT. It was a playground to use OOP concepts learned at school: abstraction, inheritance, common interface
+- I also got my start on Git via Gitorious, a code hosting site that no longer exists.
+- I worked on the maintenance and improvement of four versions of the software
+- I gained a lot of experience on Pure Data
+- I developed fun media actuators like this funny 3D feedback effect:
 
 ![Feedback](./feedback.gif)
