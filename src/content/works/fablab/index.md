@@ -6,56 +6,53 @@ img_placeholder: ./cover-small.jpg
 img_preview: ./preview.jpg
 img_preview_placeholder: ./preview-small.jpg
 img_social: ./social.jpg
-description: blablablabla
-abstract: blablablabla
+description: From 2014 to 2018, I worked as a software developer at Reso-nance Numérique. I developed Web features for its community and softwares for interactive projects. At our Fablab in Marseille, we were sharing and teaching about open source interactive technologies.
+abstract: From 2014 to 2018, I worked as a software developer at Reso-nance Numérique. I developed Web features for its community and softwares for interactive projects. At our Fablab in Marseille, we were sharing and teaching about open source interactive technologies.
+website: https://reso-nance.org/lfo_/
 stack: 
 - Pure Data
 - Arduino
 - PHP
 - Python
-type: Multimedia Framework
+type: Web, Software, Teaching
 ---
 
+The LFO is the Fablab of Friche Belle de Mai in Marseille. It opened its doors in November 2013. This project gives substance and synthesizes the educational, artistic and socio-cultural mode of action to which we have been attached since the creation of the Reso-nance Numérique association.
+
+## Web features
 
 ![PHP](./php.jpg)
 
+- PHP: get data from the RSS feed of our wordpress website and display featured projects on another website
+- PHP/AJAX/SQLITE/BOOTSTRAP: a webform to manage projects with our community
+- HTML/CSS: onepage websites for side projects like http://malinette.info
+
+## Python with Blender
+
 ![Python](./python.jpg)
 
-![Wbee](./xbee.jpg)
+“[Méta Cristal](https://reso-nance.org/meta-cristal/)” is an interactive and immersive installation inviting spectators to play with the codes and aesthetics of Marvel and DC Comics comics. Several scenes are offered around a magic crystal. The crystal physically emerges from the screen as an interface between the imaginary world of superheroes and the real world. A story emerges between the spectators and the crystal. This gives them a superpower, that of acting on elements of the decor with their movements.
+
+- I've developed a scene manager in Python for Blender
+- I wrote a technical article about it: [Python with Blender Game Engine](https://reso-nance.org/wiki/logiciels/blender/bge-python/accueil)
+
+## XBee
+
+![Xbee](./xbee.jpg)
+
+XBee modules are a solution for transmitting data wirelessly, by radio waves. We were trying to use it on wireless projects.
+- I wrote a technical article on XBee: [XBee - wiki](http://reso-nance.org/wiki/materiel/xbee/accueil)
+
+## Workshops
 
 ![Workshops](./workshops.jpg)
 
-
-git: https://framagit.org/malinette
-website: https://malinette.info/en/
-video: https://www.youtube.com/watch?v=bhKK9LBlwG
-
-
-
-WEB
-Forms ajax/sqlite/boostrap, onepage, rss, 
-
-
-PYTHON - META CRISTAL Blender Game Engine
-OSCeleton | Delicode NI mate
-http://reso-nance.org/wiki/projets/meta-cristal/accueil
-https://reso-nance.org/wiki/logiciels/blender/bge-python/accueil
-><p>Plusieurs tableaux sont proposés autour d’un cristal magique, Le cristal sort physiquement de l’écran comme une interface entre le monde imaginaire des super-héros et le monde réel. Une histoire s’esquisse entre les spectateurs et le cristal. Celui-ci leur donne un super-pouvoir, celui d’agir sur des éléments du décor avec leurs mouvements.</p>
-<p>En co-conception avec le pôle action culturelle et pédagogique de la bibliothèque, nous proposons ici une création interactive reposant sur l’usage de la caméra Xtion (caméra infrarouge type Kinect) et du logiciel libre Blender 3D dédié à la création 3D. Blender offre les fonctionnalités nécessaires à la fois au vidéo-mapping et au jeu vidéo, ouvrant un vaste terrain de création. Étant libre, il nous permet de l’utiliser comme support pédagogique pour la vidéo, la conception 3D, l’interactivité et le traitement temps réel.</p>
-</div><div class="w3-half w3-padding-large"><h2>Exhibition</h2>
-<ul>
-<li>"Et si les super-héros …", 19 march &gt; 4 june 2016, Bibliothèque Départementale des Bouches-du-Rhône Gaston Deferre.</li>
-
-
-
-XBEE
-https://player.vimeo.com/video/106574642
-Les modules XBee sont une solution pour transmettre des données sans-fils, par ondes radio
-https://github.com/faitmain/faitmain.org/blob/master/src/volume-2/xbee-arduino.rst
-http://reso-nance.org/wiki/materiel/xbee/accueil
-
-
-
-ATELIERS: drawbot, animabot
-FESTIVALS
-Karma, 
+- We created a lot of funny [workshops](https://reso-nance.org/wiki/ateliers/accueil) for children, students and professionals in order to learn open source interactive technologies
+  - [DrawBot](https://reso-nance.org/drawbot/)
+  - [AnimaBot](https://reso-nance.org/wiki/ateliers/animabot/accueil)
+  - ...
+- We organized events: 
+  - [Festival Machines](https://reso-nance.org/wiki/projets/machines/accueil)
+  - [What the Flok?](https://reso-nance.org/whattheflok_/)
+  - ...
+  

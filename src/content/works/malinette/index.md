@@ -19,6 +19,8 @@ type: Multimedia Framework
 ---
 
 
+
+
 The graphical interface is based on the fantastic Pure Data language and the work of its community. It is released under three different flavors, from newbies to experts.
 
 We design a wood box shaped like a book to make it portable. It contains an electronic board Arduino and a coherent set of five sensors and five actuators. You can be build the box in a Fablab near you.

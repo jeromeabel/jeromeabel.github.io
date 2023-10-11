@@ -6,8 +6,8 @@ img_placeholder: ./small.jpg
 img_preview: ./preview.jpg
 img_preview_placeholder: ./preview-small.jpg
 img_social: ./social.jpg
-description: As a software developer at Reso-nance Numériques, I developed a PHP plugin for Dokuwiki allowing articles to be displayed in a grid of thumbnails
-abstract: As a software developer at Reso-nance Numériques, I developed a PHP plugin for Dokuwiki allowing articles to be displayed in a grid of thumbnails
+description: As a software developer at Reso-nance Numérique, I developed a PHP plugin for Dokuwiki allowing articles to be displayed in a grid of thumbnails
+abstract: As a software developer at Reso-nance Numérique, I developed a PHP plugin for Dokuwiki allowing articles to be displayed in a grid of thumbnails
 git: https://framagit.org/resonance/dirpictures/
 website: https://www.dokuwiki.org/plugin:dirpictures
 stack: 
