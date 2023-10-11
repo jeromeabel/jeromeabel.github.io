@@ -6,8 +6,8 @@ img_placeholder: ./exhibition-small.jpg
 img_preview: ./preview.jpg
 img_preview_placeholder: ./preview-small.jpg
 img_social: ./social.jpg
-description: As a software developer at Reso-nance Numérique, I built a system to control five or more robotic drummers. As a tribe, they tap on poles in the city to create sound rhythms.
-abstract: As a software developer at Reso-nance Numérique, I built a system to control five or more robotic drummers. As a tribe, they tap on poles in the city to create sound rhythms.  
+description: "As a software developer at Reso-nance Numérique, I built a system to control five or more robotic drummers. As a tribe, they tap on poles in the city to create sound rhythms: an echo of human activites in primitive rhythms."
+abstract: "As a software developer at Reso-nance Numérique, I built a system to control five or more robotic drummers. As a tribe, they tap on poles in the city to create sound rhythms: an echo of human activites in primitive rhythms." 
 git: https://git.framasoft.org/resonance/chimeres-orchestra/
 website: https://jeromeabel.net/workshop/chimeres-mutation-4/
 video: https://vimeo.com/658636474
@@ -19,14 +19,16 @@ stack:
 type: Art, Robotic, Software
 ---
 
+> Our cities are made up of materials, surfaces and textures which vibrate and produce possibilities for aesthetic and musical intervention. What would happen if we could play these surfaces and hear their shapes and sounds? What if across our cities musical robots played upon these surfaces, turning the city into a live automatic orchestra ?
+> 
+> Shaped like insects, Chimères Orchestra is a robotic sound installation, which is attached to metallic structures around the city. As a group, these robotic instruments form a tribe or family, and when organised together play rhythms using their spidery arms. Their sounds resonate through space, calling to passers-by, disrupting their rhythm and walk; they invite us to hit, play and explore the physicality of our urban surfaces.
+
 The project is maintained by [Reso-nance numérique](https://reso-nance.org/chimeres-orchestra/). It has been exhibited around twenty times in Europe.
 
-> An echo of human activites in primitive rhythms.
 
 ## The problem
 
-- The robots could have 2 or more arms
-- The number of robots could be 3 or more
+- The configuration must be flexible: the number of robots can be 3 or more, they can have 2 or more arms
 - As a musical instrument, the rhythms must be synchronized
 - Rhythms should be fast enough to have variety and loud enough to be heard
 - The project could be exhibited outdoors during days
