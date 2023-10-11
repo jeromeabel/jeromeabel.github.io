@@ -6,8 +6,8 @@ img_placeholder: ./cover-small.jpg
 img_preview: ./preview.jpg
 img_preview_placeholder: ./preview-small.jpg
 img_social: ./social.jpg
-description: From 2014 to 2018, I worked as a software developer at Reso-nance Numérique. I developed Web features for its community and softwares for interactive projects. At our Fablab in Marseille, we were sharing and teaching about open source interactive technologies.
-abstract: From 2014 to 2018, I worked as a software developer at Reso-nance Numérique. I developed Web features for its community and softwares for interactive projects. At our Fablab in Marseille, we were sharing and teaching about open source interactive technologies.
+description: From 2014 to 2018, I worked as a software developer at Reso-nance Numérique. I developed web features for its community and software for interactive projects. In our Fablab in Marseille, we shared and taught about open source interactive technologies.
+abstract: From 2014 to 2018, I worked as a software developer at Reso-nance Numérique. I developed web features for its community and software for interactive projects. In our Fablab in Marseille, we shared and taught about open source interactive technologies.
 website: https://reso-nance.org/lfo_/
 stack: 
 - Pure Data
