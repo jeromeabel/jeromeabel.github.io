@@ -6,33 +6,34 @@ img_placeholder: ./cover-small.jpg
 img_preview: ./preview.jpg
 img_preview_placeholder: ./preview-small.jpg
 img_social: ./social.jpg
-description: Installation en deux tableaux, l'un sous forme de laboratoire dédié à l'observation de scènes microscopiques et l'autre, un paysage apocalyptique dans lequel un virus de sable recouvre lentement des images analogiques.
-abstract: Installation en deux tableaux, l'un sous forme de laboratoire dédié à l'observation de scènes microscopiques et l'autre, un paysage apocalyptique dans lequel un virus de sable recouvre lentement des images analogiques.
+description: For this art project, I developed wireless communication between two devices 1 km apart via a website
+abstract: For this art project, I developed wireless communication between two devices 1 km apart via a website
 git: https://framagit.org/chateaucarbone/fromxtox
 video: https://vimeo.com/329901237
+website: https://jeromeabel.net/workshop/fromx-tox/
 stack:
-- Bash
 - Arduino
 - PHP
-- Processing
-type: Art
+- Bash
+type: Art, Web
 ---
 
+The artistic installation is present in two different rooms: “From X” and “To X”. The first room features a laboratory, where a microscope projects images of a microscopic form. The microscope is controllable with a joystick. The latter's movements are sent to another room, which stages a robotic landscape of sand projection on cathode ray screens.
+
+## The problem
+
+- Send data between two devices 1 km apart
+
+## The solution
 
 ![web](./web.jpg)
 
+1. A computer sends data with `curl` command
+2. On a website, a PHP script handles this data and write them in a file
+3. An Arduino program for the ESP8266 chip get this data from the server
 
-![wiring](./wiring.png)
+## Things I've learned
 
-Installation en deux tableaux - From X et To X - dans deux salles de la ville de Niort, le Pilori et l'espace Grappeli.
-
-S'inspirant de l'histoire du Phylloxéra, un puceron ramené dans les malles des explorateurs européens et qui a causé une maladie dévastant les vignes françaises, **From X** est un laboratoire dédié à l'observation de scènes microscopiques. À travers un microscope inventé pour l'occasion, le visiteur pourra se plonger dans un milieu organique singulier. Il aura ainsi entre ses mains la possibilité de pousser sa curiosité. Mais plus les visiteurs s'adonneront à ce jeu, plus intense sera alors l'activité au pavillon Grappelli.
-
-**To X** met en scène un paysage apocalyptique dans lequel un virus de sable recouvre lentement des images analogiques, de vieux téléviseurs cathodiques disposés en ligne au sol. Le long d'un rail, des machines épanderont une pluie de matières fines. Les archives audiovisuelles de la ville de Niort, diffusées en boucle sur les écrans seront progressivement recouvertes et déteriorées par l'activité des visiteurs tout au long de l'exposition.
-
-L'exposition a été présentée dans le cadre du festival du polar [Regards noirs](http://regardsnoirs.niort.fr/) 2019 à [Niort](http://www.niortagglo.fr/fr/sortir-visiter/agenda/exposition-installation-from-x-to-x-15585/index.html).
-
-**Production** : Aide à la création de la Ville de Niort, association QZN
-
-**Remerciements** : Un immense merci au fablab ENO pour son accueil !
-
+- Simplify the idea! No real-time or two-way communication
+- PHP script to secure incoming request  and write data to a local file
+- ESP8266 program to get data from the web
