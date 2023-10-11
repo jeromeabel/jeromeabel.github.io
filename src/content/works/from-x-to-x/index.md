@@ -28,12 +28,12 @@ The artistic installation is present in two different rooms: “From X” and �
 
 ![web](./web.jpg)
 
-1. A computer sends data with `curl` command
-2. On a website, a PHP script handles this data and write them in a file
-3. An Arduino program for the ESP8266 chip get this data from the server
+1. A computer sends a file with `curl` command
+2. On a website, a PHP script handles the file upload
+3. An Arduino program for the ESP8266 chip requests this file from the server and extract data 
 
 ## Things I've learned
 
 - Simplify the idea! No real-time or two-way communication
-- PHP script to secure incoming request  and write data to a local file
+- PHP script to secure incoming file
 - ESP8266 program to get data from the web
