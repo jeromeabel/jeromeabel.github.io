@@ -6,10 +6,11 @@ img_placeholder: ./small2.jpg
 img_preview: ./preview.jpg
 img_preview_placeholder: ./preview-small.jpg
 img_social: ./social.jpg
-description: Logariat is an audiovisual performance on themes linked to digital technology and the body
+description: Develop a real-time application for an audiovisual performance on themes linked to digital technology and the body.
 abstract: "Develop a real-time application for an audiovisual performance on themes linked to digital technology and the body."
 git: https://framagit.org/chateaucarbone/logariat
 video: https://vimeo.com/345117719
+website: https://jeromeabel.net/workshop/logariat/
 stack:
 - Node
 - Socket IO
@@ -18,24 +19,34 @@ stack:
 - Arduino
 - Pure Data
 - Python
-type: Art
+type: Art, Web
 ---
 
-Logariat is the desire to explore relationships:
-- between computer work (automations, data) and the body (biological time, sitting position)
-- between writing (of commands, programs, laws) and physical reality (signals).
+Logariat is the desire to explore the relationships between computer work (automations, data), the body (biological time, sitting position) and different forms of writing (commands, programs, laws)
 
-A black human figure sits on an unpleasant chair. Bright lines outline its skeleton. A keyboard is placed in front, a light screen represents that of a computer. The only physical action is that he writes on a keyboard.
+## The problem
 
-![Logariat Close-Up](./logariat-01.jpg)
+- Real time interactions
+- Generative graphics & sounds
+- Get data from the body
+- Get video from a mobile phonte
 
-The video projection is divided into three zones, a triptych of writing, body and images. The writing area is rather austere, in the form of a terminal or forms. The body is represented by real-time physical signals coming from sensors on the performer's body. The third zone leaves room for the generation of organic forms between camouflage, scar and artificial forms of physical modeling of trajectories, density, microscopic worlds, etc.
 
-![Logariat storyboard](./screens.jpg)
+## The solution
 
-## What I've learned
+![Logariat Tech Stack](./tech.png)
 
-The challenge was to connect all these technologies together. All show monitoring is written in Bash and all sensors communicate to all open programs. Node is ultimately the heart of the program, it allows you to connect all the elements together, such as receiving data from biological sensors, the camera, the keyboard.
+- Browser and Node as the heart of the program, it allows me to connect all the elements together, such as receiving data from biological sensors, the camera, the keyboard.
+- P5JS for WebGL
+- SocketIO for real time communications between the server and the client
+- Serial communications between Node and Arduino
+- OSC communications between Node, Pure Data an Python
+- Pure Data for the sounds
+- Python sends Keyboard Events to all softwares via OSC
 
-![Logariat storyboard](./tech.png)
+![Logariat Storyboard](./screens.jpg)
+
+## Things I've learned
+
+The challenge was to connect all these technologies together. All show monitoring is written in Bash and all sensors communicate to all open programs. Node is ultimately the heart of the program, it allows me to connect all the elements together, such as receiving data from biological sensors, the camera, the keyboard.
 
