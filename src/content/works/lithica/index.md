@@ -33,26 +33,23 @@ A project created by [LazerQuest](https://lazerquestgalerie.tumblr.com/ABOUT), e
 - Software to manage all incoming data and link it to sound generators
 
 ### Sensors
+
 ![Sensors](./sensors.png)
 
-
 ### Python & OpenCV
+
 ![Pymotion](./pymotion.jpg)
 
 ### Wiring
+
 ![Wiring](./wiring.png)
 
-
 ### Software
+
 ![Screen](./screen.png)
-
-
-
 
 ## Things I've learned
 
+- Experiment a dozen of different sensors
 - JeVois Camera programming
 - OpenCV with Python
-- Experiment a dozen of different sensors
-
-
