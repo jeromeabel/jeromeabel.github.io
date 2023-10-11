@@ -130,5 +130,5 @@ class LikesCounter {
 - JS Array methods
 - JS Design patterns
 - Accessibility: keyboard navigation & focus, screenreader visibility, accessibility reports (achecker, axe, wave)
-- I wrote a gist about [ARIA & modal](https://gist.github.com/jeromeabel/941da71f8d0bacf191fc2b8a845b886b
+- I wrote a gist about this tricky part: [ARIA & modal](https://gist.github.com/jeromeabel/941da71f8d0bacf191fc2b8a845b886b
 )
