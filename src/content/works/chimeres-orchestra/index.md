@@ -25,7 +25,6 @@ type: Art, Robotic, Software
 
 The project is maintained by [Reso-nance numérique](https://reso-nance.org/chimeres-orchestra/). It has been exhibited around twenty times in Europe.
 
-
 ## The problem
 
 - The configuration must be flexible: the number of robots can be 3 or more, they can have 2 or more arms

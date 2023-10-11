@@ -63,7 +63,6 @@ Using Redux ToolKit, I followed some vertical architecture's principles : a slic
     └── *.scss
 ```
 
-
 #### Private Route
 
 The first step of authentication was to add a private route with `React-Router`. The idea is to provide a conditional routing system which renders the Profile page if the user is logged or the Login page instead.
@@ -87,7 +86,6 @@ const App = createBrowserRouter([
   },
 ]);
 ```
-
 
 #### Form Validation
 ![Login ArgentBank](./login.png)
@@ -119,12 +117,9 @@ The form validation was handled by `Formik` and `Yup`. A visual feedback from `T
     </Formik> )
 ```
 
-
-
-
 #### RTK
-When the form was successfully submitted, RTK stores a token from the server and use it in the Header of every API requests.
 
+When the form was successfully submitted, RTK stores a token from the server and use it in the Header of every API requests.
 
 ```jsx
 export const api = createApi({
