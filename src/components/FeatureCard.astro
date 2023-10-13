@@ -6,9 +6,9 @@ interface Props {
 }
 const { slug } = Astro.props;
 const entry = (await getEntryBySlug(
-  'features',
+  'feature', 
   slug,
-)) as CollectionEntry<'features'>;
+)) as CollectionEntry<'feature'>;
 const { Content } = await entry.render();
 ---
 

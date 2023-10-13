@@ -10,11 +10,11 @@ interface Props {
 
 const { slug, layout = 2} = Astro.props;
 
-const work = await getEntry('works', slug);
+const work = await getEntry('work', slug);
 ---
 
 <a
-  href={'/works/' + work?.slug}
+  href={'/work/' + work?.slug}
   title={`Open project ${work?.data.title}`}
   class="relative shadow-lg focus:outline-2 outline-black outline-offset-4"
 >

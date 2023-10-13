@@ -7,13 +7,13 @@ import WorkNavigation from '@components/work/WorkNavigation.astro';
 import ResponsiveImage from '@components/ResponsiveImage.astro';
 
 interface Props {
-  entry: CollectionEntry<'works'>;
-  next: CollectionEntry<'works'>;
-  prev: CollectionEntry<'works'>;
+  entry: CollectionEntry<'work'>;
+  next: CollectionEntry<'work'>;
+  prev: CollectionEntry<'work'>;
 }
 
 export async function getStaticPaths() {
-  const works = (await getCollection('works')).sort(
+  const works = (await getCollection('work')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
   const numberOfWorks = works.length;
