@@ -35,7 +35,7 @@ const dateISOString = new Date(data.date).toISOString().slice(0, 10);
     </tbody>
   </table>
 
-  <div class="flex mt-4 gap-4">
+  <div class="flex mt-4 gap-4 flex-wrap">
     {data.website && <ArrowLink href={data.website} label="Website" />}
     {data.live && <ArrowLink href={data.live} label="Live" />}
     {data.git && <ArrowLink href={data.git} label="Code" />}
