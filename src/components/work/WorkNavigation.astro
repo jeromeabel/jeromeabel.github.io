@@ -11,13 +11,13 @@ const prevURL = `/work/${prev?.slug}`;
 
 ---
 
-<div class="flex justify-between pt-12 hover:prose-a:border-dashed prose-a:font-normal">
+<div class="flex justify-between pt-12 hover:prose-a:border-dashed prose-a:font-normal flex-wrap gap-6">
   <div>
     {
       prev ? (
         <a href={prevURL} class={aStyle} aria-label={prev?.data.title} title={`Previous: ${prev?.data.title}`}>
           <Icon name="ion:ios-arrow-thin-left" class={iconStyle} />
-          {prev?.data.title}
+          <span class="hidden sm:block">{prev?.data.title}</span>
         </a>
       ) : null
     }
@@ -27,7 +27,7 @@ const prevURL = `/work/${prev?.slug}`;
     {
       next ? (
         <a href={nextURL} class={aStyle} aria-label={next?.data.title} title={`Next: ${next?.data.title}`}>
-          {next?.data.title}
+           <span class="hidden sm:block">{next?.data.title}</span>
           <Icon name="ion:ios-arrow-thin-right" class={iconStyle} />
         </a>
       ) : null
