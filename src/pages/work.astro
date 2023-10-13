@@ -4,19 +4,19 @@ import { getCollection } from 'astro:content';
 import Layout from '@layouts/Layout.astro';
 import WorkCard from '@components/work/WorkCard.astro';
 
-const works = (await getCollection('works')).sort(
+const works = (await getCollection('work')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
 
 ---
 
-<Layout page="Works">
+<Layout page="Work">
   <main class="container py-8 lg:py-24">
     <header class="w-full lg:w-2/3 flex flex-col gap-4 lg:gap-8">
       <h1
         class="font-title text-4xl sm:text-5xl lg:text-6xl uppercase tracking-widest"
       >
-        Works
+        Work
       </h1>
       <p
         class="text-xl sm:text-2xl lg:text-3xl leading-normal tracking-normal md:tracking-wide"
