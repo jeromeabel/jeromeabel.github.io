@@ -6,8 +6,9 @@ import Icon from 'astro-icon';
 ---
 
 <Layout page="About">
-  <main class="container py-8 lg:py-24 text-lg sm:text-xl flex flex-col gap-24">
-    <header class="w-full lg:w-2/3 flex flex-col gap-6 sm:gap-8 relative">
+  <main class="container relative py-8 lg:py-24 text-lg sm:text-xl flex flex-col gap-24">
+    <div class="absolute -left-1/4 -top-[50px] w-screen aspect-square sm:w-[700px] -z-10 bg-[radial-gradient(ellipse_at_50%_50%,_#ff8a0460_0%,#f5ffe1_70%)]"></div>
+    <header class="w-full lg:w-2/3 flex flex-col gap-6 sm:gap-8">
       <h1
         class="font-title text-4xl sm:text-5xl lg:text-6xl uppercase tracking-widest"
       >
@@ -48,7 +49,6 @@ import Icon from 'astro-icon';
           class="h-10 inline-block"
         />
       </p>
-
       <PrimaryLinkSimple
         label="Download CV"
         href="/CV_JeromeAbel_en.pdf"
@@ -71,10 +71,6 @@ import Icon from 'astro-icon';
       </div>
     </section>
   </main>
-  <div
-    class="absolute inset-0 w-screen aspect-square -z-10 bg-[radial-gradient(ellipse_at_10%_40%,_#ff8a0460_0%,#f5ffe1_35%)] sm:bg-[radial-gradient(ellipse_at_20%_30%,_#ff8a0460_0%,#f5ffe1_25%)] md:bg-[radial-gradient(ellipse_at_20%_20%,_#ff8a0460_0%,#f5ffe1_15%)]"
-  >
-  </div>
 </Layout>
 
 <style>
