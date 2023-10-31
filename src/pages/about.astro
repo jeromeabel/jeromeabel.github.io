@@ -46,7 +46,7 @@ import Icon from 'astro-icon';
         I look forward to growing in this field with brilliant people and
         engineers! <Icon
           name="fluent:handshake-24-regular"
-          class="h-10 inline-block"
+          class="h-10 inline-block animate-rotate"
         />
       </p>
       <PrimaryLinkSimple
@@ -80,4 +80,19 @@ import Icon from 'astro-icon';
   a:hover {
     border-bottom: 1px solid black;
   }
+  @keyframes animRotation {
+    from { transform: rotate(-15deg)};
+    to { transform: rotate(15deg)}
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-rotate {
+      animation: none;
+     }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .animate-rotate {
+      animation: animRotation 1s ease-in-out infinite alternate;
+    }
+  }
 </style>
+
