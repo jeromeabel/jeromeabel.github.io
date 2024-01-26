@@ -15,7 +15,7 @@ module.exports = {
         title: ['Bubbler One', ...defaultTheme.fontFamily.sans],
       },
       colors: {
-        black: '#1E1E1E', //1E1E1E, 1e1f28, 0E1613
+        black: '#1E1E1E',
         white: '#FAFAFA',
       },
       container: {
@@ -30,15 +30,6 @@ module.exports = {
       },
       animation: {
         'bounce-slow': 'bounce 2.5s ease-in infinite',
-      },
-      typography: {
-        DEFAULT: {
-          // Custom CSS here ↓
-          css: {
-            // color: '#333',
-            // 'ul, li, p': { lineHeight: '1.5rem' },
-          },
-        },
       },
     },
   },
