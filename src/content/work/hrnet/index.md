@@ -11,26 +11,24 @@ abstract: "WealthHealth is a large financial company that uses an internal emplo
 git: https://github.com/jeromeabel/oc-p14-hrnet
 live: https://jeromeabel.net/oc-p14-hrnet/
 stack:
-- TypeScript
-- React
-- React Context
-- React-router
-- React Hook Form
-- Zod
-- Tailwind CSS
-- Vitest
+  - TypeScript
+  - React
+  - React Context
+  - React-router
+  - React Hook Form
+  - Zod
+  - Tailwind CSS
+  - Vitest
 type: Education, Web
-
 ---
 
 This project is the n°14 of the [OpenClassrooms Front-End learning path](https://openclassrooms.com/fr/paths/516-developpeur-dapplication-javascript-react).
-
 
 ## The problem
 
 - Convert the project to React
 - Add a state management system
-- Publish a React plugin to NPM 
+- Publish a React plugin to NPM
 - Performance report between old and new version
 
 ## The solution
@@ -38,7 +36,6 @@ This project is the n°14 of the [OpenClassrooms Front-End learning path](https:
 ### Responsive Web App with Tailwind
 
 ![Responsive screens HRnet App](./screens.png)
-
 
 ### State Management with React Context
 
@@ -50,7 +47,7 @@ To handle the form validation, I've used the combination of Zod and React Hook F
 
 ![React Table Component](./table.png)
 
-The [ja-react-table](https://www.npmjs.com/package/ja-react-table) is component which display data into a table and provide features as sort, search and pagination.
+The [ja-react-table](https://www.npmjs.com/package/ja-react-table) is a component which display data into a table and provide features as sort, search and pagination.
 
 The component is published on npm registry using vite
 

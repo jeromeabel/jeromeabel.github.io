@@ -9,15 +9,15 @@ img_social: ./social.png
 description: As a front-end developer, I designed and created this portfolio site to provide a great user experience and showcase my ability to build high-quality websites.
 abstract: As a front-end developer, I designed and created this portfolio site to provide a great user experience and showcase my ability to build high-quality websites.
 git: https://github.com/jeromeabel/jeromeabel.github.io
-stack: 
-- Astro
-- Hugo
-- Lektor
-- Tailwind
-- Tachyons
-- W3CSS
-- JavaScript
-- CodeIgniter
+stack:
+  - Astro
+  - Hugo
+  - Lektor
+  - Tailwind
+  - Tachyons
+  - W3CSS
+  - JavaScript
+  - CodeIgniter
 type: Web
 ---
 
@@ -79,5 +79,14 @@ A lot of optimizations have been made to get those great results:
 - Work on visual content with Inkscape
 - Tailwind tricks
 - Optimizations principles
-  
-I will write some notes about my journey with Astro... Coming soon.
+
+## Articles
+
+I wrote some notes about this work on LinkedIn:
+
+- [Web Development Portfolio: Getting Started](https://www.linkedin.com/posts/jerome-abel_building-an-effective-dev-portfolio-activity-7122454190747971584-jZWc)
+- [Web Development Portfolio: Getting Inspirations](https://www.linkedin.com/posts/jerome-abel_webdevelopment-portfolio-activity-7123541343129251840-gxhf)
+- [Web Development Portfolio: How To Create Mockups](https://www.linkedin.com/posts/jerome-abel_webdevelopment-portfolio-webdesign-activity-7125005976696430593-zJVe)
+- [Web Development Portfolio: Why I Prefer SSG](https://www.linkedin.com/posts/jerome-abel_webdevelopment-portfolio-ssg-activity-7125730768110120963-b7nD)
+- [Web Development Portfolio: Why I Chose Astro](https://www.linkedin.com/posts/jerome-abel_webdevelopment-portfolio-astro-activity-7127180334017699840-A9cC)
+- [Web Development Portfolio: Optimize Font Loading](https://www.linkedin.com/posts/jerome-abel_webperformance-fontloading-preload-activity-7150735510913630208-p0vG)
