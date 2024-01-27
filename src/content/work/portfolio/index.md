@@ -9,6 +9,7 @@ img_social: ./social.png
 description: As a front-end developer, I designed and created this portfolio site to provide a great user experience and showcase my ability to build high-quality websites.
 abstract: As a front-end developer, I designed and created this portfolio site to provide a great user experience and showcase my ability to build high-quality websites.
 git: https://github.com/jeromeabel/jeromeabel.github.io
+live: https://dev.jeromeabel.net
 stack:
   - Astro
   - Hugo
@@ -25,11 +26,11 @@ type: Web
 
 Since 2004, I have shared my work on the Web. A portfolio site is always an opportunity to test new techniques:
 
-- 2004 - abel.jerome.free.fr: Flash Action Script
-- 2012 - jeromeabel.net v1: PHP Ionize CMS, Blueprint CSS framework
-- 2018 - jeromeabel.net v2: Lektor SSG, Jinja template, W3CSS framework, JS slider
-- 2021 - jeromeabel.net v3: Hugo SSG, Tachyons CSS, JS lazy and scroll
-- 2023 - dev.jeromeabel.net v1: Astro SSG, Tailwind CSS, JS intersection observer
+- 2004: abel.jerome.free.fr: Flash Action Script
+- 2012: jeromeabel.net v1: PHP Ionize CMS, Blueprint CSS framework
+- 2018: jeromeabel.net v2: Lektor SSG, Jinja template, W3CSS framework, JS slider
+- 2021: jeromeabel.net v3: Hugo SSG, Tachyons CSS, JS lazy and scroll
+- 2023: dev.jeromeabel.net v1: Astro SSG, Tailwind CSS, JS intersection observer
 
 ![jeromeabel](./jeromeabel.png)
 
@@ -62,6 +63,8 @@ From there was also born the idea of showing material in a vector drawing: shado
 
 ### High quality
 
+![lighthouse](./lighthouse.png)
+
 A lot of optimizations have been made to get those great results:
 
 - Font loading
@@ -71,7 +74,64 @@ A lot of optimizations have been made to get those great results:
 - Semantic HTML
 - ...
 
-![lighthouse](./lighthouse.png)
+### Intersection Observer
+
+I wanted to add animations when scrolling on the web page. I used the Intersection Observer API to add or remove CSS classes on elements.
+
+The JS script looks like this:
+
+```js
+document.addEventListener('astro:page-load', () => {
+  const reveals = [...document.querySelectorAll<HTMLElement>('.reveal')];
+
+  if (reveals) {
+    // create observer
+    const callbackObserver = (entries: any[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !entry.target.classList.contains('reveal-anim')) {
+          entry.target.classList.add('reveal-anim');
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(callbackObserver, {
+      threshold: 0.25,
+    });
+
+    // observe boxes
+    reveals.forEach((reveal) => observer.observe(reveal));
+  }
+});
+```
+
+In combinations with these CSS classes:
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transition-property: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transition:
+      opacity 1.3s 0.1s ease-in-out,
+      transform 1.3s 0.1s ease-in-out;
+  }
+  .reveal-anim {
+    opacity: 1;
+  }
+  .reveal.reveal-bottom {
+    transform: translateY(5rem);
+  }
+  .reveal.reveal-bottom.reveal-anim {
+    transform: translateY(0);
+  }
+}
+```
 
 ## What I Learned
 
@@ -79,8 +139,9 @@ A lot of optimizations have been made to get those great results:
 - Work on visual content with Inkscape
 - Tailwind tricks
 - Optimizations principles
+- Use the IntersectionObserver API
 
-## Articles
+### Articles
 
 I wrote some notes about this work on LinkedIn:
 
