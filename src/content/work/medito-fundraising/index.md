@@ -213,7 +213,7 @@ Interactivity and animations are used to enhance the user experience. Here is an
 
 ![Medito Fundraising Confetti animations](./thanks.jpg)
 
-## Things I've Learned
+## What I Learned
 
 - Astro with server side rendering & API endpoints
 - Astro with React

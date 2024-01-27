@@ -6,16 +6,15 @@ img_placeholder: ./cover-small.jpg
 img_preview: ./preview.jpg
 img_preview_placeholder: ./preview-small.jpg
 img_social: ./social.jpg
-description: I developed real-time interactive tools for the Sensitive Art Resource Center (CRASlab) in Paris, Montpellier, Dakar and Bamako. 
+description: I developed real-time interactive tools for the Sensitive Art Resource Center (CRASlab) in Paris, Montpellier, Dakar and Bamako.
 abstract: I developed real-time interactive tools for the Sensitive Art Resource Center (CRASlab) in Paris, Montpellier, Dakar and Bamako.
 website: https://www.mainsdoeuvres.org/Centre-de-ressources-art-sensitif.html
 git: https://framagit.org/craslab/
 video: https://vimeo.com/871971072
-stack: 
-- Pure Data
+stack:
+  - Pure Data
 type: Software
 ---
-
 
 **History**:
 
@@ -29,10 +28,10 @@ type: Software
 > The Sensitive Art Resource Center (CRASlab) is dedicated to understanding all digital cultures... The
 > place specializes in real-time interactive digital creation, and in free cultures. The heart of this
 > project?
-> 
+>
 > • Educational tools that are easy to use, which allow us to establish a common vocabulary and
 > structuring benchmarks to understand our technological worlds.
-> 
+>
 > • A transmission around digital artistic practices: to open up possibilities, decipher preconceptions,
 > take a technical look, and think about our relationships between technologies and societies.
 
@@ -57,7 +56,7 @@ The **scenario**:
 
 ### 1.2. The solution
 
-The software was written in [Pure Data](https://puredata.info/). Is is well-know language to create multimedia projects. The network features are also very convenient. 
+The software was written in [Pure Data](https://puredata.info/). Is is well-know language to create multimedia projects. The network features are also very convenient.
 
 The only missing point was the User Interface. So, I've developed **[pd-gem-ui](https://framagit.org/craslab/pd-gem-ui)**, a Pure Data library to handle all user interactions and display features needed as the graph oscilloscope.
 
@@ -87,7 +86,7 @@ It allows artists but also all audiences, including children, to discover the te
 
 ![Valise](./valise.jpg)
 
-The project is also about a "mobile" hardware set, avaiblable in Dakar and Bamako. 
+The project is also about a "mobile" hardware set, avaiblable in Dakar and Bamako.
 
 ![Valise Screen](./valise-screens.jpg)
 
@@ -97,7 +96,7 @@ The project is also about a "mobile" hardware set, avaiblable in Dakar and Bamak
 
 Links: [Code](https://framagit.org/craslab/valise-pedagogique-interactive), [Video](https://vimeo.com/871774295)
 
-## 3. Things I've learned
+## 3. What I Learned
 
 - As my first real project, I gained experience on setting up a local network
 - The project evolved in parallel with my training in IT. It was a playground to use OOP concepts learned at school: abstraction, inheritance, common interface

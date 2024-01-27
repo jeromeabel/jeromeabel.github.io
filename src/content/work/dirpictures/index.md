@@ -10,10 +10,9 @@ description: As a software developer at Reso-nance Numérique, I developed a PHP
 abstract: As a software developer at Reso-nance Numérique, I developed a PHP plugin for Dokuwiki allowing articles to be displayed in a grid of thumbnails
 git: https://framagit.org/resonance/dirpictures/
 website: https://www.dokuwiki.org/plugin:dirpictures
-stack: 
-- PHP
+stack:
+  - PHP
 type: Web
-
 ---
 
 ## The problem
@@ -28,7 +27,6 @@ It is used to display pictures for all pages of a directory (aka. all subnamespa
 
 A live example: https://reso-nance.org/wiki/projets/accueil
 
-
 Choose one of these options and write it into a wiki page.
 
 ```m
@@ -42,7 +40,6 @@ Choose one of these options and write it into a wiki page.
 ~~DIRPICTURES sortByDate sortDesc~~
 ```
 
-## Things I've learned
+## What I Learned
 
 - Create a PHP plugin for Dokuwiki
-  

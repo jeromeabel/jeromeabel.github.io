@@ -191,7 +191,7 @@ if (!images[imagePath])
 <Image src={images[imagePath]()} {alt} {width} />
 ```
 
-## What I've learned
+## What I Learned
 
 - Properly preparing the project with use cases
 - Improving my skills in writing user stories

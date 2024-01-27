@@ -11,10 +11,10 @@ abstract: As a software developer for the CICM Research Center, I developed QSox
 git: https://sourceforge.net/projects/qsox/
 website: https://revues.mshparisnord.fr/rfim/index.php?id=145
 video: https://vimeo.com/872515089
-stack: 
-- Pure Data
-- Arduino
-- Bash
+stack:
+  - Pure Data
+  - Arduino
+  - Bash
 type: Software
 ---
 
@@ -37,7 +37,7 @@ It is possible to do batch processing with [SoX](http://sox.sourceforge.net/) us
 - QSox works on Win XP and GNU/Linux
 - It doesn't support mp3 like SoX.
 
-## Things I've learned
+## What I Learned
 
 - C++ with Qt
 - Working with engineers

@@ -73,7 +73,7 @@ A lot of optimizations have been made to get those great results:
 
 ![lighthouse](./lighthouse.png)
 
-## Things I've learned
+## What I Learned
 
 - Build a website with Astro
 - Work on visual content with Inkscape

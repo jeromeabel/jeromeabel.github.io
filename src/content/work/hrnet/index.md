@@ -72,7 +72,7 @@ The Lighthouse dev tool is used to show differences between the old and newest v
 
 ![Performance score](./performance.png)
 
-## Things I've Learned
+## What I Learned
 
 - Redesign an application to reduce technical debt
 - Deploy a front-end application
