@@ -7,7 +7,7 @@ img_preview: ./preview.jpg
 img_preview_placeholder: ./preview-small.jpg
 img_social: ./social.jpg
 description: Find a bar in Brest, France
-abstract: "A 4-day challenge for the web agency Lumy. I developed a web application to find bars in Brest 🍺, France. The criteria are based, among other things, on deployment, filtering system, and originality."
+abstract: 'A 4-day challenge for the web agency Lumy. I developed a web application to find bars in Brest 🍺, France. The criteria are based, among other things, on deployment, filtering system, and originality.'
 git: https://github.com/jeromeabel/neptunebeerclub
 live: https://jeromeabel.github.io/neptunebeerclub/
 stack:
@@ -19,26 +19,24 @@ stack:
 type: Challenge, Web
 ---
 
-
 ## The problem
 
 - See a map of Brest with all bars
 - See the list of bars
 - View details
-- Filterbars
+- Filter bars
 
 ## The solution
 
 1. Single Page Application (SPA) with the React, Vite and Tailwind library.
 2. Configuration: Vite, Vitest, Prettier, EsLint, TypeScript
 3. File organization: Screaming architecture with a features/bar folder
-4. Deployment: GitHub Actions 
-
-
+4. Deployment: GitHub Actions
 
 ### Screaming architecture
 
 I tried to implement these features:
+
 - index.js as a public API
 - camel-case
 - features & colocation
@@ -116,34 +114,34 @@ export const Home = () => {
 
 ```tsx
 <Map
-        id="barmap"
-        initialViewState={{
-          longitude: -4.4852,
-          latitude: 48.3891,
-          zoom: 14,
-        }}
-        mapStyle="mapbox://styles/mapbox/dark-v9"
-        mapboxAccessToken={MAPBOX_TOKEN}
-        interactiveLayerIds={[clusterLayer.id as string]}
-        ref={mapRef}
-        onClick={onClick}
-      >
-        {geojsonData ? (
-          <Source
-            id="brest-bars"
-            type="geojson"
-            data={geojsonData}
-            cluster={true}
-            clusterMaxZoom={14}
-            clusterRadius={50}
-          >
-            <Layer {...clusterLayer} />
-            <Layer {...clusterCountLayer} />
-            <Layer {...unclusteredPointLayer} />
-          </Source>
-        ) : null}
-        <BarMapMarkers bars={filteredBars} />
-      </Map>
+  id="barmap"
+  initialViewState={{
+    longitude: -4.4852,
+    latitude: 48.3891,
+    zoom: 14,
+  }}
+  mapStyle="mapbox://styles/mapbox/dark-v9"
+  mapboxAccessToken={MAPBOX_TOKEN}
+  interactiveLayerIds={[clusterLayer.id as string]}
+  ref={mapRef}
+  onClick={onClick}
+>
+  {geojsonData ? (
+    <Source
+      id="brest-bars"
+      type="geojson"
+      data={geojsonData}
+      cluster={true}
+      clusterMaxZoom={14}
+      clusterRadius={50}
+    >
+      <Layer {...clusterLayer} />
+      <Layer {...clusterCountLayer} />
+      <Layer {...unclusteredPointLayer} />
+    </Source>
+  ) : null}
+  <BarMapMarkers bars={filteredBars} />
+</Map>
 ```
 
 ## Things I've Learned
@@ -153,8 +151,8 @@ export const Home = () => {
 - Using the map in React
 - Overcome the difficulties of using the GeoJson format
 
-
 ## Future Plans
+
 The goal is to develop the "Neptune Beer Club" application, giving a **charismatic and legendary identity** to bars in Brest.
 
 1. **Enhanced User Interaction:** Implementing a search feature, providing directions, and enabling location sharing for a more interactive experience.
