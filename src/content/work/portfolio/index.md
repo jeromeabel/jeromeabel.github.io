@@ -139,7 +139,7 @@ In combinations with these CSS classes:
 - Work on visual content with Inkscape
 - Tailwind tricks
 - Optimizations principles
-- Use the IntersectionObserver API
+- Use the Intersection Observer API
 
 ### Articles
 
