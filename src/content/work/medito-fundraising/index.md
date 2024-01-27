@@ -6,8 +6,8 @@ img_placeholder: ./screens-small.jpg
 img_preview: ./preview.jpg
 img_preview_placeholder: ./preview-small.jpg
 img_social: ./social.jpg
-description: Develop a versatile single web page that can be adapted for various fundraising initiatives, such as hiring personnel, creating ad campaigns, or developing new features. 
-abstract: "I had 5 days to develop a full-stack fundraising web site for the Medito foundation. Medito foundation is a nonprofit dedicated to improving mental wellbeing and helping people cope better with depression, stress, anxiety, and any other negative states of mind."
+description: Develop a versatile single web page that can be adapted for various fundraising initiatives, such as hiring personnel, creating ad campaigns, or developing new features.
+abstract: 'I had 5 days to develop a full-stack fundraising web site for the Medito foundation. Medito foundation is a nonprofit dedicated to improving mental wellbeing and helping people cope better with depression, stress, anxiety, and any other negative states of mind.'
 git: https://github.com/jeromeabel/medito-fundraising
 live: https://medito-fundraising.pages.dev/
 stack:
@@ -21,7 +21,7 @@ stack:
 type: Challenge, Web
 ---
 
-Medito foundation needs a versatile single web page that can be adapted for various fundraising initiatives, such as hiring personnel, creating ad campaigns, or developing new features. 
+Medito foundation needs a versatile single web page that can be adapted for various fundraising initiatives, such as hiring personnel, creating ad campaigns, or developing new features.
 
 ## Objectives
 
@@ -30,16 +30,13 @@ Medito foundation needs a versatile single web page that can be adapted for vari
 - Structure allows for easy content updates for different campaigns
 - Optimized for hosting on Cloudflare Pages
 
-
 ## Solution
 
 ![Medito Fundraising screenshot](./screen.jpg)
 
-
 ### Versatile project
 
-**Astro** is an agnostic framework, it offers a great choice for build a versatile website. Some pages might be static, server side or client side. You can use all great UI libs as React, Svelte or Vue.
-
+**Astro** is an agnostic framework, it offers a great choice for build a versatile website. Some pages might be static, server side or client side. You can use all great UI libs such as React, Svelte or Vue.
 
 ### Setup
 
@@ -54,12 +51,14 @@ export default defineConfig({
   image: {
     service: passthroughImageService(),
     domains: ['images.unsplash.com'], // allow optimizations of remote images
-    remotePatterns: [{protocol: 'https'}],
+    remotePatterns: [{ protocol: 'https' }],
   },
   output: 'server', // server side rendering
   adapter: cloudflare(), // server adapter
-  integrations: [ tailwind(), react(),
-    icon({ iconDir: 'src/assets/icons'}) // change the icons directory
+  integrations: [
+    tailwind(),
+    react(),
+    icon({ iconDir: 'src/assets/icons' }), // change the icons directory
   ],
 });
 ```
@@ -107,13 +106,13 @@ In Supabase, you can add tables with differents types of data. The idea is to li
 ### API endpoints
 
 With Astro and server side rendering, it is very convenient to add API endpoints to our application:
+
 - `/api/campaigns`: Get all campaigns
 - `/api/campaign/:id`: Get one campaign with its id
 - `/api/campaign/:id/donors`: Get all donors for the campaign
 - `/api/campaign/:id/questions`: Get all questions for the campaign
 - `/api/campaign/:id/donate`: Send a request to Stripe
 - `/api/session/:id/`: Get the session data from the validated
-
 
 **Example**: `/api/campaign/:id/donors`: Get all donors for the campaign
 
@@ -139,12 +138,12 @@ export const GET: APIRoute = async ({ params }) => {
     headers: {'Content-Type': 'application/json',},
   });
 };
-``` 
-
+```
 
 ### Fetch Data
 
 **Fetch utility function**
+
 ```js
 export const getJson = async (url: string) => {
   const response = await fetch(url);
@@ -156,6 +155,7 @@ export const getJson = async (url: string) => {
 ```
 
 **Fetch API In Astro**
+
 ```js
 import { getJson } from '@services/fetchAPI';
 import type { Tables } from '@config/supabase.types.ts';
@@ -170,7 +170,6 @@ const campaign: Tables<'campaigns'> = await getJson(
 Payment is made possible because of the Stripe Checkout Form integration. You have to fill in "4242 4242 4242 4242" as a test card number to test the transaction. You will be redirected to the "thanks" page when the transaction is fulfilled.
 
 ![Medito Fundraising With Stripe](./stripe.jpg)
-
 
 ### Contact Form With Resend
 
@@ -188,13 +187,13 @@ export const POST: APIRoute = async ({ request }) => {
     });
   }
 
-  const res = await fetch("https://api.resend.com/emails", {
-    method: "POST",
+  const res = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${import.meta.env.RESEND_API_KEY}`,
     },
-    body: JSON.stringify({ to, from, html, subject, text, reply_to }),    
+    body: JSON.stringify({ to, from, html, subject, text, reply_to }),
   });
 
   const data = await res.json();
@@ -202,7 +201,7 @@ export const POST: APIRoute = async ({ request }) => {
   return new Response(JSON.stringify(data), {
     status: 200,
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   });
 };
@@ -214,7 +213,6 @@ Interactivity and animations are used to enhance the user experience. Here is an
 
 ![Medito Fundraising Confetti animations](./thanks.jpg)
 
-
 ## Things I've Learned
 
 - Astro with server side rendering & API endpoints
@@ -222,6 +220,3 @@ Interactivity and animations are used to enhance the user experience. Here is an
 - Supabase integration
 - Stripe with React
 - Resend integration
-
-
-

@@ -185,16 +185,27 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
     '/src/content/*/*/*.{jpg,JPG,jpeg,JPEG,png,PNG}',
 );
 if (!images[imagePath])
-    throw new Error(`"${imagePath}" does not exist in glob: "/src/content/*/*/*.{jpeg,jpg,png,gif}"`);
+    throw new Error(`"${imagePath}" does not exist in glob: "/src/content/*/*/"`);
 ---
 
 <Image src={images[imagePath]()} {alt} {width} />
 ```
 
-### What I've learned
+## What I've learned
 
 - Properly preparing the project with use cases
 - Improving my skills in writing user stories
 - Enhancing my Figma skills with a mockup and a design system
 - Advancing my Astro skills
 - Enhancing my Tailwind skills in animations, shadows, ...
+
+### Articles
+
+I wrote some notes about Astro on LinkedIn:
+
+- [Astro Overview](https://www.linkedin.com/posts/jerome-abel_astro-overview-getting-started-activity-7130441805086498816-CFS0)
+- [Astro Tips: Navigation](https://www.linkedin.com/posts/jerome-abel_astro-tips-navigation-activity-7133703320380006400-iKm8)
+- [Astro Tips: Split Markdown Content](https://www.linkedin.com/posts/jerome-abel_astro-tips-split-markdown-content-activity-7134790451575824384-aRgZ)
+- [Astro Tips: Customize Markdown](https://www.linkedin.com/posts/jerome-abel_astro-tips-customize-markdown-links-activity-7137689581881114624-bhmM)
+- [Astro Tips: Display Images From A Post Folder](https://www.linkedin.com/posts/jerome-abel_astro-tips-display-images-from-a-post-folder-activity-7143487776691257345-lrsP)
+- [Astro Tips: Fix View Transition With Custom Scripts](https://www.linkedin.com/posts/jerome-abel_astro-tips-fix-view-transitions-custom-activity-7140226286521610240-3dkE)
