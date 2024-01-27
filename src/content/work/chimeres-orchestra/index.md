@@ -6,21 +6,21 @@ img_placeholder: ./exhibition-small.jpg
 img_preview: ./preview.jpg
 img_preview_placeholder: ./preview-small.jpg
 img_social: ./social.jpg
-description: "As a software developer at Reso-nance Numérique, I built a system to control five or more robotic drummers. As a tribe, they tap on poles in the city to create sound rhythms: an echo of human activites in primitive rhythms."
-abstract: "As a software developer at Reso-nance Numérique, I built a system to control five or more robotic drummers. As a tribe, they tap on poles in the city to create sound rhythms: an echo of human activites in primitive rhythms." 
+description: 'As a software developer at Reso-nance Numérique, I built a system to control five or more robotic drummers. As a tribe, they tap on poles in the city to create sound rhythms: an echo of human activites in primitive rhythms.'
+abstract: 'As a software developer at Reso-nance Numérique, I built a system to control five or more robotic drummers. As a tribe, they tap on poles in the city to create sound rhythms: an echo of human activites in primitive rhythms.'
 git: https://git.framasoft.org/resonance/chimeres-orchestra/
 website: https://jeromeabel.net/workshop/chimeres-mutation-4/
 video: https://vimeo.com/658636474
-stack: 
-- Pure Data
-- Arduino
-- Udoo
-- OSC
+stack:
+  - Pure Data
+  - Arduino
+  - Udoo
+  - OSC
 type: Art, Robotic, Software
 ---
 
 > Our cities are made up of materials, surfaces and textures which vibrate and produce possibilities for aesthetic and musical intervention. What would happen if we could play these surfaces and hear their shapes and sounds? What if across our cities musical robots played upon these surfaces, turning the city into a live automatic orchestra ?
-> 
+>
 > Shaped like insects, Chimères Orchestra is a robotic sound installation, which is attached to metallic structures around the city. As a group, these robotic instruments form a tribe or family, and when organised together play rhythms using their spidery arms. Their sounds resonate through space, calling to passers-by, disrupting their rhythm and walk; they invite us to hit, play and explore the physicality of our urban surfaces.
 
 The project is maintained by [Reso-nance numérique](https://reso-nance.org/chimeres-orchestra/). It has been exhibited around twenty times in Europe.
@@ -61,7 +61,7 @@ void PwmMotor::on(unsigned long _current, int _pwm, int _time){
 }
 
 void PwmMotor::off(unsigned long _current) {
-    if( _current - last >= time_on ) { 
+    if( _current - last >= time_on ) {
         state = false;
         analogWrite(pin, 0);
         if (debug) Serial.println("OFF");
@@ -108,7 +108,7 @@ The hardware design reflects aesthetics of insects and waterproof concerns.
 
 ![Blueprints for building metal pieces and electronics box](./tech.jpg)
 
-## Things I've learned
+## What I Learned
 
 - Maintain and develop a project over 10 years! A formative journey towards quality and simplicity in fact.
 - Set up a LAN network with computers, Raspberry, Arduino and mobile application

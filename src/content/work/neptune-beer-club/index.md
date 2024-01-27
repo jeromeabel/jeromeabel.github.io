@@ -144,7 +144,7 @@ export const Home = () => {
 </Map>
 ```
 
-## Things I've Learned
+## What I Learned
 
 - Deployment with 2 GitHub Actions: testing and deployment
 - Feature-based architecture with public API

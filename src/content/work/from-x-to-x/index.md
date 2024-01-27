@@ -12,9 +12,9 @@ git: https://framagit.org/chateaucarbone/fromxtox
 video: https://vimeo.com/329901237
 website: https://jeromeabel.net/workshop/fromx-tox/
 stack:
-- Arduino
-- PHP
-- Bash
+  - Arduino
+  - PHP
+  - Bash
 type: Art, Web
 ---
 
@@ -30,9 +30,9 @@ The artistic installation is present in two different rooms: “From X” and �
 
 1. A computer sends a file with `curl` command
 2. On a website, a PHP script handles the file upload
-3. An Arduino program for the ESP8266 chip requests this file from the server and extract data 
+3. An Arduino program for the ESP8266 chip requests this file from the server and extract data
 
-## Things I've learned
+## What I Learned
 
 - Simplify the idea! No real-time or two-way communication
 - PHP script to secure incoming file

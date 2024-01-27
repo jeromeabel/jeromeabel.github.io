@@ -7,14 +7,14 @@ img_preview: ./preview.png
 img_preview_placeholder: ./preview-small.jpg
 img_social: ./social.jpg
 description: The Malinette is a free and open source framework to make interactive and multimedia projects. It is used by artists, students and teachers in labs, schools, colleges or faculties.
-abstract: "The Malinette is a free and open source framework to make interactive and multimedia projects. It is used by artists, students and teachers in labs, schools, colleges or faculties."
+abstract: 'The Malinette is a free and open source framework to make interactive and multimedia projects. It is used by artists, students and teachers in labs, schools, colleges or faculties.'
 git: https://framagit.org/malinette
 website: http://malinette.info/en/
 video: https://www.youtube.com/watch?v=bhKK9LBlwG
-stack: 
-- Pure Data
-- Arduino
-- Bash
+stack:
+  - Pure Data
+  - Arduino
+  - Bash
 type: Multimedia Framework
 ---
 
@@ -55,7 +55,7 @@ We designed a book-shaped wooden box to make the kit portable. It contains an Ar
 Around 150 objects divided into 6 categories: input, output, audio, video, numbers and sequencers
 
 ![Malinette Objects List](./objects.png)
- 
+
 Some utilities have been developed, such as "pd2png". It allows taking png screenshots of a Pure Data file folder.
 
 ![Pd2png](./pd2png.png)
@@ -66,7 +66,7 @@ I've built also a minimal website in french and english, using HTML and W3CSS li
 
 ![Website](./hub.jpg)
 
-## Things I've learned
+## What I Learned
 
 - Maintain and develop a community project, with personas, user interviews and debug
 - Apply OOP principles in the refactoring of the version 2

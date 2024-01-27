@@ -9,9 +9,9 @@ img_social: ./social.jpg
 description: I developed a set of small programs that take an architectural blueprint as input and export a graphical evolution into PDF files.
 abstract: I developed a set of small programs that take an architectural blueprint as input and export a graphical evolution into PDF files.
 git: https://framagit.org/chateaucarbone/commitcraty
-stack: 
-- Processing
-- Inkscape
+stack:
+  - Processing
+  - Inkscape
 type: Software, print
 ---
 
@@ -42,7 +42,7 @@ I used the free and open source software [Processing](https://processing.org/) (
 
 ```java
 import processing.pdf.*;
- 
+
 PGraphics pdf = createGraphics(300, 300, PDF, "/home/user/Desktop/output.pdf");
 pdf.beginDraw();
 pdf.background(128, 0, 0);
@@ -60,7 +60,7 @@ To generate graphical variations, I used the [geomative](https://github.com/rikr
 
 ![code](./code.png)
 
-## Things I've learned
+## What I Learned
 
 - Clean SVG files
 - Export PDF files with custom dimensions and pages

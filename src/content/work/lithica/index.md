@@ -10,10 +10,10 @@ description: For the Lazer Quest collective, I developed an interactive system. 
 abstract: For the Lazer Quest collective, I developed an interactive system. They need it for Lithica, a light sculpture
 git: https://framagit.org/lithica/lithica-tech
 video: https://vimeo.com/872530669
-stack: 
-- Pure Data
-- Arduino
-- Python
+stack:
+  - Pure Data
+  - Arduino
+  - Python
 type: Software
 ---
 
@@ -48,7 +48,7 @@ A project created by [LazerQuest](https://lazerquestgalerie.tumblr.com/ABOUT), e
 
 ![Screen](./screen.png)
 
-## Things I've learned
+## What I Learned
 
 - Experiment a dozen of different sensors
 - JeVois Camera programming

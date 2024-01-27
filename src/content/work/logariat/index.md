@@ -7,18 +7,18 @@ img_preview: ./preview.jpg
 img_preview_placeholder: ./preview-small.jpg
 img_social: ./social.jpg
 description: Develop a real-time application for an audiovisual performance on themes linked to digital technology and the body.
-abstract: "Develop a real-time application for an audiovisual performance on themes linked to digital technology and the body."
+abstract: 'Develop a real-time application for an audiovisual performance on themes linked to digital technology and the body.'
 git: https://framagit.org/chateaucarbone/logariat
 video: https://vimeo.com/345117719
 website: https://jeromeabel.net/workshop/logariat/
 stack:
-- Node
-- Socket IO
-- P5JS
-- Bash
-- Arduino
-- Pure Data
-- Python
+  - Node
+  - Socket IO
+  - P5JS
+  - Bash
+  - Arduino
+  - Pure Data
+  - Python
 type: Art, Web
 ---
 
@@ -30,7 +30,6 @@ Logariat is the desire to explore the relationships between computer work (autom
 - Generative graphics & sounds
 - Get data from the body
 - Get video from a mobile phonte
-
 
 ## The solution
 
@@ -46,7 +45,6 @@ Logariat is the desire to explore the relationships between computer work (autom
 
 ![Logariat Storyboard](./screens.jpg)
 
-## Things I've learned
+## What I Learned
 
 The challenge was to connect all these technologies together. All show monitoring is written in Bash and all sensors communicate to all open programs. Node is ultimately the heart of the program, it allows me to connect all the elements together, such as receiving data from biological sensors, the camera, the keyboard.
-
