@@ -42,7 +42,7 @@ See more infos on this page: https://dev.jeromeabel.net/work/portfolio/
 
 ## 🎉 Results
 
-![Screenshot of Pagespeed scores](./pagespeed.png)
+![Screenshot of Pagespeed scores](./report.png)
 
 ## 👤 Author
 
