@@ -1,8 +1,8 @@
 # My Web Dev Portfolio
 
-[![Astro](https://img.shields.io/badge/Astro-3.2-BC52EE)](https://astro.build/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.2-3178C6)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.0-38BDF8)](https://tailwindcss.com/)
+[![Astro](https://img.shields.io/badge/Astro-5.3-BC52EE)](https://astro.build/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178C6)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38BDF8)](https://tailwindcss.com/)
 
 As a front-end developer, I designed and created this portfolio site to provide a great user experience and showcase my ability to build high-quality websites.
 
