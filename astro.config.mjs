@@ -4,7 +4,7 @@ import rehypeExternalLinks from 'rehype-external-links';
 // https://astro.build/config
 export default defineConfig({
   // site: 'https://dev.jeromeabel.net',
-  // integrations: [tailwind()],
+  integrations: [tailwind()],
   // build: {
   //   assets: 'assets',
   //   assetsPrefix: 'https://dev.jeromeabel.net',
