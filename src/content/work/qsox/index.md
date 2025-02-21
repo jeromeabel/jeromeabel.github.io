@@ -12,8 +12,8 @@ git: https://sourceforge.net/projects/qsox/
 website: https://revues.mshparisnord.fr/rfim/index.php?id=145
 video: https://vimeo.com/872515089
 stack:
-  - Pure Data
-  - Arduino
+  - Qt
+  - SoX
   - Bash
 type: Software
 ---

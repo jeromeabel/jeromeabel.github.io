@@ -56,7 +56,7 @@ The **scenario**:
 
 ### 1.2. The solution
 
-The software was written in [Pure Data](https://puredata.info/). Is is well-know language to create multimedia projects. The network features are also very convenient.
+The software was written in [Pure Data](https://puredata.info/). It is a well-known language for creating multimedia projects. The network features are also very handy.
 
 The only missing point was the User Interface. So, I've developed **[pd-gem-ui](https://framagit.org/craslab/pd-gem-ui)**, a Pure Data library to handle all user interactions and display features needed as the graph oscilloscope.
 
@@ -86,7 +86,7 @@ It allows artists but also all audiences, including children, to discover the te
 
 ![Valise](./valise.jpg)
 
-The project is also about a "mobile" hardware set, avaiblable in Dakar and Bamako.
+The project also covers a set of “mobile” equipment, available in Dakar and Bamako.
 
 ![Valise Screen](./valise-screens.jpg)
 
@@ -101,7 +101,7 @@ Links: [Code](https://framagit.org/craslab/valise-pedagogique-interactive), [Vid
 - As my first real project, I gained experience on setting up a local network
 - The project evolved in parallel with my training in IT. It was a playground to use OOP concepts learned at school: abstraction, inheritance, common interface
 - I also got my start on Git via Gitorious, a code hosting site that no longer exists.
-- I worked on the maintenance and improvement of four versions of the software
+- I worked on maintaining and improving four versions of the software
 - I gained a lot of experience on Pure Data
 - I developed fun media actuators like this funny 3D feedback effect:
 
