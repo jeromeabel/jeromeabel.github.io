@@ -1,5 +1,5 @@
 import tailwind from '@astrojs/tailwind';
-import { defineConfig } from 'astro/config';
+import { defineConfig, passthroughImageService } from 'astro/config';
 import rehypeExternalLinks from 'rehype-external-links';
 
 // https://astro.build/config
@@ -11,9 +11,7 @@ export default defineConfig({
     assetsPrefix: 'https://dev.jeromeabel.net',
   },
   image: {
-    service: {
-      entrypoint: 'astro/assets/services/noop',
-    },
+    service: passthroughImageService()
   },
   markdown: {
     shikiConfig: {
