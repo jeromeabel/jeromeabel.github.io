@@ -10,6 +10,11 @@ export default defineConfig({
     assets: 'assets',
     assetsPrefix: 'https://dev.jeromeabel.net',
   },
+  image: {
+    service: {
+      entrypoint: 'astro/assets/services/noop',
+    },
+  },
   markdown: {
     shikiConfig: {
       theme: 'github-dark',
