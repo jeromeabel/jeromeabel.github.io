@@ -1,7 +1,7 @@
 ---
+import FeatureCard from '@components/FeatureCard.astro';
 import PrimaryLinkSimple from '@components/links/PrimaryLinkSimple.astro';
 import Layout from '@layouts/Layout.astro';
-import FeatureCard from '@components/FeatureCard.astro';
 import Icon from 'astro-icon';
 ---
 
@@ -65,9 +65,9 @@ import Icon from 'astro-icon';
       <div
         class="grid grid-cols-1 lg:grid-cols-3 gap-16 md:gap-8 py-8 lg:py-12"
       >
-        <FeatureCard slug="user" />
-        <FeatureCard slug="creativity" />
-        <FeatureCard slug="quality" />
+        <FeatureCard id="user" />
+        <FeatureCard id="creativity" />
+        <FeatureCard id="quality" />
       </div>
     </section>
   </main>

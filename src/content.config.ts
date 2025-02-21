@@ -1,16 +1,17 @@
+import { glob } from 'astro/loaders';
 import { defineCollection, z } from 'astro:content';
 
 const featureCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/feature' }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
-      img: image()
+      img: image(),
     }),
 });
 
 const workCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/work' }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -20,9 +21,9 @@ const workCollection = defineCollection({
       }),
       img_placeholder: image(),
       img_preview: image().refine((img) => img.width >= 500, {
-        message: 'Cover image must be at least 500 pixels wide!',
+        message: 'Image preview must be at least 500 pixels wide!',
       }),
-	  img_preview_placeholder: image().optional(),
+      img_preview_placeholder: image().optional(),
       img_social: image().optional(),
       description: z.string(),
       abstract: z.string(),

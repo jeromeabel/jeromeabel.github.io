@@ -1,13 +1,12 @@
 ---
 import { getCollection } from 'astro:content';
 
-import Layout from '@layouts/Layout.astro';
 import WorkCard from '@components/work/WorkCard.astro';
+import Layout from '@layouts/Layout.astro';
 
 const works = (await getCollection('work')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
-
 ---
 
 <Layout page="Work">
@@ -30,7 +29,7 @@ const works = (await getCollection('work')).sort(
     <section
       class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8 lg:mt-24"
     >
-      {works.map((work) => <WorkCard slug={work.slug} layout={3} />)}
+      {works.map((work) => <WorkCard id={work.id} layout={3} />)}
     </section>
   </main>
 </Layout>

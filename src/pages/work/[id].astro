@@ -1,10 +1,10 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { type CollectionEntry, getCollection, render } from 'astro:content';
 
-import Layout from '@layouts/Layout.astro';
+import ResponsiveImage from '@components/ResponsiveImage.astro';
 import WorkHeader from '@components/work/WorkHeader.astro';
 import WorkNavigation from '@components/work/WorkNavigation.astro';
-import ResponsiveImage from '@components/ResponsiveImage.astro';
+import Layout from '@layouts/Layout.astro';
 
 interface Props {
   entry: CollectionEntry<'work'>;
@@ -19,7 +19,7 @@ export async function getStaticPaths() {
   const numberOfWorks = works.length;
 
   return works.map((entry, i) => ({
-    params: { slug: entry.slug },
+    params: { id: entry.id },
     props: {
       entry,
       prev: i + 1 === numberOfWorks ? null : works[i + 1],
@@ -29,7 +29,7 @@ export async function getStaticPaths() {
 }
 
 const { entry, prev, next } = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 
 const publishedDate = new Date(entry.data.date);
 
@@ -54,7 +54,7 @@ const publishedDate = new Date(entry.data.date);
     <section
       class="md:mx-auto prose prose-blockquote:border-blue-600 prose-blockquote:font-thin prose-pre:leading-none sm:prose-xl lg:prose-2xl prose-p:leading-normal prose-li:leading-normal prose-headings:font-semibold prose-a:no-underline prose-a:border-b hover:prose-a:border-solid prose-a:border-dashed prose-a:border-black prose-img:bg-white prose-img:shadow-xl marker:text-black"
     >      <Content />
-      
+
     </section>
     <WorkNavigation {next} {prev} />
   </main>

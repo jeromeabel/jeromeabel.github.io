@@ -1,15 +1,16 @@
 ---
-import { getEntryBySlug, type CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
+import { getEntry, render, type CollectionEntry } from 'astro:content';
 interface Props {
-  slug: string;
+  id: string;
 }
-const { slug } = Astro.props;
-const entry = (await getEntryBySlug(
-  'feature', 
-  slug,
+const { id } = Astro.props;
+const entry = (await getEntry(
+  'feature',
+  id,
 )) as CollectionEntry<'feature'>;
-const { Content } = await entry.render();
+
+const { Content } = await render(entry);
 ---
 
 <article class="">
