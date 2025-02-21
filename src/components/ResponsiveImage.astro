@@ -68,10 +68,12 @@ if (layout === 2) mediaSizes = '(min-width: 639px) 50vw, 100vw';
 // 3/ WordCard WorkPage: 100%, > 639px 2cols 50%, > 1279px 3cols 33vm
 else if (layout === 3)
   mediaSizes = '(min-width: 1279px) 33vw, (min-width: 639px) 50vw, 100vw';
+
+  //  <source type="image/avif" srcset={srcSetAvif.join(', ')} sizes={mediaSizes} />
+
 ---
 
 <picture>
-  <source type="image/avif" srcset={srcSetAvif.join(', ')} sizes={mediaSizes} />
   <source type="image/webp" srcset={srcSetWebp.join(', ')} sizes={mediaSizes} />
   <img
     src={src.src}
