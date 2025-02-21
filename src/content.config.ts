@@ -16,13 +16,9 @@ const workCollection = defineCollection({
     z.object({
       title: z.string(),
       date: z.coerce.date(),
-      img: image().refine((img) => img.width >= 500, {
-        message: 'Cover image must be at least 500 pixels wide!',
-      }),
+      img: image(),
       img_placeholder: image(),
-      img_preview: image().refine((img) => img.width >= 500, {
-        message: 'Image preview must be at least 500 pixels wide!',
-      }),
+      img_preview: image(),
       img_preview_placeholder: image().optional(),
       img_social: image().optional(),
       description: z.string(),
