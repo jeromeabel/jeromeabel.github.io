@@ -1,38 +1,14 @@
 {
   "name": "jeromeabel.github.io",
   "type": "module",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro check && tsc --noEmit && astro build",
+    "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.4",
-    "@astrojs/tailwind": "^6.0.0",
-    "@fontsource/bubbler-one": "^5.1.1",
-    "@fontsource/ibm-plex-sans": "^5.1.1",
-    "astro": "^5.3.0",
-    "rehype-external-links": "^3.0.0",
-    "sharp": "^0.32.6",
-    "tailwindcss": "^3.4.17",
-    "typescript": "^5.7.3"
-  },
-  "devDependencies": {
-    "@tailwindcss/typography": "^0.5.16",
-    "astro-icon": "^0.8.2",
-    "gh-pages": "^6.3.0",
-    "prettier": "^3.5.1",
-    "prettier-plugin-astro": "^0.12.3"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "sharp"
-    ]
+    "astro": "^5.3.0"
   }
 }
