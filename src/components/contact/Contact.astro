@@ -1,0 +1,17 @@
+---
+import ContactNoise from '@components/contact/ContactNoise.astro';
+import ContactText from '@components/contact/ContactText.astro';
+import ContactImage from '@components/contact/ContactImage.astro';
+//
+---
+
+<section
+  role="complementary"
+  class="relative mt-0 sm:mt-32 py-8 sm:py-20 text-xl "
+>
+  <ContactNoise />
+  <div class="container flex justify-between">
+    <ContactText />
+    <ContactImage />
+  </div>
+</section>

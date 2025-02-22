@@ -1,47 +1,53 @@
-# Astro Starter Kit: Minimal
+# My Web Dev Portfolio
+
+[![Astro](https://img.shields.io/badge/Astro-5.3-BC52EE)](https://astro.build/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38BDF8)](https://tailwindcss.com/)
+
+As a front-end developer, I designed and created this portfolio site to provide a great user experience and showcase my ability to build high-quality websites.
+
+## ✨ Live
+
+👉 https://dev.jeromeabel.net
+
+![Screenshot of the Website dev.jeromeabel.net](./screen.png)
+
+## 🚨 Prerequisites
+
+You will need:
+
+- [NodeJS](https://nodejs.org/)
+- [Git](https://git-scm.com/)
+- A terminal to run commands
+
+## 🛠️ Installation
 
 ```sh
-npm create astro@latest -- --template minimal
+git clone git@github.com:jeromeabel/jeromeabel.github.io.git
+cd jeromeabel.github.io
+npm install
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+## 🚀 Utilisation
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```sh
+npm run dev
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Open the browser at the address: http://localhost:4321/
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## 📝 Documentation
 
-Any static assets, like images, can be placed in the `public/` directory.
+See more infos on this page: https://dev.jeromeabel.net/work/portfolio/
 
-## 🧞 Commands
+## 🎉 Results
 
-All commands are run from the root of the project, from a terminal:
+![Screenshot of Pagespeed scores](./report.png)
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## 👤 Author
 
-## 👀 Want to learn more?
+- [@jeromeabel](https://github.com/jeromeabel)
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## 📷 Images Credits
+
+- Jérôme Abel

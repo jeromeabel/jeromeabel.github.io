@@ -1,0 +1,27 @@
+---
+import { Image } from 'astro:assets';
+import { getEntry, render } from 'astro:content';
+interface Props {
+  id: string;
+}
+const { id } = Astro.props;
+
+const entry = await getEntry('feature', id);
+if (!entry) {
+   // Handle Error, for example:
+  throw new Error('Could not find entry');
+}
+const { Content } = await render(entry);
+---
+
+<article>
+  <div
+    class="bg-gradient-to-r from-white from-0% md:from-30% p-8 lg:p-12 lg:pb-8 aspect-auto sm:aspect-[2/1] md:aspect-auto"
+  >
+    <Image src={entry?.data.img} alt={`Illustration ${entry?.data.title}`}/>
+    <h2 class="font-title mt-4 lg:mt-6 text-3xl uppercase tracking-wide">
+      {entry?.data.title}
+    </h2>
+  </div>
+  <div class="prose-lg sm:prose-xl mt-8 md:mt-10"><Content /></div>
+</article>

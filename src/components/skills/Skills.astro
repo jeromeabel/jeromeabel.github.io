@@ -1,0 +1,48 @@
+---
+import SkillsText from '@components/skills/SkillsText.astro';
+
+import skillsSVG from '@assets/images/skills.svg';
+import skillsFlatDesign from '@assets/images/skills_design_flat.svg';
+import skillsFlatEnv from '@assets/images/skills_env_flat.svg';
+import skillsFlatFront from '@assets/images/skills_front_flat.svg';
+---
+
+<section class="flex flex-col gap-4 lg:gap-8 bg-black text-white py-16" id="explore">
+  <div class="container">
+    <h2
+      class="text-xl lg:text-3xl uppercase font-semibold tracking-widest sm:tracking-[0.2em] lg:tracking-[0.4rem] leading-none"
+    >
+      Let's Work<br />Together
+    </h2>
+
+    <div
+      class="grid grid-rows-3 grid-flow-col gap-16 lg:gap-4 py-8 md:py-16 items-center"
+    >
+    <pre>{ skillsSVG.src }</pre>
+      <img
+        class="row-span-3 hidden md:block reveal"
+        src={skillsSVG.src}
+        alt="my skills"
+      />
+      <SkillsText title="Design" id="01" image={skillsFlatDesign}>
+        Interviews and specifications are stored in Markdown files and mermaid
+        diagrams. Obsidian is my knowledge management system for connecting
+        things together. It's time to translate your ideas into prototypes,
+        components and animations with Figma and Inkscape.
+      </SkillsText>
+      <SkillsText title="Setup" id="02" image={skillsFlatEnv}>
+        On my XUbuntu I use VS Code, Git, NodeJs and Vite as the core of the build
+        system. If we're building a website, let's use Astro; for a mobile
+        application, Expo is the one we need. We can even opt for a clean
+        architecture in monorepo projects using NX tools.
+      </SkillsText>
+      <SkillsText title="Front-End" id="03" image={skillsFlatFront}>
+        I use the rich Javascript and React ecosystem. For animations and rapid
+        presentation prototyping, let's take Tailwind. I break the application
+        into components, then secure it with TypeScript and Zod. To get a
+        quality (and maintainable) application, I use Jest and Cypress to run
+        the tests.
+      </SkillsText>
+    </div>
+  </div>
+</section>
