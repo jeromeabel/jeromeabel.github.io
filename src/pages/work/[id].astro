@@ -1,0 +1,30 @@
+---
+import { Picture } from 'astro:assets';
+import { getCollection, render } from 'astro:content';
+import "../../styles/global.css";
+// 1. Generate a new path for every collection entry
+export async function getStaticPaths() {
+  const posts = await getCollection('work');
+  return posts.map(post => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+// 2. For your template, you can get the entry directly from the prop
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+<main class="container flex flex-col gap-8 py-8 lg:gap-12 lg:py-24">
+<h1>{post.data.title}</h1>
+<Picture
+src={post.data.img}
+formats={['avif', 'webp']}
+sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${post.data.img.width}px`}
+alt={`${post.data.title} project`}
+/>
+<section
+      class="md:mx-auto prose prose-blockquote:border-blue-600 prose-blockquote:font-thin prose-pre:leading-none sm:prose-xl lg:prose-2xl prose-p:leading-normal prose-li:leading-normal prose-headings:font-semibold prose-a:no-underline prose-a:border-b hover:prose-a:border-solid prose-a:border-dashed prose-a:border-black prose-img:bg-white prose-img:shadow-xl marker:text-black"
+    >      <Content />
+
+    </section>
+    </main>

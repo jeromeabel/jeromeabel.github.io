@@ -1,5 +1,6 @@
 ---
-
+import { getCollection } from 'astro:content';
+const posts = await getCollection('work');
 ---
 
 <html lang="en">
@@ -12,5 +13,13 @@
 	</head>
 	<body>
 		<h1>Astro</h1>
+
+<h1>My posts</h1>
+
+<ul>
+  {posts.map(post => (
+    <li><a href={`/content/work/${post.id}`}>{post.data.title}</a></li>
+  ))}
+</ul>
 	</body>
 </html>
