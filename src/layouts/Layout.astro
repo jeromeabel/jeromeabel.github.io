@@ -1,0 +1,81 @@
+---
+import Footer from '@components/Footer.astro';
+import Header from '@components/Header.astro';
+import SiteHead from '@components/SiteHead.astro';
+import "../styles/global.css";
+
+// import '@fontsource/bubbler-one'; // preload font
+import '@fontsource/ibm-plex-sans/300.css';
+import '@fontsource/ibm-plex-sans/400.css';
+import '@fontsource/ibm-plex-sans/600.css';
+
+import type { ImageMetadata } from 'astro';
+
+export interface Props {
+  page?: string | undefined;
+  description?: string | undefined;
+  publishedDate?: Date | undefined;
+  image?: ImageMetadata | undefined;
+}
+
+const { page, description, publishedDate, image } = Astro.props;
+---
+
+<html
+  lang="en"
+  class="overflow-x-hidden bg-[#f5ffe1] break-words motion-safe:scroll-smooth"
+>
+  <head>
+    <link
+      rel="preload"
+      href="/bubbler-one-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <SiteHead {page} {description} {publishedDate} {image} />
+  </head>
+  <body class="min-h-screen">
+    <Header />
+    <slot />
+    <Footer />
+    <!-- <script src="../scripts/revealAnim.ts"></script> -->
+
+    <style is:global>
+      @font-face {
+        font-family: 'Bubbler One';
+        src:
+          url('/bubbler-one-latin-400-normal.woff2') format('woff2'),
+          url('/bubbler-one-latin-400-normal.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .reveal {
+          opacity: 1;
+          transition-property: none;
+        }
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        .reveal {
+          opacity: 0;
+          transition:
+            opacity 1.3s 0.1s ease-in-out,
+            transform 1.3s 0.1s ease-in-out;
+        }
+        .reveal-anim {
+          opacity: 1;
+        }
+        .reveal.reveal-bottom {
+          transform: translateY(5rem);
+        }
+        .reveal.reveal-bottom.reveal-anim {
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </body>
+</html>

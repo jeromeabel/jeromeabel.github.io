@@ -1,0 +1,37 @@
+---
+import Icon from 'astro-icon';
+---
+
+<div
+  class="flex flex-col gap-2 lg:gap-4 items-center col-span-2"
+  role="link"
+>
+  <Icon name="icon_big_arrow" class="h-24 lg:h-36 anim-arrow" />
+  <a
+    class="font-title text-lg sm:text-2xl break-normal p-2"
+    href="/#explore"
+    title="Explore works">EXPLORE</a
+  >
+</div>
+
+<style>
+  .anim-arrow {
+    animation: animY 1.2s ease-in-out alternate infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .anim-arrow {
+      animation: none;
+    }
+  }
+
+  @keyframes animY {
+    from {
+      transform: translateY(-8px);
+    }
+
+    100% {
+      transform: translateY(8px);
+    }
+  }
+</style>

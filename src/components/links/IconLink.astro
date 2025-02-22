@@ -1,0 +1,23 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import Icon from 'astro-icon';
+
+interface Props extends HTMLAttributes<'a'> {
+  label: string;
+  icon: string;
+}
+
+const { label, icon, href, ...props } = Astro.props;
+---
+
+<a
+  class="hover:bg-white transition rounded-full w-10 h-10 lg:w-14 lg:h-14 grid place-items-center border border-dashed border-black"
+  href={href}
+  aria-label={label}
+  title={label}
+  target="_blank"
+  rel="nofollow noopener noreferrer"
+  {...props}
+>
+  <Icon name={icon} class="h-6 lg:h-9" />
+</a>

@@ -1,25 +1,23 @@
 ---
 import { getCollection } from 'astro:content';
 const posts = await getCollection('work');
+
+import Layout from '@layouts/Layout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
+<Layout>
 
-<h1>My posts</h1>
+  <main
+    class="flex flex-col gap-16 lg:gap-32 mt-0 lg:mt-16 pt-8 sm:pt-12 lg:pt-16 pb-16"
+  >
+	<ul>
+		{posts.map(post => (
+			<li><a href={`/work/${post.id}`}>{post.data.title}</a></li>
+		))}
+	</ul>
+  </main>
+</Layout>
 
-<ul>
-  {posts.map(post => (
-    <li><a href={`/content/work/${post.id}`}>{post.data.title}</a></li>
-  ))}
-</ul>
+
 	</body>
 </html>

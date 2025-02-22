@@ -11,6 +11,12 @@ importers:
       '@astrojs/netlify':
         specifier: ^6.2.0
         version: 6.2.0(astro@5.3.0(@netlify/blobs@8.1.1)(jiti@2.4.2)(lightningcss@1.29.1)(rollup@4.34.8)(typescript@5.7.3))(jiti@2.4.2)(lightningcss@1.29.1)(rollup@4.34.8)
+      '@astrojs/partytown':
+        specifier: ^2.1.3
+        version: 2.1.3
+      '@fontsource/ibm-plex-sans':
+        specifier: ^5.1.1
+        version: 5.1.1
       '@tailwindcss/vite':
         specifier: ^4.0.8
         version: 4.0.8(vite@6.1.1(jiti@2.4.2)(lightningcss@1.29.1))
@@ -46,6 +52,9 @@ packages:
     resolution: {integrity: sha512-96oXxWaHgAFXm4ZPQhs1QjDwTwIqbfRttG7eWYqHonB8cGKfnOl5OATdJTqsIuTufuJDxdvee31u4iAli9mvJQ==}
     peerDependencies:
       astro: ^5.3.0
+
+  '@astrojs/partytown@2.1.3':
+    resolution: {integrity: sha512-pkGsV6/GUTph4oLgvrpbrGnu4+9JuG8fOCzBCI2dQKtpBYQ6XAZKHrPA3evQoB5vDbfUZGVCoWe95MnSoPbVtQ==}
 
   '@astrojs/prism@3.2.0':
     resolution: {integrity: sha512-GilTHKGCW6HMq7y3BUv9Ac7GMe/MO9gi9GW62GzKtth0SwukCu/qp2wLiGpEujhY+VVhaG9v7kv/5vFzvf4NYw==}
@@ -237,6 +246,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@fontsource/ibm-plex-sans@5.1.1':
+    resolution: {integrity: sha512-s6xHuHCYxZbIZV0Qchw+EoucPYWCP3PgLs9+oF3u1kLQKwabWaUC3Fm30y6n3VIMCqR89dpkcS8LTqH/IGTDDQ==}
+
   '@img/sharp-darwin-arm64@0.33.5':
     resolution: {integrity: sha512-UT4p+iz/2H4twwAoLCqfA9UH5pI6DggwKEGuaPy7nCVQ8ZsiY5PIcrRvD1DzuY3qYL07NtIQcWnBSY/heikIFQ==}
     engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
@@ -392,6 +404,11 @@ packages:
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
+
+  '@qwik.dev/partytown@0.11.0':
+    resolution: {integrity: sha512-MHime7cxj7KGrapGZ1VqLkXXq5BLNqvjNZndRJVvMkUWn92F2bsezlWW1lKDoFaKCKu2xv9LRUZL99RYOs+ccA==}
+    engines: {node: '>=18.0.0'}
+    hasBin: true
 
   '@rollup/pluginutils@5.1.4':
     resolution: {integrity: sha512-USm05zrsFxYLPdWWq+K3STlWiT/3ELn3RcV5hJMghpeAIhxfsUIg6mt12CBJBInWMV4VneoV7SfGv8xIwo2qNQ==}
@@ -1038,6 +1055,10 @@ packages:
 
   dlv@1.1.3:
     resolution: {integrity: sha512-+HlytyjlPKnIG8XuRG8WvmBP8xs8P71y+SKKS6ZXWoEgLuePxtDoUEiH7WkdePWrQ5JBpE6aoVqfZfJUQkjXwA==}
+
+  dotenv@16.4.7:
+    resolution: {integrity: sha512-47qPchRCykZC03FhkYAhrvwU4xDBFIj1QPqaarj6mdM/hgUzfPHcpkHJOn3mJAufFeeAxAzeGsr5X0M4k6fLZQ==}
+    engines: {node: '>=12'}
 
   draht@1.0.1:
     resolution: {integrity: sha512-yNNHL864dniNmIE9ZKD++mKypiAUAvVZtyV0QrbXH/ak3ebzFqo5xsmRBRqV8pZVhImOSBiyq500Wcmrf44zAg==}
@@ -2838,6 +2859,11 @@ snapshots:
       - tsx
       - yaml
 
+  '@astrojs/partytown@2.1.3':
+    dependencies:
+      '@qwik.dev/partytown': 0.11.0
+      mrmime: 2.0.1
+
   '@astrojs/prism@3.2.0':
     dependencies:
       prismjs: 1.29.0
@@ -2960,6 +2986,8 @@ snapshots:
 
   '@esbuild/win32-x64@0.24.2':
     optional: true
+
+  '@fontsource/ibm-plex-sans@5.1.1': {}
 
   '@img/sharp-darwin-arm64@0.33.5':
     optionalDependencies:
@@ -3093,6 +3121,10 @@ snapshots:
 
   '@pkgjs/parseargs@0.11.0':
     optional: true
+
+  '@qwik.dev/partytown@0.11.0':
+    dependencies:
+      dotenv: 16.4.7
 
   '@rollup/pluginutils@5.1.4(rollup@4.34.8)':
     dependencies:
@@ -3793,6 +3825,8 @@ snapshots:
   diff@5.2.0: {}
 
   dlv@1.1.3: {}
+
+  dotenv@16.4.7: {}
 
   draht@1.0.1:
     dependencies:

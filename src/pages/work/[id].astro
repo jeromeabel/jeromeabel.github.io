@@ -1,7 +1,8 @@
 ---
+import Layout from '@layouts/Layout.astro';
 import { Picture } from 'astro:assets';
 import { getCollection, render } from 'astro:content';
-import "../../styles/global.css";
+
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
   const posts = await getCollection('work');
@@ -13,7 +14,16 @@ export async function getStaticPaths() {
 // 2. For your template, you can get the entry directly from the prop
 const { post } = Astro.props;
 const { Content } = await render(post);
+const publishedDate = new Date(post.data.date);
+
 ---
+
+<Layout
+  page={post.data.title}
+  description={post.data.description}
+  {publishedDate}
+  image={post.data.img_social || post.data.img}
+>
 <main class="container flex flex-col gap-8 py-8 lg:gap-12 lg:py-24">
 <h1>{post.data.title}</h1>
 <Picture
@@ -28,3 +38,5 @@ alt={`${post.data.title} project`}
 
     </section>
     </main>
+
+  </Layout>

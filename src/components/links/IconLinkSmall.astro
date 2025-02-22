@@ -1,0 +1,35 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import Icon from 'astro-icon';
+
+interface Props extends HTMLAttributes<'a'> {
+  label: string;
+  icon: string;
+  size?: string;
+  animate?: boolean;
+}
+
+const {
+  label,
+  icon,
+  size = 'h-9',
+  animate = false,
+  href,
+  ...props
+} = Astro.props;
+---
+
+<a
+  class:list={[
+    'hover:bg-black shadow hover:text-white transition-all duration-300 rounded-full w-10 h-10 grid place-items-center border border-dashed border-black',
+    { 'motion-safe:animate-bounce-slow': animate },
+  ]}
+  href={href}
+  aria-label={label}
+  title={label}
+  target="_blank"
+  rel="nofollow noopener noreferrer"
+  {...props}
+>
+  <Icon name={icon} class="h-6" />
+</a>
