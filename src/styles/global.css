@@ -1,2 +1,65 @@
 @import "tailwindcss";
 @plugin '@tailwindcss/typography';
+
+@utility container {
+   margin-inline: auto;
+   padding-inline: 1rem;
+   @variant sm {
+      padding-inline: 3rem
+    }
+    @variant lg {
+      padding-inline: 6rem;
+    }
+    @variant xl {
+      padding-inline: 8rem;
+    }
+    @variant 2xl {
+      padding-inline: 10rem;
+    }
+}
+
+@theme {
+   --font-sans: 'IBM Plex Sans', sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+   --font-title: 'Bubbler One', Georgia, Cambria, "Times New Roman", Times, serif;
+
+   --color-black: #1E1E1E;
+   --color-white: #FAFAFA;
+
+   --breakpoint-md: 60rem;
+   --breakpoint-lg: 80rem;
+}
+
+@font-face {
+   font-family: 'Bubbler One';
+   src:
+     url('/bubbler-one-latin-400-normal.woff2') format('woff2'),
+     url('/bubbler-one-latin-400-normal.woff') format('woff');
+   font-weight: normal;
+   font-style: normal;
+   font-display: swap;
+ }
+
+ @media (prefers-reduced-motion: reduce) {
+   .reveal {
+     opacity: 1;
+     transition-property: none;
+   }
+ }
+
+ @media (prefers-reduced-motion: no-preference) {
+   .reveal {
+     opacity: 0;
+     transition:
+       opacity 1.3s 0.1s ease-in-out,
+       transform 1.3s 0.1s ease-in-out;
+   }
+   .reveal-anim {
+     opacity: 1;
+   }
+   .reveal.reveal-bottom {
+     transform: translateY(5rem);
+   }
+   .reveal.reveal-bottom.reveal-anim {
+     transform: translateY(0);
+   }
+ }

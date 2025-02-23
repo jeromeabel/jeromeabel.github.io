@@ -1,10 +1,10 @@
 ---
-import SkillsText from '@components/skills/SkillsText.astro';
-
 import skillsSVG from '@assets/images/skills.svg';
 import skillsFlatDesign from '@assets/images/skills_design_flat.svg';
 import skillsFlatEnv from '@assets/images/skills_env_flat.svg';
 import skillsFlatFront from '@assets/images/skills_front_flat.svg';
+import SkillsText from '@components/skills/SkillsText.astro';
+import { Image } from 'astro:assets';
 ---
 
 <section class="flex flex-col gap-4 lg:gap-8 bg-black text-white py-16" id="explore">
@@ -18,10 +18,9 @@ import skillsFlatFront from '@assets/images/skills_front_flat.svg';
     <div
       class="grid grid-rows-3 grid-flow-col gap-16 lg:gap-4 py-8 md:py-16 items-center"
     >
-    <pre>{ skillsSVG.src }</pre>
-      <img
+      <Image
         class="row-span-3 hidden md:block reveal"
-        src={skillsSVG.src}
+        src={skillsSVG}
         alt="my skills"
       />
       <SkillsText title="Design" id="01" image={skillsFlatDesign}>
