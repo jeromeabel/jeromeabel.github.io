@@ -9,11 +9,11 @@ img_social: ./social.jpg
 description: From 2014 to 2018, I worked as a software developer at Reso-nance Numérique. I developed web features for its community and software for interactive projects. In our Fablab in Marseille, we shared and taught about open source interactive technologies.
 abstract: From 2014 to 2018, I worked as a software developer at Reso-nance Numérique. I developed web features for its community and software for interactive projects. In our Fablab in Marseille, we shared and taught about open source interactive technologies.
 website: https://reso-nance.org/lfo_/
-stack: 
-- Pure Data
-- Arduino
-- PHP
-- Python
+stack:
+  - Pure Data
+  - Arduino
+  - PHP
+  - Python
 type: Web, Software, Teaching
 ---
 
@@ -41,6 +41,7 @@ The LFO is the Fablab of Friche Belle de Mai in Marseille. It opened its doors i
 ![Xbee](./xbee.jpg)
 
 XBee modules are a solution for transmitting data wirelessly, by radio waves. We were trying to use it on wireless projects.
+
 - I wrote a technical article on XBee: [XBee - wiki](http://reso-nance.org/wiki/materiel/xbee/accueil)
 
 ## Workshops
@@ -51,8 +52,7 @@ XBee modules are a solution for transmitting data wirelessly, by radio waves. We
   - [DrawBot](https://reso-nance.org/drawbot/)
   - [AnimaBot](https://reso-nance.org/wiki/ateliers/animabot/accueil)
   - ...
-- We organized events: 
+- We organized events:
   - [Festival Machines](https://reso-nance.org/wiki/projets/machines/accueil)
   - [What the Flok?](https://reso-nance.org/whattheflok_/)
   - ...
-  

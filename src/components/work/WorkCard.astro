@@ -1,7 +1,7 @@
 ---
-import { Icon } from 'astro-icon/components';
-import { Image } from 'astro:assets';
-import { getEntry } from 'astro:content';
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import { getEntry } from "astro:content";
 
 interface Props {
   slug: string;
@@ -9,35 +9,36 @@ interface Props {
 
 const { slug } = Astro.props;
 
-const work = await getEntry('work', slug);
+const work = await getEntry("work", slug);
 
 if (!work) {
-  throw new Error('Could not find work');
+  throw new Error("Could not find work");
 }
 ---
+
 <a
-  href={'/work/' + work?.id}
+  href={"/work/" + work?.id}
   title={`Open the "${work?.data.title}" project`}
-  class="relative shadow-lg focus:outline-2 outline-black outline-offset-4"
+  class="relative shadow-lg outline-offset-4 outline-black focus:outline-2"
 >
-  <article class="aspect-square bg-white group overflow-hidden">
+  <article class="group aspect-square overflow-hidden bg-white">
     <Image
       src={work.data.img_preview}
       alt={`${work.data.title} preview`}
-      class="scale-100 motion-safe:group-hover:scale-110 transition-transform duration-1000"
+      class="scale-100 transition-transform duration-1000 motion-safe:group-hover:scale-110"
       loading="lazy"
     />
     <div
-      class="absolute inset-0 grid items-center group-bg-black bg-black/0 group-hover:bg-black/90 duration-500 motion-reduce:transition-all"
+      class="group-bg-black absolute inset-0 grid items-center bg-black/0 duration-500 group-hover:bg-black/90 motion-reduce:transition-all"
     >
       <div
-        class="flex-col gap-6 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 duration-500 p-4"
+        class="flex flex-col items-center justify-center gap-6 p-4 text-white opacity-0 duration-500 group-hover:opacity-100"
       >
         <Icon
           name="icon_big_arrow_cross"
-          class="text-8xl motion-safe:-rotate-45 group-hover:rotate-0 transition-all delay-100 duration-500"
+          class="text-8xl transition-all delay-100 duration-500 group-hover:rotate-0 motion-safe:-rotate-45"
         />
-        <p class="text-4xl lg:text-5xl font-title">
+        <p class="font-title text-4xl lg:text-5xl">
           {work?.data.title}
         </p>
       </div>

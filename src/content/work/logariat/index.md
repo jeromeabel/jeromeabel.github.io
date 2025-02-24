@@ -7,7 +7,7 @@ img_preview: ./preview.jpg
 img_preview_placeholder: ./preview-small.jpg
 img_social: ./social.jpg
 description: Develop a real-time application for an audiovisual performance on themes linked to digital technology and the body.
-abstract: 'Develop a real-time application for an audiovisual performance on themes linked to digital technology and the body.'
+abstract: "Develop a real-time application for an audiovisual performance on themes linked to digital technology and the body."
 git: https://framagit.org/chateaucarbone/logariat
 video: https://vimeo.com/345117719
 website: https://jeromeabel.net/workshop/logariat/

@@ -1,15 +1,15 @@
 ---
-import Footer from '@components/Footer.astro';
-import Header from '@components/Header.astro';
-import SiteHead from '@components/SiteHead.astro';
+import Footer from "@components/Footer.astro";
+import Header from "@components/Header.astro";
+import SiteHead from "@components/SiteHead.astro";
 import "../styles/global.css";
 
 // import '@fontsource/bubbler-one'; // preload font
-import '@fontsource/ibm-plex-sans/300.css';
-import '@fontsource/ibm-plex-sans/400.css';
-import '@fontsource/ibm-plex-sans/600.css';
+import "@fontsource/ibm-plex-sans/300.css";
+import "@fontsource/ibm-plex-sans/400.css";
+import "@fontsource/ibm-plex-sans/600.css";
 
-import type { ImageMetadata } from 'astro';
+import type { ImageMetadata } from "astro";
 
 export interface Props {
   page?: string | undefined;
@@ -34,17 +34,25 @@ const { page, description, publishedDate, image } = Astro.props;
       crossorigin
     />
     <SiteHead {page} {description} {publishedDate} {image} />
-    <script is:inline type="text/partytown" src="https://cdn.eu.amplitude.com/script/4be93bed99fb2eccac90000ec720a4b1.js"></script>
+    <script
+      is:inline
+      type="text/partytown"
+      src="https://cdn.eu.amplitude.com/script/4be93bed99fb2eccac90000ec720a4b1.js"
+    ></script>
 
     <script is:inline type="text/partytown">
-      window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));
-      window.amplitude.init('4be93bed99fb2eccac90000ec720a4b1', {"fetchRemoteConfig":true,"serverZone":"EU","autocapture":true});
+      window.amplitude.add(window.sessionReplay.plugin({ sampleRate: 1 }));
+      window.amplitude.init("4be93bed99fb2eccac90000ec720a4b1", {
+        fetchRemoteConfig: true,
+        serverZone: "EU",
+        autocapture: true,
+      });
     </script>
   </head>
   <body class="min-h-screen">
     <Header />
     <slot />
     <Footer />
-    <script  src="../scripts/revealAnim.ts"></script>
+    <script src="../scripts/revealAnim.ts"></script>
   </body>
 </html>

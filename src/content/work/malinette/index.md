@@ -7,7 +7,7 @@ img_preview: ./preview.png
 img_preview_placeholder: ./preview-small.jpg
 img_social: ./social.jpg
 description: The Malinette is a free and open source framework to make interactive and multimedia projects. It is used by artists, students and teachers in labs, schools, colleges or faculties.
-abstract: 'The Malinette is a free and open source framework to make interactive and multimedia projects. It is used by artists, students and teachers in labs, schools, colleges or faculties.'
+abstract: "The Malinette is a free and open source framework to make interactive and multimedia projects. It is used by artists, students and teachers in labs, schools, colleges or faculties."
 git: https://framagit.org/malinette
 website: http://malinette.info/en/
 video: https://www.youtube.com/watch?v=bhKK9LBlwG

@@ -1,7 +1,7 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
+import type { HTMLAttributes } from "astro/types";
 
-interface Props extends HTMLAttributes<'a'> {
+interface Props extends HTMLAttributes<"a"> {
   label: string;
 }
 
@@ -9,14 +9,17 @@ const { href, label, ...props } = Astro.props;
 
 const { pathname } = Astro.url;
 // const isActive = href === pathname || href === pathname.replace(/\/$/, '');
-const currentPath = `/${pathname.split('/')[1].trim()}`; // remove the first "/"
+const currentPath = `/${pathname.split("/")[1].trim()}`; // remove the first "/"
 const isActive =
-  href === currentPath || href === currentPath.replace(/\/$/, '');
+  href === currentPath || href === currentPath.replace(/\/$/, "");
 ---
 
 <a
   href={href}
-  class:list={['text-xl text-zinc-600 hover:text-black border-black', { active: isActive }]}
+  class:list={[
+    "border-black text-xl text-zinc-600 hover:text-black",
+    { active: isActive },
+  ]}
   {...props}
   aria-label={`${label} page`}
   title={`${label} page`}
@@ -27,6 +30,6 @@ const isActive =
 <style>
   a.active {
     color: var(--color-black);
-    border-bottom: 1px solid var(--color-black)
+    border-bottom: 1px solid var(--color-black);
   }
 </style>

@@ -1,12 +1,15 @@
-document.addEventListener('astro:page-load', () => {
-  const reveals = [...document.querySelectorAll<HTMLElement>('.reveal')];
+document.addEventListener("astro:page-load", () => {
+  const reveals = [...document.querySelectorAll<HTMLElement>(".reveal")];
 
   if (reveals) {
     // create observer
     const callbackObserver = (entries: any[]) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting && !entry.target.classList.contains('reveal-anim')) {
-          entry.target.classList.add('reveal-anim');
+        if (
+          entry.isIntersecting &&
+          !entry.target.classList.contains("reveal-anim")
+        ) {
+          entry.target.classList.add("reveal-anim");
         }
       });
     };

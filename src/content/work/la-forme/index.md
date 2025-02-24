@@ -6,8 +6,8 @@ img_placeholder: ./small.jpg
 img_preview: ./preview.jpg
 img_preview_placeholder: ./preview-small.jpg
 img_social: ./social.jpg
-description: 'Develop a video tracking software for an audio-visual performance'
-abstract: 'Develop a video tracking software for an audio-visual performance'
+description: "Develop a video tracking software for an audio-visual performance"
+abstract: "Develop a video tracking software for an audio-visual performance"
 git: https://framagit.org/afa/la-forme-live
 video: https://www.youtube.com/watch?v=10-1Zacngq8
 website: https://jeromeabel.net/workshop/la-forme-neuss/

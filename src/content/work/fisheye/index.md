@@ -6,8 +6,8 @@ img_placeholder: ./small.jpg
 img_preview: ./preview.jpg
 img_preview_placeholder: ./preview-small.jpg
 img_social: ./social.jpg
-description: 'I developed a modernized version of the FishEye website, a photographers platform, using dynamic content with Javascript, design patterns, json, modal, gallery and sorting features. I also followed the accessibility guidelines to make it fully accessible: focus, keyboard navigation, ARIA.'
-abstract: 'I developed a modernized version of the FishEye website, a photographers platform, using dynamic content with Javascript, design patterns, json, modal, gallery and sorting features. I also followed the accessibility guidelines to make it fully accessible: focus, keyboard navigation, ARIA.'
+description: "I developed a modernized version of the FishEye website, a photographers platform, using dynamic content with Javascript, design patterns, json, modal, gallery and sorting features. I also followed the accessibility guidelines to make it fully accessible: focus, keyboard navigation, ARIA."
+abstract: "I developed a modernized version of the FishEye website, a photographers platform, using dynamic content with Javascript, design patterns, json, modal, gallery and sorting features. I also followed the accessibility guidelines to make it fully accessible: focus, keyboard navigation, ARIA."
 git: https://github.com/jeromeabel/oc-p6-fisheye/
 live: https://jeromeabel.github.io/oc-p6-fisheye/
 stack:
@@ -48,7 +48,7 @@ class MediaFactory {
     } else if (media.video) {
       return new MediaVideo(media);
     } else {
-      throw 'MediaFactory Error : Unkown type';
+      throw "MediaFactory Error : Unkown type";
     }
   }
 }
@@ -59,24 +59,24 @@ class MediaFactory {
 ```js
 class MediaSort {
   setListeners() {
-    const elements = this.$wrapper.querySelectorAll('[data-sortBy]');
+    const elements = this.$wrapper.querySelectorAll("[data-sortBy]");
     elements.forEach((elt) => {
-      elt.addEventListener('click', () => {
-        this.sort(elt.getAttribute('data-sortBy'));
+      elt.addEventListener("click", () => {
+        this.sort(elt.getAttribute("data-sortBy"));
       });
     });
   }
 
   sort(type) {
-    if (type === 'title') {
+    if (type === "title") {
       this.media.sort(function (a, b) {
         return a.title.localeCompare(b.title);
       });
-    } else if (type === 'date') {
+    } else if (type === "date") {
       this.media.sort(function (a, b) {
         return new Date(b.date) - new Date(a.date);
       });
-    } else if (type === 'pop') {
+    } else if (type === "pop") {
       this.media.sort(function (a, b) {
         return b.likes - a.likes; // du plus grand au plus petit
       });

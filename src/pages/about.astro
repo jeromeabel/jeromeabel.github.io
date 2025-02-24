@@ -1,16 +1,21 @@
 ---
-import FeatureCard from '@components/FeatureCard.astro';
-import PrimaryLinkSimple from '@components/links/PrimaryLinkSimple.astro';
-import Layout from '@layouts/Layout.astro';
-import { Icon } from 'astro-icon/components';
+import FeatureCard from "@components/FeatureCard.astro";
+import PrimaryLinkSimple from "@components/links/PrimaryLinkSimple.astro";
+import Layout from "@layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
 ---
 
 <Layout page="About">
-  <main class="container relative py-8 lg:py-24 text-lg sm:text-xl flex flex-col gap-24">
-    <div class="absolute -left-1/4 -top-[50px] w-screen aspect-square sm:w-[700px] -z-10 bg-[radial-gradient(ellipse_at_50%_50%,_#ff8a0460_0%,#f5ffe1_70%)]"></div>
-    <header class="w-full lg:w-2/3 flex flex-col gap-6 sm:gap-8">
+  <main
+    class="relative container flex flex-col gap-24 py-8 text-lg sm:text-xl lg:py-24"
+  >
+    <div
+      class="absolute -top-[50px] -left-1/4 -z-10 aspect-square w-screen bg-[radial-gradient(ellipse_at_50%_50%,_#ff8a0460_0%,#f5ffe1_70%)] sm:w-[700px]"
+    >
+    </div>
+    <header class="flex w-full flex-col gap-6 sm:gap-8 lg:w-2/3">
       <h1
-        class="font-title text-4xl sm:text-5xl lg:text-6xl uppercase tracking-widest"
+        class="font-title text-4xl tracking-widest uppercase sm:text-5xl lg:text-6xl"
       >
         About
       </h1>
@@ -46,7 +51,7 @@ import { Icon } from 'astro-icon/components';
         I look forward to growing in this field with brilliant people and
         engineers! <Icon
           name="fluent:handshake-24-regular"
-          class="h-10 inline-block animate-rotate"
+          class="animate-rotate inline-block h-10"
         />
       </p>
       <PrimaryLinkSimple
@@ -58,12 +63,12 @@ import { Icon } from 'astro-icon/components';
 
     <section class="mt-0 lg:mt-12">
       <h2
-        class="font-title text-4xl sm:text-5xl lg:text-6xl uppercase tracking-widest"
+        class="font-title text-4xl tracking-widest uppercase sm:text-5xl lg:text-6xl"
       >
         My Way Of Doing
       </h2>
       <div
-        class="grid grid-cols-1 lg:grid-cols-3 gap-16 md:gap-8 py-8 lg:py-12"
+        class="grid grid-cols-1 gap-16 py-8 md:gap-8 lg:grid-cols-3 lg:py-12"
       >
         <FeatureCard id="user" />
         <FeatureCard id="creativity" />
@@ -81,13 +86,17 @@ import { Icon } from 'astro-icon/components';
     border-bottom: 1px solid var(--color-black);
   }
   @keyframes animRotation {
-    from { transform: rotate(-15deg)}
-    to { transform: rotate(15deg)}
+    from {
+      transform: rotate(-15deg);
+    }
+    to {
+      transform: rotate(15deg);
+    }
   }
   @media (prefers-reduced-motion: reduce) {
     .animate-rotate {
       animation: none;
-     }
+    }
   }
   @media (prefers-reduced-motion: no-preference) {
     .animate-rotate {
@@ -95,4 +104,3 @@ import { Icon } from 'astro-icon/components';
     }
   }
 </style>
-

@@ -7,7 +7,7 @@ img_preview: ./preview.jpg
 img_preview_placeholder: ./preview-small.jpg
 img_social: ./social.jpg
 description: Find a bar in Brest, France
-abstract: 'A 4-day challenge for the web agency Lumy. I developed a web application to find bars in Brest 🍺, France. The criteria are based, among other things, on deployment, filtering system, and originality.'
+abstract: "A 4-day challenge for the web agency Lumy. I developed a web application to find bars in Brest 🍺, France. The criteria are based, among other things, on deployment, filtering system, and originality."
 git: https://github.com/jeromeabel/neptunebeerclub
 live: https://jeromeabel.github.io/neptunebeerclub/
 stack:
@@ -74,10 +74,10 @@ I tried to implement these features:
 ### Public API (index.js)
 
 ```ts
-export * from './bar-list';
-export * from './bar-map';
-export * from './bar-filters';
-export * from './bar-context';
+export * from "./bar-list";
+export * from "./bar-map";
+export * from "./bar-filters";
+export * from "./bar-context";
 ```
 
 ### Home.tsx
@@ -86,9 +86,9 @@ export * from './bar-context';
 - The `<MapProvider />` is provided by React Map GL to allow actions on the map from other components. You can click a button in <BarList /> that sends a new position of the <BarMap />.
 
 ```tsx
-import { Header } from '@containers/Header';
-import { BarList, BarMap, BarFilters, BarProvider } from '@features/bar';
-import { MapProvider } from 'react-map-gl';
+import { Header } from "@containers/Header";
+import { BarList, BarMap, BarFilters, BarProvider } from "@features/bar";
+import { MapProvider } from "react-map-gl";
 
 export const Home = () => {
   return (

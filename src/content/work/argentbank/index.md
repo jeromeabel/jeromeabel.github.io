@@ -73,13 +73,13 @@ const PrivateRoute = ({ element }) => {
 
 const App = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <Layout />,
     children: [
       { index: true, element: <Home /> },
-      { path: 'login', element: <Login /> },
-      { path: 'profile', element: <PrivateRoute element={<Profile />} /> },
-      { path: '*', element: <Error404 /> },
+      { path: "login", element: <Login /> },
+      { path: "profile", element: <PrivateRoute element={<Profile />} /> },
+      { path: "*", element: <Error404 /> },
     ],
   },
 ]);
@@ -93,15 +93,15 @@ The form validation was handled by `Formik` and `Yup`. A visual feedback from `T
 
 ```jsx
 const validationSchema = Yup.object({
-  email: Yup.string().email('Invalid email addresss').required('Required'),
+  email: Yup.string().email("Invalid email addresss").required("Required"),
   password: Yup.string()
-    .min(8, 'Must be 8 characters or more')
-    .max(20, 'Must be 20 characters or less')
-    .required('Required'),
+    .min(8, "Must be 8 characters or more")
+    .max(20, "Must be 20 characters or less")
+    .required("Required"),
   rememberMe: Yup.boolean().default(false),
 });
 
-const initialValues = { email: '', password: '', rememberMe: false };
+const initialValues = { email: "", password: "", rememberMe: false };
 
 return (
   <Formik
@@ -127,13 +127,13 @@ When the form was successfully submitted, RTK stores a token from the server and
 
 ```jsx
 export const api = createApi({
-  reducerPath: 'api',
+  reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:3001/api/v1',
+    baseUrl: "http://localhost:3001/api/v1",
     prepareHeaders: (headers, { getState }) => {
-      const token = getState().auth.token || localStorage.getItem('token');
-      if (!headers.has('Authorization') && token) {
-        headers.set('Authorization', `Bearer ${token}`);
+      const token = getState().auth.token || localStorage.getItem("token");
+      if (!headers.has("Authorization") && token) {
+        headers.set("Authorization", `Bearer ${token}`);
       }
       return headers;
     },

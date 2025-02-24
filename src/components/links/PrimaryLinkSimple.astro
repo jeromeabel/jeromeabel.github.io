@@ -1,8 +1,8 @@
 ---
-import { Icon } from 'astro-icon/components';
-import type { HTMLAttributes } from 'astro/types';
+import { Icon } from "astro-icon/components";
+import type { HTMLAttributes } from "astro/types";
 
-interface Props extends HTMLAttributes<'a'> {
+interface Props extends HTMLAttributes<"a"> {
   label: string;
   icon: string;
 }
@@ -11,7 +11,7 @@ const { label, icon, href, ...props } = Astro.props;
 ---
 
 <a
-  class="hover-fx max-w-fit flex gap-2 px-6 items-center text-base py-3 bg-black text-white rounded-full"
+  class="hover-fx flex max-w-fit items-center gap-2 rounded-full bg-black px-6 py-3 text-base text-white"
   href={href}
   aria-label={`${label}`}
   title={`${label}`}
@@ -20,7 +20,7 @@ const { label, icon, href, ...props } = Astro.props;
   rel="nofollow noopener noreferrer"
 >
   {label}
-  <Icon name={icon} class="stroke-none fill-none w-6" />
+  <Icon name={icon} class="w-6 fill-none stroke-none" />
 </a>
 
 <style>

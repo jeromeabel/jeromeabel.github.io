@@ -7,7 +7,7 @@ img_preview: ./preview.jpg
 img_preview_placeholder: ./preview-small.jpg
 img_social: ./social.jpg
 description: Develop a versatile single web page that can be adapted for various fundraising initiatives, such as hiring personnel, creating ad campaigns, or developing new features.
-abstract: 'I had 5 days to develop a full-stack fundraising web site for the Medito foundation. Medito foundation is a nonprofit dedicated to improving mental wellbeing and helping people cope better with depression, stress, anxiety, and any other negative states of mind.'
+abstract: "I had 5 days to develop a full-stack fundraising web site for the Medito foundation. Medito foundation is a nonprofit dedicated to improving mental wellbeing and helping people cope better with depression, stress, anxiety, and any other negative states of mind."
 git: https://github.com/jeromeabel/medito-fundraising
 live: https://medito-fundraising.pages.dev/
 stack:
@@ -41,24 +41,24 @@ Medito foundation needs a versatile single web page that can be adapted for vari
 ### Setup
 
 ```js
-import { defineConfig, passthroughImageService } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
-import cloudflare from '@astrojs/cloudflare';
-import react from '@astrojs/react';
-import { Icon } from 'astro-icon/components';
+import { defineConfig, passthroughImageService } from "astro/config";
+import tailwind from "@astrojs/tailwind";
+import cloudflare from "@astrojs/cloudflare";
+import react from "@astrojs/react";
+import { Icon } from "astro-icon/components";
 
 export default defineConfig({
   image: {
     service: passthroughImageService(),
-    domains: ['images.unsplash.com'], // allow optimizations of remote images
-    remotePatterns: [{ protocol: 'https' }],
+    domains: ["images.unsplash.com"], // allow optimizations of remote images
+    remotePatterns: [{ protocol: "https" }],
   },
-  output: 'server', // server side rendering
+  output: "server", // server side rendering
   adapter: cloudflare(), // server adapter
   integrations: [
     tailwind(),
     react(),
-    icon({ iconDir: 'src/assets/icons' }), // change the icons directory
+    icon({ iconDir: "src/assets/icons" }), // change the icons directory
   ],
 });
 ```
@@ -71,30 +71,30 @@ Global settings of the website are stored in `src/config/site.ts` file:
 
 ```ts
 export const SITE: SiteType = {
-  name: 'Medito Fundraising',
-  description: 'Support Medito Foundation by building a more mindful world',
-  keywords: 'meditation, fundraising, mindfull, medito, medito app',
-  icon: '/favicon.png',
+  name: "Medito Fundraising",
+  description: "Support Medito Foundation by building a more mindful world",
+  keywords: "meditation, fundraising, mindfull, medito, medito app",
+  icon: "/favicon.png",
   ogImage: {
-    src: '/og.jpg',
+    src: "/og.jpg",
     width: 1200,
     height: 628,
-    format: 'jpg',
+    format: "jpg",
   },
-  themeColor: '#ffffff',
-  author: 'Jérôme Abel',
-  twitterAcount: '@jeromeabeldev',
+  themeColor: "#ffffff",
+  author: "Jérôme Abel",
+  twitterAcount: "@jeromeabeldev",
   socials: {
-    twitter: 'https://twitter.com/meditohq',
-    facebook: 'https://www.facebook.com/meditohq',
-    instagram: 'https://www.instagram.com/meditohq',
-    linkedin: 'https://www.linkedin.com/in//company/meditofoundation',
+    twitter: "https://twitter.com/meditohq",
+    facebook: "https://www.facebook.com/meditohq",
+    instagram: "https://www.instagram.com/meditohq",
+    linkedin: "https://www.linkedin.com/in//company/meditofoundation",
   },
   nav: [
-    { label: 'Home', href: '/' },
-    { label: 'About', href: '/about' },
-    { label: 'Campaigns', href: '/campaign' },
-    { label: 'Blog', href: '/blog' },
+    { label: "Home", href: "/" },
+    { label: "About", href: "/about" },
+    { label: "Campaigns", href: "/campaign" },
+    { label: "Blog", href: "/blog" },
   ],
 };
 ```
@@ -174,7 +174,7 @@ Payment is made possible because of the Stripe Checkout Form integration. You ha
 ### Contact Form With Resend
 
 ```ts
-import type { APIRoute } from 'astro';
+import type { APIRoute } from "astro";
 
 export const POST: APIRoute = async ({ request }) => {
   const body = await request.json();
@@ -183,14 +183,14 @@ export const POST: APIRoute = async ({ request }) => {
   if (!to || !from || !html || !subject || !text) {
     return new Response(null, {
       status: 404,
-      statusText: 'Did not provide the right data',
+      statusText: "Did not provide the right data",
     });
   }
 
-  const res = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
       Authorization: `Bearer ${import.meta.env.RESEND_API_KEY}`,
     },
     body: JSON.stringify({ to, from, html, subject, text, reply_to }),
@@ -201,7 +201,7 @@ export const POST: APIRoute = async ({ request }) => {
   return new Response(JSON.stringify(data), {
     status: 200,
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   });
 };

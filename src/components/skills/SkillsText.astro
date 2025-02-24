@@ -1,16 +1,16 @@
 ---
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 const { title, id, image } = Astro.props;
 ---
 
-<div class="md:max-w-lg lg:max-w-xl reveal reveal-bottom ">
-    <h3
-      class="text-lg lg:text-2xl uppercase font-semibold tracking-wide sm:tracking-[0.2em] lg:tracking-[0.3rem] leading-none"
-    >
-      <span class="text-stone-500 text-xl ">{id}.&nbsp;</span>{title}
-    </h3>
-    <p class="my-3 text-xl lg:text-2xl leading-normal">
-      <slot />
-    </p>
-    <Image class="block md:hidden" src={image} alt={`${title} Skills`} />
+<div class="reveal reveal-bottom md:max-w-lg lg:max-w-xl">
+  <h3
+    class="text-lg leading-none font-semibold tracking-wide uppercase sm:tracking-[0.2em] lg:text-2xl lg:tracking-[0.3rem]"
+  >
+    <span class="text-xl text-stone-500">{id}.&nbsp;</span>{title}
+  </h3>
+  <p class="my-3 text-xl leading-normal lg:text-2xl">
+    <slot />
+  </p>
+  <Image class="block md:hidden" src={image} alt={`${title} Skills`} />
 </div>
