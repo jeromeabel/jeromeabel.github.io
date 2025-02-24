@@ -24,7 +24,7 @@ const {
 } = Astro.props;
 
 const title = `${page} - Jérôme Abel`;
-const canonicalWebsiteURL = new URL("http://localhost"); //Astro.url.pathname, Astro.site
+const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site);
 const socialImageURL = new URL(image.src, Astro.url);
 
 const publishedDateString = publishedDate.toISOString().slice(0, 10);

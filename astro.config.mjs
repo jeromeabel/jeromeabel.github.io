@@ -8,7 +8,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
-  //site: 'https://dev.jeromeabel.net',
+  site: "https://dev.jeromeabel.net",
 
   // Used for the Netlify Image Service
   adapter: netlify(),
