@@ -32,6 +32,7 @@
   --breakpoint-lg: 80rem;
 }
 
+@custom-variant dark (&:where(.dark, .dark *));
 @font-face {
   font-family: "Bubbler One";
   src:

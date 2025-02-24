@@ -23,7 +23,7 @@ const { page, description, publishedDate, image } = Astro.props;
 
 <html
   lang="en"
-  class="overflow-x-hidden bg-[#f5ffe1] break-words motion-safe:scroll-smooth"
+  class="overflow-x-hidden bg-[#f5ffe1] break-words motion-safe:scroll-smooth dark:bg-black dark:text-white"
 >
   <head>
     <link
@@ -34,6 +34,9 @@ const { page, description, publishedDate, image } = Astro.props;
       crossorigin
     />
     <SiteHead {page} {description} {publishedDate} {image} />
+
+    <script src="../scripts/theme.ts"></script>
+
     <script
       is:inline
       type="text/partytown"
