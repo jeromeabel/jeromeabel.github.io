@@ -1,22 +1,24 @@
 ---
-import PrimaryLink from "@components/links/PrimaryLink.astro";
-import IconLink from "@components/links/IconLink.astro";
+import Link from "@components/links/Link.astro";
 ---
 
 <div class="mt-6 flex items-center gap-4 lg:mt-10 lg:gap-6">
-  <PrimaryLink
+  <Link
     label="Contact me"
     href="mailto:dev@jeromeabel.net"
     icon="arrow-right"
+    variant="cta"
   />
-  <IconLink
+  <Link
     label="Github"
     href="https://github.com/jeromeabel"
-    icon="mdi:github-face"
+    icon="mdi:github"
+    variant="icon"
   />
-  <IconLink
+  <Link
     label="LinkedIn"
     href="https://www.linkedin.com/in/jerome-abel/"
     icon="linkedin"
+    variant="icon"
   />
 </div>

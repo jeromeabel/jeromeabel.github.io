@@ -1,5 +1,5 @@
 ---
-import ArrowLink from "@components/links/ArrowLink.astro";
+import Link from "@components/links/Link.astro";
 const { data } = Astro.props;
 
 const year = new Date(data.date).getFullYear();
@@ -35,9 +35,13 @@ const dateISOString = new Date(data.date).toISOString().slice(0, 10);
   </table>
 
   <div class="mt-4 flex flex-wrap gap-4">
-    {data.website && <ArrowLink href={data.website} label="Website" />}
-    {data.live && <ArrowLink href={data.live} label="Live" />}
-    {data.git && <ArrowLink href={data.git} label="Code" />}
-    {data.video && <ArrowLink href={data.video} label="Video" />}
+    {
+      data.website && (
+        <Link href={data.website} label="Website" variant="textIcon" />
+      )
+    }
+    {data.live && <Link href={data.live} label="Live" variant="textIcon" />}
+    {data.git && <Link href={data.git} label="Code" variant="textIcon" />}
+    {data.video && <Link href={data.video} label="Video" variant="textIcon" />}
   </div>
 </header>

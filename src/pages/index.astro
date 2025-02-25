@@ -1,10 +1,10 @@
 ---
+import Contact from "@components/contact/Contact.astro";
 import Hero from "@components/hero/Hero.astro";
+import Link from "@components/links/Link.astro";
+import Skills from "@components/skills/Skills.astro";
 import WorksPreview from "@components/work/WorksPreview.astro";
 import Layout from "@layouts/Layout.astro";
-import SecondaryLink from "@components/links/SecondaryLink.astro";
-import Contact from "@components/contact/Contact.astro";
-import Skills from "@components/skills/Skills.astro";
 ---
 
 <Layout>
@@ -17,16 +17,16 @@ import Skills from "@components/skills/Skills.astro";
       works={["kungfu-school", "medito-fundraising"]}
       title="I build"
       subtitle="Websites"
-      class="text-green-700"
+      class="text-green-700 dark:text-green-400"
     />
     <WorksPreview
       works={["la-forme", "logariat"]}
       title="I make"
       subtitle="Real-time applications"
-      class="text-blue-600"
+      class="text-blue-600 dark:text-blue-400"
     />
     <div class="flex justify-center">
-      <SecondaryLink label="See All Works" href="/work" />
+      <Link label="See All Works" href="/work" variant="secondary" />
     </div>
   </main>
   <Contact />

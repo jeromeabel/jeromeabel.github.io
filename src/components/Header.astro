@@ -1,14 +1,14 @@
 ---
-import NavLink from "@components/links/NavLink.astro";
+import Link from "@components/links/Link.astro";
 import ThemeToggle from "./ThemeToggle.astro";
 ---
 
 <header class="py-4 lg:py-6">
   <nav class="container">
     <ul class="flex items-center justify-start gap-6 lg:justify-end lg:gap-10">
-      <li><NavLink label="Home" href="/" /></li>
-      <li><NavLink label="Work" href="/work" /></li>
-      <li><NavLink label="About" href="/about" /></li>
+      <li><Link label="Home" href="/" /></li>
+      <li><Link label="Work" href="/work" /></li>
+      <li><Link label="About" href="/about" /></li>
       <li class="flex items-center"><ThemeToggle /></li>
     </ul>
   </nav>

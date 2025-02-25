@@ -1,6 +1,6 @@
 ---
 import FeatureCard from "@components/FeatureCard.astro";
-import PrimaryLinkSimple from "@components/links/PrimaryLinkSimple.astro";
+import Link from "@components/links/Link.astro";
 import Layout from "@layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
 ---
@@ -29,6 +29,7 @@ import { Icon } from "astro-icon/components";
         Dublin, Paris and more. It was a lot of fun with nice people! If this
         side interests you, consider visiting my artistic projects on <a
           href="https://jeromeabel.net"
+          class="link"
           target="_blank"
           title="jeromeabel.net"
           rel="nofollow noopener noreferrer">jeromeabel.net</a
@@ -54,10 +55,12 @@ import { Icon } from "astro-icon/components";
           class="animate-rotate inline-block h-10"
         />
       </p>
-      <PrimaryLinkSimple
+      <Link
         label="Download CV"
         href="/CV_JeromeAbel_en.pdf"
         icon="carbon:download"
+        variant="textIcon"
+        class="bg-black text-white hover:bg-white hover:text-black"
       />
     </header>
 
@@ -79,10 +82,10 @@ import { Icon } from "astro-icon/components";
 </Layout>
 
 <style>
-  a {
+  a.link {
     border-bottom: 1px dashed var(--color-black);
   }
-  a:hover {
+  a.link:hover {
     border-bottom: 1px solid var(--color-black);
   }
   @keyframes animRotation {

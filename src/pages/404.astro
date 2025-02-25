@@ -1,6 +1,6 @@
 ---
 import img404 from "@assets/images/404.svg";
-import SecondaryLink from "@components/links/SecondaryLink.astro";
+import Link from "@components/links/Link.astro";
 import Layout from "@layouts/Layout.astro";
 import { Image } from "astro:assets";
 ---
@@ -10,7 +10,7 @@ import { Image } from "astro:assets";
     <div class="flex flex-col items-center justify-center gap-8 sm:gap-12">
       <Image src={img404} alt="Error 404 illustration" />
       <h1 class="text-xl sm:text-2xl">Page Not Found</h1>
-      <SecondaryLink label="Return to home" href="/" />
+      <Link label="Return to home" href="/" variant="secondary" />
     </div>
   </main>
 </Layout>

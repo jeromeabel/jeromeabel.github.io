@@ -1,0 +1,159 @@
+---
+import { Icon } from "astro-icon/components";
+import type { HTMLAttributes } from "astro/types";
+
+export type LinkVariant = "menu" | "cta" | "secondary" | "icon" | "textIcon";
+
+export interface Props extends HTMLAttributes<"a"> {
+  label: string;
+  icon?: string;
+  variant?: LinkVariant;
+  external?: boolean;
+}
+
+const {
+  label,
+  icon,
+  variant = "menu",
+  external = false,
+  href,
+  class: className,
+  ...props
+} = Astro.props;
+
+// For menu links, determine if active
+const currentPath = `/${Astro.url.pathname.split("/")[1].trim()}`;
+const isActive =
+  variant === "menu" &&
+  (href === currentPath || href === currentPath.replace(/\/$/, ""));
+
+// Set external link attributes if needed
+const externalAttrs = external
+  ? { target: "_blank", rel: "nofollow noopener noreferrer" }
+  : {};
+
+// Default aria and title attributes
+const ariaLabel =
+  props["aria-label"] || (variant === "menu" ? `${label} page` : label);
+const titleAttr = props.title || (variant === "menu" ? `${label} page` : label);
+---
+
+<a
+  class:list={[
+    // Lien de menu (NavLink)
+    {
+      "border-b text-xl hover:text-black dark:hover:text-white":
+        variant === "menu",
+    },
+    {
+      "text-muted border-transparent dark:text-stone-400":
+        variant === "menu" && !isActive,
+    },
+    {
+      "border-black text-black dark:border-white dark:text-white":
+        variant === "menu" && isActive,
+    },
+
+    // CTA (PrimaryLink)
+    {
+      "hover-fx flex h-10 min-w-fit items-center gap-2 rounded-full bg-black px-4 text-base text-white sm:gap-4 lg:h-14 lg:gap-6 lg:px-6 lg:text-lg dark:bg-white dark:text-black":
+        variant === "cta",
+    },
+
+    // Secondary (SecondaryLink)
+    {
+      "flex h-14 max-w-fit items-center gap-4 rounded-full border border-dashed border-black bg-transparent px-6 text-lg text-black transition-all hover:bg-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-black":
+        variant === "secondary",
+    },
+
+    // Icon (IconLink)
+    {
+      "grid h-10 w-10 place-items-center rounded-full border border-dashed border-black transition hover:bg-white lg:h-14 lg:w-14 dark:border-white dark:hover:bg-white dark:hover:text-black":
+        variant === "icon",
+    },
+
+    // Text + Icon (ArrowLink)
+    {
+      "dark:hover:white flex max-w-fit justify-between rounded-full border border-dashed border-black px-4 py-2 text-base transition-all hover:bg-white dark:border-white dark:hover:text-black":
+        variant === "textIcon",
+    },
+
+    // Classe personnalisée
+    className,
+  ]}
+  href={href}
+  aria-label={ariaLabel}
+  title={titleAttr}
+  {...externalAttrs}
+  {...props}
+>
+  {/* Contenu basé sur le variant */}
+  {variant !== "icon" && label}
+
+  {/* Icône pour CTA */}
+  {
+    icon && variant === "cta" && (
+      <Icon name={icon} class="w-8 fill-none stroke-current lg:w-12" />
+    )
+  }
+
+  {/* Icône pour secondary */}
+  {
+    icon && variant === "secondary" && (
+      <Icon name={icon} class="h-6 fill-none stroke-current" />
+    )
+  }
+
+  {/* Icon-only */}
+  {
+    icon && variant === "icon" && (
+      <Icon name={icon} class="text-xl lg:text-3xl" />
+    )
+  }
+
+  {/* Text + Icon */}
+  {
+    variant === "textIcon" && (
+      <Icon name={icon || "mdi:arrow-top-right"} class="ml-1 h-6" />
+    )
+  }
+</a>
+
+<style>
+  .hover-fx {
+    background-image: linear-gradient(var(--color-white), var(--color-white));
+    background-size: 0 100%;
+    background-repeat: no-repeat;
+    transition: 0.4s;
+  }
+
+  .hover-fx:hover {
+    background-size: 100% 100%;
+    color: var(--color-black);
+  }
+
+  :global(.dark) .hover-fx {
+    background-image: linear-gradient(#111, #111);
+  }
+
+  :global(.dark) .hover-fx:hover {
+    color: var(--color-white, #fff);
+  }
+
+  /* @media (prefers-color-scheme: dark) {
+    .hover-fx {
+      background-image: linear-gradient(#444, #444);
+    }
+
+    .hover-fx:hover {
+      color: var(--color-white, #fff);
+    }
+  } */
+
+  /* Respecter les préférences des utilisateurs pour réduire les animations */
+  @media (prefers-reduced-motion: reduce) {
+    .hover-fx {
+      transition: none;
+    }
+  }
+</style>
