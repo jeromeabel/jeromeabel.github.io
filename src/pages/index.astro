@@ -2,32 +2,43 @@
 import Contact from "@components/contact/Contact.astro";
 import Hero from "@components/hero/Hero.astro";
 import Link from "@components/links/Link.astro";
-import Skills from "@components/skills/Skills.astro";
 import WorksPreview from "@components/work/WorksPreview.astro";
 import Layout from "@layouts/Layout.astro";
+// "mt-0 flex flex-col gap-16 pt-8 pb-16 sm:pt-12 lg:mt-16 lg:gap-32 lg:pt-16
 ---
 
 <Layout>
-  <Hero />
-  <main
-    class="mt-0 flex flex-col gap-16 pt-8 pb-16 sm:pt-12 lg:mt-16 lg:gap-32 lg:pt-16"
-  >
-    <Skills />
-    <WorksPreview
-      works={["kungfu-school", "medito-fundraising"]}
-      title="I build"
-      subtitle="Websites"
-      class="text-green-700 dark:text-green-400"
-    />
-    <WorksPreview
-      works={["la-forme", "logariat"]}
-      title="I make"
-      subtitle="Real-time applications"
-      class="text-blue-600 dark:text-blue-400"
-    />
-    <div class="flex justify-center">
-      <Link label="See All Works" href="/work" variant="secondary" />
+  <div>
+    <Hero />
+    <main class="flex flex-col gap-16 lg:gap-32">
+      <WorksPreview
+        works={["fablab", "malinette"]}
+        title="I share"
+        subtitle="Knowledge"
+        class="text-secondary-dark dark:text-secondary"
+      />
+      <WorksPreview
+        works={["kungfu-school", "medito-fundraising"]}
+        title="I build"
+        subtitle="Websites"
+        class="text-green-700 dark:text-green-400"
+      />
+      <WorksPreview
+        works={["la-forme", "logariat"]}
+        title="I make"
+        subtitle="Real-time applications"
+        class="text-blue-600 dark:text-blue-400"
+      />
+    </main>
+    <div class="flex justify-center py-16">
+      <Link
+        label="See All Works"
+        href="/work"
+        variant="textIcon"
+        icon="mdi:arrow-right"
+      />
     </div>
-  </main>
-  <Contact />
+
+    <Contact />
+  </div>
 </Layout>

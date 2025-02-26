@@ -4,7 +4,7 @@ import Link from "@components/links/Link.astro";
 import { Image } from "astro:assets";
 ---
 
-<div class="flex flex-col gap-8 text-black">
+<div class="flex flex-col gap-8">
   <h2
     class="text-xl leading-none font-semibold tracking-[0.2em] uppercase lg:text-3xl lg:tracking-[0.4rem]"
   >
@@ -12,7 +12,7 @@ import { Image } from "astro:assets";
   </h2>
 
   <div class="flex flex-col">
-    <h3 class="text-muted">Email me at</h3>
+    <h3 class="text-muted dark:text-muted-dark">Email me at</h3>
     <p>
       <a class="font-semibold" href="mailto:dev@jeromeabel.net" title="Email">
         dev@jeromeabel.net
@@ -21,7 +21,7 @@ import { Image } from "astro:assets";
   </div>
 
   <div class="flex flex-col gap-2">
-    <h3 class="text-muted">Follow</h3>
+    <h3 class="text-muted dark:text-muted-dark">Follow</h3>
     <div class="flex gap-3">
       <Link
         label="GitHub"
@@ -36,9 +36,10 @@ import { Image } from "astro:assets";
           href="https://www.linkedin.com/in/jerome-abel/"
           icon="linkedin"
           variant="icon"
+          class="animate-[bounce_2.5s_ease-in_infinite]"
         />
         <div
-          class="absolute -top-9 -right-[130px] z-20 w-36 sm:-top-[56px] sm:-right-[278px] sm:w-72"
+          class="absolute -top-9 -right-[130px] z-20 w-36 sm:-top-[56px] sm:-right-[278px] sm:w-72 dark:invert"
         >
           <Image
             src={curveImg}

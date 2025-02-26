@@ -19,17 +19,17 @@ if (!work) {
 <a
   href={"/work/" + work?.id}
   title={`Open the "${work?.data.title}" project`}
-  class="relative shadow-lg outline-offset-4 outline-black focus:outline-2"
+  class="relative shadow-lg outline-offset-4 outline-black focus:outline-2 dark:shadow-none dark:outline-white"
 >
-  <article class="group aspect-square overflow-hidden bg-white">
+  <article class="group aspect-square overflow-hidden">
     <Image
       src={work.data.img_preview}
       alt={`${work.data.title} preview`}
-      class="scale-100 transition-transform duration-1000 motion-safe:group-hover:scale-110"
+      class="h-full transition-transform duration-1000 motion-safe:group-hover:scale-110"
       loading="lazy"
     />
     <div
-      class="group-bg-black absolute inset-0 grid items-center bg-black/0 duration-500 group-hover:bg-black/90 motion-reduce:transition-all"
+      class="group-bg-black absolute inset-0 grid items-center duration-500 group-hover:bg-black/90 motion-reduce:transition-all"
     >
       <div
         class="flex flex-col items-center justify-center gap-6 p-4 text-white opacity-0 duration-500 group-hover:opacity-100"

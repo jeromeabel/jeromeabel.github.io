@@ -29,12 +29,17 @@
   --color-white: #fafafa;
   --color-primary: #f5ffe1;
   --color-muted: #444;
+  --color-muted-dark: #9b9b9b;
+
+  --color-secondary: #8e6cd2;
+  --color-secondary-dark: #5821c7;
 
   --breakpoint-md: 60rem;
   --breakpoint-lg: 80rem;
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
+
 @font-face {
   font-family: "Bubbler One";
   src:

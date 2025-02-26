@@ -42,15 +42,14 @@ const titleAttr = props.title || (variant === "menu" ? `${label} page` : label);
   class:list={[
     // Lien de menu (NavLink)
     {
-      "border-b text-xl hover:text-black dark:hover:text-white":
+      "border-t border-b border-transparent text-xl hover:text-black dark:hover:text-white":
         variant === "menu",
     },
     {
-      "text-muted border-transparent dark:text-stone-400":
-        variant === "menu" && !isActive,
+      "text-muted dark:text-muted-dark": variant === "menu" && !isActive,
     },
     {
-      "border-black text-black dark:border-white dark:text-white":
+      "border-b-black text-black dark:border-b-white dark:text-white":
         variant === "menu" && isActive,
     },
 

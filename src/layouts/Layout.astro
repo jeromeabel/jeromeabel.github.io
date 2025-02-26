@@ -10,6 +10,7 @@ import "@fontsource/ibm-plex-sans/400.css";
 import "@fontsource/ibm-plex-sans/600.css";
 
 import type { ImageMetadata } from "astro";
+import Hero from "@components/hero/Hero.astro";
 
 export interface Props {
   page?: string | undefined;
@@ -52,7 +53,7 @@ const { page, description, publishedDate, image } = Astro.props;
       });
     </script>
   </head>
-  <body class="min-h-screen">
+  <body class="grid min-h-screen auto-rows-[auto_1fr_auto]">
     <Header />
     <slot />
     <Footer />

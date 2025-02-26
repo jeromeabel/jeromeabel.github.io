@@ -5,5 +5,9 @@ import { Image } from "astro:assets";
 ---
 
 <div class="relative hidden flex-1 sm:block">
-  <Image class="absolute -top-40 -right-16 z-10" src={footerImg} alt="" />
+  <Image
+    class="absolute -top-40 -right-16 z-10 dark:invert"
+    src={footerImg}
+    alt=""
+  />
 </div>
