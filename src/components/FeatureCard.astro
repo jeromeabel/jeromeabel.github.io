@@ -8,24 +8,28 @@ const { id } = Astro.props;
 
 const entry = await getEntry("feature", id);
 if (!entry) {
-  // Handle Error, for example:
   throw new Error("Could not find entry");
 }
 const { Content } = await render(entry);
+
+// dark:border-muted aspect-auto h-fit max-w-fit bg-gradient-to-r from-white from-0% p-8 sm:aspect-[2/1] md:from-30% lg:p-12 lg:pb-8 dark:border dark:bg-non
+//bg-gradient-to-r from-gray-900
 ---
 
-<article>
-  <div
-    class="dark:border-muted aspect-auto max-w-fit bg-gradient-to-r from-white from-0% p-8 text-pretty sm:aspect-[2/1] md:from-30% lg:p-12 lg:pb-8 dark:border dark:bg-none"
-  >
-    <Image
-      class="flex-1 dark:invert"
-      src={entry?.data.img}
-      alt={`Illustration ${entry?.data.title}`}
-    />
-    <h2 class="font-title mt-4 text-3xl tracking-wide uppercase lg:mt-6">
+<article
+  class="border-muted/50 flex flex-row gap-16 border p-16 lg:flex-col lg:p-8 2xl:p-16"
+>
+  <Image
+    class="dark:invert"
+    src={entry?.data.img}
+    alt={`Illustration ${entry?.data.title}`}
+  />
+  <div>
+    <h2 class="font-title text-3xl tracking-wide uppercase">
       {entry?.data.title}
     </h2>
+    <div class="prose-lg sm:prose-xl text-pretty">
+      <Content />
+    </div>
   </div>
-  <div class="prose-lg sm:prose-xl mt-8 md:mt-10"><Content /></div>
 </article>
