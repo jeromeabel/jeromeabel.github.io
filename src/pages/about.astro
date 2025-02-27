@@ -10,7 +10,7 @@ import { Icon } from "astro-icon/components";
     class="relative container flex flex-col gap-24 py-8 text-lg sm:text-xl lg:py-24"
   >
     <div
-      class="absolute -top-[50px] -left-1/4 -z-10 aspect-square w-screen bg-[radial-gradient(ellipse_at_50%_50%,_#ff8a0460_0%,#f5ffe1_70%)] sm:w-[700px]"
+      class="absolute -top-[50px] -left-1/4 -z-10 aspect-square w-screen bg-[radial-gradient(ellipse_at_50%_50%,_#ff8a0460_0%,#f5ffe1_70%)] sm:w-[700px] dark:bg-[radial-gradient(ellipse_at_50%_50%,_#ff8a0430_0%,_#1e1e1e_70%)]"
     >
     </div>
     <header class="flex w-full flex-col gap-6 sm:gap-8 lg:w-2/3">
@@ -29,7 +29,7 @@ import { Icon } from "astro-icon/components";
         Dublin, Paris and more. It was a lot of fun with nice people! If this
         side interests you, consider visiting my artistic projects on <a
           href="https://jeromeabel.net"
-          class="link"
+          class="border-b border-dashed border-black no-underline hover:border-solid dark:border-white"
           target="_blank"
           title="jeromeabel.net"
           rel="nofollow noopener noreferrer">jeromeabel.net</a
@@ -81,7 +81,7 @@ import { Icon } from "astro-icon/components";
   </main>
 </Layout>
 
-<style>
+<style scoped>
   a.link {
     border-bottom: 1px dashed var(--color-black);
   }

@@ -13,6 +13,8 @@
   "dependencies": {
     "@astrojs/netlify": "^6.2.0",
     "@astrojs/partytown": "^2.1.3",
+    "@fontsource/fira-code": "^5.1.1",
+    "@fontsource/ibm-plex-mono": "^5.1.1",
     "@fontsource/ibm-plex-sans": "^5.1.1",
     "@iconify-json/carbon": "^1.2.7",
     "@iconify-json/fa-brands": "^1.2.1",

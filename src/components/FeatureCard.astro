@@ -16,9 +16,13 @@ const { Content } = await render(entry);
 
 <article>
   <div
-    class="aspect-auto bg-gradient-to-r from-white from-0% p-8 sm:aspect-[2/1] md:aspect-auto md:from-30% lg:p-12 lg:pb-8"
+    class="dark:border-muted aspect-auto max-w-fit bg-gradient-to-r from-white from-0% p-8 text-pretty sm:aspect-[2/1] md:from-30% lg:p-12 lg:pb-8 dark:border dark:bg-none"
   >
-    <Image src={entry?.data.img} alt={`Illustration ${entry?.data.title}`} />
+    <Image
+      class="flex-1 dark:invert"
+      src={entry?.data.img}
+      alt={`Illustration ${entry?.data.title}`}
+    />
     <h2 class="font-title mt-4 text-3xl tracking-wide uppercase lg:mt-6">
       {entry?.data.title}
     </h2>

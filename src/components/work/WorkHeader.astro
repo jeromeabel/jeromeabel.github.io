@@ -17,20 +17,18 @@ const dateISOString = new Date(data.date).toISOString().slice(0, 10);
   </p>
 
   <table
-    class="prose lg:prose-td:py-4 mt-2 min-w-full border-b border-black font-light sm:mt-6"
+    class="prose lg:prose-td:py-4 prose-td:border-b dark:prose-invert mt-2 min-w-full font-light sm:mt-6"
   >
-    <tbody class="prose-tr:border-gray-600">
+    <tbody>
       <tr><td class="w-16 font-semibold">TYPE</td><td>{data.type}</td></tr>
+      <tr>
+        <td class="font-semibold">DATE</td>
+        <td><time datetime={dateISOString}>{year}</time></td>
+      </tr>
       <tr
-        ><td class="font-semibold">DATE</td><td
-          ><time datetime={dateISOString}>{year}</time></td
-        ></tr
-      >
-      <tr
-        ><td class="font-semibold">STACK</td><td class="capitalize"
-          >{data?.stack.join(", ")}</td
-        ></tr
-      >
+        ><td class="font-semibold">STACK</td>
+        <td class="capitalize">{data?.stack.join(", ")}</td>
+      </tr>
     </tbody>
   </table>
 

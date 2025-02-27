@@ -24,9 +24,10 @@
     "Segoe UI Symbol", "Noto Color Emoji";
   --font-title:
     "Bubbler One", Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: "Fira Code", monospace;
 
   --color-black: #1e1e1e;
-  --color-white: #fafafa;
+  --color-white: #ececec;
   --color-primary: #f5ffe1;
   --color-muted: #444;
   --color-muted-dark: #9b9b9b;

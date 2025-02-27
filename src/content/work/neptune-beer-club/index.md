@@ -41,13 +41,13 @@ I tried to implement these features:
 - camel-case
 - features & colocation
 
-```
+```ansi
 └── src/
-	├── assets/
+    ├── assets/
     ├── features/
     │   ├── bars/
     │   │   ├── index.js (public API)
-	│   │   ├── api/index.ts
+    │   │   ├── api/index.ts
     │   │   ├── bar-map/
     │   │   ├── bar-form/
     │   │   └── bar-list/
@@ -62,7 +62,7 @@ I tried to implement these features:
     │   │   ├── login/
     │   │   ├── signup/
     │   │   └── use-auth.js
-	│	├── ui/ (common, shared components)
+    │   ├── ui/ (common, shared components)
     │   ├── index.js
     │   ├── components/
     │   ├── containers/ : header, footer, navbar, ...
@@ -151,7 +151,7 @@ export const Home = () => {
 - Using the map in React
 - Overcome the difficulties of using the GeoJson format
 
-## Future Plans
+## Future Plans For Fun
 
 The goal is to develop the "Neptune Beer Club" application, giving a **charismatic and legendary identity** to bars in Brest.
 

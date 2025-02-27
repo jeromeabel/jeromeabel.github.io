@@ -73,7 +73,7 @@ const titleAttr = props.title || (variant === "menu" ? `${label} page` : label);
 
     // Text + Icon (ArrowLink)
     {
-      "dark:hover:white flex max-w-fit justify-between rounded-full border border-dashed border-black px-4 py-2 text-base transition-all hover:bg-white dark:border-white dark:hover:text-black":
+      "flex w-fit rounded-full border border-dashed border-black px-4 py-2 transition-all hover:bg-[#fff] dark:border-white dark:hover:text-black":
         variant === "textIcon",
     },
 
@@ -139,17 +139,6 @@ const titleAttr = props.title || (variant === "menu" ? `${label} page` : label);
     color: var(--color-white, #fff);
   }
 
-  /* @media (prefers-color-scheme: dark) {
-    .hover-fx {
-      background-image: linear-gradient(#444, #444);
-    }
-
-    .hover-fx:hover {
-      color: var(--color-white, #fff);
-    }
-  } */
-
-  /* Respecter les préférences des utilisateurs pour réduire les animations */
   @media (prefers-reduced-motion: reduce) {
     .hover-fx {
       transition: none;
