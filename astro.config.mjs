@@ -13,6 +13,10 @@ export default defineConfig({
   // Used for the Netlify Image Service
   adapter: netlify(),
 
+  experimental: {
+    svg: true,
+  },
+
   integrations: [
     partytown({
       config: {
