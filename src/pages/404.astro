@@ -8,22 +8,9 @@ import { Image } from "astro:assets";
 <Layout page="Error 404" description="Error, page not found">
   <main class="grid items-center p-8">
     <div class="flex flex-col items-center justify-center gap-8 sm:gap-12">
-      <Image src={img404} alt="Error 404 illustration" />
+      <Image src={img404} alt="Error 404 illustration" class="dark:invert" />
       <h1 class="text-xl sm:text-2xl">Page Not Found</h1>
       <Link label="Return to home" href="/" variant="secondary" />
     </div>
   </main>
 </Layout>
-
-<style>
-  body {
-    display: flex;
-    flex-direction: column;
-  }
-  body main {
-    flex: 1 0 auto;
-  }
-  body footer {
-    shrink: 0;
-  }
-</style>
