@@ -18,6 +18,8 @@
   }
 }
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-sans:
     "IBM Plex Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
@@ -26,20 +28,31 @@
     "Bubbler One", Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono: "Fira Code", monospace;
 
-  --color-black: #1e1e1e;
-  --color-white: #ececec;
+  --color-background: #f5ffe1;
+  /* --color-background: #1e1e1e; */
+  --color-foreground: #1e1e1e;
   --color-primary: #f5ffe1;
-  --color-muted: #444;
-  --color-muted-dark: #9b9b9b;
+  --color-muted: #4b4b4b;
 
   --color-secondary: #8e6cd2;
   --color-secondary-dark: #5821c7;
-
-  --breakpoint-md: 60rem;
-  --breakpoint-lg: 80rem;
+  --accent: 0 0% 96.1%;
+  --accent-foreground: 0 0% 9%;
+  /* --breakpoint-md: 60rem;
+  --breakpoint-lg: 80rem; */
 }
 
-@custom-variant dark (&:where(.dark, .dark *));
+
+@variant dark {
+  --color-background: #1e1e1e;
+  --color-foreground: #ececec;
+  /* --color-muted: #9b9b9b; */
+  --color-muted: #9b9b9b;
+
+  --accent: 0 0% 14.9%;
+  --accent-foreground: 0 0% 98%;
+
+}
 
 @font-face {
   font-family: "Bubbler One";

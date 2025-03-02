@@ -42,20 +42,19 @@ const titleAttr = props.title || (variant === "menu" ? `${label} page` : label);
   class:list={[
     // Lien de menu (NavLink)
     {
-      "border-t border-b border-transparent text-xl hover:text-black dark:hover:text-white":
+      "hover:text-foreground border-t border-b border-transparent text-xl":
         variant === "menu",
     },
     {
-      "text-muted dark:text-muted-dark": variant === "menu" && !isActive,
+      "text-muted": variant === "menu" && !isActive,
     },
     {
-      "border-b-black text-black dark:border-b-white dark:text-white":
-        variant === "menu" && isActive,
+      "border-b-foreground text-foreground": variant === "menu" && isActive,
     },
 
     // CTA (PrimaryLink)
     {
-      "hover-fx border-muted flex h-10 min-w-fit items-center gap-2 rounded-full border-2 bg-black px-4 text-base text-white sm:gap-4 lg:h-14 lg:gap-6 lg:px-6 lg:text-lg dark:bg-white dark:text-black":
+      "hover-fx border-muted text-background bg-foreground flex h-10 min-w-fit items-center gap-2 rounded-full border-2 px-4 text-base sm:gap-4 lg:h-14 lg:gap-6 lg:px-6 lg:text-lg":
         variant === "cta",
     },
 
@@ -120,7 +119,10 @@ const titleAttr = props.title || (variant === "menu" ? `${label} page` : label);
 
 <style>
   .hover-fx {
-    background-image: linear-gradient(var(--color-white), var(--color-white));
+    background-image: linear-gradient(
+      var(--color-background),
+      var(--color-background)
+    );
     background-size: 0 100%;
     background-repeat: no-repeat;
     transition: 0.4s;
@@ -128,15 +130,18 @@ const titleAttr = props.title || (variant === "menu" ? `${label} page` : label);
 
   .hover-fx:hover {
     background-size: 100% 100%;
-    color: var(--color-black);
+    color: var(--color-foreground);
   }
 
   :global(.dark) .hover-fx {
-    background-image: linear-gradient(#111, #111);
+    background-image: linear-gradient(
+      var(--color-background),
+      var(--color-background)
+    );
   }
 
   :global(.dark) .hover-fx:hover {
-    color: var(--color-white, #fff);
+    color: var(--color-foreground, --color-foreground);
   }
 
   @media (prefers-reduced-motion: reduce) {
