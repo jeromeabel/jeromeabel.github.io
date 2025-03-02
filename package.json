@@ -11,21 +11,21 @@
     "format:write": "prettier --write ."
   },
   "dependencies": {
-    "@astrojs/netlify": "^6.2.0",
+    "@astrojs/netlify": "^6.2.2",
     "@astrojs/partytown": "^2.1.3",
-    "@fontsource/fira-code": "^5.1.1",
-    "@fontsource/ibm-plex-mono": "^5.1.1",
-    "@fontsource/ibm-plex-sans": "^5.1.1",
-    "@iconify-json/carbon": "^1.2.7",
+    "@fontsource/fira-code": "^5.2.5",
+    "@fontsource/ibm-plex-mono": "^5.2.5",
+    "@fontsource/ibm-plex-sans": "^5.2.5",
+    "@iconify-json/carbon": "^1.2.8",
     "@iconify-json/fa-brands": "^1.2.1",
-    "@iconify-json/fluent": "^1.2.14",
+    "@iconify-json/fluent": "^1.2.15",
     "@iconify-json/mdi": "^1.2.3",
     "@iconify-json/ph": "^1.2.2",
-    "@tailwindcss/vite": "^4.0.8",
-    "astro": "^5.3.0",
+    "@tailwindcss/vite": "^4.0.9",
+    "astro": "^5.4.1",
     "astro-icon": "^1.1.5",
     "sharp": "^0.33.5",
-    "tailwindcss": "^4.0.8"
+    "tailwindcss": "^4.0.9"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.16",
