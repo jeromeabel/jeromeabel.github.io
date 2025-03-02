@@ -2,13 +2,14 @@
 import { Icon } from "astro-icon/components";
 import type { HTMLAttributes } from "astro/types";
 
-export type LinkVariant = "menu" | "cta" | "secondary" | "icon" | "textIcon";
-
+type LinkVariant = "menu" | "cta" | "secondary" | "icon" | "textIcon";
+type LinkSize = "sm" | "md" | "lg";
 export interface Props extends HTMLAttributes<"a"> {
   label: string;
   icon?: string;
   variant?: LinkVariant;
   external?: boolean;
+  size?: LinkSize;
 }
 
 const {
@@ -54,25 +55,25 @@ const titleAttr = props.title || (variant === "menu" ? `${label} page` : label);
 
     // CTA (PrimaryLink)
     {
-      "hover-fx border-muted text-background bg-foreground flex h-10 min-w-fit items-center gap-2 rounded-full border-2 px-4 text-base sm:gap-4 lg:h-14 lg:gap-6 lg:px-6 lg:text-lg":
+      "hover-fx border-foreground text-background bg-foreground flex h-10 min-w-fit items-center gap-2 rounded-full border px-4 text-base sm:gap-4 lg:h-14 lg:gap-6 lg:px-6 lg:text-lg":
         variant === "cta",
     },
 
     // Secondary (SecondaryLink)
     {
-      "flex h-14 max-w-fit items-center gap-4 rounded-full border border-dashed border-black bg-transparent px-6 text-lg text-black transition-all hover:bg-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-black":
+      "border-foreground text-foreground flex h-14 max-w-fit items-center gap-4 rounded-full border border-dashed px-6 text-lg transition-colors":
         variant === "secondary",
     },
 
     // Icon (IconLink)
     {
-      "grid h-10 w-10 place-items-center rounded-full border border-dashed border-black transition hover:bg-white lg:h-14 lg:w-14 dark:border-white dark:hover:bg-white dark:hover:text-black":
+      "text-foreground border-muted hover:border-foreground grid h-10 w-10 place-items-center rounded-full border border-dashed transition-colors hover:border-solid lg:h-14 lg:w-14":
         variant === "icon",
     },
 
     // Text + Icon (ArrowLink)
     {
-      "flex w-fit rounded-full border border-dashed border-black px-4 py-2 transition-all hover:bg-[#fff] dark:border-white dark:hover:text-black":
+      "text-foreground hover:bg-foreground hover:text-background flex w-fit rounded-full border border-dashed px-4 py-2 transition-all hover:border-solid":
         variant === "textIcon",
     },
 
@@ -132,18 +133,6 @@ const titleAttr = props.title || (variant === "menu" ? `${label} page` : label);
     background-size: 100% 100%;
     color: var(--color-foreground);
   }
-
-  :global(.dark) .hover-fx {
-    background-image: linear-gradient(
-      var(--color-background),
-      var(--color-background)
-    );
-  }
-
-  :global(.dark) .hover-fx:hover {
-    color: var(--color-foreground, --color-foreground);
-  }
-
   @media (prefers-reduced-motion: reduce) {
     .hover-fx {
       transition: none;
