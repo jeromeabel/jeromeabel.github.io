@@ -1,54 +1,28 @@
 ---
+import Link from "@components/Link2.astro";
+
 const today = new Date();
+
+const links = [
+  { label: "Art Portfolio", href: "https://jeromeabel.net" },
+  { label: "Framagit", href: "https://framagit.org/jeromeabel" },
+  { label: "GitHub", href: "https://github.com/jeromeabel" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/jerome-abel/" },
+  { label: "Email", href: "mailto:dev@jeromeabel.net" },
+];
 ---
 
-<footer
-  class="text-muted dark:text-muted-dark py-8 text-sm sm:py-16 lg:text-base"
->
+<footer class="text-muted py-8 sm:py-16 lg:text-base">
   <div class="container flex flex-col justify-between gap-8 sm:flex-row">
     <p>Jérôme Abel - {today.getFullYear()}</p>
-    <div class="flex flex-col gap-2 sm:flex-row sm:gap-6">
-      <a
-        href="mailto:dev@jeromeabel.net"
-        title="Email"
-        target="_blank"
-        rel="nofollow noopener noreferrer">Email</a
-      >
-      <a
-        href="https://www.linkedin.com/in/jerome-abel/"
-        title="LinkedIn"
-        target="_blank"
-        rel="nofollow noopener noreferrer">LinkedIn</a
-      >
-      <a
-        href="https://github.com/jeromeabel"
-        title="Github"
-        target="_blank"
-        rel="nofollow noopener noreferrer">Github</a
-      >
-      <a
-        href="https://framagit.org/jeromeabel"
-        title="Framagit"
-        target="_blank"
-        rel="nofollow noopener noreferrer">Framagit</a
-      >
-      <a
-        href="https://jeromeabel.net"
-        title="Art Portfolio jeromeabel.net"
-        target="_blank"
-        rel="nofollow noopener noreferrer">Art Portfolio</a
-      >
-    </div>
+    <ul class="flex flex-col gap-2 sm:flex-row sm:gap-6">
+      {
+        links.map((link) => (
+          <li>
+            <Link label={link.label} href={link.href} />
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </footer>
-
-<style>
-  a {
-    border-bottom: 1px dashed var(--color-black);
-    max-width: fit-content;
-  }
-
-  a:hover {
-    border-bottom: 1px solid var(--color-black);
-  }
-</style>

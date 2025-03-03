@@ -1,0 +1,140 @@
+---
+import { Icon } from "astro-icon/components";
+import type { HTMLAttributes } from "astro/types";
+import { cva, type VariantProps } from "class-variance-authority";
+
+type LinkVariant = VariantProps<typeof linkVariants>["variant"];
+type LinkSize = VariantProps<typeof linkVariants>["size"];
+type LinkPadding = VariantProps<typeof linkVariants>["padding"];
+
+const linkVariants = cva("transition-colors", {
+  variants: {
+    variant: {
+      "menu-active": "text-foreground font-semibold",
+      "menu-inactive": "text-muted hover:text-foreground",
+      default: "border-dashed border-current border-b hover:border-solid",
+      cta: "hover-fx rounded-full px-6 py-3 inline-flex items-center justify-center gap-6 bg-foreground text-background border border-muted",
+      icon: "text-foreground border-muted hover:border-foreground grid h-10 w-10 place-items-center rounded-full border border-dashed transition-colors hover:border-solid lg:h-14 lg:w-14",
+    },
+    size: {
+      sm: "text-sm",
+      md: "text-base",
+      lg: "text-lg",
+      xl: "text-xl",
+    },
+    padding: {
+      sm: "px-2 py-1",
+      md: "px-4 py-2",
+      lg: "px-6 py-3",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+});
+
+export interface Props extends HTMLAttributes<"a"> {
+  label?: string;
+  variant?: LinkVariant;
+  icon?: string;
+  size?: LinkSize;
+  padding?: LinkPadding;
+}
+
+const {
+  label,
+  variant,
+  size,
+  padding,
+  icon,
+  class: className,
+  ...props
+} = Astro.props;
+
+/*
+
+  a {
+    border-bottom: 1px dashed var(--color-black);
+    max-width: fit-content;
+  }
+
+  a:hover {
+    border-bottom: 1px solid var(--color-black);
+  }
+
+ target="_blank"
+        rel="nofollow noopener noreferrer">
+
+export interface Props extends HTMLAttributes<"a"> {
+  label?: string;
+  icon?: string;
+  variant?: LinkVariant;
+  external?: boolean;
+  size?: LinkSize;
+}
+
+const ariaLabel =
+  props["aria-label"] || (variant === "menu" ? `${label} page` : label);
+
+const titleAttr = props.title || (variant === "menu" ? `${label} page` : label);
+
+const externalAttrs = external
+  ? { target: "_blank", rel: "nofollow noopener noreferrer" }
+  : {};
+
+const classes = linkVariants({ variant, size, className });
+
+const {
+  label,
+  icon,
+  variant = "menu",
+  external = false,
+  class: className,
+  size = "md",
+  ...props
+} = Astro.props;
+
+
+<a
+  class={classes}
+  href={href}
+  aria-label={ariaLabel}
+  title={titleAttr}
+  {...externalAttrs}
+  {...props}
+
+
+    {variant !== "icon" && label}
+
+
+  */
+
+const classes = linkVariants({ variant, size, padding, className });
+---
+
+<a class={classes} title={label} {...props}>
+  {label}
+  {icon && <Icon name={icon} />}
+</a>
+
+<style>
+  .hover-fx {
+    background-image: linear-gradient(
+      var(--color-background),
+      var(--color-background)
+    );
+    background-size: 0 100%;
+    background-repeat: no-repeat;
+    transition: 0.4s;
+  }
+
+  .hover-fx:hover {
+    background-size: 100% 100%;
+    color: var(--color-foreground);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hover-fx {
+      transition: none;
+    }
+  }
+</style>
