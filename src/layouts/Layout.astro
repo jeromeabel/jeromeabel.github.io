@@ -1,7 +1,7 @@
 ---
-import Footer from "@components/Footer.astro";
-import Header from "@components/Header.astro";
-import SiteHead from "@components/SiteHead.astro";
+import AppFooter from "@components/AppFooter.astro";
+import AppHeader from "@components/AppHeader.astro";
+import AppSEO from "@components/AppSEO.astro";
 
 import "../styles/global.css";
 
@@ -34,7 +34,7 @@ const { page, description, publishedDate, image } = Astro.props;
       type="font/woff2"
       crossorigin
     />
-    <SiteHead {page} {description} {publishedDate} {image} />
+    <AppSEO {page} {description} {publishedDate} {image} />
 
     <script src="../scripts/theme.ts"></script>
 
@@ -54,9 +54,9 @@ const { page, description, publishedDate, image } = Astro.props;
     </script>
   </head>
   <body class="grid min-h-screen auto-rows-[auto_1fr_auto]">
-    <Header />
+    <AppHeader />
     <slot />
-    <Footer />
+    <AppFooter />
     <script src="../scripts/revealAnim.ts"></script>
   </body>
 </html>
