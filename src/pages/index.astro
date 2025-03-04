@@ -1,5 +1,8 @@
 ---
+import Contact from "@components/contact/Contact.astro";
 import Hero from "@components/hero/Hero.astro";
+import Link from "@components/ui/Link2.astro";
+import WorksPreview from "@components/work/WorksPreview.astro";
 import Layout from "@layouts/Layout.astro";
 // "mt-0 flex flex-col gap-16 pt-8 pb-16 sm:pt-12 lg:mt-16 lg:gap-32 lg:pt-16
 ---
@@ -7,12 +10,13 @@ import Layout from "@layouts/Layout.astro";
 <Layout>
   <div>
     <Hero />
-    <!-- <main class="flex flex-col gap-16 lg:gap-32">
+
+    <main class="flex flex-col gap-16 lg:gap-32">
       <WorksPreview
         works={["fablab", "malinette"]}
         title="I share"
         subtitle="Knowledge"
-        class="text-secondary"
+        class="text-purple-600 dark:text-purple-400"
       />
       <WorksPreview
         works={["kungfu-school", "medito-fundraising"]}
@@ -22,22 +26,21 @@ import Layout from "@layouts/Layout.astro";
       />
       <WorksPreview
         works={["la-forme", "logariat"]}
-        title="I make"
+        title="I made"
         subtitle="Real-time applications"
         class="text-blue-600 dark:text-blue-400"
       />
     </main>
-    <div class="flex justify-center py-32">
+
+    <div class="container py-36">
       <Link
-        label="See All Works"
+        label="See more works"
         href="/work"
-        variant="textIcon"
-        size="lg"
-        icon="mdi:arrow-right"
+        icon="lucide:arrow-right"
+        variant="secondary"
       />
     </div>
 
     <Contact />
-  </div> -->
   </div>
 </Layout>

@@ -1,18 +1,18 @@
 ---
 import HeroSocials from "@components/hero/HeroSocials.astro";
-import Link from "@components/Link2.astro";
+import Link from "@components/ui/Link2.astro";
+import P from "@components/ui/P.astro";
 ---
 
 <div class="flex flex-col justify-center gap-2 md:gap-4" role="presentation">
-  <h1 class="text-xl md:text-3xl">Hi! I'm Jerôme Abel</h1>
-  <p
-    class="font-title text-xl md:text-2xl md:tracking-wide lg:text-3xl lg:leading-tight 2xl:text-4xl"
-  >
+  <h1 class="font-title text-xl tracking-wide md:text-5xl">
+    Hi! I'm Jerôme Abel
+  </h1>
+  <P>
     A front-end engineer working at <Link
       label="uhlive"
       href="https://uh.live/"
-    />.<br />
-    Funny thing: I have a 10+ year background in interactive arts.
-  </p>
+    />, <br /> with 10+ years background in interactive arts.
+  </P>
   <HeroSocials />
 </div>

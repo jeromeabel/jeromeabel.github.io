@@ -1,53 +1,88 @@
 ---
-import curveImg from "@assets/images/curve_arrow_text.svg";
-import Link from "@components/links/Link.astro";
-import { Image } from "astro:assets";
+import Curve from "@assets/images/arrow-curve2.svg";
+
+import H2 from "@components/ui/H2.astro";
+import Link from "@components/ui/Link2.astro";
+//-top-9 -right-[130px] z-20 sm:-top-[56px] sm:-right-[278px] sm:w-72 dark:invert
 ---
 
 <div class="flex flex-col gap-8">
-  <h2
-    class="text-xl leading-none font-semibold tracking-[0.2em] uppercase lg:text-3xl lg:tracking-[0.4rem]"
-  >
-    LET'S TALK
-  </h2>
+  <H2>LET'S TALK</H2>
 
   <div class="flex flex-col">
-    <h3 class="text-muted dark:text-muted-dark">Email me at</h3>
+    <h3 class="text-muted">Email me at</h3>
     <p>
-      <a class="font-semibold" href="mailto:dev@jeromeabel.net" title="Email">
-        dev@jeromeabel.net
-      </a>
+      <Link
+        href="mailto:dev@jeromeabel.net"
+        label="dev@jeromeabel.net"
+        variant="bold"
+      />
     </p>
   </div>
 
   <div class="flex flex-col gap-2">
-    <h3 class="text-muted dark:text-muted-dark">Follow</h3>
+    <h3 class="text-muted">Follow</h3>
     <div class="flex gap-3">
       <Link
         label="GitHub"
         href="https://github.com/jeromeabel"
-        icon="fa-brands:github"
+        icon="fa6-brands:github"
         variant="icon"
       />
-
+      <Link
+        label="Bluesky"
+        href="https://bsky.app/profile/jeromeabel.bsky.social"
+        icon="fa6-brands:bluesky"
+        variant="icon"
+      />
       <div class="relative">
         <Link
           label="LinkedIn"
           href="https://www.linkedin.com/in/jerome-abel/"
-          icon="linkedin"
+          icon="fa6-brands:linkedin-in"
           variant="icon"
           class="animate-[bounce_2.5s_ease-in_infinite]"
         />
         <div
-          class="absolute -top-9 -right-[130px] z-20 w-36 sm:-top-[56px] sm:-right-[278px] sm:w-72 dark:invert"
+          class="anim-shadow border-muted absolute -bottom-0 -z-10 w-full border-t"
         >
-          <Image
-            src={curveImg}
-            class="w-full object-cover"
-            alt="I post weekly on LinkedIn."
-          />
+        </div>
+        <div class="absolute -top-12 left-12 flex w-100 gap-2">
+          <Curve />
+          <p class="font-title w-full rotate-5 text-3xl">
+            I post sometimes <br /> on LinkedIn...
+          </p>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<style>
+  @media (prefers-reduced-motion: no-preference) {
+    .anim-shadow {
+      animation: anim-width 2.5s ease-out infinite;
+      filter: blur(2px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .anim-shadow {
+      visibility: hidden;
+    }
+  }
+
+  @keyframes anim-width {
+    0%,
+    100% {
+      transform: scaleX(0.6);
+      opacity: 0.4;
+      filter: blur(2px);
+    }
+    50% {
+      transform: scaleX(0.7);
+      opacity: 0.9;
+      filter: blur(1.1px);
+    }
+  }
+</style>

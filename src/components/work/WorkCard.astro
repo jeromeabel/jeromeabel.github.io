@@ -12,7 +12,7 @@ const { slug } = Astro.props;
 const work = await getEntry("work", slug);
 
 if (!work) {
-  throw new Error("Could not find work");
+  throw new Error("Sorry, could not find work");
 }
 ---
 
@@ -25,11 +25,11 @@ if (!work) {
     <Image
       src={work.data.img_preview}
       alt={`${work.data.title} preview`}
-      class="h-full transition-transform duration-1000 motion-safe:group-hover:scale-110"
+      class="transition-transform duration-1000 motion-safe:group-hover:scale-110"
       loading="lazy"
     />
     <div
-      class="group-bg-black absolute inset-0 grid items-center duration-500 group-hover:bg-black/90 motion-reduce:transition-all"
+      class="group-bg-black absolute inset-0 grid items-center duration-500 group-hover:bg-black/85 motion-reduce:transition-all"
     >
       <div
         class="flex flex-col items-center justify-center gap-6 p-4 opacity-0 duration-500 group-hover:opacity-100"
@@ -39,7 +39,7 @@ if (!work) {
           class="text-8xl transition-all delay-100 duration-500 group-hover:rotate-0 motion-safe:-rotate-45"
         />
         <p
-          class="font-title text-background dark:text-foreground text-4xl lg:text-5xl"
+          class="font-title text-background-accent dark:text-foreground-accent text-4xl lg:text-5xl"
         >
           {work?.data.title}
         </p>

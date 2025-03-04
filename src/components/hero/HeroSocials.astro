@@ -1,24 +1,25 @@
 ---
-import Link from "@components/Link2.astro";
+import Link from "@components/ui/Link2.astro";
 ---
 
 <div class="mt-6 flex items-center gap-4 lg:mt-10 lg:gap-6">
   <Link
     label="Contact me"
     href="mailto:dev@jeromeabel.net"
-    icon="arrow-right"
+    icon="arrow-right-long"
     variant="cta"
+    class="stroke stroke-current"
   />
   <Link
     label="Github"
     href="https://github.com/jeromeabel"
-    icon="mdi:github"
+    icon="fa6-brands:github"
     variant="icon"
   />
   <Link
     label="LinkedIn"
     href="https://www.linkedin.com/in/jerome-abel/"
-    icon="linkedin"
+    icon="fa6-brands:linkedin-in"
     variant="icon"
   />
 </div>

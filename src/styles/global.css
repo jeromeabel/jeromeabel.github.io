@@ -4,6 +4,12 @@
 @utility container {
   margin-inline: auto;
   padding-inline: 1rem;
+
+}
+
+
+/*
+
   @variant sm {
     padding-inline: 3rem;
   }
@@ -16,8 +22,8 @@
   @variant 2xl {
     padding-inline: 10rem;
   }
-}
 
+*/
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
@@ -30,10 +36,12 @@
 
   --color-background: #f5ffe1;
   --color-foreground: #1e1e1e;
-  /* --color-background-accent: #f7f7f7;
-  --color-foreground-accent: #101010; */
+  --color-background-accent: #f7f7f7;
+  --color-foreground-accent: #101010;
 
   --color-muted: #5b5b5b;
+  --color-muted-border: #d1ddbb;
+
   /* --color-muted-accent: #383838; */
   --color-muted-background: #e0eec4;
   --color-muted-background-accent: #d1ddbb;
@@ -56,18 +64,20 @@
 @variant dark {
   --color-background: #1e1e1e;
   --color-foreground: #ececec;
-  /* --color-background-accent: #101010;
-  --color-foreground-accent: #f7f7f7; */
+  --color-background-accent: #101010;
+  --color-foreground-accent: #f7f7f7;
 
   --color-muted: #9b9b9b;
   /* --color-muted-accent: #d6d6d6; */
+  --color-muted-border: #4c4c4c;
+
   --color-muted-background: #343434;
   --color-muted-background-accent: #4c4c4c;
 
 
   /* --accent: 0 0% 14.9%;
   --accent-foreground: 0 0% 98%; */
-  --color-secondary: #5821c7;
+  --color-secondary: #9364f3;
 
 }
 
