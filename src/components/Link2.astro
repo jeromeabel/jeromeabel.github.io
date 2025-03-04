@@ -12,7 +12,8 @@ const linkVariants = cva("transition-colors", {
     variant: {
       "menu-active": "text-foreground font-semibold",
       "menu-inactive": "text-muted hover:text-foreground",
-      default: "border-dashed border-current border-b hover:border-solid",
+      default:
+        "border-dashed border-current border-b hover:border-solid inline-block",
       cta: "hover-fx rounded-full px-6 py-3 inline-flex items-center justify-center gap-6 bg-foreground text-background border border-muted",
       icon: "text-foreground border-muted hover:border-foreground grid h-10 w-10 place-items-center rounded-full border border-dashed transition-colors hover:border-solid lg:h-14 lg:w-14",
     },
