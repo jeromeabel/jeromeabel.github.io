@@ -32,12 +32,15 @@
   /* --color-background: #1e1e1e; */
   --color-foreground: #1e1e1e;
   --color-primary: #f5ffe1;
+
   --color-muted: #5b5b5b;
+  --color-muted-background: #e1e1e1;
+  --color-muted-background-accent: #cecece;
 
   --color-secondary: #8e6cd2;
-  --color-secondary-dark: #5821c7;
-  --accent: 0 0% 96.1%;
-  --accent-foreground: 0 0% 9%;
+
+  /* --accent: 0 0% 96.1%;
+  --accent-foreground: 0 0% 9%; */
   /* --breakpoint-md: 60rem;
   --breakpoint-lg: 80rem; */
 }
@@ -46,11 +49,15 @@
 @variant dark {
   --color-background: #1e1e1e;
   --color-foreground: #ececec;
-  /* --color-muted: #9b9b9b; */
-  --color-muted: #9b9b9b;
 
-  --accent: 0 0% 14.9%;
-  --accent-foreground: 0 0% 98%;
+  --color-muted: #9b9b9b;
+  --color-muted-background: #343434;
+  --color-muted-background-accent: #4c4c4c;
+
+
+  /* --accent: 0 0% 14.9%;
+  --accent-foreground: 0 0% 98%; */
+  --color-secondary: #5821c7;
 
 }
 
