@@ -65,7 +65,6 @@ const shapes = [
   :root {
     --float-rot1-duration: 7.1s;
     --float-rot1-translate: -10px;
-    --shadow-pulse1-duration: 5s;
     --shadow-pulse1-scale: 0.98;
     --shadow-pulse1-blur: 8px;
     --shape-1-right: 200px;
@@ -75,7 +74,6 @@ const shapes = [
 
     --float-rot2-duration: 8.2s;
     --float-rot2-translate: 15px;
-    --shadow-pulse2-duration: 6s;
     --shadow-pulse2-scale: 0.92;
     --shadow-pulse2-blur: 7px;
     --shape-2-right: 90px;
@@ -85,7 +83,6 @@ const shapes = [
 
     --float-rot3-duration: 10.2s;
     --float-rot3-translate: -30px;
-    --shadow-pulse3-duration: 8s;
     --shadow-pulse3-scale: 1;
     --shadow-pulse3-blur: 5px;
     --shape-3-left: 90px;
@@ -127,7 +124,7 @@ const shapes = [
     position: absolute;
     right: var(--shadow-1-right);
     top: var(--shadow-1-top);
-    animation: shadow-pulse1 var(--shadow-pulse1-duration) ease-in-out infinite;
+    animation: shadow-pulse1 var(--float-rot1-duration) ease-in-out infinite;
   }
 
   @keyframes float-rot2 {
@@ -163,7 +160,7 @@ const shapes = [
     position: absolute;
     right: var(--shadow-2-right);
     top: var(--shadow-2-top);
-    animation: shadow-pulse2 var(--shadow-pulse2-duration) ease-in-out infinite;
+    animation: shadow-pulse2 var(--float-rot2-duration) ease-in-out infinite;
   }
 
   @keyframes float-rot3 {
@@ -199,7 +196,7 @@ const shapes = [
     position: absolute;
     left: var(--shadow-3-left);
     top: var(--shadow-3-top);
-    animation: shadow-pulse3 var(--shadow-pulse3-duration) ease-in-out infinite;
+    animation: shadow-pulse3 var(--float-rot3-duration) ease-in-out infinite;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -214,23 +211,3 @@ const shapes = [
     will-change: transform, opacity;
   }
 </style>
-
-<script>
-  const observedElements = document.querySelectorAll(".shape, .shape-shadow");
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const el = entry.target as SVGElement;
-        if (entry.isIntersecting) {
-          el.style.willChange = "transform, opacity";
-        } else {
-          el.style.willChange = "auto";
-        }
-      });
-    },
-    { threshold: 0.1 },
-  );
-
-  observedElements.forEach((el) => observer.observe(el));
-</script>
