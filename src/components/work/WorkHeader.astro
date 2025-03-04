@@ -1,5 +1,7 @@
 ---
-import Link from "@components/links/Link.astro";
+import H1 from "@components/ui/H1.astro";
+import Link from "@components/ui/Link2.astro";
+import P from "@components/ui/P.astro";
 const { data } = Astro.props;
 
 const year = new Date(data.date).getFullYear();
@@ -7,14 +9,12 @@ const dateISOString = new Date(data.date).toISOString().slice(0, 10);
 ---
 
 <header class="relative flex w-full flex-col gap-4 lg:w-2/3 lg:gap-8">
-  <h1
-    class="font-title text-4xl tracking-widest uppercase sm:text-5xl lg:text-6xl"
-  >
+  <H1>
     {data.title}
-  </h1>
-  <p class="text-xl tracking-wide sm:text-2xl lg:text-3xl">
+  </H1>
+  <P>
     {data.abstract}
-  </p>
+  </P>
 
   <table
     class="prose lg:prose-td:py-4 prose-td:border-b dark:prose-invert mt-2 min-w-full font-light sm:mt-6"
@@ -35,11 +35,11 @@ const dateISOString = new Date(data.date).toISOString().slice(0, 10);
   <div class="mt-4 flex flex-wrap gap-4">
     {
       data.website && (
-        <Link href={data.website} label="Website" variant="textIcon" />
+        <Link href={data.website} label="Website" variant="external" />
       )
     }
-    {data.live && <Link href={data.live} label="Live" variant="textIcon" />}
-    {data.git && <Link href={data.git} label="Code" variant="textIcon" />}
-    {data.video && <Link href={data.video} label="Video" variant="textIcon" />}
+    {data.live && <Link href={data.live} label="Demo" variant="external" />}
+    {data.git && <Link href={data.git} label="Code" variant="external" />}
+    {data.video && <Link href={data.video} label="Video" variant="external" />}
   </div>
 </header>

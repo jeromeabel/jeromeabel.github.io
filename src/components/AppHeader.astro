@@ -15,7 +15,7 @@ const isActive = (href: string) =>
   href === currentPath || href === currentPath.replace(/\/$/, "");
 
 const variant = (href: string) =>
-  isActive(href) ? "menu-active" : "menu-inactive";
+  isActive(href) ? "menuActive" : "menuInactive";
 ---
 
 <header class="py-4 lg:py-6">
@@ -28,7 +28,7 @@ const variant = (href: string) =>
               href={link.href}
               label={link.label}
               variant={variant(link.href)}
-              textSize="xl"
+              class="text-xl"
             />
           </li>
         ))

@@ -1,6 +1,8 @@
 ---
 import FeatureCard from "@components/FeatureCard.astro";
-import Link from "@components/links/Link.astro";
+import H1 from "@components/ui/H1.astro";
+import H2 from "@components/ui/H2.astro";
+import Link from "@components/ui/Link2.astro";
 import Layout from "@layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
 ---
@@ -14,61 +16,53 @@ import { Icon } from "astro-icon/components";
     >
     </div>
     <header class="flex w-full flex-col gap-6 sm:gap-8 lg:w-2/3">
-      <h1
-        class="font-title text-4xl tracking-widest uppercase sm:text-5xl lg:text-6xl"
-      >
-        About
-      </h1>
-      <p class="font-semibold">Art is beautiful, period.</p>
+      <H1>About</H1>
+
       <p>
-        It can provide unique and multidimensional experiences, resonating with
-        our feelings, perceptions and thoughts. That's why I've been working in
-        software arts for over 10 years, exploring embedded systems, creative
-        frameworks, and a dozen programming languages. My artistic projects have
-        been exhibited in Brussels, Dakar, Montreal, Dubrovnik, Neuss, Tunis,
-        Dublin, Paris and more. It was a lot of fun with nice people! If this
-        side interests you, consider visiting my artistic projects on <a
+        Art and software development both push the limits of creativity and
+        technology.
+      </p>
+
+      <p>
+        For over a decade, I’ve explored software arts, working with embedded
+        systems, creative frameworks, and multiple programming languages. My
+        projects have been exhibited in Brussels, Dakar, Montreal, Dubrovnik,
+        Neuss, Tunis, Dublin, Paris, and beyond. It’s been a journey filled with
+        collaboration, discovery, and meaningful experiences. If you're curious,
+        you can check out my artistic work at <Link
           href="https://jeromeabel.net"
-          class="border-b border-dashed border-black no-underline hover:border-solid dark:border-white"
-          target="_blank"
-          title="jeromeabel.net"
-          rel="nofollow noopener noreferrer">jeromeabel.net</a
-        >.
+          label="jeromeabel.net"
+        />.
       </p>
-      <p class="font-semibold">
-        Software development is a collective and organic exploration of
-        humanity.
-      </p>
+
       <p>
-        Today, I am fully launching into the field of web development with a
-        first specialty in front-end. I just finished a year-long learning
-        program at OpenClassrooms, where I learned all the modern tools for
-        creating modern, responsive websites: learning skills, writing technical
-        specifications, CSS, Sass, creating prototypes in Figma, writing unit
-        and integration tests, modern JavaScript and design patterns, making web
-        apps with React and Redux.
+        Today, I focus on front-end development, crafting modern, maintainable,
+        and tested web applications. I completed a year-long program at
+        OpenClassrooms, learning JavaScript, CSS, Sass, UI prototyping (Figma),
+        design patterns, unit and integration testing, React, and Redux. More
+        than just tools, I value clean architecture, testing, and performance,
+        ensuring that what I build is solid and scalable.
       </p>
+
       <p>
-        I look forward to growing in this field with brilliant people and
-        engineers! <Icon
-          name="fluent:handshake-24-regular"
-          class="animate-rotate inline-block h-10"
+        Software development is a collective effort—an evolving craft that grows
+        through sharing and collaboration. I look forward to working with
+        talented engineers, learning from them, and building great things
+        together. <Icon
+          name="lucide:handshake"
+          class="animate-rotate inline-block h-8 w-8"
         />
       </p>
       <Link
         label="Download CV"
         href="/CV_JeromeAbel_en.pdf"
         icon="carbon:download"
-        variant="textIcon"
+        variant="secondary"
       />
     </header>
 
     <section class="mt-0 lg:mt-12">
-      <h2
-        class="font-title text-4xl tracking-widest uppercase sm:text-5xl lg:text-6xl"
-      >
-        My Way Of Doing
-      </h2>
+      <H2> My Way Of Doing </H2>
       <div
         class="my-8 grid grid-cols-1 gap-6 md:my-16 lg:grid-cols-3 2xl:gap-12"
       >
@@ -80,13 +74,7 @@ import { Icon } from "astro-icon/components";
   </main>
 </Layout>
 
-<style scoped>
-  a.link {
-    border-bottom: 1px dashed var(--color-black);
-  }
-  a.link:hover {
-    border-bottom: 1px solid var(--color-black);
-  }
+<style>
   @keyframes animRotation {
     from {
       transform: rotate(-15deg);

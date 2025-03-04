@@ -1,6 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 
+import H1 from "@components/ui/H1.astro";
+import P from "@components/ui/P.astro";
 import WorkCard from "@components/work/WorkCard.astro";
 import Layout from "@layouts/Layout.astro";
 
@@ -12,18 +14,12 @@ const works = (await getCollection("work")).sort(
 <Layout page="Work">
   <main class="container py-8 lg:py-24">
     <header class="flex w-full flex-col gap-4 lg:w-2/3 lg:gap-8">
-      <h1
-        class="font-title text-4xl tracking-widest uppercase sm:text-5xl lg:text-6xl"
-      >
-        Work
-      </h1>
-      <p
-        class="text-xl leading-normal tracking-normal sm:text-2xl md:tracking-wide lg:text-3xl"
-      >
+      <H1>Work</H1>
+      <P>
         Here, you'll find a collection of my web development projects and
         creative software explorations, combining technical skills with
         thoughtful design.
-      </p>
+      </P>
     </header>
 
     <section
