@@ -29,13 +29,20 @@
   --font-mono: "Fira Code", monospace;
 
   --color-background: #f5ffe1;
-  /* --color-background: #1e1e1e; */
   --color-foreground: #1e1e1e;
-  --color-primary: #f5ffe1;
+  /* --color-background-accent: #f7f7f7;
+  --color-foreground-accent: #101010; */
 
   --color-muted: #5b5b5b;
+  /* --color-muted-accent: #383838; */
+  --color-muted-background: #e0eec4;
+  --color-muted-background-accent: #d1ddbb;
+
+/*
+  --color-muted: #5b5b5b;
   --color-muted-background: #e1e1e1;
-  --color-muted-background-accent: #cecece;
+  --color-muted-background-accent: #cecece; */
+
 
   --color-secondary: #8e6cd2;
 
@@ -49,8 +56,11 @@
 @variant dark {
   --color-background: #1e1e1e;
   --color-foreground: #ececec;
+  /* --color-background-accent: #101010;
+  --color-foreground-accent: #f7f7f7; */
 
   --color-muted: #9b9b9b;
+  /* --color-muted-accent: #d6d6d6; */
   --color-muted-background: #343434;
   --color-muted-background-accent: #4c4c4c;
 
