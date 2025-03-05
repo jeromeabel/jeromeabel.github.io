@@ -3,6 +3,7 @@ import FeatureCard from "@components/FeatureCard.astro";
 import H1 from "@components/ui/H1.astro";
 import H2 from "@components/ui/H2.astro";
 import Link from "@components/ui/Link2.astro";
+import Prose from "@components/ui/Prose.astro";
 import Layout from "@layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
 ---
@@ -18,47 +19,44 @@ import { Icon } from "astro-icon/components";
     <header class="flex w-full flex-col gap-6 sm:gap-8 lg:w-2/3">
       <H1>About</H1>
 
-      <p>
-        Art and software development both push the limits of creativity and
-        technology.
-      </p>
+      <Prose>
+        <p>
+          <em>Art is beautiful</em>. For over a decade, I’ve explored software
+          arts, working with embedded systems, creative frameworks, and multiple
+          programming languages. My projects have been exhibited in Brussels,
+          Dakar, Montreal, Dubrovnik, Neuss, Tunis, Dublin, Paris, and beyond.
+          It’s been a journey filled with collaboration, discovery, and
+          meaningful experiences. If you're curious, you can check out my
+          artistic work at <Link
+            href="https://jeromeabel.net"
+            label="jeromeabel.net"
+          />.
+        </p>
 
-      <p>
-        For over a decade, I’ve explored software arts, working with embedded
-        systems, creative frameworks, and multiple programming languages. My
-        projects have been exhibited in Brussels, Dakar, Montreal, Dubrovnik,
-        Neuss, Tunis, Dublin, Paris, and beyond. It’s been a journey filled with
-        collaboration, discovery, and meaningful experiences. If you're curious,
-        you can check out my artistic work at <Link
-          href="https://jeromeabel.net"
-          label="jeromeabel.net"
-        />.
-      </p>
+        <p>
+          Today, I focus on front-end development, crafting modern,
+          maintainable, and tested web applications. I completed a year-long
+          program at OpenClassrooms, learning JavaScript, CSS, Sass, UI
+          prototyping (Figma), design patterns, unit and integration testing,
+          React, and Redux. More than just tools, I value clean architecture,
+          testing, and performance, ensuring that what I build is solid and
+          scalable.
+        </p>
 
-      <p>
-        Today, I focus on front-end development, crafting modern, maintainable,
-        and tested web applications. I completed a year-long program at
-        OpenClassrooms, learning JavaScript, CSS, Sass, UI prototyping (Figma),
-        design patterns, unit and integration testing, React, and Redux. More
-        than just tools, I value clean architecture, testing, and performance,
-        ensuring that what I build is solid and scalable.
-      </p>
-
-      <p>
-        Software development is a collective effort—an evolving craft that grows
-        through sharing and collaboration. I look forward to working with
-        talented engineers, learning from them, and building great things
-        together. <Icon
-          name="lucide:handshake"
-          class="animate-rotate inline-block h-8 w-8"
+        <p>
+          I look forward to working with talented engineers, learning from them,
+          and building great things together. <Icon
+            name="lucide:handshake"
+            class="animate-rotate inline-block h-6 w-6"
+          />
+        </p>
+        <Link
+          label="Download CV"
+          href="/CV_JeromeAbel_en.pdf"
+          icon="carbon:download"
+          variant="secondary"
         />
-      </p>
-      <Link
-        label="Download CV"
-        href="/CV_JeromeAbel_en.pdf"
-        icon="carbon:download"
-        variant="secondary"
-      />
+      </Prose>
     </header>
 
     <section class="mt-0 lg:mt-12">

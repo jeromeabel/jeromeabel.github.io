@@ -1,4 +1,5 @@
 ---
+import Prose from "@components/ui/Prose.astro";
 import WorkHeader from "@components/work/WorkHeader.astro";
 import Layout from "@layouts/Layout.astro";
 import { Picture } from "astro:assets";
@@ -31,10 +32,8 @@ const publishedDate = new Date(work.data.date);
       sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${work.data.img.width}px`}
       alt={`${work.data.title} project`}
     />
-    <section
-      class="prose sm:prose-lg lg:prose-xl prose-stone dark:prose-invert prose-img:shadow-xl prose-a:border-b prose-a:border-dashed prose-a:no-underline prose-a:hover:border-solid mt-8 md:mx-auto"
-    >
+    <Prose class="md:mx-auto">
       <Content />
-    </section>
+    </Prose>
   </main>
 </Layout>
