@@ -6,15 +6,15 @@ interface Props {
   works: Array<string>;
   title: string;
   subtitle: string;
-  class: string;
+  color: string;
 }
 
-const { works, title, subtitle, class: className } = Astro.props;
+const { works, title, subtitle, color } = Astro.props;
 ---
 
 <section class="container flex flex-col gap-4 lg:gap-8">
   <H2>
-    <span class={className}>{title}</span><br />{subtitle}
+    <span class={color}>{title}</span><br />{subtitle}
   </H2>
   <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-8">
     {works.map((work) => <WorkCard slug={work} variant="home" />)}
