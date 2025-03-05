@@ -44,7 +44,7 @@ import Link from "@components/ui/Link2.astro";
           class="animate-[bounce_2.5s_ease-in_infinite]"
         />
         <div
-          class="anim-shadow border-muted absolute -bottom-0 -z-10 w-full border-t"
+          class="anim-shadow border-muted absolute -bottom-0 -z-10 w-full rounded-lg border-t"
         >
         </div>
         <div class="absolute -top-12 left-12 flex w-100 gap-2">
@@ -62,7 +62,6 @@ import Link from "@components/ui/Link2.astro";
   @media (prefers-reduced-motion: no-preference) {
     .anim-shadow {
       animation: anim-width 2.5s ease-out infinite;
-      filter: blur(2px);
     }
   }
 
@@ -75,14 +74,14 @@ import Link from "@components/ui/Link2.astro";
   @keyframes anim-width {
     0%,
     100% {
-      transform: scaleX(0.6);
+      transform: scaleX(0.35);
       opacity: 0.4;
       filter: blur(2px);
     }
     50% {
-      transform: scaleX(0.7);
+      transform: scaleX(0.55);
       opacity: 0.9;
-      filter: blur(1.1px);
+      filter: blur(1.2px);
     }
   }
 </style>

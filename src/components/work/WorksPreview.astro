@@ -16,7 +16,7 @@ const { works, title, subtitle, class: className } = Astro.props;
   <H2>
     <span class={className}>{title}</span><br />{subtitle}
   </H2>
-  <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:gap-8">
-    {works.map((work) => <WorkCard slug={work} />)}
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-8">
+    {works.map((work) => <WorkCard slug={work} variant="home" />)}
   </div>
 </section>

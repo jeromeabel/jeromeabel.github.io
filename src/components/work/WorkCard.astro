@@ -3,11 +3,17 @@ import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import { getEntry } from "astro:content";
 
+const variants = {
+  home: { article: "aspect-video", a: "border-muted-border border-2" },
+  work: { article: "aspect-square", a: "" },
+};
+
 interface Props {
   slug: string;
+  variant?: "home" | "work";
 }
 
-const { slug } = Astro.props;
+const { slug, variant = "work" } = Astro.props;
 
 const work = await getEntry("work", slug);
 
@@ -17,11 +23,14 @@ if (!work) {
 ---
 
 <a
-  href={"/work/" + work?.id}
-  title={`Open the "${work?.data.title}" project`}
-  class="relative shadow-lg outline-offset-4 outline-black focus:outline-2 dark:shadow-none dark:outline-white"
+  href={"/work/" + work.id}
+  title={`Open the "${work.data.title}" project`}
+  class:list={[
+    "relative shadow-lg outline-offset-4 outline-black focus:outline-2 dark:shadow-none dark:outline-white",
+    variants[variant].a,
+  ]}
 >
-  <article class="group aspect-square overflow-hidden">
+  <article class=`group ${variants[variant].article} overflow-hidden`>
     <Image
       src={work.data.img_preview}
       alt={`${work.data.title} preview`}
