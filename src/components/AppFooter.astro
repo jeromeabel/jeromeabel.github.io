@@ -13,10 +13,12 @@ const links = [
 ];
 ---
 
-<footer class="text-muted py-8 sm:py-16 lg:text-base">
-  <div class="container flex flex-col justify-between gap-8 sm:flex-row">
-    <p>Jérôme Abel - {today.getFullYear()}</p>
-    <ul class="flex flex-col gap-2 sm:flex-row sm:gap-6">
+<footer class="text-muted py-8 md:py-16">
+  <div
+    class="container flex flex-col-reverse justify-between gap-6 md:flex-row md:gap-8"
+  >
+    <p class="text-center">Jérôme Abel - {today.getFullYear()}</p>
+    <ul class="flex flex-row flex-wrap justify-center gap-2 md:gap-6">
       {
         links.map((link) => (
           <li>

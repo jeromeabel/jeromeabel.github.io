@@ -41,10 +41,12 @@ const shapes = [
     class: "shape-shadow shadow-3",
   },
 ];
-//   triangle: { src: "/hero/triangle.svg", width: 461, height: 401 },
 ---
 
-<div class="relative hidden h-[500px] md:block dark:invert" aria-hidden="true">
+<div
+  class="reveal relative hidden h-full flex-1 lg:block dark:invert"
+  aria-hidden="true"
+>
   {
     shapes.map((shape) => (
       <Image
@@ -57,7 +59,7 @@ const shapes = [
     ))
   }
   <Triangle
-    class="shape absolute right-0 -z-10 text-[#ffffff] blur-lg dark:opacity-40"
+    class="shape absolute right-0 -z-10 text-white blur-lg dark:opacity-40"
   />
 </div>
 

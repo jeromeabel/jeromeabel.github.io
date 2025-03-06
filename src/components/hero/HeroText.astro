@@ -4,15 +4,17 @@ import Link from "@components/ui/Link2.astro";
 import P from "@components/ui/P.astro";
 ---
 
-<div class="flex flex-col justify-center gap-2 md:gap-4" role="presentation">
-  <h1 class="font-title text-2xl tracking-wide md:text-5xl">
-    Hi! I'm Jerôme Abel
-  </h1>
-  <P>
-    A front-end engineer working at <Link
-      label="uhlive"
-      href="https://uh.live/"
-    />, <br /> with 10+ years background in interactive arts.
-  </P>
-  <HeroSocials />
+<div class="flex-1" role="presentation">
+  <div class="flex flex-col justify-center gap-2 border text-balance md:gap-4">
+    <h1 class="font-title text-2xl tracking-wide md:text-4xl">
+      Hi! I'm Jerôme Abel
+    </h1>
+    <P>
+      A front-end engineer working at <Link
+        label="uhlive"
+        href="https://uh.live/"
+      />, <br class="" /> with 10+ years background in interactive arts.</P
+    >
+    <HeroSocials />
+  </div>
 </div>
