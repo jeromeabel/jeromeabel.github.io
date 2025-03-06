@@ -4,26 +4,9 @@
 @utility container {
   margin-inline: auto;
   padding-inline: 1rem;
-
+  max-width: var(--breakpoint-xl);
 }
 
-
-/*
-
-  @variant sm {
-    padding-inline: 3rem;
-  }
-  @variant lg {
-    padding-inline: 6rem;
-  }
-  @variant xl {
-    padding-inline: 8rem;
-  }
-  @variant 2xl {
-    padding-inline: 10rem;
-  }
-
-*/
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
@@ -31,8 +14,8 @@
     "IBM Plex Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
     "Segoe UI Symbol", "Noto Color Emoji";
   --font-title:
-    "Bubbler One", Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-mono: "Fira Code", monospace;
+    "Bubbler One", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
   --color-background: #f5ffe1;
   --color-foreground: #1e1e1e;
@@ -41,23 +24,8 @@
 
   --color-muted: #5b5b5b;
   --color-muted-border: #d1ddbb;
-
-  /* --color-muted-accent: #383838; */
   --color-muted-background: #e0eec4;
   --color-muted-background-accent: #d1ddbb;
-
-/*
-  --color-muted: #5b5b5b;
-  --color-muted-background: #e1e1e1;
-  --color-muted-background-accent: #cecece; */
-
-
-  --color-secondary: #8e6cd2;
-
-  /* --accent: 0 0% 96.1%;
-  --accent-foreground: 0 0% 9%; */
-  /* --breakpoint-md: 60rem;
-  --breakpoint-lg: 80rem; */
 }
 
 
@@ -68,27 +36,9 @@
   --color-foreground-accent: #f7f7f7;
 
   --color-muted: #9b9b9b;
-  /* --color-muted-accent: #d6d6d6; */
   --color-muted-border: #4c4c4c;
-
   --color-muted-background: #343434;
   --color-muted-background-accent: #4c4c4c;
-
-
-  /* --accent: 0 0% 14.9%;
-  --accent-foreground: 0 0% 98%; */
-  --color-secondary: #9364f3;
-
-}
-
-@font-face {
-  font-family: "Bubbler One";
-  src:
-    url("/bubbler-one-latin-400-normal.woff2") format("woff2"),
-    url("/bubbler-one-latin-400-normal.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
 }
 
 @media (prefers-reduced-motion: reduce) {
