@@ -5,15 +5,12 @@ import SEO from "@components/app/SEO.astro";
 
 import "../styles/global.css";
 
-import "@fontsource/fira-code/400.css";
-import "@fontsource/fira-code/600.css";
-import "@fontsource/ibm-plex-sans/300.css";
+import "@fontsource/bubbler-one/400.css";
 import "@fontsource/ibm-plex-sans/400.css";
 import "@fontsource/ibm-plex-sans/600.css";
-import "@fontsource/bubbler-one/400.css";
-
-// Preload
-import bubblerOneWoff2 from "@fontsource/bubbler-one/files/bubbler-one-latin-400-normal.woff2?url";
+import "@fontsource/ibm-plex-sans/300.css";
+import "@fontsource/fira-code/400.css";
+import "@fontsource/fira-code/600.css";
 
 import type { ImageMetadata } from "astro";
 
@@ -32,13 +29,6 @@ const { page, description, publishedDate, image } = Astro.props;
   class="bg-background text-foreground max-w-screen overflow-x-hidden break-words motion-safe:scroll-smooth"
 >
   <head>
-    <link
-      rel="preload"
-      as="font"
-      type="font/woff2"
-      href={bubblerOneWoff2}
-      crossorigin="anonymous"
-    />
     <SEO {page} {description} {publishedDate} {image} />
 
     <script src="../scripts/theme.ts"></script>
