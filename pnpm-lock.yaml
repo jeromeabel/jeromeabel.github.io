@@ -23,24 +23,12 @@ importers:
       '@fontsource/ibm-plex-sans':
         specifier: ^5.2.5
         version: 5.2.5
-      '@iconify-json/carbon':
-        specifier: ^1.2.8
-        version: 1.2.8
       '@iconify-json/fa-brands':
         specifier: ^1.2.1
         version: 1.2.1
-      '@iconify-json/fluent':
-        specifier: ^1.2.15
-        version: 1.2.15
       '@iconify-json/lucide':
         specifier: ^1.2.28
         version: 1.2.28
-      '@iconify-json/mdi':
-        specifier: ^1.2.3
-        version: 1.2.3
-      '@iconify-json/ph':
-        specifier: ^1.2.2
-        version: 1.2.2
       '@tailwindcss/vite':
         specifier: ^4.0.9
         version: 4.0.9(vite@6.2.0(@types/node@22.13.8)(jiti@2.4.2)(lightningcss@1.29.1))
@@ -291,26 +279,14 @@ packages:
   '@fontsource/ibm-plex-sans@5.2.5':
     resolution: {integrity: sha512-W1kkC/fpDuoKQ5pNSQt/Bg0rpV9AATreA9ABwZf678AlwSCY2TQBT1YwAxxB65E9jcT/ysDrU1sGVNUyWCBXRw==}
 
-  '@iconify-json/carbon@1.2.8':
-    resolution: {integrity: sha512-6xh4YiFBz6qoSnB3XMe23WvjTJroDFXB17J1MbiT7nATFe+70+em1acRXr8hgP/gYpwFMHFc4IvjA/IPTPnTzg==}
-
   '@iconify-json/fa-brands@1.2.1':
     resolution: {integrity: sha512-v5wVXoWIusAU1n0GGctIY+VyINIFXaD/WWHiwS+TFX74C0pFZrmrwUkqZDDCclu7zxuhlixPO+VLyDqNtoppfA==}
 
   '@iconify-json/fa6-brands@1.2.5':
     resolution: {integrity: sha512-U/iFfziz6jSN9zArOJZYTtoj2tQyh6MxPdI8M84DQ2kEulPaj8j+h9bqvjmzszNHmD7v+kmmKd/MLkMKk+3Zuw==}
 
-  '@iconify-json/fluent@1.2.15':
-    resolution: {integrity: sha512-Xxbq0c7y+nGim6zgv+ZRh9MAAEsjXAYqUOvAZnwcTdXTdplGleLVM1d/xAuAje9CKFdbQN6zlfcfqJ26X39MPA==}
-
   '@iconify-json/lucide@1.2.28':
     resolution: {integrity: sha512-SPeAoh1YKhALpNSto/FBspf3GZ0eAr3ka/OI7cJJ5HljLzycIITv0s4Rd2+sRVzFtD1I991mJJmYohQeOSZ+Og==}
-
-  '@iconify-json/mdi@1.2.3':
-    resolution: {integrity: sha512-O3cLwbDOK7NNDf2ihaQOH5F9JglnulNDFV7WprU2dSoZu3h3cWH//h74uQAB87brHmvFVxIOkuBX2sZSzYhScg==}
-
-  '@iconify-json/ph@1.2.2':
-    resolution: {integrity: sha512-PgkEZNtqa8hBGjHXQa4pMwZa93hmfu8FUSjs/nv4oUU6yLsgv+gh9nu28Kqi8Fz9CCVu4hj1MZs9/60J57IzFw==}
 
   '@iconify/tools@4.1.1':
     resolution: {integrity: sha512-Hybu/HGhv6T8nLQhiG9rKx+ekF7NNpPOEQAy7JRSKht3s3dcFSsPccYzk24Znc9MTxrR6Gak3cg6CPP5dyvS2Q==}
@@ -2537,10 +2513,6 @@ snapshots:
 
   '@fontsource/ibm-plex-sans@5.2.5': {}
 
-  '@iconify-json/carbon@1.2.8':
-    dependencies:
-      '@iconify/types': 2.0.0
-
   '@iconify-json/fa-brands@1.2.1':
     dependencies:
       '@iconify/types': 2.0.0
@@ -2549,19 +2521,7 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/fluent@1.2.15':
-    dependencies:
-      '@iconify/types': 2.0.0
-
   '@iconify-json/lucide@1.2.28':
-    dependencies:
-      '@iconify/types': 2.0.0
-
-  '@iconify-json/mdi@1.2.3':
-    dependencies:
-      '@iconify/types': 2.0.0
-
-  '@iconify-json/ph@1.2.2':
     dependencies:
       '@iconify/types': 2.0.0
 

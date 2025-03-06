@@ -24,7 +24,13 @@ export default defineConfig({
         forward: ["dataLayer.push"],
       },
     }),
-    icon(),
+    icon({
+      include: {
+        lucide: ['download', 'arrow-right', 'arrow-up-right', 'sun', 'moon', 'handshake'],
+        'fa6-brands': ['github', 'linkedin-in', 'bluesky']
+      }
+    })
+
   ],
 
   vite: {
