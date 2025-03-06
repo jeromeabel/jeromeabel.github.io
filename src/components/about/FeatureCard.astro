@@ -21,15 +21,17 @@ const { Content } = await render(entry);
   <div class="flex justify-center lg:flex-none">
     <Image
       class="max-w-[250px] md:max-w-[300px] lg:max-w-[200px] dark:invert"
-      src={entry?.data.img}
-      alt={`Illustration ${entry?.data.title}`}
+      src={entry.data.img}
+      width={entry.data.img.width}
+      height={entry.data.img.height}
+      alt={`Illustration ${entry.data.title}`}
     />
   </div>
   <div
     class="border-muted border-t border-dashed p-6 md:border-t-0 md:border-l lg:border-t lg:border-l-0 lg:p-0 lg:pt-6"
   >
     <h2 class="font-title text-3xl tracking-wide uppercase sm:text-4xl">
-      {entry?.data.title}
+      {entry.data.title}
     </h2>
     <div class="prose-md sm:prose-lg pt-4 text-pretty">
       <Content />

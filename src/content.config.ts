@@ -7,6 +7,7 @@ const featureCollection = defineCollection({
     z.object({
       title: z.string(),
       img: image(),
+      img_url: z.string(),
     }),
 });
 
