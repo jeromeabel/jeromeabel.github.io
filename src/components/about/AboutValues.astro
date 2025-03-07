@@ -1,0 +1,28 @@
+---
+import creativityImage from "@assets/images/values/creativity.svg?url";
+import qualityImage from "@assets/images/values/quality.svg?url";
+import userImage from "@assets/images/values/user.svg?url";
+import ValueCard from "@components/about/ValueCard.astro";
+import H2 from "@components/ui/H2.astro";
+---
+
+<section class="mt-0 lg:mt-12">
+  <H2>My Way Of Doing</H2>
+  <div class="my-8 grid grid-cols-1 gap-6 md:my-16 lg:grid-cols-3">
+    <ValueCard title="User" imgUrl={userImage}>
+      As a web developer, my goal is to build applications that truly meet user
+      needs. A great user experience comes from understanding interactions
+      throughout the project's lifecycle.
+    </ValueCard>
+    <ValueCard title="Creativity" imgUrl={creativityImage}>
+      Exploring different domains helps me connect concepts, prototype
+      effectively, and make informed decisions. Creativity fuels innovation,
+      turning challenges into opportunities.
+    </ValueCard>
+    <ValueCard title="Quality" imgUrl={qualityImage}>
+      I strive for high-quality code through clean architecture, low coupling,
+      and rigorous testing. By fostering a strong development culture, I ensure
+      software remains scalable, maintainable, and adaptable.
+    </ValueCard>
+  </div>
+</section>

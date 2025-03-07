@@ -1,15 +1,15 @@
 import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
 
-const featureCollection = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/feature" }),
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      img: image(),
-      img_url: z.string(),
-    }),
-});
+// const featureCollection = defineCollection({
+//   loader: glob({ pattern: "**/*.md", base: "./src/content/feature" }),
+//   schema: ({ image }) =>
+//     z.object({
+//       title: z.string(),
+//       img: image(),
+//       img_url: z.string(),
+//     }),
+// });
 
 const workCollection = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/work" }),
@@ -35,5 +35,4 @@ const workCollection = defineCollection({
 
 export const collections = {
   work: workCollection,
-  feature: featureCollection,
 };

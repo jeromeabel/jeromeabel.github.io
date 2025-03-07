@@ -1,11 +1,7 @@
 ---
-import FeatureCard from "@components/about/FeatureCard.astro";
-import H1 from "@components/ui/H1.astro";
-import H2 from "@components/ui/H2.astro";
-import Link from "@components/ui/Link.astro";
-import Prose from "@components/ui/Prose.astro";
+import AboutText from "@components/about/AboutText.astro";
+import AboutValues from "@components/about/AboutValues.astro";
 import Layout from "@layouts/Layout.astro";
-import { Icon } from "astro-icon/components";
 ---
 
 <Layout page="About">
@@ -16,67 +12,8 @@ import { Icon } from "astro-icon/components";
       class="absolute -top-[50px] -left-1/4 -z-10 aspect-square w-screen bg-[radial-gradient(ellipse_at_50%_50%,_#ff8a0460_0%,#f5ffe1_70%)] sm:w-[700px] dark:bg-[radial-gradient(ellipse_at_50%_50%,_#ff8a0430_0%,_#1e1e1e_70%)]"
     >
     </div>
-    <header class="flex w-full flex-col gap-6 sm:gap-8 lg:w-2/3">
-      <H1>About</H1>
-
-      <Prose>
-        <p>
-          <strong>Art is beautiful</strong>. For over a decade, I’ve explored
-          software arts, working with embedded systems, creative frameworks, and
-          multiple programming languages. My projects have been exhibited in
-          Brussels, Dakar, Montreal, Dubrovnik, Neuss, Tunis, Dublin, Paris, and
-          beyond. This journey has been filled with collaboration, discovery,
-          and meaningful experiences. If you're curious, you can check out my
-          artistic work at <Link
-            href="https://jeromeabel.net"
-            label="jeromeabel.net"
-          />.
-        </p>
-
-        <p>
-          Today, <strong>I focus on front-end development</strong>, crafting
-          modern, maintainable, and well-tested web applications. In 2023, I
-          completed a year-long Front-End and React program at OpenClassrooms.
-          My experience at Raccourci Agency further deepened my skills in Vue
-          and Kotlin. Now, I’m fully engaged in building a great product at
-          uh!ive, an innovative company at the forefront of AI-driven Call
-          Intelligence.
-        </p>
-
-        <p>
-          Beyond technical expertise, I focus on engineering best practices that
-          promote quality and maintainability. I value clean architecture,
-          testing, and performance to ensure that everything I build is solid
-          and scalable
-        </p>
-
-        <p>
-          I look forward to working with talented engineers, learning from them,
-          and building great things together. <Icon
-            name="lucide:handshake"
-            class="animate-rotate inline-block h-6 w-6"
-          />
-        </p>
-      </Prose>
-      <Link
-        label="Download CV"
-        href="/CV_JeromeAbel_en.pdf"
-        icon="lucide:download"
-        variant="external"
-        class="mt-4"
-      />
-    </header>
-
-    <section class="mt-0 lg:mt-12">
-      <H2>My Way Of Doing</H2>
-      <div
-        class="my-8 grid grid-cols-1 gap-6 md:my-16 lg:grid-cols-3 2xl:gap-12"
-      >
-        <FeatureCard id="user" />
-        <FeatureCard id="creativity" />
-        <FeatureCard id="quality" />
-      </div>
-    </section>
+    <AboutText />
+    <AboutValues />
   </main>
 </Layout>
 

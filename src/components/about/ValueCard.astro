@@ -1,18 +1,12 @@
 ---
 import { Image } from "astro:assets";
-import { getEntry, render } from "astro:content";
+
 interface Props {
-  id: string;
-}
-const { id } = Astro.props;
-
-const entry = await getEntry("feature", id);
-
-if (!entry) {
-  throw new Error("Could not find entry");
+  title: string;
+  imgUrl: string;
 }
 
-const { Content } = await render(entry);
+const { title, imgUrl } = Astro.props;
 ---
 
 <article
@@ -21,20 +15,20 @@ const { Content } = await render(entry);
   <div class="flex justify-center lg:flex-none">
     <Image
       class="max-w-[250px] md:max-w-[300px] lg:max-w-[200px] dark:invert"
-      src={entry.data.img_url}
-      width={entry.data.img.width}
-      height={entry.data.img.height}
-      alt={`Illustration ${entry.data.title}`}
+      src={imgUrl}
+      width={400}
+      height={400}
+      alt={`Illustration ${title}`}
     />
   </div>
   <div
     class="border-muted border-t border-dashed p-6 md:border-t-0 md:border-l lg:border-t lg:border-l-0 lg:p-0 lg:pt-6"
   >
     <h2 class="font-title text-3xl tracking-wide uppercase sm:text-4xl">
-      {entry.data.title}
+      {title}
     </h2>
     <div class="prose-md sm:prose-lg pt-4 text-pretty">
-      <Content />
+      <slot />
     </div>
   </div>
 </article>
