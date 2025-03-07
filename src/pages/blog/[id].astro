@@ -1,0 +1,30 @@
+---
+import Prose from "@components/ui/Prose.astro";
+import Layout from "@layouts/Layout.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const blogs = await getCollection("blog");
+  return blogs.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const publishedDate = new Date(entry.data.date);
+// SEO image
+---
+
+<Layout
+  page={entry.data.title}
+  description={entry.data.description}
+  {publishedDate}
+>
+  <main class="container flex flex-col gap-8 py-8 lg:gap-12 lg:py-24">
+    <Prose class="md:mx-auto">
+      <Content />
+    </Prose>
+  </main>
+</Layout>

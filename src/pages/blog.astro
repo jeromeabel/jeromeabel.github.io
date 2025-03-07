@@ -1,0 +1,26 @@
+---
+import { getCollection } from "astro:content";
+
+import H1 from "@components/ui/H1.astro";
+import P from "@components/ui/P.astro";
+import Layout from "@layouts/Layout.astro";
+
+const blogs = (await getCollection("blog")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<Layout page="Work">
+  <main class="container py-8 lg:py-24">
+    <section class="flex w-full flex-col gap-4 lg:w-2/3 lg:gap-8">
+      <H1>Blog</H1>
+      <P>Insights, experiments, and lessons from my journey as a developer.</P>
+    </section>
+
+    <section class=" bg-muted-background rounded-2xl my-16">
+    <ul class="flex flex-col gap-8 p-8">
+      { blogs.map((blog) => <li><a href=`/blog/${blog.id}`>{blog.id}</a></li>) }
+      </ul>
+    </section>
+  </main>
+</Layout>
