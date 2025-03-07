@@ -1,0 +1,34 @@
+---
+import { getEntry } from "astro:content";
+
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+
+const entry = await getEntry("blog", id);
+
+if (!entry) {
+  throw new Error("Sorry, could not find entry");
+}
+
+const dateOptions: Intl.DateTimeFormatOptions = {
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+};
+const dateISOString = new Date(entry.data.date).toLocaleDateString(
+  "en-EN",
+  dateOptions,
+);
+---
+
+<a
+  href=`/blog/${entry.id}`
+  class="border-muted-border hover:bg-muted-background border-s-4 px-3 py-1"
+  ><h2 class="font-semibold">{entry.data.order}: {entry.data.title}</h2><time
+    class="first-letter:uppercase">{dateISOString}</time
+  >
+</a>

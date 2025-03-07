@@ -1,8 +1,10 @@
 ---
-title: "Part 4/10: Test the component (v2-1)"
+title: "Test the Component (v2.1)"
 headline: "From February 8 to 9, 2023"
 date: 2025-03-07
 description: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus assumenda deleniti itaque molestias odio quidem praesentium, numquam veniam animi ipsam velit iure atque delectus debitis quisquam tempore optio ea corrupti.
+series: "Testing a Simple Nuxt Feature"
+order: 4
 ---
 
 Code: [version-banner-2-1.unit.spec.ts](https://github.com/jeromeabel/nuxt-clean-architecture/blob/feat/version-banner/layers/version-02/__tests__/version-banner-2-1.unit.spec.ts)
@@ -181,67 +183,4 @@ Let's add the new specifications to have a better design:
 
 ## Decision Map
 
-```mermaid
-graph TB
-
-    %% Start
-    A((🏁 Start v2.1>)):::start
-
-    %% Spec v2 Checklist
-    B[📋 Specification v2.1]:::checklist
-
-    %% Development Process
-    C2(["👨‍💻 Component (Humble)"]):::impl
-    C1(["👨‍💻 Composable (Presenter)"]):::impl
-
-    D{{🧪👁️ Visual Test}}:::test
-    E{Confidence <br>Enough?}:::decision
-    F((👋 Exit)):::exit
-
-    %% Test
-    G{{🧪 Automated Test}}:::test
-
-    %% Issues
-    H[/⚠️ Integration Test/]:::issue
-    I{Confidence <br>Enough?}:::decision
-    J[/⚠️ Issues/]:::issue
-    K1[/"⚠️ <b>Dependencies:</b><br>useRuntimeConfig & localStorage"/]:::issue
-    K2[/"⚠️ <b>Hardcoded:</b><br>'app-version'"/]:::issue
-    K3[/"⚠️ <b>Lifecycle:</b><br>onMounted"/]:::issue
-
-    L1[🎯 Mock the comosable]:::checklist
-    L2[🎯 Test the composable]:::checklist
-    L3[🎯 Move onMounted]:::checklist
-
-    M[📋 Specification v2.2]:::checklist
-    N((v2.2))
-
-    %% Connections
-    A --> B
-    B --> | Refactor | C2
-    B --> | Refactor: Extract Logic | C1
-    C1 & C2 --> D
-    D --> E
-    E --> |Yes| F
-    E --> |No| G
-    %%G --- |"Refactor: add nextTick"| G
-    G --- H
-    H --- I
-    I --- |yes| F
-    I --- |no| J --- K1 & K2 & K3
-    K1 --- |"★ Guided By SRP & <br>Don't test implementation details"|L1
-    K2 --- |★ Guided By SRP & <br>Avoid magic values|L2
-    K3 --- |"★ Guided By Make the test simpler"|L3
-    L1 & L2 --- M
-    L3 -.- |optional|M
-    M --- N
-
-    %% Define Styles %%
-    classDef start fill:#fff,color:#000,stroke:#000,stroke-width:2;
-    classDef impl fill:#000,color:#fff,stroke:#fff,stroke-width:0;
-    classDef issue fill:#f48c06,color:#000,stroke:#333,stroke-width:0;
-    classDef decision fill:#FEE420,color:#000,stroke:#4F4400,stroke-width:0;
-    classDef test fill:#264653,color:#fff,stroke:#060600,stroke-width:0;
-    classDef exit fill:#ff0044,color:#fff,stroke-width:0;
-    classDef checklist fill:#E1F5FE,stroke:#000000,color:#000000;
-```
+![Decision Map Graph](./graph.svg)

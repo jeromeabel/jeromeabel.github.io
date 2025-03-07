@@ -1,4 +1,3 @@
-```mermaid
 graph TD;
     %% Class Definitions
     classDef start fill:#fff,color:#000,stroke:#000,stroke-width:2;
@@ -68,4 +67,3 @@ graph TD;
     ISSUE4C --> |Refactor:<br>Repository Pattern| IMPL4A & IMPL4B & IMPL4C
     IMPL4A --> |Refactor:<br> Dependency Inversion| IMPL5A --- TEST5A
     IMPL4B --> TEST5A & TEST5B --- SUCCESS2
-```

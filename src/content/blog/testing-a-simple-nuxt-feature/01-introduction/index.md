@@ -1,17 +1,21 @@
 ---
-title: "Part 1/10: Introduction"
+title: "Introduction"
 headline: "From February 8 to 9, 2023"
 date: 2025-03-07
 description: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus assumenda deleniti itaque molestias odio quidem praesentium, numquam veniam animi ipsam velit iure atque delectus debitis quisquam tempore optio ea corrupti.
+series: "Testing a Simple Nuxt Feature"
+order: 1
 ---
-
-Code: [feat/version-banner](https://github.com/jeromeabel/nuxt-clean-architecture/tree/feat/version-banner)
 
 ## Introduction
 
 When developing frontend features, it’s easy to create components that mix UI, business logic, data retrieval, and state management. While this might work initially, it quickly becomes untestable and difficult to maintain.
 
 If you're new to testing, join me on this journey—I believe it will help you navigate similar situations. If you're experienced with testing, I welcome your feedback to improve this series.
+
+## Code
+
+👉 [feat/version-banner](https://github.com/jeromeabel/nuxt-clean-architecture/tree/feat/version-banner)
 
 ## What’s the Best Way to Learn Testing?
 
@@ -52,4 +56,4 @@ Specifications will evolve throughout development, just as they do in real proje
 ## Decision Map Overview
 
 Let's take a look at the final map of this journey:
-![Map](./map.png)
+![Decision Map Graph](./graph.svg)

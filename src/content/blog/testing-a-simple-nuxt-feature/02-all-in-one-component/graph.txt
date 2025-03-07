@@ -1,0 +1,49 @@
+graph TB;
+
+    %% Start %%
+    A((🏁 Start Feature:<br> <b>Version Banner</b>)):::start
+
+    %% Spec v1 Checklist %%
+    B[📋 Specification v1]:::checklist
+
+    %% Development Process %%
+    C([👨‍💻 All-In-One Component]):::impl
+    D{{🧪👁️ Visual Tests}}:::test
+    E{Confidence Enough?}:::decision
+    F((👋 Exit)):::exit
+
+    %% Issues %%
+    G[/⚠️ Difficult to Test/]:::issue
+    G1[/⚠️ <b>Type Assumptions</b>/]:::issue
+    G2[/⚠️ <b>Too Many Concerns</b>:<br>UI, State, Lifecycle, Dependencies/]:::issue
+
+    %% Spec v2 Checklist %%
+    H1["🎯 Version Handling ➜ Entity & Validation"]:::checklist
+    H2["🎯 Component ➜ UI Only"]:::checklist
+    I[📋 Specification v2.1]:::checklist
+    J((v2.1)):::start
+
+    %% Connections %%
+    A --> |"★ Guided By YAGNI"| B
+    B --> |First Implementation| C
+    C --> D
+    D --> E
+    E --> |Yes| F
+    E --> |No| G
+
+    G -->|"★ Guided By Primitive Obsession"| G1
+    G -->|"★ Guided By Separation of Concerns (SoC)"| G2
+    G1 --> H1
+    G2 --> H2
+    H1 --> I
+    H2 --> I
+    I --> J
+
+    %% Define Styles %%
+    classDef start fill:#fff,color:#000,stroke:#000,stroke-width:2;
+    classDef impl fill:#000,color:#fff,stroke:#fff,stroke-width:0;
+    classDef issue fill:#f48c06,color:#000,stroke:#333,stroke-width:0;
+    classDef decision fill:#FEE420,color:#000,stroke:#4F4400,stroke-width:0;
+    classDef test fill:#264653,color:#fff,stroke:#060600,stroke-width:0;
+    classDef exit fill:#ff0044,color:#fff,stroke-width:0;
+    classDef checklist fill:#E1F5FE,stroke:#000000,color:#000000;

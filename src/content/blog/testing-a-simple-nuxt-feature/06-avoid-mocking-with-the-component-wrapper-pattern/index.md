@@ -1,8 +1,10 @@
 ---
-title: "Part 6/10: Avoid Mocks With the 'Component Wrapper' Pattern (v3)"
+title: "Avoid Mocks With the 'Component Wrapper' Pattern (v3)"
 headline: "From February 8 to 9, 2023"
 date: 2025-03-07
 description: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus assumenda deleniti itaque molestias odio quidem praesentium, numquam veniam animi ipsam velit iure atque delectus debitis quisquam tempore optio ea corrupti.
+series: "Testing a Simple Nuxt Feature"
+order: 6
 ---
 
 ## Refactor to a Component Wrapper
@@ -136,45 +138,4 @@ The journey isn’t over yet. Now that the component no longer depends directly 
 
 ## Decision Map
 
-```mermaid
-graph TB
-
-    %% Start
-    A((🏁 Start v3)):::start
-
-    %% Specification v3 Checklist
-    B[📋 Specification v3]:::checklist
-
-    %% Development Process
-    C1(["👨‍💻 <b>Wrapper Component</b>:<br>VersionBanner03.vue"]):::impl
-    C2(["👨‍💻 <b>Child Component</b>:<br>VersionBannerUI.vue"]):::impl
-
-    %% Test
-    D{{🧪 Automated Test}}:::test
-
-    F([✅ Enough Confidence!]):::success
-
-    G{Is Testing<br>Sufficient?}:::decision
-    H((👋 Exit)):::exit
-    I[🎯 The composable should be tested]:::checklist
-    J((v4)):::start
-
-    %% Connections
-    A --> B
-    B --> | Refactor: Extract Component | C1 & C2
-    C2 --> | Refactor: Remove Mocks | D
-    D --- F --- G
-    G --- |Yes| H
-    G --- |No| I
-    I --- J
-
-    %% Define Styles
-    classDef start fill:#fff,color:#000,stroke:#000,stroke-width:2;
-    classDef impl fill:#000,color:#fff,stroke:#fff,stroke-width:0;
-    classDef issue fill:#f48c06,color:#000,stroke:#333,stroke-width:0;
-    classDef decision fill:#FEE420,color:#000,stroke:#4F4400,stroke-width:0;
-    classDef test fill:#264653,color:#fff,stroke:#060600,stroke-width:0;
-    classDef exit fill:#ff0044,color:#fff,stroke-width:0;
-    classDef checklist fill:#E1F5FE,stroke:#000000,color:#000000;
-    classDef success fill:#4CAF50,color:#fff,stroke:#fff,stroke-width:0;
-```
+![Decision Map Graph](./graph.svg)

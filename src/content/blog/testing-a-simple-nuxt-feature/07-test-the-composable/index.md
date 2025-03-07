@@ -1,8 +1,10 @@
 ---
-title: "Part 7/10: Test the composable (v4)"
+title: "Test the composable (v4)"
 headline: "From February 8 to 9, 2023"
 date: 2025-03-07
 description: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus assumenda deleniti itaque molestias odio quidem praesentium, numquam veniam animi ipsam velit iure atque delectus debitis quisquam tempore optio ea corrupti.
+series: "Testing a Simple Nuxt Feature"
+order: 7
 ---
 
 ## First Test (v4-1)
@@ -188,44 +190,4 @@ Improving this test by converting it into a unit test would be a valuable enhanc
 
 ## Decision Map
 
-```mermaid
-graph TB
-
-    %% Start
-    A((🏁 Start v4.1)):::start
-
-    %% Specification v4 Checklist
-    B[📋 Specification v4.1]:::checklist
-
-    %% Development Process
-    C(["👨‍💻 <b>Composable</b><br>useVersion.ts"]):::impl
-
-    %% Test
-    D{{"🧪 Automated Test"}}:::test
-    E[/⚠️ onMounted Warning/]:::issue
-    F{{"🧪 Automated Test<br>(v4.2 & v4.3)"}}:::test
-    G[/⚠️ Not a Unit Test/]:::issue
-
-
-    H{Is Testing<br>Sufficient?}:::decision
-    I((👋 Exit)):::exit
-    J["🎯 Move 'onMounted' to the Parent Component"]:::checklist
-    K["🎯 Mock Dependencies to Have a Unit Test"]:::checklist
-    L((v5)):::start
-
-    %% Connections
-    A --> B --> C --> D
-    D --- E --- | Refactor: withSetup| F --- G --- H
-    H --> |No| J & K --- L
-    H --> |Yes| I
-
-    %% Define Styles
-    classDef start fill:#fff,color:#000,stroke:#000,stroke-width:2;
-    classDef impl fill:#000,color:#fff,stroke:#fff,stroke-width:0;
-    classDef issue fill:#f48c06,color:#000,stroke:#333,stroke-width:0;
-    classDef decision fill:#FEE420,color:#000,stroke:#4F4400,stroke-width:0;
-    classDef test fill:#264653,color:#fff,stroke:#060600,stroke-width:0;
-    classDef exit fill:#ff0044,color:#fff,stroke-width:0;
-    classDef checklist fill:#E1F5FE,stroke:#000000,color:#000000;
-    classDef success fill:#4CAF50,color:#fff,stroke:#fff,stroke-width:0;
-```
+![Decision Map Graph](./graph.svg)

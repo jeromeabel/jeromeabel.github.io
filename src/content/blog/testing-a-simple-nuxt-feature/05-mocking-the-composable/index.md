@@ -1,8 +1,10 @@
 ---
-title: "Part 5/10: Mocking the composable (v2-2 & v2-3)"
+title: "Mocking the composable (v2-2) & (v2-3)"
 headline: "From February 8 to 9, 2023"
 date: 2025-03-07
 description: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus assumenda deleniti itaque molestias odio quidem praesentium, numquam veniam animi ipsam velit iure atque delectus debitis quisquam tempore optio ea corrupti.
+series: "Testing a Simple Nuxt Feature"
+order: 5
 ---
 
 As we saw earlier, we gonnna mock the composable. It will help us isolate the component test without relying on Nuxt's real interactions or localStorage behavior.
@@ -205,51 +207,4 @@ What do you think? Should we continue refining our testing strategy further?
 
 ## Decision Map
 
-```mermaid
-graph TB
-
-    %% Start
-    A((🏁 Start v2.2)):::start
-
-    %% Specification v2 Checklist
-    B[📋 Specification v2.2]:::checklist
-
-    %% Development Process
-    C(["👨‍💻 <b>Component</b>:<br>VersionBanner02.vue"]):::impl
-
-        %% Test
-    D{{🧪 Automated Test}}:::test
-
-    E([✅ Isolated Unit Test]):::success
-    F{Confident Enough?}:::decision
-    G((👋 Exit)):::exit
-
-    %% Issues
-    H[/⚠️ The component is tightly coupled to the composable/]:::issue
-    I[🎯 The component should expose only props and events]:::checklist
-
-    J[📋 Specification v3]:::checklist
-    K((v3)):::start
-
-    %% Connections
-    A --> B
-    B --> | Refactor: add data-testid | C
-    C --> | Mock the composable | D
-    C --- | Refactor: Follow DRY Principle| D
-    D --> E
-    E --- F
-    F --> |Yes, white-box testing is OK| G
-    F --> |No, I prefer black-box testing| H
-    H --> |Guided by 'Don't test internal details' and 'Minimize coupling'| I
-    I --- J --- K
-
-    %% Define Styles %%
-    classDef start fill:#fff,color:#000,stroke:#000,stroke-width:2;
-    classDef impl fill:#000,color:#fff,stroke:#fff,stroke-width:0;
-    classDef issue fill:#f48c06,color:#000,stroke:#333,stroke-width:0;
-    classDef decision fill:#FEE420,color:#000,stroke:#4F4400,stroke-width:0;
-    classDef test fill:#264653,color:#fff,stroke:#060600,stroke-width:0;
-    classDef exit fill:#ff0044,color:#fff,stroke-width:0;
-    classDef checklist fill:#E1F5FE,stroke:#000000,color:#000000;
-    classDef success fill:#4CAF50,color:#fff,stroke:#fff,stroke-width:0;
-```
+![Decision Map Graph](./graph.svg)

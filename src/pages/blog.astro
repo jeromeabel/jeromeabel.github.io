@@ -1,13 +1,25 @@
 ---
 import { getCollection } from "astro:content";
 
+import PostCard from "@components/blog/PostCard.astro";
 import H1 from "@components/ui/H1.astro";
 import P from "@components/ui/P.astro";
 import Layout from "@layouts/Layout.astro";
 
-const blogs = (await getCollection("blog")).sort(
+const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
+
+const series = Array.from(
+  new Set(posts.map((post) => post.data.series).filter(Boolean)),
+);
+
+console.log(series);
+
+const SERIE = "Testing a Simple Nuxt Feature";
+const seriesPosts = posts
+  .filter((post) => post.data.series === SERIE)
+  .sort((a, b) => (a.data?.order ?? 0) - (b.data?.order ?? 0));
 ---
 
 <Layout page="Work">
@@ -17,10 +29,13 @@ const blogs = (await getCollection("blog")).sort(
       <P>Insights, experiments, and lessons from my journey as a developer.</P>
     </section>
 
-    <section class=" bg-muted-background rounded-2xl my-16">
-    <ul class="flex flex-col gap-8 p-8">
-      { blogs.map((blog) => <li><a href=`/blog/${blog.id}`>{blog.id}</a></li>) }
-      </ul>
+    <section class="my-16 flex flex-col gap-8">
+      <div class="border-muted-border rounded">
+        <h3 class="mb-8 text-xl font-semibold">{SERIE}</h3>
+        <div class="grid grid-cols-2 gap-4">
+          {seriesPosts.map((post) => <PostCard id={post.id} />)}
+        </div>
+      </div>
     </section>
   </main>
 </Layout>
