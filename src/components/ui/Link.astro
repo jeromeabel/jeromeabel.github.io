@@ -6,7 +6,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 const linkVariants = cva("transition-colors", {
   variants: {
     variant: {
-      menuActive: "text-foreground font-semibold",
+      menuActive: "text-foreground underline underline-offset-8",
       menuInactive: "text-muted hover:text-foreground",
       default:
         "inline-block border-dashed border-foreground border-b max-w-fit hover:border-solid",
