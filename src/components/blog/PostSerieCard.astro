@@ -26,10 +26,14 @@ const dateISOString = new Date(entry.data.date).toLocaleDateString(
 
 <a
   href=`/blog/${entry.id}`
-  class="border-muted-border hover:bg-muted-background borde4 flex justify-start gap-4 border"
-  ><time
-    class="text-muted bg-muted-background border-muted-border w-50 border-e px-4 py-2 first-letter:uppercase"
-    >{dateISOString}</time
+  class="border-muted-border hover:bg-muted-background borde4 flex items-center gap-4 border"
+  ><div
+    class="border-muted-border bg-muted-background flex h-full w-8 items-center justify-center border-e font-semibold"
   >
-  <h2 class="py-2 font-semibold">{entry.data.title}</h2>
+    {entry.data.order}
+  </div><div class="py-2">
+    <h2 class="font-semibold">{entry.data.title}</h2><time
+      class="text-muted first-letter:uppercase">{dateISOString}</time
+    >
+  </div>
 </a>

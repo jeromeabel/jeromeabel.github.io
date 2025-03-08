@@ -1,40 +1,54 @@
 ---
 import { getCollection } from "astro:content";
 
+import BlogSerie from "@components/blog/BlogSerie.astro";
 import PostCard from "@components/blog/PostCard.astro";
 import H1 from "@components/ui/H1.astro";
+import H2 from "@components/ui/H2.astro";
 import P from "@components/ui/P.astro";
 import Layout from "@layouts/Layout.astro";
 
-const posts = (await getCollection("blog")).sort(
+const allPosts = (await getCollection("blog")).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
 
-const series = Array.from(
-  new Set(posts.map((post) => post.data.series).filter(Boolean)),
+// const series = Array.from(
+//   new Set(allPosts.map((post) => post.data.series).filter(Boolean)),
+// );
+
+const { withSeries, withoutSeries } = allPosts.reduce(
+  (acc, post) => {
+    if (post.data.series) {
+      acc.withSeries.push(post);
+    } else {
+      acc.withoutSeries.push(post);
+    }
+    return acc;
+  },
+  { withSeries: [] as typeof allPosts, withoutSeries: [] as typeof allPosts },
 );
 
-console.log(series);
-
-const SERIE = "Testing a Simple Nuxt Feature";
-const seriesPosts = posts
-  .filter((post) => post.data.series === SERIE)
-  .sort((a, b) => (a.data?.order ?? 0) - (b.data?.order ?? 0));
+const series = Array.from(new Set(withSeries.map((post) => post.data.series)));
 ---
 
 <Layout page="Work">
-  <main class="container py-8 lg:py-24">
-    <section class="flex w-full flex-col gap-4 lg:w-2/3 lg:gap-8">
+  <main class="container flex flex-col gap-24 py-8 lg:py-24">
+    <header class="flex w-full flex-col gap-4 lg:w-2/3 lg:gap-8">
       <H1>Blog</H1>
       <P>Insights, experiments, and lessons from my journey as a developer.</P>
+    </header>
+
+    <section class="">
+      <H2>Posts</H2>
+      <div class="mt-8">
+        {withoutSeries.map((post) => <PostCard id={post.id} />)}
+      </div>
     </section>
 
-    <section class="my-16 flex flex-col gap-8">
-      <div class="border-muted-border rounded">
-        <h3 class="mb-8 text-xl font-semibold">{SERIE}</h3>
-        <div class="grid grid-cols-2 gap-4">
-          {seriesPosts.map((post) => <PostCard id={post.id} />)}
-        </div>
+    <section class="">
+      <H2>Series</H2>
+      <div class="mt-8">
+        {series.map((serie) => <BlogSerie id={serie} />)}
       </div>
     </section>
   </main>

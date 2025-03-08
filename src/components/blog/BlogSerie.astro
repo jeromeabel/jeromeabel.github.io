@@ -1,0 +1,25 @@
+---
+import PostSerieCard from "@components/blog/PostSerieCard.astro";
+import { getCollection } from "astro:content";
+
+interface Props {
+  id?: string;
+}
+
+const { id } = Astro.props;
+
+const allPosts = (await getCollection("blog")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+const seriesPosts = allPosts
+  .filter((post) => post.data.series === id)
+  .sort((a, b) => (a.data?.order ?? 0) - (b.data?.order ?? 0));
+---
+
+<div class="border-muted-border flex flex-col border-s ps-8">
+  <h3 class="mb-8 text-xl font-semibold">The "{id}" Serie</h3>
+  <div class="grid grid-cols-2 gap-4 ps-4">
+    {seriesPosts.map((post) => <PostSerieCard id={post.id} />)}
+  </div>
+</div>
