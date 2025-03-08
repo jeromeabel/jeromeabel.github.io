@@ -5,6 +5,7 @@ date: 2025-03-07
 description: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus assumenda deleniti itaque molestias odio quidem praesentium, numquam veniam animi ipsam velit iure atque delectus debitis quisquam tempore optio ea corrupti.
 series: "Testing a Simple Nuxt Feature"
 order: 5
+draft: true
 ---
 
 As we saw earlier, we gonnna mock the composable. It will help us isolate the component test without relying on Nuxt's real interactions or localStorage behavior.

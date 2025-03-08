@@ -8,13 +8,9 @@ import H2 from "@components/ui/H2.astro";
 import P from "@components/ui/P.astro";
 import Layout from "@layouts/Layout.astro";
 
-const allPosts = (await getCollection("blog")).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
-);
-
-// const series = Array.from(
-//   new Set(allPosts.map((post) => post.data.series).filter(Boolean)),
-// );
+const allPosts = (await getCollection("blog"))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .filter((post) => (import.meta.env.PROD ? post.data.draft !== true : true));
 
 const { withSeries, withoutSeries } = allPosts.reduce(
   (acc, post) => {
@@ -28,7 +24,9 @@ const { withSeries, withoutSeries } = allPosts.reduce(
   { withSeries: [] as typeof allPosts, withoutSeries: [] as typeof allPosts },
 );
 
-const series = Array.from(new Set(withSeries.map((post) => post.data.series)));
+const series = Array.from(
+  new Set(withSeries.map((post) => post.data.series).filter(Boolean)),
+);
 ---
 
 <Layout page="Work">
@@ -41,7 +39,7 @@ const series = Array.from(new Set(withSeries.map((post) => post.data.series)));
     <section class="">
       <H2>Posts</H2>
       <div class="mt-8">
-        {withoutSeries.map((post) => <PostCard id={post.id} />)}
+        {withoutSeries.map((post) => <PostCard {post} />)}
       </div>
     </section>
 

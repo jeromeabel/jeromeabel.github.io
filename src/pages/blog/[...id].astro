@@ -1,4 +1,5 @@
 ---
+import DraftBadge from "@components/blog/DraftBadge.astro";
 import H1 from "@components/ui/H1.astro";
 import Prose from "@components/ui/Prose.astro";
 import Layout from "@layouts/Layout.astro";
@@ -23,8 +24,9 @@ const publishedDate = new Date(entry.data.date);
   description={entry.data.description}
   {publishedDate}
 >
-  <main class="container flex flex-col gap-8 py-8 lg:gap-12 lg:py-24">
+  <main class="relative container flex flex-col gap-8 py-8 lg:gap-12 lg:py-24">
     <H1>{entry.data.title}</H1>
+    <DraftBadge visible={entry.data.draft} />
     <Prose class="md:mx-auto">
       <Content />
     </Prose>

@@ -3,6 +3,7 @@ title: "Building Scalable and Testable Nuxt Projects with Clean Architecture ✨
 headline: "From February 8 to 9, 2023"
 date: 2024-11-14
 description: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus assumenda deleniti itaque molestias odio quidem praesentium, numquam veniam animi ipsam velit iure atque delectus debitis quisquam tempore optio ea corrupti.
+draft: false
 ---
 
 I've been experimenting with Clean Architecture in Nuxt, and I'm excited to share the results with a practical example of a newsletter subscription feature!

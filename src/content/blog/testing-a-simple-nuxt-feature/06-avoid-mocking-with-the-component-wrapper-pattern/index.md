@@ -5,6 +5,7 @@ date: 2025-03-07
 description: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus assumenda deleniti itaque molestias odio quidem praesentium, numquam veniam animi ipsam velit iure atque delectus debitis quisquam tempore optio ea corrupti.
 series: "Testing a Simple Nuxt Feature"
 order: 6
+draft: true
 ---
 
 ## Refactor to a Component Wrapper

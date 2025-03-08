@@ -5,6 +5,7 @@ date: 2025-03-07
 description: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus assumenda deleniti itaque molestias odio quidem praesentium, numquam veniam animi ipsam velit iure atque delectus debitis quisquam tempore optio ea corrupti.
 series: "Testing a Simple Nuxt Feature"
 order: 4
+draft: true
 ---
 
 Code: [version-banner-2-1.unit.spec.ts](https://github.com/jeromeabel/nuxt-clean-architecture/blob/feat/version-banner/layers/version-02/__tests__/version-banner-2-1.unit.spec.ts)

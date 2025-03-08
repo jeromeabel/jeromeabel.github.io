@@ -1,16 +1,14 @@
 ---
-import { getEntry } from "astro:content";
-
+import type { CollectionEntry } from "astro:content";
+import DraftBadge from "./DraftBadge.astro";
 interface Props {
-  id: string;
+  post: CollectionEntry<"blog">;
 }
 
-const { id } = Astro.props;
+const { post } = Astro.props;
 
-const entry = await getEntry("blog", id);
-
-if (!entry) {
-  throw new Error("Sorry, could not find entry");
+if (!post) {
+  throw new Error("Sorry, could not find post");
 }
 
 const dateOptions: Intl.DateTimeFormatOptions = {
@@ -18,22 +16,23 @@ const dateOptions: Intl.DateTimeFormatOptions = {
   month: "long",
   day: "numeric",
 };
-const dateISOString = new Date(entry.data.date).toLocaleDateString(
+const dateISOString = new Date(post.data.date).toLocaleDateString(
   "en-EN",
   dateOptions,
 );
 ---
 
 <a
-  href=`/blog/${entry.id}`
+  href=`/blog/${post.id}`
   class="border-muted-border hover:bg-muted-background borde4 flex items-center gap-4 border"
   ><div
     class="border-muted-border bg-muted-background flex h-full w-8 items-center justify-center border-e font-semibold"
   >
-    {entry.data.order}
+    {post.data.order}
   </div><div class="py-2">
-    <h2 class="font-semibold">{entry.data.title}</h2><time
+    <h2 class="font-semibold">{post.data.title}</h2><time
       class="text-muted first-letter:uppercase">{dateISOString}</time
     >
+    <DraftBadge visible={post.data.draft} />
   </div>
 </a>
