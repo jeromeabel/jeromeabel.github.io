@@ -13,7 +13,7 @@ if (!post) {
 
 const dateOptions: Intl.DateTimeFormatOptions = {
   year: "numeric",
-  month: "long",
+  month: "numeric",
   day: "numeric",
 };
 const dateISOString = new Date(post.data.date).toLocaleDateString(
