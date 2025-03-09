@@ -257,4 +257,4 @@ What do you think?
 
 ## Decision Map
 
-![Decision Map Graph](./graph.png)
+![Decision Map Graph](./graph.svg)

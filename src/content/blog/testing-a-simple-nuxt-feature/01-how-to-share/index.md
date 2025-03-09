@@ -1,5 +1,5 @@
 ---
-title: "Introduction"
+title: "How to Share?"
 date: 2025-03-07
 description: Let's dive into the first chapter of this serie about testing in Nuxt. Prevent your code being untestable and difficult to maintain.
 serie: "Testing a Simple Nuxt Feature"
@@ -56,4 +56,4 @@ Specifications will evolve throughout development, just as they do in real proje
 ## Decision Map Overview
 
 Let's take a look at the final map of this journey:
-![Decision Map Graph](./graph.png)
+![Decision Map Graph](./graph.svg)

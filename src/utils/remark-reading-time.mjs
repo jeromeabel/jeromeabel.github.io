@@ -4,7 +4,7 @@ import getReadingTime from "reading-time";
 export function remarkReadingTime() {
   return function (tree, { data }) {
     const textOnPage = toString(tree);
-    const readingTime = getReadingTime(textOnPage);
-    data.astro.frontmatter.minutesRead = readingTime.text;
+    const readingTime = getReadingTime(textOnPage, { wordsPerMinute: 120 });
+    data.astro.frontmatter.minutesRead =  readingTime.text;
   };
 }

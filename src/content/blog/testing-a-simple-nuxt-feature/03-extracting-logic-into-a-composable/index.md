@@ -4,7 +4,7 @@ date: 2025-03-07
 description: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus assumenda deleniti itaque molestias odio quidem praesentium, numquam veniam animi ipsam velit iure atque delectus debitis quisquam tempore optio ea corrupti.
 serie: "Testing a Simple Nuxt Feature"
 order: 3
-draft: false
+draft: true
 ---
 
 (Presenter/Humble Component Pattern)
@@ -240,4 +240,4 @@ Let's add the new specifications to have a better design:
 
 ## Decision Map
 
-![Decision Map Graph](./graph.png)
+![Decision Map Graph](./graph.svg)

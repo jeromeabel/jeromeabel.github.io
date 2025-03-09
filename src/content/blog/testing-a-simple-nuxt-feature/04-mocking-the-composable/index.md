@@ -209,4 +209,4 @@ What do you think? Should we continue refining our testing strategy further?
 
 ## Decision Map
 
-![Decision Map Graph](./graph.png)
+![Decision Map Graph](./graph.svg)

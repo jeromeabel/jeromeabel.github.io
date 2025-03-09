@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 
 import H1 from "@components/ui/H1.astro";
 import P from "@components/ui/P.astro";
-import WorkCard from "@components/work/WorkCard.astro";
+import WorkCardImage from "@components/work/WorkCardImage.astro";
 import Layout from "@layouts/Layout.astro";
 
 const works = (await getCollection("work")).sort(
@@ -25,7 +25,7 @@ const works = (await getCollection("work")).sort(
     <section
       class="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:mt-24 lg:grid-cols-3"
     >
-      {works.map((work) => <WorkCard slug={work.id} />)}
+      {works.map((work) => <WorkCardImage {work} />)}
     </section>
   </main>
 </Layout>

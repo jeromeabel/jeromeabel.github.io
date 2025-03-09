@@ -192,4 +192,4 @@ Improving this test by converting it into a unit test would be a valuable enhanc
 
 ## Decision Map
 
-![Decision Map Graph](./graph.png)
+![Decision Map Graph](./graph.svg)

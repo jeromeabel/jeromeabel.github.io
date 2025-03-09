@@ -1,22 +1,24 @@
 ---
 import H2 from "@components/ui/H2.astro";
+import Link from "@components/ui/Link.astro";
 import WorkCard from "@components/work/WorkCard.astro";
+import { getCollection } from "astro:content";
 
-interface Props {
-  works: Array<string>;
-  title: string;
-  subtitle: string;
-  color: string;
-}
-
-const { works, title, subtitle, color } = Astro.props;
+const works = (await getCollection("work"))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
 ---
 
 <section class="container flex flex-col gap-4 lg:gap-8">
-  <H2>
-    <span class={color}>{title}</span><br />{subtitle}
-  </H2>
-  <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-8">
-    {works.map((work) => <WorkCard slug={work} variant="home" />)}
+  <H2>Latest Works</H2>
+  <div class="grid grid-cols-1 gap-4 md:grid-cols-3 lg:gap-8">
+    {works.map((work) => <WorkCard {work} />)}
   </div>
+  <Link
+    class="mt-8"
+    label="See more works"
+    href="/blog"
+    icon="lucide:arrow-right"
+    variant="secondary"
+  />
 </section>

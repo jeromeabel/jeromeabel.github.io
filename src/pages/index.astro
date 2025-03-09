@@ -2,7 +2,6 @@
 import BlogPreview from "@components/blog/BlogPreview.astro";
 import Contact from "@components/contact/Contact.astro";
 import Hero from "@components/hero/Hero.astro";
-import Link from "@components/ui/Link.astro";
 import WorksPreview from "@components/work/WorksPreview.astro";
 import Layout from "@layouts/Layout.astro";
 ---
@@ -11,37 +10,10 @@ import Layout from "@layouts/Layout.astro";
   <div>
     <Hero />
 
-    <main class="flex flex-col gap-16 lg:gap-24 xl:gap-32">
-      <BlogPreview
-        title=""
-        subtitle="Latest Posts"
-        color="text-purple-600 dark:text-purple-400"
-      />
-      <WorksPreview
-        works={["kungfu-school", "medito-fundraising"]}
-        title="I build"
-        subtitle="Websites"
-        color="text-green-700 dark:text-green-400"
-      />
-      <WorksPreview
-        works={["la-forme", "logariat"]}
-        title="I made"
-        subtitle="Real-time applications"
-        color="text-blue-600 dark:text-blue-400"
-      />
+    <main class="mb-32 flex flex-col gap-16 lg:gap-24 xl:gap-36">
+      <BlogPreview />
+      <WorksPreview />
     </main>
-
-    <div
-      class="container flex justify-center py-12 sm:justify-start md:py-24 xl:py-32"
-    >
-      <Link
-        label="See more works"
-        href="/work"
-        icon="lucide:arrow-right"
-        variant="secondary"
-      />
-    </div>
-
     <Contact />
   </div>
 </Layout>

@@ -1,0 +1,58 @@
+---
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+
+const variants = {
+  home: { article: "aspect-square", a: "border-muted-border border-2" },
+  work: { article: "aspect-square", a: "" },
+};
+
+interface Props {
+  work?: CollectionEntry<"work">;
+  variant?: "home" | "work";
+}
+
+const { work } = Astro.props;
+
+const variant = "home";
+
+if (!work) {
+  throw new Error("Sorry, could not find work");
+}
+---
+
+<a
+  href={"/work/" + work.id}
+  title={`Open the "${work.data.title}" project`}
+  class:list={[
+    "relative shadow-lg outline-offset-4 outline-black focus:outline-2 dark:shadow-none dark:outline-white",
+    variants[variant].a,
+  ]}
+>
+  <article class=`group ${variants[variant].article} overflow-hidden`>
+    <Image
+      src={work.data.img_preview}
+      alt={`${work.data.title} preview`}
+      class="transition-transform duration-1000 motion-safe:group-hover:scale-110"
+      loading="lazy"
+    />
+    <div
+      class="group-bg-black absolute inset-0 grid items-center duration-500 group-hover:bg-black/85 motion-reduce:transition-all dark:group-hover:bg-black/90"
+    >
+      <div
+        class="flex flex-col items-center justify-center gap-6 p-4 opacity-0 duration-500 group-hover:opacity-100"
+      >
+        <Icon
+          name="cross-big"
+          class="text-5xl transition-all delay-100 duration-500 group-hover:rotate-0 motion-safe:-rotate-45 lg:text-8xl"
+        />
+        <p
+          class="font-title text-background-accent dark:text-foreground-accent text-3xl lg:text-5xl"
+        >
+          {work?.data.title}
+        </p>
+      </div>
+    </div>
+  </article>
+</a>

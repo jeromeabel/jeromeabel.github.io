@@ -140,4 +140,4 @@ The journey isn’t over yet. Now that the component no longer depends directly 
 
 ## Decision Map
 
-![Decision Map Graph](./graph.png)
+![Decision Map Graph](./graph.svg)

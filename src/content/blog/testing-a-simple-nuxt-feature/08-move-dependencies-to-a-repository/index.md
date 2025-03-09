@@ -315,4 +315,4 @@ If you want to continue, you could try to fullfill these two missing specificati
 
 ## Decision Map
 
-![Decision Map Graph](./graph.png)
+![Decision Map Graph](./graph.svg)

@@ -1,11 +1,15 @@
 ---
+import { Icon } from "astro-icon/components";
 import type { CollectionEntry } from "astro:content";
+import { render } from 'astro:content';
+
 import DraftBadge from "./DraftBadge.astro";
 interface Props {
   post: CollectionEntry<"blog">;
 }
 
 const { post } = Astro.props;
+const { remarkPluginFrontmatter } = await render(post);
 
 if (!post) {
   throw new Error("Sorry, could not find post");
@@ -13,9 +17,10 @@ if (!post) {
 
 const dateOptions: Intl.DateTimeFormatOptions = {
   year: "numeric",
-  month: "numeric",
+  month: "long",
   day: "numeric",
 };
+
 const dateISOString = new Date(post.data.date).toLocaleDateString(
   "en-EN",
   dateOptions,
@@ -24,23 +29,36 @@ const dateISOString = new Date(post.data.date).toLocaleDateString(
 const title = post.data.title;
 const titleSerie = post.data.serie;
 const order = post.data.order;
+/*
+time
+    class="text-muted bg-muted-background border-muted-border flex h-full min-h-[50px] w-[120px] shrink-0 items-center border-e ps-4"
+    >{dateISOString}</time
+  >
+*/
+
 ---
 
 <a
   href=`/blog/${post.id}`
-  class="border-muted-border hover:bg-muted-background flex items-center gap-4 border"
-  ><time
-    class="text-muted bg-muted-background border-muted-border flex h-full min-h-[50px] w-[120px] shrink-0 items-center border-e ps-4"
-    >{dateISOString}</time
-  >
-  <h2 class="py-2 font-semibold">
+  class="border-muted-border hover:bg-muted-background/50 flex flex-col gap-4 border ps-8 pt-8 pb-4 pe-6"
+>
+  <h2 class="text-2xl tracking-wide font-bold">
     {
-      titleSerie && (
-        <span class="text-muted me-4 border-e pe-4">
-          "{titleSerie}" {order}
-        </span>
-      )
-    }{title}
+      titleSerie ? (
+        <p class="text-muted text-lg font-normal uppercase">
+          {titleSerie} &#128900; <span class="text-muted text-base">{order}</span>
+        </p>
+        <p> {title}</p>
+      ): (title)
+    }
   </h2>
+  <p class="line-clamp-2">{post.data.description}</p>
+  <div class="flex items-center gap-2 text-muted justify-end mt-4">
+    <Icon name="lucide:calendar" />
+    <time class=" text-sm">{dateISOString}</time>
+
+    <Icon name="lucide:clock" class="ms-6" />
+    <span class=" text-sm">{remarkPluginFrontmatter.minutesRead}</span>
+  </div>
   <DraftBadge visible={post.data.draft} />
 </a>

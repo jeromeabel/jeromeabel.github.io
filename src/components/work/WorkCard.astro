@@ -1,58 +1,51 @@
 ---
-import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
-import { getEntry } from "astro:content";
-
-const variants = {
-  home: { article: "aspect-video", a: "border-muted-border border-2" },
-  work: { article: "aspect-square", a: "" },
-};
+import type { CollectionEntry } from "astro:content";
 
 interface Props {
-  slug: string;
-  variant?: "home" | "work";
+  work?: CollectionEntry<"work">;
 }
 
-const { slug, variant = "work" } = Astro.props;
-
-const work = await getEntry("work", slug);
+const { work } = Astro.props;
 
 if (!work) {
   throw new Error("Sorry, could not find work");
 }
+
+const dateOptions: Intl.DateTimeFormatOptions = {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+};
+
+const dateISOString = new Date(work.data.date).toLocaleDateString(
+  "en-EN",
+  dateOptions,
+);
 ---
 
 <a
   href={"/work/" + work.id}
   title={`Open the "${work.data.title}" project`}
-  class:list={[
-    "relative shadow-lg outline-offset-4 outline-black focus:outline-2 dark:shadow-none dark:outline-white",
-    variants[variant].a,
-  ]}
+  class="border-muted-border group hover:bg-muted-background relative grid auto-rows-[auto_1fr] border shadow-lg outline-offset-4 outline-black focus:outline-2 dark:shadow-none dark:outline-white"
 >
-  <article class=`group ${variants[variant].article} overflow-hidden`>
+  <div class="aspect-square overflow-hidden">
     <Image
       src={work.data.img_preview}
       alt={`${work.data.title} preview`}
-      class="transition-transform duration-1000 motion-safe:group-hover:scale-110"
+      class="transition-transform duration-1000 motion-safe:group-hover:scale-105"
       loading="lazy"
     />
-    <div
-      class="group-bg-black absolute inset-0 grid items-center duration-500 group-hover:bg-black/85 motion-reduce:transition-all dark:group-hover:bg-black/90"
-    >
-      <div
-        class="flex flex-col items-center justify-center gap-6 p-4 opacity-0 duration-500 group-hover:opacity-100"
-      >
-        <Icon
-          name="cross-big"
-          class="text-5xl transition-all delay-100 duration-500 group-hover:rotate-0 motion-safe:-rotate-45 lg:text-8xl"
-        />
-        <p
-          class="font-title text-background-accent dark:text-foreground-accent text-3xl lg:text-5xl"
-        >
-          {work?.data.title}
-        </p>
-      </div>
-    </div>
-  </article>
+  </div>
+
+  <div class="p-6">
+    <p class="text-3xl font-semibold tracking-wide">
+      {work.data.title}
+    </p>
+    <p class="line-clamp-2 pt-2">{work.data.description}</p>
+  </div>
+
+  <p class="text-muted px-6 pb-3 text-end">
+    {dateISOString}
+  </p>
 </a>

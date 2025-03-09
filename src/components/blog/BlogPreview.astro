@@ -1,37 +1,23 @@
 ---
-import PostCard2 from "@components/blog/PostCard2.astro";
-import PostLine from "@components/blog/PostLine.astro";
+import PostCard from "@components/blog/PostCard.astro";
 import H2 from "@components/ui/H2.astro";
 import Link from "@components/ui/Link.astro";
 import { getCollection } from "astro:content";
 
-interface Props {
-  title: string;
-  subtitle: string;
-  color: string;
-}
-
-const { title, subtitle, color } = Astro.props;
-const allPosts = (await getCollection("blog"))
+const posts = (await getCollection("blog"))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .filter((post) => post.data.draft !== true)
   .slice(0, 8);
-console.log(allPosts.map((p) => p.id));
 ---
 
-<section class="container flex flex-col gap-4 lg:gap-16">
-  <H2>
-    <span class={color}>{title}</span><br />{subtitle}
-  </H2>
+<section class="container flex flex-col gap-4 lg:gap-8">
+  <H2>Latest Posts</H2>
   <div class="grid grid-cols-2 gap-8">
-    {allPosts.map((post) => <PostCard2 {post} />)}
-  </div>
-
-  <div class="grid grid-cols-1 gap-8">
-    {allPosts.map((post) => <PostLine {post} />)}
+    {posts.map((post) => <PostCard {post} />)}
   </div>
 
   <Link
+    class="mt-8"
     label="See more posts"
     href="/blog"
     icon="lucide:arrow-right"
