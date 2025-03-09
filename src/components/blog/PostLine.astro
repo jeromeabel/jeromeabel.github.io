@@ -1,6 +1,5 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import DraftBadge from "./DraftBadge.astro";
 interface Props {
   post: CollectionEntry<"blog">;
 }
@@ -24,16 +23,16 @@ const dateISOString = new Date(post.data.date).toLocaleDateString(
 const title = post.data.title;
 const titleSerie = post.data.serie;
 const order = post.data.order;
----
 
-<a
-  href=`/blog/${post.id}`
-  class="border-muted-border hover:bg-muted-background flex items-center gap-4 border"
-  ><time
+/*
+
+  <time class="text-muted">{dateISOString}</time>
+
+
+<time
     class="text-muted bg-muted-background border-muted-border flex h-full min-h-[50px] w-[120px] shrink-0 items-center border-e ps-4"
     >{dateISOString}</time
   >
-  <h2 class="py-2 font-semibold">
     {
       titleSerie && (
         <span class="text-muted me-4 border-e pe-4">
@@ -41,6 +40,16 @@ const order = post.data.order;
         </span>
       )
     }{title}
-  </h2>
-  <DraftBadge visible={post.data.draft} />
+
+
+    <DraftBadge visible={post.data.draft} />;
+*/
+---
+
+<a
+  href=`/blog/${post.id}`
+  class="border-muted-border flex flex-col border-s-2 ps-4"
+>
+  <h2 class="font-semibold">{title}</h2>
+  <p class="text-muted">{post.data.description}</p>
 </a>

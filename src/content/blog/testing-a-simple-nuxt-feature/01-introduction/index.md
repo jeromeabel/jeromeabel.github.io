@@ -1,9 +1,8 @@
 ---
 title: "Introduction"
-headline: "From February 8 to 9, 2023"
 date: 2025-03-07
-description: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus assumenda deleniti itaque molestias odio quidem praesentium, numquam veniam animi ipsam velit iure atque delectus debitis quisquam tempore optio ea corrupti.
-series: "Testing a Simple Nuxt Feature"
+description: Let's dive into the first chapter of this serie about testing in Nuxt. Prevent your code being untestable and difficult to maintain.
+serie: "Testing a Simple Nuxt Feature"
 order: 1
 draft: false
 ---
@@ -12,7 +11,7 @@ draft: false
 
 When developing frontend features, it’s easy to create components that mix UI, business logic, data retrieval, and state management. While this might work initially, it quickly becomes untestable and difficult to maintain.
 
-If you're new to testing, join me on this journey—I believe it will help you navigate similar situations. If you're experienced with testing, I welcome your feedback to improve this series.
+If you're new to testing, join me on this journey—I believe it will help you navigate similar situations. If you're experienced with testing, I welcome your feedback to improve this .
 
 ## Code
 
@@ -57,4 +56,4 @@ Specifications will evolve throughout development, just as they do in real proje
 ## Decision Map Overview
 
 Let's take a look at the final map of this journey:
-![Decision Map Graph](./graph.svg)
+![Decision Map Graph](./graph.png)

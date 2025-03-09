@@ -3,6 +3,7 @@ import netlify from "@astrojs/netlify";
 import partytown from "@astrojs/partytown";
 import icon from "astro-icon";
 import { defineConfig } from "astro/config";
+import { remarkReadingTime } from './src/utils/remark-reading-time.mjs';
 
 import tailwindcss from "@tailwindcss/vite";
 
@@ -26,14 +27,18 @@ export default defineConfig({
     }),
     icon({
       include: {
-        lucide: ['download', 'arrow-right', 'arrow-up-right', 'sun', 'moon', 'handshake'],
-        'fa6-brands': ['github', 'linkedin-in', 'bluesky']
-      }
+        lucide: ['download', 'arrow-right', 'arrow-up-right', 'sun', 'moon', 'handshake',  'clock',  'calendar'],
+        'fa6-brands': ['github', 'linkedin-in', 'bluesky',],
+      },
     })
 
   ],
 
   vite: {
     plugins: [tailwindcss()],
+  },
+
+  markdown: {
+    remarkPlugins: [remarkReadingTime],
   },
 });

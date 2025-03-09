@@ -14,7 +14,7 @@ const allPosts = (await getCollection("blog"))
 
 const { withSeries, withoutSeries } = allPosts.reduce(
   (acc, post) => {
-    if (post.data.series) {
+    if (post.data.serie) {
       acc.withSeries.push(post);
     } else {
       acc.withoutSeries.push(post);
@@ -25,7 +25,7 @@ const { withSeries, withoutSeries } = allPosts.reduce(
 );
 
 const series = Array.from(
-  new Set(withSeries.map((post) => post.data.series).filter(Boolean)),
+  new Set(withSeries.map((post) => post.data.serie).filter(Boolean)),
 );
 ---
 

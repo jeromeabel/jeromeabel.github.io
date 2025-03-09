@@ -1,12 +1,13 @@
 ---
-title: "Avoid Mocks With the 'Component Wrapper' Pattern (v3)"
-headline: "From February 8 to 9, 2023"
+title: "Avoid Mocks With the 'Component Wrapper' Pattern"
 date: 2025-03-07
 description: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus assumenda deleniti itaque molestias odio quidem praesentium, numquam veniam animi ipsam velit iure atque delectus debitis quisquam tempore optio ea corrupti.
-series: "Testing a Simple Nuxt Feature"
-order: 6
+serie: "Testing a Simple Nuxt Feature"
+order: 5
 draft: true
 ---
+
+(v3)
 
 ## Refactor to a Component Wrapper
 
@@ -139,4 +140,4 @@ The journey isn’t over yet. Now that the component no longer depends directly 
 
 ## Decision Map
 
-![Decision Map Graph](./graph.svg)
+![Decision Map Graph](./graph.png)

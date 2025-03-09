@@ -41,6 +41,12 @@ importers:
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
+      mdast-util-to-string:
+        specifier: ^4.0.0
+        version: 4.0.0
+      reading-time:
+        specifier: ^1.5.0
+        version: 1.5.0
       sharp:
         specifier: ^0.33.5
         version: 0.33.5
@@ -1854,6 +1860,9 @@ packages:
   readdirp@4.1.2:
     resolution: {integrity: sha512-GDhwkLfywWL2s6vEjyhri+eXmfH6j1L7JE27WhqLeYzoh/A3DBaYGEj2H/HFZCn/kMfim73FXxEJTw06WtxQwg==}
     engines: {node: '>= 14.18.0'}
+
+  reading-time@1.5.0:
+    resolution: {integrity: sha512-onYyVhBNr4CmAxFsKS7bz+uTLRakypIe4R+5A824vBSkQy/hB3fZepoVEf8OVAxzLvK+H/jm9TzpI3ETSm64Kg==}
 
   regex-recursion@5.1.1:
     resolution: {integrity: sha512-ae7SBCbzVNrIjgSbh7wMznPcQel1DNlDtzensnFxpiNpXt1U2ju/bHugH422r+4LAVS1FpW1YCwilmnNsjum9w==}
@@ -4297,6 +4306,8 @@ snapshots:
   radix3@1.1.2: {}
 
   readdirp@4.1.2: {}
+
+  reading-time@1.5.0: {}
 
   regex-recursion@5.1.1:
     dependencies:

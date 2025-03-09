@@ -1,10 +1,9 @@
 ---
 title: "Bonus: Add Integration Tests"
-headline: "From February 8 to 9, 2023"
 date: 2025-03-07
 description: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus assumenda deleniti itaque molestias odio quidem praesentium, numquam veniam animi ipsam velit iure atque delectus debitis quisquam tempore optio ea corrupti.
-series: "Testing a Simple Nuxt Feature"
-order: 10
+serie: "Testing a Simple Nuxt Feature"
+order: 9
 draft: true
 ---
 

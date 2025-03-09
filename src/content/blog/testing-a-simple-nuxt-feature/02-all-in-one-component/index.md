@@ -1,14 +1,13 @@
 ---
-title: "All-In-One Components (v1)"
-headline: "From February 8 to 9, 2023"
+title: "All-In-One Components "
 date: 2025-03-07
 description: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus assumenda deleniti itaque molestias odio quidem praesentium, numquam veniam animi ipsam velit iure atque delectus debitis quisquam tempore optio ea corrupti.
-series: "Testing a Simple Nuxt Feature"
+serie: "Testing a Simple Nuxt Feature"
 order: 2
 draft: false
 ---
 
-## Code
+## Code v1
 
 - [VersionBanner01.vue](https://github.com/jeromeabel/nuxt-clean-architecture/blob/feat/version-banner/layers/version-01/components/VersionBanner01.vue)
 
@@ -65,4 +64,4 @@ What are your thoughts on this implementation? Does this structure seem sufficie
 
 ## Decision Map
 
-![Decision Map Graph](./graph.svg)
+![Decision Map Graph](./graph.png)

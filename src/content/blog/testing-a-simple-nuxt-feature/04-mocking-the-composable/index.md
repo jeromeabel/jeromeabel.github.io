@@ -1,12 +1,13 @@
 ---
-title: "Mocking the composable (v2-2) & (v2-3)"
-headline: "From February 8 to 9, 2023"
+title: "Mocking the composable"
 date: 2025-03-07
 description: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus assumenda deleniti itaque molestias odio quidem praesentium, numquam veniam animi ipsam velit iure atque delectus debitis quisquam tempore optio ea corrupti.
-series: "Testing a Simple Nuxt Feature"
-order: 5
+serie: "Testing a Simple Nuxt Feature"
+order: 4
 draft: true
 ---
+
+(v2-2) & (v2-3)
 
 As we saw earlier, we gonnna mock the composable. It will help us isolate the component test without relying on Nuxt's real interactions or localStorage behavior.
 
@@ -208,4 +209,4 @@ What do you think? Should we continue refining our testing strategy further?
 
 ## Decision Map
 
-![Decision Map Graph](./graph.svg)
+![Decision Map Graph](./graph.png)

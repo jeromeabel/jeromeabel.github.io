@@ -1,8 +1,7 @@
 ---
-title: "Building Scalable and Testable Nuxt Projects with Clean Architecture ✨"
-headline: "From February 8 to 9, 2023"
+title: "Building Scalable and Testable Nuxt Projects with Clean Architecture"
 date: 2024-11-14
-description: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus assumenda deleniti itaque molestias odio quidem praesentium, numquam veniam animi ipsam velit iure atque delectus debitis quisquam tempore optio ea corrupti.
+description: Implement a newsletter subscription feature that highlights how to organize code into distinct layers using the new Nuxt 4 file structure, making it modular, testable, and scalable.
 draft: false
 ---
 

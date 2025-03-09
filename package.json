@@ -22,6 +22,8 @@
     "astro": "^5.4.2",
     "astro-icon": "^1.1.5",
     "class-variance-authority": "^0.7.1",
+    "mdast-util-to-string": "^4.0.0",
+    "reading-time": "^1.5.0",
     "sharp": "^0.33.5",
     "tailwindcss": "^4.0.11"
   },
