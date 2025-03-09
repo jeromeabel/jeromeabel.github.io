@@ -1,4 +1,5 @@
 ---
+import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 
@@ -29,23 +30,38 @@ const dateISOString = new Date(work.data.date).toLocaleDateString(
   title={`Open the "${work.data.title}" project`}
   class="border-muted-border group hover:bg-muted-background relative grid auto-rows-[auto_1fr] border shadow-lg outline-offset-4 outline-black focus:outline-2 dark:shadow-none dark:outline-white"
 >
-  <div class="aspect-square overflow-hidden">
+  <div class="relative aspect-square overflow-hidden">
     <Image
       src={work.data.img_preview}
       alt={`${work.data.title} preview`}
       class="transition-transform duration-1000 motion-safe:group-hover:scale-105"
       loading="lazy"
     />
+    <div
+      class="absolute inset-0 grid items-center duration-500 group-hover:bg-black/85 motion-reduce:transition-all dark:group-hover:bg-black/90"
+    >
+      <div
+        class="flex flex-col items-center justify-center gap-6 p-4 opacity-0 duration-500 group-hover:opacity-100"
+      >
+        <Icon
+          name="cross-big"
+          class="text-5xl transition-all delay-100 duration-500 group-hover:rotate-0 motion-safe:-rotate-45 lg:text-8xl"
+        />
+      </div>
+    </div>
   </div>
 
-  <div class="p-6">
+  <div class="p-8">
     <p class="text-3xl font-semibold tracking-wide">
       {work.data.title}
     </p>
-    <p class="line-clamp-2 pt-2">{work.data.description}</p>
+    <p class="pt-2">{work.data.description}</p>
   </div>
 
-  <p class="text-muted px-6 pb-3 text-end">
-    {dateISOString}
+  <p class="text-muted flex items-center gap-2 px-8 pb-8">
+    <Icon name="lucide:calendar" />
+    <time>
+      {dateISOString}
+    </time>
   </p>
 </a>
