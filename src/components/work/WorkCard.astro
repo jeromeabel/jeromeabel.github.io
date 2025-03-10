@@ -23,18 +23,22 @@ const dateISOString = new Date(work.data.date).toLocaleDateString(
   "en-EN",
   dateOptions,
 );
+
+//border-muted-border hover:border-muted group relative grid grid-cols-1 border shadow-lg outline-offset-4 outline-black focus:outline-2 md:grid-cols-2 lg:auto-rows-[auto_1fr] lg:grid-cols-1 dark:shadow-none dark:outline-white
 ---
 
 <a
   href={"/work/" + work.id}
   title={`Open the "${work.data.title}" project`}
-  class="border-muted-border group hover:bg-muted-background relative grid auto-rows-[auto_1fr] border shadow-lg outline-offset-4 outline-black focus:outline-2 dark:shadow-none dark:outline-white"
+  class="border-muted-border hover:bg-muted-background group flex flex-col border md:flex-row lg:flex-col"
 >
-  <div class="relative aspect-square overflow-hidden">
+  <div
+    class="relative aspect-[16/5] flex-1 overflow-hidden lg:aspect-square lg:flex-none"
+  >
     <Image
       src={work.data.img_preview}
       alt={`${work.data.title} preview`}
-      class="transition-transform duration-1000 motion-safe:group-hover:scale-105"
+      class="object-cover transition-transform duration-1000 motion-safe:group-hover:scale-105"
       loading="lazy"
     />
     <div
@@ -51,17 +55,18 @@ const dateISOString = new Date(work.data.date).toLocaleDateString(
     </div>
   </div>
 
-  <div class="p-8">
-    <p class="text-3xl font-semibold tracking-wide">
+  <div class="flex flex-col p-6 md:flex-1 lg:flex-auto lg:p-8">
+    <p class="font-title text-3xl tracking-wide">
       {work.data.title}
     </p>
-    <p class="pt-2">{work.data.description}</p>
+    <p class="line-clamp-3 pt-2">{work.data.description}</p>
+    <p
+      class="text-muted mt-auto flex h-fit items-center gap-2 place-self-end pt-4"
+    >
+      <Icon name="lucide:calendar" />
+      <time>
+        {dateISOString}
+      </time>
+    </p>
   </div>
-
-  <p class="text-muted flex items-center gap-2 px-8 pb-8">
-    <Icon name="lucide:calendar" />
-    <time>
-      {dateISOString}
-    </time>
-  </p>
 </a>

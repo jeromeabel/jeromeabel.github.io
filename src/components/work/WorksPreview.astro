@@ -11,11 +11,11 @@ const works = (await getCollection("work"))
 
 <section class="container flex flex-col gap-4 lg:gap-8">
   <H2>Latest Works</H2>
-  <div class="grid grid-cols-1 gap-4 md:grid-cols-3 lg:gap-8">
+  <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
     {works.map((work) => <WorkCard {work} />)}
   </div>
   <Link
-    class="mt-8"
+    class="mt-12"
     label="See more works"
     href="/work"
     icon="lucide:arrow-right"

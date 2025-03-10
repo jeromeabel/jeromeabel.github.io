@@ -3,7 +3,6 @@ import { Icon } from "astro-icon/components";
 import type { CollectionEntry } from "astro:content";
 import { render } from 'astro:content';
 
-import DraftBadge from "./DraftBadge.astro";
 interface Props {
   post: CollectionEntry<"blog">;
 }
@@ -29,23 +28,17 @@ const dateISOString = new Date(post.data.date).toLocaleDateString(
 const title = post.data.title;
 const titleSerie = post.data.serie;
 const order = post.data.order;
-/*
-time
-    class="text-muted bg-muted-background border-muted-border flex h-full min-h-[50px] w-[120px] shrink-0 items-center border-e ps-4"
-    >{dateISOString}</time
-  >
-*/
 
 ---
 
 <a
   href=`/blog/${post.id}`
-  class="border-muted-border hover:bg-muted-background/50 flex flex-col gap-4 border ps-8 pt-8 pb-4 pe-6"
+  class="border-muted-border hover:bg-muted-background/50 flex flex-col gap-2 border p-4 lg:p-6"
 >
-  <h2 class="text-2xl tracking-wide font-bold">
+  <h2 class="text-xl lg:text-2xl tracking-wide font-bold">
     {
       titleSerie ? (
-        <p class="text-muted text-lg font-normal uppercase">
+        <p class="text-muted text-base lg:text-lg font-normal uppercase">
           {titleSerie} &#128900; <span class="text-muted text-base">{order}</span>
         </p>
         <p> {title}</p>
@@ -53,12 +46,11 @@ time
     }
   </h2>
   <p class="line-clamp-2">{post.data.description}</p>
-  <div class="flex items-center gap-2 text-muted justify-end mt-4">
+  <div class="flex items-center gap-2 text-muted justify-end md:mt-4">
     <Icon name="lucide:calendar" />
-    <time class=" text-sm">{dateISOString}</time>
+    <time class="text-sm">{dateISOString}</time>
 
     <Icon name="lucide:clock" class="ms-6" />
-    <span class=" text-sm">{remarkPluginFrontmatter.minutesRead}</span>
+    <span class="text-sm">{remarkPluginFrontmatter.minutesRead}</span>
   </div>
-  <DraftBadge visible={post.data.draft} />
 </a>

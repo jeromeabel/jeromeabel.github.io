@@ -12,7 +12,7 @@ const posts = (await getCollection("blog"))
 
 <section class="container flex flex-col gap-4 lg:gap-8">
   <H2>Latest Posts</H2>
-  <div class="grid grid-cols-2 gap-8">
+  <div class="grid gap-4 md:grid-cols-2 lg:gap-8">
     {posts.map((post) => <PostCard {post} />)}
   </div>
 
