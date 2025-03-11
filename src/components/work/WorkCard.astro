@@ -15,7 +15,7 @@ if (!work) {
 
 const dateOptions: Intl.DateTimeFormatOptions = {
   year: "numeric",
-  month: "long",
+  month: "short",
   day: "numeric",
 };
 
@@ -60,13 +60,16 @@ const dateISOString = new Date(work.data.date).toLocaleDateString(
       {work.data.title}
     </p>
     <p class="line-clamp-3 pt-2">{work.data.description}</p>
-    <p
-      class="text-muted mt-auto flex h-fit items-center gap-2 place-self-end pt-4"
-    >
+    <p class="text-muted mt-auto flex items-center gap-2 pt-6">
       <Icon name="lucide:calendar" />
       <time>
         {dateISOString}
       </time>
+
+      <span
+        class="border-muted-border text-muted ms-4 rounded-full border px-2 text-sm uppercase"
+        >{work.data.type}</span
+      >
     </p>
   </div>
 </a>

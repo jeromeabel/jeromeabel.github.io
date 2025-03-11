@@ -1,9 +1,11 @@
 ---
-title: "Building Scalable and Testable Nuxt Projects with Clean Architecture"
+title: "Nuxt Clean Architecture"
 date: 2024-11-14
 description: Implement a newsletter subscription feature that highlights how to organize code into distinct layers using the new Nuxt 4 file structure, making it modular, testable, and scalable.
 draft: false
 ---
+
+Building Scalable and Testable Nuxt Projects with Clean Architecture
 
 I've been experimenting with Clean Architecture in Nuxt, and I'm excited to share the results with a practical example of a newsletter subscription feature!
 

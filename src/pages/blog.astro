@@ -2,11 +2,11 @@
 import { getCollection } from "astro:content";
 
 import BlogSerie from "@components/blog/BlogSerie.astro";
-import PostCard from "@components/blog/PostCard.astro";
 import H1 from "@components/ui/H1.astro";
 import H2 from "@components/ui/H2.astro";
 import P from "@components/ui/P.astro";
 import Layout from "@layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
 
 const allPosts = (await getCollection("blog"))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
@@ -27,6 +27,13 @@ const { withSeries, withoutSeries } = allPosts.reduce(
 const series = Array.from(
   new Set(withSeries.map((post) => post.data.serie).filter(Boolean)),
 );
+
+const dateOptions: Intl.DateTimeFormatOptions = {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+};
+
 ---
 
 <Layout page="Work">
@@ -38,8 +45,22 @@ const series = Array.from(
 
     <section class="">
       <H2>Posts</H2>
-      <div class="mt-8">
-        {withoutSeries.map((post) => <PostCard {post} />)}
+      <div class="border-muted-border mt-8 w-full border-t text-xl">
+        {
+          withoutSeries.map((post) => (
+            <a
+              href=`/blog/${post.id}`
+              class="border-muted-border overflow-hidden items-center relative hover:bg-muted-background group flex flex-row justify-between border-b py-4"
+            >
+              <Icon name="lucide:arrow-right" class="absolute -translate-x-8 group-hover:translate-x-2 transition-transform" />
+              <h3 class="flex-1  group-hover:translate-x-8 transition-transform">
+              {post.data.title}</h3>
+
+                  <time class="text-muted ">{ new Date(post.data.date).toLocaleDateString("en-EN",dateOptions)}</time>
+
+            </a>
+          ))
+        }
       </div>
     </section>
 
