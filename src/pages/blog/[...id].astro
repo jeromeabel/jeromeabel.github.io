@@ -62,13 +62,12 @@ function slugify(text: string) {
     <header
       class="border-muted-border relative flex w-full flex-col gap-4 border-b pb-6 lg:w-2/3 lg:gap-8 lg:pb-12"
     >
-      <div class="text-muted flex items-center text-base lg:text-xl uppercase">
-        <Link href="/blog" label="Blog" />
+      <div class="text-muted flex flex-col md:flex-row md:items-center text-base lg:text-xl uppercase">
+        <p><Link href="/blog" label="Blog" /> {  entry.data.serie ? ( <span>&nbsp;/&nbsp;</span>): ""} </p>
         {
           entry.data.serie ? (
             <p>
-              &nbsp; /
-              <Link href=`/blog/${slugify(entry.data.serie)}` label={entry.data.serie} /> &#128900;
+              <Link href=`/blog/${slugify(entry.data.serie)}` label={entry.data.serie} /> 🞄
               <span class="text-muted">{entry.data.order}</span>
             </p>
           ) : (
