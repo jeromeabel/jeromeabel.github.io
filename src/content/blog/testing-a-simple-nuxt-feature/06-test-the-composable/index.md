@@ -192,4 +192,4 @@ Improving this test by converting it into a unit test would be a valuable enhanc
 
 ## Decision Map
 
-![Decision Map Graph](./graph.svg)
+![Decision Map Graph](/blog/testing-a-simple-nuxt-feature/06-test-the-composable.svg)

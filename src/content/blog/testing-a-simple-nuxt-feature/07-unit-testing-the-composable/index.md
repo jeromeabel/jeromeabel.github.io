@@ -257,4 +257,4 @@ What do you think?
 
 ## Decision Map
 
-![Decision Map Graph](./graph.svg)
+![Decision Map Graph](/blog/testing-a-simple-nuxt-feature/07-unit-testing-the-composable.svg)

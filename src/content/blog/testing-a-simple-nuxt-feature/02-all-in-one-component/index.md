@@ -64,4 +64,4 @@ What are your thoughts on this implementation? Does this structure seem sufficie
 
 ## Decision Map
 
-![Decision Map Graph](./graph.svg)
+![Decision Map Graph](/blog/testing-a-simple-nuxt-feature/02-all-in-one-component.svg)

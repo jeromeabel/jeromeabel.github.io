@@ -140,4 +140,4 @@ The journey isn’t over yet. Now that the component no longer depends directly 
 
 ## Decision Map
 
-![Decision Map Graph](./graph.svg)
+![Decision Map Graph](/blog/testing-a-simple-nuxt-feature/05-avoid-mocking-with-the-component-wrapper-pattern.svg)
