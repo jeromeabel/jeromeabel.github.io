@@ -37,7 +37,7 @@ const dateOptions: Intl.DateTimeFormatOptions = {
 ---
 
 <Layout page="Work">
-  <main class="container flex flex-col gap-24 py-8 lg:py-24">
+  <main class="container flex flex-col gap-16 md:gap-24 py-8 lg:py-24">
     <header class="flex w-full flex-col gap-4 lg:w-2/3 lg:gap-8">
       <H1>Blog</H1>
       <P>Insights, experiments, and lessons from my journey as a developer.</P>
@@ -45,19 +45,16 @@ const dateOptions: Intl.DateTimeFormatOptions = {
 
     <section class="">
       <H2>Posts</H2>
-      <div class="border-muted-border mt-8 w-full border-t text-xl">
+      <div class="border-muted-border mt-8 w-full border-t text-base md:text-xl">
         {
           withoutSeries.map((post) => (
             <a
               href=`/blog/${post.id}`
               class="border-muted-border overflow-hidden items-center relative hover:bg-muted-background group flex flex-row justify-between border-b py-4"
             >
-              <Icon name="lucide:arrow-right" class="absolute -translate-x-8 group-hover:translate-x-2 transition-transform" />
-              <h3 class="flex-1  group-hover:translate-x-8 transition-transform">
-              {post.data.title}</h3>
-
-                  <time class="text-muted ">{ new Date(post.data.date).toLocaleDateString("en-EN",dateOptions)}</time>
-
+              <Icon name="lucide:arrow-right" class="absolute -translate-x-8 group-hover:translate-x-2 transition-transform text-muted" />
+              <h3 class="flex-1  group-hover:translate-x-8 transition-transform">{post.data.title}</h3>
+              <time class="text-muted ">{ new Date(post.data.date).toLocaleDateString("en-EN",dateOptions)}</time>
             </a>
           ))
         }

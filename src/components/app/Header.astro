@@ -21,7 +21,7 @@ const variant = (href: string) =>
 
 <header class="py-4 lg:py-6">
   <nav class="container flex lg:justify-end">
-    <ul class="flex h-10 items-center gap-6 lg:gap-10">
+    <ul class="flex h-10 items-center gap-4 md:gap-6 lg:gap-10">
       {
         links.map((link) => (
           <li>
@@ -29,7 +29,7 @@ const variant = (href: string) =>
               href={link.href}
               label={link.label}
               variant={variant(link.href)}
-              class="text-xl"
+              class="text-base md:text-xl"
             />
           </li>
         ))

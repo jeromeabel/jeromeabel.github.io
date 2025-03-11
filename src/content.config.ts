@@ -11,6 +11,7 @@ const blog = defineCollection({
       draft: z.boolean(),
       serie: z.string().optional(),
       order: z.number().optional(),
+      is_parent: z.boolean().optional(),
     }),
 });
 

@@ -12,14 +12,14 @@ const allPosts = (await getCollection("blog"))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .filter((post) => (import.meta.env.PROD ? post.data.draft !== true : true));
 
-const Posts = allPosts
+const posts = allPosts
   .filter((post) => post.data.serie === id)
   .sort((a, b) => (a.data?.order ?? 0) - (b.data?.order ?? 0));
 ---
 
-<div class="border-muted-border flex flex-col border-s ps-8">
+<div class="border-muted-border flex flex-col md:border-s md:ps-8">
   <h3 class="text-muted mb-6 text-xl font-semibold uppercase">{id}</h3>
-  <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
-    {Posts.map((post) => <PostSerieCard {post} />)}
+  <div class="grid grid-cols-1 gap-0 md:gap-4 lg:grid-cols-2">
+    {posts.map((post) => <PostSerieCard {post} />)}
   </div>
 </div>

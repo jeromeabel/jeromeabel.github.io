@@ -1,4 +1,5 @@
 ---
+import PostSerieCard from "@components/blog/PostSerieCard.astro";
 import H1 from "@components/ui/H1.astro";
 import Link from "@components/ui/Link.astro";
 import P from "@components/ui/P.astro";
@@ -19,6 +20,15 @@ const { entry } = Astro.props;
 const { Content, remarkPluginFrontmatter } = await render(entry);
 const publishedDate = new Date(entry.data.date);
 
+
+const allPosts = (await getCollection("blog"))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .filter((post) => (import.meta.env.PROD ? post.data.draft !== true : true));
+
+const seriePosts = allPosts
+  .filter((post) => post.data.serie === entry.data.title)
+  .sort((a, b) => (a.data?.order ?? 0) - (b.data?.order ?? 0));
+
 const dateOptions: Intl.DateTimeFormatOptions = {
   year: "numeric",
   month: "short",
@@ -29,6 +39,18 @@ const dateISOString = new Date(entry.data.date).toLocaleDateString(
   "en-EN",
   dateOptions,
 );
+
+function slugify(text: string) {
+  return text
+    .toString() // Convertit en chaîne si ce n'est pas déjà le cas
+    .normalize("NFD") // Décompose les caractères accentués
+    .replace(/[\u0300-\u036f]/g, "") // Supprime les diacritiques (accents)
+    .toLowerCase() // Convertit en minuscules
+    .trim() // Supprime les espaces en début et fin de chaîne
+    .replace(/[^a-z0-9 -]/g, "") // Supprime les caractères spéciaux
+    .replace(/\s+/g, "-") // Remplace les espaces par des tirets
+    .replace(/-+/g, "-"); // Remplace plusieurs tirets consécutifs par un seul
+}
 ---
 
 <Layout
@@ -38,15 +60,15 @@ const dateISOString = new Date(entry.data.date).toLocaleDateString(
 >
   <main class="relative container flex flex-col gap-8 py-8 lg:gap-12 lg:py-24">
     <header
-      class="border-muted-border relative flex w-full flex-col gap-4 border-b pb-16 lg:w-2/3 lg:gap-8"
+      class="border-muted-border relative flex w-full flex-col gap-4 border-b pb-6 lg:w-2/3 lg:gap-8 lg:pb-12"
     >
-      <div class="text-muted flex items-center text-xl uppercase">
+      <div class="text-muted flex items-center text-base lg:text-xl uppercase">
         <Link href="/blog" label="Blog" />
         {
           entry.data.serie ? (
             <p>
               &nbsp; /
-              <Link href="/" label={entry.data.serie} /> -
+              <Link href=`/blog/${slugify(entry.data.serie)}` label={entry.data.serie} /> &#128900;
               <span class="text-muted">{entry.data.order}</span>
             </p>
           ) : (
@@ -62,17 +84,22 @@ const dateISOString = new Date(entry.data.date).toLocaleDateString(
         {entry.data.description}
       </P>
 
-      <div class="text-muted flex items-center gap-2 md:mt-4">
+      { !entry.data.is_parent ? (<div class="text-muted flex items-center gap-2 md:mt-4">
         <Icon name="lucide:calendar" />
         <time class="text-sm">{dateISOString}</time>
 
         <Icon name="lucide:clock" class="ms-6" />
         <span class="text-sm">{remarkPluginFrontmatter.minutesRead}</span>
-      </div>
+      </div>) :""}
+
     </header>
 
+    { !entry.data.is_parent ? (
     <Prose class="md:mx-auto">
       <Content />
     </Prose>
+    ) : (  <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+    {seriePosts.map((post) => <PostSerieCard {post} />)}
+  </div>)}
   </main>
 </Layout>
