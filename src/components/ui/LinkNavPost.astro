@@ -1,0 +1,31 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  id: string;
+  title: string;
+  type: "prev" | "next";
+}
+
+const { id, title, type } = Astro.props;
+
+if (!id) return;
+
+const isNext = type === "next";
+const iconName = isNext ? "lucide:arrow-right" : "lucide:arrow-left";
+const positionType = isNext ? "text-right" : "text-left";
+const paddingType = isNext ? "ps-12 pe-6" : "pe-12 ps-6";
+---
+
+<a
+  href=`/serie/${id}`
+  class=`border-foreground text-foreground hover:bg-muted-background flex w-full max-w-fit items-center justify-between gap-4 rounded-full border py-4 text-xl ${paddingType}`
+>
+  {!isNext && <Icon name={iconName} class="text-muted text-3xl" />}
+
+  <div>
+    <p class=`text-muted block capitalize ${positionType}`>{type}</p>
+    <p class="text-2xl">{title}</p>
+  </div>
+  {isNext && <Icon name={iconName} class="text-muted text-3xl" />}
+</a>

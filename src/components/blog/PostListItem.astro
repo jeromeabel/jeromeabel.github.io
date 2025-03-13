@@ -1,0 +1,29 @@
+---
+import { Icon } from "astro-icon/components";
+import type { CollectionEntry } from "astro:content";
+import { getFormattedDate } from "src/utils/format-date";
+
+interface Props {
+  post: CollectionEntry<"post">;
+}
+
+const { post } = Astro.props;
+
+if (!post) {
+  throw new Error("Sorry, could not find post");
+}
+---
+
+<a
+  href=`/post/${post.id}`
+  class="border-muted-border hover:bg-muted-background group relative flex flex-row items-center justify-between overflow-hidden border-b py-4"
+>
+  <Icon
+    name="lucide:arrow-right"
+    class="text-muted absolute -translate-x-8 transition-transform group-hover:translate-x-2"
+  />
+  <h3 class="flex-1 transition-transform group-hover:translate-x-8">
+    {post.data.title}
+  </h3>
+  <time class="text-muted">{getFormattedDate(post.data.date)}</time>
+</a>

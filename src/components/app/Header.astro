@@ -13,7 +13,9 @@ const links = [
 const currentPath = `/${Astro.url.pathname.split("/")[1].trim()}`;
 
 const isActive = (href: string) =>
-  href === currentPath || href === currentPath.replace(/\/$/, "");
+  href === currentPath ||
+  href === currentPath.replace(/\/$/, "") ||
+  (href === "/blog" && (currentPath === "/post" || currentPath === "/serie"));
 
 const variant = (href: string) =>
   isActive(href) ? "menuActive" : "menuInactive";

@@ -1,0 +1,26 @@
+---
+import SeriePostListItem from "@components/blog/SeriePostListItem.astro";
+import { type CollectionEntry } from "astro:content";
+import { getPostsFromSerie } from "src/utils/repository";
+
+interface Props {
+  serie: CollectionEntry<"serie">;
+}
+
+const { serie } = Astro.props;
+
+if (!serie) {
+  throw new Error("Sorry, could not find serie");
+}
+
+const posts = await getPostsFromSerie(serie);
+---
+
+<div class="border-muted-border flex flex-col md:border-s md:ps-8">
+  <h3 class="text-muted mb-6 text-xl uppercase">
+    {serie.data.title}
+  </h3>
+  <div class="grid grid-cols-1 gap-0 gap-x-12 lg:grid-cols-2">
+    {posts.map((post, index) => <SeriePostListItem {post} {index} />)}
+  </div>
+</div>

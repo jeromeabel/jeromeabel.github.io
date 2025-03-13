@@ -2,25 +2,30 @@
 import PostCard from "@components/blog/PostCard.astro";
 import H2 from "@components/ui/H2.astro";
 import Link from "@components/ui/Link.astro";
-import { getCollection } from "astro:content";
+import { getAllPosts } from "src/utils/repository";
 
-const posts = (await getCollection("blog"))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .filter((post) => post.data.draft !== true)
-  .slice(0, 8);
+const NB_POSTS = 6;
+
+const allPosts = (await getAllPosts()).slice(0, NB_POSTS);
 ---
 
 <section class="container flex flex-col gap-4 lg:gap-8">
   <H2>Latest Posts</H2>
   <div class="grid gap-4 md:grid-cols-2 lg:gap-8">
-    {posts.map((post) => <PostCard {post} />)}
+    {allPosts.map((post) => <PostCard {post} />)}
   </div>
 
-  <Link
-    class="mt-8"
-    label="See more posts"
-    href="/blog"
-    icon="lucide:arrow-right"
-    variant="secondary"
-  />
+  {
+    allPosts.length > NB_POSTS ? (
+      <Link
+        class="mt-8"
+        label="See all posts"
+        href="/blog"
+        icon="lucide:arrow-right"
+        variant="secondary"
+      />
+    ) : (
+      ""
+    )
+  }
 </section>

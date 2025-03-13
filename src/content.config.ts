@@ -1,18 +1,33 @@
 import { glob } from "astro/loaders";
-import { defineCollection, z } from "astro:content";
+import { defineCollection, reference, z } from "astro:content";
 
-const blog = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/blog" }),
-  schema: () =>
-    z.object({
-      title: z.string(),
-      date: z.date(),
-      description: z.string(),
-      draft: z.boolean(),
-      serie: z.string().optional(),
-      order: z.number().optional(),
-      is_parent: z.boolean().optional(),
-    }),
+const PostSchema = z.object({
+  title: z.string(),
+  date: z.date(),
+  description: z.string(),
+  abstract: z.string(),
+  draft: z.boolean().default(true),
+});
+
+const post = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/post" }),
+  schema: PostSchema,
+});
+
+const seriePost = defineCollection({
+  loader: glob({ pattern: "*/*/*.md", base: "./src/content/serie" }),
+  schema: PostSchema,
+});
+
+const serie = defineCollection({
+  loader: glob({ pattern: "*/*.md", base: "./src/content/serie" }),
+  schema: z.object({
+    title: z.string(),
+    date: z.coerce.date(),
+    description: z.string(),
+    abstract: z.string(),
+    posts: z.array(reference("seriePost")),
+  }),
 });
 
 const work = defineCollection({
@@ -39,5 +54,7 @@ const work = defineCollection({
 
 export const collections = {
   work: work,
-  blog: blog,
+  post: post,
+  seriePost: seriePost,
+  serie: serie,
 };

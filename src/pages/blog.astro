@@ -1,71 +1,27 @@
 ---
-import { getCollection } from "astro:content";
-
-import BlogSerie from "@components/blog/BlogSerie.astro";
+import PostList from "@components/blog/PostList.astro";
+import SerieList from "@components/blog/SerieList.astro";
 import H1 from "@components/ui/H1.astro";
 import H2 from "@components/ui/H2.astro";
 import P from "@components/ui/P.astro";
 import Layout from "@layouts/Layout.astro";
-import { Icon } from "astro-icon/components";
-
-const allPosts = (await getCollection("blog"))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .filter((post) => (import.meta.env.PROD ? post.data.draft !== true : true));
-
-const { withSeries, withoutSeries } = allPosts.reduce(
-  (acc, post) => {
-    if (post.data.serie) {
-      acc.withSeries.push(post);
-    } else {
-      acc.withoutSeries.push(post);
-    }
-    return acc;
-  },
-  { withSeries: [] as typeof allPosts, withoutSeries: [] as typeof allPosts },
-);
-
-const series = Array.from(
-  new Set(withSeries.map((post) => post.data.serie).filter(Boolean)),
-);
-
-const dateOptions: Intl.DateTimeFormatOptions = {
-  year: "numeric",
-  month: "short",
-  day: "numeric",
-};
-
 ---
 
 <Layout page="Work">
-  <main class="container flex flex-col gap-16 md:gap-24 py-8 lg:py-24">
+  <main class="container flex flex-col gap-16 py-8 md:gap-24 lg:py-24">
     <header class="flex w-full flex-col gap-4 lg:w-2/3 lg:gap-8">
       <H1>Blog</H1>
       <P>Insights, experiments, and lessons from my journey as a developer.</P>
     </header>
 
-    <section class="">
+    <section>
       <H2>Posts</H2>
-      <div class="border-muted-border mt-8 w-full border-t text-base md:text-xl">
-        {
-          withoutSeries.map((post) => (
-            <a
-              href=`/blog/${post.id}`
-              class="border-muted-border overflow-hidden items-center relative hover:bg-muted-background group flex flex-row justify-between border-b py-4"
-            >
-              <Icon name="lucide:arrow-right" class="absolute -translate-x-8 group-hover:translate-x-2 transition-transform text-muted" />
-              <h3 class="flex-1  group-hover:translate-x-8 transition-transform">{post.data.title}</h3>
-              <time class="text-muted ">{ new Date(post.data.date).toLocaleDateString("en-EN",dateOptions)}</time>
-            </a>
-          ))
-        }
-      </div>
+      <PostList />
     </section>
 
-    <section class="">
+    <section>
       <H2>Series</H2>
-      <div class="mt-8">
-        {series.map((serie) => <BlogSerie id={serie} />)}
-      </div>
+      <SerieList />
     </section>
   </main>
 </Layout>

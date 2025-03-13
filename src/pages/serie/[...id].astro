@@ -1,0 +1,99 @@
+---
+import H1 from "@components/ui/H1.astro";
+import Link from "@components/ui/Link.astro";
+import LinkNavPost from "@components/ui/LinkNavPost.astro";
+import P from "@components/ui/P.astro";
+import Prose from "@components/ui/Prose.astro";
+import Layout from "@layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+import type { CollectionEntry } from "astro:content";
+import { getCollection, render } from "astro:content";
+import { getFormattedDate } from "src/utils/format-date";
+import { getPostsFromSerie } from "src/utils/repository";
+
+interface Props {
+  entry: CollectionEntry<"seriePost">;
+  prev: CollectionEntry<"seriePost"> | null;
+  next: CollectionEntry<"seriePost"> | null;
+  serie: CollectionEntry<"serie">;
+}
+
+export async function getStaticPaths() {
+  const posts = await getCollection("seriePost");
+  const series = await getCollection("serie");
+
+  const paths = await Promise.all(
+    posts.map(async (entry, i) => {
+      const currentSerie = series.find((serie: CollectionEntry<"serie">) =>
+        serie.data.posts.some((post) => post.id === entry.id),
+      );
+
+      if (!currentSerie) return null; // return null to filter later
+
+      const currentPosts = await getPostsFromSerie(currentSerie);
+      const numberOfPosts = currentPosts.length;
+
+      return {
+        params: { id: entry.id },
+        props: {
+          entry,
+          serie: currentSerie,
+          prev: i === 0 ? null : currentPosts[i - 1],
+          next: i + 1 === numberOfPosts ? null : currentPosts[i + 1],
+        },
+      };
+    }),
+  );
+
+  return paths.filter(Boolean); // remove null values
+}
+
+const { entry, serie, next, prev } = Astro.props;
+const { Content, remarkPluginFrontmatter } = await render(entry);
+const publishedDate = new Date(entry.data.date);
+
+const hasPagination = next !== null && prev !== null;
+---
+
+<Layout
+  page={entry.data.title}
+  description={entry.data.description}
+  {publishedDate}
+>
+  <main class="relative container flex flex-col gap-8 py-8 lg:gap-12 lg:py-24">
+    <header
+      class="border-muted-border relative flex w-full flex-col gap-4 border-b pb-6 lg:w-2/3 lg:gap-8 lg:pb-12"
+    >
+      <nav class="text-muted flex items-center gap-1 uppercase">
+        <Link href="/blog" label="Blog" variant="menuInactive" />
+        <Icon name="lucide:chevron-right" />
+        <Link
+          href=`/serie/${serie.id}`
+          label=`${serie.data.title}`
+          variant="menuInactive"
+        />
+      </nav>
+      <H1>{entry.data.title}</H1>
+      <P>{entry.data.abstract}</P>
+
+      <div class="text-muted flex items-center gap-2 md:mt-4">
+        <Icon name="lucide:calendar" />
+        <time class="text-sm">{getFormattedDate(entry.data.date)}</time>
+        <Icon name="lucide:clock" class="ms-6" />
+        <span class="text-sm">{remarkPluginFrontmatter.minutesRead}</span>
+      </div>
+    </header>
+    <Prose class="mt-8 md:mx-auto">
+      <Content />
+    </Prose>
+
+    {
+      hasPagination && (
+        <div class="container flex justify-between">
+          <LinkNavPost type="prev" title={prev.data.title} id={prev.id} />
+          <LinkNavPost type="next" title={next.data.title} id={next.id} />
+        </div>
+      )
+    }
+  </main>
+</Layout>

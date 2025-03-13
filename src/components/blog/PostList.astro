@@ -1,0 +1,10 @@
+---
+import PostListItem from "@components/blog/PostListItem.astro";
+import { getAllPosts } from "src/utils/repository";
+
+const allPosts = await getAllPosts();
+---
+
+<div class="border-muted-border mt-8 w-full border-t text-base md:text-xl">
+  {allPosts.map((post) => <PostListItem {post} />)}
+</div>

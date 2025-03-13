@@ -1,0 +1,48 @@
+---
+import H1 from "@components/ui/H1.astro";
+import Link from "@components/ui/Link.astro";
+import P from "@components/ui/P.astro";
+import Prose from "@components/ui/Prose.astro";
+import Layout from "@layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+import { getCollection, render } from "astro:content";
+import { getFormattedDate } from "src/utils/format-date";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("post");
+  return posts.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content, remarkPluginFrontmatter } = await render(entry);
+const publishedDate = new Date(entry.data.date);
+---
+
+<Layout
+  page={entry.data.title}
+  description={entry.data.description}
+  {publishedDate}
+>
+  <main class="relative container flex flex-col gap-8 py-8 lg:gap-12 lg:py-24">
+    <header
+      class="border-muted-border relative flex w-full flex-col gap-4 border-b pb-6 lg:w-2/3 lg:gap-8 lg:pb-12"
+    >
+      <Link href="/blog" label="BLOG" variant="menuInactive" />
+      <H1>{entry.data.title}</H1>
+      <P>{entry.data.description}</P>
+
+      <div class="text-muted flex items-center gap-2 md:mt-4">
+        <Icon name="lucide:calendar" />
+        <time class="text-sm">{getFormattedDate(entry.data.date)}</time>
+        <Icon name="lucide:clock" class="ms-6" />
+        <span class="text-sm">{remarkPluginFrontmatter.minutesRead}</span>
+      </div>
+    </header>
+    <Prose class="mt-8 md:mx-auto">
+      <Content />
+    </Prose>
+  </main>
+</Layout>

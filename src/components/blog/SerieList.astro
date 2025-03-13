@@ -1,0 +1,10 @@
+---
+import SerieListItem from "@components/blog/SerieListItem.astro";
+import { getAllSeries } from "src/utils/repository";
+
+const allSeries = await getAllSeries();
+---
+
+<div class="mt-8 text-base md:text-xl">
+  {allSeries.map((serie) => <SerieListItem {serie} />)}
+</div>

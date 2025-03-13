@@ -1,0 +1,35 @@
+---
+import { Icon } from "astro-icon/components";
+import type { CollectionEntry } from "astro:content";
+import { getFormattedDate } from "src/utils/format-date";
+
+interface Props {
+  post: CollectionEntry<"seriePost">;
+  index: number;
+}
+
+const { post, index } = Astro.props;
+
+if (!post) {
+  throw new Error("Sorry, could not find post");
+}
+
+const order = index + 1;
+---
+
+<a
+  href=`/serie/${post.id}`
+  class="border-muted-border hover:bg-muted-background group relative flex flex-row items-center justify-between overflow-hidden border-b py-4 text-lg"
+>
+  <Icon
+    name="lucide:arrow-right"
+    class="text-muted absolute -translate-x-8 transition-transform group-hover:translate-x-2"
+  />
+  <h3 class="flex-1 transition-transform group-hover:translate-x-8">
+    <span class="text-muted">
+      {order} 🞄
+    </span>
+    {post.data.title}
+  </h3>
+  <time class="text-muted text-sm">{getFormattedDate(post.data.date)}</time>
+</a>

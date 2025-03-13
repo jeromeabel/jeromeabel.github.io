@@ -1,0 +1,49 @@
+---
+import SeriePostListItem from "@components/blog/SeriePostListItem.astro";
+import H1 from "@components/ui/H1.astro";
+import P from "@components/ui/P.astro";
+import Layout from "@layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import { getPostsFromSerie } from "src/utils/repository";
+
+export async function getStaticPaths() {
+  const series = await getCollection("serie");
+  return series.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const publishedDate = new Date();
+
+if (!entry) {
+  throw new Error("Sorry, could not find serie");
+}
+
+const posts = await getPostsFromSerie(entry);
+---
+
+<Layout
+  page={entry.data.title}
+  description={entry.data.description}
+  {publishedDate}
+>
+  <main class="relative container flex flex-col gap-8 py-8 lg:gap-12 lg:py-24">
+    <header
+      class="border-muted-border relative flex w-full flex-col gap-4 border-b pb-6 lg:w-2/3 lg:gap-8 lg:pb-12"
+    >
+      <H1>
+        {entry.data.title}
+      </H1>
+
+      <P>
+        {entry.data.abstract}
+      </P>
+    </header>
+
+    <div class="grid grid-cols-1 gap-0 gap-x-12 lg:grid-cols-2">
+      {posts.map((post, index) => <SeriePostListItem {post} {index} />)}
+    </div>
+  </main>
+</Layout>

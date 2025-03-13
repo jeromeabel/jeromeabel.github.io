@@ -1,10 +1,10 @@
 ---
 import { Icon } from "astro-icon/components";
 import type { CollectionEntry } from "astro:content";
-import { render } from 'astro:content';
-
+import { render } from "astro:content";
+import { getFormattedDate } from "src/utils/format-date";
 interface Props {
-  post: CollectionEntry<"blog">;
+  post: CollectionEntry<"post">;
 }
 
 const { post } = Astro.props;
@@ -13,42 +13,19 @@ const { remarkPluginFrontmatter } = await render(post);
 if (!post) {
   throw new Error("Sorry, could not find post");
 }
-
-const dateOptions: Intl.DateTimeFormatOptions = {
-  year: "numeric",
-  month: "short",
-  day: "numeric",
-};
-
-const dateISOString = new Date(post.data.date).toLocaleDateString(
-  "en-EN",
-  dateOptions,
-);
-
-const title = post.data.title;
-const titleSerie = post.data.serie;
-const order = post.data.order;
-
 ---
 
 <a
-  href=`/blog/${post.id}`
+  href=`/post/${post.id}`
   class="border-muted-border hover:bg-muted-background/50 flex flex-col gap-2 border p-4 lg:p-6"
 >
-  <h2 class="text-xl lg:text-2xl tracking-wide font-bold">
-    {
-      titleSerie ? (
-        <p class="text-muted text-base lg:text-lg font-normal uppercase">
-          {titleSerie} 🞄 <span class="text-muted text-base">{order}</span>
-        </p>
-        <p> {title}</p>
-      ): (title)
-    }
+  <h2 class="text-xl font-bold tracking-wide lg:text-2xl">
+    {post.data.title}
   </h2>
   <p class="line-clamp-2">{post.data.description}</p>
-  <div class="flex items-center gap-2 text-muted justify-end md:mt-4">
+  <div class="text-muted flex items-center justify-end gap-2 md:mt-4">
     <Icon name="lucide:calendar" />
-    <time class="text-sm">{dateISOString}</time>
+    <time class="text-sm">{getFormattedDate(post.data.date)}</time>
 
     <Icon name="lucide:clock" class="ms-6" />
     <span class="text-sm">{remarkPluginFrontmatter.minutesRead}</span>
