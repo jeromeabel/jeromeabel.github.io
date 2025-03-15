@@ -4,6 +4,7 @@ import Link from "@components/ui/Link.astro";
 import LinkNavPost from "@components/ui/LinkNavPost.astro";
 import P from "@components/ui/P.astro";
 import Prose from "@components/ui/Prose.astro";
+import SocialShare from "@components/ui/SocialShare.astro";
 import Layout from "@layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
 import { getCollection, getEntry, render } from "astro:content";
@@ -51,6 +52,8 @@ const { Content, remarkPluginFrontmatter } = await render(currentPost);
 const publishedDate = new Date(currentPost.data.date);
 
 const hasPagination = nextPost !== null || prevPost !== null;
+
+const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
 ---
 
 <Layout
@@ -74,11 +77,19 @@ const hasPagination = nextPost !== null || prevPost !== null;
       <H1>{currentPost.data.title}</H1>
       <P>{currentPost.data.abstract}</P>
 
-      <div class="text-muted flex items-center gap-2 md:mt-4">
-        <Icon name="lucide:calendar" />
-        <time class="text-sm">{getFormattedDate(currentPost.data.date)}</time>
-        <Icon name="lucide:clock" class="ms-6" />
-        <span class="text-sm">{remarkPluginFrontmatter.minutesRead}</span>
+      <div class="flex items-center justify-between gap-2">
+        <div class="text-muted flex items-center gap-2 md:mt-4">
+          <Icon name="lucide:calendar" />
+          <time class="text-sm">{getFormattedDate(currentPost.data.date)}</time>
+          <Icon name="lucide:clock" class="ms-4 lg:ms-6" />
+          <span class="text-sm">{remarkPluginFrontmatter.minutesRead}</span>
+        </div>
+
+        <SocialShare
+          url={canonicalWebsiteURL}
+          title={currentPost.data.title}
+          description={currentPost.data.description}
+        />
       </div>
     </header>
     <Prose class="mt-8 md:mx-auto">

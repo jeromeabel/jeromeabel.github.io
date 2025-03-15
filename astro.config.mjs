@@ -3,6 +3,7 @@ import netlify from "@astrojs/netlify";
 import partytown from "@astrojs/partytown";
 import icon from "astro-icon";
 import { defineConfig } from "astro/config";
+import rehypeMermaid from 'rehype-mermaid';
 import { remarkReadingTime } from './src/utils/remark-reading-time.mjs';
 
 import tailwindcss from "@tailwindcss/vite";
@@ -27,8 +28,8 @@ export default defineConfig({
     }),
     icon({
       include: {
-        lucide: ['download', 'arrow-right', 'arrow-left', 'arrow-up-right', 'sun', 'moon', 'handshake',  'clock',  'calendar', 'chevron-right'],
-        'fa6-brands': ['github', 'linkedin-in', 'bluesky',],
+        lucide: ['download', 'arrow-right', 'arrow-left', 'arrow-up-right', 'sun', 'moon', 'handshake',  'clock',  'calendar', 'chevron-right', 'mail'],
+        'fa6-brands': ['github', 'linkedin-in', 'bluesky', 'facebook-f', 'x-twitter'],
       },
     })
 
@@ -39,6 +40,11 @@ export default defineConfig({
   },
 
   markdown: {
+    syntaxHighlight: {
+      type: 'shiki',
+      excludeLangs: ['mermaid', 'math'],
+    },
     remarkPlugins: [remarkReadingTime],
+    rehypePlugins: [rehypeMermaid],
   },
 });

@@ -13,6 +13,8 @@ const linkVariants = cva("transition-colors", {
       bold: "font-semibold hover:text-white",
       cta: "hover-fx rounded-full px-4 lg:px-6 h-10 lg:h-14 inline-flex items-center justify-center gap-5 bg-foreground text-background border border-foreground",
       icon: "h-10 w-10 lg:h-14 lg:w-14 grid place-items-center text-xl lg:text-3xl rounded-full border border-dashed border-muted hover:border-solid hover:bg-muted-background",
+      iconSmall:
+        "h-6 w-6 lg:h-8 lg:w-8 grid place-items-center text-sm rounded-full border border-dashed border-muted hover:border-solid hover:bg-muted-background",
       secondary:
         "max-w-fit border-foreground text-foreground flex py-4 justify-between items-center gap-2 rounded-full border w-full px-6 text-xl hover:bg-muted-background",
       external:
@@ -43,7 +45,7 @@ const externalAttrs = isExternal
   ? { target: "_blank", rel: "nofollow noopener noreferrer" }
   : {};
 
-const showLabel = !["icon"].includes(variant ?? "");
+const showLabel = !["icon", "iconGhost"].includes(variant ?? "");
 const iconName = icon || (isVariantExternal ? "lucide:arrow-up-right" : "");
 const classes = linkVariants({ variant, className });
 ---

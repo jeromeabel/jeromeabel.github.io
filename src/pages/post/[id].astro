@@ -3,6 +3,7 @@ import H1 from "@components/ui/H1.astro";
 import Link from "@components/ui/Link.astro";
 import P from "@components/ui/P.astro";
 import Prose from "@components/ui/Prose.astro";
+import SocialShare from "@components/ui/SocialShare.astro";
 import Layout from "@layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
 import { getCollection, render } from "astro:content";
@@ -19,6 +20,7 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content, remarkPluginFrontmatter } = await render(entry);
 const publishedDate = new Date(entry.data.date);
+const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
 ---
 
 <Layout
@@ -26,19 +28,27 @@ const publishedDate = new Date(entry.data.date);
   description={entry.data.description}
   {publishedDate}
 >
-  <main class="relative container flex flex-col gap-8 py-8 lg:gap-12 lg:py-24">
+  <main class="container flex flex-col gap-8 py-8 lg:gap-12 lg:py-24">
     <header
-      class="border-muted-border relative flex w-full flex-col gap-4 border-b pb-6 lg:w-2/3 lg:gap-8 lg:pb-12"
+      class="border-muted-border flex w-full flex-col gap-4 border-b pb-6 lg:w-2/3 lg:gap-8 lg:pb-12"
     >
       <Link href="/blog" label="BLOG" variant="menuInactive" />
       <H1>{entry.data.title}</H1>
       <P>{entry.data.description}</P>
 
-      <div class="text-muted flex items-center gap-2 md:mt-4">
-        <Icon name="lucide:calendar" />
-        <time class="text-sm">{getFormattedDate(entry.data.date)}</time>
-        <Icon name="lucide:clock" class="ms-6" />
-        <span class="text-sm">{remarkPluginFrontmatter.minutesRead}</span>
+      <div class="flex items-center justify-between gap-2">
+        <div class="text-muted flex items-center gap-2 md:mt-4">
+          <Icon name="lucide:calendar" />
+          <time class="text-sm">{getFormattedDate(entry.data.date)}</time>
+          <Icon name="lucide:clock" class="ms-4 lg:ms-6" />
+          <span class="text-sm">{remarkPluginFrontmatter.minutesRead}</span>
+        </div>
+
+        <SocialShare
+          url={canonicalWebsiteURL}
+          title={entry.data.title}
+          description={entry.data.description}
+        />
       </div>
     </header>
     <Prose class="mt-8 md:mx-auto">
