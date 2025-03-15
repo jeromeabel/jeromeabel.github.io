@@ -14,17 +14,19 @@ if (!id) return;
 const isNext = type === "next";
 const iconName = isNext ? "lucide:arrow-right" : "lucide:arrow-left";
 const positionType = isNext ? "text-right" : "text-left";
-const paddingType = isNext ? "ps-12 pe-6" : "pe-12 ps-6";
+const paddingType = isNext
+  ? "ps-12 pe-6 justify-end"
+  : "pe-12 ps-6 justify-start";
+const typeName = isNext ? "Previous" : "Next";
 ---
 
 <a
   href=`/serie/${id}`
-  class=`border-foreground text-foreground hover:bg-muted-background flex w-full max-w-fit items-center justify-between gap-4 rounded-full border py-4 text-xl ${paddingType}`
+  class=`border-foreground text-foreground hover:bg-muted-background flex w-1/2 items-center gap-4 rounded-full border py-4 text-xl ${paddingType}`
 >
   {!isNext && <Icon name={iconName} class="text-muted text-3xl" />}
-
-  <div>
-    <p class=`text-muted block capitalize ${positionType}`>{type}</p>
+  <div class=`${positionType}`>
+    <p class="text-muted block">{typeName}</p>
     <p class="text-2xl">{title}</p>
   </div>
   {isNext && <Icon name={iconName} class="text-muted text-3xl" />}
