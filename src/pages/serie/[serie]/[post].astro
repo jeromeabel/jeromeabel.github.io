@@ -31,8 +31,6 @@ if (!serie) {
   throw new Error("Sorry, could not find serie");
 }
 
-console.log("serie", serie);
-console.log("seriePost", post);
 const currentPost = await getEntry("seriePost", `${serie}/${post}`);
 const currentSerie = await getEntry("serie", serie);
 
@@ -73,6 +71,7 @@ const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
           label=`${currentSerie.data.title}`
           variant="menuInactive"
         />
+        <Icon name="lucide:chevron-right" />{index + 1}
       </nav>
       <H1>{currentPost.data.title}</H1>
       <P>{currentPost.data.abstract}</P>
@@ -98,7 +97,7 @@ const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
 
     {
       hasPagination && (
-        <div class="container flex justify-between gap-32">
+        <div class="container mt-16 flex justify-between gap-2 md:gap-8">
           {prevPost && (
             <LinkNavPost
               type="prev"

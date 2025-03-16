@@ -10,7 +10,10 @@ export const getAllSeries = async () =>
     (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
   );
 
+// export const getPostsFromSerie = async (serie: CollectionEntry<"serie">) =>
+//   (await getEntries(serie.data.posts)).filter((post) =>
+//     import.meta.env.PROD ? post.data.draft !== true : true,
+//   );
+
 export const getPostsFromSerie = async (serie: CollectionEntry<"serie">) =>
-  (await getEntries(serie.data.posts)).filter((post) =>
-    import.meta.env.PROD ? post.data.draft !== true : true,
-  );
+  (await getEntries(serie.data.posts)).filter((post) => !post.data.draft);
