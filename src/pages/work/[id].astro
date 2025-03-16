@@ -24,7 +24,9 @@ const publishedDate = new Date(work.data.date);
   {publishedDate}
   image={work.data.img_social || work.data.img}
 >
-  <main class="container flex flex-col gap-8 py-8 lg:gap-12 lg:py-24">
+  <main
+    class="container flex max-w-screen flex-col gap-8 py-8 lg:gap-12 lg:py-24"
+  >
     <WorkHeader data={work.data} />
     <Picture
       src={work.data.img}
