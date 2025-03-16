@@ -3,7 +3,7 @@ title: "How to Share Development Process?"
 date: 2025-03-07
 description: Let's dive into the first chapter of this serie about testing in Nuxt. Prevent your code being untestable and difficult to maintain.
 abstract: Let's dive into the first chapter of this serie about testing in Nuxt. Prevent your code being untestable and difficult to maintain.
-draft: false
+draft: true
 ---
 
 ## Introduction

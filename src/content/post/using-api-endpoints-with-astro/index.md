@@ -2,8 +2,8 @@
 title: "Using API endpoints with Astro"
 date: 2024-02-24
 description: Astro stands out as a leading Static Site Generator (SSG), revered for its exceptional performance & top-notch SEO scores. But did you know how effortlessly it can evolve into a full-stack application boasting API routes and server-side rendering (SSR) pages?
-abstract:  Astro stands out as a leading Static Site Generator (SSG), revered for its exceptional performance & top-notch SEO scores. But did you know how effortlessly it can evolve into a full-stack application boasting API routes and server-side rendering (SSR) pages?
-draft: false
+abstract: Astro stands out as a leading Static Site Generator (SSG), revered for its exceptional performance & top-notch SEO scores. But did you know how effortlessly it can evolve into a full-stack application boasting API routes and server-side rendering (SSR) pages?
+draft: true
 ---
 
 ## Part 1 : Setup

@@ -1,13 +1,20 @@
 import { glob } from "astro/loaders";
-import { defineCollection, reference, z } from "astro:content";
+import {
+  defineCollection,
+  reference,
+  z,
+  type ImageFunction,
+} from "astro:content";
 
-const PostSchema = z.object({
-  title: z.string(),
-  date: z.date(),
-  description: z.string(),
-  abstract: z.string(),
-  draft: z.boolean().default(true),
-});
+const PostSchema = ({ image }: { image: ImageFunction }) =>
+  z.object({
+    title: z.string(),
+    date: z.date(),
+    description: z.string(),
+    abstract: z.string(),
+    draft: z.boolean().default(true),
+    img: image().optional(),
+  });
 
 const post = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/post" }),

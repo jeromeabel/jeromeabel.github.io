@@ -3,7 +3,7 @@ title: "Web Testing - Quotes and Tips"
 date: 2024-09-13
 description: After dedicating a few months to my side project, XPCatalyst, and embracing the Test-Driven Development (TDD) approach, I’ve had a series of “Aha!” moments that I’m excited to share the part n°1. Whether you’re just starting out or looking to refine your testing skills, these insights might resonate with you
 abstract: After dedicating a few months to my side project, XPCatalyst, and embracing the Test-Driven Development (TDD) approach, I’ve had a series of “Aha!” moments that I’m excited to share the part n°1. Whether you’re just starting out or looking to refine your testing skills, these insights might resonate with you
-draft: false
+draft: true
 ---
 
 ## Coding is Testing

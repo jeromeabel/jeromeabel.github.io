@@ -6,6 +6,7 @@ import Prose from "@components/ui/Prose.astro";
 import SocialShare from "@components/ui/SocialShare.astro";
 import Layout from "@layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
+import { Picture } from "astro:assets";
 import { getCollection, render } from "astro:content";
 import { getFormattedDate } from "src/utils/format-date";
 
@@ -37,7 +38,7 @@ const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
         <Icon name="lucide:chevron-right" />
       </nav>
       <H1>{entry.data.title}</H1>
-      <P>{entry.data.description}</P>
+      <P>{entry.data.abstract}</P>
 
       <div
         class="mt-4 flex flex-col justify-between gap-4 sm:flex-row md:items-center md:gap-2"
@@ -56,6 +57,19 @@ const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
         />
       </div>
     </header>
+
+    {
+      entry.data.img && (
+        <Picture
+          src={entry.data.img}
+          formats={["avif", "webp"]}
+          sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${entry.data.img.width}px`}
+          alt={`${entry.data.title} project`}
+          loading="eager"
+        />
+      )
+    }
+
     <Prose class="mt-4 md:mx-auto md:mt-8">
       <Content />
     </Prose>
