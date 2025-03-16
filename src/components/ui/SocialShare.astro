@@ -1,0 +1,56 @@
+---
+import Link from "@components/ui/Link.astro";
+
+/*
+let URL = `https://www.reddit.com/submit?url=${encoded_url}&title=${title}`
+let URL = `https://medium.com/new-story?url=${encodeURIComponent(url)}&title=${title}`
+https://bsky.app/intent/compose?text=I%27m%20reading%20through%20the%20Bluesky%20API%20docs%21%20%F0%9F%A6%8B%0Ahttps%3A//docs.bsky.app
+*/
+
+interface Props {
+  url?: string;
+  title: string;
+  description: string;
+}
+
+const { url = Astro.request.url, title, description } = Astro.props;
+
+const encoded_url = encodeURIComponent(url);
+
+const shareData = [
+  // {
+  //   href: `https://www.facebook.com/sharer/sharer.php?u=${encoded_url}`,
+  //   label: "Facebook",
+  //   icon: "fa6-brands:facebook-f",
+  // },
+  // {
+  //   href: `https://x.com/intent/tweet?url=${encoded_url}`,
+  //   label: "Twitter",
+  //   icon: "fa6-brands:x-twitter",
+  // },
+  {
+    href: `https://bsky.app/intent/compose?text=${title}+${encoded_url}`,
+    label: "Bluedky",
+    icon: "fa6-brands:bluesky",
+  },
+  {
+    href: `https://www.linkedin.com/sharing/share-offsite/?url=${encoded_url}`,
+    label: "LinkedIn",
+    icon: "fa6-brands:linkedin-in",
+  },
+  {
+    href: `mailto:?subject=[Jerome%20Abel]%20Website%20-%20${title}&body=${description}%0A${encoded_url}`,
+    label: "Email",
+    icon: "lucide:mail",
+  },
+];
+---
+
+<div class="text-muted flex items-center gap-2">
+  <span>Share</span>
+  {
+    shareData.map(({ label, href, icon }) => (
+      <Link {label} {href} {icon} variant="iconSmall" />
+    ))
+  }
+</div>

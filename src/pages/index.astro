@@ -1,33 +1,19 @@
 ---
-import Hero from '@components/hero/Hero.astro';
-import WorksPreview from '@components/work/WorksPreview.astro';
-import Layout from '@layouts/Layout.astro';
-import SecondaryLink from '@components/links/SecondaryLink.astro';
-import Contact from '@components/contact/Contact.astro';
-import Skills from '@components/skills/Skills.astro';
+import BlogPreview from "@components/blog/BlogPreview.astro";
+import Contact from "@components/contact/Contact.astro";
+import Hero from "@components/hero/Hero.astro";
+import WorksPreview from "@components/work/WorksPreview.astro";
+import Layout from "@layouts/Layout.astro";
 ---
 
 <Layout>
-  <Hero />
-  <main
-    class="flex flex-col gap-16 lg:gap-32 mt-0 lg:mt-16 pt-8 sm:pt-12 lg:pt-16 pb-16"
-  >
-    <Skills />
-    <WorksPreview
-      works={['kungfu-school', 'medito-fundraising']}
-      title="I build"
-      subtitle="Websites"
-      class="text-green-700"
-    />
-    <WorksPreview
-      works={['la-forme', 'logariat']}
-      title="I make"
-      subtitle="Real-time applications"
-      class="text-blue-600"
-    />
-    <div class="flex justify-center">
-      <SecondaryLink label="See All Works" href="/work" />
-    </div>
-  </main>
-  <Contact />
+  <div>
+    <Hero />
+
+    <main class="mb-32 flex flex-col gap-16 lg:gap-24 xl:gap-36">
+      <BlogPreview />
+      <WorksPreview />
+    </main>
+    <Contact />
+  </div>
 </Layout>

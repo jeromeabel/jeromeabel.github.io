@@ -1,0 +1,31 @@
+---
+import Link from "@components/ui/Link.astro";
+
+const today = new Date();
+
+const links = [
+  { label: "Art Portfolio", href: "https://jeromeabel.net" },
+  { label: "Framagit", href: "https://framagit.org/jeromeabel" },
+  { label: "GitHub", href: "https://github.com/jeromeabel" },
+  { label: "Bluesky", href: "https://bsky.app/profile/jeromeabel.bsky.social" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/jerome-abel/" },
+  { label: "Email", href: "mailto:dev@jeromeabel.net" },
+];
+---
+
+<footer class="text-muted py-8 md:py-16">
+  <div
+    class="container flex flex-col-reverse justify-between gap-6 md:flex-row md:gap-8"
+  >
+    <p class="text-center">Jérôme Abel - {today.getFullYear()}</p>
+    <ul class="flex flex-row flex-wrap justify-center gap-2 md:gap-6">
+      {
+        links.map((link) => (
+          <li>
+            <Link label={link.label} href={link.href} />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</footer>

@@ -29,7 +29,7 @@ A live example: https://reso-nance.org/wiki/projets/accueil
 
 Choose one of these options and write it into a wiki page.
 
-```m
+```
 // Sort by name
 ~~DIRPICTURES~~
 

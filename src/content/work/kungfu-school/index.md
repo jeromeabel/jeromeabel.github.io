@@ -7,7 +7,7 @@ img_preview: ./preview.jpg
 img_preview_placeholder: ./preview-small.jpg
 img_social: ./social.jpg
 description: Website to manage a Kung Fu school
-abstract: 'I am developing a website for a Kung Fu school. The current website is outdated and does not reflect current best practices in web design. My work involves designing and developing a complete redesign of the website. Additionally, I would like to integrate other services such as content management, registration, and learning tracking.'
+abstract: "I am developing a website for a Kung Fu school. The current website is outdated and does not reflect current best practices in web design. My work involves designing and developing a complete redesign of the website. Additionally, I would like to integrate other services such as content management, registration, and learning tracking."
 git: https://github.com/jeromeabel/kungfuschool
 live: https://jeromeabel.github.io/kungfuschool/
 stack:
@@ -50,17 +50,17 @@ export default {
   theme: {
     extend: {
       animation: {
-        openmenu: 'openmenu 0.5s ease-in both',
-        closemenu: 'closemenu 0.5s ease-in both',
+        openmenu: "openmenu 0.5s ease-in both",
+        closemenu: "closemenu 0.5s ease-in both",
       },
       keyframes: {
         openmenu: {
-          '0%': { top: '-400px' },
-          '100%': { top: '0px' },
+          "0%": { top: "-400px" },
+          "100%": { top: "0px" },
         },
         closemenu: {
-          '0%': { top: '0px' },
-          '100%': { top: '-400px' },
+          "0%": { top: "0px" },
+          "100%": { top: "-400px" },
         },
       },
     },
@@ -92,10 +92,10 @@ To display as soon as possible the most original font for titles "Houji," I used
   <body>
     <style is:global>
       @font-face {
-        font-family: 'Houji';
+        font-family: "Houji";
         src:
-          url('/kungfuschool/fonts/houji.woff2') format('woff2'),
-          url('/kungfuschool/fonts/houji.woff2') format('woff');
+          url("/kungfuschool/fonts/houji.woff2") format("woff2"),
+          url("/kungfuschool/fonts/houji.woff2") format("woff");
         font-weight: normal;
         font-style: normal;
         font-display: swap;

@@ -1,21 +1,50 @@
-import { defineConfig } from 'astro/config';
-import rehypeExternalLinks from 'rehype-external-links';
-import tailwind from '@astrojs/tailwind';
+// @ts-check
+import netlify from "@astrojs/netlify";
+import partytown from "@astrojs/partytown";
+import icon from "astro-icon";
+import { defineConfig } from "astro/config";
+import rehypeMermaid from 'rehype-mermaid';
+import { remarkReadingTime } from './src/utils/remark-reading-time.mjs';
+
+import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://dev.jeromeabel.net',
-  integrations: [tailwind()],
-  build: {
-    assets: 'assets',
-    assetsPrefix: 'https://dev.jeromeabel.net',
+  site: "https://dev.jeromeabel.net",
+
+  // Used for the Netlify Image Service
+  adapter: netlify(),
+
+  experimental: {
+    svg: true,
+    responsiveImages: true,
   },
+
+  integrations: [
+    partytown({
+      config: {
+        forward: ["dataLayer.push"],
+      },
+    }),
+    icon({
+      include: {
+        lucide: ['download', 'arrow-right', 'arrow-left', 'arrow-up-right', 'sun', 'moon', 'handshake',  'clock',  'calendar', 'chevron-right', 'mail'],
+        'fa6-brands': ['github', 'linkedin-in', 'bluesky', 'facebook-f', 'x-twitter'],
+      },
+    })
+
+  ],
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
+
   markdown: {
-    rehypePlugins: [
-      [
-        rehypeExternalLinks,
-        { target: '_blank', rel: ['nofollow, noopener, noreferrer'] },
-      ],
-    ],
+    syntaxHighlight: {
+      type: 'shiki',
+      excludeLangs: ['mermaid', 'math'],
+    },
+    remarkPlugins: [remarkReadingTime],
+    rehypePlugins: [rehypeMermaid],
   },
 });

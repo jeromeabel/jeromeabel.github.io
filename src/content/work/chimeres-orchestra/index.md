@@ -6,8 +6,8 @@ img_placeholder: ./exhibition-small.jpg
 img_preview: ./preview.jpg
 img_preview_placeholder: ./preview-small.jpg
 img_social: ./social.jpg
-description: 'As a software developer at Reso-nance Numérique, I built a system to control five or more robotic drummers. As a tribe, they tap on poles in the city to create sound rhythms: an echo of human activites in primitive rhythms.'
-abstract: 'As a software developer at Reso-nance Numérique, I built a system to control five or more robotic drummers. As a tribe, they tap on poles in the city to create sound rhythms: an echo of human activites in primitive rhythms.'
+description: "As a software developer at Reso-nance Numérique, I built a system to control five or more robotic drummers. As a tribe, they tap on poles in the city to create sound rhythms: an echo of human activites in primitive rhythms."
+abstract: "As a software developer at Reso-nance Numérique, I built a system to control five or more robotic drummers. As a tribe, they tap on poles in the city to create sound rhythms: an echo of human activites in primitive rhythms."
 git: https://git.framasoft.org/resonance/chimeres-orchestra/
 website: https://jeromeabel.net/workshop/chimeres-mutation-4/
 video: https://vimeo.com/658636474

@@ -4,29 +4,42 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro check && tsc --noEmit && astro build",
+    "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "format:check": "prettier --check .",
+    "format:write": "prettier --write ."
   },
   "dependencies": {
-    "@astrojs/check": "^0.2.0",
-    "@astrojs/tailwind": "^5.0.0",
-    "@fontsource/bubbler-one": "^5.0.8",
-    "@fontsource/ibm-plex-sans": "^5.0.11",
-    "astro": "^3.2.2",
-    "rehype-external-links": "^3.0.0",
-    "sharp": "^0.32.5",
-    "tailwindcss": "^3.0.24",
-    "typescript": "^5.2.2"
+    "@astrojs/netlify": "^6.2.3",
+    "@astrojs/partytown": "^2.1.4",
+    "@fontsource/bubbler-one": "^5.2.5",
+    "@fontsource/fira-code": "^5.2.5",
+    "@fontsource/ibm-plex-sans": "^5.2.5",
+    "@iconify-json/fa-brands": "^1.2.1",
+    "@iconify-json/lucide": "^1.2.30",
+    "@tailwindcss/vite": "^4.0.14",
+    "astro": "^5.5.2",
+    "astro-icon": "^1.1.5",
+    "class-variance-authority": "^0.7.1",
+    "mdast-util-to-string": "^4.0.0",
+    "playwright": "^1.51.0",
+    "reading-time": "^1.5.0",
+    "rehype-mermaid": "^3.0.0",
+    "sharp": "^0.33.5",
+    "tailwindcss": "^4.0.14"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.10",
-    "astro-icon": "^0.8.1",
-    "gh-pages": "^6.0.0",
-    "prettier": "^3.0.3",
-    "prettier-plugin-astro": "^0.12.0"
+    "@iconify-json/fa6-brands": "^1.2.5",
+    "@tailwindcss/typography": "^0.5.16",
+    "prettier": "^3.5.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "^0.6.11"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ]
   }
 }

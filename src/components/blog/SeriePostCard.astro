@@ -1,0 +1,51 @@
+---
+import { Icon } from "astro-icon/components";
+import type { CollectionEntry } from "astro:content";
+import { getCollection, render } from "astro:content";
+import { getFormattedDate } from "src/utils/format-date";
+
+interface Props {
+  post: CollectionEntry<"seriePost">;
+}
+
+const { post } = Astro.props;
+
+if (!post) {
+  throw new Error("Sorry, could not find post");
+}
+
+const { remarkPluginFrontmatter } = await render(post);
+
+const series = await getCollection("serie");
+
+let index = -1;
+const serie = series.find((s) => {
+  const postsIds = s.data.posts.map((p) => p.id);
+  index = postsIds.findIndex((id) => id === post.id);
+  return postsIds.includes(post.id);
+});
+
+if (!serie) {
+  throw new Error("Sorry, could not find serie");
+}
+---
+
+<a
+  href=`/serie/${post.id}`
+  class="border-muted-border hover:bg-muted-background/50 flex flex-col gap-2 border p-4 lg:p-6"
+>
+  <h2 class="text-xl font-bold tracking-wide lg:text-2xl">
+    <span class="text-muted block text-base font-normal uppercase lg:text-lg">
+      {serie.data.title} 🞄 <span class="text-muted text-base">{index + 1}</span>
+    </span>
+    {post.data.title}
+  </h2>
+  <p class="line-clamp-2">{post.data.description}</p>
+  <div class="text-muted mt-4 flex items-center justify-end gap-2">
+    <Icon name="lucide:calendar" />
+    <time class="text-sm">{getFormattedDate(post.data.date)}</time>
+
+    <Icon name="lucide:clock" class="ms-6" />
+    <span class="text-sm">{remarkPluginFrontmatter.minutesRead}</span>
+  </div>
+</a>

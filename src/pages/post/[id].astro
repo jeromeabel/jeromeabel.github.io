@@ -1,0 +1,77 @@
+---
+import H1 from "@components/ui/H1.astro";
+import Link from "@components/ui/Link.astro";
+import P from "@components/ui/P.astro";
+import Prose from "@components/ui/Prose.astro";
+import SocialShare from "@components/ui/SocialShare.astro";
+import Layout from "@layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+import { Picture } from "astro:assets";
+import { getCollection, render } from "astro:content";
+import { getFormattedDate } from "src/utils/format-date";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("post");
+  return posts.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content, remarkPluginFrontmatter } = await render(entry);
+const publishedDate = new Date(entry.data.date);
+const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
+---
+
+<Layout
+  page={entry.data.title}
+  description={entry.data.description}
+  {publishedDate}
+>
+  <main class="container flex flex-col gap-8 py-8 lg:gap-12 lg:py-24">
+    <header
+      class="border-muted-border flex w-full flex-col gap-4 border-b pb-6 lg:w-2/3 lg:gap-8 lg:pb-12"
+    >
+      <nav class="text-muted flex items-center gap-1 uppercase">
+        <Link href="/blog" label="BLOG" variant="menuInactive" />
+        <Icon name="lucide:chevron-right" />
+      </nav>
+      <H1>{entry.data.title}</H1>
+      <P>{entry.data.abstract}</P>
+
+      <div
+        class="mt-4 flex flex-col justify-between gap-4 sm:flex-row md:items-center md:gap-2"
+      >
+        <div class="text-muted flex items-center gap-2 md:mt-4">
+          <Icon name="lucide:calendar" />
+          <time class="text-sm">{getFormattedDate(entry.data.date)}</time>
+          <Icon name="lucide:clock" class="ms-4 lg:ms-6" />
+          <span class="text-sm">{remarkPluginFrontmatter.minutesRead}</span>
+        </div>
+
+        <SocialShare
+          url={canonicalWebsiteURL}
+          title={entry.data.title}
+          description={entry.data.description}
+        />
+      </div>
+    </header>
+
+    {
+      entry.data.img && (
+        <Picture
+          src={entry.data.img}
+          formats={["avif", "webp"]}
+          sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${entry.data.img.width}px`}
+          alt={`${entry.data.title} project`}
+          loading="eager"
+        />
+      )
+    }
+
+    <Prose class="mt-4 md:mx-auto md:mt-8">
+      <Content />
+    </Prose>
+  </main>
+</Layout>

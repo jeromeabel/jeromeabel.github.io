@@ -1,0 +1,215 @@
+---
+import Triangle from "@assets/images/hero/triangle.svg";
+
+import { Image } from "astro:assets";
+
+const shapes = [
+  {
+    src: "/hero/shape1.svg",
+    width: 107,
+    height: 137,
+    class: "shape shape-1 z-10",
+  },
+  {
+    src: "/hero/shape2.svg",
+    width: 162,
+    height: 117,
+    class: "shape shape-2 z-20",
+  },
+  {
+    src: "/hero/shape3.svg",
+    width: 214,
+    height: 13,
+    class: "shape shape-3 z-30",
+  },
+  {
+    src: "/hero/shape1-shadow.svg",
+    width: 126,
+    height: 28,
+    class: "shape-shadow shadow-1",
+  },
+  {
+    src: "/hero/shape2-shadow.svg",
+    width: 168,
+    height: 42,
+    class: "shape-shadow shadow-2",
+  },
+  {
+    src: "/hero/shape3-shadow.svg",
+    width: 199,
+    height: 19,
+    class: "shape-shadow shadow-3",
+  },
+];
+---
+
+<div
+  class="reveal relative hidden h-full flex-1 lg:block dark:invert"
+  aria-hidden="true"
+>
+  {
+    shapes.map((shape) => (
+      <Image
+        src={shape.src}
+        class={shape.class}
+        width={shape.width}
+        height={shape.height}
+        alt=""
+      />
+    ))
+  }
+  <Triangle
+    class="shape absolute right-0 -z-10 text-white blur-lg dark:opacity-30"
+  />
+</div>
+
+<style>
+  :root {
+    --float-rot1-duration: 7.1s;
+    --float-rot1-translate: -10px;
+    --shadow-pulse1-scale: 0.98;
+    --shadow-pulse1-blur: 8px;
+    --shape-1-right: 200px;
+    --shape-1-top: 20px;
+    --shadow-1-right: 200px;
+    --shadow-1-top: 290px;
+
+    --float-rot2-duration: 8.2s;
+    --float-rot2-translate: 15px;
+    --shadow-pulse2-scale: 0.92;
+    --shadow-pulse2-blur: 7px;
+    --shape-2-right: 90px;
+    --shape-2-top: 140px;
+    --shadow-2-right: 90px;
+    --shadow-2-top: 320px;
+
+    --float-rot3-duration: 10.2s;
+    --float-rot3-translate: -30px;
+    --shadow-pulse3-scale: 1;
+    --shadow-pulse3-blur: 5px;
+    --shape-3-left: 90px;
+    --shape-3-top: 240px;
+    --shadow-3-left: 90px;
+    --shadow-3-top: 420px;
+  }
+
+  @keyframes float-rot1 {
+    0%,
+    100% {
+      transform: rotateZ(0deg) translateY(0);
+    }
+    50% {
+      transform: rotateZ(1deg) translateY(var(--float-rot1-translate));
+    }
+  }
+  @keyframes shadow-pulse1 {
+    0%,
+    100% {
+      opacity: 0.7;
+      transform: scale(var(--shadow-pulse1-scale));
+      filter: blur(var(--shadow-pulse1-blur));
+    }
+    50% {
+      opacity: 0.5;
+      transform: scale(calc(var(--shadow-pulse1-scale) - 0.03));
+      filter: blur(calc(var(--shadow-pulse1-blur) - 1px));
+    }
+  }
+
+  .shape-1 {
+    position: absolute;
+    right: var(--shape-1-right);
+    top: var(--shape-1-top);
+    animation: float-rot1 var(--float-rot1-duration) ease-in-out infinite;
+  }
+  .shadow-1 {
+    position: absolute;
+    right: var(--shadow-1-right);
+    top: var(--shadow-1-top);
+    animation: shadow-pulse1 var(--float-rot1-duration) ease-in-out infinite;
+  }
+
+  @keyframes float-rot2 {
+    0%,
+    100% {
+      transform: rotateZ(0deg) translateY(0);
+    }
+    50% {
+      transform: rotateZ(-2deg) translateY(var(--float-rot2-translate));
+    }
+  }
+  @keyframes shadow-pulse2 {
+    0%,
+    100% {
+      opacity: 0.4;
+      transform: scale(var(--shadow-pulse2-scale));
+      filter: blur(var(--shadow-pulse2-blur));
+    }
+    50% {
+      opacity: 0.6;
+      transform: scale(calc(var(--shadow-pulse2-scale) + 0.03));
+      filter: blur(calc(var(--shadow-pulse2-blur) + 2px));
+    }
+  }
+
+  .shape-2 {
+    position: absolute;
+    right: var(--shape-2-right);
+    top: var(--shape-2-top);
+    animation: float-rot2 var(--float-rot2-duration) ease-in-out infinite;
+  }
+  .shadow-2 {
+    position: absolute;
+    right: var(--shadow-2-right);
+    top: var(--shadow-2-top);
+    animation: shadow-pulse2 var(--float-rot2-duration) ease-in-out infinite;
+  }
+
+  @keyframes float-rot3 {
+    0%,
+    100% {
+      transform: rotateZ(-4deg) translateY(0);
+    }
+    50% {
+      transform: rotateZ(2deg) translateY(var(--float-rot3-translate));
+    }
+  }
+  @keyframes shadow-pulse3 {
+    0%,
+    100% {
+      opacity: 0.5;
+      transform: scale(var(--shadow-pulse3-scale));
+      filter: blur(var(--shadow-pulse3-blur));
+    }
+    50% {
+      opacity: 0.4;
+      transform: scale(calc(var(--shadow-pulse3-scale) - 0.02));
+      filter: blur(calc(var(--shadow-pulse3-blur) - 1px));
+    }
+  }
+
+  .shape-3 {
+    position: absolute;
+    left: var(--shape-3-left);
+    top: var(--shape-3-top);
+    animation: float-rot3 var(--float-rot3-duration) ease-in-out infinite;
+  }
+  .shadow-3 {
+    position: absolute;
+    left: var(--shadow-3-left);
+    top: var(--shadow-3-top);
+    animation: shadow-pulse3 var(--float-rot3-duration) ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .shape,
+    .shape-shadow {
+      animation: none !important;
+    }
+  }
+
+  .shape,
+  .shape-shadow {
+    will-change: transform, opacity;
+  }
+</style>

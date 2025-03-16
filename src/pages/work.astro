@@ -1,36 +1,31 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection } from "astro:content";
 
-import Layout from '@layouts/Layout.astro';
-import WorkCard from '@components/work/WorkCard.astro';
+import H1 from "@components/ui/H1.astro";
+import P from "@components/ui/P.astro";
+import WorkCardImage from "@components/work/WorkCardImage.astro";
+import Layout from "@layouts/Layout.astro";
 
-const works = (await getCollection('work')).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+const works = (await getCollection("work")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
-
 ---
 
 <Layout page="Work">
   <main class="container py-8 lg:py-24">
-    <header class="w-full lg:w-2/3 flex flex-col gap-4 lg:gap-8">
-      <h1
-        class="font-title text-4xl sm:text-5xl lg:text-6xl uppercase tracking-widest"
-      >
-        Work
-      </h1>
-      <p
-        class="text-xl sm:text-2xl lg:text-3xl leading-normal tracking-normal md:tracking-wide"
-      >
-        Here you will find a list of my work in web development from my recent
-        Front-End Developer certification and my artistic projects involving
-        software development.
-      </p>
+    <header class="flex w-full flex-col gap-4 lg:w-2/3 lg:gap-8">
+      <H1>Work</H1>
+      <P>
+        Here, you'll find a collection of my web development projects and
+        creative software explorations, combining technical skills with
+        thoughtful design.
+      </P>
     </header>
 
     <section
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8 lg:mt-24"
+      class="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:mt-24 lg:grid-cols-3"
     >
-      {works.map((work) => <WorkCard slug={work.slug} layout={3} />)}
+      {works.map((work) => <WorkCardImage {work} />)}
     </section>
   </main>
 </Layout>

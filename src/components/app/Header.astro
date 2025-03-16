@@ -1,0 +1,42 @@
+---
+import ThemeToggle from "@components/app/ThemeToggle.astro";
+import Link from "@components/ui/Link.astro";
+
+const links = [
+  { label: "Home", href: "/" },
+  { label: "Work", href: "/work" },
+  { label: "Blog", href: "/blog" },
+  { label: "About", href: "/about" },
+];
+
+// For menu links, determine if active
+const currentPath = `/${Astro.url.pathname.split("/")[1].trim()}`;
+
+const isActive = (href: string) =>
+  href === currentPath ||
+  href === currentPath.replace(/\/$/, "") ||
+  (href === "/blog" && (currentPath === "/post" || currentPath === "/serie"));
+
+const variant = (href: string) =>
+  isActive(href) ? "menuActive" : "menuInactive";
+---
+
+<header class="py-4 lg:py-6">
+  <nav class="container flex lg:justify-end">
+    <ul class="flex h-10 items-center gap-4 md:gap-6 lg:gap-10">
+      {
+        links.map((link) => (
+          <li>
+            <Link
+              href={link.href}
+              label={link.label}
+              variant={variant(link.href)}
+              class="text-base md:text-xl"
+            />
+          </li>
+        ))
+      }
+      <li><ThemeToggle /></li>
+    </ul>
+  </nav>
+</header>

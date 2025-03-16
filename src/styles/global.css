@@ -1,0 +1,66 @@
+@import "tailwindcss";
+@plugin '@tailwindcss/typography';
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1rem;
+  max-width: var(--breakpoint-xl);
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans:
+    "IBM Plex Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+  --font-title:
+    "Bubbler One", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  --color-background: #f5ffe1;
+  --color-foreground: #1e1e1e;
+  --color-background-accent: #f7f7f7;
+  --color-foreground-accent: #101010;
+
+  --color-muted: #5b5b5b;
+  --color-muted-border: #d1ddbb;
+  --color-muted-background: #e0eec4;
+  --color-muted-background-accent: #d1ddbb;
+}
+
+@variant dark {
+  --color-background: #1e1e1e;
+  --color-foreground: #ececec;
+  --color-background-accent: #101010;
+  --color-foreground-accent: #f7f7f7;
+
+  --color-muted: #9b9b9b;
+  --color-muted-border: #4c4c4c;
+  --color-muted-background: #343434;
+  --color-muted-background-accent: #4c4c4c;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transition-property: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transition:
+      opacity 1.3s 0.1s ease-in-out,
+      transform 1.3s 0.1s ease-in-out;
+  }
+  .reveal-anim {
+    opacity: 1;
+  }
+  .reveal.reveal-bottom {
+    transform: translateY(5rem);
+  }
+  .reveal.reveal-bottom.reveal-anim {
+    transform: translateY(0);
+  }
+}

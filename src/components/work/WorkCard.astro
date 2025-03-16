@@ -1,51 +1,70 @@
 ---
-import { getEntry } from 'astro:content';
-import Icon from 'astro-icon';
-import ResponsiveImage from '@components/ResponsiveImage.astro';
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
 
 interface Props {
-  slug: string;
-  layout?: number
+  work?: CollectionEntry<"work">;
 }
 
-const { slug, layout = 2} = Astro.props;
+const { work } = Astro.props;
 
-const work = await getEntry('work', slug);
+if (!work) {
+  throw new Error("Sorry, could not find work");
+}
+
+const dateOptions: Intl.DateTimeFormatOptions = {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+};
+
+const dateISOString = new Date(work.data.date).toLocaleDateString(
+  "en-EN",
+  dateOptions,
+);
+
+//border-muted-border hover:border-muted group relative grid grid-cols-1 border shadow-lg outline-offset-4 outline-black focus:outline-2 md:grid-cols-2 lg:auto-rows-[auto_1fr] lg:grid-cols-1 dark:shadow-none dark:outline-white
 ---
 
 <a
-  href={'/work/' + work?.slug}
-  title={`Open project ${work?.data.title}`}
-  class="relative shadow-lg focus:outline-2 outline-black outline-offset-4"
+  href={"/work/" + work.id}
+  title={`Open the "${work.data.title}" project`}
+  class="border-muted-border hover:bg-muted-background group flex flex-col border outline-offset-4 outline-black focus:outline-2 md:flex-row lg:flex-col"
 >
-  <article class="aspect-square bg-white group overflow-hidden">
-    {
-      work ? (
-        <ResponsiveImage
-          src={work.data.img_preview}
-          placeholder={work.data.img_preview_placeholder}
-          sizes={[1200, 1000, 900, 600]}
-          class="scale-100 motion-safe:group-hover:scale-110 transition-transform duration-1000"
-          loading="lazy"
-          {layout}
-          alt={`${work?.data.title} preview`}
-        />
-      ) : null
-    }
+  <div
+    class="relative aspect-[16/5] flex-1 overflow-hidden lg:aspect-square lg:flex-none"
+  >
+    <Image
+      src={work.data.img_preview}
+      alt={`${work.data.title} preview`}
+      class="object-cover transition-transform duration-1000 motion-safe:group-hover:scale-105"
+      loading="lazy"
+    />
     <div
-      class="absolute inset-0 grid place-items-center bg-black bg-opacity-0 group-hover:bg-opacity-90 duration-500 motion-reduce:transition-all"
+      class="absolute inset-0 grid items-center duration-500 group-hover:bg-black/85 motion-reduce:transition-all dark:group-hover:bg-black/90"
     >
       <div
-        class="flex-col gap-6 flex opacity-0 group-hover:opacity-100 duration-500"
+        class="flex flex-col items-center justify-center gap-6 p-4 opacity-0 duration-500 group-hover:opacity-100"
       >
         <Icon
-          name="icon_big_arrow_cross"
-          class="h-24 sm:h-20 lg:h-32 motion-safe:-rotate-45 group-hover:rotate-0 transition-all delay-100 duration-500"
+          name="cross-big"
+          class="text-5xl transition-all delay-100 duration-500 group-hover:rotate-0 motion-safe:-rotate-45 lg:text-8xl"
         />
-        <p class="text-white text-4xl lg:text-5xl font-title">
-          {work?.data.title}
-        </p>
       </div>
     </div>
-  </article>
+  </div>
+
+  <div class="flex flex-col p-6 md:flex-1 lg:flex-auto lg:p-8">
+    <p class="font-title text-3xl tracking-wide">
+      {work.data.title}
+    </p>
+    <p class="line-clamp-3 pt-2">{work.data.description}</p>
+    <p class="text-muted mt-auto flex items-center gap-2 pt-6">
+      <Icon name="lucide:calendar" />
+      <time>
+        {dateISOString}
+      </time>
+    </p>
+  </div>
 </a>

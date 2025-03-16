@@ -26,11 +26,12 @@ type: Web
 
 Since 2004, I have shared my work on the Web. A portfolio site is always an opportunity to test new techniques:
 
-- 2004: abel.jerome.free.fr: Flash Action Script
-- 2012: jeromeabel.net v1: PHP Ionize CMS, Blueprint CSS framework
-- 2018: jeromeabel.net v2: Lektor SSG, Jinja template, W3CSS framework, JS slider
-- 2021: jeromeabel.net v3: Hugo SSG, Tachyons CSS, JS lazy and scroll
-- 2023: dev.jeromeabel.net v1: Astro SSG, Tailwind CSS, JS intersection observer
+- **2004**: abel.jerome.free.fr: Flash Action Script
+- **2012**: jeromeabel.net v1: PHP Ionize CMS, Blueprint CSS framework
+- **2018**: jeromeabel.net v2: Lektor SSG, Jinja template, W3CSS framework, JS slider
+- **2021**: jeromeabel.net v3: Hugo SSG, Tachyons CSS, JS lazy and scroll
+- **2023**: dev.jeromeabel.net v1: Astro SSG, Tailwind CSS, JS intersection observer
+- **2025**: dev.jeromeabel.net v2: Astro 5, Tailwind CSS 4, Netlify, blog, dark mode, theme, variant, analytics, animations
 
 ![jeromeabel](./jeromeabel.png)
 

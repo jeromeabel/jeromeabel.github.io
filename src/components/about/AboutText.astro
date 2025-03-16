@@ -1,0 +1,51 @@
+---
+import H1 from "@components/ui/H1.astro";
+import Link from "@components/ui/Link.astro";
+import Prose from "@components/ui/Prose.astro";
+import { Icon } from "astro-icon/components";
+---
+
+<section class="flex w-full flex-col gap-6 sm:gap-8 lg:w-2/3">
+  <H1>About</H1>
+  <Prose>
+    <p>
+      <strong>Art is beautiful</strong>. For over a decade, I’ve explored
+      software arts, working with embedded systems, creative frameworks, and
+      multiple programming languages. My projects have been exhibited in
+      Brussels, Dakar, Montreal, Dubrovnik, Neuss, Tunis, Dublin, Paris, and
+      beyond. This journey has been filled with collaboration, discovery, and
+      meaningful experiences. If you're curious, you can check out my artistic
+      work at <Link href="https://jeromeabel.net" label="jeromeabel.net" />.
+    </p>
+
+    <p>
+      Today, <strong>I focus on front-end development</strong>, crafting modern,
+      maintainable, and well-tested web applications. In 2023, I completed a
+      year-long Front-End and React program at OpenClassrooms. My experience at
+      Raccourci Agency further deepened my skills in Vue and Kotlin. Now, I’m
+      fully engaged in building a great product at <Link
+        label="uhlive"
+        href="https://uh.live/"
+      /> label="uhlive" />., an innovative company at the forefront of AI-driven
+      Call Intelligence.
+    </p>
+
+    <p>
+      Beyond technical expertise, I focus on engineering best practices that
+      promote quality and maintainability. I value clean architecture, testing,
+      and performance to ensure that everything I build is solid and scalable. I
+      look forward to working with talented engineers, learning from them, and
+      building great things together. <Icon
+        name="lucide:handshake"
+        class="inline-block h-6 w-6"
+      />
+    </p>
+  </Prose>
+  <Link
+    label="Download CV"
+    href="/CV_JeromeAbel_en.pdf"
+    icon="lucide:download"
+    variant="external"
+    class="mt-4"
+  />
+</section>

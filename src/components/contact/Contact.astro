@@ -1,15 +1,12 @@
 ---
-import ContactNoise from '@components/contact/ContactNoise.astro';
-import ContactText from '@components/contact/ContactText.astro';
-import ContactImage from '@components/contact/ContactImage.astro';
-//
+import ContactImage from "@components/contact/ContactImage.astro";
+import ContactText from "@components/contact/ContactText.astro";
 ---
 
 <section
   role="complementary"
-  class="relative mt-0 sm:mt-32 py-8 sm:py-20 text-xl "
+  class="border-muted-border relative overflow-x-clip border-y py-8 text-xl sm:py-20"
 >
-  <ContactNoise />
   <div class="container flex justify-between">
     <ContactText />
     <ContactImage />
