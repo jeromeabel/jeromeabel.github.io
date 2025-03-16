@@ -71,7 +71,8 @@ const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
           label=`${currentSerie.data.title}`
           variant="menuInactive"
         />
-        <Icon name="lucide:chevron-right" />{index + 1}
+        <Icon name="lucide:chevron-right" />
+        {index + 1}
       </nav>
       <H1>{currentPost.data.title}</H1>
       <P>{currentPost.data.abstract}</P>
