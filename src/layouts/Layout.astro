@@ -6,9 +6,9 @@ import SEO from "@components/app/SEO.astro";
 import "../styles/global.css";
 
 import "@fontsource/bubbler-one/400.css";
+import "@fontsource/ibm-plex-sans/300.css";
 import "@fontsource/ibm-plex-sans/400.css";
 import "@fontsource/ibm-plex-sans/600.css";
-import "@fontsource/ibm-plex-sans/300.css";
 // import "@fontsource/ibm-plex-sans/700.css";
 import "@fontsource/fira-code/400.css";
 import "@fontsource/fira-code/600.css";
@@ -33,21 +33,13 @@ const { page, description, publishedDate, image } = Astro.props;
     <SEO {page} {description} {publishedDate} {image} />
 
     <script src="../scripts/theme.ts"></script>
-
     <script
       is:inline
+      data-astro-rerun
+      defer
       type="text/partytown"
-      src="https://cdn.eu.amplitude.com/script/4be93bed99fb2eccac90000ec720a4b1.js"
-    ></script>
-
-    <script is:inline type="text/partytown">
-      window.amplitude.add(window.sessionReplay.plugin({ sampleRate: 1 }));
-      window.amplitude.init("4be93bed99fb2eccac90000ec720a4b1", {
-        fetchRemoteConfig: true,
-        serverZone: "EU",
-        autocapture: true,
-      });
-    </script>
+      src="https://cloud.umami.is/script.js"
+      data-website-id="6f46b34b-0c31-4f1e-a5f6-7989de60af48"></script>
   </head>
   <body class="grid min-h-screen auto-rows-[auto_1fr_auto]">
     <Header />

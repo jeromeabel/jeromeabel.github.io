@@ -20,12 +20,12 @@ const typeName = isNext ? "Next" : "Previous";
 
 <a
   href=`/serie/${id}`
-  class=`border-muted-border hover:bg-muted-background flex w-1/2 items-center gap-3 border p-3 lg:px-4 lg:py-6 text-xl ${paddingType}`
+  class=`border-muted-border hover:bg-muted-background flex w-1/2 items-center gap-3 border p-3 lg:px-4 lg:py-6 text-base md:text-xl ${paddingType}`
 >
-  {!isNext && <Icon name={iconName} class="text-muted text-xl md:text-3xl" />}
+  {!isNext && <Icon name={iconName} class="text-muted text-xl sm:text-2xl" />}
   <div class=`${positionType}`>
     <p class="text-muted">{typeName}</p>
-    <p class="text-xl md:text-2xl">{title}</p>
+    <p class="hidden text-xl sm:block md:text-2xl">{title}</p>
   </div>
-  {isNext && <Icon name={iconName} class="text-muted text-xl md:text-3xl" />}
+  {isNext && <Icon name={iconName} class="text-muted text-xl sm:text-2xl" />}
 </a>
