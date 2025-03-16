@@ -60,10 +60,10 @@ const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
   {publishedDate}
 >
   <main
-    class="container flex max-w-screen flex-col gap-8 py-8 lg:gap-12 lg:py-24"
+    class="container flex flex-col gap-8 overflow-auto py-8 lg:gap-12 lg:py-24"
   >
     <header
-      class="border-muted-border relative flex w-full flex-col gap-4 border-b pb-6 lg:w-2/3 lg:gap-8 lg:pb-12"
+      class="border-muted-border flex w-full flex-col gap-4 border-b pb-6 lg:w-2/3 lg:gap-8 lg:pb-12"
     >
       <nav class="text-muted flex flex-col gap-1 uppercase md:flex-row">
         <div class="flex items-center gap-1">
