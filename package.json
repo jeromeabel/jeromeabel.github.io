@@ -23,7 +23,7 @@
     "astro-icon": "^1.1.5",
     "class-variance-authority": "^0.7.1",
     "mdast-util-to-string": "^4.0.0",
-    "playwright-core": "^1.51.0",
+    "playwright": "^1.51.0",
     "reading-time": "^1.5.0",
     "rehype-mermaid": "^3.0.0",
     "sharp": "^0.33.5",
@@ -34,8 +34,7 @@
     "@tailwindcss/typography": "^0.5.16",
     "prettier": "^3.5.3",
     "prettier-plugin-astro": "^0.14.1",
-    "prettier-plugin-tailwindcss": "^0.6.11",
-    "playwright": "^1.51.0"
+    "prettier-plugin-tailwindcss": "^0.6.11"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
