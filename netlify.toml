@@ -1,6 +1,5 @@
 [build]
-  command = "pnpm install && PLAYWRIGHT_BROWSERS_PATH=.netlify/cache/playwright pnpm dlx playwright install --with-deps chromium && pnpm build"
+  command = "pnpm install && pnpm build"
 
 [build.environment]
-  PLAYWRIGHT_BROWSERS_PATH = ".netlify/cache/playwright"
-  PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS = "1"
+  PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1"
