@@ -45,7 +45,7 @@ const externalAttrs = isExternal
   ? { target: "_blank", rel: "nofollow noopener noreferrer" }
   : {};
 
-const showLabel = !["icon", "iconGhost"].includes(variant ?? "");
+const showLabel = !["icon", "iconSmall"].includes(variant ?? "");
 const iconName = icon || (isVariantExternal ? "lucide:arrow-up-right" : "");
 const classes = linkVariants({ variant, className });
 ---
