@@ -1,2 +1,5 @@
 [build]
-  command = "pnpm install && pnpm dlx playwright install --with-deps chromium && pnpm build"
+  command = "pnpm install && PLAYWRIGHT_BROWSERS_PATH=0 pnpm dlx playwright install chromium && pnpm build"
+
+[build.environment]
+  PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS = "1"
