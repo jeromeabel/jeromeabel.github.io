@@ -31,6 +31,7 @@ const publishedDate = new Date(work.data.date);
       formats={["avif", "webp"]}
       sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${work.data.img.width}px`}
       alt={`${work.data.title} project`}
+      loading="eager"
     />
     <Prose class="md:mx-auto">
       <Content />
