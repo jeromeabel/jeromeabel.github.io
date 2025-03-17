@@ -3,13 +3,13 @@ title: "Nuxt Clean Architecture"
 date: 2024-11-14
 description: Implement a newsletter subscription feature with Nuxt, following a clean architecture
 abstract: Implement a newsletter subscription feature that highlights how to organize code into distinct layers using the new Nuxt 4 file structure, making it modular, testable, and scalable.
-draft: false
 img: ./nuxt-clean-architecture-jerome-abel.png
+draft: false
 ---
 
 I've been experimenting with Clean Architecture in Nuxt, and I'm excited to share the results with a practical example of a newsletter subscription feature!
 
-🔗 Check it out here in this GitHub repo: https://github.com/jeromeabel/nuxt-clean-architecture
+👉 Code: https://github.com/jeromeabel/nuxt-clean-architecture
 
 ## Key Highlights
 
