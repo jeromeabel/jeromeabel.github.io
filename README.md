@@ -10,7 +10,7 @@ As a front-end developer, I designed and created this portfolio site to provide 
 
 👉 https://dev.jeromeabel.net
 
-![Screenshot of the Website dev.jeromeabel.net](./docs/screen.png)
+![Screenshot of the Website dev.jeromeabel.net](./docs/screen-v2.png)
 
 ## 🚨 Prerequisites
 
