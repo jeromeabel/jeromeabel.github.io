@@ -1,6 +1,5 @@
 ---
 import AboutText from "@components/about/AboutText.astro";
-import AboutValues from "@components/about/AboutValues.astro";
 import Layout from "@layouts/Layout.astro";
 ---
 
@@ -13,27 +12,5 @@ import Layout from "@layouts/Layout.astro";
     >
     </div>
     <AboutText />
-    <AboutValues />
   </main>
 </Layout>
-
-<style>
-  @keyframes animRotation {
-    from {
-      transform: rotate(-15deg);
-    }
-    to {
-      transform: rotate(15deg);
-    }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .animate-rotate {
-      animation: none;
-    }
-  }
-  @media (prefers-reduced-motion: no-preference) {
-    .animate-rotate {
-      animation: animRotation 1s ease-in-out infinite alternate;
-    }
-  }
-</style>
