@@ -30,7 +30,7 @@ export default defineConfig({
     icon({
       include: {
         lucide: ['download', 'arrow-right', 'arrow-left', 'arrow-up-right', 'sun', 'moon', 'handshake',  'clock',  'calendar', 'chevron-right', 'mail'],
-        'fa6-brands': ['github', 'linkedin-in', 'bluesky', 'facebook-f', 'x-twitter'],
+        'fa6-brands': ['github', 'linkedin-in', 'bluesky'],
       },
       iconDir: "src/assets/icons"
     })
