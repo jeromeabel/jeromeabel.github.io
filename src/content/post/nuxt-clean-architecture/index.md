@@ -59,13 +59,16 @@ The project adheres to the Ports and Adapters (Hexagonal) architecture pattern:
 
 ## Step-by-Step Implementation
 
-To build this feature in a structured manner, the following order of implementation is followed:
+It can sometimes be a little tricky to know where to start and which steps to follow. To build this feature in a structured manner, I'm following this order:
 
-1. Define the **UI** in `NewsletterForm.vue`, ensuring a clean and declarative structure.
-2. Create the **Composable** (`useNewsletter`) to manage state and encapsulate logic.
-3. Develop the **Use Case** (`subscribe-use-case.ts`) that implements subscription logic.
-4. Establish **Repository Interfaces** and **Factories** to enable dependency injection.
-5. Implement **Repositories**, using Supabase for production and an in-memory store for testing.
+1. Define the `subscriber.ts` **Entity**
+2. Establish the **Repository Interface** (Secondary Port) to connect the domain with repositories
+3. Implement the first **In-memory Repository** for testing => Ready to test
+4. Then, the **Use Case** (`subscribe-use-case.ts`) that implements subscription logic (business), which uses the repository interface => Test
+5. Implement the **Primary Adapter Interface** (Primary Port) to connect the use case with the presentation layer
+6. Create the **Composable** (`useNewsletter`) to manage state and encapsulate logic => Test
+7. Define the **UI** in `NewsletterForm.vue`, ensuring a clean and declarative structure
+8. Finally, create the **Implementation Repository** to enable dependency injection, with a possible Repository Factory improvement to switch between testing or production context easily
 
 ![Nuxt Clean Architecture - Order of Implementation](./5.png)
 
