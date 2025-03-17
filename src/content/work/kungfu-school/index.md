@@ -6,7 +6,7 @@ img_placeholder: ./screens-small.jpg
 img_preview: ./preview.jpg
 img_preview_placeholder: ./preview-small.jpg
 img_social: ./social.jpg
-description: Website to manage a Kung Fu school
+description: Redesign and develop a website to manage a Kung Fu school
 abstract: "I am developing a website for a Kung Fu school. The current website is outdated and does not reflect current best practices in web design. My work involves designing and developing a complete redesign of the website. Additionally, I would like to integrate other services such as content management, registration, and learning tracking."
 git: https://github.com/jeromeabel/kungfuschool
 live: https://jeromeabel.github.io/kungfuschool/
