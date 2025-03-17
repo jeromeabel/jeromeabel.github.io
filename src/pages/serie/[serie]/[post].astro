@@ -65,22 +65,24 @@ const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
     <header
       class="border-muted-border flex w-full flex-col gap-4 border-b pb-6 lg:w-2/3 lg:gap-8 lg:pb-12"
     >
-      <nav class="text-muted flex flex-col gap-1 uppercase md:flex-row">
-        <div class="flex items-center gap-1">
-          <Link href="/blog" label="Blog" variant="menuInactive" />
-          <Icon name="lucide:chevron-right" />
-        </div>
-        <div class="flex items-center gap-1">
-          <Link
-            href=`/serie/${currentSerie.id}`
-            label=`${currentSerie.data.title}`
-            variant="menuInactive"
-          />
-          <Icon name="lucide:chevron-right" />
-          {index + 1}
-        </div>
-      </nav>
-      <H1>{currentPost.data.title}</H1>
+      <div>
+        <nav class="text-muted mb-4 flex flex-col gap-1 uppercase md:flex-row">
+          <div class="flex items-center gap-1">
+            <Link href="/blog" label="Blog" variant="menuInactive" />
+            <Icon name="lucide:chevron-right" />
+          </div>
+          <div class="flex items-center gap-1">
+            <Link
+              href=`/serie/${currentSerie.id}`
+              label=`${currentSerie.data.title}`
+              variant="menuInactive"
+            />
+            <Icon name="lucide:chevron-right" />
+            {index + 1}
+          </div>
+        </nav>
+        <H1>{currentPost.data.title}</H1>
+      </div>
       <P>{currentPost.data.abstract}</P>
 
       <div

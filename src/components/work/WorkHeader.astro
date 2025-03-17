@@ -2,6 +2,7 @@
 import H1 from "@components/ui/H1.astro";
 import Link from "@components/ui/Link.astro";
 import P from "@components/ui/P.astro";
+import { Icon } from "astro-icon/components";
 const { data } = Astro.props;
 
 const year = new Date(data.date).getFullYear();
@@ -9,9 +10,13 @@ const dateISOString = new Date(data.date).toISOString().slice(0, 10);
 ---
 
 <header class="flex w-full flex-col gap-4 lg:w-2/3 lg:gap-8">
-  <H1>
-    {data.title}
-  </H1>
+  <div>
+    <nav class="text-muted mb-2 flex items-center gap-1 uppercase">
+      <Link href="/work" label="WORK" variant="menuInactive" />
+      <Icon name="lucide:chevron-right" />
+    </nav>
+    <H1>{data.title}</H1>
+  </div>
   <P>
     {data.abstract}
   </P>

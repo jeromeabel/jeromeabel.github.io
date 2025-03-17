@@ -33,11 +33,13 @@ const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
     <header
       class="border-muted-border flex w-full flex-col gap-4 border-b pb-6 lg:w-2/3 lg:gap-8 lg:pb-12"
     >
-      <nav class="text-muted flex items-center gap-1 uppercase">
-        <Link href="/blog" label="BLOG" variant="menuInactive" />
-        <Icon name="lucide:chevron-right" />
-      </nav>
-      <H1>{entry.data.title}</H1>
+      <div>
+        <nav class="text-muted mb-2 flex items-center gap-1 uppercase">
+          <Link href="/blog" label="BLOG" variant="menuInactive" />
+          <Icon name="lucide:chevron-right" />
+        </nav>
+        <H1>{entry.data.title}</H1>
+      </div>
       <P>{entry.data.abstract}</P>
 
       <div
