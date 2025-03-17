@@ -1,7 +1,6 @@
 ---
 import HeroSocials from "@components/hero/HeroSocials.astro";
 import Link from "@components/ui/Link.astro";
-import P from "@components/ui/P.astro";
 ---
 
 <div class="flex-1 lg:flex-2 xl:flex-1" role="presentation">
@@ -9,12 +8,14 @@ import P from "@components/ui/P.astro";
     <h1 class="font-title text-2xl tracking-wide md:text-4xl lg:text-5xl">
       Hi! I'm Jerôme Abel
     </h1>
-    <P>
+    <p
+      class="text-xl sm:text-pretty md:text-2xl md:tracking-wide xl:text-3xl xl:leading-tight"
+    >
       A front-end engineer working at <Link
         label="uhlive"
         href="https://uh.live/"
-      />, <br /> with 10+ years background in interactive arts.</P
-    >
+      />, <br /> with 10+ years background in interactive arts.
+    </p>
     <HeroSocials />
   </div>
 </div>
