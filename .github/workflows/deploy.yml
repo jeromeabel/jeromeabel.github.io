@@ -3,38 +3,31 @@ name: Deploy Astro on Netlify
 on:
   push:
     branches:
-      - chore/add-mermaid  # Remplace par la branche concernée
+      - chore/add-mermaid
+      - main
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [22]
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Setup Node.js
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
-          node-version: lts/*
+          node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
-
-      - name: Install pnpm
-        run: corepack enable && corepack prepare pnpm@latest --activate
-
-      - name: Restore pnpm cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.pnpm-store
-          key: pnpm-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: |
-            pnpm-${{ runner.os }}-
-
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
 
       - name: Install Playwright browsers
         run: pnpm dlx playwright install --with-deps chromium
