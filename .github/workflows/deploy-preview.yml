@@ -1,10 +1,10 @@
 name: Deploy Astro on Netlify
 
 on:
-  push:
-    branches:
-      - '**'        # Match all branches
-      - '!main'
+  # push:
+  #   branches:
+  #     - '**'        # Match all branches
+  #     - '!main'
   workflow_dispatch:
 
 jobs:
