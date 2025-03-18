@@ -1,2 +1,0 @@
-[build]
-  command = "pnpm install && pnmp dlx playwright install --with-deps chromium && pnpm build"
