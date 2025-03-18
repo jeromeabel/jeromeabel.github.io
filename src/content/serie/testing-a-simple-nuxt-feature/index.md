@@ -2,7 +2,7 @@
 title: "Testing a Simple Nuxt Feature"
 description: Implement a newsletter subscription feature that highlights how to organize code into distinct layers using the new Nuxt 4 file structure, making it modular, testable, and scalable.
 abstract: Implement a newsletter subscription feature that highlights how to organize code into distinct layers using the new Nuxt 4 file structure, making it modular, testable, and scalable.
-date: "2025-03-12"
+date: "2025-03-18"
 posts:
   - testing-a-simple-nuxt-feature/01-how-to-share-development-process
   - testing-a-simple-nuxt-feature/02-all-in-one-component

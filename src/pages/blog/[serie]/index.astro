@@ -9,7 +9,7 @@ import { getPostsFromSerie } from "src/utils/repository";
 export async function getStaticPaths() {
   const series = await getCollection("serie");
   return series.map((entry) => ({
-    params: { id: entry.id },
+    params: { serie: entry.id },
     props: { entry },
   }));
 }
