@@ -9,7 +9,7 @@ draft: false
 
 Clean Architecture is a powerful approach to structuring applications, ensuring maintainability, scalability, and testability. In this article, I share my experience applying Clean Architecture principles to a Nuxt project with a real-world example: a newsletter subscription feature
 
-👉 Code: https://github.com/jeromeabel/nuxt-clean-architecture
+👉 Code: [jeromeabel/nuxt-clean-architecture](https://github.com/jeromeabel/nuxt-clean-architecture/tree/6849d08be360344d9a103baa30c683dc35ad78cc)
 
 ## 🌱 Disclaimer
 

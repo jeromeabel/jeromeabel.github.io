@@ -6,14 +6,15 @@ import Link from "@components/ui/Link.astro";
 import { getAllBlogPosts } from "src/utils/repository";
 
 const NB_POSTS = 6;
-const allPosts = await getAllBlogPosts(NB_POSTS + 1);
+const allPosts = await getAllBlogPosts();
+const filteredPosts = allPosts.slice(0, NB_POSTS);
 ---
 
 <section class="container flex flex-col gap-4 lg:gap-8">
   <H2>Latest Posts</H2>
   <div class="grid gap-4 md:grid-cols-2 lg:gap-8">
     {
-      allPosts.map((post) => {
+      filteredPosts.map((post) => {
         if (post.collection === "post") return <PostCard {post} />;
         return <SeriePostCard {post} />;
       })

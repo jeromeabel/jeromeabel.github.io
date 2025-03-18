@@ -3,7 +3,7 @@ import netlify from "@astrojs/netlify";
 import partytown from "@astrojs/partytown";
 import icon from "astro-icon";
 import { defineConfig } from "astro/config";
-import rehypeMermaid from 'rehype-mermaid';
+import rehypeExternalLinks from 'rehype-external-links';
 import { remarkReadingTime } from './src/utils/remark-reading-time.mjs';
 
 import tailwindcss from "@tailwindcss/vite";
@@ -46,6 +46,14 @@ export default defineConfig({
       excludeLangs: ['mermaid', 'math'],
     },
     remarkPlugins: [remarkReadingTime],
-    rehypePlugins: [rehypeMermaid],
+    rehypePlugins: [[
+      rehypeExternalLinks,
+        {
+          target: '_blank',
+          rel: ['nofollow, noopener, noreferrer'],
+        },
+      ]
+    ],
   },
 });
+

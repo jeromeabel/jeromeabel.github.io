@@ -3,6 +3,7 @@ import { Icon } from "astro-icon/components";
 import type { CollectionEntry } from "astro:content";
 import { render } from "astro:content";
 import { getFormattedDate } from "src/utils/format-date";
+
 interface Props {
   post: CollectionEntry<"post">;
 }
@@ -23,7 +24,7 @@ if (!post) {
     {post.data.title}
   </h2>
   <p class="line-clamp-2">{post.data.description}</p>
-  <div class="text-muted :mt-4 flex items-center justify-end gap-2">
+  <div class="text-muted mt-auto flex items-center justify-end gap-2">
     <Icon name="lucide:calendar" />
     <time class="text-sm">{getFormattedDate(post.data.date)}</time>
     <Icon name="lucide:clock" class="ms-6" />

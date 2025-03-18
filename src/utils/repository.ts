@@ -10,14 +10,13 @@ export const getAllSeriePosts = async () =>
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
     .filter((post) => (import.meta.env.PROD ? post.data.draft !== true : true));
 
-export const getAllBlogPosts = async (nb: number) => {
+export const getAllBlogPosts = async () => {
   const posts = await getCollection("post");
   const seriePosts = await getCollection("seriePost");
 
   return [...posts, ...seriePosts]
     .filter((post) => (import.meta.env.PROD ? post.data.draft !== true : true))
-    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-    .slice(0, nb);
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 };
 
 export const getAllSeries = async () =>

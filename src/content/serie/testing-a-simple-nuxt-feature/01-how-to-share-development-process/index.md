@@ -3,7 +3,7 @@ title: "How to Share Development Process?"
 date: 2025-03-18
 description: Let's dive into the first chapter of this serie about testing in Nuxt. Prevent your code being untestable and difficult to maintain.
 abstract: Let's dive into the first chapter of this serie about testing in Nuxt. Prevent your code being untestable and difficult to maintain.
-draft: true
+draft: false
 ---
 
 ## Introduction
@@ -54,6 +54,6 @@ Specifications will evolve throughout development, just as they do in real proje
 
 ## Decision Map Overview
 
-Let's take a look at the final map of this journey:
+Let's take a look at the final map of this journey ( [Open 🔎](https://shorturl.at/Oy1Ye)):
 
-[![Decision Map Graph](/blog/testing-a-simple-nuxt-feature/01-how-to-share-development-process.svg)](/blog/testing-a-simple-nuxt-feature/01-how-to-share-development-process.svg)
+![Decision Map Graph](/blog/testing-a-simple-nuxt-feature/01-how-to-share-development-process.svg)
