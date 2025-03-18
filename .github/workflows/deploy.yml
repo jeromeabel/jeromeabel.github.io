@@ -12,12 +12,15 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          # Force a non-shallow checkout, so that we can reference $GITHUB_BASE_REF.
+          # See https://github.com/actions/checkout for more details.
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
-          cache: 'pnpm'
+          node-version: lts/*
 
       - name: Install pnpm
         run: corepack enable && corepack prepare pnpm@latest --activate
