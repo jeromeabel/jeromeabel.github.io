@@ -13,20 +13,28 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          # Force a non-shallow checkout, so that we can reference $GITHUB_BASE_REF.
-          # See https://github.com/actions/checkout for more details.
           fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
+          cache: 'pnpm'
 
       - name: Install pnpm
         run: corepack enable && corepack prepare pnpm@latest --activate
 
+      - name: Restore pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pnpm-store
+          key: pnpm-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            pnpm-${{ runner.os }}-
+
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Install Playwright browsers
         run: pnpm dlx playwright install --with-deps chromium
