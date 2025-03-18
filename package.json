@@ -8,8 +8,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "format:check": "prettier --check .",
-    "format:write": "prettier --write .",
-    "postinstall": "pnpm dlx playwright install --with-deps chromium && pnpm build && pnpm dlx playwright install-deps"
+    "format:write": "prettier --write ."
   },
   "dependencies": {
     "@astrojs/netlify": "^6.2.3",
