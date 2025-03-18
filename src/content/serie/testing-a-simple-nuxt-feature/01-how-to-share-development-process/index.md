@@ -6,6 +6,14 @@ abstract: Let's dive into the first chapter of this serie about testing in Nuxt.
 draft: true
 ---
 
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
+
 ## Introduction
 
 When developing frontend features, it’s easy to create components that mix UI, business logic, data retrieval, and state management. While this might work initially, it quickly becomes untestable and difficult to maintain.
