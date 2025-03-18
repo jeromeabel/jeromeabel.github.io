@@ -1,2 +1,2 @@
 [build]
-  command = "pnpm install && pnpm dlx playwright install --with-deps && pnpm build"
+  command = "pnpm install && pnpm dlx playwright install && pnpm build"
