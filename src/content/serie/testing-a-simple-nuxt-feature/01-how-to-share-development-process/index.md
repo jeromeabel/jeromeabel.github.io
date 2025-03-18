@@ -54,6 +54,6 @@ Specifications will evolve throughout development, just as they do in real proje
 
 ## Decision Map Overview
 
-Let's take a look at the final map of this journey: [🔎 Open](https://shorturl.at/Oy1Ye)
+Let's take a look at the final map of this journey ( [Open 🔎](https://shorturl.at/Oy1Ye)):
 
 ![Decision Map Graph](/blog/testing-a-simple-nuxt-feature/01-how-to-share-development-process.svg)
