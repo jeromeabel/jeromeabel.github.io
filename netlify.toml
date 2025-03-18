@@ -1,2 +1,2 @@
 [build]
-  command = "npm install && npx playwright install --with-deps chromium && npm run build"
+  command = "pnpm install && pnmp dlx playwright install --with-deps chromium && pnpm build"
