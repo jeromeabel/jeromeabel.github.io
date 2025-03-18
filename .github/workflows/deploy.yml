@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - chore/add-mermaid  # Remplace par la branche concernée
+  workflow_dispatch:
 
 jobs:
   build:
