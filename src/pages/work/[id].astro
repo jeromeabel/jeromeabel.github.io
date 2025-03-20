@@ -30,9 +30,10 @@ const publishedDate = new Date(work.data.date);
       <Picture
         src={work.data.img}
         formats={["avif", "webp"]}
-        sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${work.data.img.width}px`}
+        sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, 1248px`}
         alt={`${work.data.title} project`}
         loading="eager"
+        priority
       />
     </div>
     <Prose class="md:mx-auto">

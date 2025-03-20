@@ -65,9 +65,10 @@ const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
         <Picture
           src={entry.data.img}
           formats={["avif", "webp"]}
-          sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${entry.data.img.width}px`}
+          sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, 1248px`}
           alt={`${entry.data.title} project`}
           loading="eager"
+          priority
         />
       )
     }

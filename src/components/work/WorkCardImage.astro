@@ -34,8 +34,12 @@ if (!work) {
     <Image
       src={work.data.img_preview}
       alt={`${work.data.title} preview`}
+      widths={[240, 540, 600]}
+      sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, 600px`}
       class="transition-transform duration-1000 motion-safe:group-hover:scale-110"
       loading="lazy"
+      width={600}
+      height={600}
     />
     <div
       class="group-bg-black absolute inset-0 grid items-center duration-500 group-hover:bg-black/85 motion-reduce:transition-all dark:group-hover:bg-black/90"
