@@ -6,9 +6,10 @@ interface Props {
   img: ImageMetadata;
   alt: string;
   type?: "square" | "cover";
+  class?: string;
 }
 
-const { img, alt, type = "cover" } = Astro.props;
+const { img, alt, type = "cover", class: className } = Astro.props;
 
 const placeholderImg = await getImage({
   src: img,
@@ -25,7 +26,7 @@ const sizes =
     ? "(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, 1248px"
     : "(max-width: 360px) 240px, (max-width: 720px) 540px, 600px";
 
-// fetchpriority="high"
+//
 // transition-opacity duration-500
 ---
 
@@ -35,6 +36,7 @@ const sizes =
     aria-hidden="true"
     src={placeholderImg.src}
     alt=""
+    fetchpriority="high"
   />
   <Picture
     src={img}
@@ -43,7 +45,8 @@ const sizes =
     alt={alt}
     loading={loading}
     width={maxWidth}
-    pictureAttributes={{ class: "opacity-0" }}
+    pictureAttributes={{ class: `opacity-0` }}
+    class={className}
     onload={`this.parentElement.classList.remove('opacity-0')`}
   />
 </div>
