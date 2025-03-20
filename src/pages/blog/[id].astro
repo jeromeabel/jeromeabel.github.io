@@ -1,4 +1,5 @@
 ---
+import CustomImage from "@components/ui/CustomImage.astro";
 import H1 from "@components/ui/H1.astro";
 import Link from "@components/ui/Link.astro";
 import P from "@components/ui/P.astro";
@@ -6,7 +7,6 @@ import Prose from "@components/ui/Prose.astro";
 import SocialShare from "@components/ui/SocialShare.astro";
 import Layout from "@layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
-import { Picture } from "astro:assets";
 import { getCollection, render } from "astro:content";
 import { getFormattedDate } from "src/utils/format-date";
 
@@ -62,13 +62,7 @@ const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
 
     {
       entry.data.img && (
-        <Picture
-          src={entry.data.img}
-          formats={["avif", "webp"]}
-          sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${entry.data.img.width}px`}
-          alt={`${entry.data.title} project`}
-          loading="eager"
-        />
+        <CustomImage img={entry.data.img} alt={entry.data.title} />
       )
     }
 
