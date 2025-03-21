@@ -4,6 +4,7 @@ date: 2025-03-18
 description: Let's dive into the first chapter of this serie about testing in Nuxt. Prevent your code being untestable and difficult to maintain.
 abstract: Let's dive into the first chapter of this serie about testing in Nuxt. Prevent your code being untestable and difficult to maintain.
 draft: false
+img: ./cover.png
 ---
 
 ## Introduction

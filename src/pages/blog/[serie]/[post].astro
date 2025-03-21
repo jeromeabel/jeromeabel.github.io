@@ -1,4 +1,5 @@
 ---
+import CustomImage from "@components/ui/CustomImage.astro";
 import H1 from "@components/ui/H1.astro";
 import Link from "@components/ui/Link.astro";
 import LinkNavPost from "@components/ui/LinkNavPost.astro";
@@ -102,6 +103,13 @@ const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
         />
       </div>
     </header>
+
+    {
+      currentPost.data.img && (
+        <CustomImage img={currentPost.data.img} alt={currentPost.data.title} />
+      )
+    }
+
     <Prose class="mt-4 md:mx-auto md:mt-8">
       <Content />
     </Prose>
