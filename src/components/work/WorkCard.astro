@@ -31,7 +31,7 @@ const dateISOString = new Date(work.data.date).toLocaleDateString(
   class="border-muted-border hover:bg-muted-background group flex flex-col border outline-offset-4 outline-black focus:outline-2 md:flex-row lg:flex-col"
 >
   <div
-    class="relative aspect-[16/5] flex-1 overflow-hidden lg:aspect-square lg:flex-none"
+    class="relative aspect-video flex-1 overflow-hidden lg:aspect-square lg:flex-none"
   >
     <Image
       src={work.data.img_preview}
@@ -40,8 +40,10 @@ const dateISOString = new Date(work.data.date).toLocaleDateString(
       sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, 600px`}
       class="object-cover transition-transform duration-1000 motion-safe:group-hover:scale-105"
       loading="lazy"
-      width={600}
-      height={400}
+      widths={[240, 540, 768]}
+      sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, 768px`}
+      height={600}
+      width={768}
     />
     <div
       class="absolute inset-0 grid items-center duration-500 group-hover:bg-black/85 motion-reduce:transition-all dark:group-hover:bg-black/90"

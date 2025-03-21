@@ -1,6 +1,6 @@
 ---
+import CustomImage from "@components/ui/CustomImage.astro";
 import { Icon } from "astro-icon/components";
-import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 
 const variants = {
@@ -31,15 +31,11 @@ if (!work) {
   ]}
 >
   <article class=`group ${variants[variant].article} overflow-hidden`>
-    <Image
-      src={work.data.img_preview}
-      alt={`${work.data.title} preview`}
-      widths={[240, 540, 600]}
-      sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, 600px`}
+    <CustomImage
+      img={work.data.img_preview}
+      alt={work.data.title}
+      type="square"
       class="transition-transform duration-1000 motion-safe:group-hover:scale-110"
-      loading="lazy"
-      width={600}
-      height={600}
     />
     <div
       class="group-bg-black absolute inset-0 grid items-center duration-500 group-hover:bg-black/85 motion-reduce:transition-all dark:group-hover:bg-black/90"
@@ -52,7 +48,7 @@ if (!work) {
           class="text-5xl transition-all delay-100 duration-500 group-hover:rotate-0 motion-safe:-rotate-45 lg:text-8xl"
         />
         <p
-          class="font-title text-background-accent dark:text-foreground-accent text-3xl lg:text-5xl"
+          class="font-title text-background-accent dark:text-foreground-accent text-3xl lg:text-4xl"
         >
           {work?.data.title}
         </p>

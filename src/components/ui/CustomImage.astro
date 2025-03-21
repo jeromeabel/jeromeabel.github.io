@@ -1,0 +1,52 @@
+---
+import type { ImageMetadata } from "astro";
+import { getImage, Picture } from "astro:assets";
+
+interface Props {
+  img: ImageMetadata;
+  alt: string;
+  type?: "square" | "cover";
+  class?: string;
+}
+
+const { img, alt, type = "cover", class: className } = Astro.props;
+
+const placeholderImg = await getImage({
+  src: img,
+  format: "jpg",
+  width: 32,
+  height: 32,
+});
+
+const maxWidth = type === "cover" ? 1248 : 600;
+const loading = type === "cover" ? "eager" : "lazy";
+
+const sizes =
+  type === "cover"
+    ? "(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, 1248px"
+    : "(max-width: 360px) 240px, (max-width: 720px) 540px, 600px";
+
+//
+// transition-opacity duration-500
+---
+
+<div class="relative overflow-hidden">
+  <img
+    class="absolute -z-10 h-full blur-2xl"
+    aria-hidden="true"
+    src={placeholderImg.src}
+    alt=""
+    fetchpriority="high"
+  />
+  <Picture
+    src={img}
+    formats={["avif", "webp"]}
+    sizes={sizes}
+    alt={alt}
+    loading={loading}
+    width={maxWidth}
+    pictureAttributes={{ class: `opacity-0` }}
+    class={className}
+    onload={`this.parentElement.classList.remove('opacity-0')`}
+  />
+</div>
