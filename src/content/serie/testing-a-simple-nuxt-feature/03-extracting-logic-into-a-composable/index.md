@@ -1,20 +1,17 @@
 ---
 title: "Extracting Logic into a Composable "
-date: 2025-03-07
-description: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus assumenda deleniti itaque molestias odio quidem praesentium, numquam veniam animi ipsam velit iure atque delectus debitis quisquam tempore optio ea corrupti.
-abstract: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus assumenda deleniti itaque molestias odio quidem praesentium, numquam veniam animi ipsam velit iure atque delectus debitis quisquam tempore optio ea corrupti.
-draft: true
+date: 2025-03-24
+description: Split the all-in-one component into two files following the Presenter/Humble Component Pattern
+abstract: In this third episode, we make our first refactoring. The idea is to split the all-in-one component into two files following the Presenter/Humble Component Pattern.
+draft: false
+img: ./cover.png
 ---
-
-(Presenter/Humble Component Pattern)
-
-(v2.1)
 
 In this first refactoring, we extract the business logic into a composable (Presenter), leaving the component to solely handle UI rendering (Humble).
 
-## Composable (Presenter)
+## Meet the Presenter: A Composable
 
-Code: [useVersion.ts](https://github.com/jeromeabel/nuxt-clean-architecture/blob/feat/version-banner/layers/version-02/composables/useVersion.ts)
+👉 Code: [useVersion.ts](https://github.com/jeromeabel/nuxt-clean-architecture/blob/feat/version-banner/layers/version-02/composables/useVersion.ts)
 
 ```ts
 // File: layers/version-02/composables/useVersion.ts
@@ -38,7 +35,7 @@ export const useVersion = () => {
 };
 ```
 
-## Component (Humble or Dumb)
+## Meet the Humble Component (or Dumb)
 
 Code: [VersionBanner02.vue](https://github.com/jeromeabel/nuxt-clean-architecture/blob/feat/version-banner/layers/version-02/components/VersionBanner02.vue)
 
@@ -59,15 +56,13 @@ const { isVisible, version, close } = useVersion();
 
 This should be enough. Let's test it!
 
-Test the Component
+## Test the Component v2.1
 
-## Code v2.1
-
-Code: [version-banner-2-1.unit.spec.ts](https://github.com/jeromeabel/nuxt-clean-architecture/blob/feat/version-banner/layers/version-02/__tests__/version-banner-2-1.unit.spec.ts)
+👉 Code: [version-banner-2-1.unit.spec.ts](https://github.com/jeromeabel/nuxt-clean-architecture/blob/feat/version-banner/layers/version-02/__tests__/version-banner-2-1.unit.spec.ts)
 
 ## Initial Tests
 
-We'll start by implementing two types of tests:
+We'll start by implementing two tests:
 
 - The banner should be hidden by default.
 - The banner should be displayed when no version is stored.
@@ -75,7 +70,8 @@ We'll start by implementing two types of tests:
 ```ts
 // File: layers/version-02/__tests__/version-banner.spec.ts
 // @vitest-environment nuxt
-// Set the Vitest environment to Nuxt since we use Nuxt's useRuntimeConfig (happy-dom isn’t sufficient)
+// Set the Vitest environment to Nuxt since we use Nuxt's useRuntimeConfig
+// (happy-dom isn’t sufficient)
 import { describe, it, expect, beforeEach } from "vitest";
 import { mount, VueWrapper } from "@vue/test-utils";
 import pkg from "@@/package.json"; // We use the version from package.json
@@ -100,7 +96,8 @@ describe("VersionBanner", () => {
     });
 
     it("should display the current version", () => {
-      expect(wrapper.text()).toContain(pkg.version); // e.g., "version": "0.0.2"
+      // e.g., "version": "0.0.2"
+      expect(wrapper.text()).toContain(pkg.version);
     });
   });
 });
@@ -169,7 +166,8 @@ describe("VersionBanner", () => {
   });
 
   describe("when the same version is stored", () => {
-    // Without nextTick(), we might get a false positive because the default state is still rendered.
+    // Without nextTick(), we might get a false positive because
+    // the default state is still rendered.
     it("should hide the banner", async () => {
       localStorage.setItem("app-version", pkg.version);
       wrapper = mount(VersionBanner);
@@ -225,18 +223,20 @@ Which path will you take?
 
 Let's add the new specifications to have a better design:
 
-- (v1) The application’s version is defined in `package.json`.
-- (v1) The component displays the current version.
-- (v1) The banner remains hidden if the version is already stored in local storage.
-- (v1) The user can dismiss the banner.
-- (v2.1) The component should only care about the UI behavior + v(2.2) only Props & Events
+- [x] (v1) The application’s version is defined in `package.json`.
+- [x] (v1) The component displays the current version.
+- [x] (v1) The banner remains hidden if the version is already stored in local storage.
+- [x] (v1) The user can dismiss the banner.
+- **(v2.1) The component should only care about the UI behavior + v(2.2) only Props & Events**
 - (v2.1) The version should be wrapped in an Entity
-- (v2.2) The banner should be hidden by default.
-- (v2.2) The banner should be displayed when no version is stored.
-- (v2.2) Mock the `useVersion()` Composable to isolate the component under test (CUT)
-- (v2.2) Test the composable
-- (v2.2) Move `onMounted` (optional)
+- **(v2.2) The banner should be hidden by default.**
+- **(v2.2) The banner should be displayed when no version is stored.**
+- **(v2.2) Mock the `useVersion()` Composable to isolate the component under test (CUT)**
+- **(v2.2) Test the composable**
+- **(v2.2) Move `onMounted` (optional)**
 
 ## Decision Map
+
+Let's take a look at the current map ([Open 🔎](https://shorturl.at/VVyvO)):
 
 ![Decision Map Graph](/blog/testing-a-simple-nuxt-feature/03-extracting-logic-into-a-composable.svg)
