@@ -1,24 +1,49 @@
 document.addEventListener("astro:page-load", () => {
-  const reveals = [...document.querySelectorAll<HTMLElement>(".reveal")];
+  function handleImageFadeIn() {
+    document
+      .querySelectorAll<HTMLElement>(".reveal-img")
+      .forEach((container) => {
+        const picture = container.querySelector<HTMLElement>("picture");
+        const placeholder = container.querySelector<HTMLElement>(".absolute");
+        const imgElement = picture?.querySelector("img");
 
-  if (reveals) {
-    // create observer
-    const callbackObserver = (entries: any[]) => {
-      entries.forEach((entry) => {
-        if (
-          entry.isIntersecting &&
-          !entry.target.classList.contains("reveal-anim")
-        ) {
-          entry.target.classList.add("reveal-anim");
+        if (!picture || !imgElement) return;
+
+        const showImage = () => {
+          picture.style.opacity = "1";
+          if (placeholder) placeholder.style.opacity = "0";
+        };
+
+        if (imgElement.complete) {
+          showImage(); // Image chargée depuis le cache
+        } else {
+          picture.style.transition = "opacity 1200ms ease";
+          if (placeholder) placeholder.style.transition = "opacity 1200ms ease";
+
+          imgElement.addEventListener("load", showImage);
         }
       });
-    };
+  }
 
-    const observer = new IntersectionObserver(callbackObserver, {
-      threshold: 0.25,
-    });
+  function setupRevealAnimations() {
+    const reveals = document.querySelectorAll<HTMLElement>(".reveal");
 
-    // observe boxes
+    if (reveals.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("reveal-anim");
+          }
+        });
+      },
+      { threshold: 0.25 },
+    );
+
     reveals.forEach((reveal) => observer.observe(reveal));
   }
+
+  handleImageFadeIn();
+  setupRevealAnimations();
 });
