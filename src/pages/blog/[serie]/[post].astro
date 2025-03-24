@@ -59,6 +59,7 @@ const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
   page={currentPost.data.title}
   description={currentPost.data.description}
   {publishedDate}
+  image={currentPost.data.img}
 >
   <main
     class="container flex flex-col gap-8 overflow-auto py-8 lg:gap-12 lg:py-24"

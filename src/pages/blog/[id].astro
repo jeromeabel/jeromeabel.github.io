@@ -28,6 +28,7 @@ const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
   page={entry.data.title}
   description={entry.data.description}
   {publishedDate}
+  image={entry.data.img}
 >
   <main class="container flex flex-col gap-8 py-8 lg:gap-12 lg:py-24">
     <header
