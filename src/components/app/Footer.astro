@@ -17,7 +17,13 @@ const links = [
   <div
     class="container flex flex-col-reverse justify-between gap-6 md:flex-row md:gap-8"
   >
-    <p class="text-center">Jérôme Abel - {today.getFullYear()}</p>
+    <p class="text-center">
+      Jérôme Abel - {today.getFullYear()} -
+      <Link
+        href="https://creativecommons.org/licenses/by/4.0/"
+        label="License CC BY 4.0"
+      />
+    </p>
     <ul class="flex flex-row flex-wrap justify-center gap-2 md:gap-6">
       {
         links.map((link) => (
