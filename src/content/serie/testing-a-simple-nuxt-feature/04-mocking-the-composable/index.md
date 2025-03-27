@@ -1,17 +1,15 @@
 ---
 title: "Mocking the composable"
-date: 2025-03-07
-description: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus assumenda deleniti itaque molestias odio quidem praesentium, numquam veniam animi ipsam velit iure atque delectus debitis quisquam tempore optio ea corrupti.
-abstract: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus assumenda deleniti itaque molestias odio quidem praesentium, numquam veniam animi ipsam velit iure atque delectus debitis quisquam tempore optio ea corrupti.
+date: 2025-03-27
+description: "Fourth episode: Mocking the composable will help us isolate the component test without relying on Nuxt's real interactions or localStorage behavior."
+abstract: "In this fourth episode, we will mock the composable. This will help us isolate the component test without relying on Nuxt's real interactions or localStorage behavior."
+draft: false
+img: ./cover.png
 ---
-
-(v2-2) & (v2-3)
-
-As we saw earlier, we gonnna mock the composable. It will help us isolate the component test without relying on Nuxt's real interactions or localStorage behavior.
 
 ## Component Reminder: VersionBanner02.vue
 
-Code: [VersionBanner02.vue](https://github.com/jeromeabel/nuxt-clean-architecture/blob/feat/version-banner/layers/version-02/components/VersionBanner02.vue)
+👉 Code: [VersionBanner02.vue](https://github.com/jeromeabel/nuxt-clean-architecture/blob/feat/version-banner/layers/version-02/components/VersionBanner02.vue)
 
 ```vue
 <script lang="ts" setup>
@@ -30,7 +28,7 @@ const { isVisible, version, close } = useVersion();
 
 ## First Mock (v2-2)
 
-Code: [version-banner-2-2.unit.spec.ts](https://github.com/jeromeabel/nuxt-clean-architecture/blob/feat/version-banner/layers/version-02/__tests__/version-banner-2-2.unit.spec.ts)
+👉 Code: [version-banner-2-2.unit.spec.ts](https://github.com/jeromeabel/nuxt-clean-architecture/blob/feat/version-banner/layers/version-02/__tests__/version-banner-2-2.unit.spec.ts)
 
 ```ts
 // File: layers/version-02/__tests__/version-banner.spec.ts
@@ -70,7 +68,7 @@ We have successfully isolated the component from the composable's interactions w
 
 ## Complete Component Test With Composable Mocking (v2-3)
 
-Code: [VersionBanner02.vue](https://github.com/jeromeabel/nuxt-clean-architecture/blob/feat/version-banner/layers/version-02/components/VersionBanner02.vue)
+👉 Code: [VersionBanner02.vue](https://github.com/jeromeabel/nuxt-clean-architecture/blob/feat/version-banner/layers/version-02/components/VersionBanner02.vue)
 
 First, let’s add `data-testid` attributes to the component. This common technique lets us select elements without being affected by changes in the internal HTML layout.
 
@@ -94,7 +92,7 @@ Code: [version-banner-2-3.unit.spec.ts](https://github.com/jeromeabel/nuxt-clean
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { shallowMount, VueWrapper } from "@vue/test-utils";
 import VersionBanner02 from "../components/VersionBanner02.vue";
-import { useVersion } from "../composables/useVersion"; // Not needed in Nuxt
+import { useVersion } from "../composables/useVersion";
 
 vi.mock("../composables/useVersion", () => ({
   useVersion: vi.fn(),
@@ -193,18 +191,20 @@ What do you think? Should we continue refining our testing strategy further?
 
 ## Specifications v3
 
-- (v1) The application’s version is defined in `package.json`.
-- (v1) The component displays the current version.
-- (v1) The banner remains hidden if the version is already stored in local storage.
-- (v1) The user can dismiss the banner.
-- (v2.1) The component should only care about the UI behavior + v(2.2) only Props & Events
+- [x] (v1) The application’s version is defined in `package.json`.
+- [x] (v1) The component displays the current version.
+- [x] (v1) The banner remains hidden if the version is already stored in local storage.
+- [x] (v1) The user can dismiss the banner.
+- **(v2.1) The component should only care about the UI behavior + v(2.2) only Props & Events**
 - (v2.1) The version should be wrapped in an Entity
-- (v2.2) The banner should be hidden by default.
-- (v2.2) The banner should be displayed when no version is stored.
+- [x] (v2.2) The banner should be hidden by default.
+- [x] (v2.2) The banner should be displayed when no version is stored.
 - [x] (v2.2) Mock the `useVersion()` Composable to isolate the component under test (CUT)
-- (v2.2) Test the composable
+- **(v2.2) Test the composable**
 - (v2.2) Move `onMounted` (optional)
 
 ## Decision Map
+
+Let's take a look at the current map ([Open 🔎](https://shorturl.at/qIleZ)):
 
 ![Decision Map Graph](/blog/testing-a-simple-nuxt-feature/04-mocking-the-composable.svg)
