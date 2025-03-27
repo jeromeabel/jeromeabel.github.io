@@ -17,11 +17,16 @@ const posts = await getPostsFromSerie(serie);
 ---
 
 <div class="border-muted-border flex flex-col gap-2 md:border-s md:ps-8">
-  <h3 class="text-xl uppercase">
-    {serie.data.title}
-  </h3>
+  <a
+    href={`/blog/${serie.id}`}
+    class="text-xl font-semibold uppercase hover:text-white"
+    title={serie.data.title}
+    ><h3>
+      {serie.data.title}
+    </h3></a
+  >
   <p class="text-muted max-w-prose">{serie.data.abstract}</p>
-  <div class="mt-4 grid grid-cols-1 gap-0 gap-x-12 lg:grid-cols-2">
+  <div class="mt-4">
     {posts.map((post, index) => <SeriePostListItem {post} {index} />)}
   </div>
 </div>
