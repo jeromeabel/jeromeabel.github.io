@@ -1,15 +1,17 @@
 ---
 title: "Unit Testing the Composable"
-date: 2025-03-07
-description: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus assumenda deleniti itaque molestias odio quidem praesentium, numquam veniam animi ipsam velit iure atque delectus debitis quisquam tempore optio ea corrupti.
-abstract: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus assumenda deleniti itaque molestias odio quidem praesentium, numquam veniam animi ipsam velit iure atque delectus debitis quisquam tempore optio ea corrupti.
+date: 2025-04-05
+abstract: In this seventh episode, we simplify testing by replacing `onMounted` with an explicit `init` method. This small refactor leads us to deeper questions about dependencies inside composables. Should we mock them—or inject them? We explore both approaches and their trade-offs.
+description: Version 5 of our banner continues the exploration of testable composables. By removing `onMounted`, mocking `useRuntimeConfig`, and even `localStorage`, we move closer to unit tests that are truly isolated. But at what cost? We reflect on the complexity this introduces and whether dependency injection might offer a cleaner solution.
+draft: false
+img: ./cover.png
 ---
 
 ## Refactor: Replace onMounted with an "init" Method in the Composable
 
 Instead of using `onMounted` directly inside the composable, we now expose an `init` function. This change allows tests to control when the initialization logic runs.
 
-Code: [useVersion.ts](https://github.com/jeromeabel/nuxt-clean-architecture/blob/feat/version-banner/layers/version-05/composables/useVersion.ts)
+👉 Code: [useVersion.ts](https://github.com/jeromeabel/nuxt-clean-architecture/blob/feat/version-banner/layers/version-05/composables/useVersion.ts)
 
 ```ts
 export const useVersion = () => {
@@ -42,7 +44,7 @@ Now, the first test will pass.
 
 We should also update the parent component to call the `init` function:
 
-Code: [VersionBanner05.vue](https://github.com/jeromeabel/nuxt-clean-architecture/blob/feat/version-banner/layers/version-05/components/VersionBanner05.vue)
+👉 Code: [VersionBanner05.vue](https://github.com/jeromeabel/nuxt-clean-architecture/blob/feat/version-banner/layers/version-05/components/VersionBanner05.vue)
 
 ```vue
 <script lang="ts" setup>
@@ -58,7 +60,7 @@ onMounted(() => {
 
 We can now mock `useRuntimeConfig` and centralize our test variables, eliminating the need for the `withSetup` utility function. This approach tests the composable directly.
 
-Code: [use-version-5-1.unit.spec.ts](https://github.com/jeromeabel/nuxt-clean-architecture/blob/feat/version-banner/layers/version-05/__tests__/use-version-5-1.unit.spec.ts)
+👉 Code: [use-version-5-1.unit.spec.ts](https://github.com/jeromeabel/nuxt-clean-architecture/blob/feat/version-banner/layers/version-05/__tests__/use-version-5-1.unit.spec.ts)
 
 ```ts
 // @vitest-environment happy-dom
@@ -137,7 +139,7 @@ _Note:_ This is still an integration test because it relies on localStorage.
 
 ## Mocking localStorage (v5-2)
 
-Code: [use-version-5-2.unit.spec.ts](https://github.com/jeromeabel/nuxt-clean-architecture/blob/feat/version-banner/layers/version-05/__tests__/use-version-5-2.unit.spec.ts)
+👉 Code: [use-version-5-2.unit.spec.ts](https://github.com/jeromeabel/nuxt-clean-architecture/blob/feat/version-banner/layers/version-05/__tests__/use-version-5-2.unit.spec.ts)
 
 To further isolate our test and transform it into a true unit test, we can also mock localStorage:
 
@@ -254,5 +256,7 @@ We consistently face the same issue: Is it the composable's responsibility to im
 What do you think?
 
 ## Decision Map
+
+Let's take a look at the current map ([Open 🔎](https://shorturl.at/6eaG4):
 
 ![Decision Map Graph](/blog/testing-a-simple-nuxt-feature/07-unit-testing-the-composable.svg)
