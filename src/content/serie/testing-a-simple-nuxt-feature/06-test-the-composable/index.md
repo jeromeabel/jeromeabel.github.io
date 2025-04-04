@@ -1,15 +1,15 @@
 ---
 title: "Test the composable"
-date: 2025-03-07
-description: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus assumenda deleniti itaque molestias odio quidem praesentium, numquam veniam animi ipsam velit iure atque delectus debitis quisquam tempore optio ea corrupti.
-abstract: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus assumenda deleniti itaque molestias odio quidem praesentium, numquam veniam animi ipsam velit iure atque delectus debitis quisquam tempore optio ea corrupti.
+date: 2025-04-04
+abstract: "In this sixth episode, we face a common challenge when testing composables that use `onMounted`. Should the lifecycle hook live in the composable or in the component? We explore multiple ways to test it and the trade-offs of each approach."
+description: "Version 4 of our banner introduces a tricky scenario: testing a composable that uses `onMounted`. We explore various testing strategies—including using `withSetup`, wrapper components, and the decision to move lifecycle logic outside the composable—to understand when and how to simplify our tests."
+draft: false
+img: ./cover.png
 ---
-
-(v4)
 
 ## First Test (v4-1)
 
-Code: [use-version-4-1.unit.spec.ts](https://github.com/jeromeabel/nuxt-clean-architecture/blob/feat/version-banner/layers/version-04/__tests__/use-version-4-1.unit.spec.ts)
+👉 Code: [use-version-4-1.unit.spec.ts](https://github.com/jeromeabel/nuxt-clean-architecture/blob/feat/version-banner/layers/version-04/__tests__/use-version-4-1.unit.spec.ts)
 
 ```ts
 // File: layers/version-04/__tests__/use-version.spec.ts
@@ -46,7 +46,7 @@ To explore testing a composable that uses `onMounted`, we can use a helper funct
 
 ## Testing with withSetup (v4-2)
 
-Code: [use-version-4-2.unit.spec.ts](https://github.com/jeromeabel/nuxt-clean-architecture/blob/feat/version-banner/layers/version-04/__tests__/use-version-4-2.unit.spec.ts)
+👉 Code: [use-version-4-2.unit.spec.ts](https://github.com/jeromeabel/nuxt-clean-architecture/blob/feat/version-banner/layers/version-04/__tests__/use-version-4-2.unit.spec.ts)
 
 ```ts
 // @vitest-environment nuxt
@@ -111,7 +111,7 @@ The downside is that accessing `.vm` is generally discouraged because it exposes
 
 ## Complete Composable Test (v4-3)
 
-Code: [use-version-4-3.unit.spec.ts](https://github.com/jeromeabel/nuxt-clean-architecture/blob/feat/version-banner/layers/version-04/__tests__/use-version-4-3.unit.spec.ts)
+👉 Code: [use-version-4-3.unit.spec.ts](https://github.com/jeromeabel/nuxt-clean-architecture/blob/feat/version-banner/layers/version-04/__tests__/use-version-4-3.unit.spec.ts)
 
 ```ts
 // @vitest-environment nuxt
@@ -189,5 +189,7 @@ There are a few ways to improve this test further:
 Improving this test by converting it into a unit test would be a valuable enhancement.
 
 ## Decision Map
+
+Let's take a look at the current map ([Open 🔎](https://shorturl.at/lvte5)):
 
 ![Decision Map Graph](/blog/testing-a-simple-nuxt-feature/06-test-the-composable.svg)
