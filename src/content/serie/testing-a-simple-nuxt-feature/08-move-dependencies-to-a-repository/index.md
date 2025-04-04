@@ -1,8 +1,10 @@
 ---
 title: "Move Dependencies to a Repository"
-date: 2025-03-07
-description: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus assumenda deleniti itaque molestias odio quidem praesentium, numquam veniam animi ipsam velit iure atque delectus debitis quisquam tempore optio ea corrupti.
-abstract: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus assumenda deleniti itaque molestias odio quidem praesentium, numquam veniam animi ipsam velit iure atque delectus debitis quisquam tempore optio ea corrupti.
+date: 2025-04-06
+abstract: "In this eighth episode, we move external dependencies—like `useRuntimeConfig` and `localStorage`—outside of the composable. By injecting a version repository, we make the logic more focused and the tests more reliable. We discuss the benefits of this design and how it improves both testability and separation of concerns."
+description: "Version 6 of our banner takes a bigger step toward clean architecture. We define a repository interface, inject it into our composable, and provide two implementations: one for the browser and one for unit tests. This approach helps decouple the logic from I/O and keeps our tests fast and focused. We also reflect on what's next: using app.config, wrapping version in an entity, and writing integration tests."
+draft: false
+img: ./cover.png
 ---
 
 ## Refactor to Avoid Real Dependencies
@@ -312,5 +314,7 @@ If you want to continue, you could try to fullfill these two missing specificati
 - Complete testing suite with integration tests
 
 ## Decision Map
+
+Let's take a look at the current map ([Open 🔎](https://shorturl.at/THZBC):
 
 ![Decision Map Graph](/blog/testing-a-simple-nuxt-feature/08-move-dependencies-to-a-repository.svg)
