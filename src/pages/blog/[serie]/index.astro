@@ -32,9 +32,7 @@ const posts = await getPostsFromSerie(entry);
   {publishedDate}
 >
   <main class="container flex flex-col gap-8 py-8 lg:gap-12 lg:py-24">
-    <header
-      class="border-muted-border flex w-full flex-col gap-4 border-b pb-6 lg:w-2/3 lg:gap-8 lg:pb-12"
-    >
+    <header class="flex w-full flex-col gap-4 lg:w-2/3 lg:gap-8">
       <div>
         <nav class="text-muted mb-2 flex items-center gap-1 uppercase">
           <Link href="/blog" label="BLOG" variant="menuInactive" />
@@ -48,7 +46,7 @@ const posts = await getPostsFromSerie(entry);
       </P>
     </header>
 
-    <div class="grid grid-cols-1 gap-0 gap-x-12 lg:grid-cols-2">
+    <div class="border-muted-border border-t">
       {posts.map((post, index) => <SeriePostListItem {post} {index} />)}
     </div>
   </main>
