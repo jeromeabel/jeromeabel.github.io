@@ -4,7 +4,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38BDF8)](https://tailwindcss.com/)
 
-As a front-end developer, I designed and created this portfolio site to provide a great user experience and showcase my ability to build high-quality websites.
+As a front-end developer, I designed and created this portfolio site to showcase my ability to build high-quality websites and sharing my journey in web development.
 
 ## ✨ Live
 
