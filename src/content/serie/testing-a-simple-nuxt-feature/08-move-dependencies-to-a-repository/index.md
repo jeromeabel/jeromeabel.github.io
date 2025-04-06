@@ -315,6 +315,6 @@ If you want to continue, you could try to fullfill these two missing specificati
 
 ## Decision Map
 
-Let's take a look at the current map ([Open 🔎](https://shorturl.at/THZBC):
+Let's take a look at the current map ([Open 🔎](https://shorturl.at/THZBC)):
 
 ![Decision Map Graph](/blog/testing-a-simple-nuxt-feature/08-move-dependencies-to-a-repository.svg)

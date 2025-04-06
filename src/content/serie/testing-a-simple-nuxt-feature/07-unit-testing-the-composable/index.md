@@ -257,6 +257,6 @@ What do you think?
 
 ## Decision Map
 
-Let's take a look at the current map ([Open 🔎](https://shorturl.at/6eaG4):
+Let's take a look at the current map ([Open 🔎](https://shorturl.at/6eaG4)):
 
 ![Decision Map Graph](/blog/testing-a-simple-nuxt-feature/07-unit-testing-the-composable.svg)
