@@ -18,7 +18,7 @@ if (!post) {
 
 <a
   href=`/blog/${post.id}`
-  class="border-muted-border hover:bg-muted-background group relative flex flex-row items-center justify-between overflow-hidden border-b py-4"
+  class="border-muted-border hover:bg-muted-background group relative flex flex-row items-center justify-between gap-8 overflow-hidden border-b py-4"
 >
   <Icon
     name="lucide:arrow-right"
@@ -27,8 +27,8 @@ if (!post) {
   <h3 class="flex-1 transition-transform group-hover:translate-x-8">
     {post.data.title}
   </h3>
-  <div class="text-muted flex gap-2 font-mono text-sm">
-    <p>{remarkPluginFrontmatter.minutesRead} -</p>
+  <div class="text-muted flex gap-2 font-mono text-xs md:text-sm">
+    <p class="hidden sm:block">{remarkPluginFrontmatter.minutesRead} -</p>
     <time>{getFormattedDate(post.data.date)}</time>
   </div>
 </a>
