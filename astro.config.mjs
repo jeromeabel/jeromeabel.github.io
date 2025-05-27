@@ -16,7 +16,6 @@ export default defineConfig({
   adapter: netlify(),
 
   experimental: {
-    svg: true,
     responsiveImages: true,
   },
 
