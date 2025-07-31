@@ -1,7 +1,7 @@
 ---
 title: "Testing a Simple Nuxt Feature"
-description: This blog series uses the implementation of a simple version banner in a Nuxt app as a practical guide to learning how to write tests in Nuxt. Starting from the UI and evolving with the feature, each post builds testing skills through real-world development decisions and core principles like Single Responsability & Dependency Injection Principles.
-abstract: This blog series uses the implementation of a simple version banner in a Nuxt app as a practical guide to learning how to write tests in Nuxt. Starting from the UI and evolving with the feature, each post builds testing skills through real-world development decisions and core principles like Single Responsability & Dependency Injection Principles.
+description: Implement a simple version banner in a Nuxt app as a practical guide to learning how to write tests in Nuxt.
+abstract: Implement a simple version banner in a Nuxt app as a practical guide to learning how to write tests in Nuxt.
 date: "2025-03-18"
 posts:
   - testing-a-simple-nuxt-feature/01-how-to-share-development-process
