@@ -1,7 +1,7 @@
 ---
 title: "Testing a Simple Nuxt Feature"
-description: Implement a newsletter subscription feature that highlights how to organize code into distinct layers using the new Nuxt 4 file structure, making it modular, testable, and scalable.
-abstract: Implement a newsletter subscription feature that highlights how to organize code into distinct layers using the new Nuxt 4 file structure, making it modular, testable, and scalable.
+description: This blog series uses the implementation of a simple version banner in a Nuxt app as a practical guide to learning how to write tests in Nuxt. Starting from the UI and evolving with the feature, each post builds testing skills through real-world development decisions and core principles like Single Responsability & Dependency Injection Principles.
+abstract: This blog series uses the implementation of a simple version banner in a Nuxt app as a practical guide to learning how to write tests in Nuxt. Starting from the UI and evolving with the feature, each post builds testing skills through real-world development decisions and core principles like Single Responsability & Dependency Injection Principles.
 date: "2025-03-18"
 posts:
   - testing-a-simple-nuxt-feature/01-how-to-share-development-process
