@@ -16,13 +16,13 @@ importers:
         version: 2.1.4
       '@fontsource/bubbler-one':
         specifier: ^5.2.6
-        version: 5.2.6
+        version: 5.2.8
       '@fontsource/fira-code':
         specifier: ^5.2.6
-        version: 5.2.6
+        version: 5.2.7
       '@fontsource/ibm-plex-sans':
         specifier: ^5.2.6
-        version: 5.2.6
+        version: 5.2.8
       '@iconify-json/fa-brands':
         specifier: ^1.2.1
         version: 1.2.2
@@ -483,14 +483,14 @@ packages:
   '@fastify/busboy@3.2.0':
     resolution: {integrity: sha512-m9FVDXU3GT2ITSe0UaMA5rU3QkfC/UXtCU8y0gSN/GugTqtVldOBWIB5V6V3sbmenVZUIpU6f+mPEO2+m5iTaA==}
 
-  '@fontsource/bubbler-one@5.2.6':
-    resolution: {integrity: sha512-5GYCd3I8UtsGCWHM6qzIb5GcoOEbGoW1PxrARivMC1e7HTE/nQzIQcuItpC/5jyj1rg5LECysLGoyfy+zEnwoQ==}
+  '@fontsource/bubbler-one@5.2.8':
+    resolution: {integrity: sha512-Uz69gmoUhR4RXEWXZcaf9bhw6f6pPOUL6N8r0qLjTn1COl2qCxQVQQNeaoQgvT4Yn5BsFTkq5rMDeIMLV/i7ig==}
 
-  '@fontsource/fira-code@5.2.6':
-    resolution: {integrity: sha512-wCkIpPm0BqlkCPLYeY4Vui96ODmVUV0/GpEe3OfJ4v8EJn/BF2SlyxvarFsTs1CKiGjrO2cXlIZbBrKi9F+hUQ==}
+  '@fontsource/fira-code@5.2.7':
+    resolution: {integrity: sha512-tnB9NNund9TwIym8/7DMJe573nlPEQb+fKUV5GL8TBYXjIhDvL0D7mgmNVNQUPhXp+R7RylQeiBdkA4EbOHPGQ==}
 
-  '@fontsource/ibm-plex-sans@5.2.6':
-    resolution: {integrity: sha512-yclktpagJncROwdWHHEfPsrIfoo3uiIeDFchvmjNmTW/YMBfLYWJnUv19EAqPNhGizdtmcH9FjzOR2094Z2uPg==}
+  '@fontsource/ibm-plex-sans@5.2.8':
+    resolution: {integrity: sha512-eztSXjDhPhcpxNIiGTgMebdLP9qS4rWkysuE1V7c+DjOR0qiezaiDaTwQE7bTnG5HxAY/8M43XKDvs3cYq6ZYQ==}
 
   '@humanwhocodes/momoa@2.0.4':
     resolution: {integrity: sha512-RE815I4arJFtt+FVeU1Tgp9/Xvecacji8w/V6XtXsWWH/wz/eNkNbhb+ny/+PlVZjV0rxQpRSQKNKE3lcktHEA==}
@@ -4414,11 +4414,11 @@ snapshots:
 
   '@fastify/busboy@3.2.0': {}
 
-  '@fontsource/bubbler-one@5.2.6': {}
+  '@fontsource/bubbler-one@5.2.8': {}
 
-  '@fontsource/fira-code@5.2.6': {}
+  '@fontsource/fira-code@5.2.7': {}
 
-  '@fontsource/ibm-plex-sans@5.2.6': {}
+  '@fontsource/ibm-plex-sans@5.2.8': {}
 
   '@humanwhocodes/momoa@2.0.4': {}
 
