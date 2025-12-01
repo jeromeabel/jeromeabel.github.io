@@ -4,6 +4,7 @@ date: 2025-12-01
 description: AI is not just another tool upgrade like TypeScript; it is a horizontal disruption. In this chapter, we step away from the IDE to weigh the "civilization concerns" of our industry.
 abstract: AI is not just another tool upgrade like TypeScript; it is a horizontal disruption. In this chapter, we step away from the IDE to weigh the "civilization concerns" of our industry.
 draft: false
+img: ./cover.jpg
 ---
 
 ## Introduction
