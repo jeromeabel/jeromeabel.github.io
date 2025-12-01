@@ -124,7 +124,7 @@ In the next post, **Part 3: A Balanced Shift**, I will explore some notes about 
 
 [^1]: [Beyond Pair Programming with AI - course](https://www.linkedin.com/learning/build-with-ai-beyond-pair-programming-with-ai/pair-programming-with-ai), by Morten Rand-Hendriksen
 
-[^2]: [The Godmother of AI on jobs, robots & why world models are next | Dr. Fei-Fei Li](https://youtu.be/Ctjiatnd6Xk)
+[^2]: [The Godmother of AI on jobs, robots & why world models are next | Dr. Fei-Fei Li](https://youtu.be/Ctjiatnd6Xk), Lenny's podcast
 
 [^3]: [Critical Thinking during the age of AI](https://addyo.substack.com/p/critical-thinking-during-the-age), by Addy Osmani
 
