@@ -5,6 +5,6 @@ import { getAllSeries } from "src/utils/repository";
 const allSeries = await getAllSeries();
 ---
 
-<div class="mt-8 text-base md:text-xl">
+<div class="mt-8 text-base md:text-xl flex flex-col gap-16">
   {allSeries.map((serie) => <SerieListItem {serie} />)}
 </div>
