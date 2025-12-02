@@ -118,7 +118,7 @@ Ultimately, engineers are part of the human community before we are writers of c
 
 AI is here to stay; that is the baseline. But the shape it takes is not fixed. It relies on our ability to understand broadly, to share our practices, and to maintain our nuance. That is how we craft the future, rather than just enduring it.
 
-In the next post, **Part 3: A Balanced Shift**, I will explore some notes about productivity and learning skills.
+In the next post, **Part 2: A Balanced Shift**, I will explore some notes about productivity and learning skills.
 
 ---
 
