@@ -28,7 +28,7 @@ importers:
         version: 1.2.2
       '@iconify-json/lucide':
         specifier: ^1.2.51
-        version: 1.2.77
+        version: 1.2.79
       '@tailwindcss/vite':
         specifier: ^4.1.10
         version: 4.1.17(vite@6.4.1(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(yaml@2.8.1))
@@ -498,8 +498,8 @@ packages:
   '@iconify-json/fa6-brands@1.2.6':
     resolution: {integrity: sha512-twL3X4KWcxAhbc1vz/mIDsVr+CAItk1/EIfxKUVQtpv6O4eydk5KNYqTZWdvJNHGInUgd6vKg21aWfVgb5DXEg==}
 
-  '@iconify-json/lucide@1.2.77':
-    resolution: {integrity: sha512-FF3Z+np6Ksb0MaoQymhCHZ4xs5Oo8992Fw7By7bCgVCbBCClYV3wxpF8KzsI1FlxHD4ZXR42NVmXuqdW8YQGgA==}
+  '@iconify-json/lucide@1.2.79':
+    resolution: {integrity: sha512-CcwoXfC2Y7UVW0PXopmXtB4Do/eUJkhAqQqOnVENEiw3FwU707TK4uyIUqdo9tlvBaFBl95wnJf3smqsTnSyKA==}
 
   '@iconify/tools@4.1.1':
     resolution: {integrity: sha512-Hybu/HGhv6T8nLQhiG9rKx+ekF7NNpPOEQAy7JRSKht3s3dcFSsPccYzk24Znc9MTxrR6Gak3cg6CPP5dyvS2Q==}
@@ -1696,8 +1696,8 @@ packages:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
     engines: {node: '>=7.0.0'}
 
-  color-convert@3.1.2:
-    resolution: {integrity: sha512-UNqkvCDXstVck3kdowtOTWROIJQwafjOfXSmddoDrXo4cewMKmusCeF22Q24zvjR8nwWib/3S/dfyzPItPEiJg==}
+  color-convert@3.1.3:
+    resolution: {integrity: sha512-fasDH2ont2GqF5HpyO4w0+BcewlhHEZOFn9c1ckZdHpJ56Qb7MHhH/IcJZbBGgvdtwdwNbLvxiBEdg336iA9Sg==}
     engines: {node: '>=14.6'}
 
   color-name@1.1.4:
@@ -4463,7 +4463,7 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/lucide@1.2.77':
+  '@iconify-json/lucide@1.2.79':
     dependencies:
       '@iconify/types': 2.0.0
 
@@ -5930,7 +5930,7 @@ snapshots:
     dependencies:
       color-name: 1.1.4
 
-  color-convert@3.1.2:
+  color-convert@3.1.3:
     dependencies:
       color-name: 2.0.2
 
@@ -5954,7 +5954,7 @@ snapshots:
 
   color@5.0.2:
     dependencies:
-      color-convert: 3.1.2
+      color-convert: 3.1.3
       color-string: 2.1.2
 
   combined-stream@1.0.8:
