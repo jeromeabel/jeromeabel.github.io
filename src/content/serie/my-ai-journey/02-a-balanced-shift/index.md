@@ -9,13 +9,15 @@ img: ./cover.jpg
 
 ## 1. The "Big Shift": Cutting Through the Fog
 
-The hype around JavaScript frameworks has finally quieted down. Since Angular arrived in 2012, we’ve seen at least 15 major frontend frameworks. Now, looking at the volume of AI models & tools released in the last three years, we’ve traded JavaScript fatigue for full-blown **AI fatigue**...
+You may remember the good old days, when memes joked about JavaScript frameworks. Since Angular arrived in 2012, we’ve seen at least 15 major frontend frameworks. Now, look at what’s happening today: considering the sheer volume of AI models and tools released over the last three years, it feels like we’ve traded JavaScript fatigue for full-blown **AI fatigue**.
 
-As a newer engineer, this pace feels unsettling. Knowing which skills will matter in five years is nearly impossible, creating a sense of professional vertigo. Morten Rand-Hendriksen captures this in "Everybody Else Is Doing It, So Why Can't I?" which looks at **F.O.M.O.** [^1] in an era of constant change.
+As a newer engineer, this pace feels unsettling. Knowing which skills will matter in five years is nearly impossible, creating a sense of professional vertigo. Morten Rand-Hendriksen captures this well in "Everybody Else Is Doing It, So Why Can't I?": 
+
+> This uncertainty brought by AI is one of the main roots of the AI-FOMO I observed, both in the conference and in my broader interactions with people in the world. We're deep in the third year of a chaotic transformation of everything, brought to us by generative AI, and during that time the rate of transformation has only increased. Three years of uncertainty with no sign of stability any time soon must be enormously stressful for anyone in need of stability. (Morten Rand-Hendriksen [^1])
 
 ### Perspective from the Veterans
 
-To see through the fog, I looked to those who have lived through previous industry shifts.
+One approach that works well for me is to look to people who have lived through previous industry shifts. It helps cut through the fog.
 
 When **Martin Fowler** and **Gergely Orosz** discussed this, they didn't just nod at the hype; they acknowledged this as the **biggest technology shift of their careers** [^2]. That’s a relief. It confirms the current confusion isn’t just a "junior" problem—it’s an industry-wide transformation. **The ground is moving for everyone**.
 
@@ -24,33 +26,33 @@ When **Martin Fowler** and **Gergely Orosz** discussed this, they didn't just no
 Once you accept the collective struggle, you can evaluate the shift for what it actually is.
 
 **1. The Paradigm Shift: Non-Determinism**
-Software engineering is traditionally a deterministic process. You translate requirements into functions and classes with expected behaviors. Even complex bugs remain traceable.
 
-> Because if you've ever looked at chaos theory, you understand that even very simple functions can yield very extreme results depending on the variability in the inputs. (Michelle Brush [^3])
+Software engineering is traditionally a deterministic process. You translate requirements into functions and classes with expected behaviors. But non as deterministic as we would like:
 
-The new world introduces non-deterministic assistants. We now spend our energy fighting to provide enough context to keep "Black Box" LLMs from drifting—a challenge that scales poorly at the team level. It changes our relationship with code, requiring new skills, new tools and logging strategies.
+> If you've ever looked at chaos theory, you understand that even very simple functions can yield very extreme results depending on the variability in the inputs. (Michelle Brush [^3])
+
+The new world introduces non-deterministic assistants. We now spend our energy fighting to provide enough context to keep "Black Box" LLMs from drifting. It changes our workflows, our relationships with code, requiring new skills, new tools and logging strategies.
 
 **2. The "Intelligence" Trap**
+
 Morten Rand-Hendriksen argues that "Intelligence" is a loaded term that gives these tools too much credit; we should view them as **Assisted Technologies** [^4]. Terms like *learning* or *reasoning* are human metaphors that trigger our bias to anthropomorphize machines.
 
-> We want to understand these things as people... We can’t help it; humans are hopeless anthropomorphizers. (Adam Mastroianni [^5])
+> We want to understand these things as people... We can’t help it; **humans are hopeless anthropomorphizers**. (Adam Mastroianni [^5])
 
-This is similar to **Pareidolia**—the same instinct that makes us see faces in clouds. Our brains find patterns and project intent where there is only mathematics. As Rand-Hendriksen notes, when the line between human and artificial becomes blurred, it generates deep-seated anxiety.
+It may be similar to **Pareidolia**— instinct that makes us see faces in clouds. Our brains are wired to detect patterns and project intent where there is only mathematics. As Morten notes, when the line between human and artificial becomes blurred, it generates deep-seated anxiety. The choice of words is not trivial.
 
 **3. The Irony of Automation**
-If using AI feels exhausting, there is a technical reason for it. Michelle Brush refers to this as the **Irony of Automation**: partial automation often makes the remaining manual tasks harder.
+
+If using AI feels exhausting, there is also a technical reason for it. Michelle Brush refers to this as the **Irony of Automation**: partial automation often makes the remaining manual tasks harder. 
 
 > When you automate the easy parts, what’s left are the hard judgments, debugging edge cases, and maintenance. (Michelle Brush [^3])
 
-* The AI handles the "low-hanging fruit": boilerplate, syntax, and common patterns.
-* The human is left with the high-complexity tasks: judgment, edge cases, and debugging failures.
-* **The Result:** Your "typing" time decreases, but your **thinking intensity** skyrockets.
 
 **4. The Foundation Still Holds**
 
 > Almost everything that makes someone a senior engineer is what now yields the best outcomes with AI. (Simon Willison [^6])
 
-This leads to a vital reassurance: **the fundamentals haven’t changed**. Engineering foundations are more critical now than ever. If your foundations are weak, AI just helps you build a flawed system faster. If your foundations are strong, AI becomes a powerful lever.
+This leads to a vital reassurance: **the fundamentals haven’t changed**. Engineering foundations are more critical now than ever.
 
 ---
 
@@ -60,9 +62,7 @@ We’ve all seen the demos: a developer builds a full-stack app in 20 minutes us
 
 ### How to Measure It
 
-If productivity is the goal, we need a better way to define "winning" than just lines of code.
-
-AI forces us to re-evaluate how we measure value. To cut through the noise, industry reports and tech radars have become essential for understanding what is actually happening on the ground. Measuring impact is complex and evolving.
+If productivity is the goal, how do we measure it? To cut through the noise, industry reports and tech radars have become essential for understanding what is actually happening on the ground.
 
 > AI impact must be measured across multiple dimensions. [...] It requires looking at a set of metrics across multiple dimensions—quality, effectiveness, speed—as opposed to relying on a single metric. (DX [^7])
 
@@ -72,22 +72,20 @@ DX proposes this AI Measurement Framework which focus on three key dimensions: u
 
 ### The Context Reality: One Size Fits None
 
-A study of 100,000 developers by Yegor Denisov-Blanch [^9] highlights what’s often missing from the conversation. It confirms that counting commits is a useless metric because AI often generates "noisy" code—large chunks of rewrites that may introduce as many bugs as they solve. The results of this study are fairly consistent with what a developer might think on a daily basis. Sometimes it boosts our productivity, sometimes it doesn't.
+A study of 100,000 developers by Yegor Denisov-Blanch [^9] reflects what many developers experience daily: sometimes AI boosts productivity; sometimes it doesn’t. It confirms that counting commits is a useless metric because AI often generates "noisy" code—large chunks of rewrites that may introduce as many bugs as they solve.
 
 ![Yegor Denisov-Blanch Study](graph-greenfield-brownfield.png)
-(Greenfield projects gain 30-35% on simple task, and 10-15% on complex ones, versus 15-20% and 5-10% in brownfield projects - Yegor Denisov-Blanch)
+(Greenfield projects gain 30-35% on simple task, and 10-15% on complex ones, versus 15-20% and 5-10% in brownfield projects)
 
 The data suggests several technical constraints that dictate whether an AI tool is a lever or a weight:
 
 * **Language Popularity:** Models struggle with niche languages where training data is scarce.
 * **Context Length:** Even as context windows expand, the risk of "disalignment" increases. The more context you provide to explain a legacy system, the more likely the LLM is to lose the thread.
 * **Task Complexity:** AI handles isolated tasks—like writing a single utility function or a unit test—fairly well. However, complex refactoring across multiple files requires so much manual oversight that it can often become a net time-sink.
-* **Codebase Maturity:** This is the "Greenfield vs. Brownfield" divide. AI excels in new projects where there is no technical debt to navigate (the "YouTube Demo" mode). In Brownfield projects, where old patterns clash with new dependencies, productivity gains drop significantly.
+* **Codebase Maturity:** AI excels in new projects (Greenfield) where there is no technical debt to navigate (the "YouTube Demo" mode). In Brownfield projects, where old patterns clash with new dependencies, productivity gains drop significantly.
 * **Codebase Size:** As the repository grows, the model's ability to understand the codebase and maintain architectural consistency diminishes.
 
-I’d also add **"AI Literacy"** to this list—knowing how to feed the model the right documentation, setting environment rules, and knowing when to ignore the suggestion entirely.
-
-These parameters explain quite well, why I can feel like a "5x developer" on Tuesday when I'm prototyping in "YOLO mode," only to become a "-5% developer" on Wednesday when I try to rework an existing module the AI simply can't grasp.
+I’d also add **"AI skills"** to this list—knowing how to provide the right documentation, define environment rules, and when to ignore a suggestion entirely or steer the conversation back on track.
 
 ---
 
@@ -97,23 +95,23 @@ To get better at using AI, we have to look objectively at the friction it create
 
 ### The "Average" Factory
 
-In his piece "AI Makes Everyone Average" [^10], Steve Huynh highlights a risk often called "skills atrophy". If you rely entirely on AI, you stop engaging with the "boring" but essential parts of the job—raw documentation, source code, and RFCs. You begin to live in a "Summary Layer": a crowded space where everyone uses AI to generate the same B+ explanations and generic components.
+In his piece "AI Makes Everyone Average" [^10], Steve Huynh highlights a risk often called "skills atrophy". If you rely entirely on AI, you stop engaging with the "boring" but essential parts of the job—raw documentation, source code, and RFCs. You begin to live in a "Summary Layer": a crowded space where everyone uses AI to generate the same B+ explanations and generic components. When we stop digging deeper, our solutions regress to the mean.
 
-The real technical edge in engineering comes from the nuance found in the raw source material. When we stop digging deeper, our solutions regress to the mean. This can lead to a dangerous "de-responsibilization," where critical thinking is replaced by a confirmation bias—assuming the LLM is correct simply because its output looks authoritative or confirms our initial hypothesis.
+This can lead to a dangerous "de-responsibilization," where critical thinking is replaced by a confirmation bias—assuming the LLM is correct simply because its output looks authoritative or confirms our initial hypothesis.
 
 ### The Context-Switching Tax
 
-Context switching is the enemy of engineering flow. Moving between tasks can cost as much as 40 percent of a person's productive time. AI tools introduce a new, unpredictable form of this interruption.
+Context switching is the enemy of engineering flow and productivity. 
 
-> Even brief mental blocks created by shifting between tasks can cost as much as 40 percent of someone's productive time (American Psychological Association [^11])
+> Even brief mental blocks created by shifting between tasks can cost as much as 40% of someone's productive time (American Psychological Association [^11])
 
-When working with AI, feedback loops can range from five seconds to several minutes. For simple tasks, the wait is predictable; for complex research or multi-file edits, it’s a black hole. While many tools now show "steps" or intermediate results to keep you engaged, the "thinking gap" often breaks your concentration. 
+AI tools introduce a new form of interruption. When working with AI, feedback loops can range from 1 second to several minutes. For simple tasks, the wait is predictable; for complex research or multi-file edits, it’s a black hole. While many tools now show "steps" or intermediate results to keep you engaged, the "thinking gap" often breaks your concentration. 
 
 I’ve tried managing two user stories across two IDEs—launching an AI task in one and switching to the other while it runs. To be honest, in most cases, it fries my brain. It only feels manageable when the projects are homogeneous—similar in both timeframe and scope. But the question remains: what kind of AI task can you launch without breaking your flow? Usually, if a task is going to take a while, it’s better to launch it before a coffee break rather than trying to multi-task through the wait.
 
 ### The Joy of Crafting
 
-For many of us, the joy of coding comes from the "cognitive battle"—the stimulating effort of solving a problem ourselves. Failure is a vital part of that learning process; it teaches us why certain paths were wrong and what trade-offs were made. AI shifts the developer’s role from a "creator" to an "orchestrator" or "compliance officer".
+For many of us, the joy of coding comes from the "cognitive battle"—the stimulating effort of solving a problem ourselves. Failure is a vital part of that learning process; it teaches us why certain paths were wrong and what trade-offs were made. AI shifts the developer’s role from a "creator" to an "orchestrator".
 
 I’ve noticed that dealing with specification files creates a clear divide in how developers work. Some of us prefer to code first and let the specs evolve organically as we build. Forcing a complete specification upfront feels like a return to the Waterfall model—it’s bureaucratic and disengaging. We are being pushed into the drudgery of prompt engineering, where the "make it work" joy of hacking is being replaced by a "specify it correctly" mindset that turns our craft into a compliance task.
 
@@ -125,7 +123,7 @@ The weirdest part is that you eventually end up asking the LLM to write instruct
 
 ### The Team Dynamic
 
-As Martin Fowler notes [^2]:, we are still learning how to operate with AI in a team environment. It requires a shift in organizational culture and a healthy data ecosystem.
+As Martin Fowler notes [^2]: "we are still learning how to operate with AI in a team environment". It requires a shift in organizational culture.
 
 > Successful AI adoption requires more than just tools. Our new DORA AI Capabilities Model identifies seven foundational practices—including a clear AI policy, a healthy data ecosystem, and a user-centric focus—that are proven to amplify the positive impact of AI on organizational performance. (DORA Report [^13])
 
@@ -151,15 +149,13 @@ Vibe-coding gets a bad rap, but "YOLO mode"—accepting AI output just because i
 
 AI adoption forces you to audit your habits. To figure out where an LLM actually fits, you have to break your day into micro-tasks and identify which ones are implicit or just "organic" noise.
 
-I’ve started thinking of my workflow like Martin Fowler’s *Refactoring* book—where every move has a name. It’s like sports: once you name the movement, you can optimize the sequence. This consistent introspection creates a loop of small, compounding improvements to how you and your team actually interact.
+I’ve started thinking of my workflow like Martin Fowler’s *Refactoring* book—where every move has a name. It’s like sports: once you name the movement, you can optimize the sequence. This consistent introspection creates a loop of small, compounding improvements in how you and your team actually interact.
 
 ### Living Documentation
 
-> In my experience, docs have three main failure modes: They don't exist, They can't be trusted, They can't be found. — Luca Rossi & Dennis Pilarinos [^14]
+> In my experience, docs have three main failure modes: they don’t exist, they can’t be trusted, they can’t be found. — Luca Rossi & Dennis Pilarinos [^14]
 
-We all know the drill: documentation is painful, it’s usually obsolete by the time it’s read, and developers would rather just "read the code." We treat docs like noise because they often are.
-
-AI changes the math. Generating docstrings or Mermaid diagrams to map how functions communicate is now a low-effort task. It provides a map of the codebase before you start digging.
+We all know the drill: documentation is painful, it’s usually obsolete by the time it’s read, and developers would rather just "read the code." We treat docs like noise because they often are. AI changes the math. Generating docstrings or Mermaid diagrams to map how functions communicate is now a low-effort task. It provides a map of the codebase before you start digging.
 
 The debate over "too much documentation" is still there, but the cost of keeping it updated has plummeted. Because AI agents *need* this context to be useful, documentation has become a "living" requirement. It’s no longer just for onboarding; it’s the source of truth that keeps the LLM from hallucinating.
 
@@ -167,7 +163,7 @@ The debate over "too much documentation" is still there, but the cost of keeping
 
 ![The pyramid of docs - Luca Rossi](./pyramid-of-docs-luca-rossi.png)
 
-Our roles are shifting toward "orchestrator", managing coding agents. You’re a Product Manager for your own code. In this world, the **specification file** is the most important asset you own.
+Our roles are shifting toward "orchestrator", managing coding agents. In this world, the **specification files** become a crucial piece, as they serve as the source.
 
 Starting with a "plan" file is now standard practice. A single feature might involve two or three files: the User Story, the Brainstorming Plan, and the Implementation Tasks. This creates a paper trail that keeps the LLM on track even when you have to clear the context or pick up work the next day.
 
@@ -177,10 +173,11 @@ Some frameworks, like spec-kit, take this further, producing four or more files 
 
 It’s a bit ironic if the future of high-end engineering might just be managing a bunch of Markdown files
 
-> - Specifications, not prompts or code, are becoming the fundamental unit of programming. (The New Code — Sean Grove, OpenAI [^12])
-> - Coding is an incredible skill an asset. But it's not the end goal. Engineering is the precise exploration (by humans) of software solutions to humans problems. 
-> - The Code is 10-20% of your impact; The other 80-90% is the structured communication (talk, understand, distill, ideate, plan, share, translate, test, verify)
+> - Coding is an incredible skill and asset. But it's not the end goal. Engineering is the precise exploration (by humans) of software solutions to human problems. 
+> - Code is 10–20% of your impact; The other 80–90% is the structured communication (talk, understand, distill, ideate, plan, share, translate, test, verify)
 > - A written specification is what **enables** you to **align humans** - it's the artifact that you discuss, debate, refer to, and sync on.
+> - Specifications, not prompts or code, are becoming the fundamental unit of programming. 
+> (The New Code — Sean Grove, OpenAI [^12])
 
 When we start a feature by talking about implementation details, we lose the "Why." AI forces us back to the high-level analysis. If you can’t explain it clearly in a spec, the agent will fail.
 
@@ -200,16 +197,15 @@ For developers — especially when working solo — this creates a new mirror fo
 
 The real challenge now is control: quality, reliability, and intentional use. But it is also about freedom — how far we let these systems influence our creative process. As always, it is a matter of balance, and a choice that individuals and society will have to consciously make.
 
-
 ---
 
 ## 5. Conclusion
 
 > The **Jevons Paradox** says that as we use large language models to build more software, we're going to create demand for more engineers.
 
-As the "Big Shift" continues, engineering excellence is being redefined. Here is what will matter in the next era:
+As the "Big Shift" continues, engineering excellence is being redefined. Here is what might matter in the next era:
 
-**1. Engineering Leadership: Moving Beyond the Fog**
+**1. Engineering Leadership**
 
 We need nuanced feedback from senior developers who can see through the marketing fog. Successful AI adoption requires investing in mentoring and creating deliberate space to learn (Michelle Brush)
 
@@ -231,7 +227,7 @@ Embracing AI shouldn't mean surrendering agency. Keeping a "human in the loop" i
 
 Sometimes, the right move is to "code naked"—turning the AI off to write a module from scratch. We don't do this for speed, but because writing code remains one of the most effective ways we have to think.
 
-In a future post, I’ll explore this further through **"Teacher Mode"**: a shift in perspective where we treat AI not as a shortcut, but as a collaborative partner for deeper exploration and
+In a future post, I’ll explore this further through **"Teacher Mode"**: a shift in perspective where we treat AI not as a shortcut, but as a collaborative partner for deeper exploration.
 
 
 ---
