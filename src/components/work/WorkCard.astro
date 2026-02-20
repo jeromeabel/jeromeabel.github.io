@@ -36,14 +36,10 @@ const dateISOString = new Date(work.data.date).toLocaleDateString(
     <Image
       src={work.data.img_preview}
       alt={`${work.data.title} preview`}
-      widths={[240, 540, 600]}
-      sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, 600px`}
-      class="object-cover transition-transform duration-1000 motion-safe:group-hover:scale-105"
+      class="block h-full w-full object-cover transition-transform duration-1000 motion-safe:group-hover:scale-105"
       loading="lazy"
-      widths={[240, 540, 768]}
-      sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, 768px`}
-      height={600}
-      width={768}
+      widths={[240, 360, 540, 768, 960]}
+      sizes={`(max-width: 767px) calc(100vw - 2rem), (max-width: 1023px) calc((100vw - 2rem) / 2), (min-width: 1280px) 395px, calc((100vw - 6rem) / 3)`}
     />
     <div
       class="absolute inset-0 grid items-center duration-500 group-hover:bg-black/85 motion-reduce:transition-all dark:group-hover:bg-black/90"
