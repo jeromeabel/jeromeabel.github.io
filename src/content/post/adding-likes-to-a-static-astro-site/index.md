@@ -4,7 +4,7 @@ date: 2026-02-22
 description: A hybrid rendering pattern for adding dynamic votes to a fully static site — using Astro, Turso, and vanilla JavaScript, without turning the app into SSR.
 abstract: A single server route, two database queries, and optimistic UI — how to add real votes to a static site without converting it to SSR.
 img: ./adding-likes-to-a-static-astro-site.jpg
-draft: false
+draft: true
 ---
 
 ## Static pages can't count
