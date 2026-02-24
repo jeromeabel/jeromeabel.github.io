@@ -1,64 +1,37 @@
 ---
 title: Adding Likes to a Static Astro Site
-date: 2026-02-22
-description: A hybrid rendering pattern for adding dynamic votes to a fully static site — using Astro, Turso, and vanilla JavaScript, without turning the app into SSR.
-abstract: A single server route, two database queries, and optimistic UI — how to add real votes to a static site without converting it to SSR.
+date: 2026-02-24
+description: Two approaches to adding dynamic votes to a static Astro site — first with Astro DB and Turso (elegant, 667ms), then with PHP and MySQL (fast, 118ms).
+abstract: Astro DB + Turso gave me votes in an afternoon. Then I measured the response time. A single PHP file on shared hosting replaced the entire serverless stack.
 img: ./adding-likes-to-a-static-astro-site.jpg
-draft: true
+draft: false
 ---
 
-## Static pages can't count
-
-My comic site is fully static — markdown files rendered at build time, served from a CDN. Fast, cheap, zero server. But I wanted visitors to heart their favorite comics.
-
-The obvious question: where does the count live? Not in a JSON file — two visitors clicking at the same millisecond would overwrite each other. Not in localStorage — that's per-browser, invisible to other visitors. I needed a real database, but only for this one tiny feature.
-
-The constraint: don’t turn the whole site into SSR just to increment a number.
+I wanted to add some interactivity to my static comic blog — a heart button so visitors could vote for their favorite strips. The site is built with Astro, fully static, served from Netlify's CDN. The challenge: where does the vote count live?
 
 
-## The hybrid pattern: one server route, everything else stays static
+## Approach 1: Astro's hybrid pattern
 
-Astro’s hybrid rendering solves this with one line:
+Astro has a clean answer. Mark one file as server-rendered, everything else stays static:
 
 ```ts
 // src/pages/api/vote.ts
 export const prerender = false;
+
+export async function GET() {}
+export async function POST() {}
 ```
 
-Everything stays static HTML — prerendered at build time and served from the CDN. Except this one file.
-
-At build time, Astro splits the project:
-
-* `.astro` pages → static files
-* `src/pages/api/*.ts` with `prerender = false` → serverless functions
-
-Architecture:
+At build time, Astro splits the project — `.astro` pages become static HTML, and this single TypeScript file becomes a [server endpoint](https://docs.astro.build/en/guides/endpoints/#server-endpoints-api-routes) with a Netlify Function thanks to the Netlify adapter. The architecture:
 
 ```
 Static HTML (CDN)
   └─ <script> → fetch('/api/vote')
-       └─ Netlify function
+       └─ Netlify Function (serverless in a .netlify/functions folder)
             └─ Turso (remote SQLite)
 ```
 
-The page is HTML with a `<script>` that wakes up one button.
-
-
-## Serverless: pay for what you use
-
-When Astro builds the project, the `@astrojs/netlify` adapter packages server routes as Netlify Functions. My `api/vote.ts` becomes a small JavaScript file sitting on Netlify's infrastructure — not a Node.js process running 24/7.
-
-The difference matters:
-
-- **Traditional server:** always on, costs when idle, you handle scaling
-- **Serverless function:** spins up per request, then stops. 100 simultaneous votes = 100 parallel executions. No queue, no bottleneck.
-
-The trade-off is cold starts — the first request after idle has a small delay while Netlify spins up a container. For a vote button, that seems ok. The user clicks, the optimistic UI responds instantly, and the serverless function catches up in the background. To be honest, I think it takes too much time, I will test another solution later, but I will keep it as is for now.
-
-
-## A database in 12 lines
-
-The schema is one table with a composite unique index:
+[Astro DB](https://docs.astro.build/en/guides/astro-db/) provides a built-in ORM powered by Drizzle. The schema is one table:
 
 ```ts
 const Vote = defineTable({
@@ -72,34 +45,17 @@ const Vote = defineTable({
 });
 ```
 
-That composite index does double duty:
+The composite unique index does double duty — fast lookup and one-vote-per-visitor enforcement at the database level. The client can't break this rule.
 
-* Fast lookup by `(comicId, visitorId)`
-* Enforces one vote per visitor per comic
-
-The database enforces the rule. The client can’t break it.
-
-Locally, Astro DB runs SQLite in `.astro/content.db`. In production, the same schema connects to Turso. The queries don’t change.
-
-
-## Two queries in parallel
-
-This is the real constraint in a serverless setup: round-trips cost more than rows.
-
-The index page lists every comic with its vote count.
-The naive approach: one query per comic → N sequential queries.
-
-Instead, exactly **two round-trips**, no matter how many comics:
+For the index page (all comics listed with their counts), round-trips matter more than row count. Two queries in parallel, no matter how many comics:
 
 ```ts
 const [comicsCounts, userVotes] = await Promise.all([
-  // Query 1: counts per comic (SQL aggregation)
   db.select({ comicId: Vote.comicId, value: count() })
     .from(Vote)
     .where(inArray(Vote.comicId, comicIds))
     .groupBy(Vote.comicId),
 
- // Query 2: which comics did this visitor vote for?
   db.select({ comicId: Vote.comicId })
     .from(Vote)
     .where(and(
@@ -109,83 +65,39 @@ const [comicsCounts, userVotes] = await Promise.all([
 ]);
 ```
 
-## Drizzle: SQL, but refactorable
+In production, Astro DB connects to [Turso](https://docs.turso.tech/) — hosted SQLite with a generous free tier. Locally, it runs a SQLite file. The queries don't change.
 
-Astro DB uses Drizzle ORM under the hood. The queries read like SQL, but they're TypeScript — which means autocomplete, compile-time errors, and safe refactoring.
-
-```ts
-const existingVote = await db.select()
-  .from(Vote)
-  .where(and(
-    eq(Vote.comicId, comicId),
-    eq(Vote.visitorId, visitorId)
-  ))
-  .limit(1)
-  .get();
-```
-
-```sql
-SELECT * FROM Vote
-WHERE comicId = ? AND visitorId = ?
-LIMIT 1;
-```
-
-If I rename a column, the compiler catches it. With raw SQL strings, that becomes a runtime error.
-
-Drizzle also stays thin — it's a lightweight wrapper, not an engine like Prisma. No query planner, no custom binary, no schema language to learn. The schema is TypeScript. The queries are TypeScript. Everything stays in one language.
-
-
-## Turso: hosted SQLite
-
-[Turso](https://docs.turso.tech/) is a managed libSQL platform — essentially hosted SQLite. The free tier gives you 5 GB of storage and 500 million row reads per month. For a comic site, that's essentially unlimited.
-
-
-Setup:
-
-```bash
-turso db create my-project
-turso db show my-project --url          # → ASTRO_DB_REMOTE_URL
-turso db tokens create my-project       # → ASTRO_DB_APP_TOKEN
-```
-
-Add both values as environment variables on Netlify, then push your schema:
-
-```bash
-pnpm astro db push --remote
-```
-
-Astro DB handles the connection — `astro build --remote` in your build command switches from local SQLite to the hosted Turso instance.
+The whole setup took a few hours to wire together. Schema, API route, client-side optimistic UI — done.
 
 
 ## Anonymous identity with a cookie
 
-No login system — this is a comic blog, not a bank. A UUID cookie is enough:
+Both approaches need to know *who* is voting without a login system. A cookie isn't true identification — someone can clear it and vote again — but for a heart button on a comic blog, it's plenty. Simple, built into every browser, no signup flow.
 
-```ts
-function getOrCreateVisitorId(cookies: AstroCookies): string {
-  let visitorId = cookies.get("visitorId")?.value;
-  if (!visitorId) {
-    visitorId = crypto.randomUUID();
-    cookies.set("visitorId", visitorId, {
-      httpOnly: true,     // JS can't read it → XSS protection
-      sameSite: "lax",    // blocks cross-site POST → CSRF protection
-      secure: true,       // HTTPS only
-      maxAge: 365 * 24 * 60 * 60,
-      path: "/",
-    });
-  }
-  return visitorId;
+A random ID stored in an `httpOnly` cookie is enough:
+
+```php
+$visitorId = $_COOKIE['visitor_id'] ?? null;
+
+if (!$visitorId) {
+    $visitorId = bin2hex(random_bytes(16));
+    setcookie('visitor_id', $visitorId, [
+        'expires'  => time() + 365 * 24 * 60 * 60,
+        'path'     => '/',
+        'domain'   => '.jeromeabel.net',  // shared across subdomains
+        'secure'   => true,               // HTTPS only
+        'httponly'  => true,              // JS can't read it
+        'samesite' => 'None',             // needed for cross-origin fetch
+    ]);
 }
 ```
 
-`HttpOnly` means even if an attacker injects a script (XSS), they can't steal the cookie. `SameSite=lax` means a malicious site can't forge votes. Can someone clear their cookies and vote again? Sure. It's a heart button on a comic site — the threat model is "don't let someone spam-click," not "secure an election."
+`httponly` means even if an attacker injects a script (XSS), they can't steal the cookie. `domain=.jeromeabel.net` makes the cookie available to both `api.jeromeabel.net` and `leconceptdelapreuve.jeromeabel.net`. `SameSite=None` is required here — the browser sees `fetch()` from one subdomain to another as a cross-origin request, and `Lax` would block the cookie on those subresource requests. `Secure` is mandatory when using `SameSite=None`. Can someone clear their cookies and vote again? Sure. The threat model is "don't let someone spam-click," not "secure an election."
 
 
-## Optimistic UI without a framework
+## Optimistic UI
 
-The client is a vanilla `<script>`. Buttons carry their comic ID as `data-comic-id` attributes. The script discovers them at runtime, so it works identically on the index page (many buttons) and the detail page (one button) without any routing awareness.
-
-The click handler updates the UI before the server responds:
+The vote POST will succeed the vast majority of the time. So the UI updates *before* the server responds — immediate feedback. If the request fails, roll back.
 
 ```ts
 const prev = state.get(comicId) ?? { count: 0, voted: false };
@@ -198,31 +110,173 @@ const optimistic = {
 updateButtonUI(button, optimistic);
 
 try {
-  const result = await fetchJson("/api/vote", {
+  const result = await fetchJson(API_URL, {
     method: "POST",
     body: JSON.stringify({ comicId }),
     headers: { "Content-Type": "application/json" },
+    credentials: "include",
   });
-
   state.set(comicId, result);
   updateButtonUI(button, result);
 } catch {
+  // Rollback
   state.set(comicId, prev);
   updateButtonUI(button, prev);
 }
 ```
 
-A `pending` Set guards against double-clicks — if a POST is already in flight, the second click is ignored. No debounce needed. The button stays visually enabled (no grey flicker), and `finally { pending.delete(comicId) }` clears the guard in all outcomes.
+State lives in a `Map<string, VoteState>` inside a closure — not in the DOM. The DOM is the display layer, not the data layer. Rollback is `state.set(comicId, prev)`. A `pending` Set guards against double-clicks — if a POST is already in flight, the second click is ignored.
 
-State lives in a `Map<string, VoteState>` inside a closure — not in the DOM. The DOM is the display layer, not the data layer. Rollback is `state.set(comicId, prev)`, not "read the span, parse the string, decrement, hope it's right."
+---
+
+## Too Long to Get
+
+Then I opened DevTools to have numbers data about a bad feeling of frustration. It takes too much time to get the vote counts.
+
+| Phase | Duration |
+|-------|----------|
+| Queueing | 1.40 ms |
+| Stalled | 0.73 ms |
+| Request sent | 0.15 ms |
+| **Waiting for server response** | **663.18 ms** |
+| Content Download | 1.55 ms |
+| **Total** | **667.01 ms** |
+
+663ms waiting for the server. The Netlify Function wakes up from a cold start, connects to Turso's remote database, runs two queries over the network, serializes the response. Too much infrastructure, too many network hops, for a feature this small.
+
+
+## Approach 2: PHP + MySQL on shared hosting
+
+My domain is registered with OVH. The hosting plan includes PHP and MySQL — already paid for, sitting idle. The idea: deploy a single PHP file behind an `api` subdomain.
+
+```
+leconceptdelapreuve.jeromeabel.net (Netlify CDN — static, unchanged)
+  └─ <script> → fetch('https://api.jeromeabel.net/vote.php')
+
+api.jeromeabel.net (OVH shared hosting)
+  └─ PHP (always warm)
+       └─ MySQL (OVH internal network — no internet hop)
+```
+
+One PHP file handles everything — CORS, cookies, reading counts, toggling votes:
+
+```php
+<?php
+// vote.php — the entire backend
+
+// Defaults — overridden when required by vote-staging.php
+$TABLE = $TABLE ?? 'votes';
+$ALLOWED_ORIGINS = $ALLOWED_ORIGINS ?? ['https://leconceptdelapreuve.jeromeabel.net'];
+$ALLOWED_ORIGIN_PATTERNS = $ALLOWED_ORIGIN_PATTERNS ?? [];
+
+// CORS — api subdomain ≠ main domain for the browser
+// Some servers strip HTTP_ORIGIN, so fallback to getallheaders()
+$origin = $_SERVER['HTTP_ORIGIN'] ?? getallheaders()['Origin'] ?? '';
+
+$isAllowedOrigin = in_array($origin, $ALLOWED_ORIGINS, true);
+if (!$isAllowedOrigin) {
+    foreach ($ALLOWED_ORIGIN_PATTERNS as $pattern) {
+        if (preg_match($pattern, $origin) === 1) { $isAllowedOrigin = true; break; }
+    }
+}
+
+if ($isAllowedOrigin) {
+    header("Access-Control-Allow-Origin: $origin");
+    header('Access-Control-Allow-Credentials: true');
+}
+```
+
+The toggle logic is a check-then-act: if the visitor already voted, delete the row (un-vote); otherwise insert (vote). Then return the fresh count:
+
+```php
+// POST: toggle vote
+$check = $pdo->prepare(
+    "SELECT id FROM {$tableSql} WHERE comic_id = ? AND visitor_id = ? LIMIT 1"
+);
+$check->execute([$comicId, $visitorId]);
+
+if ($check->fetch()) {
+    $pdo->prepare("DELETE FROM {$tableSql} WHERE comic_id = ? AND visitor_id = ?")
+        ->execute([$comicId, $visitorId]);
+    $voted = false;
+} else {
+    $pdo->prepare("INSERT INTO {$tableSql} (comic_id, visitor_id) VALUES (?, ?)")
+        ->execute([$comicId, $visitorId]);
+    $voted = true;
+}
+
+$countStmt = $pdo->prepare("SELECT COUNT(*) FROM {$tableSql} WHERE comic_id = ?");
+$countStmt->execute([$comicId]);
+
+echo json_encode(['count' => (int) $countStmt->fetchColumn(), 'voted' => $voted]);
+```
+
+The MySQL schema uses the same composite unique index pattern — same constraint, different language:
+
+```sql
+CREATE TABLE votes (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  comic_id VARCHAR(8) NOT NULL,
+  visitor_id VARCHAR(36) NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE KEY unique_vote (comic_id, visitor_id),
+  INDEX idx_comic_id (comic_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+```
+
+The cookies work across subdomains because `api.jeromeabel.net` and `leconceptdelapreuve.jeromeabel.net` share the same registrable domain. A cookie set with `domain=.jeromeabel.net` is sent to both. I initially assumed `SameSite=Lax` would be enough since the domains are same-site. It wasn't — browsers treat `fetch()` with `credentials: 'include'` to a different origin as a cross-origin subresource request, and `Lax` blocks cookies on those. `SameSite=None` (with `Secure`) is required.
+
+The result:
+
+| Phase | Duration |
+|-------|----------|
+| Queueing | 1.83 ms |
+| DNS Lookup | 6.23 ms |
+| Initial connection | 40.25 ms |
+| SSL | 21.75 ms |
+| Request sent | 0.07 ms |
+| **Waiting for server response** | **53.93 ms** |
+| Content Download | 14.67 ms |
+| **Total** | **117.90 ms** |
+
+54ms server wait. Down from 663ms. The connection overhead (DNS + SSL) adds ~68ms on first request, but that gets reused on subsequent calls. The site also becomes fully static again — no `prerender = false` routes, no `--remote` build flag, no serverless functions.
+
+
+## One file, two environments
+
+I didn't want local development to pollute production vote data. PHP's `require` shares the calling script's variable scope, so a 5-line wrapper is enough:
+
+```php
+<?php
+// vote-staging.php
+$TABLE = 'votes_staging';
+$ALLOWED_ORIGINS = ['http://localhost:4321'];
+$ALLOWED_ORIGIN_PATTERNS = [
+    '/^https:\/\/(?:deploy-preview-\d+|branch-[a-z0-9-]+)--leconceptdelapreuve\.netlify\.app$/',
+];
+require __DIR__ . '/vote.php';
+```
+
+When `vote-staging.php` sets `$TABLE` then requires `vote.php`, the variable is already defined — `$TABLE ?? 'votes'` keeps it. Direct requests to `vote.php` get the default production table.
+
+On the Astro side, a config file switches the URL by environment:
+
+```ts
+// src/utils/voteConfig.ts
+export const VOTE_API_URL =
+  import.meta.env.PUBLIC_VOTE_API_URL ??
+  (import.meta.env.DEV
+    ? "https://api.jeromeabel.net/vote-staging.php"
+    : "https://api.jeromeabel.net/vote.php");
+```
+
+The `PUBLIC_VOTE_API_URL` env var allows overriding in CI if needed. By default, `pnpm dev` hits the staging endpoint, and production builds hit the real one. Netlify deploy previews also hit the staging table — the regex pattern in `$ALLOWED_ORIGIN_PATTERNS` matches both `deploy-preview-*` and `branch-*` URLs, so branch previews get CORS access to the staging endpoint without touching production data.
 
 
 ## What I Learned
 
-* One `prerender = false` line is enough to introduce dynamic behavior into a static site
-* The hybrid pattern keeps architecture stable — one server route, everything else CDN
-* Composite unique indexes enforce business rules better than application code
-* In serverless, reduce round-trips first — batch and parallelize queries
-* SQL with type safety is a sweet spot — Drizzle feels close to the metal without sacrificing refactors
-* Optimistic UI doesn’t require a framework — careful state handling is enough
-* Cookie usage
+* Astro DB + Turso is genuinely pleasant to work with — schema, ORM, and hosting in one integration
+* Serverless cold starts add up when the feature is trivial
+* Co-located PHP + MySQL on shared hosting can be faster than a modern serverless stack — because physics wins: same machine, no network hop
+* A cookie identity pattern transfers across stacks without changes
+* Optimistic UI decouples the user experience from backend latency
