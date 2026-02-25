@@ -230,16 +230,15 @@ The result:
 
 | Phase | Duration |
 |-------|----------|
-| Queueing | 1.83 ms |
-| DNS Lookup | 6.23 ms |
-| Initial connection | 40.25 ms |
-| SSL | 21.75 ms |
-| Request sent | 0.07 ms |
-| **Waiting for server response** | **53.93 ms** |
-| Content Download | 14.67 ms |
-| **Total** | **117.90 ms** |
+| Queueing | 0.78 ms |
+| Stalled | 0.52 ms |
+| Request sent | 0.20 ms |
+| **Waiting for server response** | **48.60 ms** |
+| Content Download | 14.66 ms |
+| **Total** | **64.75 ms** |
 
-54ms server wait. Down from 663ms. The connection overhead (DNS + SSL) adds ~68ms on first request, but that gets reused on subsequent calls. The site also becomes fully static again — no `prerender = false` routes, no `--remote` build flag, no serverless functions.
+
+48ms server wait, down from 663ms, with connection overhead reused on subsequent calls for near-instant loads. The site also becomes fully static again — no `prerender = false` routes, no `--remote` build flag, no serverless functions.
 
 
 ## One file, two environments
