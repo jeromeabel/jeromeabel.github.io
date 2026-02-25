@@ -237,9 +237,7 @@ The result:
 | Content Download | 14.66 ms |
 | **Total** | **64.75 ms** |
 
-
-48ms server wait, down from 663ms, with connection overhead reused on subsequent calls for near-instant loads. The site also becomes fully static again — no `prerender = false` routes, no `--remote` build flag, no serverless functions.
-
+48ms server wait, down from 663ms, powered by an ultra-low 1.7ms internal latency between the PHP and MySQL servers. By moving to a localized private network, the "serverless tax" is eliminated and the project returns to a fully static build—no more `prerender = false` or `--remote` flags.
 
 ## One file, two environments
 
