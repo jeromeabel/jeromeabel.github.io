@@ -2,9 +2,11 @@
 @plugin '@tailwindcss/typography';
 
 @utility container {
-  margin-inline: auto;
-  padding-inline: 1rem;
-  max-width: var(--breakpoint-xl);
+ margin-inline: auto;
+ padding-inline: 1rem;
+ max-width: var(--breakpoint-xl);
+ overflow-x: hidden;
+ overflow-wrap: break-word;
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
