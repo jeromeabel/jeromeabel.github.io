@@ -9,10 +9,10 @@ importers:
   .:
     dependencies:
       '@astrojs/netlify':
-        specifier: ^7.0.2
+        specifier: ^7.0.5
         version: 7.0.5(@types/node@25.5.0)(astro@6.1.1(@netlify/blobs@10.7.4)(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(typescript@5.9.3)(yaml@2.8.3))(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(yaml@2.8.3)
       '@astrojs/partytown':
-        specifier: ^2.1.5
+        specifier: ^2.1.6
         version: 2.1.6
       '@fontsource/bubbler-one':
         specifier: ^5.2.8
@@ -27,13 +27,13 @@ importers:
         specifier: ^1.2.2
         version: 1.2.2
       '@iconify-json/lucide':
-        specifier: ^1.2.98
+        specifier: ^1.2.99
         version: 1.2.99
       '@tailwindcss/vite':
-        specifier: ^4.2.1
+        specifier: ^4.2.2
         version: 4.2.2(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(yaml@2.8.3))
       astro:
-        specifier: ^6.0.4
+        specifier: ^6.1.1
         version: 6.1.1(@netlify/blobs@10.7.4)(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(typescript@5.9.3)(yaml@2.8.3)
       astro-icon:
         specifier: ^1.1.5
@@ -54,7 +54,7 @@ importers:
         specifier: ^0.33.5
         version: 0.33.5
       tailwindcss:
-        specifier: ^4.2.1
+        specifier: ^4.2.2
         version: 4.2.2
     devDependencies:
       '@iconify-json/fa6-brands':
