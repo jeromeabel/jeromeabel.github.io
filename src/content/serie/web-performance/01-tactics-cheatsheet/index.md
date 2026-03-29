@@ -34,7 +34,11 @@ To be *perceived* as faster than a competitor, you need to be roughly **20% fast
 
 **Business metrics:**
 
-There is a direct correlation between Core Web Vitals and key business metrics: bounce rate, session duration, and conversion rates. Correlation is not causation — but the pattern is consistent enough across studies that ignoring it is a risk.
+Business metrics can be extracted from web analytics tools. They help you understand the user journey within a product: engagement, retention, and feature adoption, measured through session duration, bounce/entry/exit rates, and user environment data such as device type, screen resolution, and location.
+
+This is definitely a complex topic that would require a dedicated post. However, at a high level, these metrics can provide value when analyzing correlations between Core Web Vitals and key business outcomes.
+
+An important note: correlation does not imply causation. However, when interpreted carefully, correlations with Core Web Vitals can reveal meaningful patterns and provide useful directional insights.
 
 ---
 
@@ -183,7 +187,7 @@ Synthetic tests on your dev machine will always be faster than production. The g
 
 ### Realistic Local Testing
 
-1. Open DevTools in a **separate window** (don't shrink the viewport)
+1. Open DevTools in a **separate window** (don't shrink the viewport) and use **Incognito mode** to avoid extra loading from extensions.
 2. Enable Responsive Mode — use a realistic device (e.g., 1366×768 at 1× density for "small laptop")
 3. Set **Network throttling** to a realistic profile
 4. Set **CPU: 4× slowdown** in Performance panel
