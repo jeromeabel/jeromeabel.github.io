@@ -175,7 +175,7 @@ This work started because a user said the app felt slow. The proof it worked was
 
 Performance improved and users said it felt faster. We wanted to know if usage data agreed.
 
-We compared two standalone 12-week windows in Amplitude's Page Engagement report — one ending before optimizations started (Aug–Oct 2025), one covering the post-optimization period (Jan–Apr 2026). Raw visitor counts dropped ~47% across all pages uniformly.
+We compared two standalone 12-week windows in Amplitude's Page Engagement report — one ending before optimizations started (Aug–Oct 2025), one covering the post-optimization period (Jan–Apr 2026).
 
 A caveat on these numbers: we're working with a small user base — around 50–60 weekly active users, roughly 300–550 unique visitors per 12-week window. This is a B2B tool, not a consumer app. With this sample size, a single power user changing their habits can move a metric by a few percent. The trends are directional, not statistically significant in the way a 100K-user A/B test would be.
 
