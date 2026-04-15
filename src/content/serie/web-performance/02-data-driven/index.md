@@ -6,9 +6,9 @@ abstract: "A practical account of using field data, lab measurements, and behavi
 draft: false
 ---
 
-I work on a speech analytics web app built with Vue.js at [Uhlive](https://uh.live/). Customer analysts use it to search, filter, and review recorded calls — transcripts, tags, metrics. To get a sense of scale, some customers have over 800,000 calls.
+I work on a speech analytics web app built with Vue.js at [Uhlive](https://uh.live/). Customer analysts use it to search, filter, and review recorded calls — transcripts, tags, metrics. To get a sense of scale, some customers have millions of calls.
 
-Our performance was bad. Loading times reached 6–8 seconds. Users told us: *"it's a bit long"*, *"it grinds"*. That feedback hurt more than any dashboard number — we had to act. Removing user friction and earning back a feeling of quality mattered more than hitting a metric target.
+Our performance was bad. Loading times reached 6–8 seconds. Users told us: *"it's a bit long"*, *"it grinds"*. That feedback was the trigger — we had to give users the best experience possible.
 
 I wanted to take a data-driven approach with our team — identify what matters, avoid guessing, prove each change with numbers. Sometimes it was obvious. Sometimes the results were unexpected, often in the wrong direction, and sometimes decoupled from the actual experience improvements.
 
@@ -92,7 +92,7 @@ The mild INP regression (+35%) echoed Phase 1's pattern, but TanStack Virtual ca
 
 ![Loading states comparison: blank page vs. skeleton screen with disabled interactions during data fetch](./skeletons.png)
 
-The virtualization and payload reduction work took sprints. We couldn't ask users to wait that long without doing something visible. So we shipped a perception layer in parallel — small changes that didn't reduce load time but changed how the wait felt.
+The virtualization and payload reduction work took weeks. We couldn't ask users to wait that long without doing something visible. So we shipped a perception layer in parallel — small changes that didn't reduce load time but changed how the wait felt.
 
 - **Skeleton screens** instead of blank pages. A 3-second load with a skeleton felt faster than a 2-second load with a white screen — users started scanning the layout before data arrived.
 - **Disabled interactions during loading.** We'd seen users click buttons that weren't ready yet and get no response. Locking the UI with a visible loading state removed that "nothing happened" moment.
@@ -154,7 +154,7 @@ And then users told us:
 
 No Core Web Vital captures "I thought I had changed my hardware." The transcript virtualization made scrolling smooth. The parallel API calls removed the sequential wait. The skeleton screens made the remaining wait feel purposeful. None of this registered clearly in our RUM data — but it registered with the people using the tool every day.
 
-This sprint started because a user said the app felt slow. The proof it worked was someone thinking they got new hardware.
+This work started because a user said the app felt slow. The proof it worked was someone thinking they got new hardware.
 
 ---
 
@@ -207,8 +207,8 @@ Three things stand out:
 - **p75, not average.** Averages hid our worst users. p75 showed the experience that was driving bounce rates.
 - **Performance is a budget.** Every feature spends from the same budget — Phase 4 proved you can drain it in 5 weeks without anyone noticing.
 - **The LCP/INP tradeoff is real and recurring.** Faster loading means more data competing for the main thread — only virtualization broke this by decoupling DOM size from data size.
-- **Business metrics justify the sprint.** "22% more pages per session, 17% fewer bounces" is a business case — "LCP is 8.1s" is not.
-- **Perception fixes buy time.** Skeletons shipped in days; virtualization took sprints. Users noticed both.
+- **Business metrics justify the effort.** "22% more pages per session, 17% fewer bounces" is a business case — "LCP is 8.1s" is not.
+- **Perception fixes buy time.** Skeletons shipped in days; virtualization took weeks. Users noticed both.
 - **Not every change moves the dashboard.** Some PRs didn't register in the metrics — data tells you where to look, not always whether your fix worked.
 - **User feedback is the companion to data.** The clearest signal before: "it grinds." After: "I thought I got new hardware." No dashboard gave us that.
 - **Instrument before you optimize.** Call Details was invisible until we added tracking. You can't improve what you're not measuring — but you also can't always trust what you are.
