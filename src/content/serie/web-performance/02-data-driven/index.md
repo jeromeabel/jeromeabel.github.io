@@ -1,16 +1,16 @@
 ---
 title: "Exploring a Data-Driven Approach to Web Performance"
-date: 2026-04-15
+date: 2026-04-16
 description: "Six months of performance work on a Vue.js speech analytics app — what the RUM data revealed, where metrics fell short, and what user feedback proved better than any dashboard."
 abstract: "A practical account of using field data, lab measurements, and behavioral analytics to drive and evaluate performance improvements on a real B2B tool."
 draft: false
 ---
 
-I work on a speech analytics web app built with Vue.js at [Uhlive](https://uh.live/). Customer analysts use it to search, filter, and review recorded calls — transcripts, tags, metrics. Some customers have over 200,000 calls.
+I work on a speech analytics web app built with Vue.js at [Uhlive](https://uh.live/). Customer analysts use it to search, filter, and review recorded calls — transcripts, tags, metrics. To get a sense of scale, some customers have over 800,000 calls.
 
-Our performance was bad. Loading times reached 6–8 seconds. Users told us: *"it's a bit long"*, *"it grinds"*. This was enough to focus a development cycle on it.
+Our performance was bad. Loading times reached 6–8 seconds. Users told us: *"it's a bit long"*, *"it grinds"*. That feedback hurt more than any dashboard number — we had to act. Removing user friction and earning back a feeling of quality mattered more than hitting a metric target.
 
-I tried to measure the before and after of each change. Six months later, the hardest part wasn't finding what to fix — it was knowing whether a fix actually worked.
+I wanted to take a data-driven approach with our team — identify what matters, avoid guessing, prove each change with numbers. Sometimes it was obvious. Sometimes the results were unexpected, often in the wrong direction, and sometimes decoupled from the actual experience improvements.
 
 ---
 
@@ -26,24 +26,22 @@ Amplitude's behavioral data revealed a clear correlation: **worst LCP = worst bo
 
 On the same page, when INP (Interaction to Next Paint — how fast the page responds to clicks) exceeded 400ms, Amplitude showed a 42% drop in search-to-action completions — users who searched but didn't open any results.
 
-### Know Your Users
+### Who We Were Optimizing For
 
-Before optimizing, we needed to understand who we were optimizing for. Our users are call-center analysts on desktop, recent Chrome-based browsers, small to HD screens. No mobile, no old browsers. A useful constraint.
-
-Keep in mind: those users might be on 4-year-old Windows laptops with background processes competing for CPU — what scores 60 on your machine might score 30 on theirs. CPU throttling in Lighthouse gets you closer to their reality.
-
-The user base splits into two distinct profiles:
+We knew our users, but we needed to sharpen that picture — validate our assumptions and make sure we weren't hiding anything interesting. The user base splits into two distinct profiles:
 
 - **Supervisors** check in periodically — reviewing analytics dashboards, monitoring data quality, browsing the call list to spot trends. Shorter sessions, more page-hopping. A supervisor "bouncing" from Call Details may just be checking one call and moving on — not a performance problem.
 - **Analysts** work for hours — picking calls from the list, opening each one, reviewing transcripts and tags. Long sessions on Call Details, high page views on Call List. These are the users who felt the pain of 6-second LCP most acutely.
 
+The great majority of our users work on desktop or laptop, recent Chrome-based browsers, small to HD screens, on Windows. No mobile, no old browsers.
+
+We didn't have real data on their CPU power or device capabilities. But 25% of users had small desktop screens (under 1366px), which hinted that a significant portion could be on 4-year-old office laptops. Those machines — with background processes, distant servers, and average network quality — could explain the extreme worst results, even if they don't fully account for the p75 numbers. That's why we used CPU throttling in Lighthouse and the Performance tab to stay closer to their reality during development.
+
 ---
 
-## The Journey in Five Phases
+## The Call List Journey in Five Phases
 
-Performance optimizations don't happen in a vacuum. The product can't be paused — new features ship alongside performance work, sometimes competing with it. That tension shaped every phase.
-
-We tracked RUM data (New Relic p75) over 6 months on two pages. Here's what happened.
+Performance optimizations don't happen in a vacuum. The product can't be paused — new features ship alongside performance work, sometimes competing with it. That tension shaped every phase. We tracked our progress over six months, and the results weren't always linear as you can see in this graph.
 
 ![Call List: LCP & INP over 6 months](./call-list-lcp-inp-2025-2026.png)
 
@@ -58,120 +56,121 @@ We tracked RUM data (New Relic p75) over 6 months on two pages. Here's what happ
 
 ### Phase 1 — The backend win (and its tradeoff)
 
-The backend team replaced a heavy endpoint with two specialized ones. On the frontend, we added pagination — no more loading all results at once — and refactored the store to consume the new endpoints. Call List LCP dropped from 8600ms to 4000ms — **the single biggest win in the whole journey.**
+The first big change came from the backend team. They replaced a heavy endpoint with two specialized ones. On the frontend, we added pagination — no more loading all results at once — and refactored the store to consume the new endpoints. Call List LCP dropped from 8600ms to 4000ms — **the single biggest win in the whole journey.**
 
-But INP spiked from 420ms to 1360ms. Why? The page now loaded faster, delivering more interactive data sooner. The JavaScript tasks that process incoming data competed more aggressively for the main thread. **Faster load = more data to interact with = worse INP.**
+But something I didn't expect happened. INP spiked from 420ms to 1360ms. It took me a while to understand why — I only pieced it together months later, when preparing the data for this post. The page now loaded faster, delivering more interactive data sooner. The JavaScript tasks that process incoming data competed more aggressively for the main thread. **Faster load meant more data to interact with, which meant worse responsiveness.**
 
-### Phase 2 — The boring one that works
+### Phase 2 — Cleaning up requests
 
 Removing dead code paths, deleting deprecated API calls (useless since using the new endpoints) & fields, reducing polling frequency. Nothing exciting. INP dropped 57%. Removing dead code and useless API calls freed the main thread for user interactions.
 
 ### Phase 3 — Virtual scrolling breaks the tradeoff
 
-Users wanted to see 100 rows instead of 20 by default. We tried PrimeVue DataTable's built-in virtual scroller, but hit a known bug with row expansion — we use row expansion to show call details, and virtual scroll made it flicker and break ([PrimeVue Issue #3491](https://github.com/primefaces/primevue/issues/3491)). After documented attempts, we replaced PrimeVue entirely with TanStack Table & Virtual.
+Users wanted to see 100 rows by default instead of 20. We tried PrimeVue DataTable's built-in virtual scroller, but hit a known bug with row expansion — we use row expansion to show call details inline, and virtual scroll made it flicker and break ([PrimeVue Issue #3491](https://github.com/primefaces/primevue/issues/3491)). After documented attempts, we replaced PrimeVue entirely with TanStack Table & Virtual.
 
 TanStack's headless approach solved both the performance problem and the UX issue: row expansion worked reliably, scroll behavior was consistent, and column widths stayed stable. The LCP gain came from rendering only visible rows instead of 100 DOM nodes. The INP gain from less DOM to interact with.
 
-LCP: −67%. INP: −65%. This was the only phase that improved both metrics simultaneously, because virtualization decouples rendered DOM from data size. The browser no longer cares whether the list has 100 or 10,000 items.
+LCP: −67%. INP: −65%. This was the only phase that improved both metrics simultaneously, because virtualization decouples rendered DOM from data size. The browser no longer cares whether the list has 100 or 800,000 items — and neither should users. Having a consistent load time regardless of dataset size is as much a UX win as a performance one.
 
 ### Phase 4 — Feature Debt: Performance is a budget (and we spent it)
 
-Over 5 weeks, Call List LCP crept from 1328ms back to 3406ms — **+156%**. No one noticed in real-time.
+The most uncomfortable phase to write about. Over 5 weeks, Call List LCP crept from 1328ms back to 3406ms — **+156%**. Nobody noticed in real-time.
 
-The cause: a column-sharing feature that added a new blocking API call on every page load, an eager watcher running a function with localStorage for every user, and 53 restructured files adding parse-time overhead. Plus 13 PRs touching global router files, and three new runtime libraries (~45KB combined) landing silently.
+We were shipping features and every PR added a small cost. A new blocking API call on every page load, an eager watcher with localStorage for every user, and 53 restructured files adding parse-time overhead. Plus 13 PRs touching global router files, and three new runtime libraries (~45KB combined) landing silently.
 
-Each PR added a small cost. None had a compensating optimization. The budget was gone.
+The metaphor I keep coming back to is a budget. Performance is a budget, and every feature spends from it. The uncomfortable truth about Phase 4 is that nothing went *wrong* — we were doing normal product work, shipping things users needed. Each PR added a small cost. None had a compensating optimization. The budget was gone.
 
 ### Phase 5 — Earning it back
 
-Targeted fixes: migrated an endpoint (reversing the Phase 4 blocking call), rewrote the filter bar with cleaner imports to reduce the module graph on that route, and removed alpha-gating logic that was still being evaluated at runtime for every user. LCP dropped from 3406ms to 1266ms — **back below the Phase 3 best.**
+Targeted fixes reversed the Phase 4 costs directly: migrated a blocking API call to a lighter, dedicated endpoint, rewrote the filters to centralize definitions and shrink the module graph, and removed feature-gating logic that was still being evaluated at runtime for every user. LCP dropped from 3406ms to 1266ms — **back below the Phase 3 best.**
 
 The mild INP regression (+35%) echoed Phase 1's pattern, but TanStack Virtual capped its magnitude. The DOM ceiling prevents exponential INP growth.
 
 ---
 
-## Lab Data to Find the Fix
-
-For Call List, RUM data told us what was broken. For Call Details, lab data was the only reliable tool.
-
-For each PR, I ran Chrome DevTools performance traces and Lighthouse reports through custom Python scripts. The scripts parsed the trace's `CrRendererMain` thread events and extracted a diagnostic chain — each metric pointing toward the next root cause:
-
-```
-Diagnostic funnel — Call Details (before → after)
-────────────────────────────────────────────────────
-FPS              45fps → 50fps
-  ↓ frame cost: 22.8ms  (budget: 16.67ms for 60fps)
-
-Rendering        185ms/s → 135ms/s
-  ↓ 6,797 DOM nodes → layout + style recalc on every frame
-  ↓ 329 segment components in the transcript alone
-  fix: virtual scroll, render only ~20 visible segments
-
-Scripting        807ms/s → 671ms/s
-  ↓ FireAnimationFrame × 60/sec evaluating :is-segment-active
-  ↓ across 329 segments ≈ 20,000 comparisons/sec
-  fix: O(1) active index; watch transitions (~30×/10s) not timecode (~600×/10s)
-
-Longest task     115ms → 76ms
-  ↓ analyze_longest_task traced child calls with source locations
-  ↓ pointed directly at the composable to rewrite
-────────────────────────────────────────────────────
-Lighthouse: 33/100 · TBT: 600ms+ · TTI: 28s
-```
-
-Each number was a clue. Lighthouse confirmed the structural problems — too many nodes, too much blocking script — but the traces told us *where to cut*. The lab data proved every change worked. The RUM data? Inconclusive — p75 still sits around 3100ms, fluctuating week to week. For Call Details, the gap between lab and field measurements was too wide to trust either one alone.
-
----
-
-## What Data Can't Prove
-
-**Correlation is not causation.** Slow pages might be slow because they're complex, and complex pages might have higher bounce rates for reasons unrelated to performance. The signal was strong enough to act on — especially when users described the experience as "slow" — but we can't prove the causal link.
-
-**Improving one metric can worsen another.** The LCP/INP tradeoff showed up three times. When data arrives faster, the JavaScript that processes it competes harder for the main thread. The metrics are connected in ways that aren't obvious until you're deep in it.
-
-**Not every PR moves the dashboard.** Some improvements are real but too small for field data to register. Others only matter on the slowest devices. I still think avoiding unnecessary reactive operations on 1,000+ items is a gain, at least for older hardware. But I can't always prove it with a graph.
-
-**Rolling windows blend context away.** New Relic's weekly p75 is a blend of data from the entire period. Our best week (1328ms) likely included some pre-optimization data that made it look better than reality. Our worst-to-best recovery (3406 → 1266ms) was partly the old data aging out. When interpreting RUM trends, always account for this — dramatic week-over-week changes are often the window shifting composition, not just new code.
-
----
-
 ## Ship Perception While You Fix Architecture
 
-![Loading states comparison: blank page vs. skeleton screen with disabled interactions during data fetch](./perception-loading-states.png)
+![Loading states comparison: blank page vs. skeleton screen with disabled interactions during data fetch](./skeletons.png)
 
-Structural fixes take sprints. Perception fixes can ship in a week. **People will wait for value, but unexplained waits feel slower.**
+The virtualization and payload reduction work took sprints. We couldn't ask users to wait that long without doing something visible. So we shipped a perception layer in parallel — small changes that didn't reduce load time but changed how the wait felt.
 
-While we worked on virtualization and payload reduction, we shipped a perception layer:
+- **Skeleton screens** instead of blank pages. A 3-second load with a skeleton felt faster than a 2-second load with a white screen — users started scanning the layout before data arrived.
+- **Disabled interactions during loading.** We'd seen users click buttons that weren't ready yet and get no response. Locking the UI with a visible loading state removed that "nothing happened" moment.
+- **Optimistic UI** for high-confidence actions. We showed the result immediately and reconciled after the server responded. For actions that almost never fail, the delay was invisible.
 
-- **Skeleton screens** replaced blank pages. A 3-second load with a skeleton feels faster than a 2-second load with a white screen. Users start reading the layout before data arrives.
-- **Disabled interactions while loading.** Clicking a button that isn't ready causes the frustration of "I clicked and nothing happened." Lock the UI, show a loading state, unlock when ready.
-- **Optimistic UI** for high-confidence actions. Show the result immediately and reconcile after the server responds.
-
-This isn't cheating. The worst UX is uncertainty — no feedback, no progress, just a frozen screen.
+Skeletons and loading states are a small investment, but "it looks nicer" isn't enough to get them prioritized. What helped was framing it in terms of the feedback we were getting — users saying "I clicked and nothing happened," "it looks broken." Those aren't performance complaints, they're trust complaints. The perception layer was our answer to those while the structural work continued.
 
 Trust in a tool is asymmetric: it builds slowly through repeated success and drops fast on failure. An analyst opening 30 calls a day adjusts by day 3 — two fast sessions set an expectation; one regression confirms a fear. A skeleton screen doesn't change load time, but it signals that something is happening — that the tool is working for the user, not against them. Perception fixes buy time while the team works on structural changes.
 
 ---
 
-## When Users Tell You What the Dashboard Can't
+## Call Details: the Page Under the Radar
 
-![./call-details-session-trends.png]
+The Call List story is clean: 8600ms → 1500ms, the data proves it. The Call Details story is less straightforward — the RUM numbers never told the improvement story well.
 
-The Call List story is clean: 8600ms → 1500ms, the data proves it. The Call Details story is the opposite.
+### Discovering the invisible problem
 
-Call Details LCP bounced between 1400ms and 4600ms across the whole period with no clear trend. We parallelized API calls (5 sequential → 3 parallel), virtualized the transcript (−73% DOM nodes, −94% segment nodes), and optimized the layout. The lab data proved every change worked. But the RUM data stayed inconclusive — and the users told us what the dashboard couldn't:
+Call Details was part of our performance goals, but it wasn't in the weekly data report before October 2025. Then we looked at New Relic's worst-pages ranking: **over 70% of the worst 20 LCP spikes came from Call Details URLs.** No baseline, nothing to trend against.
+
+So the first step wasn't fixing anything. It was adding New Relic instrumentation to Call Details so we could see what was actually happening. Once we had records, the picture was clear: some calls loaded in 1–2 seconds, others took 7, even 12 seconds. Long calls with thousands of transcript segments were the worst — a 45-minute call with dense transcripts and dozens of tags loaded completely differently from a short, clean one. The variance was enormous, and the p75 averaged it all into a number that looked manageable.
+
+It wasn't.
+
+### Lab Data Was the Only Way Forward
+
+For Call List, I could make a change, wait two weeks, and see the impact in the RUM trends. For Call Details, that wasn't possible. There was no historical baseline to compare against, and the variance between calls made week-over-week trends meaningless.
+
+I needed per-PR feedback. Chrome DevTools performance traces and Lighthouse reports were the only reliable signal — I could run them before and after each change on the same call, on the same machine, and see exactly what moved.
+
+I wrote Python scripts with Claude Code that parsed the trace's `CrRendererMain` thread events and extracted a diagnostic chain — each metric pointing toward the next root cause:
+
+| Layer | Before | After | Root cause | Fix |
+|-------|-------:|------:|-----------|-----|
+| **FPS** | 45 fps | 50 fps | Frame cost 22.8ms (budget: 16.67ms) | — |
+| **Rendering** | 185 ms/s | 135 ms/s | 6,797 DOM nodes; 329 segment components | Virtual scroll — render ~20 visible segments |
+| **Scripting** | 807 ms/s | 671 ms/s | `FireAnimationFrame` × 60/s × 329 segments = 20K comparisons/s | O(1) active index; watch transitions (~30×/10s) not timecodes (~600×/10s) |
+| **Longest task** | 115 ms | 76 ms | `analyze_longest_task` traced child calls to source | Rewrote the composable |
+
+*Lighthouse before: 33/100 · TBT: 600ms+ · TTI: 28s*
+
+Each number was a clue. Lighthouse confirmed the structural problems — too many nodes, too much blocking script — but the traces told us *where to cut*. We parallelized API calls (5 sequential → 3 parallel), virtualized the transcript (−73% DOM nodes, −94% segment nodes), and optimized the layout. The lab data proved every change worked.
+
+### The Graph That Didn't Move
+
+![Call Details - LCP & INP over 6 months](./call-details-lcp-inp-2025-2026.png)
+
+Months later, here's what the RUM data showed. Call Details LCP bounced between 1400ms and 4600ms across the whole period with no clear trend. The majority of worst-page spikes still came from Call Details, but with fewer extreme values — the 12-second loads were gone.
+
+The p75 still sits around 3000ms, fluctuating week to week. For Call Details, the gap between lab and field measurements was too wide to trust either one alone. The sample size is smaller, the usage patterns are more varied, and the improvements were spread across multiple interaction moments rather than concentrated in a single LCP event.
+
+If I'd only had the graph, I would have concluded the work was a wash.
+
+### What Users Said
+
+And then users told us:
 
 > I thought I had changed my hardware!
-
 > We forget how long it used to take to open a call — now it's under 2 seconds
 
-"I thought I had changed my hardware." No Core Web Vital captures that. The transcript virtualization made scrolling smooth. The parallel API calls removed the sequential wait. The skeleton screens made the remaining wait feel purposeful. None of this registered clearly in our RUM data — the sample size is smaller for Call Details, the usage patterns are more varied, and the improvements were spread across multiple interaction moments rather than concentrated in a single LCP event.
+No Core Web Vital captures "I thought I had changed my hardware." The transcript virtualization made scrolling smooth. The parallel API calls removed the sequential wait. The skeleton screens made the remaining wait feel purposeful. None of this registered clearly in our RUM data — but it registered with the people using the tool every day.
 
-User feedback is data too. This sprint started because a user said the app felt slow. The proof it worked was someone thinking they got new hardware.
+This sprint started because a user said the app felt slow. The proof it worked was someone thinking they got new hardware.
 
 ---
 
-## The Business Impact: Amplitude Before and After
+## What Data Can't Prove
+
+**Correlation is not causation.** Slow pages might be slow because they're complex, and complex pages might have higher bounce rates for reasons unrelated to performance. The signal was strong enough to act on — especially when users described the experience as "slow" — but I can't prove the causal link from metrics alone.
+
+**Improving one metric can worsen another.** The LCP/INP tradeoff showed up three times during this journey. When data arrives faster, the JavaScript that processes it competes harder for the main thread. I didn't expect the metrics to be connected this tightly — it only became obvious once we were deep in it.
+
+**Not every PR moves the dashboard.** Some improvements were real but too small for field data to register. Others only mattered on the slowest devices. I still think avoiding unnecessary reactive operations on 1,000+ items is a gain, at least for older hardware. But I couldn't always prove it with a graph.
+
+**Rolling windows blend context away.** New Relic's weekly p75 blends data from the entire period. Our best week (1328ms) likely included some pre-optimization data that made it look better than reality. Our worst-to-best recovery (3406 → 1266ms) was partly the old data aging out. I learned to be careful with these — dramatic week-over-week changes were often the window shifting composition, not just new code.
+
+---
+
+## The Business Impact
 
 Performance improved and users said it felt faster. We wanted to know if usage data agreed.
 
@@ -204,18 +203,18 @@ Three things stand out:
 
 ## What I Learned
 
+- **Field data first, lab data second.** RUM told us what was broken. Lighthouse and traces told us why.
+- **p75, not average.** Averages hid our worst users. p75 showed the experience that was driving bounce rates.
 - **Performance is a budget.** Every feature spends from the same budget — Phase 4 proved you can drain it in 5 weeks without anyone noticing.
 - **The LCP/INP tradeoff is real and recurring.** Faster loading means more data competing for the main thread — only virtualization broke this by decoupling DOM size from data size.
 - **Business metrics justify the sprint.** "22% more pages per session, 17% fewer bounces" is a business case — "LCP is 8.1s" is not.
-- **Performance is a trust contract.** Trust builds through repeated fast sessions and drops faster than it forms. Skeletons are transparency, not tricks.
 - **Perception fixes buy time.** Skeletons shipped in days; virtualization took sprints. Users noticed both.
 - **Not every change moves the dashboard.** Some PRs didn't register in the metrics — data tells you where to look, not always whether your fix worked.
 - **User feedback is the companion to data.** The clearest signal before: "it grinds." After: "I thought I got new hardware." No dashboard gave us that.
+- **Instrument before you optimize.** Call Details was invisible until we added tracking. You can't improve what you're not measuring — but you also can't always trust what you are.
 
 ---
 
 ## What's Next
 
-I'm building a test environment with 10,000 botanical species — expandable rows, the same structure as the call list. The goal is to compare three rendering approaches: a naive `v-for` table, PrimeVue DataTable, and TanStack Virtual. Lighthouse scores the naive table at 100. Users measure 3-second mount times and single-digit FPS.
-
-The gap between synthetic scores and real experience is where the interesting work starts. Since there's no RUM data in a playground, the methodology uses Chrome DevTools traces and Lighthouse reports — the same Python scripts from Call Details, applied to a reproducible benchmark.
+I'm building a sandbox with 10,000 items to benchmark three rendering approaches: naive `v-for`, PrimeVue DataTable, and TanStack Virtual. Lighthouse scores the naive table at 100. Users measure 3-second mount times and single-digit FPS. The gap between synthetic scores and real experience is where the interesting engineering happens.
