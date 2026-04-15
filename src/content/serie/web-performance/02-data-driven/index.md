@@ -72,7 +72,7 @@ TanStack's headless approach solved both the performance problem and the UX issu
 
 LCP: −67%. INP: −65%. This was the only phase that improved both metrics simultaneously, because virtualization decouples rendered DOM from data size. The browser no longer cares whether the list has 100 or 800,000 items — and neither should users. Having a consistent load time regardless of dataset size is as much a UX win as a performance one.
 
-### Phase 4 — Feature Debt: Performance is a budget (and we spent it)
+### Phase 4 — Feature Debt: Performance is a budget
 
 The most uncomfortable phase to write about. Over 5 weeks, Call List LCP crept from 1328ms back to 3406ms — **+156%**. Nobody noticed in real-time.
 
@@ -150,6 +150,7 @@ If I'd only had the graph, I would have concluded the work was a wash.
 And then users told us:
 
 > I thought I had changed my hardware!
+
 > We forget how long it used to take to open a call — now it's under 2 seconds
 
 No Core Web Vital captures "I thought I had changed my hardware." The transcript virtualization made scrolling smooth. The parallel API calls removed the sequential wait. The skeleton screens made the remaining wait feel purposeful. None of this registered clearly in our RUM data — but it registered with the people using the tool every day.
