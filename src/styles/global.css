@@ -42,6 +42,50 @@
   --color-muted-background-accent: #4c4c4c;
 }
 
+/* Image zoom: expand (desktop only) */
+.img-zoom-active {
+  overflow: visible !important;
+}
+
+@media (min-width: 768px) {
+  .prose[data-expand-image] img {
+    cursor: zoom-in;
+  }
+
+  .prose img.img-expanded {
+    cursor: zoom-out;
+    max-width: none;
+    z-index: 10;
+  }
+}
+
+/* Image zoom: lightbox */
+.img-lightbox-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.img-lightbox-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.img-lightbox-backdrop img {
+  max-width: 80vw;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;
