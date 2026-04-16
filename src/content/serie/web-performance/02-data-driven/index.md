@@ -177,10 +177,11 @@ Performance improved and users said it felt faster. We wanted to know if usage d
 
 We compared two standalone 12-week windows in Amplitude's Page Engagement report — one ending before optimizations started (Aug–Oct 2025), one covering the post-optimization period (Jan–Apr 2026).
 
-A caveat on these numbers: we're working with a small user base — around 50–60 weekly active users, roughly 300–550 unique visitors per 12-week window. This is a B2B tool, not a consumer app. With this sample size, a single power user changing their habits can move a metric by a few percent. The trends are directional, not statistically significant in the way a 100K-user A/B test would be.
+A caveat on these numbers: we're working with a small user base — around 50-70 weekly active users, roughly 400-700 unique visitors per 12-week window. This is a B2B tool, not a consumer app. With this sample size, a single power user changing their habits can move a metric by a few percent. The trends are directional, not statistically significant in the way a 100K-user A/B test would be.
 
 | Page | Metric | Before (12w) | After (12w) | Change |
 |------|--------|-------------:|------------:|-------:|
+| **All pages** | Unique visitors | ~48 / week | ~77 / week | **+60%** |
 | **All pages** | Bounce Rate | 17.2% | 14.2% | **−17.4%** |
 | **All pages** | Views/Session | 20.0 | 21.1 | +5.5% |
 | **All pages** | Time/Session | 392s | 438s | +11.7% |
