@@ -4,6 +4,7 @@ date: 2026-04-16
 description: "Six months of performance work on a Vue.js speech analytics app — what the RUM data revealed, where metrics fell short, and what user feedback proved better than any dashboard."
 abstract: "A practical account of using field data, lab measurements, and behavioral analytics to drive and evaluate performance improvements on a real B2B tool."
 draft: false
+img: ./cover.jpg
 ---
 
 I work on a speech analytics web app built with Vue.js at [Uhlive](https://uh.live/). Customer analysts use it to search, filter, and review recorded calls — transcripts, tags, metrics. To get a sense of scale, some customers have millions of calls.
