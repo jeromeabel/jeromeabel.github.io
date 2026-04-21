@@ -9,7 +9,7 @@ img: ./cover.jpg
 
 I work on a speech analytics web app built with Vue.js at [Uhlive](https://uh.live/). Customer analysts use it to search, filter, and review recorded calls — transcripts, tags, metrics. To get a sense of scale, some customers have millions of calls.
 
-Our performance was bad. Loading times reached 6–8 seconds. Users told us: *"it's a bit long"*, *"it grinds"*. That feedback was the trigger — we had to give users the best experience possible.
+Our performance was bad. Loading times reached 6–8 seconds. Users told us: *"it's a bit long"*, *"it grinds"*. That feedback was the trigger — we decided to focus a development cycle on performance.
 
 I wanted to take a data-driven approach with our team — identify what matters, avoid guessing, prove each change with numbers. Sometimes it was obvious. Sometimes the results were unexpected, often in the wrong direction, and sometimes decoupled from the actual experience improvements.
 
@@ -89,6 +89,18 @@ The mild INP regression (+35%) echoed Phase 1's pattern, but TanStack Virtual ca
 
 ---
 
+## What Data Can't Prove
+
+**Correlation is not causation.** Slow pages may be slow because they're complex, and complex pages may have higher bounce rates for reasons unrelated to performance. The signal was strong enough to act on, but I can't prove the causal link from metrics alone.
+
+**Improving one metric can worsen another.** The LCP/INP tradeoff showed up three times. When data arrives faster, the JavaScript that processes it competes harder for the main thread.
+
+**Not every PR moves the dashboard.** Some improvements were too small for field data to register. Others only mattered on the slowest devices — I still think avoiding unnecessary reactive operations on 1,000+ items is a gain, even when I couldn't prove it with a graph.
+
+**Rolling windows blend context away.** New Relic's weekly p75 blends data from the whole period. Dramatic week-over-week changes were often the window shifting composition, not just new code.
+
+---
+
 ## Ship Perception While You Fix Architecture
 
 ![Loading states comparison: blank page vs. skeleton screen with disabled interactions during data fetch](./skeletons.png)
@@ -99,9 +111,7 @@ The virtualization and payload reduction work took weeks. We couldn't ask users 
 - **Disabled interactions during loading.** We'd seen users click buttons that weren't ready yet and get no response. Locking the UI with a visible loading state removed that "nothing happened" moment.
 - **Optimistic UI** for high-confidence actions. We showed the result immediately and reconciled after the server responded. For actions that almost never fail, the delay was invisible.
 
-Skeletons and loading states are a small investment, but "it looks nicer" isn't enough to get them prioritized. What helped was framing it in terms of the feedback we were getting — users saying "I clicked and nothing happened," "it looks broken." Those aren't performance complaints, they're trust complaints. The perception layer was our answer to those while the structural work continued.
-
-Trust in a tool is asymmetric: it builds slowly through repeated success and drops fast on failure. An analyst opening 30 calls a day adjusts by day 3 — two fast sessions set an expectation; one regression confirms a fear. A skeleton screen doesn't change load time, but it signals that something is happening — that the tool is working for the user, not against them. Perception fixes buy time while the team works on structural changes.
+"I clicked and nothing happened" isn't a performance complaint — it's a trust complaint. Perception fixes were our answer while the structural work continued.
 
 ---
 
@@ -160,18 +170,6 @@ This work started because a user said the app felt slow. The proof it worked was
 
 ---
 
-## What Data Can't Prove
-
-**Correlation is not causation.** Slow pages might be slow because they're complex, and complex pages might have higher bounce rates for reasons unrelated to performance. The signal was strong enough to act on — especially when users described the experience as "slow" — but I can't prove the causal link from metrics alone.
-
-**Improving one metric can worsen another.** The LCP/INP tradeoff showed up three times during this journey. When data arrives faster, the JavaScript that processes it competes harder for the main thread. I didn't expect the metrics to be connected this tightly — it only became obvious once we were deep in it.
-
-**Not every PR moves the dashboard.** Some improvements were real but too small for field data to register. Others only mattered on the slowest devices. I still think avoiding unnecessary reactive operations on 1,000+ items is a gain, at least for older hardware. But I couldn't always prove it with a graph.
-
-**Rolling windows blend context away.** New Relic's weekly p75 blends data from the entire period. Our best week (1328ms) likely included some pre-optimization data that made it look better than reality. Our worst-to-best recovery (3406 → 1266ms) was partly the old data aging out. I learned to be careful with these — dramatic week-over-week changes were often the window shifting composition, not just new code.
-
----
-
 ## The Business Impact
 
 Performance improved and users said it felt faster. We wanted to know if usage data agreed.
@@ -220,4 +218,4 @@ Three things stand out:
 
 ## What's Next
 
-I'm building a sandbox with 10,000 items to benchmark three rendering approaches: naive `v-for`, PrimeVue DataTable, and TanStack Virtual. Lighthouse scores the naive table at 100. Users measure 3-second mount times and single-digit FPS. The gap between synthetic scores and real experience is where the interesting engineering happens.
+Lighthouse scores the naive table at 100. Users measure 3-second mount times and single-digit FPS. The gap between synthetic scores and real experience is where the interesting engineering happens.

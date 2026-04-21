@@ -3,7 +3,7 @@ title: "Clickable Images in Astro Markdown: Inline Expand and Lightbox"
 date: 2026-04-16
 description: "How to make images in Astro markdown blog posts clickable — with two modes: inline expand (breaking out of the prose container) and lightbox modal. No dependencies, no MDX required."
 abstract: "A step-by-step guide to adding click-to-expand and lightbox behavior to images inside Astro markdown content, using a client-side script, a few CSS rules, and a data attribute on the prose wrapper."
-draft: true
+draft: false
 ---
 
 Images inside markdown blog posts are constrained by the prose container. That's fine for reading flow, but charts, diagrams, and screenshots often need to be seen larger. I wanted a way to click an image and see it bigger — without installing a library, without switching to MDX, and without changing any markdown files.
