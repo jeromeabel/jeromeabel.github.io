@@ -1,18 +1,18 @@
 ---
 title: Adding API Endpoints to an Astro Project
-date: 2024-02-24
+date: 2026-05-11
 description: "Astro's file-based routing extends naturally to API endpoints — GET, POST, dynamic params, and three patterns for handling forms."
 abstract: "A walkthrough of building server-side routes in Astro: GET endpoints, dynamic [id] routes, two manual POST patterns (redirect and JSON), and Astro Actions — the modern default."
+img: ./api-endpoints-with-astro.jpg
+draft: false
 ---
 
 Astro's file-based routing doesn't stop at `.astro` pages. Drop a `.ts` file in the `pages/` directory, export an HTTP method handler, and you have an API endpoint. No Express, no separate server — just the same routing convention you already know.
 
-This post walks through a small *Avengers Retirement Home*: heroes can browse the current residents, look themselves up by id, and apply to join via three different POST patterns. I built it as a runnable companion so each section in the post maps to a real page you can try.
+This post walks through a small companion project *Heroes Retirement Home*: browse the current residents, look them up by id, and apply to join via three different POST patterns. Each section maps to a real page you can try.
 
-- Live demo: [https://astro-playground-jeromeabel.netlify.app/](https://astro-playground-jeromeabel.netlify.app/)
+- Live demo: [https://astro-jeromeabel.netlify.app/](https://astro-jeromeabel.netlify.app/residents)
 - Code: [astro-playground](https://github.com/jeromeabel/astro-playground)
-
-The first request to the demo may take a few seconds — Netlify cold-starts the function before serving.
 
 ---
 
@@ -36,7 +36,36 @@ export default defineConfig({
 });
 ```
 
-Either way, a server adapter is required for production. The playground uses [`@astrojs/netlify`](https://docs.astro.build/en/guides/integrations-guide/netlify/) and is deployed at [https://astro-playground-jeromeabel.netlify.app/](https://astro-playground-jeromeabel.netlify.app/) — every code block below corresponds to a route you can hit there. Other [adapters](https://docs.astro.build/en/guides/on-demand-rendering/#server-adapters) (Node, Vercel, Cloudflare) work the same way.
+Either way, a server adapter is required for production. The playground uses [`@astrojs/netlify`](https://docs.astro.build/en/guides/integrations-guide/netlify/), other [adapters](https://docs.astro.build/en/guides/on-demand-rendering/#server-adapters) (Node, Vercel, Cloudflare) work the same way.
+
+---
+
+## The data
+
+The project tracks two lists. `heroes` is the full roster — every retired superhero in the system. `residents` is the subset who've actually moved into the home.
+
+```ts
+// src/data/heroes.ts
+export type Hero = {
+  id: number;
+  name: string;
+  alias: string;
+  email: string;
+  retiredYear: number;
+};
+
+export const heroes: Hero[] = [
+  { id: 1, name: "Bob Dude",     alias: "Super Yellow",     email: "bob@super.com",   retiredYear: 2021 },
+  { id: 2, name: "Jane Doe",     alias: "Wonder Great",     email: "jane@super.com",  retiredYear: 2019 },
+  // ...
+];
+
+export const residents: Hero[] = [heroes[0], heroes[1]];
+```
+
+Bob, and Jane have already settled in. The rest can still apply. Every hero has a `@super.com` email — that's how the POST endpoints know an applicant is on the roster.
+
+The data lives in a plain array — there's no database. On Netlify, each serverless function invocation gets its own module scope, so `residents` resets on every cold start. This is intentional: the playground is about routing patterns, not persistence. In production, swap the array for a database call inside the handler — the surrounding scaffolding stays the same.
 
 ---
 
@@ -48,15 +77,16 @@ The file structure mirrors the URL. A file at `pages/api/residents/index.ts` bec
 src/pages/
 ├── api/
 │   └── residents/
-│       ├── index.ts        → GET /api/residents/
-│       ├── [id].ts         → GET /api/residents/:id
+│       ├── index.ts         → GET /api/residents/
+│       ├── [id].ts          → GET /api/residents/:id
 │       ├── join-redirect.ts → POST /api/residents/join-redirect
-│       └── join-json.ts    → POST /api/residents/join-json
+│       └── join-json.ts     → POST /api/residents/join-json
 ├── residents/
-│   ├── index.astro         → /residents (hub)
-│   ├── list.astro          → /residents/list (GET demo)
-│   └── join-*.astro        → form pages, one per POST pattern
-└── index.astro             → /
+│   ├── index.astro          → /residents (hub)
+│   ├── list.astro           → /residents/list (GET demo)
+│   ├── [id].astro           → /residents/:id (detail page)
+│   └── join-*.astro         → form pages, one per POST pattern
+└── index.astro              → /
 ```
 
 The endpoint exports a named function matching the HTTP method — `GET`, `POST`, `PUT`, `DELETE`:
@@ -75,25 +105,37 @@ export const GET: APIRoute = () => {
 };
 ```
 
-`residents` is a plain in-memory array exported from `src/data/heroes.ts`. The endpoint serializes whatever is currently there. (More on the in-memory bit at the end.)
-
-Calling it from a page is a standard `fetch` from inside the frontmatter:
+Calling it from a page — a `fetch` inside the frontmatter, with `import.meta.glob` to resolve hero portraits dynamically:
 
 ```astro
 ---
 // src/pages/residents/list.astro
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
 import type { Hero } from "../../data/heroes";
+
+export const prerender = false;
 
 const response = await fetch(`${Astro.url.origin}/api/residents/`);
 const residents: Hero[] = await response.json();
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/heroes/*.jpg"
+);
 ---
 
-<ul>
-  {residents.map((h) => (
-    <li><b>{h.alias}</b>: {h.email}</li>
-  ))}
-</ul>
+{residents.map((h) => (
+  <a href={`/residents/${h.id}`}>
+    <Image
+      src={images[`/src/assets/heroes/${h.id}.jpg`]()}
+      alt={h.alias}
+    />
+    <p>{h.alias}</p>
+  </a>
+))}
 ```
+
+`import.meta.glob` builds a map of all matching file paths to lazy importers at bundle time. At render time, `images['/src/assets/heroes/1.jpg']()` resolves to the `ImageMetadata` that `<Image>` needs — dimensions, format, and optimized source. This is the [documented pattern](https://docs.astro.build/en/recipes/dynamically-importing-images/) for dynamic image imports in Astro.
 
 Astro also lets you skip the HTTP round-trip by importing the handler directly:
 
@@ -103,7 +145,40 @@ const response = await GET(Astro);
 const residents: Hero[] = await response.json();
 ```
 
-Both work. The direct import is faster (no network hop), but the `fetch` version is closer to how a client-side script would call the same endpoint — useful if you plan to share the call site between server and client.
+The difference matters on Netlify:
+
+```
+fetch() — two serverless invocations:
+
+  Browser ──▸ Netlify ──▸ list.astro (fn A)
+                              │
+                              ├── fetch("/api/residents/")
+                              │       │  HTTP request
+                              │       ▼
+                              │   index.ts (fn B) ← may cold-start
+                              │       │
+                              │       ▼
+                              │   JSON response
+                              │
+                              └── renders HTML ──▸ Browser
+```
+
+```
+import { GET } — single invocation, no network:
+
+  Browser ──▸ Netlify ──▸ list.astro (fn A)
+                              │
+                              ├── GET(Astro) ← function call, same process
+                              │       │
+                              │       ▼
+                              │   JSON (in-memory, no HTTP)
+                              │
+                              └── renders HTML ──▸ Browser
+```
+
+With `fetch()`, the function running `list.astro` makes an HTTP request back into Netlify's infrastructure — potentially triggering a second cold start on `index.ts`. With `import { GET }`, the handler runs as a regular function call inside the same process. No network, no second cold start.
+
+Both work. The `fetch` version is closer to how a client-side script would call the same endpoint — useful if you plan to share the call site between server and client. The direct import is faster but couples the page to the handler's module.
 
 ---
 
@@ -132,9 +207,38 @@ export const GET: APIRoute = ({ params }: APIContext) => {
 };
 ```
 
-`params` is an object containing the matched segments — here, `params.id` maps to whatever replaces `[id]` in the URL. Navigating to `/api/residents/2` returns Tony Stark; `/api/residents/99` returns a 404 JSON body.
+`params` is an object containing the matched segments — here, `params.id` maps to whatever replaces `[id]` in the URL. Navigating to `/api/residents/1` returns Bob Dude; `/api/residents/99` returns a 404 JSON body.
 
-This route reads from `heroes` (the full roster of 10), not `residents` (the join state), so you can look up any hero whether or not they've joined.
+This route reads from `heroes` (the full roster), not `residents` (the join list), so you can look up any hero whether or not they've moved in.
+
+The detail page calls the endpoint and renders the hero's portrait alongside their info:
+
+```astro
+---
+// src/pages/residents/[id].astro
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+import type { Hero } from "../../data/heroes";
+
+export const prerender = false;
+
+const { id } = Astro.params;
+const res = await fetch(`${Astro.url.origin}/api/residents/${id}`);
+if (!res.ok) return Astro.redirect("/404");
+const hero: Hero = await res.json();
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/heroes/*.jpg"
+);
+---
+
+<Image
+  src={images[`/src/assets/heroes/${hero.id}.jpg`]()}
+  alt={hero.alias}
+/>
+<h1>{hero.alias}</h1>
+<p>{hero.name} · {hero.email} · Retired {hero.retiredYear}</p>
+```
 
 ---
 
@@ -182,6 +286,30 @@ The form is plain HTML — no JavaScript needed:
 </form>
 ```
 
+The browser handles everything. `<form method="POST">` triggers a native form submission: the browser serializes the fields, sends the POST to the `action` URL, and follows the server's redirect response. The entire round-trip is browser + server — no client-side JavaScript involved:
+
+```
+Form submission — the browser does the work:
+
+  Browser                               Netlify (serverless fn)
+  ┌─────────────────────┐              ┌──────────────────────────┐
+  │ <form method="POST"> │  POST req   │  join-redirect.ts        │
+  │   email: chuck@s...  │ ──────────▸ │    parse formData        │
+  │   [Submit]           │             │    find hero             │
+  │                      │  307 + URL  │    redirect("/welcome")  │
+  │                      │ ◂────────── │                          │
+  └─────────────────────┘              └──────────────────────────┘
+           │
+           │  GET /welcome?name=Chuck
+           ▼
+  ┌─────────────────────┐              ┌──────────────────────────┐
+  │ Welcome, Chuck!      │ ◂────────── │  welcome.astro           │
+  │                      │    HTML     │    reads query params     │
+  └─────────────────────┘              └──────────────────────────┘
+```
+
+This is the traditional server-side pattern. It works without JavaScript on the client, which matters for progressive enhancement and for users with JS disabled or failing.
+
 The destination pages read the query params:
 
 ```astro
@@ -191,11 +319,9 @@ export const prerender = false;
 const reason = Astro.url.searchParams.get("reason") ?? "Unknown reason.";
 ---
 
-<h1>Application rejected</h1>
+<h1>⚠ Application rejected</h1>
 <p>{reason}</p>
 ```
-
-This is the traditional server-side pattern. It works without JavaScript on the client, which matters for progressive enhancement and for users with JS disabled or failing.
 
 ---
 
@@ -238,7 +364,7 @@ function json(body: JoinResponse, status = 200): Response {
 }
 ```
 
-Note that *both* the rejection and the "already settled in" branches return `200`. They aren't transport-level errors — they're business outcomes the client renders verbatim. The `ok` flag tells the UI which color to use.
+Note that *both* the rejection and the "already settled in" branches return `200`. They aren't transport-level errors — they're business outcomes the client renders verbatim. The `ok` flag tells the UI which style to use.
 
 The page wires up a submit handler that intercepts the form:
 
@@ -261,7 +387,7 @@ The page wires up a submit handler that intercepts the form:
       body: new FormData(form),
     });
     const data = (await response.json()) as { ok: boolean; msg: string };
-    message.textContent = data.msg;
+    message.textContent = data.ok ? data.msg : `⚠ ${data.msg}`;
   });
 </script>
 ```
@@ -327,7 +453,7 @@ const result = Astro.getActionResult(actions.join);
   <p class="success">{result.data.message}</p>
 )}
 {result?.error && (
-  <p class="error">{result.error.message}</p>
+  <p class="error">⚠ {result.error.message}</p>
 )}
 ```
 
@@ -363,8 +489,10 @@ If you're starting fresh, use Actions. If you need to work without JavaScript an
 - **File-based API routing is Astro's underrated feature.** The same convention that maps `.astro` files to pages maps `.ts` files to endpoints. No router configuration, no middleware setup.
 - **Three POST patterns cover most use cases.** Redirect for progressive enhancement, JSON for inline feedback, Actions for new code. Pick by audience and constraints, not by personal preference.
 - **Dynamic routes use the same bracket syntax as pages.** `[id].ts` works identically to `[id].astro` — the `params` object is the same.
-- **Direct handler imports skip the network.** Calling `GET(Astro)` instead of `fetch()` avoids an HTTP round-trip when the API and page colocate. Useful for the page that *also* renders the data.
+- **Direct handler imports skip the network.** Calling `GET(Astro)` instead of `fetch()` avoids an HTTP round-trip and a potential cold start when the API and page colocate.
 - **`output: "server"` is one option, not the only one.** Per-route `export const prerender = false` keeps the rest of the site static.
 - **Astro Actions are the modern default.** Less boilerplate, type-safe, zero-JS by default. The two manual patterns are still useful — you should know they exist — but new forms should reach for Actions first.
+- **`import.meta.glob` is the key to dynamic images.** It builds a map at bundle time, letting server-rendered pages resolve the right image from `src/assets/` without hardcoding imports.
+- **Dev and production behave differently for in-memory state.** In `pnpm dev`, a single long-running Node.js process handles all requests, so a `residents.push()` survives browser reloads and hard reloads — the module instance stays alive. In production on Netlify, cold starts re-initialize the module and reset the array. It feels like a database in dev; it's ephemeral in prod. The fix is a real database inside the handler — the routing scaffolding stays the same.
 
-The playground keeps everything in memory: the `residents` array resets on every cold start, so two visits to the live demo can see different state. In production you'd swap the array for a database call inside the handler — the surrounding scaffolding stays exactly the same. Try it: [https://astro-playground-jeromeabel.netlify.app/](https://astro-playground-jeromeabel.netlify.app/).
+Try it: [https://astro-jeromeabel.netlify.app/residents](https://astro-jeromeabel.netlify.app/residents).
