@@ -1,5 +1,6 @@
 // @ts-check
 import netlify from "@astrojs/netlify";
+import { unified } from "@astrojs/markdown-remark";
 import partytown from "@astrojs/partytown";
 import icon from "astro-icon";
 import { defineConfig } from "astro/config";
@@ -44,15 +45,16 @@ export default defineConfig({
       type: 'shiki',
       excludeLangs: ['mermaid', 'math'],
     },
-    remarkPlugins: [remarkReadingTime],
-    rehypePlugins: [[
-      rehypeExternalLinks,
+    processor: unified({
+      remarkPlugins: [remarkReadingTime],
+      rehypePlugins: [[
+        rehypeExternalLinks,
         {
           target: '_blank',
           rel: ['nofollow, noopener, noreferrer'],
         },
-      ]
-    ],
+      ]],
+    }),
   },
 });
 

@@ -6,4 +6,5 @@ date: "2026-04-16"
 posts:
   - web-performance/01-tactics-cheatsheet
   - web-performance/02-data-driven
+  - web-performance/03-benchmark-tables
 ---
