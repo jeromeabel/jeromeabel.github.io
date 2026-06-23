@@ -104,9 +104,27 @@ The props become important once you want the same source image cropped different
 
 One source file, two cropped outputs, zero extra scripts. In Astro v6, responsive styles are emitted as a hashed class plus `data-astro-fit` / `data-astro-pos` attributes (replacing v5's inline `style="--fit; --pos"`). That distinction matters for the LQIP section below: `pictureAttributes={{ style: "opacity: 0" }}` sets an inline style on the outer `<picture>` element, and because v6's responsive styles live in a class — not an inline style — there's no attribute collision.
 
+## Five strategies, one benchmark
+
+The companion playground runs all five strategies side by side over the same 20-image dataset. The benchmark — `pnpm benchmark:images http://localhost:8888` — runs Lighthouse 13 three times per strategy and takes the median cold-cache, against `netlify serve` so the Netlify CDN's `/.netlify/images` endpoint resolves correctly:
+
+| Strategy      | LCP (ms) | CLS   | Transfer (KB) |
+|---|---|---|---|
+| naive         | 4676     | 0.154 | 9272          |
+| manual        | 628      | 0.000 | 702           |
+| auto          | 608      | 0.000 | 117           |
+| pixel-perfect | 602      | 0.000 | 120           |
+| lqip          | 588      | 0.000 | 137           |
+
+Naive is not a fair competitor — raw `<img src>`, no `srcset`, no `width`/`height`. Its CLS of 0.154 (the "needs improvement" threshold is 0.1) comes directly from missing dimensions: the layout shifts every time an image arrives. Transfer is 9.3 MB per page.
+
+Switching to `auto` — nothing beyond `<Picture>` — cuts LCP from 4676 ms to 608 ms and transfer from 9272 KB to 117 KB. The framework wins before you write a line of extra code. Manual is worse than auto on bytes because it serves hand-encoded JPEGs instead of routing through the CDN and negotiating AVIF/WebP per request.
+
+`lqip` edges `auto` on LCP by 20 ms — within measurement noise — and spends 20 KB more for the placeholder layer. The Lighthouse number doesn't capture why lqip is worth it: the user sees a blurred version of the image immediately instead of a blank rectangle while the real file streams in. That's the next section.
+
 ## The one piece Astro doesn't give you
 
-Everything above is bytes and layout. What Astro won't do is *perceived* performance: showing something instantly so the page doesn't flash empty rectangles while the real images stream in. That's the LQIP — low-quality image placeholder — and it's the one custom component still worth writing.
+Everything above is bytes and layout. What Astro won't do is *perceived* performance: the user experience between the first paint and the moment the real image is ready. On a slow connection, the gap between "page appeared" and "images loaded" can run several seconds. Without a placeholder, every image slot is an empty white box — the page looks broken. That's the LQIP — low-quality image placeholder — and it's the one custom component still worth writing.
 
 `getImage()` is the server-side escape hatch. I use it to render a tiny blurred placeholder, sized to the real image's aspect ratio so it doesn't distort:
 
@@ -194,6 +212,7 @@ fetchpriority={type === "cover" ? "high" : "auto"}
 - The framework deleted the bash toil — formats, `srcset`, resizing. The `sizes` contract is the one part it can't generate, because only you know your layout.
 - Auto `width`/`height` for CLS prevention is the silent win. Smaller files are nice; not shifting the layout is what users actually feel.
 - LQIP and fade are perceived performance, not bytes. They won't move a Lighthouse score and that's fine — they're a different axis.
+- Numbers in one place: `auto` vs `naive` is 608 ms vs 4676 ms LCP, 117 KB vs 9272 KB — just `<Picture>`, no extra code. `lqip` is 20 ms faster than `auto` on Lighthouse; the real win is perceived load, not the metric.
 - Measure cold, not warm. Lighthouse runs with an empty cache, so its numbers are first-visit; a manual reload is cached and always looks faster. Compare strategies cold (a 3-run median), and treat the warm reload as the *felt* experience, not the benchmark.
 - Never animate a cached image. Guard on `img.complete` (or `complete && naturalHeight !== 0`), or back/forward navigation strobes.
 - The output is plain static files. `astro:assets` works on GitHub Pages with no image service at all — Netlify's CDN just moves transform cost off build time. Same `/_astro/` files, different bill.
