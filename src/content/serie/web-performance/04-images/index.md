@@ -110,17 +110,17 @@ The companion playground runs all five strategies side by side over the same 20-
 
 | Strategy      | LCP (ms) | CLS   | Transfer (KB) |
 |---|---|---|---|
-| naive         | 4676     | 0.154 | 9272          |
-| manual        | 628      | 0.000 | 702           |
-| auto          | 608      | 0.000 | 117           |
-| pixel-perfect | 602      | 0.000 | 120           |
-| lqip          | 588      | 0.000 | 137           |
+| naive         | 5131     | 0.201 | 9272          |
+| manual        | 1020     | 0.000 | 702           |
+| auto          | 1892     | 0.000 | 474           |
+| pixel-perfect | 1959     | 0.000 | 477           |
+| lqip          | 685      | 0.000 | 490           |
 
-Naive is not a fair competitor — raw `<img src>`, no `srcset`, no `width`/`height`. Its CLS of 0.154 (the "needs improvement" threshold is 0.1) comes directly from missing dimensions: the layout shifts every time an image arrives. Transfer is 9.3 MB per page.
+Naive is not a fair competitor — raw `<img src>`, no `srcset`, no `width`/`height`. Its CLS of 0.201 (the "needs improvement" threshold is 0.1) comes directly from missing dimensions: the layout shifts every time an image arrives. Transfer is 9.3 MB per page.
 
-Switching to `auto` — nothing beyond `<Picture>` — cuts LCP from 4676 ms to 608 ms and transfer from 9272 KB to 117 KB. The framework wins before you write a line of extra code. Manual is worse than auto on bytes because it serves hand-encoded JPEGs instead of routing through the CDN and negotiating AVIF/WebP per request.
+Switching to `auto` — nothing beyond `<Picture>` — cuts LCP from 5131 ms to 1892 ms and transfer from 9272 KB to 474 KB. The framework wins before you write a line of extra code. Manual is worse than auto on bytes (702 KB vs 474) because it serves hand-encoded JPEGs instead of routing through the CDN and negotiating AVIF/WebP per request.
 
-`lqip` edges `auto` on LCP by 20 ms — within measurement noise — and spends 20 KB more for the placeholder layer. The Lighthouse number doesn't capture why lqip is worth it: the user sees a blurred version of the image immediately instead of a blank rectangle while the real file streams in. That's the next section.
+`lqip` is the fastest of all — 685 ms, beating `auto` by ~1200 ms — for 16 KB more. The placeholder paints a large blurred image on the first frame, so LCP fires on *that* instead of waiting for the full file to stream in. This is the one case where the Lighthouse number and the perceived win point the same way: the user sees a blurred image immediately instead of a blank rectangle. That's the next section.
 
 ## The one piece Astro doesn't give you
 
@@ -194,7 +194,7 @@ For a photograph, you don't need pixel accuracy. The browser picks the nearest `
 
 Le concept de la preuve is the opposite case. The images are comic pages — line art and lettering. If the served file is even slightly wider or narrower than the slot, the browser resamples it, and resampling text is where it shows: edges go soft, thin strokes shimmer, the lettering reads as faintly out of focus. There's no "close enough" for a glyph the way there is for foliage. So that site computes the exact display widths from its layout and serves a file that lands on the slot with no scaling at all. The extra math buys sharp text, which is the entire point of the page.
 
-That's the manual-vs-automatic line, and it isn't about how much you trust the framework — it's about what's *in* the picture. Photos, screenshots, hero banners: let `layout` do it. Text, line art, diagrams, anything with hard edges a reader will scrutinize: compute the widths so the browser never has to resample. The framework's default is tuned for the common case; the uncommon case is exactly the one worth the manual work. The companion playground makes this visible: its `art` images bake hard-edged text onto free photos, so the `pixel-perfect` route serves a file that lands on the slot with crisp lettering while `auto` lets the browser resample and the text softens.
+That's the manual-vs-automatic line, and it isn't about how much you trust the framework — it's about what's *in* the picture. Photos, screenshots, hero banners: let `layout` do it. Text, line art, diagrams, anything with hard edges a reader will scrutinize: compute the widths so the browser never has to resample. The framework's default is tuned for the common case; the uncommon case is exactly the one worth the manual work. The companion playground makes this concrete. One set of images bakes a fine vertical grating at source resolution — 4px black bars at 2400px, which collapse to roughly 1px at 640px. Serve the file at exactly the display slot width and the bars reproduce cleanly. Serve it at an off-exact width and the browser resamples; the periodic grid shifts out of phase, and you get *moiré* — alternating light and dark interference bands that signal a sampling mismatch ([Wikipedia: Moiré pattern](https://en.wikipedia.org/wiki/Moir%C3%A9_pattern)). The `pixel-perfect` strategy eliminates it by serving a file that lands on the slot with no scaling at all; `auto` doesn't, and the interference bands are visible. The effect is extreme on a ruled grating, but the same physics governs any hard-edged periodic content: thin letterstrokes, ruled lines, hatching, pixel art. The grating makes the problem impossible to miss.
 
 ## Eager hero vs lazy rest
 
@@ -212,12 +212,13 @@ fetchpriority={type === "cover" ? "high" : "auto"}
 - The framework deleted the bash toil — formats, `srcset`, resizing. The `sizes` contract is the one part it can't generate, because only you know your layout.
 - Auto `width`/`height` for CLS prevention is the silent win. Smaller files are nice; not shifting the layout is what users actually feel.
 - LQIP and fade are perceived performance, not bytes. They won't move a Lighthouse score and that's fine — they're a different axis.
-- Numbers in one place: `auto` vs `naive` is 608 ms vs 4676 ms LCP, 117 KB vs 9272 KB — just `<Picture>`, no extra code. `lqip` is 20 ms faster than `auto` on Lighthouse; the real win is perceived load, not the metric.
+- Numbers in one place: `auto` vs `naive` is 1892 ms vs 5131 ms LCP, 474 KB vs 9272 KB — just `<Picture>`, no extra code. `lqip` is the fastest of all (685 ms) because its placeholder paints on the first frame; here the metric and the perceived win point the same way.
 - Measure cold, not warm. Lighthouse runs with an empty cache, so its numbers are first-visit; a manual reload is cached and always looks faster. Compare strategies cold (a 3-run median), and treat the warm reload as the *felt* experience, not the benchmark.
 - Never animate a cached image. Guard on `img.complete` (or `complete && naturalHeight !== 0`), or back/forward navigation strobes.
 - The output is plain static files. `astro:assets` works on GitHub Pages with no image service at all — Netlify's CDN just moves transform cost off build time. Same `/_astro/` files, different bill.
 - You can outsource images to Cloudinary or Imgix, but Sharp-or-Netlify keeps the assets in the repo and off a subscription. For a personal site, owning the data wins.
 - Accurate `sizes` comes from your layout tokens, not hand-typed breakpoints — derive it from the same values that drive the grid and it stops drifting.
 - Manual vs automatic is decided by image content. Photos tolerate `srcset` stepping — auto `layout` is fine. Text and line art blur when resampled, so compute exact widths and serve a file that lands on the slot with zero scaling.
+- Moiré is a visible signal, not decoration. A periodic grating resampled at a mismatched frequency erupts into interference bands — it makes the resampling problem impossible to miss and directly motivates the pixel-perfect approach.
 - LQIP blur is a tradeoff: bake it into the file (zero runtime, fixed) or blur in CSS (live, tweakable). On a 32px placeholder, CSS is free — so I tweak instead of re-running scripts.
 - Tailwind 4's cascade layer loses to Astro's responsive styles by default. Know which one wins before you debug the wrong file.
