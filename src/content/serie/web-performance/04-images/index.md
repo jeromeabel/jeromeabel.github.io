@@ -104,23 +104,93 @@ The props become important once you want the same source image cropped different
 
 One source file, two cropped outputs, zero extra scripts. In Astro v6, responsive styles are emitted as a hashed class plus `data-astro-fit` / `data-astro-pos` attributes (replacing v5's inline `style="--fit; --pos"`). That distinction matters for the LQIP section below: `pictureAttributes={{ style: "opacity: 0" }}` sets an inline style on the outer `<picture>` element, and because v6's responsive styles live in a class — not an inline style — there's no attribute collision.
 
-## Five strategies, one benchmark
+## Seven strategies, one benchmark
 
-The companion playground runs all five strategies side by side over the same 20-image dataset. The benchmark — `pnpm benchmark:images http://localhost:8888` — runs Lighthouse 13 three times per strategy and takes the median cold-cache, against `netlify serve` so the Netlify CDN's `/.netlify/images` endpoint resolves correctly:
+The [companion playground](https://astro-jeromeabel.netlify.app/optimg) runs all seven strategies side by side over the same 21-image dataset. The benchmark — `pnpm benchmark:optimg http://localhost:8888` — runs Lighthouse 13 three times per strategy and takes the median cold-cache, against `netlify serve` so the Netlify CDN's `/.netlify/images` endpoint resolves correctly:
 
 | Strategy      | LCP (ms) | CLS   | Transfer (KB) |
 |---|---|---|---|
-| naive         | 5131     | 0.201 | 9272          |
-| manual        | 1020     | 0.000 | 702           |
-| auto          | 1892     | 0.000 | 474           |
-| pixel-perfect | 1959     | 0.000 | 477           |
-| lqip          | 685      | 0.000 | 490           |
+| naive         | 4422     | 0.011 | 9179          |
+| manual        | 965      | 0.000 | 939           |
+| auto          | 1101     | 0.000 | 511           |
+| pixel-perfect | 1037     | 0.000 | 230           |
+| lqip          | 1251     | 0.000 | 528           |
+| cropped       | 1569     | 0.000 | 546           |
+| final         | 1057     | 0.000 | 247           |
 
-Naive is not a fair competitor — raw `<img src>`, no `srcset`, no `width`/`height`. Its CLS of 0.201 (the "needs improvement" threshold is 0.1) comes directly from missing dimensions: the layout shifts every time an image arrives. Transfer is 9.3 MB per page.
+Each row is a live route — open them and compare in your own browser:
+[naive](https://astro-jeromeabel.netlify.app/optimg/naive) ·
+[manual](https://astro-jeromeabel.netlify.app/optimg/manual) ·
+[auto](https://astro-jeromeabel.netlify.app/optimg/auto) ·
+[pixel-perfect](https://astro-jeromeabel.netlify.app/optimg/pixel-perfect) ·
+[lqip](https://astro-jeromeabel.netlify.app/optimg/lqip) ·
+[cropped](https://astro-jeromeabel.netlify.app/optimg/cropped) ·
+[final](https://astro-jeromeabel.netlify.app/optimg/final).
 
-Switching to `auto` — nothing beyond `<Picture>` — cuts LCP from 5131 ms to 1892 ms and transfer from 9272 KB to 474 KB. The framework wins before you write a line of extra code. Manual is worse than auto on bytes (702 KB vs 474) because it serves hand-encoded JPEGs instead of routing through the CDN and negotiating AVIF/WebP per request.
+[![The /optimg hub showing this benchmark table rendered in the browser](./optimg-benchmark.png)](https://astro-jeromeabel.netlify.app/optimg)
+*Placeholder — pending a real screenshot of [the /optimg hub](https://astro-jeromeabel.netlify.app/optimg). **Capture:** the full benchmark table + strategy cards; no specific image needed.*
 
-`lqip` is the fastest of all — 685 ms, beating `auto` by ~1200 ms — for 16 KB more. The placeholder paints a large blurred image on the first frame, so LCP fires on *that* instead of waiting for the full file to stream in. This is the one case where the Lighthouse number and the perceived win point the same way: the user sees a blurred image immediately instead of a blank rectangle. That's the next section.
+Naive is still the measurement floor — raw `<img src>`, no `srcset`, no `width`/`height`, 9179 KB per page. Its CLS is now 0.011 despite missing dimensions because the grid container provides implicit space around each card. A previous run of this benchmark measured CLS at 0.201; the grid layout has since grown structure that absorbs the shift. The lesson stands: reserve space explicitly rather than relying on layout accidents.
+
+Switching to `auto` — nothing beyond `<Picture>` — cuts LCP from 4422 ms to 1101 ms and transfer from 9179 KB to 511 KB before writing a line of extra code. Manual beats auto on LCP this run (965 ms vs 1101 ms) but loses on bytes (939 KB vs 511 KB): hand-encoded JPEGs at fixed widths instead of CDN-negotiated AVIF/WebP per request.
+
+`pixel-perfect` is the byte story: 230 KB and 1037 ms LCP. Token-derived widths mean Astro generates files that match the slot exactly — the CDN never serves a wider file than the device needs.
+
+`lqip` — LQIP placeholder with auto widths — lands at 1251 ms, *slower* than `pixel-perfect` (1037 ms). The placeholder paints immediately so perceived performance is better than the number, but Lighthouse counts LCP when the real image finishes loading. LQIP without accurate sizes is not automatically the fastest strategy on the metric.
+
+`final` (1057 ms, 247 KB) shows what happens when both pieces are active: pixel-perfect widths deliver a smaller file, and the LQIP placeholder fills the slot immediately. It beats `lqip` alone by 194 ms because the real image is 528 KB vs 247 KB — the placeholder buys perceived time, but the download time drives the Lighthouse number. `cropped` (1569 ms, 546 KB) adds per-image aspect ratios but lands 468 ms behind `auto` (1101 ms): each cover request adds a CDN crop transform that the other strategies skip.
+
+## One source, two crops
+
+The `cropped` strategy is the smallest possible addition to `auto`: add `fit="cover"` and an explicit `height`, and Astro generates a cropped variant at build time.
+
+```astro
+{/* grid thumbnail: 4:3 */}
+<Picture src={image} layout="constrained" fit="cover"
+  width={640} height={480} sizes={autoSizes} alt={alt} />
+
+{/* detail cover: 16:9 */}
+<Picture src={image} layout="constrained" fit="cover"
+  width={1280} height={720} sizes={autoSizes} alt={alt} />
+```
+
+Both read the same `image` import. Astro produces two output files — a 640×480 crop and a 1280×720 crop — during `pnpm build`. No server, no runtime transform; the CDN serves static files. What changes between the grid and detail view is the frame the user sees, not when the transform runs.
+
+[![/optimg/cropped — grid thumbnail (4:3) and detail cover (16:9) side by side, same source image](./optimg-cropped.png)](https://astro-jeromeabel.netlify.app/optimg/cropped)
+*Placeholder — pending a real screenshot. **Capture:** a `d`-overlay landscape (big baked title) so the reframing is obvious — e.g. `photo-04` (desert dunes). Put the grid thumbnail (4:3, [`/optimg/cropped`](https://astro-jeromeabel.netlify.app/optimg/cropped)) next to its detail cover (16:9, [`/optimg/cropped/photo-04`](https://astro-jeromeabel.netlify.app/optimg/cropped/photo-04)); same source, two crops.*
+
+In the benchmark `cropped` (1569 ms, 546 KB) runs 468 ms behind `auto` (1101 ms): the CDN crop transform adds latency on the detail cover request that straight `auto` skips. The file size is similar — cropping changes the frame, not the bytes. What `cropped` teaches is that one source can serve multiple contexts with different aspect ratios without a script, a server route, or a CMS crop step. For gallery items where `crop: true` is set, the `final` strategy extends this — 16:9 covers and 4:3 thumbnails combined with pixel-perfect widths and the LQIP placeholder.
+
+## The final stack
+
+`final` combines everything: pixel-perfect token widths under a LQIP placeholder, with optional per-image crop. It beats `lqip` alone by 194 ms (1057 ms vs 1251 ms) because smaller files from accurate sizing more than offset the placeholder overhead.
+
+The component adds pixel-perfect props to the `lqip` structure from the next section:
+
+```astro
+<div class="reveal-img relative overflow-hidden">
+  <!-- 32px blurred placeholder, aspect-matched to the real image -->
+  <img class="absolute inset-0 -z-10 h-full w-full object-cover blur-2xl"
+    aria-hidden="true" src={placeholder} alt="" />
+
+  <!-- pixel-perfect <Picture> with optional per-item crop -->
+  <Picture
+    src={image} layout="constrained"
+    width={ppWidth} widths={ppWidths} sizes={ppSizes}
+    height={finalHeight}
+    fit={finalCrop ? "cover" : undefined}
+    position={finalCrop ? "top" : undefined}
+    pictureAttributes={{ style: "opacity:0" }}
+    alt={alt} />
+</div>
+```
+
+`ppWidth`, `ppWidths`, and `ppSizes` come from the layout tokens. `finalHeight` is only set when `item.crop: true` in `gallery.json`, adjusting the aspect ratio for both the placeholder (via `getImage`) and the real image (via `fit="cover"`). The reveal script is the same as for `lqip` — `img.complete` fires a snap on cached images and a 1.2 s fade on a network load.
+
+[![/optimg/final mid-load with DevTools throttle (Slow 3G, disable cache) — LQIP placeholder visible before the real image streams in](./optimg-final-loading.png)](https://astro-jeromeabel.netlify.app/optimg/final)
+*Placeholder — pending a real screenshot. **Capture:** [`/optimg/final`](https://astro-jeromeabel.netlify.app/optimg/final), DevTools throttle Slow 3G + disable cache, snap mid-load. Feature a `d`-overlay title photo (e.g. `photo-01`) so the blurred LQIP placeholder → sharp title transition is legible while the real file streams.*
+
+The 20 ms gap between `pixel-perfect` (1037 ms) and `final` (1057 ms) is the LQIP overhead: a 32px WebP placeholder decoded and painted before the real file streams. On a fast connection the placeholder is gone before it registers; on a slow one it fills the slot immediately instead of a blank rectangle. The Lighthouse number barely moves; the user experience does.
 
 ## The one piece Astro doesn't give you
 
@@ -194,7 +264,28 @@ For a photograph, you don't need pixel accuracy. The browser picks the nearest `
 
 Le concept de la preuve is the opposite case. The images are comic pages — line art and lettering. If the served file is even slightly wider or narrower than the slot, the browser resamples it, and resampling text is where it shows: edges go soft, thin strokes shimmer, the lettering reads as faintly out of focus. There's no "close enough" for a glyph the way there is for foliage. So that site computes the exact display widths from its layout and serves a file that lands on the slot with no scaling at all. The extra math buys sharp text, which is the entire point of the page.
 
-That's the manual-vs-automatic line, and it isn't about how much you trust the framework — it's about what's *in* the picture. Photos, screenshots, hero banners: let `layout` do it. Text, line art, diagrams, anything with hard edges a reader will scrutinize: compute the widths so the browser never has to resample. The framework's default is tuned for the common case; the uncommon case is exactly the one worth the manual work. The companion playground makes this concrete. One set of images bakes a fine vertical grating at source resolution — 4px black bars at 2400px, which collapse to roughly 1px at 640px. Serve the file at exactly the display slot width and the bars reproduce cleanly. Serve it at an off-exact width and the browser resamples; the periodic grid shifts out of phase, and you get *moiré* — alternating light and dark interference bands that signal a sampling mismatch ([Wikipedia: Moiré pattern](https://en.wikipedia.org/wiki/Moir%C3%A9_pattern)). The `pixel-perfect` strategy eliminates it by serving a file that lands on the slot with no scaling at all; `auto` doesn't, and the interference bands are visible. The effect is extreme on a ruled grating, but the same physics governs any hard-edged periodic content: thin letterstrokes, ruled lines, hatching, pixel art. The grating makes the problem impossible to miss.
+That's the manual-vs-automatic line, and it isn't about how much you trust the framework — it's about what's *in* the picture. Photos, screenshots, hero banners: let `layout` do it. Text, line art, diagrams, anything with hard edges a reader will scrutinize: compute the widths so the browser never has to resample. The framework's default is tuned for the common case; the uncommon case is exactly the one worth the manual work. The companion playground makes this concrete. A grating only *reads* — bars individually visible — when each bar is a few pixels wide at the displayed slot, and a 20-image gallery shows that slot at anything from a ~316px grid thumbnail to a 976px cover. So a single bar width can't demonstrate the effect everywhere: bake bars fine enough for the cover and they collapse to a sub-pixel mush in the grid; bake them coarse enough for the grid and they're crude on the cover. The fix is two stacked gratings baked at source resolution: a **coarse** band (60px period) tuned to read at the grid thumbnail, and a **fine** band (20px period) tuned for the cover. Whatever layout you're viewing, one band is in its sweet spot and the other is the control. Serve the file at exactly the display slot width and the bars reproduce cleanly. Serve it at an off-exact width and the browser resamples; the periodic grid shifts out of phase, and you get *moiré* — alternating light and dark interference bands that signal a sampling mismatch ([Wikipedia: Moiré pattern](https://en.wikipedia.org/wiki/Moir%C3%A9_pattern)). The `pixel-perfect` strategy eliminates it by serving a file that lands on the slot with no scaling at all; `auto` doesn't, and the interference bands are visible. The effect is extreme on a ruled grating, but the same physics governs any hard-edged periodic content: thin letterstrokes, ruled lines, hatching, pixel art. The grating makes the problem impossible to miss.
+
+[![/optimg/auto vs /optimg/pixel-perfect — same grating image at the same viewport, moiré bands visible on auto, clean bars on pixel-perfect](./optimg-moire.png)](https://astro-jeromeabel.netlify.app/optimg/pixel-perfect?debug)
+*Placeholder — pending a real screenshot.* **To capture:** open [`/optimg/auto?debug`](https://astro-jeromeabel.netlify.app/optimg/auto?debug) and [`/optimg/pixel-perfect?debug`](https://astro-jeromeabel.netlify.app/optimg/pixel-perfect?debug) side by side at a **≥1024px viewport** (so the lg 3-col thumb is exactly 316px) and focus on the two-grating photos (`photo-12`, `photo-16`, `photo-20`). The coarse top band is the one that reads at this slot: on `auto` the badge shows a wider served file (e.g. `640w`) and the bars shimmer into moiré; on `pixel-perfect` it shows `slot 316 · 316w · ✓ ok` and the bars stay crisp. For the fine band, repeat the comparison on a detail page (`…/auto/photo-12?debug` vs `…/pixel-perfect/photo-12?debug`), where the 976px cover puts the fine grating in its sweet spot.*
+
+## The debug overlay
+
+Every strategy route accepts a `?debug` query parameter that attaches a per-card badge showing what the browser actually loaded versus what the slot required:
+
+[![/optimg/pixel-perfect?debug — cards with per-card badges showing slot, DPR, served width, and verdict](./optimg-debug.png)](https://astro-jeromeabel.netlify.app/optimg/pixel-perfect?debug)
+*Placeholder — pending a real screenshot. **Capture:** [`/optimg/pixel-perfect?debug`](https://astro-jeromeabel.netlify.app/optimg/pixel-perfect?debug) at ≥1024px so the lg cards read `slot 316 · 316w · ✓ ok`. Frame the hard-edged overlays where the verdict matters — the `e` moiré photos (`photo-12/16/20`) and an `a`/`c` text-overlay (`photo-11`, `photo-13`). For contrast, the same grid on [`/optimg/naive?debug`](https://astro-jeromeabel.netlify.app/optimg/naive?debug) shows the over-fetch badge.*
+
+```
+slot 316 · DPR 1 · 316w · ✓ ok
+slot 316 · DPR 2 · 632w · ✓ ok
+```
+
+**slot** — CSS display width in pixels at the current viewport. **DPR** — device pixel ratio. **served width** — the `w` parameter from the CDN URL for strategies with `srcset`, or the image's natural width for `naive` and `manual`. **verdict**: `✓ ok` (file covers the slot at this density), `✗ short` (upscaling — real bug), `≫ over` (over-fetch by more than 25%).
+
+For `naive`, the badge shows the full source width with no `srcset` annotation — the over-fetch is explicit. For `pixel-perfect` and `final`, every card should read `✓ ok` at 1× and 2× DPR: the token-derived widths are computed to land the file on the slot at both densities with no resampling.
+
+The overlay persists across grid → detail navigation via `sessionStorage`. A floating "🔍 debug: on" button clears it. Lighthouse runs are never affected — the overlay requires `?debug` in the URL or a manually set session flag, neither of which is present in a fresh browser run.
 
 ## Eager hero vs lazy rest
 
@@ -212,7 +303,7 @@ fetchpriority={type === "cover" ? "high" : "auto"}
 - The framework deleted the bash toil — formats, `srcset`, resizing. The `sizes` contract is the one part it can't generate, because only you know your layout.
 - Auto `width`/`height` for CLS prevention is the silent win. Smaller files are nice; not shifting the layout is what users actually feel.
 - LQIP and fade are perceived performance, not bytes. They won't move a Lighthouse score and that's fine — they're a different axis.
-- Numbers in one place: `auto` vs `naive` is 1892 ms vs 5131 ms LCP, 474 KB vs 9272 KB — just `<Picture>`, no extra code. `lqip` is the fastest of all (685 ms) because its placeholder paints on the first frame; here the metric and the perceived win point the same way.
+- Numbers in one place: `auto` vs `naive` is 1101 ms vs 4422 ms LCP, 511 KB vs 9179 KB — just `<Picture>`, no extra code. Among automated strategies, `pixel-perfect` (1037 ms, 230 KB) leads on both LCP and bytes; `final` (1057 ms, 247 KB) adds 20 ms and 17 KB for the LQIP perceived-speed layer.
 - Measure cold, not warm. Lighthouse runs with an empty cache, so its numbers are first-visit; a manual reload is cached and always looks faster. Compare strategies cold (a 3-run median), and treat the warm reload as the *felt* experience, not the benchmark.
 - Never animate a cached image. Guard on `img.complete` (or `complete && naturalHeight !== 0`), or back/forward navigation strobes.
 - The output is plain static files. `astro:assets` works on GitHub Pages with no image service at all — Netlify's CDN just moves transform cost off build time. Same `/_astro/` files, different bill.
@@ -222,3 +313,7 @@ fetchpriority={type === "cover" ? "high" : "auto"}
 - Moiré is a visible signal, not decoration. A periodic grating resampled at a mismatched frequency erupts into interference bands — it makes the resampling problem impossible to miss and directly motivates the pixel-perfect approach.
 - LQIP blur is a tradeoff: bake it into the file (zero runtime, fixed) or blur in CSS (live, tweakable). On a 32px placeholder, CSS is free — so I tweak instead of re-running scripts.
 - Tailwind 4's cascade layer loses to Astro's responsive styles by default. Know which one wins before you debug the wrong file.
+- One source, two crops: `fit="cover"` with different `height` values produces separate build-time outputs. No server, no script — one import, two transforms, zero runtime cost.
+- LQIP alone isn't the fastest strategy on the LCP metric: `lqip` (1251 ms) is slower than `pixel-perfect` (1037 ms) because auto widths still serve a larger file. Accurate sizing matters more than a placeholder.
+- `final` beats `lqip` by 194 ms (1057 ms vs 1251 ms) by combining both: smaller files from pixel-perfect widths reduce real load time, and the LQIP placeholder fills the visible slot immediately.
+- The debug overlay (`?debug` on any strategy URL) shows slot width, DPR, served width, and a verdict per card. It's how you verify pixel-perfect is actually working — not by reading the `srcset`, but by watching what the browser chose at your viewport and DPR.
