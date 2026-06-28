@@ -6,7 +6,7 @@ abstract: "Du redimensionnement manuel des images jusqu'à Astro et le Netlify I
 draft: false
 ---
 
-Les images sont souvent l'élément le plus lourd à télécharger pour un navigateur, en grande partie responsable des mauvais scores de performance de la métrique LCP (Large Content Paint).
+Les images sont souvent l'élément le plus lourd à télécharger pour un navigateur, donc en grande partie responsable des mauvais scores de performance de la métrique LCP (Large Content Paint).
 
 Pour accompagner l'article, des exemples concrets sur le [playground compagnon](https://astro-jeromeabel.netlify.app/optimg).
 
@@ -20,7 +20,7 @@ La base, une image fluide en CSS:
 img { display: block; max-width: 100%; height: auto; }
 ```
 
-Une seule version de l'image ne suffit souvent jamais. Il faut pouvoir fournir d'autres tailles de la même image pour s'adapter de façon "responsive" à la largeur du viewport, au Device Pixel Ratio (DPR) et aux différents configurations d'affichage de la page. Par exemple pour un emplacement disponible de 1024px, un écran DPR-2 voudra le double, une image de 2048px.
+Une seule version de l'image ne suffit souvent jamais. Il faut pouvoir fournir d'autres tailles de la même image pour s'adapter de façon "responsive" à la largeur de l'écran (viewport), au Device Pixel Ratio (DPR) et aux différents configurations d'affichage de la page (minitiatures, hero, grille, colonnes, etc.). Par exemple pour un emplacement disponible de 1024px, un écran DPR-2 voudra le double, une image de 2048px.
 
 En HTML, les propriétés `srcset` et `sizes` permettent au navigateur de choisir l'image la plus adaptée, la moins lourde à charger. 
 
@@ -33,7 +33,7 @@ En HTML, les propriétés `srcset` et `sizes` permettent au navigateur de choisi
   alt="">
 ```
 
-Et `sizes` doit correspondre à votre layout CSS réel. Ici, nous voulons afficher l'image en pleine largeur (100vw) en dessous de 1024px, et seulement 50% pour un écran plus grand et un affichage en deux colonnes, sans dépasser 768px. Un `sizes` incorrect et le navigateur télécharge le mauvais fichier.
+Notez que `sizes` doit correspondre à votre layout CSS réel, c'est une configuration qui ne peut être déduite automatique par le framework. Dans cet exemple, nous voulons afficher l'image en pleine largeur (100vw) en dessous de 1024px, et seulement la moitié (50vw) pour un écran plus grand qui correspondra dans notre mise en page à un affichage en deux colonnes, et sans dépasser 768px. Un `sizes` incorrect et le navigateur télécharge le mauvais fichier, surchargeant inutilement le chargement de la page/
 
 Exemple de script basique pour générer une version de l'image flou avec ImageMagick :
 
@@ -48,7 +48,7 @@ done
 
 ## Plus simple avec Astro
 
-Le composant `<Picture>` simplifie une grande partie du travail précédent. Il génère un élément `<picture>` avec une `<source>` par format moderne et un fallback `<img>`. 
+Le composant `<Picture>` fournit par Astro simplifie en grande partie le travail précédent. Il génère un élément `<picture>` avec une `<source>` par format moderne et un fallback `<img>`. 
 
 ```astro
 ---
@@ -79,20 +79,20 @@ Il suffit de lister les formats du plus moderne au plus ancien — l'ordre est l
   data-astro-image="constrained">
 ```
 
-La paire `width`/`height` est automatiquement définit pour réserver l'espace nécessaire avant que l'image se charge. Ce qui **prévient le Cumulative Layout Shift**.
+La paire `width`/`height` est automatiquement définit pour réserver l'espace nécessaire avant que l'image se charge. Ce qui **prévient le Cumulative Layout Shift** (CLS).
 
 ### On Build, On Demand
 
-Par défaut, la création des images ne nécessite pas de serveur. Au moment du build `astro:assets` crée les fichiers statiques "hachés" dans `/_astro/`: `hero.hash.webp` et ses variantes. Le déploiement est possible partout: GitHub Pages, S3, une clé USB.
+Par défaut, la création des images ne nécessite pas de serveur. Au moment du build `astro:assets` crée les fichiers statiques "hachés" dans `/_astro/`: `hero.hash.webp` et ses variantes. Ce qui permet un déploiement partout: GitHub Pages, S3, une clé USB.
 
-Avec les adaptateurs, on peut aller plus loin. Ici, l'adaptateur `@astrojs/netlify` permet de bénéficier du **Netlify Image CDN**. Le redimensionnement se fait alors à la demande. Pour un site avec des centaines d'images le temps de build n'est donc pas impacté, et le CDN met en cache les fichiers. Le service qui gère les images est paramétrable — Cloudinary, Imgix et d'autres ont des intégrations.
+Avec les adaptateurs, on peut aller plus loin. Ici, j'utilise l'adaptateur `@astrojs/netlify`, ce qui permet de bénéficier du **Netlify Image CDN**. Le redimensionnement se fait alors à la demande. Pour un site avec des centaines d'images le temps de build n'est donc pas impacté, et le CDN met en cache les fichiers. D'autres services sont possibles : Cloudinary, Imgix et d'autres ont des intégrations.
 
-Mais cette commodité a un coût caché, et c'est exactement ce que le benchmark plus bas va révéler. Il y a deux *moments* d'optimisation. Le build pré-cuit les fichiers : le travail est payé une fois, au déploiement, et chaque visiteur reçoit un fichier déjà prêt. Le CDN à la demande, lui, diffère le travail à la première requête : sur un cache froid, le serveur doit récupérer la source, la décoder, la redimensionner, la ré-encoder en AVIF, puis répondre — du calcul serveur qui s'ajoute au TTFB, payé par image et par cycle de cache. Une fois le fichier en cache, c'est gratuit ; mais le tout premier visiteur — et chaque run de benchmark à froid — paie la transformation.
+Mais cette commodité a un coût caché, et c'est exactement ce que le benchmark plus bas va révéler. Il y a deux *moments* d'optimisation. Le build génère les fichiers : le travail se fait deux fois, au moment du build et pour transférer les fichiers vers l'espace d'hébergement mais chaque visiteur reçoit un fichier déjà prêt. Le CDN à la demande, lui, diffère le travail à la première requête : sur un cache froid, le serveur doit récupérer la source, la décoder, la redimensionner, la ré-encoder en AVIF, puis répondre — du calcul serveur qui s'ajoute au TTFB, payé par image et par cycle de cache. Une fois le fichier en cache, c'est directement accessible ; mais le tout premier visiteur — et chaque run de benchmark à froid — paie la transformation.
 
 
 ### Petit piège avec Tailwind
 
-Si vous avez l'habitude d'utiliser Tailwind il se peut que vous rencontriez un problème avec la façon dont Astro gère les images "responsive". Il faut ajouter au fichier de configuration ([doc](https://docs.astro.build/en/guides/images/#responsive-image-styles)):
+Si vous avez l'habitude d'utiliser Tailwind il se peut que vous rencontriez un problème avec la façon dont Astro gère les images "responsive". Pour utiliser les images responsive dans Astro, il faut ajouter au fichier de configuration ([doc](https://docs.astro.build/en/guides/images/#responsive-image-styles)):
 
 ```js
 // astro.config.mjs
@@ -119,7 +119,7 @@ Une seule image source en entrée, deux images générées et recadrées en sort
 
 ## Benchmark de sept stratégies
 
-Le [projet "optimg"](https://astro-jeromeabel.netlify.app/optimg) accompagne cette article pour présenter sept stratégies et un benchmark réalisé avec lighthouse en prenant la médiane de 3 itérations.
+Le [projet "optimg"](https://astro-jeromeabel.netlify.app/optimg) accompagne cette article pour présenter sept stratégies, de la plus naïve à la plus sophistiquée. Un premier benchmark en local a été réalisé avec lighthouse en prenant la médiane de 3 itérations pour comparer leurs performances.
 
 | Stratégie | LCP (ms) | CLS | Transfert (KB) | Description |
 | --- | --- | --- | --- | --- |
@@ -127,7 +127,7 @@ Le [projet "optimg"](https://astro-jeromeabel.netlify.app/optimg) accompagne cet
 | [manual](https://astro-jeromeabel.netlify.app/optimg/manual) | 749 | 0.000 | 962 | JPEG ré-encodés par sharp (qualité 78), 3 largeurs + un fallback flou, servis en statique depuis `/public/` |
 | [auto](https://astro-jeromeabel.netlify.app/optimg/auto) | 1529 | 0.000 | 523 | `<Picture>` basique, plusieurs tailles et formats AVIF/WebP transformés à la demande par le CDN Netlify |
 | [pixel-perfect](https://astro-jeromeabel.netlify.app/optimg/pixel-perfect) | 1001 | 0.000 | 236 | `<Picture>` avec optimisation des tailles au pixel près |
-| [lqip](https://astro-jeromeabel.netlify.app/optimg/lqip) | 1254 | 0.000 | 541 | Une image flou de basse qualité (LQIP) s'affiche au plus vite en attendant le chargement de `<Picture>` |
+| [lqip](https://astro-jeromeabel.netlify.app/optimg/lqip) | 1254 | 0.000 | 541 | Une image floue de basse qualité (LQIP) s'affiche au plus vite en attendant le chargement de `<Picture>` |
 | [cropped](https://astro-jeromeabel.netlify.app/optimg/cropped) | 1600 | 0.000 | 559 | `<Picture>` basique avec découpage de l'image |
 | [final](https://astro-jeromeabel.netlify.app/optimg/final) | 1077 | 0.000 | 254 | Combine `<Picture>`, optimisation des tailles et LQIP |
 
@@ -136,47 +136,51 @@ Une fois les largeurs et hauteurs précisées, plus aucun problème de CLS. Simp
 
 !["Simple, basique"](./basic.png)
 
-Mais pas si basique quand on lit le reste du tableau. La surprise n'est pas là où on l'attend : **`manual` — du JPEG, deux fois plus d'octets que `auto` et un format plus ancien — gagne sur le LCP (749 ms contre 1529 ms).** L'intuition dit l'inverse : `auto` sert de l'AVIF deux fois plus léger, il *devrait* être plus rapide. Il ne l'est pas. Et `manual` n'est même pas un JPEG naïf : le script `gen-images.mjs` le ré-encode avec sharp à qualité 78, en trois largeurs, avec un fallback flou — un manuel déjà soigné. Trois forces expliquent le classement, et aucune n'est « les octets ».
+Le reste du tableau est contre-intuitif. `manual`, en JPEG — format moins optimal qu'AVIF — et deux fois plus lourd qu'`auto` (962 vs 523 KB), obtient un LCP deux fois meilleur. 🙃
 
-**1. Le cache froid taxe la transformation à la demande.** Le benchmark tourne avec `netlify serve` en local, cache vidé à chaque run. `manual` est servi directement depuis le disque — zéro travail serveur, le coût a été payé au build par sharp. `auto`, `pixel-perfect` et `final` émettent des URL `/.netlify/images?url=…` : au premier accès (froid), le serveur doit récupérer la source, décoder, redimensionner, ré-encoder en AVIF et répondre. Ce calcul s'ajoute au TTFB, par image, à chaque run froid. C'est le coût caché de la section précédente, rendu mesurable.
+Le piège, c'est que ce benchmark mesure deux choses en même temps.
 
-**2. L'élément LCP est une miniature de 316 px — les octets sont du bruit.** Le LCP de chaque page est `photo-01`, la cellule en haut à gauche de la grille, un slot de 316 px au-dessus de la ligne de flottaison. À cette taille le fichier est minuscule des deux côtés (≈ 25 KB en AVIF, ≈ 38 KB en JPEG). Les 13 KB d'écart valent quelques millisecondes sur une connexion correcte — bien moins que la pénalité de transformation. Le LCP d'une petite image est piloté par la latence et la priorité de la requête, pas par sa taille. Le gain de format ne se voit que sur une grande image hero.
+- **La stratégie *et* le pipeline de déploiement.** `manual` est servi en statique depuis le disque ; `auto`, `pixel-perfect` et `final` émettent des URL `/.netlify/images?url=…` et, au premier accès, le serveur doit récupérer la source, la décoder, la redimensionner, la ré-encoder en AVIF, puis répondre — du calcul qui s'ajoute au TTFB. Or `netlify serve` vide son cache à chaque lancement : la mesure est toujours froide, donc cette transformation est toujours payée. Le 2× d'écart, c'est cette taxe, pas le format.
+- **L'élément LCP est une miniature de 316 px, servie trop large.** La page est une grille de 21 images ; le LCP est `photo-01`, une miniature de 316 px. À cette taille, JPEG ou AVIF pèsent à peu près pareil (≈ 39 vs 25 KB) — le gain de format est invisible. Pire : le `sizes` de `manual` comme d'`auto` résout ce slot de 316 px par un fichier `w=640`, deux fois trop large. La preuve : `pixel-perfect` (1001 ms) et `final` (1077 ms) utilisent *exactement la même* transformation AVIF qu'`auto` et le battent de ~500 ms, juste en servant la bonne taille.
 
-**3. `auto` demande aussi la mauvaise taille.** Son `sizes` résout le slot de 316 px en un candidat `w=640` du `srcset` — deux fois trop large, donc transformation plus lourde et ≈ 2× d'octets (523 KB contre 236 KB pour `pixel-perfect`). La preuve : `pixel-perfect` (1001 ms) et `final` (1077 ms) utilisent *exactement la même* transformation AVIF `/.netlify/images` que `auto`, et le battent de ~500 ms. L'écart n'est donc ni le format ni le CDN — c'est `auto` qui réclame un fichier de 640 px pour un trou de 316 px. Corrigez le `sizes` et la transformation à la demande redevient compétitive.
+Bref, ce premier benchmark fournit le pire scénario — un cache vide, comme une première visite — et il confond la stratégie avec le pipeline. J'ai cru mesurer une variable, j'en mesurais deux.
 
-> **Quel régime mesure-t-on ?** Ces chiffres viennent d'un cache *froid* en local (`netlify serve`, preset desktop de Lighthouse, médiane de 3 itérations). C'est le pire cas : chaque run paie la transformation comme une toute première visite. En production sur `astro-jeromeabel.netlify.app`, le CDN Netlify est déjà *chaud* — les transformations sont en cache depuis les visites précédentes — et toutes les stratégies tombent autour de 0,3 s. Les deux mesures sont vraies, elles répondent à des questions différentes : le froid est le coût d'amorçage par asset, pas le coût permanent. Mesurez le régime que vous livrez.
 
-`netlify serve` n'est pas un simple serveur de fichiers : il démarre le *runtime* Netlify de production en local — l'adaptateur, les redirections, et surtout le endpoint Image CDN `/.netlify/images`. C'est ce qui rend la mesure fidèle pour les images. Une stratégie statique comme `manual` est servie depuis le disque ; une stratégie `<Picture>` avec `imageCDN` actif émet les mêmes URL `/.netlify/images?url=…&w=…` qu'en prod, et elles se résolvent vraiment ici — le chemin de transformation est exécuté, pas simulé. Les deux comportements de chargement coexistent donc exactement comme en production. Lighthouse, lui, lance un Chrome headless neuf à chaque itération (cache vide = première visite), charge la page, enregistre la trace, et en extrait le LCP (le plus grand paint — ici la miniature de 316 px au-dessus de la ligne de flottaison), le CLS et le total transféré. Trois itérations, médiane : le bruit réseau et l'ordonnancement varient d'un run à l'autre, la médiane les mate. Le seul biais assumé du local : pas d'edge, donc la transformation à froid est toujours payée — c'est précisément ce que la prod chaude masque.
+## Comparer proprement : une variable à la fois
 
-J'ai poussé la comparaison un cran plus loin en redéployant le même `dist/` sur un hébergement OVH mutualisé — un seul origine en Europe, sans edge ni transformation à la demande, avec sharp qui pré-cuit l'AVIF/WebP au build. Localement (je suis en France, près des deux), OVH et Netlify ont un TTFB identique ; depuis des sondes lointaines, OVH gonfle avec la distance — chaque octet traverse l'océan depuis un seul datacenter — pendant que l'edge Netlify garde le corps de la réponse près du client. Résultat contre-intuitif de plus : sur OVH, `auto` en AVIF pré-cuit au build (0,9 s mobile sur PageSpeed) bat Netlify en transformation à la demande (1,8 s), parce que supprimer l'aller-retour `/.netlify/images` compte plus que la proximité edge pour une seule grande image. La localisation du test et l'infrastructure d'hébergement déplacent le classement autant que la stratégie d'image elle-même.
+La règle tient en une phrase : **figer toutes les variables sauf celle qu'on étudie.** Trois bougent — la stratégie, l'hôte, l'outil de mesure — et mon premier run en confondait deux. Pour lire les stratégies entre elles, il faut donc figer l'hôte et le régime. J'ai re-mesuré **à chaud**, en production, médiane de 3 itérations Lighthouse desktop, sur deux hébergements : un build statique sur un mutualisé OVH (`astro.jeromeabel.net`, où les fichiers sont déjà produits) et le build Netlify avec Image CDN à la demande (`astro-jeromeabel.netlify.app`).
 
-De tous ces faux pas, quelques principes se dégagent :
-
-- **Comparer à configuration égale.** `imageCDN` activé d'un côté et désactivé de l'autre, ce sont deux builds différents — l'écart n'est plus la stratégie d'image mais le pipeline. Rebâtissez les deux pareil avant de conclure.
-- **Distinguer les deux requêtes.** Les attributs HTML (`loading`, `fetchpriority`, `sizes`) sont figés au build ; les octets de l'image sont négociés à l'exécution. Un seul levier agit par couche, et un benchmark qui les confond attribue le gain à la mauvaise.
-- **Nommer le régime.** Froid (première visite) ou chaud (visites suivantes), local ou edge : un chiffre sans son régime ne veut rien dire.
-
-### Trois outils de mesure, trois régimes
-
-Le 3-run local n'est qu'un angle. Trois outils répondent à trois questions différentes, et confondre leurs chiffres est la première source de tournis.
-
-| Outil | Où ça tourne | Throttle (défaut) | Cache | Données |
+| Stratégie | OVH LCP (ms) | OVH (KB) | Netlify LCP (ms) | Netlify (KB) |
 | --- | --- | --- | --- | --- |
-| Lighthouse local (`netlify serve`) | ma machine | preset desktop : 40 ms RTT, 10 Mbps, CPU ×1 | froid | labo, contrôlé |
-| Lighthouse DevTools (site live) | ma machine + edge | mobile Slow 4G : 150 ms, 1,6 Mbps, CPU ×4 | froid | labo, 1 run |
-| PageSpeed Insights | serveurs Google | mobile Slow 4G + CPU ×4 (Android milieu de gamme) | froid | labo **+ terrain CrUX** |
+| naive | 1292 | 9158 | 615 | 9136 |
+| manual | 355 | 903 | 409 | 900 |
+| auto | 414 | 373 | 412 | 729 |
+| pixel-perfect | **302** | **138** | **336** | 234 |
+| lqip | 417 | 383 | 649 | 741 |
+| cropped | 392 | 405 | 435 | 797 |
+| final | 333 | 148 | 411 | 246 |
 
-Trois précisions qui changent l'interprétation, vérifiées dans la doc Lighthouse :
+Le paradoxe froid a disparu. À chaud, `manual` (355 ms) et `auto` (414 ms) sont quasi à égalité sur OVH, et à égalité stricte sur Netlify (409 vs 412) : le 2× de l'écart froid, c'était la taxe de transformation CDN payée à chaque run, rien d'autre. Une fois cette taxe amortie, le vrai classement apparaît — et il ne tient ni au format ni à l'hôte. `pixel-perfect` gagne partout (302 ms / 138 KB sur OVH), `final` juste derrière. Or `pixel-perfect`, `final` et `auto` utilisent la *même* transformation AVIF ; la seule différence, c'est que les deux premiers servent un fichier à la taille du slot là où `auto` sur-fetch un `w=640` pour 316 px. **Le levier n'a jamais été le format ; c'est le contrat `sizes`.** Et le CLS reste à 0 partout sauf sur `naive` : `width`/`height` suffisent.
 
-**Le throttling est simulé, pas réel.** Par défaut — CLI, DevTools et PageSpeed Insights — Lighthouse charge la page une fois sans throttle, puis *calcule* le temps qu'elle aurait pris sous les conditions cibles ([throttling.md](https://github.com/GoogleChrome/lighthouse/blob/main/docs/throttling.md)). Rapide et déterministe, mais c'est un modèle, pas un vrai réseau lent. Le preset desktop que j'utilise en local ne ralentit pas le CPU (×1) et vise 40 ms / 10 Mbps ; le preset mobile applique un CPU 4× plus lent et un « Slow 4G » à 150 ms / 1,6 Mbps. Le mobile est le révélateur — mon desktop local masque le coût CPU que vit un téléphone milieu de gamme.
+### Le déploiement compte moins que le `sizes`
 
-**Chaque run Lighthouse est une première visite.** `disableStorageReset` vaut `false` par défaut : cache et stockage sont vidés avant chaque run. C'est pour ça que le benchmark local mesure le froid, et pourquoi la transformation CDN y est toujours payée. Pour mesurer le chaud, il faut explicitement `--disable-storage-reset`.
+Reste l'hôte. OVH sert du Sharp build-time, Netlify transforme à la demande : comparer une *ligne* du tableau, c'est comparer deux pipelines, pas deux réseaux. Deux cas le démêlent. Sur le payload brut (`naive`, ~9 MB, aucune transformation), seul le transport compte et l'edge Netlify (615 ms) bat l'origine unique OVH (1292 ms) d'un facteur deux — la proximité du POP domine. Sur les assets optimisés, l'inverse : le Sharp build-time produit des fichiers ~2× plus petits que la transformation à la demande (`auto` 373 KB sur OVH contre 729 sur Netlify), et ces octets plus légers servis depuis une origine proche font gagner OVH à chaud en local.
 
-**La médiane, et combien de runs.** La doc est nette : « la médiane de 5 runs est deux fois plus stable qu'un seul run » ([variability.md](https://github.com/GoogleChrome/lighthouse/blob/main/docs/variability.md)). Mes 3 runs lissent déjà l'essentiel ; passer à 5 ne vaut le coût que si les chiffres sautent encore d'un run à l'autre. Un run unique, jamais.
+Mais à l'échelle d'une miniature, sous 0,5 s, ces 50–100 ms relèvent surtout du bruit de run, et le classement s'inverserait encore avec une sonde mobile lointaine, qui rendrait l'avantage à l'edge. Le déploiement déplace le résultat à la marge ; le `sizes`, lui, le déplace de 500 ms. L'un est un réglage, l'autre est le levier.
 
-Le vrai complément du labo local, c'est PageSpeed Insights. Il fait deux choses que ma mesure locale ne fait pas : il applique le throttling **mobile** — le régime discriminant — et il affiche les données **terrain** du Chrome UX Report quand elles existent : le 75e centile de mes vrais visiteurs, sur une fenêtre glissante de 28 jours ([CrUX](https://developer.chrome.com/docs/crux/guides/pagespeed-insights)). Le labo reproduit, le terrain valide — et c'est le terrain qui doit guider les priorités. Les seuils « bons » des Core Web Vitals sont d'ailleurs définis à ce 75e centile : LCP ≤ 2,5 s, CLS ≤ 0,1, INP ≤ 200 ms (l'INP a remplacé le FID en mars 2024) ([web.dev](https://web.dev/articles/defining-core-web-vitals-thresholds)).
+### Le même test, trois instruments
 
-Au final : le 3-run local froid pour **comparer les stratégies** entre elles (même machine, conditions figées) ; PageSpeed mobile pour le **régime que je livre** plus le terrain CrUX ; le Lighthouse DevTools sur le site live comme **vérification ponctuelle** — il tourne sur ma machine, un seul run, et deux machines différentes ne sont pas comparables, donc jamais comme chiffre de référence.
+Dernier piège : changez d'outil et le classement rebouge, sans que la page change. Trois instruments répondent à trois questions, et confondre leurs chiffres est la première source de tournis.
+
+| Outil | Où ça tourne | Throttle (défaut) | Cache |
+| --- | --- | --- | --- |
+| Lighthouse local (`netlify serve`) | ma machine | desktop : 40 ms RTT, 10 Mbps, CPU ×1 | froid |
+| Lighthouse DevTools (site live) | ma machine | mobile Slow 4G : 150 ms, 1,6 Mbps, CPU ×4 | froid |
+| PageSpeed Insights | serveurs Google | mobile Slow 4G + CPU ×4 | froid |
+
+Trois choses à savoir, vérifiées dans la doc Lighthouse. **Le throttling est simulé** : Lighthouse charge la page une fois sans throttle, puis *calcule* le temps qu'elle aurait pris sous les conditions cibles ([throttling.md](https://github.com/GoogleChrome/lighthouse/blob/main/docs/throttling.md)) — rapide et déterministe, mais c'est un modèle, pas un vrai réseau lent. **Chaque run vide le cache** (`disableStorageReset` vaut `false` par défaut) : la mesure est donc toujours froide, et la transformation CDN toujours payée. **Un run unique ment** : « la médiane de 5 runs est deux fois plus stable qu'un seul run » ([variability.md](https://github.com/GoogleChrome/lighthouse/blob/main/docs/variability.md)) — `final` sur Netlify affichait 2,3 s en un seul run mobile contre 0,8 s ailleurs, du bruit pur.
+
+Le mobile reste le révélateur : il applique un CPU 4× plus lent que mon desktop, le coût que vit un vrai téléphone et que ma machine masque. Mais tout ceci est du labo — ces pages de démo n'ont pas de visiteurs, donc aucune donnée terrain pour trancher. En pratique : le 3-run local à chaud pour **comparer les stratégies** entre elles ; PageSpeed mobile pour **approcher le régime livré** ; le Lighthouse DevTools sur le live seulement comme coup d'œil — ma machine, un seul run, jamais un chiffre de référence.
 
 ## Une source, deux recadrages
 
@@ -366,10 +370,10 @@ Le point clé : `eager` couvre une zone (toute la rangée above-fold), `fetchpri
 - Le `width`/`height` auto pour la prévention du CLS est le gain silencieux. Les fichiers plus petits, c'est bien ; ne pas faire sauter la mise en page, c'est ce que les utilisateurs ressentent vraiment.
 - LQIP et fondu sont de la performance perçue, pas des octets. Ils ne déplaceront pas un score Lighthouse et c'est très bien — ce sont un axe différent.
 - Chiffres en un endroit : `auto` vs `naive` c'est 1529 ms vs 4876 ms de LCP, 523 KB vs 9400 KB — juste `<Picture>`, sans code supplémentaire. Parmi les stratégies automatisées, `pixel-perfect` (1001 ms, 236 KB) est en tête à la fois sur le LCP et les octets ; `final` (1077 ms, 254 KB) ajoute 76 ms et 18 KB pour la couche de vitesse perçue LQIP.
-- Le contre-intuitif du run froid : `manual` (749 ms, JPEG, 962 KB) bat `auto` (1529 ms, AVIF, 523 KB) sur le LCP. Pas malgré la taille — à cause du régime : `manual` est du JPEG sharp pré-cuit servi en statique, `auto` paie une transformation CDN à froid. En production chaude, l'écart s'efface. Sur une miniature, c'est la latence de requête qui décide, pas les octets.
-- La localisation du test et l'hébergement déplacent le classement autant que la stratégie. Du sharp build-time sur une origine unique (OVH) peut battre une transformation edge à la demande (Netlify) sur une grande image ; mesurez depuis là où sont vos utilisateurs, pas seulement depuis votre machine.
-- Mesurez à froid, pas à chaud. Lighthouse tourne avec un cache vide, donc ses chiffres sont en première visite ; un rechargement manuel est en cache et semble toujours plus rapide. Comparez les stratégies à froid (médiane sur 3 itérations), et traitez le rechargement chaud comme l'expérience *ressentie*, pas le benchmark.
-- Trois outils, trois régimes. Le throttling Lighthouse est *simulé* (un load mesuré puis modélisé) et chaque run vide le cache par défaut, donc c'est toujours du froid. Le 3-run local froid compare les stratégies entre elles ; PageSpeed mobile donne le régime livré plus le terrain CrUX (75e centile sur 28 jours) ; le Lighthouse DevTools sur le live n'est qu'un spot-check — ta machine, un seul run.
+- Le contre-intuitif du run froid : `manual` (749 ms, JPEG, 962 KB) bat `auto` (1529 ms, AVIF, 523 KB) sur le LCP. Pas malgré la taille — à cause du régime : `manual` est du JPEG sharp pré-cuit servi en statique, `auto` paie une transformation CDN à froid. À chaud en production, l'écart s'efface (355 vs 414 sur OVH, 409 vs 412 sur Netlify) : c'était la taxe de transformation, pas le format. Sur une miniature, c'est la latence de requête qui décide, pas les octets.
+- La localisation du test et l'hébergement déplacent le classement autant que la stratégie. Sur le payload brut (`naive`, ~9 MB), l'edge Netlify écrase l'origine unique OVH (615 vs 1292 ms) — la proximité du POP gagne. Mais sur les assets déjà optimisés, le sharp build-time d'OVH sert des fichiers ~2× plus petits que la transformation à la demande Netlify (`auto` 373 vs 729 KB) et reprend l'avantage à chaud en local — avant de le reperdre en mobile lointain (PSI), où l'edge masque la distance. Mesurez depuis là où sont vos utilisateurs, pas seulement depuis votre machine.
+- Le cache froid n'est pas neutre : il confond la stratégie avec le pipeline. Un run froid taxe `auto` (transformation à la demande) mais pas `manual` (statique) — l'écart mesuré n'est plus la stratégie. Pour comparer des stratégies, fige l'hôte et le régime (à chaud, en prod, médiane de 3 runs) ; garde le froid pour ce qu'il dit vraiment, le coût d'amorçage par asset d'une première visite.
+- Trois outils, trois régimes. Le throttling Lighthouse est *simulé* (un load mesuré puis modélisé) et chaque run vide le cache par défaut, donc c'est toujours du froid. Le 3-run local à chaud compare les stratégies entre elles ; PageSpeed mobile approche le régime livré ; le Lighthouse DevTools sur le live n'est qu'un coup d'œil — ma machine, un seul run.
 - N'animez jamais une image en cache. Gardez sur `img.complete` (ou `complete && naturalHeight !== 0`), sinon la navigation arrière/avant scintille.
 - La sortie n'est que des fichiers statiques. `astro:assets` fonctionne sur GitHub Pages sans aucun service d'images — le CDN Netlify déplace juste le coût de transformation hors du build. Mêmes fichiers `/_astro/`, facture différente.
 - Vous pouvez externaliser les images vers Cloudinary ou Imgix, mais Sharp-ou-Netlify garde les assets dans le dépôt et hors d'un abonnement. Pour un site personnel, posséder les données l'emporte.
