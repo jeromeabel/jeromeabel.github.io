@@ -6,13 +6,13 @@ abstract: "Du redimensionnement manuel des images jusqu'à Astro et le Netlify I
 draft: false
 ---
 
-Les images sont souvent l'élément le plus lourd à télécharger pour un navigateur, donc en grande partie responsable des mauvais scores de performance de la métrique LCP (Large Content Paint).
+Les images sont souvent l'élément le plus lourd à télécharger pour votre navigateur. Elles sont de ce fait en grande partie responsable des mauvais scores de performance. Pour les images, on peut s'intéresser a deux métriques LCP (Large Content Paint) et le CLS (Cumulative Layout Shift).
 
 Pour accompagner l'article, des exemples concrets sur le [playground compagnon](https://astro-jeromeabel.netlify.app/optimg).
 
 ## Le redimensionnement manuel
 
-On peut très bien se passer de framework pour automatiser la création et l'affichage des images avec des scripts et du CSS. L'idée est la même : afficher les images visibles le plus rapidement possible en s'adaptant aux dimensions de l'écran.
+On peut très bien se passer de framework pour automatiser la création et l'affichage des images avec des scripts et du CSS. On va voir que c'est une approche tout à fait valable. L'idée est la même : afficher les images visibles le plus rapidement possible en s'adaptant aux dimensions de l'écran.
 
 La base, une image fluide en CSS:
 
@@ -20,7 +20,7 @@ La base, une image fluide en CSS:
 img { display: block; max-width: 100%; height: auto; }
 ```
 
-Une seule version de l'image ne suffit souvent jamais. Il faut pouvoir fournir d'autres tailles de la même image pour s'adapter de façon "responsive" à la largeur de l'écran (viewport), au Device Pixel Ratio (DPR) et aux différents configurations d'affichage de la page (minitiatures, hero, grille, colonnes, etc.). Par exemple pour un emplacement disponible de 1024px, un écran DPR-2 voudra le double, une image de 2048px.
+Une seule version de l'image ne suffit souvent jamais. Il faut pouvoir fournir d'autres tailles de la même image pour s'adapter ("responsive") à la largeur de l'écran (viewport), au ratio de pixel de l'appareil (DPR pour Device Pixel Ratio) et aux différents configurations d'affichage ("layouts") de la page (minitiatures, hero, grille, colonnes, etc.). Par exemple si une image a un emplacement disponible de 1024px, alors un écran avec un DPR 2 voudra le double, donc une image de 2048px.
 
 En HTML, les propriétés `srcset` et `sizes` permettent au navigateur de choisir l'image la plus adaptée, la moins lourde à charger. 
 
@@ -33,7 +33,7 @@ En HTML, les propriétés `srcset` et `sizes` permettent au navigateur de choisi
   alt="">
 ```
 
-Notez que `sizes` doit correspondre à votre layout CSS réel, c'est une configuration qui ne peut être déduite automatique par le framework. Dans cet exemple, nous voulons afficher l'image en pleine largeur (100vw) en dessous de 1024px, et seulement la moitié (50vw) pour un écran plus grand qui correspondra dans notre mise en page à un affichage en deux colonnes, et sans dépasser 768px. Un `sizes` incorrect et le navigateur télécharge le mauvais fichier, surchargeant inutilement le chargement de la page/
+Notez que les valeurs de `sizes` doivent se rapprocher de votre layout CSS réel. Ce qui ne peut être déduit automatiquement par le framework. Dans cet exemple, nous voulons afficher l'image en pleine largeur (100vw) en dessous de 1024px, et seulement la moitié (50vw) pour un écran plus grand qui correspondra dans notre mise en page à un affichage en deux colonnes, sans dépasser 768px. Un `sizes` incorrect et le navigateur télécharge le mauvais fichier, augmentant inutilement le chargement de la page.
 
 Exemple de script basique pour générer une version de l'image flou avec ImageMagick :
 
@@ -46,9 +46,11 @@ for SIZE in "${SIZES[@]}"; do
 done
 ```
 
-## Plus simple avec Astro
+Les assistants IA sont très utiles pour générer ce type de scripts.
 
-Le composant `<Picture>` fournit par Astro simplifie en grande partie le travail précédent. Il génère un élément `<picture>` avec une `<source>` par format moderne et un fallback `<img>`. 
+## Ce que propose Astro
+
+Le composant `<Picture>` fournit par Astro simplifie en grande partie le travail précédent. Il génère un élément `<picture>` avec une `<source>` par format moderne et un fallback `<img>`. Il suffit de lister les formats du plus moderne au plus ancien — l'ordre est la priorité d'affichage.
 
 ```astro
 ---
@@ -65,7 +67,7 @@ import hero from "./hero.png"; // 1600x900
 />
 ```
 
-Il suffit de lister les formats du plus moderne au plus ancien — l'ordre est la priorité d'affichage. La propriété `layout` va permettre de générer `srcset` et `sizes`:
+La propriété `layout` va permettre de générer `srcset` et `sizes`. Exemple en sortie :
 
 ```html
 <img 
@@ -79,15 +81,19 @@ Il suffit de lister les formats du plus moderne au plus ancien — l'ordre est l
   data-astro-image="constrained">
 ```
 
-La paire `width`/`height` est automatiquement définit pour réserver l'espace nécessaire avant que l'image se charge. Ce qui **prévient le Cumulative Layout Shift** (CLS).
+La paire `width`/`height` est automatiquement définit pour réserver l'espace nécessaire avant que l'image se charge. Ce qui **annule le CLS**, car il n'y aura pas de décalage non prévu dans l'affichage.
 
-### On Build, On Demand
+### Générer une fois ou à la demande
 
-Par défaut, la création des images ne nécessite pas de serveur. Au moment du build `astro:assets` crée les fichiers statiques "hachés" dans `/_astro/`: `hero.hash.webp` et ses variantes. Ce qui permet un déploiement partout: GitHub Pages, S3, une clé USB.
+Par défaut, la création des images ne nécessite pas de serveur. Au moment du "build" `astro:assets` crée les fichiers statiques "hachés" dans `/_astro/`. Ce qui permet un déploiement partout: GitHub Pages, S3, une clé USB.
 
-Avec les adaptateurs, on peut aller plus loin. Ici, j'utilise l'adaptateur `@astrojs/netlify`, ce qui permet de bénéficier du **Netlify Image CDN**. Le redimensionnement se fait alors à la demande. Pour un site avec des centaines d'images le temps de build n'est donc pas impacté, et le CDN met en cache les fichiers. D'autres services sont possibles : Cloudinary, Imgix et d'autres ont des intégrations.
+Avec les adaptateurs, on peut aller plus loin. Dans le projet companon, j'utilise l'adaptateur `@astrojs/netlify`, ce qui permet de bénéficier du **Netlify Image CDN**. Le redimensionnement se fait alors à la demande. Pour un site avec des centaines d'images le temps de build n'est donc pas impacté, et le CDN met en cache les fichiers. D'autres services sont disponibles : Cloudinary, Imgix et d'autres ont des intégrations.
 
-Mais cette commodité a un coût caché, et c'est exactement ce que le benchmark plus bas va révéler. Il y a deux *moments* d'optimisation. Le build génère les fichiers : le travail se fait deux fois, au moment du build et pour transférer les fichiers vers l'espace d'hébergement mais chaque visiteur reçoit un fichier déjà prêt. Le CDN à la demande, lui, diffère le travail à la première requête : sur un cache froid, le serveur doit récupérer la source, la décoder, la redimensionner, la ré-encoder en AVIF, puis répondre — du calcul serveur qui s'ajoute au TTFB, payé par image et par cycle de cache. Une fois le fichier en cache, c'est directement accessible ; mais le tout premier visiteur — et chaque run de benchmark à froid — paie la transformation.
+Les deux options ont leurs avantages et inconvénients :
+- Pour la version statique, deux opérations potentiellement longues sont nécessaires : la création d'images au moment du "build" et leur transfert vers l'espace d'hébergement. En revanche, au moment de la navigation par un visiteur, le serveur a juste à livrer les images, elles sont déjà prêtes.
+- Le CDN à la demande, lui, diffère le travail à la première requête : sur un cache froid, le serveur doit récupérer la source, la décoder, la redimensionner, la ré-encoder en AVIF, puis répondre — du calcul serveur qui s'ajoute au TTFB, par image et par cycle de cache. Une fois le fichier en cache, c'est directement accessible ; le problème se reporte sur le premier visiteur.
+
+TODO. "Premier visiteur" signifie-t-il, ma première visite à moi ou la première visite de n'importe quelle personne ?
 
 
 ### Petit piège avec Tailwind
@@ -99,13 +105,18 @@ Si vous avez l'habitude d'utiliser Tailwind il se peut que vous rencontriez un p
 image: { responsiveStyles: true }, // par défaut false
 ```
 
-Cela injecte des règles CSS globales délibérément faibles en spécificité via `:where([data-astro-image])` qui l'emportent sur les classes Tailwind. À savoir avant de passer dix minutes à comprendre pourquoi `object-cover` ne fait rien. La solution est d'utiliser les props `fit` et `position` qui se branchent directement dans ces mêmes styles responsives :
+Cela injecte des règles CSS globales délibérément faibles en spécificité via `:where([data-astro-image])` qui l'emportent sur les classes Tailwind. Ce qui rend les classes Tailwind inopérantes. Bon à savoir avant de passer dix minutes à comprendre pourquoi `object-cover` n'a aucun effet. La solution de remplacement est d'utiliser les props `fit` et `position` qui se branchent directement dans ces mêmes styles responsives :
 
 ```astro
 <Picture src={img} layout="constrained" fit="cover" position="top" alt="…" />
 ```
 
-Désactiver `responsiveStyles` et prendre en charge entièrement le CSS est l'autre option valide. Les props deviennent importantes dès que vous voulez la même image source recadrée différemment selon le contexte — une miniature carrée sur la grille, une large couverture paysage sur la page de détail. Un seul import, des props différentes par usage ; Astro génère des fichiers de sortie séparés pour chaque combinaison au moment du build :
+L'autre option est de désactiver `responsiveStyles` et prendre en charge entièrement le CSS. 
+
+
+Depuis Astro 6, les styles responsives sont émis sous forme de classe hachée plus des attributs `data-astro-fit` / `data-astro-pos`. 
+
+Exemple d'usage des props : à partir d'une seule image, générer deux images recadrées (une miniature carrée sur la grille, une large couverture paysage sur la page de détail), sans script.  
 
 ```astro
 {/* grille : recadrage carré */}
@@ -115,11 +126,9 @@ Désactiver `responsiveStyles` et prendre en charge entièrement le CSS est l'au
 <Picture src={img} layout="full-width" width={1200} height={600} fit="cover" position="top" alt="…" />
 ```
 
-Une seule image source en entrée, deux images générées et recadrées en sortie, sans script. Depuis Astro 6, les styles responsives sont émis sous forme de classe hachée plus des attributs `data-astro-fit` / `data-astro-pos`. 
-
 ## Benchmark de sept stratégies
 
-Le [projet "optimg"](https://astro-jeromeabel.netlify.app/optimg) accompagne cette article pour présenter sept stratégies, de la plus naïve à la plus sophistiquée. Un premier benchmark en local a été réalisé avec lighthouse en prenant la médiane de 3 itérations pour comparer leurs performances.
+Le [projet "optimg"](https://astro-jeromeabel.netlify.app/optimg) accompagne cette article pour présenter sept stratégies, de la plus naïve à la plus sophistiquée. Un premier benchmark en local a été réalisé avec `netlify serve` et Lighthouse en prenant la médiane de 3 itérations pour comparer leurs performances.
 
 | Stratégie | LCP (ms) | CLS | Transfert (KB) | Description |
 | --- | --- | --- | --- | --- |
@@ -131,42 +140,67 @@ Le [projet "optimg"](https://astro-jeromeabel.netlify.app/optimg) accompagne cet
 | [cropped](https://astro-jeromeabel.netlify.app/optimg/cropped) | 1600 | 0.000 | 559 | `<Picture>` basique avec découpage de l'image |
 | [final](https://astro-jeromeabel.netlify.app/optimg/final) | 1077 | 0.000 | 254 | Combine `<Picture>`, optimisation des tailles et LQIP |
 
-
 Une fois les largeurs et hauteurs précisées, plus aucun problème de CLS. Simple. Une seule version par image (`naive`) est un désastre : 4876 ms de LCP et 9400 KB de transfert. Basique.
 
 !["Simple, basique"](./basic.png)
 
-Le reste du tableau est contre-intuitif. `manual`, en JPEG — format moins optimal qu'AVIF — et deux fois plus lourd qu'`auto` (962 vs 523 KB), obtient un LCP deux fois meilleur. 🙃
+Le reste du tableau n'est pas si basique, voir carrément contre-intuitif. La stratégie `manual` utilisant un format JPEG moins optimal qu'AVIF et deux fois plus lourd qu'`auto` (962 vs 523 KB), obtient un LCP deux fois meilleur. 🙃
 
-Le piège, c'est que ce benchmark mesure deux choses en même temps.
+Le piège, c'est que mon benchmark mesure deux choses en même temps.
 
 - **La stratégie *et* le pipeline de déploiement.** `manual` est servi en statique depuis le disque ; `auto`, `pixel-perfect` et `final` émettent des URL `/.netlify/images?url=…` et, au premier accès, le serveur doit récupérer la source, la décoder, la redimensionner, la ré-encoder en AVIF, puis répondre — du calcul qui s'ajoute au TTFB. Or `netlify serve` vide son cache à chaque lancement : la mesure est toujours froide, donc cette transformation est toujours payée. Le 2× d'écart, c'est cette taxe, pas le format.
 - **L'élément LCP est une miniature de 316 px, servie trop large.** La page est une grille de 21 images ; le LCP est `photo-01`, une miniature de 316 px. À cette taille, JPEG ou AVIF pèsent à peu près pareil (≈ 39 vs 25 KB) — le gain de format est invisible. Pire : le `sizes` de `manual` comme d'`auto` résout ce slot de 316 px par un fichier `w=640`, deux fois trop large. La preuve : `pixel-perfect` (1001 ms) et `final` (1077 ms) utilisent *exactement la même* transformation AVIF qu'`auto` et le battent de ~500 ms, juste en servant la bonne taille.
 
-Bref, ce premier benchmark fournit le pire scénario — un cache vide, comme une première visite — et il confond la stratégie avec le pipeline. J'ai cru mesurer une variable, j'en mesurais deux.
+Bref, ce premier benchmark fournit le pire scénario — un cache vide, comme une première visite — et il confond la stratégie avec le pipeline. J'ai cru mesurer une variable, j'en mesurais deux. On apprend ...
 
 
 ## Comparer proprement : une variable à la fois
 
-La règle tient en une phrase : **figer toutes les variables sauf celle qu'on étudie.** Trois bougent — la stratégie, l'hôte, l'outil de mesure — et mon premier run en confondait deux. Pour lire les stratégies entre elles, il faut donc figer l'hôte et le régime. J'ai re-mesuré **à chaud**, en production, médiane de 3 itérations Lighthouse desktop, sur deux hébergements : un build statique sur un mutualisé OVH (`astro.jeromeabel.net`, où les fichiers sont déjà produits) et le build Netlify avec Image CDN à la demande (`astro-jeromeabel.netlify.app`).
+Cette fois, une règle simple : **figer toutes les variables sauf celle qu'on étudie.** Il y a trois variables : la stratégie, l'hôte, l'outil de mesure. Pour comparer les stratégies entre elles, je fige donc l'hôte et la mesure — production Netlify avec Image CDN à la demande (`astro-jeromeabel.netlify.app`), médiane de 3 itérations Lighthouse, et le cache CDN amorcé avant de mesurer (c'est ça, « à chaud » : la transformation déjà en cache, pas recalculée à chaque run). L'hôte, je le compare à part juste après — une variable à la fois, jusqu'au bout.
+
+| Stratégie | LCP (ms) | Transfert (KB) |
+| --- | --- | --- |
+| naive | 615 | 9136 |
+| manual | 409 | 900 |
+| auto | 412 | 729 |
+| pixel-perfect | **336** | **234** |
+| lqip | 649 | 741 |
+| cropped | 435 | 797 |
+| final | 411 | 246 |
+
+Le paradoxe froid a disparu. À chaud, `manual` (409 ms) et `auto` (412 ms) sont à égalité stricte : le 2× de l'écart froid, c'était la taxe de transformation CDN payée à chaque run à vide, rien d'autre. Une fois cette taxe amortie, le vrai classement apparaît, et il ne tient pas au format. `pixel-perfect` gagne (336 ms / 234 KB), `final` juste derrière. Or `pixel-perfect`, `final` et `auto` utilisent la *même* transformation AVIF ; la seule différence, c'est que les deux premiers servent un fichier à la taille du slot là où `auto` sur-fetch un `w=640` pour 316 px. **Le levier n'a jamais été le format ; c'est le contrat `sizes`.** Et le CLS reste à 0 partout sauf sur `naive` : `width`/`height` suffisent.
+
+### Le déploiement compte moins que le `sizes`
+
+Maintenant qu'on a figé l'hôte pour classer les stratégies, faisons varier *seulement* l'hôte. J'ai relancé le même benchmark sur un build statique déposé sur un mutualisé OVH (`astro.jeromeabel.net`) — les fichiers y sont déjà produits par Sharp au moment du build — face à la transformation à la demande de Netlify. Deux lignes suffisent à démêler le réseau du pipeline :
 
 | Stratégie | OVH LCP (ms) | OVH (KB) | Netlify LCP (ms) | Netlify (KB) |
 | --- | --- | --- | --- | --- |
 | naive | 1292 | 9158 | 615 | 9136 |
-| manual | 355 | 903 | 409 | 900 |
 | auto | 414 | 373 | 412 | 729 |
-| pixel-perfect | **302** | **138** | **336** | 234 |
-| lqip | 417 | 383 | 649 | 741 |
-| cropped | 392 | 405 | 435 | 797 |
-| final | 333 | 148 | 411 | 246 |
 
-Le paradoxe froid a disparu. À chaud, `manual` (355 ms) et `auto` (414 ms) sont quasi à égalité sur OVH, et à égalité stricte sur Netlify (409 vs 412) : le 2× de l'écart froid, c'était la taxe de transformation CDN payée à chaque run, rien d'autre. Une fois cette taxe amortie, le vrai classement apparaît — et il ne tient ni au format ni à l'hôte. `pixel-perfect` gagne partout (302 ms / 138 KB sur OVH), `final` juste derrière. Or `pixel-perfect`, `final` et `auto` utilisent la *même* transformation AVIF ; la seule différence, c'est que les deux premiers servent un fichier à la taille du slot là où `auto` sur-fetch un `w=640` pour 316 px. **Le levier n'a jamais été le format ; c'est le contrat `sizes`.** Et le CLS reste à 0 partout sauf sur `naive` : `width`/`height` suffisent.
-
-### Le déploiement compte moins que le `sizes`
-
-Reste l'hôte. OVH sert du Sharp build-time, Netlify transforme à la demande : comparer une *ligne* du tableau, c'est comparer deux pipelines, pas deux réseaux. Deux cas le démêlent. Sur le payload brut (`naive`, ~9 MB, aucune transformation), seul le transport compte et l'edge Netlify (615 ms) bat l'origine unique OVH (1292 ms) d'un facteur deux — la proximité du POP domine. Sur les assets optimisés, l'inverse : le Sharp build-time produit des fichiers ~2× plus petits que la transformation à la demande (`auto` 373 KB sur OVH contre 729 sur Netlify), et ces octets plus légers servis depuis une origine proche font gagner OVH à chaud en local.
+OVH sert du Sharp build-time, Netlify transforme à la demande : comparer une *ligne*, c'est comparer deux pipelines, pas deux réseaux. Deux cas le démêlent. Sur le payload brut (`naive`, ~9 MB, aucune transformation), seul le transport compte et l'edge Netlify (615 ms) bat l'origine unique OVH (1292 ms) d'un facteur deux — la proximité du POP domine. Sur les assets optimisés, l'inverse : le Sharp build-time produit des fichiers ~2× plus petits que la transformation à la demande (`auto` 373 KB sur OVH contre 729 sur Netlify), et ces octets plus légers servis depuis une origine proche font gagner OVH à chaud en local.
 
 Mais à l'échelle d'une miniature, sous 0,5 s, ces 50–100 ms relèvent surtout du bruit de run, et le classement s'inverserait encore avec une sonde mobile lointaine, qui rendrait l'avantage à l'edge. Le déploiement déplace le résultat à la marge ; le `sizes`, lui, le déplace de 500 ms. L'un est un réglage, l'autre est le levier.
+
+Puisqu'on parle de self-hosting, un point à connaître avant de déposer un build statique sur un mutualisé : **le cache HTTP**, que Netlify gère pour vous et qu'Apache ne fait pas tout seul.
+
+Astro, via Vite, empreinte chaque asset — `hero.B2x9f.webp`. Le hash dérive du contenu : un octet change, le nom change. Sous une URL donnée, le fichier ne devient donc jamais périmé — on peut le mettre en cache *pour toujours*. Encore faut-il le dire au serveur. Sur un mutualisé OVH (Apache), ça se déclare en `.htaccess` :
+
+```apache
+# Assets hachés par Astro (/_astro/) : le nom EST l'empreinte du contenu → immuables
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^_astro/ - [E=IMMUTABLE:1]
+</IfModule>
+<IfModule mod_headers.c>
+  Header set Cache-Control "public, max-age=31536000, immutable" env=IMMUTABLE
+</IfModule>
+```
+
+`immutable` dit au navigateur de ne même pas revalider : tant que l'URL ne change pas, aucune requête, pas même un `304`. C'est le hash qui invalide — nouveau contenu, nouveau nom, nouveau fetch. Sans cet en-tête, le navigateur repasse à chaque visite vérifier chaque fichier (un aller-retour par asset, juste pour s'entendre dire « pas changé ») : économe en octets, coûteux en latence.
+
+Le ciblage sur `/_astro/` est volontaire. Ces fichiers-là sont hachés ; le HTML (`index.html`) et les images non hachées de `/public/` — comme celles de la stratégie `manual` — ne le sont pas et doivent rester révalidés, sinon un remplacement de fichier resterait invisible derrière un cache d'un an.
 
 ### Le même test, trois instruments
 
