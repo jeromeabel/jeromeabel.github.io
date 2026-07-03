@@ -251,33 +251,76 @@ miniature — les octets pèsent beaucoup plus.
 - [x] **Reporter min/médiane/max** — `measure.mjs` : exposer la dispersion au
       lieu de la seule médiane.
 
-### Résultats après correction (2026-07-03)
+### Résultats après correction (2026-07-03, throttling `devtools`)
 
 Fondu exempté de l'above-fold (snap sur `naive`/`cover`, fondu conservé
-seulement sur le lazy below-fold), chauffe + garde `dpl` en place. Nouveau
-run live (deploy `6a4812fded72650008c54b34`) :
+seulement sur le lazy below-fold), chauffe + garde `dpl` en place, throttling
+mobile passé de `simulate` à `devtools` (voir cause ci-dessous). Run live
+sur un seul deploy (mobile et desktop partagent le même `dpl`).
 
-- **Délai de rendu de l'élément LCP** (`final`, mobile) : 19 ms — contre
-  ~1236 ms avant correction. La pénalité d'animation a disparu : c'était
-  bien le fondu qui décalait la mesure, pas l'image elle-même.
-- **Élément LCP** : dans les 7 stratégies (mobile), c'est la vraie image
-  `<picture><img>` qui gagne le LCP, jamais le placeholder LQIP — les
-  mesures restent comparables entre stratégies.
-- **Classement en octets image** confirmé : `naive` ≫ `manual` >
-  `pixel-perfect` ≈ `final` > `auto` ≈ `lqip` ≈ `cropped`.
-- **Mais** `final` mobile (médiane 1440 ms) reste sous `pixel-perfect`
-  mobile (2038 ms) — pas la quasi-égalité espérée. Les deux distributions
-  sont bimodales même après un run de chauffe (~1100–1400 ms vs
-  ~2000–3500 ms selon les runs) : probablement des variantes `srcset` à DPR
-  différent que la chauffe (un seul hit) ne couvre pas toutes. Sur desktop
-  la dispersion est resserrée pour la même paire (288 vs 408 ms). Chiffre
-  gardé tel quel plutôt que forcé à correspondre à l'hypothèse — voir
-  `data/benchmark.{mobile,desktop}.json` (`lcpMinMs`/`lcpMaxMs`).
+**Pourquoi le throttling a changé.** Le premier run post-correction (méthode
+`simulate`/Lantern, note précédente) gardait une dispersion bimodale sur
+`pixel-perfect` (1121–3531 ms) et `final` (1412–2640 ms) malgré la chauffe.
+Investigation : la requête de l'image LCP elle-même était quasi identique
+sur les 5 runs (même URL, même `dpl`, ~41 Ko, fin de transfert 325–682 ms) —
+la variance ne venait pas du CDN. `simulate` n'est pas une mesure directe :
+Lighthouse rejoue la trace observée sur un profil réseau/CPU modélisé
+(Lantern), et ce modèle amplifie de façon non linéaire la moindre gigue
+réelle. Preuve : un run observé 343→715 ms (×2,1) devenait simulé
+1138→3522 ms (×3,1). La chauffe (Task 2) prime le cache CDN, pas la
+sensibilité de Lantern à la gigue — deux problèmes distincts qui produisaient
+le même symptôme (grande dispersion).
+
+**Effet du passage à `devtools`** (throttling réellement appliqué au réseau/CPU
+au lieu de simulé ; desktop inchangé, déjà en profil léger ×1 CPU / 10 Mbps) :
+
+- La dispersion min–max se resserre **sur toutes les stratégies mobiles**,
+  pas seulement `pixel-perfect`/`final` : ratio max/min passe de 3,15× à
+  1,006× (`pixel-perfect`), 1,87× à 1,025× (`final`), et pour les autres
+  stratégies d'une fourchette 1,03–2,57× à 1,00–1,10×. Le diagnostic Lantern
+  est confirmé dans son principe, mais l'effet n'était pas spécifique aux
+  chaînes de dépendance longues comme supposé : `devtools` resserre la mesure
+  partout.
+- Les valeurs absolues de LCP **augmentent fortement** sous `devtools` (réseau
+  réellement bridé sur toute la fenêtre de mesure, pas juste modélisé) :
+  ordre de grandeur ×2 à ×12 selon la stratégie. `naive` passe de 2299 ms à
+  28926 ms — cohérent avec son défaut connu (20 images en eager sans
+  `loading`, cf. composant) : sous bande passante réellement contrainte, les
+  20 requêtes se disputent réellement la bande passante, ce que `simulate`
+  sous-estimait.
+- **Changement de classement notable : `manual`.** Sous `simulate`, `manual`
+  était 3ᵉ plus rapide (1308 ms, devant `final`/`lqip`/`pixel-perfect`). Sous
+  `devtools`, il devient 2ᵉ plus lent (6535 ms, derrière `auto`/`cropped`/
+  `lqip`/`final`/`pixel-perfect`). Cause probable : `manual` pèse ~1148 Ko
+  d'images, environ le double d'`auto`/`lqip`/`cropped` (~590 Ko) — sur un
+  réseau réellement bridé le temps de transfert est directement proportionnel
+  aux octets, alors que Lantern ne semble pas avoir pondéré ce coût aussi
+  lourdement pour une chaîne de dépendance courte (pas de hop de transform
+  CDN). Le classement en **octets image** (`naive` ≫ `manual` >
+  `pixel-perfect` ≈ `final` > `auto` ≈ `lqip` ≈ `cropped`) reste, lui,
+  inchangé — il ne dépend pas du throttling.
+- **`final` bat toujours `pixel-perfect` sur mobile** (4248 ms vs 4493 ms) —
+  la conclusion de la correction du fondu tient dans sa direction, mais l'écart
+  relatif se resserre (5,7 % contre 29 % sous `simulate`) : les deux
+  chiffres absolus ayant explosé sous throttling réel, l'écart en valeur
+  absolue pèse proportionnellement moins.
+- **Desktop quasi inchangé** (297 vs 288 ms pour `pixel-perfect`, 406 vs
+  408 ms pour `final`) — attendu, le profil desktop était déjà léger, sans
+  matière à amplification Lantern.
+
+Chiffres complets : `data/benchmark.{mobile,desktop}.json`
+(`lcpMinMs`/`lcpMedianMs`/`lcpMaxMs`).
 
 **Leçon explicite : ne jamais animer l'élément LCP.** L'above-fold « snap »
 désormais (le placeholder LQIP reste peint derrière) ; seul le below-fold
 garde le fondu. Ce n'est pas une régression de la démo, c'est la règle que
 la démo enseigne.
+
+**Leçon méthode : `simulate` (Lantern) n'est pas une mesure fiable en
+absolu ni en dispersion pour comparer des stratégies mobiles entre elles.**
+Utiliser `--throttling-method=devtools` pour des comparaisons mobiles
+défendables, au prix d'un temps réel d'exécution nettement plus long (pas
+de raccourci de simulation).
 
 Note méthode : `imageBytes` compare les stratégies *au sein d'un mode*
 (la marge de lazy-load diffère entre émulation mobile et desktop — jamais de
