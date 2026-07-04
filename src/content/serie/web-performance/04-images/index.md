@@ -93,7 +93,7 @@ Les deux options ont leurs avantages et inconvénients :
 - Pour la version statique, deux opérations potentiellement longues sont nécessaires : la création d'images au moment du "build" et leur transfert vers l'espace d'hébergement. En revanche, au moment de la navigation par un visiteur, le serveur a juste à livrer les images, elles sont déjà prêtes.
 - Le CDN à la demande, lui, diffère le travail à la première requête : sur un cache froid, le serveur doit récupérer la source, la décoder, la redimensionner, la ré-encoder en AVIF, puis répondre — du calcul serveur qui s'ajoute au TTFB, par image et par cycle de cache. Une fois le fichier en cache, c'est directement accessible ; le problème se reporte sur le premier visiteur.
 
-TODO. "Premier visiteur" signifie-t-il, ma première visite à moi ou la première visite de n'importe quelle personne ?
+« Premier visiteur » désigne la première personne — n'importe laquelle — à demander cette variante précise sur un nœud edge donné, pas vous en particulier. Le cache est partagé : une fois qu'un visiteur a payé la transformation, le fichier est en cache et tous les suivants le reçoivent déjà prêt, jusqu'à ce que le cache expire ou qu'un redéploiement (`dpl`) l'invalide. Le coût de « première visite » est donc payé une fois par variante et par nœud, pas à chaque visite.
 
 
 ### Petit piège avec Tailwind
@@ -151,60 +151,94 @@ Le piège, c'est que mon benchmark mesure deux choses en même temps.
 - **La stratégie *et* le pipeline de déploiement.** `manual` est servi en statique depuis le disque ; `auto`, `pixel-perfect` et `final` émettent des URL `/.netlify/images?url=…` et, au premier accès, le serveur doit récupérer la source, la décoder, la redimensionner, la ré-encoder en AVIF, puis répondre — du calcul qui s'ajoute au TTFB. Or `netlify serve` vide son cache à chaque lancement : la mesure est toujours froide, donc cette transformation est toujours payée. Le 2× d'écart, c'est cette taxe, pas le format.
 - **L'élément LCP est une miniature de 316 px, servie trop large.** La page est une grille de 21 images ; le LCP est `photo-01`, une miniature de 316 px. À cette taille, JPEG ou AVIF pèsent à peu près pareil (≈ 39 vs 25 KB) — le gain de format est invisible. Pire : le `sizes` de `manual` comme d'`auto` résout ce slot de 316 px par un fichier `w=640`, deux fois trop large. La preuve : `pixel-perfect` (1001 ms) et `final` (1077 ms) utilisent *exactement la même* transformation AVIF qu'`auto` et le battent de ~500 ms, juste en servant la bonne taille.
 
-Bref, ce premier benchmark fournit le pire scénario — un cache vide, comme une première visite — et il confond la stratégie avec le pipeline. J'ai cru mesurer une variable, j'en mesurais deux. On apprend ...
+Bref, ce premier benchmark fournit le pire scénario — un cache vide, comme une première visite — et il confond la stratégie avec le pipeline. J'ai cru mesurer une variable, j'en mesurais deux.
 
 
 ## Comparer proprement : une variable à la fois
 
-Cette fois, une règle simple : **figer toutes les variables sauf celle qu'on étudie.** Il y a trois variables : la stratégie, l'hôte, l'outil de mesure. Pour comparer les stratégies entre elles, je fige donc l'hôte et la mesure — production Netlify avec Image CDN à la demande (`astro-jeromeabel.netlify.app`), médiane de 3 itérations Lighthouse, et le cache CDN amorcé avant de mesurer (c'est ça, « à chaud » : la transformation déjà en cache, pas recalculée à chaque run). L'hôte, je le compare à part juste après — une variable à la fois, jusqu'au bout.
+Maintenant que j'ai compris la leçon, j'ai tout refait sur des bases saines. Trois changements :
 
-| Stratégie | LCP (ms) | Transfert (KB) |
+- **Un jeu d'images réaliste.** Les sources picsum du premier essai étaient déjà optimisées, et sur une miniature JPEG et AVIF pèsent presque pareil — de quoi masquer les écarts que les stratégies existent pour montrer. J'ai figé un jeu d'originaux bruts (committé une fois), et le générateur dérive chaque variante à partir de là. Reproductible, et `manual`/`pixel-perfect` gagnent enfin visiblement.
+- **Un régime de cache déclaré et forcé.** Le seul régime reproductible sur Netlify live est le **chaud**. Chaque stratégie × mode reçoit un run de chauffe jetable qui amorce le cache edge, puis médiane de 5 runs mesurés. Chaque URL de transform porte un `dpl=<deploy-id>` ; je vérifie que tous les runs partagent le même — sinon un redéploiement en cours de benchmark aurait tout recaché à zéro.
+- **La bonne métrique en tête.** Une colonne LCP unique mélange quatre variables : les octets livrés, le régime de cache, le fondu de rendu et les artefacts de l'outil. La seule mesure déterministe — zéro variance, insensible au cache et au fondu — c'est les **octets d'images transférés**. C'est le classement principal ; le LCP vient en confirmation, publié en **min / médiane / max** pour que la dispersion soit visible plutôt que maquillée par la seule médiane.
+
+Et surtout, je mesure **mobile et desktop séparément**. C'est là qu'est la vraie histoire.
+
+### Mobile — le révélateur
+
+Émulation Moto G Power, Slow 4G réellement *appliqué* (`--throttling-method=devtools`, pas le modèle Lantern qui amplifiait le bruit de façon non linéaire). Classement par octets d'images ; LCP en médiane (min–max) de 5 runs chauds, tous sur le même deploy.
+
+| Stratégie | Octets image (KB) | LCP méd. (min–max) ms |
 | --- | --- | --- |
-| naive | 615 | 9136 |
-| manual | 409 | 900 |
-| auto | 412 | 729 |
-| pixel-perfect | **336** | **234** |
-| lqip | 649 | 741 |
-| cropped | 435 | 797 |
-| final | 411 | 246 |
+| naive | 9124 | 28891 (28774–28936) |
+| manual | 1148 | 6542 (6533–6602) |
+| pixel-perfect | 913 | 4494 (4481–4560) |
+| final | 913 | 4514 (4501–4523) |
+| auto | 597 | 3794 (3778–3805) |
+| lqip | 597 | 3822 (3807–3832) |
+| cropped | 585 | 3547 (3533–3616) |
 
-Le paradoxe froid a disparu. À chaud, `manual` (409 ms) et `auto` (412 ms) sont à égalité stricte : le 2× de l'écart froid, c'était la taxe de transformation CDN payée à chaque run à vide, rien d'autre. Une fois cette taxe amortie, le vrai classement apparaît, et il ne tient pas au format. `pixel-perfect` gagne (336 ms / 234 KB), `final` juste derrière. Or `pixel-perfect`, `final` et `auto` utilisent la *même* transformation AVIF ; la seule différence, c'est que les deux premiers servent un fichier à la taille du slot là où `auto` sur-fetch un `w=640` pour 316 px. **Le levier n'a jamais été le format ; c'est le contrat `sizes`.** Et le CLS reste à 0 partout sauf sur `naive` : `width`/`height` suffisent.
+Rien ne se passe comme le desktop laissait croire.
+
+- **`naive` est une catastrophe : 28,9 s.** Vingt images en `eager` sans `loading`, qui se disputent réellement une bande passante bridée. Sous throttling simulé ce coût était sous-estimé ; sous throttling réel il explose. C'est le prix d'un seul défaut structurel — pas de lazy-load, pas de priorité — payé au comptant.
+- **`pixel-perfect` n'est plus le plus léger : il est parmi les plus lourds (913 KB).** Contre-intuitif jusqu'à ce qu'on regarde le slot. En mobile 1 colonne, l'élément LCP est une image **pleine largeur** à DPR 1,75, pas une miniature. `pixel-perfect` dimensionne *honnêtement* ce grand slot ; le `sizes` générique d'`auto` le **sous-estime** (597 KB) et sert un fichier trop petit pour l'emplacement. Plus léger ne veut pas dire mieux dimensionné — `auto` gagne des octets en trichant sur la taille.
+- **`cropped` gagne le LCP mobile (3547 ms).** Recadrer, c'est déplacer moins de pixels pour la même largeur de slot : le fichier est plus petit à cadrage utile égal. Sur un hero mobile pleine largeur, c'est le levier le plus direct sur le LCP.
+- **`final ≈ pixel-perfect` (4514 vs 4494 ms, 0,4 %).** La pénalité de fondu de ~1,2 s du premier run a disparu : l'élément LCP above-fold « snappe » désormais au lieu de fondre (voir [Ne jamais animer l'élément LCP](#le-fondu-au-chargement) plus bas). Sans ce correctif, `final` et `lqip` mesuraient la durée d'une animation, pas une stratégie d'images.
+
+### Desktop — le contraste
+
+Émulation desktop (profil léger, ×1 CPU / 10 Mbps), même deploy, même méthode.
+
+| Stratégie | Octets image (KB) | LCP méd. (min–max) ms |
+| --- | --- | --- |
+| naive | 9124 | 526 (506–533) |
+| manual | 889 | 384 (369–395) |
+| cropped | 785 | 352 (340–415) |
+| lqip | 717 | 437 (403–524) |
+| auto | 716 | 362 (362–395) |
+| pixel-perfect | 222 | 326 (283–339) |
+| final | 222 | 400 (384–407) |
+
+Ici l'ancienne histoire tient. En grille 3 colonnes, le slot est une miniature de 316 px à DPR 1, et `pixel-perfect` sert *exactement* cette taille : 222 KB, le plus léger de loin, et le meilleur LCP (326 ms). `final` égale les octets (222 KB) et ajoute 74 ms pour la couche LQIP. `auto` transporte 3× plus d'octets (716 KB) pour la *même* transformation AVIF, juste parce que son `sizes` générique sur-fetch le petit slot.
+
+### Ce que l'inversion dit vraiment
+
+Le même `pixel-perfect` est **le plus léger sur desktop (222 KB) et parmi les plus lourds sur mobile (913 KB)** — sans changer une ligne de code. Le levier n'a jamais été « pixel-perfect gagne toujours » ; c'est **la taille du slot**. Quand le slot est petit (miniature desktop), le bon `sizes` économise énormément d'octets et `pixel-perfect` domine. Quand le slot est grand (hero mobile pleine largeur), dimensionner honnêtement *coûte* des octets, et le vrai levier LCP devient « déplacer moins de pixels » — donc le recadrage. `auto` ne paraît plus léger en mobile que parce qu'il sous-dimensionne : un gain d'octets au prix d'une image servie trop petite pour son slot.
+
+Le classement en octets ne dépend ni du throttling ni du cache — c'est la mesure directe de la thèse `sizes`, et la seule colonne qui mérite le mot « classement ». Mais il n'est stable que dans sa **structure grossière** : `naive` explose seul, `manual` reste lourd (JPEG hors CDN), et les transformations CDN se regroupent bien en dessous. L'ordre *fin*, lui, s'inverse avec le slot — c'est tout le propos ci-dessus. En mobile (hero pleine largeur) : `pixel-perfect` ≈ `final` (913 KB) au-dessus de `auto` ≈ `lqip` ≈ `cropped` (~590 KB). En desktop (miniature 316 px), l'ordre bascule : `pixel-perfect` ≈ `final` passent les plus légers (222 KB), tandis que `cropped` (785 KB) remonte au-dessus de `auto` ≈ `lqip` (716 KB). Même code, deux classements — parce que « bien dimensionné » dépend du slot, pas de la stratégie.
+
+Trois mises en garde pour que ces chiffres restent reproductibles :
+
+- Les octets se comparent **au sein d'un mode seulement** — la marge de lazy-load diffère entre émulation mobile et desktop ; jamais de comparaison croisée mobile↔desktop sur cette colonne.
+- `naive` et `manual` n'ont pas d'URL de transform CDN : leur `dpl` est trivialement uniforme (les noms de fichiers hachés rendent leur cache immunisé au deploy de toute façon).
+- Tous les chiffres sont établis sur le jeu d'originaux réalistes committé, un seul deploy (même `dpl` sur les deux modes), un seul outil.
 
 ### Le déploiement compte moins que le `sizes`
 
-Maintenant qu'on a figé l'hôte pour classer les stratégies, faisons varier *seulement* l'hôte. J'ai relancé le même benchmark sur un build statique déposé sur un mutualisé OVH (`astro.jeromeabel.net`) — les fichiers y sont déjà produits par Sharp au moment du build — face à la transformation à la demande de Netlify. Deux lignes suffisent à démêler le réseau du pipeline :
+*Cet écart hôte-contre-hôte a été mesuré lors d'une passe antérieure (jeu d'images picsum, run unique par hôte), pas dans le benchmark dual-mode ci-dessus — je le garde parce que la leçon qu'il porte ne dépend pas du dataset.*
+
+Après avoir figé l'hôte pour classer les stratégies, faisons varier *seulement* l'hôte. J'ai relancé le même benchmark sur un build statique déposé sur un hébergement mutualisé OVH (`astro.jeromeabel.net`) — les fichiers y sont déjà produits par Sharp au moment du build — face à la transformation à la demande de Netlify. 
+
+Au sujet de l'hébergement mutualisé (self-hosting), il est important de mentionner que le serveur Apache a été configuré de façon minimale pour supporter le cache et se rapprocher autant que possible des optimisations fournies automatiquement par Netlify.
+
+Deux lignes suffisent pour poser un diagnostic :
 
 | Stratégie | OVH LCP (ms) | OVH (KB) | Netlify LCP (ms) | Netlify (KB) |
 | --- | --- | --- | --- | --- |
 | naive | 1292 | 9158 | 615 | 9136 |
 | auto | 414 | 373 | 412 | 729 |
 
-OVH sert du Sharp build-time, Netlify transforme à la demande : comparer une *ligne*, c'est comparer deux pipelines, pas deux réseaux. Deux cas le démêlent. Sur le payload brut (`naive`, ~9 MB, aucune transformation), seul le transport compte et l'edge Netlify (615 ms) bat l'origine unique OVH (1292 ms) d'un facteur deux — la proximité du POP domine. Sur les assets optimisés, l'inverse : le Sharp build-time produit des fichiers ~2× plus petits que la transformation à la demande (`auto` 373 KB sur OVH contre 729 sur Netlify), et ces octets plus légers servis depuis une origine proche font gagner OVH à chaud en local.
+Un **POP** (*Point of Presence*) est un nœud du réseau de diffusion proche géographiquement du visiteur : Netlify réplique le site sur des dizaines de POP à travers le monde et sert chacun depuis le plus proche, là où l'hébergement mutualisé OVH n'a qu'une seule origine.
 
-Mais à l'échelle d'une miniature, sous 0,5 s, ces 50–100 ms relèvent surtout du bruit de run, et le classement s'inverserait encore avec une sonde mobile lointaine, qui rendrait l'avantage à l'edge. Le déploiement déplace le résultat à la marge ; le `sizes`, lui, le déplace de 500 ms. L'un est un réglage, l'autre est le levier.
+Sur le payload brut (`naive`, ~9 MB, aucune transformation), seul le transport compte et l'edge Netlify (615 ms) bat l'origine unique OVH (1292 ms) d'un facteur deux — la proximité du POP domine. Sur les assets optimisés, c'est l'inverse : le Sharp build-time produit des fichiers ~2× plus petits que la transformation à la demande (`auto` 373 KB sur OVH contre 729 sur Netlify). Cela ne semble pas impacté le LCP, mais c'est tout de même à noter.
 
-Puisqu'on parle de self-hosting, un point à connaître avant de déposer un build statique sur un mutualisé : **le cache HTTP**, que Netlify gère pour vous et qu'Apache ne fait pas tout seul.
+Donc, pour un cas plus probable où tout le monde fournira plusieurs tailles d'image, le déploiement ne semble pas être dans mon cas, un facteur critique. Le facteur le plus déterminant reste donc les valeurs `sizes`.
 
-Astro, via Vite, empreinte chaque asset — `hero.B2x9f.webp`. Le hash dérive du contenu : un octet change, le nom change. Sous une URL donnée, le fichier ne devient donc jamais périmé — on peut le mettre en cache *pour toujours*. Encore faut-il le dire au serveur. Sur un mutualisé OVH (Apache), ça se déclare en `.htaccess` :
+### Les différentes méthodes de mesure
 
-```apache
-# Assets hachés par Astro (/_astro/) : le nom EST l'empreinte du contenu → immuables
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteRule ^_astro/ - [E=IMMUTABLE:1]
-</IfModule>
-<IfModule mod_headers.c>
-  Header set Cache-Control "public, max-age=31536000, immutable" env=IMMUTABLE
-</IfModule>
-```
+*Ce tableau des régimes d'outils vient lui aussi de la passe antérieure ; les chiffres cités sont illustratifs, mais la mise en garde — trois outils, trois régimes jamais comparables en absolu — vaut pour n'importe quel dataset, y compris le benchmark dual-mode ci-dessus.*
 
-`immutable` dit au navigateur de ne même pas revalider : tant que l'URL ne change pas, aucune requête, pas même un `304`. C'est le hash qui invalide — nouveau contenu, nouveau nom, nouveau fetch. Sans cet en-tête, le navigateur repasse à chaque visite vérifier chaque fichier (un aller-retour par asset, juste pour s'entendre dire « pas changé ») : économe en octets, coûteux en latence.
-
-Le ciblage sur `/_astro/` est volontaire. Ces fichiers-là sont hachés ; le HTML (`index.html`) et les images non hachées de `/public/` — comme celles de la stratégie `manual` — ne le sont pas et doivent rester révalidés, sinon un remplacement de fichier resterait invisible derrière un cache d'un an.
-
-### Le même test, trois instruments
-
-Dernier piège : changez d'outil et le classement rebouge, sans que la page change. Trois instruments répondent à trois questions, et confondre leurs chiffres est la première source de tournis.
+Dernier piège : changez d'outil et le classement change sans que la page ne change.
 
 | Outil | Où ça tourne | Throttle (défaut) | Cache |
 | --- | --- | --- | --- |
@@ -212,169 +246,38 @@ Dernier piège : changez d'outil et le classement rebouge, sans que la page chan
 | Lighthouse DevTools (site live) | ma machine | mobile Slow 4G : 150 ms, 1,6 Mbps, CPU ×4 | froid |
 | PageSpeed Insights | serveurs Google | mobile Slow 4G + CPU ×4 | froid |
 
-Trois choses à savoir, vérifiées dans la doc Lighthouse. **Le throttling est simulé** : Lighthouse charge la page une fois sans throttle, puis *calcule* le temps qu'elle aurait pris sous les conditions cibles ([throttling.md](https://github.com/GoogleChrome/lighthouse/blob/main/docs/throttling.md)) — rapide et déterministe, mais c'est un modèle, pas un vrai réseau lent. **Chaque run vide le cache** (`disableStorageReset` vaut `false` par défaut) : la mesure est donc toujours froide, et la transformation CDN toujours payée. **Un run unique ment** : « la médiane de 5 runs est deux fois plus stable qu'un seul run » ([variability.md](https://github.com/GoogleChrome/lighthouse/blob/main/docs/variability.md)) — `final` sur Netlify affichait 2,3 s en un seul run mobile contre 0,8 s ailleurs, du bruit pur.
+Trois pièges, confirmés par la doc Lighthouse :
 
-Le mobile reste le révélateur : il applique un CPU 4× plus lent que mon desktop, le coût que vit un vrai téléphone et que ma machine masque. Mais tout ceci est du labo — ces pages de démo n'ont pas de visiteurs, donc aucune donnée terrain pour trancher. En pratique : le 3-run local à chaud pour **comparer les stratégies** entre elles ; PageSpeed mobile pour **approcher le régime livré** ; le Lighthouse DevTools sur le live seulement comme coup d'œil — ma machine, un seul run, jamais un chiffre de référence.
+- **Le throttling est simulé.** Lighthouse charge la page une fois sans bridage, puis *calcule* le temps qu'elle aurait pris dans les conditions cibles ([throttling.md](https://github.com/GoogleChrome/lighthouse/blob/main/docs/throttling.md)). Rapide et reproductible, mais c'est un modèle — pas un vrai réseau lent.
+- **Chaque run part d'un cache vide** (`disableStorageReset` vaut `false` par défaut). La mesure est donc toujours froide, et la transformation CDN toujours payée.
+- **Un seul run ne veut rien dire.** La doc le dit : « la médiane de 5 runs est deux fois plus stable qu'un seul run » ([variability.md](https://github.com/GoogleChrome/lighthouse/blob/main/docs/variability.md)). `final` sur Netlify affichait 2,3 s sur un run mobile isolé contre 0,8 s ailleurs — du bruit, rien d'autre.
 
-## Une source, deux recadrages
+Le mobile reste le révélateur : son CPU 4× plus lent que mon desktop expose le coût que vit un vrai téléphone et que ma machine masque. Mais tout cela reste du labo : ces pages de démo n'ont aucun visiteur, donc aucune donnée terrain pour trancher.
 
-La stratégie `cropped` est le plus petit ajout possible à `auto` : ajouter `fit="cover"` et une `height` explicite, et Astro génère une variante recadrée au moment du build.
+En pratique, à chaque outil son usage :
 
-```astro
-{/* miniature grille : 4:3 */}
-<Picture src={image} layout="constrained" fit="cover"
-  width={640} height={480} sizes={autoSizes} alt={alt} />
+- **le benchmark scripté** (Lighthouse en médiane de 3 runs, preset desktop, CDN à chaud) : c'est lui qui a établi le classement des stratégies plus haut — ma seule mesure de référence ;
+- **PageSpeed mobile** : pour *approcher le régime réellement livré*, mesuré sur l'infra de Google ;
+- **Lighthouse DevTools sur le live** : un coup d'œil rapide en conditions mobiles, utile pour situer la page mais jamais un chiffre de référence.
 
-{/* couverture détail : 16:9 */}
-<Picture src={image} layout="constrained" fit="cover"
-  width={1280} height={720} sizes={autoSizes} alt={alt} />
-```
+## Reproduire un service d'images, une option à la fois
 
-Les deux lisent le même import `image`. Astro produit deux fichiers de sortie — un recadrage 640×480 et un recadrage 1280×720 — pendant `pnpm build`. Pas de serveur, pas de transformation à l'exécution ; le CDN sert des fichiers statiques. Ce qui change entre la vue grille et la vue détail, c'est le cadre que voit l'utilisateur, pas le moment où la transformation s'exécute.
+Tout ce qui précède, c'est le benchmark : quelle stratégie livre le moins d'octets, dans quel régime, mesurée comment. Reste la question du *comment le construire*. Un service dédié — Cloudinary, Imgix — vous vend une boîte noire qui fait tout à la fois. `CustomImage` fait la même chose à la main, une **option composable** à la fois, et chaque option se justifie par un chiffre du benchmark ci-dessus ou par une amélioration d'UX mesurable. Je les présente dans l'ordre où je les activerais sur une vraie galerie — le plus structurant d'abord.
 
-[![/optimg/cropped — miniature grille (4:3) et couverture détail (16:9) côte à côte, même image source](./optimg-cropped.png)](https://astro-jeromeabel.netlify.app/optimg/cropped)
-*Placeholder — en attente d'une vraie capture d'écran. **Capturer :** une photo paysage avec overlay `d` (grand titre baked) pour que le recadrage soit évident — ex. `photo-04` (dunes de désert). Placer la miniature grille (4:3, [`/optimg/cropped`](https://astro-jeromeabel.netlify.app/optimg/cropped)) à côté de sa couverture détail (16:9, [`/optimg/cropped/photo-04`](https://astro-jeromeabel.netlify.app/optimg/cropped/photo-04)) ; même source, deux recadrages.*
+## Hero eager, le reste lazy
 
-Dans le benchmark, `cropped` (1600 ms, 559 KB) suit `auto` (1529 ms) de près sur le LCP — la transformation de recadrage CDN n'ajoute qu'une latence marginale ce run — pour ~36 KB de plus. Recadrer change surtout le cadre, à peine les octets. Ce que `cropped` enseigne, c'est qu'une source peut servir plusieurs contextes avec des ratios d'aspect différents sans script, sans route serveur, ni étape de recadrage CMS. Pour les éléments de galerie où `crop: true` est défini, la stratégie `final` étend cela — couvertures 16:9 et miniatures 4:3 combinées avec des largeurs pixel-perfect et le placeholder LQIP.
-
-## La stack finale
-
-`final` combine tout : largeurs pixel-perfect basées sur les tokens sous un placeholder LQIP, avec recadrage optionnel par image. Elle bat `lqip` seul de 177 ms (1077 ms vs 1254 ms) parce que les fichiers plus petits issus du sizing précis compensent largement la surcharge du placeholder.
-
-Le composant ajoute des props pixel-perfect à la structure `lqip` de la section suivante :
-
-```astro
-<div class="reveal-img relative overflow-hidden">
-  <!-- placeholder flou 32px, correspondant au ratio d'aspect de la vraie image -->
-  <img class="absolute inset-0 -z-10 h-full w-full object-cover blur-2xl"
-    aria-hidden="true" src={placeholder} alt="" />
-
-  <!-- <Picture> pixel-perfect avec recadrage optionnel par item -->
-  <Picture
-    src={image} layout="constrained"
-    width={ppWidth} widths={ppWidths} sizes={ppSizes}
-    height={finalHeight}
-    fit={finalCrop ? "cover" : undefined}
-    position={finalCrop ? "top" : undefined}
-    pictureAttributes={{ style: "opacity:0" }}
-    alt={alt} />
-</div>
-```
-
-`ppWidth`, `ppWidths` et `ppSizes` viennent des tokens de mise en page. `finalHeight` n'est défini que quand `item.crop: true` dans `gallery.json`, ajustant le ratio d'aspect à la fois pour le placeholder (via `getImage`) et pour la vraie image (via `fit="cover"`). Le script de révélation est identique à celui de `lqip` — `img.complete` déclenche un snap sur les images en cache et un fondu de 1,2 s sur un chargement réseau.
-
-[![/optimg/final en cours de chargement avec le throttle DevTools (Slow 3G, cache désactivé) — placeholder LQIP visible avant le streaming de la vraie image](./optimg-final-loading.png)](https://astro-jeromeabel.netlify.app/optimg/final)
-*Placeholder — en attente d'une vraie capture d'écran. **Capturer :** [`/optimg/final`](https://astro-jeromeabel.netlify.app/optimg/final), DevTools throttle Slow 3G + cache désactivé, snap en cours de chargement. Mettre en avant une photo avec titre overlay `d` (ex. `photo-01`) pour que la transition placeholder LQIP flou → titre net soit lisible pendant que le vrai fichier stream.*
-
-L'écart de 76 ms entre `pixel-perfect` (1001 ms) et `final` (1077 ms) est la surcharge LQIP : un placeholder WebP 32px décodé et affiché avant que le vrai fichier stream. Sur une connexion rapide le placeholder disparaît avant qu'on le remarque ; sur une connexion lente il remplit le slot immédiatement plutôt qu'un rectangle blanc. Le chiffre Lighthouse bouge à peine ; l'expérience utilisateur, oui.
-
-## La pièce qu'Astro ne vous donne pas
-
-Tout ce qui précède, c'est des octets et de la mise en page. Ce qu'Astro ne fera pas, c'est la performance *perçue* : l'expérience utilisateur entre le premier affichage et le moment où la vraie image est prête. Sur une connexion lente, le délai entre « la page est apparue » et « les images sont chargées » peut durer plusieurs secondes. Sans placeholder, chaque slot d'image est une boîte blanche vide — la page semble cassée. C'est le LQIP — low-quality image placeholder — et c'est le seul composant personnalisé qui vaut encore la peine d'être écrit.
-
-`getImage()` est la trappe de secours côté serveur. Je l'utilise pour rendre un minuscule placeholder flou, dimensionné au ratio d'aspect de la vraie image pour qu'il ne se déforme pas :
-
-```ts
-const aspectRatio = img.width / img.height;
-const w = aspectRatio >= 1 ? 32 : Math.round(32 * aspectRatio);
-const h = aspectRatio >= 1 ? Math.round(32 / aspectRatio) : 32;
-const placeholder = await getImage({ src: img, format: "jpg", width: w, height: h });
-```
-
-Le placeholder se place derrière la vraie image, flouté ; le vrai `<Picture>` commence invisible. Les props du composant Astro vont vers le `<img>` interne, donc `pictureAttributes` est comment vous accédez à l'élément externe pour le démarrer caché :
-
-```astro
-<div class="reveal-img relative overflow-hidden">
-  <img class="absolute -z-10 h-full blur-2xl" aria-hidden="true"
-    src={placeholder.src} alt="" />
-  <Picture src={img} formats={["avif", "webp"]} sizes={sizes} alt={alt}
-    pictureAttributes={{ style: "opacity: 0" }} />
-</div>
-```
-
-Il y a deux façons de rendre ce placeholder flou, et elles offrent des compromis différents. Vous pouvez cuire le flou dans le fichier — le vieux `-blur 0x8` d'ImageMagick de l'ère manuelle — pour que les octets arrivent déjà doux et que le navigateur ne fasse aucun travail. Ou vous livrez une image nette de 32px et la floutez en CSS (`blur-2xl`, ou un `filter`). Le flou baked coûte zéro à l'exécution mais l'aspect est figé au build ; le flou CSS est un filtre GPU live — une couche de composition supplémentaire — mais le rayon est une classe que vous pouvez ajuster, et sur une image 32×32 le filtre est si bon marché qu'il ne se remarque pas. J'utilise la voie CSS précisément parce que le placeholder est déjà minuscule : il n'y a rien à optimiser, et je préfère changer `blur-2xl` en `blur-xl` en un seul endroit plutôt que relancer un script. Sur un grand placeholder je le cuirais à la place.
-
-Ensuite un petit script fait fondre la vraie image à l'apparition. Le détail qui compte — et le bug que tout le monde rencontre — c'est le garde-cache :
-
-```ts
-const showImage = () => {
-  picture.style.opacity = "1";
-  if (placeholder) placeholder.style.opacity = "0";
-};
-if (imgElement.complete) showImage();              // en cache → snap, pas d'animation
-else {
-  picture.style.transition = "opacity 1200ms ease";
-  imgElement.addEventListener("load", showImage);  // réseau → fondu
-}
-```
-
-Si vous animez sans condition, chaque navigation arrière/avant rejoue un fondu de 1,2 s sur des images que le navigateur a déjà, et la page scintille. Vérifier `img.complete` signifie que l'animation ne joue que sur un vrai chargement réseau. Je lance ça sur `astro:page-load` pour que ça survive aux View Transitions, où un listener `DOMContentLoaded` naïf ne se déclencherait qu'une fois et jamais plus.
-
-J'ai écrit ça deux fois, et les deux versions ne s'accordent pas sur les détails — ce qui est la partie utile :
-
-| Aspect | Ce site | Un site de BD que je gère aussi |
-|---|---|---|
-| Placeholder | `<img>` flou 32px séparé derrière | aucun — le `<img>` réel se floute sur lui-même |
-| Transition | opacité, 1200ms | opacité + `filter: blur(10px)→0`, 400ms |
-| `sizes` | écrit à la main par type d'image | `widths[]` + `sizes` calculés depuis les tokens de mise en page |
-| Garde-cache | `img.complete` | `img.complete && naturalHeight !== 0` (plus robuste) |
-
-Le garde de la deuxième colonne est le meilleur : une image en cache mais cassée rapporte `complete: true` avec `naturalHeight: 0`, et seule la vérification plus stricte saute correctement le fondu. Même idée, apprise deux fois.
-
-La ligne `sizes` est l'autre endroit où le site de BD est plus précis. Plutôt que de taper les breakpoints à la main, il calcule `sizes` depuis les tokens de mise en page réels — max-width de page, padding, gap, la grille à deux colonnes — pour que la largeur de slot déclarée corresponde à ce que l'image occupe vraiment à l'écran :
-
-```astro
-const sizesAttr = [
-  `(min-width: 768px) calc((min(100vw, ${pageMaxPx}px) - ${chromePx + gapPx}px) / 2)`,
-  `calc(100vw - ${mobileChromePx}px)`,
-].join(", ");
-```
-
-C'est la façon précise de faire `sizes`. Les breakpoints écrits à la main dérivent dès que vous changez une marge ; un `sizes` dérivé des mêmes tokens qui pilotent la mise en page reste honnête, et le navigateur arrête de sur-fetcher pour un slot plus étroit que vous l'aviez estimé. Plus de travail à mettre en place, moins d'octets gâchés pour toujours.
-
-### Quand la précision supplémentaire mérite vraiment son coût
-
-Ce qui soulève la vraie question : pourquoi s'embêter, quand le `layout` auto d'Astro aurait généré un `srcset` parfaitement raisonnable tout seul ? La réponse est le *contenu* de l'image, pas l'image en tant que concept.
-
-Pour une photographie, vous n'avez pas besoin de précision pixel. Le navigateur choisit l'étape `srcset` la plus proche, la met à l'échelle de quelques pourcents pour remplir le slot, et ce scaling est invisible — un arbre flouté de 4 % ressemble à un arbre. Le `layout` auto est exactement le bon choix ici, et calculer les largeurs à la main serait un effort pour rien.
-
-*Le concept de la preuve* est le cas inverse. Les images sont des pages de BD — art linéaire et lettrage. Si le fichier servi est même légèrement plus large ou plus étroit que le slot, le navigateur le rééchantillonne, et rééchantillonner du texte, c'est là que ça se voit : les contours s'adoucissent, les traits fins scintillent, le lettrage semble vaguement hors focus. Il n'y a pas de « suffisamment proche » pour un glyphe comme il y en a pour du feuillage. Donc ce site calcule les largeurs d'affichage exactes depuis sa mise en page et sert un fichier qui atterrit sur le slot sans scaling du tout. Le calcul supplémentaire achète du texte net, qui est tout l'intérêt de la page.
-
-C'est la ligne manuelle-vs-automatique, et elle n'est pas liée à combien vous faites confiance au framework — elle dépend de ce qui est *dans* l'image. Photos, captures d'écran, banners hero : laissez `layout` faire. Texte, art linéaire, diagrammes, tout ce qui a des contours durs qu'un lecteur scrutera : calculez les largeurs pour que le navigateur n'ait jamais à rééchantillonner. La valeur par défaut du framework est réglée pour le cas courant ; le cas non courant est exactement celui qui vaut le travail manuel. Le playground compagnon rend ça concret. Un réseau de lignes ne *se lit* — barres individuellement visibles — que quand chaque barre fait quelques pixels de large au slot affiché, et une galerie de 20 images montre ce slot de ~316px de miniature grille à 976px de couverture. Donc une largeur de barre unique ne peut pas démontrer l'effet partout : cuire des barres assez fines pour la couverture et elles s'effondrent en une bouillie sous-pixel dans la grille ; les cuire assez grossières pour la grille et elles sont grossières sur la couverture. La solution est deux réseaux empilés cuits à la résolution source : une bande **grossière** (période 60px) réglée pour se lire à la miniature grille, et une bande **fine** (période 20px) réglée pour la couverture. Quelle que soit la mise en page que vous regardez, une bande est dans sa zone optimale et l'autre est le contrôle. Servez le fichier exactement à la largeur du slot affiché et les barres se reproduisent proprement. Servez-le à une largeur légèrement différente et le navigateur rééchantillonne ; le réseau périodique change de phase, et vous obtenez du *moiré* — des bandes d'interférence alternant clair et sombre qui signalent une inadéquation d'échantillonnage ([Wikipedia : Effet de moiré](https://en.wikipedia.org/wiki/Moir%C3%A9_pattern)). La stratégie `pixel-perfect` l'élimine en servant un fichier qui atterrit sur le slot sans aucun scaling ; `auto` ne le fait pas, et les bandes d'interférence sont visibles. L'effet est extrême sur un réseau de lignes réglé, mais la même physique gouverne tout contenu dur-et-périodique : traits de lettrage fins, lignes réglées, hachures, pixel art. Le réseau rend le problème impossible à manquer.
-
-[![/optimg/auto vs /optimg/pixel-perfect — même image de réseau au même viewport, bandes de moiré visibles sur auto, barres nettes sur pixel-perfect](./optimg-moire.png)](https://astro-jeromeabel.netlify.app/optimg/pixel-perfect?debug)
-*Placeholder — en attente d'une vraie capture d'écran.* **Pour capturer :** ouvrir [`/optimg/auto?debug`](https://astro-jeromeabel.netlify.app/optimg/auto?debug) et [`/optimg/pixel-perfect?debug`](https://astro-jeromeabel.netlify.app/optimg/pixel-perfect?debug) côte à côte à un **viewport ≥1024px** (pour que la miniature lg 3-col soit exactement 316px) et se concentrer sur les photos à deux réseaux (`photo-12`, `photo-16`, `photo-20`). La bande grossière du haut est celle qui se lit à ce slot : sur `auto` le badge montre un fichier servi plus large (ex. `640w`) et les barres scintillent en moiré ; sur `pixel-perfect` il affiche `slot 316 · 316w · ✓ ok` et les barres restent nettes. Pour la bande fine, répéter la comparaison sur une page de détail (`…/auto/photo-12?debug` vs `…/pixel-perfect/photo-12?debug`), où la couverture 976px met le réseau fin dans sa zone optimale.*
-
-## Le debug overlay
-
-Chaque route de stratégie accepte un paramètre de requête `?debug` qui attache un badge par carte montrant ce que le navigateur a vraiment chargé par rapport à ce que le slot requérait :
-
-[![/optimg/pixel-perfect?debug — cartes avec badges par carte montrant le slot, le DPR, la largeur servie et le verdict](./optimg-debug.png)](https://astro-jeromeabel.netlify.app/optimg/pixel-perfect?debug)
-*Placeholder — en attente d'une vraie capture d'écran. **Capturer :** [`/optimg/pixel-perfect?debug`](https://astro-jeromeabel.netlify.app/optimg/pixel-perfect?debug) à ≥1024px pour que les cartes lg lisent `slot 316 · 316w · ✓ ok`. Cadrer les overlays à contours durs où le verdict compte — les photos moiré `e` (`photo-12/16/20`) et un overlay de texte `a`/`c` (`photo-11`, `photo-13`). Pour contraste, la même grille sur [`/optimg/naive?debug`](https://astro-jeromeabel.netlify.app/optimg/naive?debug) affiche le badge de sur-fetch.*
-
-```
-slot 316 · DPR 1 · 316w · ✓ ok
-slot 316 · DPR 2 · 632w · ✓ ok
-```
-
-**slot** — largeur d'affichage CSS en pixels au viewport actuel. **DPR** — ratio de pixels de l'appareil. **largeur servie** — le paramètre `w` de l'URL CDN pour les stratégies avec `srcset`, ou la largeur naturelle de l'image pour `naive` et `manual`. **verdict** : `✓ ok` (le fichier couvre le slot à cette densité), `✗ short` (upscaling — vrai bug), `≫ over` (sur-fetch de plus de 25 %).
-
-Pour `naive`, le badge montre la largeur source complète sans annotation `srcset` — le sur-fetch est explicite. Pour `pixel-perfect` et `final`, chaque carte devrait lire `✓ ok` à DPR 1× et 2× : les largeurs dérivées des tokens sont calculées pour faire atterrir le fichier sur le slot aux deux densités sans rééchantillonnage.
-
-L'overlay persiste sur la navigation grille → détail via `sessionStorage`. Un bouton flottant « 🔍 debug : activé » le supprime. Les runs Lighthouse ne sont jamais affectés — l'overlay requiert `?debug` dans l'URL ou un flag de session défini manuellement, ni l'un ni l'autre n'étant présent dans un run de navigateur vierge.
-
-## Hero eager vs reste lazy
-
-Un dernier levier, et c'est le point LCP de la [Partie 1](/blog/web-performance/01-tactics-cheatsheet) rendu concret. Astro met par défaut chaque image en `loading="lazy"`, ce qui est correct pour tout *sauf* l'image qui est l'élément LCP. Donc le composant prend un `type` : un hero `cover` se charge en eager et haute priorité, tout le reste reste lazy.
+Le premier levier, et c'est le point LCP de la [Partie 1](/blog/web-performance/01-tactics-cheatsheet) rendu concret. Astro met par défaut chaque image en `loading="lazy"`, ce qui est correct pour tout *sauf* l'image qui est l'élément LCP. Le composant prend donc un `type` : un hero `cover` se charge en eager et haute priorité, tout le reste reste lazy.
 
 ```astro
 loading={type === "cover" ? "eager" : "lazy"}
 fetchpriority={type === "cover" ? "high" : "auto"}
 ```
 
-`fetchpriority="high"` dit au navigateur de récupérer le hero avant les images lazy plus bas. Ce sont deux attributs, et c'est la différence entre l'élément LCP qui arrive en premier ou attend dans la file derrière du contenu décoratif.
+`fetchpriority="high"` dit au navigateur de récupérer le hero avant les images lazy plus bas. Ce sont deux attributs, et c'est la différence entre l'élément LCP qui arrive en premier ou qui attend dans la file derrière du contenu décoratif.
 
-Un piège que j'ai d'abord raté : ce split suppose qu'un hero `cover` existe sur la page. Les pages *grille* de stratégie n'en ont pas — chaque cellule est `type="thumb"`, donc les 21 miniatures partent en `loading="lazy" fetchpriority="auto"`, y compris la première rangée above-fold qui *contient* l'élément LCP. Lighthouse 13 le sanctionne (`lcp-discovery` à 0) : le LCP lui-même est en lazy. Le lazy natif ne promeut pas tout seul une image above-fold — c'est le travail de l'auteur.
+Pourquoi ce levier d'abord ? Parce que c'est le plus cher à rater. `naive` — vingt images en eager sans priorité ni lazy, qui se disputent réellement la bande passante — mesure **28,9 s de LCP en mobile** (contre 3,5–4,5 s pour toutes les autres). Ce n'est pas un problème d'octets par image ; c'est vingt requêtes lancées d'un coup sans qu'aucune ne soit priorisée. Le split eager/lazy est le seul levier de cette liste qui se compte en secondes, pas en dizaines de millisecondes.
+
+Un piège que j'ai d'abord raté : ce split suppose qu'un hero `cover` existe sur la page. Les pages *grille* de stratégie n'en ont pas — chaque cellule est `type="thumb"`, donc les 21 miniatures partiraient en `loading="lazy" fetchpriority="auto"`, y compris la première rangée above-fold qui *contient* l'élément LCP. Lighthouse 13 le sanctionne (`lcp-discovery` à 0) : le LCP lui-même est en lazy. Le lazy natif ne promeut pas tout seul une image above-fold — c'est le travail de l'auteur.
 
 La grille passe donc la position de chaque cellule au composant, qui en dérive les deux attributs séparément :
 
@@ -398,25 +301,156 @@ const fetchpriority = isCover || isLCP ? "high" : "auto";
 
 Le point clé : `eager` couvre une zone (toute la rangée above-fold), `fetchpriority="high"` marque **un seul** élément. Et le seuil ne peut pas être dérivé du layout — la hauteur du viewport n'existe pas au build, donc `EAGER_AHEAD` est une constante pire-cas assumée, pas un calcul.
 
+## Le placeholder : remplir le trou blanc
+
+Le hero part vite ; il n'arrive pas pour autant instantanément. Sur une connexion lente, entre « la page est apparue » et « les images sont chargées » il peut s'écouler plusieurs secondes, et sans placeholder chaque slot est une boîte blanche vide — la page semble cassée. C'est de la performance *perçue* : Astro ne la génère pas, il faut l'écrire.
+
+Il y a un dégradé d'options, du moins cher au plus soigné :
+
+- **Rien / un slot coloré.** Réserver la place avec `width`/`height` (déjà gratuit, c'est ce qui tient le CLS à 0) et un fond de couleur unie ou un skeleton SVG. Zéro octet supplémentaire, mais le slot ne dit rien de l'image à venir.
+- **Un vrai LQIP** — *low-quality image placeholder* : une miniature floue de la vraie image, qui donne tout de suite la couleur et la composition. C'est le seul composant personnalisé qui vaut encore la peine d'être écrit.
+
+`getImage()` est la trappe de secours côté serveur pour le second. Je l'utilise pour rendre un minuscule placeholder, dimensionné au ratio d'aspect de la vraie image pour qu'il ne se déforme pas :
+
+```ts
+const aspectRatio = img.width / img.height;
+const w = aspectRatio >= 1 ? 32 : Math.round(32 * aspectRatio);
+const h = aspectRatio >= 1 ? Math.round(32 / aspectRatio) : 32;
+const placeholder = await getImage({ src: img, format: "jpg", width: w, height: h });
+```
+
+Le placeholder se place derrière la vraie image, flouté ; le vrai `<Picture>` commence invisible. Les props du composant Astro vont vers le `<img>` interne, donc `pictureAttributes` est comment vous accédez à l'élément externe pour le démarrer caché :
+
+```astro
+<div class="reveal-img relative overflow-hidden">
+  <img class="absolute -z-10 h-full blur-2xl" aria-hidden="true"
+    src={placeholder.src} alt="" />
+  <Picture src={img} formats={["avif", "webp"]} sizes={sizes} alt={alt}
+    pictureAttributes={{ style: "opacity: 0" }} />
+</div>
+```
+
+Deux façons de rendre le flou, deux compromis. Vous pouvez le **cuire dans le fichier** — le vieux `-blur 0x8` d'ImageMagick de l'ère manuelle — pour que les octets arrivent déjà doux et que le navigateur ne fasse aucun travail ; l'aspect est alors figé au build. Ou vous livrez une image nette de 32px et la **floutez en CSS** (`blur-2xl`, ou un `filter`) : un filtre GPU live, une couche de composition de plus, mais le rayon est une classe que vous ajustez sans relancer un script. Sur une image 32×32 le filtre est si bon marché qu'il ne se remarque pas, donc j'utilise la voie CSS — il n'y a rien à optimiser, et je préfère changer `blur-2xl` en `blur-xl` en un endroit. Sur un grand placeholder je le cuirais.
+
+Le point important, c'est le **coût** : un placeholder LQIP est quasi gratuit sur les métriques. En mobile, `lqip` transfère 597 KB pour 3822 ms de LCP, contre 597 KB / 3794 ms pour `auto` sans placeholder — mêmes octets, 28 ms d'écart, du bruit. En desktop, `lqip` (717 KB) ajoute 75 ms à `auto` (716 KB) pour le décodage du placeholder, à octets d'image constants. Le chiffre Lighthouse bouge à peine ; ce que le placeholder achète, c'est un slot rempli au lieu d'un rectangle blanc pendant que le vrai fichier stream. C'est un axe différent de la performance, pas la même colonne.
+
+## Le fondu au chargement
+
+Le placeholder rempli, reste la transition placeholder → vraie image. Un fondu brut suffit, mais le détail qui compte — et le bug que tout le monde rencontre — c'est le **garde-cache** :
+
+```ts
+const showImage = () => {
+  picture.style.opacity = "1";
+  if (placeholder) placeholder.style.opacity = "0";
+};
+if (imgElement.complete) showImage();              // en cache → snap, pas d'animation
+else {
+  picture.style.transition = "opacity 1200ms ease";
+  imgElement.addEventListener("load", showImage);  // réseau → fondu
+}
+```
+
+Si vous animez sans condition, chaque navigation arrière/avant rejoue un fondu de 1,2 s sur des images que le navigateur a déjà, et la page scintille. Vérifier `img.complete` signifie que l'animation ne joue que sur un vrai chargement réseau. Je lance ça sur `astro:page-load` pour que ça survive aux View Transitions, où un listener `DOMContentLoaded` naïf ne se déclencherait qu'une fois et jamais plus.
+
+Et une règle non négociable : **ne jamais animer l'élément LCP.** Un fondu, c'est un `element render delay` : le pixel est peint en opacité 0 puis monté en 1 sur 1,2 s, et Lighthouse date le LCP à la fin de l'animation, pas à l'arrivée des octets. Ma première version fondait le hero comme le reste ; `final` et `lqip` mesuraient alors la durée d'un fondu, pas une stratégie d'images. Le composant expose donc `ABOVE_FOLD_FADE = false` : au-dessus de la ligne de flottaison, l'image *snappe*, elle ne fond pas.
+
+La preuve est dans les chiffres après correction. En mobile, `final` (4514 ms) et `pixel-perfect` (4494 ms) sont à 0,4 % — la pénalité de fondu de ~1,2 s du premier run a disparu, et le `element render delay` du run `final` retombe à **29 ms** (contre ~1236 ms avant). L'audit `lcp-discovery` de Lighthouse 13 confirme que l'élément LCP est bien la vraie première image (`Landscape photograph, sample 01`) sur les sept stratégies, jamais le placeholder. Le fondu embellit la *transition* du reste de la galerie ; il ne doit jamais toucher l'image qui fait le score.
+
+J'ai écrit ce script deux fois, et les deux versions ne s'accordent pas sur les détails — ce qui est la partie utile :
+
+| Aspect | Ce site | Un site de BD que je gère aussi |
+|---|---|---|
+| Placeholder | `<img>` flou 32px séparé derrière | aucun — le `<img>` réel se floute sur lui-même |
+| Transition | opacité, 1200ms | opacité + `filter: blur(10px)→0`, 400ms |
+| Garde-cache | `img.complete` | `img.complete && naturalHeight !== 0` (plus robuste) |
+
+Le garde de la deuxième colonne est le meilleur : une image en cache mais cassée rapporte `complete: true` avec `naturalHeight: 0`, et seule la vérification plus stricte saute correctement le fondu. Même idée, apprise deux fois.
+
+## Le contrat `sizes` : la taille juste
+
+Jusqu'ici, above-fold, placeholder et fondu améliorent l'*expérience* sans presque toucher aux octets. Le levier sur les octets, c'est le contrat `sizes` — et c'est aussi le plus subtil, parce que le benchmark montre qu'il n'a pas toujours le signe qu'on croit.
+
+Plutôt que de taper les breakpoints à la main, `CustomImage` calcule `sizes` depuis les tokens de mise en page réels — max-width de page, padding, gap, la grille — pour que la largeur de slot déclarée corresponde à ce que l'image occupe vraiment à l'écran :
+
+```astro
+const sizesAttr = [
+  `(min-width: 768px) calc((min(100vw, ${pageMaxPx}px) - ${chromePx + gapPx}px) / 2)`,
+  `calc(100vw - ${mobileChromePx}px)`,
+].join(", ");
+```
+
+Les breakpoints écrits à la main dérivent dès que vous changez une marge ; un `sizes` dérivé des mêmes tokens qui pilotent la mise en page reste honnête, et le navigateur arrête de sur-fetcher pour un slot plus étroit que vous l'aviez estimé.
+
+L'effet dépend entièrement de la **taille du slot**, et c'est là que le benchmark surprend. En desktop, l'élément LCP est une miniature de 316px dans la grille 3 colonnes : `pixel-perfect` sert *exactement* cette taille et transfère **222 KB**, contre **716 KB** pour `auto` — un facteur 3, pour la *même* transformation AVIF. Le `sizes` générique d'`auto` sur-fetche un `w=640` pour un slot de 316px. Ici, dimensionner juste est le plus gros gain d'octets de tout l'article.
+
+En mobile, l'inversion. L'élément LCP est une image *pleine largeur* à DPR 1,75, pas une miniature : `pixel-perfect` dimensionne honnêtement ce grand slot et transfère **913 KB**, là où `auto` n'affiche que **597 KB** — mais parce qu'il *sous-dimensionne*, en servant un fichier trop petit pour l'emplacement. Plus léger ne veut pas dire mieux dimensionné. Le contrat `sizes` ne « gagne » pas toujours des octets ; il sert la *bonne* taille, et la bonne taille pèse plus cher quand le slot est grand.
+
+Ce qui soulève la vraie question : pourquoi s'embêter, quand le `layout` auto d'Astro génère un `srcset` parfaitement raisonnable tout seul ? La réponse est le **contenu** de l'image, pas l'image en tant que concept.
+
+Pour une photographie, pas besoin de précision pixel. Le navigateur choisit l'étape `srcset` la plus proche, la met à l'échelle de quelques pourcents, et ce scaling est invisible — un arbre flouté de 4 % ressemble à un arbre. Le `layout` auto est exactement le bon choix, et calculer les largeurs à la main serait un effort pour rien.
+
+*Le concept de la preuve* est le cas inverse. Les images sont des pages de BD — art linéaire et lettrage. Si le fichier servi est même légèrement plus large ou plus étroit que le slot, le navigateur le rééchantillonne, et rééchantillonner du texte, c'est là que ça se voit : les contours s'adoucissent, les traits fins scintillent, le lettrage semble hors focus. Il n'y a pas de « suffisamment proche » pour un glyphe comme il y en a pour du feuillage. Ce site calcule donc les largeurs d'affichage exactes depuis sa mise en page et sert un fichier qui atterrit sur le slot sans scaling du tout. Le calcul supplémentaire achète du texte net, qui est tout l'intérêt de la page.
+
+C'est la ligne manuelle-vs-automatique, et elle ne dépend pas de votre confiance dans le framework — elle dépend de ce qui est *dans* l'image. Photos, captures d'écran, banners hero : laissez `layout` faire. Texte, art linéaire, diagrammes, tout ce qu'un lecteur scrutera : calculez les largeurs pour que le navigateur n'ait jamais à rééchantillonner. Le playground compagnon rend ça concret avec un réseau de lignes : servez le fichier exactement à la largeur du slot et les barres se reproduisent proprement ; servez-le à une largeur légèrement différente et le réseau change de phase — vous obtenez du *moiré*, des bandes d'interférence qui signalent une inadéquation d'échantillonnage ([Wikipedia : Effet de moiré](https://en.wikipedia.org/wiki/Moir%C3%A9_pattern)). `pixel-perfect` l'élimine en servant un fichier qui atterrit sur le slot ; `auto` ne le fait pas, et les bandes sont visibles. L'effet est extrême sur un réseau réglé, mais la même physique gouverne tout contenu dur-et-périodique : traits de lettrage fins, hachures, pixel art.
+
+[![/optimg/auto vs /optimg/pixel-perfect — même image de réseau au même viewport, bandes de moiré visibles sur auto, barres nettes sur pixel-perfect](./optimg-moire.png)](https://astro-jeromeabel.netlify.app/optimg/pixel-perfect?debug)
+*Placeholder — en attente d'une vraie capture d'écran.* **Pour capturer :** ouvrir [`/optimg/auto?debug`](https://astro-jeromeabel.netlify.app/optimg/auto?debug) et [`/optimg/pixel-perfect?debug`](https://astro-jeromeabel.netlify.app/optimg/pixel-perfect?debug) côte à côte à un **viewport ≥1024px** (pour que la miniature lg 3-col soit exactement 316px) et se concentrer sur les photos à deux réseaux (`photo-16`, `photo-17`, `photo-18`). La bande grossière du haut est celle qui se lit à ce slot : sur `auto` le badge montre un fichier servi plus large (ex. `640w`) et les barres scintillent en moiré ; sur `pixel-perfect` il affiche `slot 316 · 316w · ✓ ok` et les barres restent nettes. Pour la bande fine, répéter la comparaison sur une page de détail (`…/auto/photo-16?debug` vs `…/pixel-perfect/photo-16?debug`), où la couverture 976px met le réseau fin dans sa zone optimale.*
+
+## Le debug overlay : vérifier la taille
+
+Comment savoir que le contrat `sizes` fonctionne vraiment — que le navigateur charge bien un fichier à la taille du slot, et pas un `srcset` optimiste ? Chaque route de stratégie accepte un paramètre `?debug` qui attache un badge par carte, montrant ce que le navigateur a réellement chargé par rapport à ce que le slot requérait :
+
+[![/optimg/pixel-perfect?debug — cartes avec badges par carte montrant le slot, le DPR, la largeur servie et le verdict](./optimg-debug.png)](https://astro-jeromeabel.netlify.app/optimg/pixel-perfect?debug)
+*Placeholder — en attente d'une vraie capture d'écran. **Capturer :** [`/optimg/pixel-perfect?debug`](https://astro-jeromeabel.netlify.app/optimg/pixel-perfect?debug) à ≥1024px pour que les cartes lg lisent `slot 316 · 316w · ✓ ok`. Cadrer les overlays à contours durs où le verdict compte — les photos moiré `e` (`photo-16/17/18`) et un overlay de texte `a`/`c` (`photo-01`, `photo-07`). Pour contraste, la même grille sur [`/optimg/naive?debug`](https://astro-jeromeabel.netlify.app/optimg/naive?debug) affiche le badge de sur-fetch.*
+
+```
+slot 316 · DPR 1 · 316w · ✓ ok
+slot 316 · DPR 2 · 632w · ✓ ok
+```
+
+**slot** — largeur d'affichage CSS en pixels au viewport actuel. **DPR** — ratio de pixels de l'appareil. **largeur servie** — le paramètre `w` de l'URL CDN pour les stratégies avec `srcset`, ou la largeur naturelle de l'image pour `naive` et `manual`. **verdict** : `✓ ok` (le fichier couvre le slot à cette densité), `✗ short` (upscaling — vrai bug), `≫ over` (sur-fetch de plus de 25 %).
+
+Pour `naive`, le badge montre la largeur source complète sans annotation `srcset` — le sur-fetch est explicite. Pour `pixel-perfect` et `final`, chaque carte devrait lire `✓ ok` à DPR 1× et 2× : les largeurs dérivées des tokens sont calculées pour faire atterrir le fichier sur le slot aux deux densités sans rééchantillonnage. C'est ainsi qu'on vérifie que pixel-perfect fonctionne — pas en lisant le `srcset`, mais en regardant ce que le navigateur a choisi à *votre* viewport et DPR.
+
+L'overlay persiste sur la navigation grille → détail via `sessionStorage`, et un bouton flottant le supprime. Les runs Lighthouse ne sont jamais affectés — l'overlay requiert `?debug` dans l'URL ou un flag de session, ni l'un ni l'autre présent dans un run de navigateur vierge.
+
+## La stack finale
+
+`final` combine les quatre leviers : le split above-fold, le placeholder LQIP, le fondu exempté sur le LCP, et les largeurs pixel-perfect dérivées des tokens. Le composant empile simplement les options :
+
+```astro
+<div class="reveal-img relative overflow-hidden">
+  <!-- placeholder flou 32px, au ratio d'aspect de la vraie image -->
+  <img class="absolute inset-0 -z-10 h-full w-full object-cover blur-2xl"
+    aria-hidden="true" src={placeholder} alt="" />
+
+  <!-- <Picture> pixel-perfect -->
+  <Picture
+    src={image} layout="constrained"
+    width={ppWidth} widths={ppWidths} sizes={ppSizes}
+    height={finalHeight}
+    pictureAttributes={{ style: "opacity:0" }}
+    alt={alt} />
+</div>
+```
+
+Résultat au benchmark : en desktop, `final` transfère **222 KB** — exactement les octets de `pixel-perfect` — pour 400 ms de LCP, soit 74 ms de plus que `pixel-perfect` seul (326 ms), le coût de la couche LQIP. En mobile, `final` (913 KB, 4514 ms) est à 0,4 % de `pixel-perfect` (4494 ms) : le placeholder et le fondu ne coûtent rien de mesurable une fois l'élément LCP exempté d'animation. On obtient la précision d'octets du sizing pixel-perfect *et* la performance perçue du LQIP, sans les additionner en pénalité.
+
+Le recadrage par image reste disponible en option (`crop: true` par item dans `gallery.json` → couvertures 16:9, miniatures 4:3), mais il sort du cas standard « afficher une galerie le plus optimisée possible » : c'est un choix de cadrage, pas un levier de performance, et il est désactivé par défaut.
+
 ## Ce que j'ai appris
 
-- Le framework a supprimé le labeur bash — formats, `srcset`, redimensionnement. Le contrat `sizes` est la seule partie qu'il ne peut pas générer, parce que seul vous connaissez votre mise en page.
-- Le `width`/`height` auto pour la prévention du CLS est le gain silencieux. Les fichiers plus petits, c'est bien ; ne pas faire sauter la mise en page, c'est ce que les utilisateurs ressentent vraiment.
-- LQIP et fondu sont de la performance perçue, pas des octets. Ils ne déplaceront pas un score Lighthouse et c'est très bien — ce sont un axe différent.
-- Chiffres en un endroit : `auto` vs `naive` c'est 1529 ms vs 4876 ms de LCP, 523 KB vs 9400 KB — juste `<Picture>`, sans code supplémentaire. Parmi les stratégies automatisées, `pixel-perfect` (1001 ms, 236 KB) est en tête à la fois sur le LCP et les octets ; `final` (1077 ms, 254 KB) ajoute 76 ms et 18 KB pour la couche de vitesse perçue LQIP.
-- Le contre-intuitif du run froid : `manual` (749 ms, JPEG, 962 KB) bat `auto` (1529 ms, AVIF, 523 KB) sur le LCP. Pas malgré la taille — à cause du régime : `manual` est du JPEG sharp pré-cuit servi en statique, `auto` paie une transformation CDN à froid. À chaud en production, l'écart s'efface (355 vs 414 sur OVH, 409 vs 412 sur Netlify) : c'était la taxe de transformation, pas le format. Sur une miniature, c'est la latence de requête qui décide, pas les octets.
-- La localisation du test et l'hébergement déplacent le classement autant que la stratégie. Sur le payload brut (`naive`, ~9 MB), l'edge Netlify écrase l'origine unique OVH (615 vs 1292 ms) — la proximité du POP gagne. Mais sur les assets déjà optimisés, le sharp build-time d'OVH sert des fichiers ~2× plus petits que la transformation à la demande Netlify (`auto` 373 vs 729 KB) et reprend l'avantage à chaud en local — avant de le reperdre en mobile lointain (PSI), où l'edge masque la distance. Mesurez depuis là où sont vos utilisateurs, pas seulement depuis votre machine.
-- Le cache froid n'est pas neutre : il confond la stratégie avec le pipeline. Un run froid taxe `auto` (transformation à la demande) mais pas `manual` (statique) — l'écart mesuré n'est plus la stratégie. Pour comparer des stratégies, fige l'hôte et le régime (à chaud, en prod, médiane de 3 runs) ; garde le froid pour ce qu'il dit vraiment, le coût d'amorçage par asset d'une première visite.
-- Trois outils, trois régimes. Le throttling Lighthouse est *simulé* (un load mesuré puis modélisé) et chaque run vide le cache par défaut, donc c'est toujours du froid. Le 3-run local à chaud compare les stratégies entre elles ; PageSpeed mobile approche le régime livré ; le Lighthouse DevTools sur le live n'est qu'un coup d'œil — ma machine, un seul run.
-- N'animez jamais une image en cache. Gardez sur `img.complete` (ou `complete && naturalHeight !== 0`), sinon la navigation arrière/avant scintille.
-- La sortie n'est que des fichiers statiques. `astro:assets` fonctionne sur GitHub Pages sans aucun service d'images — le CDN Netlify déplace juste le coût de transformation hors du build. Mêmes fichiers `/_astro/`, facture différente.
-- Vous pouvez externaliser les images vers Cloudinary ou Imgix, mais Sharp-ou-Netlify garde les assets dans le dépôt et hors d'un abonnement. Pour un site personnel, posséder les données l'emporte.
-- Les `sizes` précises viennent de vos tokens de mise en page, pas de breakpoints tapés à la main — dérivez-les des mêmes valeurs qui pilotent la grille et ça arrête de dériver.
-- Manuelle vs automatique se décide par le contenu de l'image. Les photos tolèrent le stepping `srcset` — le `layout` auto convient. Texte et art linéaire se floutent quand ils sont rééchantillonnés, donc calculez les largeurs exactes et servez un fichier qui atterrit sur le slot sans aucun scaling.
-- Le moiré est un signal visible, pas de la décoration. Un réseau périodique rééchantillonné à une fréquence mal appariée explose en bandes d'interférence — ça rend le problème de rééchantillonnage impossible à manquer et motive directement l'approche pixel-perfect.
-- Le flou LQIP est un compromis : le cuire dans le fichier (zéro runtime, figé) ou le flouter en CSS (live, ajustable). Sur un placeholder 32px, le CSS est gratuit — donc j'ajuste plutôt que de relancer des scripts.
-- La couche cascade de Tailwind 4 perd face aux styles responsives d'Astro par défaut. Sachez lequel l'emporte avant de déboguer le mauvais fichier.
-- Une source, deux recadrages : `fit="cover"` avec des valeurs `height` différentes produit des sorties séparées au build. Pas de serveur, pas de script — un import, deux transformations, zéro coût à l'exécution.
-- LQIP seul n'est pas la stratégie la plus rapide sur la métrique LCP : `lqip` (1254 ms) est plus lent que `pixel-perfect` (1001 ms) parce que les largeurs auto servent toujours un fichier plus grand. Le sizing précis compte plus qu'un placeholder.
-- `final` bat `lqip` de 177 ms (1077 ms vs 1254 ms) en combinant les deux : les fichiers plus petits issus des largeurs pixel-perfect réduisent le temps de chargement réel, et le placeholder LQIP remplit le slot visible immédiatement.
-- Le debug overlay (`?debug` sur n'importe quelle URL de stratégie) affiche la largeur du slot, le DPR, la largeur servie et un verdict par carte. C'est ainsi que vous vérifiez que pixel-perfect fonctionne vraiment — pas en lisant le `srcset`, mais en regardant ce que le navigateur a choisi à votre viewport et DPR.
+- Mesurez **mobile et desktop séparément** — l'histoire s'inverse entre les deux. Le même `pixel-perfect` est le plus léger en desktop (222 KB) et parmi les plus lourds en mobile (913 KB), sans changer une ligne. Sur un seul mode, le levier réel reste invisible.
+- Le levier n'a jamais été le format ; c'est le **contrat `sizes`**, et son signe dépend de la taille du slot. Petit slot (miniature desktop) → dimensionner juste économise 3× les octets (222 vs 716 KB pour la même transformation AVIF). Grand slot (hero mobile pleine largeur) → dimensionner honnêtement *coûte* des octets, et `auto` ne paraît plus léger que parce qu'il sous-dimensionne.
+- Le split eager/lazy est le levier le plus cher à rater : `naive` (vingt images eager sans priorité) mesure 28,9 s de LCP mobile. Et le lazy natif ne promeut pas une image above-fold tout seul — sur une grille sans hero, le LCP part en lazy (`lcp-discovery` à 0) tant que l'auteur ne le priorise pas.
+- Placeholder et fondu sont de la **performance perçue, pas des octets**. `lqip` (597 KB) égale `auto` (597 KB) en mobile à 28 ms près ; en desktop il ajoute 75 ms pour zéro octet d'image. Ils ne déplaceront pas un score Lighthouse, et c'est très bien — c'est un autre axe.
+- **N'animez jamais l'élément LCP.** Un fondu est un `element render delay` : Lighthouse date le LCP à la fin de l'animation. Avec l'exemption above-fold, `final` (4514 ms) rejoint `pixel-perfect` (4494 ms) à 0,4 % et le render delay retombe à 29 ms (contre ~1236 ms). Sans elle, on mesurait la durée d'un fondu.
+- N'animez jamais **une image en cache** non plus. Gardez sur `img.complete` (ou `complete && naturalHeight !== 0`, plus robuste), sinon la navigation arrière/avant scintille.
+- Manuelle vs automatique se décide par le **contenu** de l'image. Les photos tolèrent le stepping `srcset` — le `layout` auto convient. Texte et art linéaire se floutent quand ils sont rééchantillonnés, donc calculez les largeurs exactes ; un réseau périodique le rend visible en explosant en moiré.
+- Le classement en octets est la **seule colonne déterministe** — insensible au throttling et au cache. Mais seule sa structure grossière est stable (`naive` seul en tête, `manual` lourd, transformations CDN groupées en dessous) ; l'ordre fin s'inverse avec le slot. Mobile : `pixel-perfect` ≈ `final` > `auto` ≈ `lqip` ≈ `cropped`. Desktop : ça bascule — `pixel-perfect` ≈ `final` les plus légers, `cropped` au-dessus de `auto` ≈ `lqip` (au sein d'un mode seulement ; jamais de comparaison croisée mobile↔desktop).
+- Le `width`/`height` auto pour le CLS est le gain silencieux : CLS à 0 partout sauf `naive`. Les fichiers plus petits, c'est bien ; ne pas faire sauter la mise en page, c'est ce que l'utilisateur ressent.
+- La localisation et l'hébergement déplacent le classement autant que la stratégie. Sur le payload brut (`naive`, ~9 MB), l'edge Netlify écrase l'origine unique OVH (615 vs 1292 ms) — la proximité du POP gagne. Sur les assets déjà optimisés, le Sharp build-time d'OVH sert des fichiers ~2× plus petits que la transformation à la demande (`auto` 373 vs 729 KB) et reprend l'avantage à chaud en local. Mesurez depuis là où sont vos utilisateurs.
+- Trois outils, trois régimes. Le throttling Lighthouse est *simulé* et chaque run vide le cache, donc c'est toujours du froid. Le run scripté à chaud (médiane de 5, même deploy) compare les stratégies ; PageSpeed mobile approche le régime livré ; le Lighthouse DevTools sur le live n'est qu'un coup d'œil.
+- La sortie n'est que des fichiers statiques. `astro:assets` fonctionne sur GitHub Pages sans service d'images — Netlify déplace juste le coût de transformation hors du build. Mêmes fichiers `/_astro/`, facture différente. Pour un site personnel, posséder ses assets dans le dépôt l'emporte sur un abonnement Cloudinary/Imgix.
+- La couche cascade de Tailwind 4 perd face aux styles responsives d'Astro. Sachez lequel l'emporte avant de déboguer le mauvais fichier.
+- Une source, deux recadrages : `fit="cover"` avec des `height` différentes produit des sorties séparées au build, sans serveur ni script — mais c'est un levier de cadrage, optionnel, hors du cas galerie standard.

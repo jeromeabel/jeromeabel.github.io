@@ -237,7 +237,7 @@ miniature — les octets pèsent beaucoup plus.
 
 ## 5. Actions possibles (à décider plus tard)
 
-- [ ] **Réécrire l'analyse de l'article** — section « Comparer proprement » +
+- [x] **Réécrire l'analyse de l'article** — section « Comparer proprement » +
       section mesure : octets comme classement, LCP fiable seulement pour les
       stratégies sans fondu, corriger les affirmations CLS et « le fondu ne bouge
       pas Lighthouse », introduire le mobile comme révélateur.
