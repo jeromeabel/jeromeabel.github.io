@@ -11,7 +11,7 @@ img: ./cover.jpg
 
 You may remember the good old days, when memes joked about JavaScript frameworks. Since Angular arrived in 2012, we’ve seen at least 15 major frontend frameworks. Now, look at what’s happening today: considering the sheer volume of AI models and tools released over the last three years, it feels like we’ve traded JavaScript fatigue for full-blown **AI fatigue**.
 
-As a newer engineer, this pace feels unsettling. Knowing which skills will matter in five years is nearly impossible, creating a sense of professional vertigo. Morten Rand-Hendriksen captures this well in "Everybody Else Is Doing It, So Why Can't I?": 
+As a newer engineer, this pace feels unsettling. Knowing which skills will matter in five years is nearly impossible, creating a sense of professional vertigo. Morten Rand-Hendriksen captures this well in "Everybody Else Is Doing It, So Why Can't I?":
 
 > This uncertainty brought by AI is one of the main roots of the AI-FOMO I observed, both in the conference and in my broader interactions with people in the world. We're deep in the third year of a chaotic transformation of everything, brought to us by generative AI, and during that time the rate of transformation has only increased. Three years of uncertainty with no sign of stability any time soon must be enormously stressful for anyone in need of stability. (Morten Rand-Hendriksen [^1])
 
@@ -35,7 +35,7 @@ The new world introduces non-deterministic assistants. We now spend our energy f
 
 **2. The "Intelligence" Trap**
 
-Morten Rand-Hendriksen argues that "Intelligence" is a loaded term that gives these tools too much credit; we should view them as **Assisted Technologies** [^4]. Terms like *learning* or *reasoning* are human metaphors that trigger our bias to anthropomorphize machines.
+Morten Rand-Hendriksen argues that "Intelligence" is a loaded term that gives these tools too much credit; we should view them as **Assisted Technologies** [^4]. Terms like _learning_ or _reasoning_ are human metaphors that trigger our bias to anthropomorphize machines.
 
 > We want to understand these things as people... We can’t help it; **humans are hopeless anthropomorphizers**. (Adam Mastroianni [^5])
 
@@ -43,10 +43,9 @@ It may be similar to **Pareidolia**— instinct that makes us see faces in cloud
 
 **3. The Irony of Automation**
 
-If using AI feels exhausting, there is also a technical reason for it. Michelle Brush refers to this as the **Irony of Automation**: partial automation often makes the remaining manual tasks harder. 
+If using AI feels exhausting, there is also a technical reason for it. Michelle Brush refers to this as the **Irony of Automation**: partial automation often makes the remaining manual tasks harder.
 
 > When you automate the easy parts, what’s left are the hard judgments, debugging edge cases, and maintenance. (Michelle Brush [^3])
-
 
 **4. The Foundation Still Holds**
 
@@ -79,11 +78,11 @@ A study of 100,000 developers by Yegor Denisov-Blanch [^9] reflects what many de
 
 The data suggests several technical constraints that dictate whether an AI tool is a lever or a weight:
 
-* **Language Popularity:** Models struggle with niche languages where training data is scarce.
-* **Context Length:** Even as context windows expand, the risk of "disalignment" increases. The more context you provide to explain a legacy system, the more likely the LLM is to lose the thread.
-* **Task Complexity:** AI handles isolated tasks—like writing a single utility function or a unit test—fairly well. However, complex refactoring across multiple files requires so much manual oversight that it can often become a net time-sink.
-* **Codebase Maturity:** AI excels in new projects (Greenfield) where there is no technical debt to navigate (the "YouTube Demo" mode). In Brownfield projects, where old patterns clash with new dependencies, productivity gains drop significantly.
-* **Codebase Size:** As the repository grows, the model's ability to understand the codebase and maintain architectural consistency diminishes.
+- **Language Popularity:** Models struggle with niche languages where training data is scarce.
+- **Context Length:** Even as context windows expand, the risk of "disalignment" increases. The more context you provide to explain a legacy system, the more likely the LLM is to lose the thread.
+- **Task Complexity:** AI handles isolated tasks—like writing a single utility function or a unit test—fairly well. However, complex refactoring across multiple files requires so much manual oversight that it can often become a net time-sink.
+- **Codebase Maturity:** AI excels in new projects (Greenfield) where there is no technical debt to navigate (the "YouTube Demo" mode). In Brownfield projects, where old patterns clash with new dependencies, productivity gains drop significantly.
+- **Codebase Size:** As the repository grows, the model's ability to understand the codebase and maintain architectural consistency diminishes.
 
 I’d also add **"AI skills"** to this list—knowing how to provide the right documentation, define environment rules, and when to ignore a suggestion entirely or steer the conversation back on track.
 
@@ -101,11 +100,11 @@ This can lead to a dangerous "de-responsibilization," where critical thinking is
 
 ### The Context-Switching Tax
 
-Context switching is the enemy of engineering flow and productivity. 
+Context switching is the enemy of engineering flow and productivity.
 
 > Even brief mental blocks created by shifting between tasks can cost as much as 40% of someone's productive time (American Psychological Association [^11])
 
-AI tools introduce a new form of interruption. When working with AI, feedback loops can range from 1 second to several minutes. For simple tasks, the wait is predictable; for complex research or multi-file edits, it’s a black hole. While many tools now show "steps" or intermediate results to keep you engaged, the "thinking gap" often breaks your concentration. 
+AI tools introduce a new form of interruption. When working with AI, feedback loops can range from 1 second to several minutes. For simple tasks, the wait is predictable; for complex research or multi-file edits, it’s a black hole. While many tools now show "steps" or intermediate results to keep you engaged, the "thinking gap" often breaks your concentration.
 
 I’ve tried managing two user stories across two IDEs—launching an AI task in one and switching to the other while it runs. To be honest, in most cases, it fries my brain. It only feels manageable when the projects are homogeneous—similar in both timeframe and scope. But the question remains: what kind of AI task can you launch without breaking your flow? Usually, if a task is going to take a while, it’s better to launch it before a coffee break rather than trying to multi-task through the wait.
 
@@ -117,7 +116,7 @@ I’ve noticed that dealing with specification files creates a clear divide in h
 
 > Lawmakers as programmers?! (Sean Grove [^12])
 
-We are entering a paradox of Spec-Driven Development. I find myself writing more documentation than ever, but I'm not writing it for my team—I'm writing it to constrain the LLM’s search space. This results in two sets of documentation: one for humans and a verbose, counter-intuitive set for the machine, filled with capital letters and "DO/DON'T" instructions specifically designed to prevent the model from hallucinating. 
+We are entering a paradox of Spec-Driven Development. I find myself writing more documentation than ever, but I'm not writing it for my team—I'm writing it to constrain the LLM’s search space. This results in two sets of documentation: one for humans and a verbose, counter-intuitive set for the machine, filled with capital letters and "DO/DON'T" instructions specifically designed to prevent the model from hallucinating.
 
 The weirdest part is that you eventually end up asking the LLM to write instructions for itself based on its own previous failures. In this workflow, you aren't the builder anymore; you’ve become a "human gateway" between the specification and the code.
 
@@ -141,15 +140,15 @@ Let’s look at where this actually gets interesting.
 
 Vibe-coding gets a bad rap, but "YOLO mode"—accepting AI output just because it looks "okay"—has actual utility when you're just exploring.
 
-* **UI/UX Exploration:** Using tools like Figma Make to spin up five variations of a feature in an hour. It’s a "variations" app with a toggle. It’s not production-ready, but it’s a tangible prototype to show the team before anyone touches the real codebase.
-* **Contextual Specs:** I’ve started adding "orchestrator" features directly in preview branches just to see them run. Testing a feature in its real environment helps me write better specs later. Once the experiment works, I ask for an implementation plan, tweak it to keep my core logic, and then rebuild properly. The "optimization" phase is much faster because the plan is already battle-tested.
-* **The Ubiquitous Language:** This is huge for non-devs. When business stakeholders can turn an idea into a functional (if messy) internal tool or report, they start to understand the friction of software. Seeing "Spec to Code" in real-time is a learning loop. It forces everyone to be explicit, which is hard.
+- **UI/UX Exploration:** Using tools like Figma Make to spin up five variations of a feature in an hour. It’s a "variations" app with a toggle. It’s not production-ready, but it’s a tangible prototype to show the team before anyone touches the real codebase.
+- **Contextual Specs:** I’ve started adding "orchestrator" features directly in preview branches just to see them run. Testing a feature in its real environment helps me write better specs later. Once the experiment works, I ask for an implementation plan, tweak it to keep my core logic, and then rebuild properly. The "optimization" phase is much faster because the plan is already battle-tested.
+- **The Ubiquitous Language:** This is huge for non-devs. When business stakeholders can turn an idea into a functional (if messy) internal tool or report, they start to understand the friction of software. Seeing "Spec to Code" in real-time is a learning loop. It forces everyone to be explicit, which is hard.
 
 ### The Continuous Workflow Audit
 
 AI adoption forces you to audit your habits. To figure out where an LLM actually fits, you have to break your day into micro-tasks and identify which ones are implicit or just "organic" noise.
 
-I’ve started thinking of my workflow like Martin Fowler’s *Refactoring* book—where every move has a name. It’s like sports: once you name the movement, you can optimize the sequence. This consistent introspection creates a loop of small, compounding improvements in how you and your team actually interact.
+I’ve started thinking of my workflow like Martin Fowler’s _Refactoring_ book—where every move has a name. It’s like sports: once you name the movement, you can optimize the sequence. This consistent introspection creates a loop of small, compounding improvements in how you and your team actually interact.
 
 ### Living Documentation
 
@@ -157,7 +156,7 @@ I’ve started thinking of my workflow like Martin Fowler’s *Refactoring* book
 
 We all know the drill: documentation is painful, it’s usually obsolete by the time it’s read, and developers would rather just "read the code." We treat docs like noise because they often are. AI changes the math. Generating docstrings or Mermaid diagrams to map how functions communicate is now a low-effort task. It provides a map of the codebase before you start digging.
 
-The debate over "too much documentation" is still there, but the cost of keeping it updated has plummeted. Because AI agents *need* this context to be useful, documentation has become a "living" requirement. It’s no longer just for onboarding; it’s the source of truth that keeps the LLM from hallucinating.
+The debate over "too much documentation" is still there, but the cost of keeping it updated has plummeted. Because AI agents _need_ this context to be useful, documentation has become a "living" requirement. It’s no longer just for onboarding; it’s the source of truth that keeps the LLM from hallucinating.
 
 ### Specs as the Fundamental Unit
 
@@ -173,11 +172,11 @@ Some frameworks, like spec-kit, take this further, producing four or more files 
 
 It’s a bit ironic if the future of high-end engineering might just be managing a bunch of Markdown files
 
-> - Coding is an incredible skill and asset. But it's not the end goal. Engineering is the precise exploration (by humans) of software solutions to human problems. 
+> - Coding is an incredible skill and asset. But it's not the end goal. Engineering is the precise exploration (by humans) of software solutions to human problems.
 > - Code is 10–20% of your impact; The other 80–90% is the structured communication (talk, understand, distill, ideate, plan, share, translate, test, verify)
 > - A written specification is what **enables** you to **align humans** - it's the artifact that you discuss, debate, refer to, and sync on.
-> - Specifications, not prompts or code, are becoming the fundamental unit of programming. 
-> (The New Code — Sean Grove, OpenAI [^12])
+> - Specifications, not prompts or code, are becoming the fundamental unit of programming.
+>   (The New Code — Sean Grove, OpenAI [^12])
 
 When we start a feature by talking about implementation details, we lose the "Why." AI forces us back to the high-level analysis. If you can’t explain it clearly in a spec, the agent will fail.
 
@@ -228,7 +227,6 @@ Embracing AI shouldn't mean surrendering agency. Keeping a "human in the loop" i
 Sometimes, the right move is to "code naked"—turning the AI off to write a module from scratch. We don't do this for speed, but because writing code remains one of the most effective ways we have to think.
 
 In a future post, I’ll explore this further through **"Teacher Mode"**: a shift in perspective where we treat AI not as a shortcut, but as a collaborative partner for deeper exploration.
-
 
 ---
 

@@ -15,7 +15,6 @@ My own journey began like many others — using chatbots, code completion, and f
 
 So I decided to explore it on my own terms. Over the past months, I began using AI more deliberately — in personal projects, in real engineering workflows. This series captures that transition — from casual experimentation to a more grounded, reflective practice of using AI in everyday development.
 
-
 ## Beyond the IDE
 
 For a frontend developer, the advent of Large Language Models (LLMs) often feels like a natural progression. We’ve moved from vanilla JS to jQuery, to Vue, to meta-frameworks like Nuxt. We are accustomed to tools that handle the heavy lifting. Code is structured language, LLMs operate on language—the connection feels obvious. After years of autocomplete, static analysis, and refactoring assistants, AI feels like the next logical upgrade.[^1]
@@ -26,7 +25,7 @@ Previous upgrades were confined to our specialized domain. TypeScript changed ho
 
 As Dr. Fei-Fei Li recently noted: _"Everybody should care about AI."_ [^2] She’s right, not because of the hype cycle, but because of the sheer ubiquity of the technology.
 
-As engineers, we pride ourselves on **Critical Thinking** [^3]. It is a high-demand skill for tech jobs, and for good reason—we spend our days weighing trade-offs, debugging logic, and anticipating edge cases. However, the current market narrative is often "adapt or die"—a framing that isolates individuals and fuels anxiety. 
+As engineers, we pride ourselves on **Critical Thinking** [^3]. It is a high-demand skill for tech jobs, and for good reason—we spend our days weighing trade-offs, debugging logic, and anticipating edge cases. However, the current market narrative is often "adapt or die"—a framing that isolates individuals and fuels anxiety.
 
 But why limit that capability to the codebase?
 

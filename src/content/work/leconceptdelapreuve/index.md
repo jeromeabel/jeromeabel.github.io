@@ -46,7 +46,7 @@ A minimal fix is an early prefetch. The Layout injects an inline script into `<h
 
 ```javascript
 // Layout.astro — in <head>, before DOMContentLoaded
-window.__votePromise = fetch('/api/vote?comic=' + earlyVoteParam);
+window.__votePromise = fetch("/api/vote?comic=" + earlyVoteParam);
 ```
 
 Vote scripts check `window.__votePromise` first and fall back to their own fetch if it's missing. The server batch-queries all comic IDs in one request and runs two parallel DB queries — total counts and whether this visitor already voted — so it's always two queries, not 2×N:
@@ -55,18 +55,17 @@ Vote scripts check `window.__votePromise` first and fall back to their own fetch
 // /api/vote.ts — GET handler
 const [comicsCounts, userVotes] = await Promise.all([
   // Query 1
-  db.select({ comicId: Vote.comicId, value: count() })
+  db
+    .select({ comicId: Vote.comicId, value: count() })
     .from(Vote)
     .where(inArray(Vote.comicId, comicIds))
     .groupBy(Vote.comicId),
-    
+
   // Query 2
-  db.select({ comicId: Vote.comicId })
+  db
+    .select({ comicId: Vote.comicId })
     .from(Vote)
-    .where(and(
-      inArray(Vote.comicId, comicIds),
-      eq(Vote.visitorId, visitorId)
-    )),
+    .where(and(inArray(Vote.comicId, comicIds), eq(Vote.visitorId, visitorId))),
 ]);
 ```
 
@@ -76,7 +75,7 @@ The UI uses optimistic updates: the heart fills immediately on click, a `pending
 
 Vector art exported to PNG looks crisp — until the browser picks the wrong resolution. Initially the `<picture>` had no `sizes` attribute, so browsers assumed `100vw` and fetched needlessly large images. On retina displays, fractional pixel widths caused sub-pixel antialiasing blur.
 
-The pragmatic workaround: compute *exact* pixel widths from a shared `layoutTokens.ts` file and feed the same numbers to CSS and the image pipeline. `sizes` must use concrete pixel math (not CSS `var()`), so we compute breakpoints at build time.
+The pragmatic workaround: compute _exact_ pixel widths from a shared `layoutTokens.ts` file and feed the same numbers to CSS and the image pipeline. `sizes` must use concrete pixel math (not CSS `var()`), so we compute breakpoints at build time.
 
 ```typescript
 // layoutTokens.ts
@@ -125,8 +124,8 @@ const observer = new IntersectionObserver(
   (entries) => {
     for (const entry of entries) {
       if (entry.isIntersecting) {
-        entry.target.classList.remove('opacity-10');
-        entry.target.classList.add('opacity-100');
+        entry.target.classList.remove("opacity-10");
+        entry.target.classList.add("opacity-100");
         observer.unobserve(entry.target);
       }
     }
@@ -165,7 +164,7 @@ The result: CDN response time dominates static pages; the only variable latency 
 
 ## What I learned
 
-* **Astro DB's local/remote split is delightful.** SQLite in dev, Turso in production; same ORM and queries with a `--remote` flag swap.
-* **Cookie attributes matter**
-* **Early prefetching masks serverless cold starts.** Starting the API call during HTML parse buys 200–500ms the user doesn't notice.
-* **The `sizes` attribute matters.** Without pixel-accurate breakpoints, you can easily fetch images twice as large as needed; furthermore, if the rendered size deviates from the actual image dimensions, any text within the illustrations becomes blurry due to sub-pixel antialiasing. Computing exact breakpoints from the same layout constants that drive the CSS fixed this, ensuring a perfect pixel match that keeps both the art and the dialogue crisp.
+- **Astro DB's local/remote split is delightful.** SQLite in dev, Turso in production; same ORM and queries with a `--remote` flag swap.
+- **Cookie attributes matter**
+- **Early prefetching masks serverless cold starts.** Starting the API call during HTML parse buys 200–500ms the user doesn't notice.
+- **The `sizes` attribute matters.** Without pixel-accurate breakpoints, you can easily fetch images twice as large as needed; furthermore, if the rendered size deviates from the actual image dimensions, any text within the illustrations becomes blurry due to sub-pixel antialiasing. Computing exact breakpoints from the same layout constants that drive the CSS fixed this, ensuring a perfect pixel match that keeps both the art and the dialogue crisp.

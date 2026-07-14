@@ -7,9 +7,9 @@ draft: false
 img: ./cover.png
 ---
 
-Optimizing a call-details page at work — long transcripts, thousands of expandable segments — the table went through four versions, each one measured before the next earned its place: a plain table, a PrimeVue DataTable, that DataTable with virtual scroll, then a headless TanStack table with virtualization. The loose end from [Part 2](/blog/web-performance/02-data-driven) is what set it off: Lighthouse scores the naive table at 100, while users measure multi-second mounts and single-digit FPS. That gap bothered me enough to isolate it, so I rebuilt the comparison away from the production code — collapsing those four production steps into three implementations of the *same* table, measured the same way, on the same data.
+Optimizing a call-details page at work — long transcripts, thousands of expandable segments — the table went through four versions, each one measured before the next earned its place: a plain table, a PrimeVue DataTable, that DataTable with virtual scroll, then a headless TanStack table with virtualization. The loose end from [Part 2](/blog/web-performance/02-data-driven) is what set it off: Lighthouse scores the naive table at 100, while users measure multi-second mounts and single-digit FPS. That gap bothered me enough to isolate it, so I rebuilt the comparison away from the production code — collapsing those four production steps into three implementations of the _same_ table, measured the same way, on the same data.
 
-The benchmark lives in [vue-jeromeabel.netlify.app/benchmark](https://vue-jeromeabel.netlify.app/benchmark). It renders 10,000 botanical species from the GBIF taxonomy database — scientific name, family, genus, taxonomic status. When you search, matching rows expand to show vernacular names in several languages: a search for "rose" expands *Rosa canina* to "Dog Rose" (en), "Eglantier" (fr), "Escaramujo" (es). Master rows with expandable detail rows, at a scale that breaks the obvious approach. That's the same shape as the Uhlive call list from Part 2: a list of calls, each expanding to its transcript.
+The benchmark lives in [vue-jeromeabel.netlify.app/benchmark](https://vue-jeromeabel.netlify.app/benchmark). It renders 10,000 botanical species from the GBIF taxonomy database — scientific name, family, genus, taxonomic status. When you search, matching rows expand to show vernacular names in several languages: a search for "rose" expands _Rosa canina_ to "Dog Rose" (en), "Eglantier" (fr), "Escaramujo" (es). Master rows with expandable detail rows, at a scale that breaks the obvious approach. That's the same shape as the Uhlive call list from Part 2: a list of calls, each expanding to its transcript.
 
 Three numbers describe the capture conditions, and they matter for every table below: **Lighthouse 13, desktop preset, 4× CPU throttling, median of 5 runs in Incognito.** The 4× throttling is the important one — it's the [cheatsheet's](/blog/web-performance/01-tactics-cheatsheet) "test like a 4-year-old office laptop," not like my workstation.
 
@@ -34,15 +34,15 @@ The honest starting point is the simplest thing: render all 10,000 rows with `v-
 
 Lighthouse, median of 5 runs:
 
-| Metric | Value | Threshold |
-|---|---|---|
-| Performance Score | **100** | ≥ 90 |
-| LCP | 538 ms | ≤ 2,500 ms |
-| Total Blocking Time | 0 ms | ≤ 200 ms |
-| DOM Size | **40** | ≤ 1,500 |
-| Main-Thread Work | **7,072 ms** | ≤ 2,000 ms |
+| Metric              | Value        | Threshold  |
+| ------------------- | ------------ | ---------- |
+| Performance Score   | **100**      | ≥ 90       |
+| LCP                 | 538 ms       | ≤ 2,500 ms |
+| Total Blocking Time | 0 ms         | ≤ 200 ms   |
+| DOM Size            | **40**       | ≤ 1,500    |
+| Main-Thread Work    | **7,072 ms** | ≤ 2,000 ms |
 
-Score 100. Zero blocking time. And **40 DOM nodes** for a 10,000-row table. That last number is the tell. There aren't 40 nodes — there are roughly 80,000 (10,000 rows × eight elements each). Lighthouse is reading 40 because of *how* the page renders:
+Score 100. Zero blocking time. And **40 DOM nodes** for a 10,000-row table. That last number is the tell. There aren't 40 nodes — there are roughly 80,000 (10,000 rows × eight elements each). Lighthouse is reading 40 because of _how_ the page renders:
 
 ```typescript
 onMounted(async () => {
@@ -52,7 +52,7 @@ onMounted(async () => {
 });
 ```
 
-The component mounts as an empty shell — header, search box, empty `<table>`: about 40 elements. Then `onMounted` fires, fetches the data, and *then* renders 80,000 nodes. Lighthouse's DOM-size audit samples at load, catching only the shell. The 80,000 nodes arrive after that window closes. The Largest Contentful Paint is the empty table, so LCP is a fast 538ms — it's measuring the wrong thing.
+The component mounts as an empty shell — header, search box, empty `<table>`: about 40 elements. Then `onMounted` fires, fetches the data, and _then_ renders 80,000 nodes. Lighthouse's DOM-size audit samples at load, catching only the shell. The 80,000 nodes arrive after that window closes. The Largest Contentful Paint is the empty table, so LCP is a fast 538ms — it's measuring the wrong thing.
 
 The one Lighthouse metric that doesn't get fooled is **Main-Thread Work: 7,072 ms**. That's the only audit here built on the full trace rather than a load-time snapshot, and it fails by 3.5×. It's the single number on this table that agrees with the user.
 
@@ -60,37 +60,37 @@ The one Lighthouse metric that doesn't get fooled is **Main-Thread Work: 7,072 m
 
 ## Two layers, because one layer lies
 
-Three instruments measured these tables, and they don't play the same role. **Lighthouse** is the scripted snapshot — a composite score sampled at load. A **Chrome trace** records the full timeline, the part Lighthouse stops watching once the page settles. And a **live metrics panel**, built into every benchmark page, runs on *your* machine: `performance.now()` around the mount (the "loading time"), a `MutationObserver` over a `TreeWalker` counting live DOM nodes, and a `requestAnimationFrame` loop sampling FPS.
+Three instruments measured these tables, and they don't play the same role. **Lighthouse** is the scripted snapshot — a composite score sampled at load. A **Chrome trace** records the full timeline, the part Lighthouse stops watching once the page settles. And a **live metrics panel**, built into every benchmark page, runs on _your_ machine: `performance.now()` around the mount (the "loading time"), a `MutationObserver` over a `TreeWalker` counting live DOM nodes, and a `requestAnimationFrame` loop sampling FPS.
 
 ```typescript
 // use-dom-metrics.ts — the panel each page mounts
-markBeforeMount();                       // t0 = performance.now()
+markBeforeMount(); // t0 = performance.now()
 // ...fetch + render...
-markAfterMount();                        // mount = performance.now() - t0
-startObserving(tableContainer);          // MutationObserver → re-walk node count on change
-startFpsCounter();                       // rAF tick → frames-per-second
+markAfterMount(); // mount = performance.now() - t0
+startObserving(tableContainer); // MutationObserver → re-walk node count on change
+startFpsCounter(); // rAF tick → frames-per-second
 ```
 
 The first two feed the numbers in this post; the third is the one you watch yourself, scrolling and filtering on your own machine.
 
 ### The pipeline, and why one tool passed
 
-The two *quoted* layers aren't captured the same way, and that difference is the whole point — the live panel writes no JSON, so it sits outside this pipeline entirely. Lighthouse is scripted: `pnpm benchmark:lighthouse` runs each approach five times and takes the median, because a single run swings 5–15%. The trace path is manual — record a Performance profile in Chrome DevTools (4× CPU, Incognito), export the `Trace-*.json`, then `pnpm analyze:trace && pnpm compare:trace` turns it into per-second rates and a comparison table. Both layers land as JSON the `/benchmark` page reads live — the numbers in this post are the files those commands write, not figures I typed into a table.
+The two _quoted_ layers aren't captured the same way, and that difference is the whole point — the live panel writes no JSON, so it sits outside this pipeline entirely. Lighthouse is scripted: `pnpm benchmark:lighthouse` runs each approach five times and takes the median, because a single run swings 5–15%. The trace path is manual — record a Performance profile in Chrome DevTools (4× CPU, Incognito), export the `Trace-*.json`, then `pnpm analyze:trace && pnpm compare:trace` turns it into per-second rates and a comparison table. Both layers land as JSON the `/benchmark` page reads live — the numbers in this post are the files those commands write, not figures I typed into a table.
 
-And that split is *why* Lighthouse passed the baseline. Its DOM-size and LCP audits sample a window that **closes at load** — before the 80,000 nodes render on the next tick. The trace integrates the **whole timeline**, so Main-Thread Work and FPS see the work Lighthouse had already stopped watching. A green snapshot sitting next to a red timeline isn't a contradiction; it's two measurement windows onto the same page, and only one of them was open when the cost arrived.
+And that split is _why_ Lighthouse passed the baseline. Its DOM-size and LCP audits sample a window that **closes at load** — before the 80,000 nodes render on the next tick. The trace integrates the **whole timeline**, so Main-Thread Work and FPS see the work Lighthouse had already stopped watching. A green snapshot sitting next to a red timeline isn't a contradiction; it's two measurement windows onto the same page, and only one of them was open when the cost arrived.
 
 The trace layer is where the baseline stops hiding:
 
-| Metric (trace, 4× CPU) | Basic v-for | PrimeVue | TanStack |
-|---|---:|---:|---:|
-| Scripting | 108 ms/s | **632 ms/s** | 122 ms/s |
-| Longest task | 139 ms | **1,017 ms** | 323 ms |
-| Long tasks (>50ms) | 2 | 9 | 5 |
-| FPS | **0.7** | 34.7 | 50.7 |
+| Metric (trace, 4× CPU) | Basic v-for |     PrimeVue | TanStack |
+| ---------------------- | ----------: | -----------: | -------: |
+| Scripting              |    108 ms/s | **632 ms/s** | 122 ms/s |
+| Longest task           |      139 ms | **1,017 ms** |   323 ms |
+| Long tasks (>50ms)     |           2 |            9 |        5 |
+| FPS                    |     **0.7** |         34.7 |     50.7 |
 
 The basic table runs at **0.7 FPS**. One detail to be honest about: that isn't a smooth-but-slow 0.7 — the trace recorded only about four frames total. The main thread is so saturated building and patching 80,000 nodes that the rAF loop barely fires. It's not slow; it's frozen. FPS here isn't a clean cross-approach score so much as a yes/no on "did the page paint at all."
 
-Put the two layers next to each other and the story inverts: the approach with the *best* Lighthouse score has the *worst* experience.
+Put the two layers next to each other and the story inverts: the approach with the _best_ Lighthouse score has the _worst_ experience.
 
 ---
 
@@ -102,7 +102,8 @@ PrimeVue's DataTable is the obvious upgrade, it is part of our Component libray,
 <DataTable
   v-model:expanded-rows="expandedRows"
   :value="filteredSpecies"
-  scrollable scroll-height="600px"
+  scrollable
+  scroll-height="600px"
   :virtual-scroller-options="{ itemSize: 40 }"
 >
   <Column expander style="width: 3rem" />
@@ -116,14 +117,14 @@ PrimeVue's DataTable is the obvious upgrade, it is part of our Component libray,
 </DataTable>
 ```
 
-Virtual scroll does its job on DOM count — 497 nodes instead of 80,000. But under real throttling, this is the approach that actually *fails* Lighthouse:
+Virtual scroll does its job on DOM count — 497 nodes instead of 80,000. But under real throttling, this is the approach that actually _fails_ Lighthouse:
 
-| Metric | Basic | **PrimeVue** | TanStack |
-|---|---:|---:|---:|
-| Score | 100 | **77** | 97 |
-| TBT | 0 ms | **534 ms** | 123 ms |
-| LCP | 538 ms | 823 ms | 826 ms |
-| Main-Thread Work | 7,072 ms | 2,395 ms | 1,184 ms |
+| Metric           |    Basic | **PrimeVue** | TanStack |
+| ---------------- | -------: | -----------: | -------: |
+| Score            |      100 |       **77** |       97 |
+| TBT              |     0 ms |   **534 ms** |   123 ms |
+| LCP              |   538 ms |       823 ms |   826 ms |
+| Main-Thread Work | 7,072 ms |     2,395 ms | 1,184 ms |
 
 A 77 is a "needs improvement," and it's earned: 534ms of blocking time, the worst scripting cost of the three (632 ms/s), and a **1,017ms** longest task — a full second where the tab can't respond. The trace shows where it goes: 678ms inside `requestAnimationFrame` callbacks, the recycler re-measuring and re-positioning rows as you scroll. The 506 KB PrimeVue chunk (108 KB gzipped, versus 18 KB for the TanStack table) is part of the same bill.
 
@@ -142,14 +143,20 @@ The first move is to stop thinking in "rows with children" and flatten every row
 ```typescript
 type FlatRow =
   | { type: "species"; data: BenchmarkedSpecies }
-  | { type: "vernacular"; data: { vernacularName: string; language: string }; parentKey: number };
+  | {
+      type: "vernacular";
+      data: { vernacularName: string; language: string };
+      parentKey: number;
+    };
 
 const flattenedRows = computed<FlatRow[]>(() => {
-  if (!query.value) return filteredSpecies.value.map(s => ({ type: "species", data: s }));
+  if (!query.value)
+    return filteredSpecies.value.map((s) => ({ type: "species", data: s }));
   const rows: FlatRow[] = [];
   for (const s of filteredSpecies.value) {
     rows.push({ type: "species", data: s });
-    for (const v of matched(s)) rows.push({ type: "vernacular", data: v, parentKey: s.key });
+    for (const v of matched(s))
+      rows.push({ type: "vernacular", data: v, parentKey: s.key });
   }
   return rows;
 });
@@ -160,7 +167,8 @@ const flattenedRows = computed<FlatRow[]>(() => {
 ```typescript
 const virtualizerOptions = computed(() => ({
   count: flattenedRows.value.length,
-  estimateSize: i => flattenedRows.value[i]?.type === "vernacular" ? 32 : 40,
+  estimateSize: (i) =>
+    flattenedRows.value[i]?.type === "vernacular" ? 32 : 40,
   getScrollElement: () => scrollContainer.value ?? null,
   overscan: 20,
 }));

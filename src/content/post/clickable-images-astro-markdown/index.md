@@ -54,10 +54,7 @@ const { class: className, ...attrs } = Astro.props;
 
 <section
   {...attrs}
-  class:list={[
-    "prose sm:prose-lg lg:prose-xl ...",
-    [className],
-  ]}
+  class:list={["prose sm:prose-lg lg:prose-xl ...", [className]]}
 >
   <slot />
 </section>
@@ -131,7 +128,7 @@ The full script, saved as `src/scripts/image-zoom.ts` and loaded in the layout:
 ```typescript
 document.addEventListener("astro:page-load", () => {
   const prose = document.querySelector<HTMLElement>(
-    ".prose[data-expand-image]"
+    ".prose[data-expand-image]",
   );
   if (!prose) return;
 
@@ -144,10 +141,7 @@ document.addEventListener("astro:page-load", () => {
   const overflowParents: HTMLElement[] = [];
 
   function isExpandable(img: HTMLImageElement) {
-    const targetWidth = Math.min(
-      img.naturalWidth,
-      window.innerWidth * 0.8
-    );
+    const targetWidth = Math.min(img.naturalWidth, window.innerWidth * 0.8);
     return targetWidth > img.offsetWidth;
   }
 
@@ -156,10 +150,7 @@ document.addEventListener("astro:page-load", () => {
     let el: HTMLElement | null = img.parentElement;
     while (el && el !== document.body) {
       const style = getComputedStyle(el);
-      if (
-        style.overflow !== "visible" ||
-        style.overflowX !== "visible"
-      ) {
+      if (style.overflow !== "visible" || style.overflowX !== "visible") {
         el.classList.add("img-zoom-active");
         overflowParents.push(el);
       }
@@ -168,9 +159,7 @@ document.addEventListener("astro:page-load", () => {
   }
 
   function restoreOverflow() {
-    overflowParents.forEach((el) =>
-      el.classList.remove("img-zoom-active")
-    );
+    overflowParents.forEach((el) => el.classList.remove("img-zoom-active"));
     overflowParents.length = 0;
   }
 
@@ -191,10 +180,7 @@ document.addEventListener("astro:page-load", () => {
       restoreOverflow();
     }
 
-    const targetWidth = Math.min(
-      img.naturalWidth,
-      window.innerWidth * 0.8
-    );
+    const targetWidth = Math.min(img.naturalWidth, window.innerWidth * 0.8);
     const currentWidth = img.offsetWidth;
     const marginLeft = -(targetWidth - currentWidth) / 2;
 
@@ -275,7 +261,7 @@ Markdown images are typically lazy-loaded. When the script initializes, images b
 
 ### Why the collapse click needs special handling
 
-The `isExpandable` function compares the target expanded width against the image's current `offsetWidth`. But when an image is already expanded, its `offsetWidth` *is* the expanded width — so `isExpandable` returns `false` and the click is silently swallowed. The fix: always let collapse through before checking expandability.
+The `isExpandable` function compares the target expanded width against the image's current `offsetWidth`. But when an image is already expanded, its `offsetWidth` _is_ the expanded width — so `isExpandable` returns `false` and the click is silently swallowed. The fix: always let collapse through before checking expandability.
 
 ```typescript
 if (img === expandedImg) {
@@ -287,7 +273,7 @@ if (!isExpandable(img)) return;
 
 ### Why small screens are handled without a media query
 
-The `isExpandable` check compares `Math.min(naturalWidth, viewportWidth * 0.8)` against the image's displayed width. On small screens, `viewportWidth * 0.8` is often *smaller* than the image's displayed width (since prose images already fill most of the screen). The function returns `false`, and clicking does nothing. No separate mobile check needed — the math handles it.
+The `isExpandable` check compares `Math.min(naturalWidth, viewportWidth * 0.8)` against the image's displayed width. On small screens, `viewportWidth * 0.8` is often _smaller_ than the image's displayed width (since prose images already fill most of the screen). The function returns `false`, and clicking does nothing. No separate mobile check needed — the math handles it.
 
 ### The overflow problem
 

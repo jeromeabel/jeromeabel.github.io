@@ -1,5 +1,7 @@
 document.addEventListener("astro:page-load", () => {
-  const prose = document.querySelector<HTMLElement>(".prose[data-expand-image]");
+  const prose = document.querySelector<HTMLElement>(
+    ".prose[data-expand-image]",
+  );
   if (!prose) return;
 
   const mode = prose.dataset.expandImage; // "inline" or "modal"

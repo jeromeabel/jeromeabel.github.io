@@ -30,7 +30,7 @@ Google's PageRank directly incorporates [Core Web Vitals](https://web.dev/vitals
 
 **Weber's Law (the 20% Rule):**
 
-To be *perceived* as faster than a competitor, you need to be roughly **20% faster**. Users don't notice small differences. This applies to any perceivable change — not just load time.
+To be _perceived_ as faster than a competitor, you need to be roughly **20% faster**. Users don't notice small differences. This applies to any perceivable change — not just load time.
 
 **Business metrics:**
 
@@ -64,13 +64,13 @@ If you're not familiar with percentiles — they solve the problem that averages
 
 ### Thresholds
 
-| Metric | Good | Needs Improvement | Poor |
-|--------|------|-------------------|------|
-| **TTFB** (Time to First Byte) | ≤ 800ms | ≤ 1800ms | > 1800ms |
-| **FCP** (First Contentful Paint) | ≤ 1.8s | ≤ 3.0s | > 3.0s |
-| **LCP** (Largest Contentful Paint) | ≤ 2.5s | ≤ 4.0s | > 4.0s |
-| **INP** (Interaction to Next Paint) | ≤ 200ms | ≤ 500ms | > 500ms |
-| **CLS** (Cumulative Layout Shift) | ≤ 0.1 | ≤ 0.25 | > 0.25 |
+| Metric                              | Good    | Needs Improvement | Poor     |
+| ----------------------------------- | ------- | ----------------- | -------- |
+| **TTFB** (Time to First Byte)       | ≤ 800ms | ≤ 1800ms          | > 1800ms |
+| **FCP** (First Contentful Paint)    | ≤ 1.8s  | ≤ 3.0s            | > 3.0s   |
+| **LCP** (Largest Contentful Paint)  | ≤ 2.5s  | ≤ 4.0s            | > 4.0s   |
+| **INP** (Interaction to Next Paint) | ≤ 200ms | ≤ 500ms           | > 500ms  |
+| **CLS** (Cumulative Layout Shift)   | ≤ 0.1   | ≤ 0.25            | > 0.25   |
 
 ### What Each Metric Captures
 
@@ -83,6 +83,7 @@ If you're not familiar with percentiles — they solve the problem that averages
 ### Browser Caveat
 
 Initially these metrics were only available in Chrome. However, since the end of 2025, the latest versions of Firefox and Safari now support LCP & INP metrics. You can check on the caniuse.com website:
+
 - [caniuse - LCP](https://caniuse.com/wf-largest-contentful-paint)
 - [caniuse - Event Timing](https://caniuse.com/wf-event-timing): the Event Timing API powers Interaction to Next Paint.
 
@@ -94,18 +95,18 @@ The field data depend on browsers' target audience: platform (mobile, desktop), 
 
 The strategy: **field data first, lab data for diagnostics.**
 
-| Aspect | RUM (Real User Monitoring) | Lab Data | Synthetic Test (Lighthouse, WebPageTest) |
-|--------|---------------------------|----------|------------------------------------------|
-| **Source** | Real users, real devices | Controlled environment (your machine) | Automated script in simulated environment |
-| **Environment** | Unpredictable: network, hardware, geography | Semi-controlled (local) | Fully controlled (throttling, emulation) |
-| **Reproducible?** | No — varies per user | Partially | Yes — same conditions every run |
-| **Metrics** | Core Web Vitals from real users ([CrUX](https://developer.chrome.com/docs/crux), RUM tools) | Lighthouse on dev machine, DevTools | Lighthouse CI, [WebPageTest](https://www.webpagetest.org/), [PageSpeed Insights](https://pagespeed.web.dev/) |
-| **Best for** | Understanding **real-world UX** | **Debugging issues** locally | **Benchmarking, regression tests** |
-| **Limitations** | Harder to isolate issues | Can differ from real-world | Not representative of actual user experience |
+| Aspect            | RUM (Real User Monitoring)                                                                  | Lab Data                              | Synthetic Test (Lighthouse, WebPageTest)                                                                     |
+| ----------------- | ------------------------------------------------------------------------------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| **Source**        | Real users, real devices                                                                    | Controlled environment (your machine) | Automated script in simulated environment                                                                    |
+| **Environment**   | Unpredictable: network, hardware, geography                                                 | Semi-controlled (local)               | Fully controlled (throttling, emulation)                                                                     |
+| **Reproducible?** | No — varies per user                                                                        | Partially                             | Yes — same conditions every run                                                                              |
+| **Metrics**       | Core Web Vitals from real users ([CrUX](https://developer.chrome.com/docs/crux), RUM tools) | Lighthouse on dev machine, DevTools   | Lighthouse CI, [WebPageTest](https://www.webpagetest.org/), [PageSpeed Insights](https://pagespeed.web.dev/) |
+| **Best for**      | Understanding **real-world UX**                                                             | **Debugging issues** locally          | **Benchmarking, regression tests**                                                                           |
+| **Limitations**   | Harder to isolate issues                                                                    | Can differ from real-world            | Not representative of actual user experience                                                                 |
 
 **When to use each:**
 
-- **RUM** tells you *what's actually happening* to your users. Start here to identify which metric to fix.
+- **RUM** tells you _what's actually happening_ to your users. Start here to identify which metric to fix.
 - **Lab data** lets you reproduce the problem locally with DevTools Performance panel, traces, and Network waterfall.
 - **Synthetic tests** ([Lighthouse](https://developer.chrome.com/docs/lighthouse)) give you a reproducible before/after score for validating that your fix worked.
 

@@ -7,6 +7,7 @@
 **Architecture:** The playground is the source of truth for the runnable code; the blog post mirrors it section-for-section. We refactor the playground first (rename `subscribers` → `residents`, rename action `subscribe` → `join`, add the two missing POST endpoints, add the per-pattern demo pages, plus `welcome` / `rejected` redirect targets). Then we bolt on the `@astrojs/netlify` adapter and deploy. Then we rewrite the post end-to-end against the new playground and remove `draft: true`.
 
 **Tech Stack:**
+
 - Astro 6 (`^6.2.2`), strict TypeScript, Tailwind CSS 4 (Vite plugin)
 - `astro:actions` + `astro:schema` (Zod) for Pattern C
 - `@astrojs/netlify` adapter for deployment
@@ -14,12 +15,14 @@
 - Package manager: `pnpm`
 
 **Working directories — read carefully:**
+
 - `PLAYGROUND` = `/home/jabel/code/projects/astro-playground`
 - `BLOG` = `/home/jabel/code/projects/jeromeabel.github.io`
 
 Each task header says which repo it touches. Commits go in the repo where the changes live.
 
 **Verification model (no test suite exists, by design — see spec §7):**
+
 - After every code-touching task: `cd PLAYGROUND && pnpm build` (runs `astro check && astro build`) must pass.
 - Smoke tests are run manually in the browser at the end of each phase.
 
@@ -67,21 +70,21 @@ jeromeabel.github.io/
 
 ### File responsibilities (one-liners)
 
-| File | Responsibility |
-|---|---|
-| `data/heroes.ts` | Source of truth for `heroes` (roster) and `residents` (in-memory join state) |
-| `actions/index.ts` | Pattern C — Zod-validated `join` action |
-| `api/residents/index.ts` | GET — return `residents` JSON |
-| `api/residents/[id].ts` | GET — return one hero by id from `heroes` |
-| `api/residents/join-redirect.ts` | POST — Pattern A — mutate + 307 to `/welcome` or `/rejected` |
-| `api/residents/join-json.ts` | POST — Pattern B — mutate + JSON `{ ok, msg }` |
-| `pages/residents/index.astro` | Hub: link to each pattern + current roster |
-| `pages/residents/list.astro` | GET demo page (server-side direct import) |
-| `pages/residents/join-redirect.astro` | Pattern A demo: vanilla HTML form |
-| `pages/residents/join-json.astro` | Pattern B demo: form + client-side fetch |
-| `pages/residents/join-action.astro` | Pattern C demo: form + `actions.join` |
-| `pages/welcome.astro` | Success target for Pattern A redirect |
-| `pages/rejected.astro` | Rejection target for Pattern A redirect (reads `?reason=`) |
+| File                                  | Responsibility                                                               |
+| ------------------------------------- | ---------------------------------------------------------------------------- |
+| `data/heroes.ts`                      | Source of truth for `heroes` (roster) and `residents` (in-memory join state) |
+| `actions/index.ts`                    | Pattern C — Zod-validated `join` action                                      |
+| `api/residents/index.ts`              | GET — return `residents` JSON                                                |
+| `api/residents/[id].ts`               | GET — return one hero by id from `heroes`                                    |
+| `api/residents/join-redirect.ts`      | POST — Pattern A — mutate + 307 to `/welcome` or `/rejected`                 |
+| `api/residents/join-json.ts`          | POST — Pattern B — mutate + JSON `{ ok, msg }`                               |
+| `pages/residents/index.astro`         | Hub: link to each pattern + current roster                                   |
+| `pages/residents/list.astro`          | GET demo page (server-side direct import)                                    |
+| `pages/residents/join-redirect.astro` | Pattern A demo: vanilla HTML form                                            |
+| `pages/residents/join-json.astro`     | Pattern B demo: form + client-side fetch                                     |
+| `pages/residents/join-action.astro`   | Pattern C demo: form + `actions.join`                                        |
+| `pages/welcome.astro`                 | Success target for Pattern A redirect                                        |
+| `pages/rejected.astro`                | Rejection target for Pattern A redirect (reads `?reason=`)                   |
 
 ---
 
@@ -96,6 +99,7 @@ Goal of this phase: every endpoint and page in the new structure exists and work
 **Repo:** PLAYGROUND
 
 **Files:**
+
 - Modify: `src/actions/index.ts`
 
 - [ ] **Step 1: Replace the file contents**
@@ -123,7 +127,11 @@ export const server = {
       }
       const firstName = hero.name.split(" ")[0];
       if (residents.find((r) => r.email === email)) {
-        return { email, name: hero.name, message: `${firstName}, you're already settled in!` };
+        return {
+          email,
+          name: hero.name,
+          message: `${firstName}, you're already settled in!`,
+        };
       }
       residents.push(hero);
       return {
@@ -156,6 +164,7 @@ Action rename is half of a paired change with the page that uses it; we'll commi
 **Repo:** PLAYGROUND
 
 **Files:**
+
 - Delete: `src/pages/api/subscribers/index.ts`
 - Delete: `src/pages/api/subscribers/[id].ts`
 - Create: `src/pages/api/residents/index.ts`
@@ -190,6 +199,7 @@ Expected: same error set as before (only the now-broken `subscribers.astro` refe
 **Repo:** PLAYGROUND
 
 **Files:**
+
 - Create: `src/pages/api/residents/join-redirect.ts`
 
 - [ ] **Step 1: Create the file**
@@ -213,7 +223,10 @@ export const POST: APIRoute = async ({ request, redirect }: APIContext) => {
 
   const firstName = hero.name.split(" ")[0];
   if (residents.find((r) => r.email === email)) {
-    return redirect(`/welcome?name=${encodeURIComponent(firstName)}&already=1`, 307);
+    return redirect(
+      `/welcome?name=${encodeURIComponent(firstName)}&already=1`,
+      307,
+    );
   }
 
   residents.push(hero);
@@ -222,6 +235,7 @@ export const POST: APIRoute = async ({ request, redirect }: APIContext) => {
 ```
 
 Notes for the implementer:
+
 - We use `307` (temporary, preserves method semantics) per the existing post draft. Astro's `redirect()` defaults to 302; pass `307` explicitly.
 - `String(formData.get("email") ?? "")` is the cleanest narrow — `formData.get` returns `FormDataEntryValue | null`.
 
@@ -237,6 +251,7 @@ Expected: still only the pre-existing `subscribers.astro` error; no new errors f
 **Repo:** PLAYGROUND
 
 **Files:**
+
 - Create: `src/pages/api/residents/join-json.ts`
 
 - [ ] **Step 1: Create the file**
@@ -256,7 +271,10 @@ export const POST: APIRoute = async ({ request }: APIContext) => {
 
   const hero = heroes.find((h) => h.email === email);
   if (!hero) {
-    return json({ ok: false, msg: `Sorry, ${email} is not on the hero roster.` });
+    return json({
+      ok: false,
+      msg: `Sorry, ${email} is not on the hero roster.`,
+    });
   }
 
   const firstName = hero.name.split(" ")[0];
@@ -277,6 +295,7 @@ function json(body: JoinResponse, status = 200): Response {
 ```
 
 Notes:
+
 - The local `json()` helper keeps the three return sites readable and consistent. It's small enough to live in the same file rather than a shared util.
 - Both rejection and "already a resident" return `200` — they're not transport-level errors, just business outcomes the client renders verbatim.
 
@@ -292,6 +311,7 @@ Expected: no new errors.
 **Repo:** PLAYGROUND
 
 **Files:**
+
 - Create: `src/pages/welcome.astro`
 
 - [ ] **Step 1: Create the file**
@@ -316,11 +336,15 @@ const message = already
     <title>Welcome — Avengers Retirement Home</title>
   </head>
   <body class="min-h-screen bg-zinc-950 text-zinc-100">
-    <main class="max-w-2xl mx-auto px-6 py-16 space-y-8">
-      <a href="/residents" class="text-sm text-zinc-400 hover:text-zinc-200 transition-colors">&larr; Back to residents</a>
+    <main class="mx-auto max-w-2xl space-y-8 px-6 py-16">
+      <a
+        href="/residents"
+        class="text-sm text-zinc-400 transition-colors hover:text-zinc-200"
+        >&larr; Back to residents</a
+      >
       <section class="space-y-2">
         <h1 class="text-2xl font-semibold text-emerald-400">{message}</h1>
-        <p class="text-zinc-400 text-sm">Enjoy the lounge.</p>
+        <p class="text-sm text-zinc-400">Enjoy the lounge.</p>
       </section>
     </main>
   </body>
@@ -336,6 +360,7 @@ Why `prerender = false`: this page reads `Astro.url.searchParams` at request tim
 **Repo:** PLAYGROUND
 
 **Files:**
+
 - Create: `src/pages/rejected.astro`
 
 - [ ] **Step 1: Create the file**
@@ -347,8 +372,7 @@ export const prerender = false;
 import "../styles/global.css";
 
 const reason =
-  Astro.url.searchParams.get("reason") ??
-  "We could not verify your identity.";
+  Astro.url.searchParams.get("reason") ?? "We could not verify your identity.";
 ---
 
 <html lang="en">
@@ -358,11 +382,17 @@ const reason =
     <title>Rejected — Avengers Retirement Home</title>
   </head>
   <body class="min-h-screen bg-zinc-950 text-zinc-100">
-    <main class="max-w-2xl mx-auto px-6 py-16 space-y-8">
-      <a href="/residents" class="text-sm text-zinc-400 hover:text-zinc-200 transition-colors">&larr; Back to residents</a>
+    <main class="mx-auto max-w-2xl space-y-8 px-6 py-16">
+      <a
+        href="/residents"
+        class="text-sm text-zinc-400 transition-colors hover:text-zinc-200"
+        >&larr; Back to residents</a
+      >
       <section class="space-y-2">
-        <h1 class="text-2xl font-semibold text-red-400">Application rejected</h1>
-        <p class="text-zinc-400 text-sm">{reason}</p>
+        <h1 class="text-2xl font-semibold text-red-400">
+          Application rejected
+        </h1>
+        <p class="text-sm text-zinc-400">{reason}</p>
       </section>
     </main>
   </body>
@@ -376,6 +406,7 @@ const reason =
 **Repo:** PLAYGROUND
 
 **Files:**
+
 - Create: `src/pages/residents/index.astro`
 
 - [ ] **Step 1: Create the file**
@@ -392,10 +423,26 @@ const response = await GET(Astro);
 const residents: Hero[] = await response.json();
 
 const patterns = [
-  { href: "/residents/list",          title: "GET — list residents",       blurb: "Fetch JSON from an endpoint." },
-  { href: "/residents/join-redirect", title: "POST + redirect (Pattern A)", blurb: "Form posts, server redirects." },
-  { href: "/residents/join-json",     title: "POST + JSON (Pattern B)",     blurb: "Form posts via fetch, DOM updates." },
-  { href: "/residents/join-action",   title: "Astro Action (Pattern C)",    blurb: "defineAction + Zod, zero JS." },
+  {
+    href: "/residents/list",
+    title: "GET — list residents",
+    blurb: "Fetch JSON from an endpoint.",
+  },
+  {
+    href: "/residents/join-redirect",
+    title: "POST + redirect (Pattern A)",
+    blurb: "Form posts, server redirects.",
+  },
+  {
+    href: "/residents/join-json",
+    title: "POST + JSON (Pattern B)",
+    blurb: "Form posts via fetch, DOM updates.",
+  },
+  {
+    href: "/residents/join-action",
+    title: "Astro Action (Pattern C)",
+    blurb: "defineAction + Zod, zero JS.",
+  },
 ];
 ---
 
@@ -406,48 +453,63 @@ const patterns = [
     <title>Avengers Retirement Home — Astro Playground</title>
   </head>
   <body class="min-h-screen bg-zinc-950 text-zinc-100">
-    <main class="max-w-2xl mx-auto px-6 py-16 space-y-12">
-
-      <a href="/" class="text-sm text-zinc-400 hover:text-zinc-200 transition-colors">&larr; Back</a>
+    <main class="mx-auto max-w-2xl space-y-12 px-6 py-16">
+      <a
+        href="/"
+        class="text-sm text-zinc-400 transition-colors hover:text-zinc-200"
+        >&larr; Back</a
+      >
 
       <section class="space-y-2">
         <h1 class="text-2xl font-semibold">Avengers Retirement Home</h1>
-        <p class="text-zinc-400 text-sm">
-          Companion playground for the blog post on Astro API endpoints. Each link
-          below shows one server-side pattern.
+        <p class="text-sm text-zinc-400">
+          Companion playground for the blog post on Astro API endpoints. Each
+          link below shows one server-side pattern.
         </p>
       </section>
 
       <nav>
         <ul class="space-y-3">
-          {patterns.map((p) => (
-            <li>
-              <a href={p.href} class="block border border-zinc-800 rounded-lg px-5 py-4 hover:bg-zinc-900 transition-colors">
-                <span class="font-medium">{p.title}</span>
-                <span class="text-zinc-400 text-sm ml-2">{p.blurb}</span>
-              </a>
-            </li>
-          ))}
+          {
+            patterns.map((p) => (
+              <li>
+                <a
+                  href={p.href}
+                  class="block rounded-lg border border-zinc-800 px-5 py-4 transition-colors hover:bg-zinc-900"
+                >
+                  <span class="font-medium">{p.title}</span>
+                  <span class="ml-2 text-sm text-zinc-400">{p.blurb}</span>
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </nav>
 
       <section class="space-y-3">
-        <h2 class="text-sm font-semibold text-zinc-400 uppercase tracking-wide">
-          Current residents <span class="text-zinc-600 font-normal normal-case">({residents.length})</span>
+        <h2 class="text-sm font-semibold tracking-wide text-zinc-400 uppercase">
+          Current residents <span class="font-normal text-zinc-600 normal-case"
+            >({residents.length})</span
+          >
         </h2>
-        <ul class="divide-y divide-zinc-800 border border-zinc-800 rounded-lg overflow-hidden">
-          {residents.map((h) => (
-            <li class="flex items-center justify-between px-4 py-3 text-sm">
-              <div>
-                <span class="font-medium">{h.alias}</span>
-                <span class="text-zinc-500 ml-2 text-xs">retired {h.retiredYear}</span>
-              </div>
-              <span class="text-zinc-400 font-mono text-xs">{h.email}</span>
-            </li>
-          ))}
+        <ul
+          class="divide-y divide-zinc-800 overflow-hidden rounded-lg border border-zinc-800"
+        >
+          {
+            residents.map((h) => (
+              <li class="flex items-center justify-between px-4 py-3 text-sm">
+                <div>
+                  <span class="font-medium">{h.alias}</span>
+                  <span class="ml-2 text-xs text-zinc-500">
+                    retired {h.retiredYear}
+                  </span>
+                </div>
+                <span class="font-mono text-xs text-zinc-400">{h.email}</span>
+              </li>
+            ))
+          }
         </ul>
       </section>
-
     </main>
   </body>
 </html>
@@ -462,6 +524,7 @@ Why direct-import `GET(Astro)` instead of `fetch`: matches the convention from t
 **Repo:** PLAYGROUND
 
 **Files:**
+
 - Create: `src/pages/residents/list.astro`
 
 - [ ] **Step 1: Create the file**
@@ -488,26 +551,36 @@ const residents: Hero[] = await response.json();
     <title>GET demo — Avengers Retirement Home</title>
   </head>
   <body class="min-h-screen bg-zinc-950 text-zinc-100">
-    <main class="max-w-2xl mx-auto px-6 py-16 space-y-8">
-      <a href="/residents" class="text-sm text-zinc-400 hover:text-zinc-200 transition-colors">&larr; Back</a>
+    <main class="mx-auto max-w-2xl space-y-8 px-6 py-16">
+      <a
+        href="/residents"
+        class="text-sm text-zinc-400 transition-colors hover:text-zinc-200"
+        >&larr; Back</a
+      >
       <section class="space-y-2">
         <h1 class="text-2xl font-semibold">GET — list residents</h1>
-        <p class="text-zinc-400 text-sm">
+        <p class="text-sm text-zinc-400">
           This page calls <code class="text-zinc-300">/api/residents/</code> from
           its frontmatter and renders the JSON server-side.
         </p>
       </section>
-      <ul class="divide-y divide-zinc-800 border border-zinc-800 rounded-lg overflow-hidden">
-        {residents.map((h) => (
-          <li class="flex items-center justify-between px-4 py-3 text-sm">
-            <span class="font-medium">{h.alias}</span>
-            <span class="text-zinc-400 font-mono text-xs">{h.email}</span>
-          </li>
-        ))}
+      <ul
+        class="divide-y divide-zinc-800 overflow-hidden rounded-lg border border-zinc-800"
+      >
+        {
+          residents.map((h) => (
+            <li class="flex items-center justify-between px-4 py-3 text-sm">
+              <span class="font-medium">{h.alias}</span>
+              <span class="font-mono text-xs text-zinc-400">{h.email}</span>
+            </li>
+          ))
+        }
       </ul>
-      <p class="text-zinc-500 text-xs">
+      <p class="text-xs text-zinc-500">
         Try the dynamic route too:
-        <a class="underline hover:text-zinc-300" href="/api/residents/2">/api/residents/2</a>
+        <a class="underline hover:text-zinc-300" href="/api/residents/2"
+          >/api/residents/2</a
+        >
       </p>
     </main>
   </body>
@@ -523,6 +596,7 @@ Note the comment block above the `fetch` call — it documents the direct-import
 **Repo:** PLAYGROUND
 
 **Files:**
+
 - Create: `src/pages/residents/join-redirect.astro`
 
 - [ ] **Step 1: Create the file**
@@ -541,19 +615,31 @@ import "../../styles/global.css";
     <title>POST + redirect (Pattern A) — Avengers Retirement Home</title>
   </head>
   <body class="min-h-screen bg-zinc-950 text-zinc-100">
-    <main class="max-w-2xl mx-auto px-6 py-16 space-y-8">
-      <a href="/residents" class="text-sm text-zinc-400 hover:text-zinc-200 transition-colors">&larr; Back</a>
+    <main class="mx-auto max-w-2xl space-y-8 px-6 py-16">
+      <a
+        href="/residents"
+        class="text-sm text-zinc-400 transition-colors hover:text-zinc-200"
+        >&larr; Back</a
+      >
 
       <section class="space-y-2">
         <h1 class="text-2xl font-semibold">POST + redirect (Pattern A)</h1>
-        <p class="text-zinc-400 text-sm">
-          The form posts to <code class="text-zinc-300">/api/residents/join-redirect</code>.
-          The server validates, mutates, and redirects to <code class="text-zinc-300">/welcome</code>
-          or <code class="text-zinc-300">/rejected</code>. Works without JavaScript.
+        <p class="text-sm text-zinc-400">
+          The form posts to <code class="text-zinc-300"
+            >/api/residents/join-redirect</code
+          >. The server validates, mutates, and redirects to <code
+            class="text-zinc-300">/welcome</code
+          >
+          or <code class="text-zinc-300">/rejected</code>. Works without
+          JavaScript.
         </p>
       </section>
 
-      <form method="POST" action="/api/residents/join-redirect" class="flex gap-3">
+      <form
+        method="POST"
+        action="/api/residents/join-redirect"
+        class="flex gap-3"
+      >
         <label class="sr-only" for="email">Hero email address</label>
         <input
           id="email"
@@ -561,20 +647,20 @@ import "../../styles/global.css";
           name="email"
           required
           placeholder="hero@example.com"
-          class="flex-1 bg-zinc-900 border border-zinc-700 rounded-lg px-4 py-2.5 text-sm placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-500"
+          class="flex-1 rounded-lg border border-zinc-700 bg-zinc-900 px-4 py-2.5 text-sm placeholder-zinc-500 focus:ring-2 focus:ring-zinc-500 focus:outline-none"
         />
         <button
           type="submit"
-          class="bg-zinc-100 text-zinc-950 text-sm font-medium px-5 py-2.5 rounded-lg hover:bg-white transition-colors cursor-pointer"
+          class="cursor-pointer rounded-lg bg-zinc-100 px-5 py-2.5 text-sm font-medium text-zinc-950 transition-colors hover:bg-white"
         >
           Apply
         </button>
       </form>
 
-      <p class="text-zinc-500 text-xs">
+      <p class="text-xs text-zinc-500">
         Try <code class="text-zinc-300">steve@rogers.com</code> (accepted),
-        <code class="text-zinc-300">tony@stark.com</code> (already a resident),
-        or <code class="text-zinc-300">peter@parker.com</code> (rejected).
+        <code class="text-zinc-300">tony@stark.com</code> (already a resident), or
+        <code class="text-zinc-300">peter@parker.com</code> (rejected).
       </p>
     </main>
   </body>
@@ -588,6 +674,7 @@ import "../../styles/global.css";
 **Repo:** PLAYGROUND
 
 **Files:**
+
 - Create: `src/pages/residents/join-json.astro`
 
 - [ ] **Step 1: Create the file**
@@ -606,15 +693,19 @@ import "../../styles/global.css";
     <title>POST + JSON (Pattern B) — Avengers Retirement Home</title>
   </head>
   <body class="min-h-screen bg-zinc-950 text-zinc-100">
-    <main class="max-w-2xl mx-auto px-6 py-16 space-y-8">
-      <a href="/residents" class="text-sm text-zinc-400 hover:text-zinc-200 transition-colors">&larr; Back</a>
+    <main class="mx-auto max-w-2xl space-y-8 px-6 py-16">
+      <a
+        href="/residents"
+        class="text-sm text-zinc-400 transition-colors hover:text-zinc-200"
+        >&larr; Back</a
+      >
 
       <section class="space-y-2">
         <h1 class="text-2xl font-semibold">POST + JSON (Pattern B)</h1>
-        <p class="text-zinc-400 text-sm">
+        <p class="text-sm text-zinc-400">
           A client-side handler intercepts the submit, calls
-          <code class="text-zinc-300">/api/residents/join-json</code>, and writes the
-          response message into the page. No navigation.
+          <code class="text-zinc-300">/api/residents/join-json</code>, and
+          writes the response message into the page. No navigation.
         </p>
       </section>
 
@@ -626,22 +717,22 @@ import "../../styles/global.css";
           name="email"
           required
           placeholder="hero@example.com"
-          class="flex-1 bg-zinc-900 border border-zinc-700 rounded-lg px-4 py-2.5 text-sm placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-500"
+          class="flex-1 rounded-lg border border-zinc-700 bg-zinc-900 px-4 py-2.5 text-sm placeholder-zinc-500 focus:ring-2 focus:ring-zinc-500 focus:outline-none"
         />
         <button
           type="submit"
-          class="bg-zinc-100 text-zinc-950 text-sm font-medium px-5 py-2.5 rounded-lg hover:bg-white transition-colors cursor-pointer"
+          class="cursor-pointer rounded-lg bg-zinc-100 px-5 py-2.5 text-sm font-medium text-zinc-950 transition-colors hover:bg-white"
         >
           Apply
         </button>
       </form>
 
-      <p id="joinFormMessage" class="text-sm min-h-5"></p>
+      <p id="joinFormMessage" class="min-h-5 text-sm"></p>
 
-      <p class="text-zinc-500 text-xs">
+      <p class="text-xs text-zinc-500">
         Try <code class="text-zinc-300">steve@rogers.com</code> (accepted),
-        <code class="text-zinc-300">tony@stark.com</code> (already a resident),
-        or <code class="text-zinc-300">peter@parker.com</code> (rejected).
+        <code class="text-zinc-300">tony@stark.com</code> (already a resident), or
+        <code class="text-zinc-300">peter@parker.com</code> (rejected).
       </p>
 
       <script>
@@ -658,7 +749,10 @@ import "../../styles/global.css";
               method: "POST",
               body: new FormData(form),
             });
-            const data = (await response.json()) as { ok: boolean; msg: string };
+            const data = (await response.json()) as {
+              ok: boolean;
+              msg: string;
+            };
             message.textContent = data.msg;
             message.className = `text-sm min-h-5 ${data.ok ? "text-emerald-400" : "text-red-400"}`;
           } catch {
@@ -681,6 +775,7 @@ The script is inline (matches Astro convention for one-off page scripts). Cast t
 **Repo:** PLAYGROUND
 
 **Files:**
+
 - Create: `src/pages/residents/join-action.astro`
 
 - [ ] **Step 1: Create the file**
@@ -702,13 +797,18 @@ const result = Astro.getActionResult(actions.join);
     <title>Astro Action (Pattern C) — Avengers Retirement Home</title>
   </head>
   <body class="min-h-screen bg-zinc-950 text-zinc-100">
-    <main class="max-w-2xl mx-auto px-6 py-16 space-y-8">
-      <a href="/residents" class="text-sm text-zinc-400 hover:text-zinc-200 transition-colors">&larr; Back</a>
+    <main class="mx-auto max-w-2xl space-y-8 px-6 py-16">
+      <a
+        href="/residents"
+        class="text-sm text-zinc-400 transition-colors hover:text-zinc-200"
+        >&larr; Back</a
+      >
 
       <section class="space-y-2">
         <h1 class="text-2xl font-semibold">Astro Action (Pattern C)</h1>
-        <p class="text-zinc-400 text-sm">
-          The form's <code class="text-zinc-300">action</code> attribute points at the
+        <p class="text-sm text-zinc-400">
+          The form's <code class="text-zinc-300">action</code> attribute points at
+          the
           <code class="text-zinc-300">join</code> action. Astro handles transport,
           Zod validates the input, and the page reads the result via
           <code class="text-zinc-300">Astro.getActionResult()</code>. Zero JS.
@@ -723,27 +823,31 @@ const result = Astro.getActionResult(actions.join);
           name="email"
           required
           placeholder="hero@example.com"
-          class="flex-1 bg-zinc-900 border border-zinc-700 rounded-lg px-4 py-2.5 text-sm placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-500"
+          class="flex-1 rounded-lg border border-zinc-700 bg-zinc-900 px-4 py-2.5 text-sm placeholder-zinc-500 focus:ring-2 focus:ring-zinc-500 focus:outline-none"
         />
         <button
           type="submit"
-          class="bg-zinc-100 text-zinc-950 text-sm font-medium px-5 py-2.5 rounded-lg hover:bg-white transition-colors cursor-pointer"
+          class="cursor-pointer rounded-lg bg-zinc-100 px-5 py-2.5 text-sm font-medium text-zinc-950 transition-colors hover:bg-white"
         >
           Apply
         </button>
       </form>
 
-      {result && !result.error && (
-        <p class="text-sm text-emerald-400">{result.data.message}</p>
-      )}
-      {result?.error && (
-        <p class="text-sm text-red-400">{result.error.message}</p>
-      )}
+      {
+        result && !result.error && (
+          <p class="text-sm text-emerald-400">{result.data.message}</p>
+        )
+      }
+      {
+        result?.error && (
+          <p class="text-sm text-red-400">{result.error.message}</p>
+        )
+      }
 
-      <p class="text-zinc-500 text-xs">
+      <p class="text-xs text-zinc-500">
         Try <code class="text-zinc-300">steve@rogers.com</code> (accepted),
-        <code class="text-zinc-300">tony@stark.com</code> (already a resident),
-        or <code class="text-zinc-300">peter@parker.com</code> (rejected).
+        <code class="text-zinc-300">tony@stark.com</code> (already a resident), or
+        <code class="text-zinc-300">peter@parker.com</code> (rejected).
       </p>
     </main>
   </body>
@@ -757,6 +861,7 @@ const result = Astro.getActionResult(actions.join);
 **Repo:** PLAYGROUND
 
 **Files:**
+
 - Modify: `src/pages/index.astro`
 - Delete: `src/pages/subscribers.astro`
 
@@ -766,7 +871,11 @@ Open `src/pages/index.astro` and change the `examples` array entry from:
 
 ```ts
 const examples = [
-  { href: "/subscribers", title: "Avengers Retirement Home", description: "API routes & Actions" },
+  {
+    href: "/subscribers",
+    title: "Avengers Retirement Home",
+    description: "API routes & Actions",
+  },
 ];
 ```
 
@@ -774,7 +883,11 @@ to:
 
 ```ts
 const examples = [
-  { href: "/residents", title: "Avengers Retirement Home", description: "API endpoints & Astro Actions — companion to the blog post" },
+  {
+    href: "/residents",
+    title: "Avengers Retirement Home",
+    description: "API endpoints & Astro Actions — companion to the blog post",
+  },
 ];
 ```
 
@@ -810,6 +923,7 @@ git status
 ```
 
 Verify the staged tree is exactly:
+
 - renamed `pages/api/subscribers/*` → `pages/api/residents/*`
 - modified `pages/index.astro`, `actions/index.ts`
 - new `pages/residents/{index,list,join-redirect,join-json,join-action}.astro`
@@ -858,26 +972,27 @@ Expected: server up at `http://localhost:4321`.
 - [ ] **Step 2: Verify each pattern in the browser**
 
 Open each URL and confirm the expected behavior. Use these emails:
+
 - `steve@rogers.com` — accepted (Steve is in `heroes`, not in pre-seeded `residents`)
 - `tony@stark.com` — already a resident (idempotent welcome)
 - `peter@parker.com` — rejected (not in `heroes`)
 
-| URL | Test | Pass criteria |
-|---|---|---|
-| `/` | Click "Avengers Retirement Home" | Lands on `/residents` |
-| `/residents` | Page loads | Shows hub + roster of 3 (Tony, Natasha, Thor) |
-| `/residents/list` | Page loads | Shows roster fetched from `/api/residents/` |
-| `/api/residents/` | Direct hit | Returns JSON array of 3 residents |
-| `/api/residents/2` | Direct hit | Returns Tony Stark JSON |
-| `/api/residents/99` | Direct hit | Returns `{ "error": "Not found" }` with 404 |
-| `/residents/join-redirect` | Submit `peter@parker.com` | Redirects to `/rejected?reason=...`, shows the reason |
-| `/residents/join-redirect` | Submit `steve@rogers.com` | Redirects to `/welcome?name=Steve`, shows green welcome |
-| `/residents/join-redirect` | Submit `steve@rogers.com` again | Redirects to `/welcome?...&already=1`, shows "already settled in" |
-| `/residents/join-json` | Submit `peter@parker.com` | Page stays, red message under form |
-| `/residents/join-json` | Submit a fresh hero email | Page stays, green message under form |
-| `/residents/join-action` | Submit `peter@parker.com` | Page re-renders, red message |
-| `/residents/join-action` | Submit a fresh hero email | Page re-renders, green message |
-| `/residents` | After all the above | Roster has grown — confirms shared `residents` array |
+| URL                        | Test                             | Pass criteria                                                     |
+| -------------------------- | -------------------------------- | ----------------------------------------------------------------- |
+| `/`                        | Click "Avengers Retirement Home" | Lands on `/residents`                                             |
+| `/residents`               | Page loads                       | Shows hub + roster of 3 (Tony, Natasha, Thor)                     |
+| `/residents/list`          | Page loads                       | Shows roster fetched from `/api/residents/`                       |
+| `/api/residents/`          | Direct hit                       | Returns JSON array of 3 residents                                 |
+| `/api/residents/2`         | Direct hit                       | Returns Tony Stark JSON                                           |
+| `/api/residents/99`        | Direct hit                       | Returns `{ "error": "Not found" }` with 404                       |
+| `/residents/join-redirect` | Submit `peter@parker.com`        | Redirects to `/rejected?reason=...`, shows the reason             |
+| `/residents/join-redirect` | Submit `steve@rogers.com`        | Redirects to `/welcome?name=Steve`, shows green welcome           |
+| `/residents/join-redirect` | Submit `steve@rogers.com` again  | Redirects to `/welcome?...&already=1`, shows "already settled in" |
+| `/residents/join-json`     | Submit `peter@parker.com`        | Page stays, red message under form                                |
+| `/residents/join-json`     | Submit a fresh hero email        | Page stays, green message under form                              |
+| `/residents/join-action`   | Submit `peter@parker.com`        | Page re-renders, red message                                      |
+| `/residents/join-action`   | Submit a fresh hero email        | Page re-renders, green message                                    |
+| `/residents`               | After all the above              | Roster has grown — confirms shared `residents` array              |
 
 **Important note on shared state:** because `residents` is a single in-memory array, joins from one pattern persist into the next during the same dev process. Restart `pnpm dev` between full sweeps if you need a clean roster.
 
@@ -898,6 +1013,7 @@ Goal: the playground is reachable at a live Netlify URL with all five patterns w
 **Repo:** PLAYGROUND
 
 **Files:**
+
 - Modify: `package.json` (via pnpm)
 - Modify: `astro.config.mjs`
 
@@ -918,9 +1034,9 @@ Replace the file contents with:
 
 ```js
 // astro.config.mjs
-import { defineConfig } from 'astro/config';
-import netlify from '@astrojs/netlify';
-import tailwindcss from '@tailwindcss/vite';
+import { defineConfig } from "astro/config";
+import netlify from "@astrojs/netlify";
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   adapter: netlify(),
@@ -995,6 +1111,7 @@ export PLAYGROUND_URL="https://astro-playground-jeromeabel.netlify.app"
 ```
 
 You will paste this URL into:
+
 - Playground `README.md` (Task 16)
 - Blog post intro, deployment section, and What-I-learned section (Tasks 18–24)
 
@@ -1005,13 +1122,14 @@ You will paste this URL into:
 **Repo:** PLAYGROUND
 
 **Files:**
+
 - Modify: `README.md`
 
 - [ ] **Step 1: Replace the file contents**
 
 Substitute `<PLAYGROUND_URL>` with the actual URL captured in Task 15.
 
-```md
+````md
 # Astro Playground
 
 A collection of examples exploring Astro 6 features.
@@ -1029,6 +1147,7 @@ Companion repository for the blog post
 pnpm install
 pnpm dev
 ```
+````
 
 ## Examples
 
@@ -1041,7 +1160,8 @@ pnpm dev
 
 The `residents` list lives in memory in `src/data/heroes.ts` and resets on
 every cold start — see the blog post for the rationale.
-```
+
+````
 
 - [ ] **Step 2: Commit**
 
@@ -1050,7 +1170,7 @@ cd /home/jabel/code/projects/astro-playground
 git add README.md
 git commit -m "docs: link README to blog post and live demo"
 git push origin main
-```
+````
 
 ---
 
@@ -1069,6 +1189,7 @@ The post is rewritten section-by-section. Each task replaces a contiguous slice 
 **Repo:** BLOG
 
 **Files:**
+
 - Modify: `src/content/post/api-endpoints-with-astro/index.md` (lines 1–15 area)
 
 Substitute `<PLAYGROUND_URL>` with the actual URL.
@@ -1088,9 +1209,9 @@ draft: true
 
 Astro's file-based routing doesn't stop at `.astro` pages. Drop a `.ts` file in the `pages/` directory, export an HTTP method handler, and you have an API endpoint. No Express, no separate server — just the same routing convention you already know.
 
-This post walks through a small *Avengers Retirement Home*: heroes can browse the current residents, look themselves up by id, and apply to join via three different POST patterns. I built it as a runnable companion so each section in the post maps to a real page you can try.
+This post walks through a small _Avengers Retirement Home_: heroes can browse the current residents, look themselves up by id, and apply to join via three different POST patterns. I built it as a runnable companion so each section in the post maps to a real page you can try.
 
-- Live demo: [<PLAYGROUND_URL>](<PLAYGROUND_URL>)
+- Live demo: [<PLAYGROUND_URL>](PLAYGROUND_URL)
 - Code: [astro-playground](https://github.com/jeromeabel/astro-playground)
 
 The first request to the demo may take a few seconds — Netlify cold-starts the function before serving.
@@ -1107,13 +1228,14 @@ Leave `draft: true` for now. We'll flip it in Task 27 once verification passes.
 **Repo:** BLOG
 
 **Files:**
+
 - Modify: same file, the section currently titled "Switching to server mode" (~lines 17–32)
 
 - [ ] **Step 1: Replace the section**
 
 Replace from the heading `## Switching to server mode` through (but not including) the next `## A first GET endpoint` heading with:
 
-```md
+````md
 ## Static → server: opting routes in
 
 By default, Astro renders every route to static HTML at build time. Endpoints that respond to real requests need to run on demand instead. The most surgical way to opt in is per-route, by exporting a flag from the file:
@@ -1122,8 +1244,9 @@ By default, Astro renders every route to static HTML at build time. Endpoints th
 // src/pages/api/residents/index.ts
 export const prerender = false;
 ```
+````
 
-That's the Astro 6 idiom for a mostly-static project that wants a few server routes. The `hybrid` mode that used to live alongside `static` and `server` was merged into `static` in Astro 5 — the per-route opt-out *is* the modern hybrid.
+That's the Astro 6 idiom for a mostly-static project that wants a few server routes. The `hybrid` mode that used to live alongside `static` and `server` was merged into `static` in Astro 5 — the per-route opt-out _is_ the modern hybrid.
 
 If you'd rather flip everything to on-demand, set `output: "server"` in `astro.config.mjs` and skip the per-route flag:
 
@@ -1134,10 +1257,11 @@ export default defineConfig({
 });
 ```
 
-Either way, a server adapter is required for production. The playground uses [`@astrojs/netlify`](https://docs.astro.build/en/guides/integrations-guide/netlify/) and is deployed at [<PLAYGROUND_URL>](<PLAYGROUND_URL>) — every code block below corresponds to a route you can hit there. Other [adapters](https://docs.astro.build/en/guides/on-demand-rendering/#server-adapters) (Node, Vercel, Cloudflare) work the same way.
+Either way, a server adapter is required for production. The playground uses [`@astrojs/netlify`](https://docs.astro.build/en/guides/integrations-guide/netlify/) and is deployed at [<PLAYGROUND_URL>](PLAYGROUND_URL) — every code block below corresponds to a route you can hit there. Other [adapters](https://docs.astro.build/en/guides/on-demand-rendering/#server-adapters) (Node, Vercel, Cloudflare) work the same way.
 
 ---
-```
+
+````
 
 Substitute `<PLAYGROUND_URL>` with the URL captured in Task 15. After this task, the URL appears in three places in the post: intro (Task 17), here (§1), and the closing paragraph (Task 26).
 
@@ -1159,20 +1283,22 @@ Replace from the heading `## A first GET endpoint` through (but not including) t
 
 The file structure mirrors the URL. A file at `pages/api/residents/index.ts` becomes the route `/api/residents/`:
 
-```
+````
+
 src/pages/
 ├── api/
-│   └── residents/
-│       ├── index.ts        → GET /api/residents/
-│       ├── [id].ts         → GET /api/residents/:id
-│       ├── join-redirect.ts → POST /api/residents/join-redirect
-│       └── join-json.ts    → POST /api/residents/join-json
+│ └── residents/
+│ ├── index.ts → GET /api/residents/
+│ ├── [id].ts → GET /api/residents/:id
+│ ├── join-redirect.ts → POST /api/residents/join-redirect
+│ └── join-json.ts → POST /api/residents/join-json
 ├── residents/
-│   ├── index.astro         → /residents (hub)
-│   ├── list.astro          → /residents/list (GET demo)
-│   └── join-*.astro        → form pages, one per POST pattern
-└── index.astro             → /
-```
+│ ├── index.astro → /residents (hub)
+│ ├── list.astro → /residents/list (GET demo)
+│ └── join-*.astro → form pages, one per POST pattern
+└── index.astro → /
+
+````
 
 The endpoint exports a named function matching the HTTP method — `GET`, `POST`, `PUT`, `DELETE`:
 
@@ -1188,7 +1314,7 @@ export const GET: APIRoute = () => {
     headers: { "Content-Type": "application/json" },
   });
 };
-```
+````
 
 `residents` is a plain in-memory array exported from `src/data/heroes.ts`. The endpoint serializes whatever is currently there. (More on the in-memory bit at the end.)
 
@@ -1204,9 +1330,13 @@ const residents: Hero[] = await response.json();
 ---
 
 <ul>
-  {residents.map((h) => (
-    <li><b>{h.alias}</b>: {h.email}</li>
-  ))}
+  {
+    residents.map((h) => (
+      <li>
+        <b>{h.alias}</b>: {h.email}
+      </li>
+    ))
+  }
 </ul>
 ```
 
@@ -1221,7 +1351,8 @@ const residents: Hero[] = await response.json();
 Both work. The direct import is faster (no network hop), but the `fetch` version is closer to how a client-side script would call the same endpoint — useful if you plan to share the call site between server and client.
 
 ---
-```
+
+````
 
 ---
 
@@ -1260,14 +1391,15 @@ export const GET: APIRoute = ({ params }: APIContext) => {
     headers: { "Content-Type": "application/json" },
   });
 };
-```
+````
 
 `params` is an object containing the matched segments — here, `params.id` maps to whatever replaces `[id]` in the URL. Navigating to `/api/residents/2` returns Tony Stark; `/api/residents/99` returns a 404 JSON body.
 
 This route reads from `heroes` (the full roster of 10), not `residents` (the join state), so you can look up any hero whether or not they've joined.
 
 ---
-```
+
+````
 
 ---
 
@@ -1312,7 +1444,7 @@ export const POST: APIRoute = async ({ request, redirect }: APIContext) => {
   residents.push(hero);
   return redirect(`/welcome?name=${encodeURIComponent(firstName)}`, 307);
 };
-```
+````
 
 Three branches, three redirects. `307` (instead of the default `302`) preserves the request method semantics and is the conventional choice when the target is the result of a POST.
 
@@ -1343,7 +1475,8 @@ const reason = Astro.url.searchParams.get("reason") ?? "Unknown reason.";
 This is the traditional server-side pattern. It works without JavaScript on the client, which matters for progressive enhancement and for users with JS disabled or failing.
 
 ---
-```
+
+````
 
 ---
 
@@ -1396,9 +1529,9 @@ function json(body: JoinResponse, status = 200): Response {
     headers: { "Content-Type": "application/json" },
   });
 }
-```
+````
 
-Note that *both* the rejection and the "already settled in" branches return `200`. They aren't transport-level errors — they're business outcomes the client renders verbatim. The `ok` flag tells the UI which color to use.
+Note that _both_ the rejection and the "already settled in" branches return `200`. They aren't transport-level errors — they're business outcomes the client renders verbatim. The `ok` flag tells the UI which color to use.
 
 The page wires up a submit handler that intercepts the form:
 
@@ -1429,7 +1562,8 @@ The page wires up a submit handler that intercepts the form:
 No page reload, no redirect, no flash of unstyled content. The trade-off: it requires JavaScript on the client.
 
 ---
-```
+
+````
 
 ---
 
@@ -1480,7 +1614,7 @@ export const server = {
     },
   }),
 };
-```
+````
 
 The action object replaces the endpoint file. `accept: "form"` tells Astro to parse `multipart/form-data`; the Zod schema validates and types the input; the handler returns a typed result, or throws `ActionError` for failure. The `code` controls the HTTP status (`FORBIDDEN` → 403).
 
@@ -1498,18 +1632,15 @@ const result = Astro.getActionResult(actions.join);
   <button type="submit">Apply</button>
 </form>
 
-{result && !result.error && (
-  <p class="success">{result.data.message}</p>
-)}
-{result?.error && (
-  <p class="error">{result.error.message}</p>
-)}
+{result && !result.error && <p class="success">{result.data.message}</p>}
+{result?.error && <p class="error">{result.error.message}</p>}
 ```
 
 `Astro.getActionResult()` reads the result of the most recent submission for that action. The success branch types `result.data` from the handler's return; the error branch types `result.error` from `ActionError`. It's the same code path as Pattern B's JSON, but Astro is doing the wiring for you.
 
 ---
-```
+
+````
 
 ---
 
@@ -1538,7 +1669,7 @@ All three share the same data and the same business rules. They differ in *how t
 If you're starting fresh, use Actions. If you need to work without JavaScript and don't want to re-render the whole page, redirect. If you have an existing client-side flow and want a simple JSON contract, return JSON.
 
 ---
-```
+````
 
 ---
 
@@ -1547,6 +1678,7 @@ If you're starting fresh, use Actions. If you need to work without JavaScript an
 **Repo:** BLOG
 
 **Files:**
+
 - Modify: same file, the section currently titled "Astro documentation" (~lines 236–244)
 
 - [ ] **Step 1: Replace the section**
@@ -1571,6 +1703,7 @@ Replace from the heading `## Astro documentation` through (but not including) th
 **Repo:** BLOG
 
 **Files:**
+
 - Modify: same file, the section currently titled "What I Learned" (~lines 246–253)
 
 - [ ] **Step 1: Replace the section**
@@ -1585,11 +1718,11 @@ Replace from the heading `## What I Learned` to end-of-file with:
 - **File-based API routing is Astro's underrated feature.** The same convention that maps `.astro` files to pages maps `.ts` files to endpoints. No router configuration, no middleware setup.
 - **Three POST patterns cover most use cases.** Redirect for progressive enhancement, JSON for inline feedback, Actions for new code. Pick by audience and constraints, not by personal preference.
 - **Dynamic routes use the same bracket syntax as pages.** `[id].ts` works identically to `[id].astro` — the `params` object is the same.
-- **Direct handler imports skip the network.** Calling `GET(Astro)` instead of `fetch()` avoids an HTTP round-trip when the API and page colocate. Useful for the page that *also* renders the data.
+- **Direct handler imports skip the network.** Calling `GET(Astro)` instead of `fetch()` avoids an HTTP round-trip when the API and page colocate. Useful for the page that _also_ renders the data.
 - **`output: "server"` is one option, not the only one.** Per-route `export const prerender = false` keeps the rest of the site static.
 - **Astro Actions are the modern default.** Less boilerplate, type-safe, zero-JS by default. The two manual patterns are still useful — you should know they exist — but new forms should reach for Actions first.
 
-The playground keeps everything in memory: the `residents` array resets on every cold start, so two visits to the live demo can see different state. In production you'd swap the array for a database call inside the handler — the surrounding scaffolding stays exactly the same. Try it: [<PLAYGROUND_URL>](<PLAYGROUND_URL>).
+The playground keeps everything in memory: the `residents` array resets on every cold start, so two visits to the live demo can see different state. In production you'd swap the array for a database call inside the handler — the surrounding scaffolding stays exactly the same. Try it: [<PLAYGROUND_URL>](PLAYGROUND_URL).
 ```
 
 (Note: this section ends the file. There's no closing horizontal rule.)
@@ -1601,6 +1734,7 @@ The playground keeps everything in memory: the `residents` array resets on every
 **Repo:** BLOG
 
 **Files:**
+
 - Modify: `src/content/post/api-endpoints-with-astro/index.md` (frontmatter)
 
 - [ ] **Step 1: Build the blog and confirm no errors**
@@ -1635,21 +1769,21 @@ Open `http://localhost:4321/blog/api-endpoints-with-astro` and read the rendered
 
 For each code block in the post, open the corresponding file in the playground and confirm the post code matches. The post is the playground's mirror; if they drift, the playground wins (update the post).
 
-| Post section | Playground file |
-|---|---|
-| §1 (`prerender = false`) | any of `api/residents/*.ts` |
-| §1 (`output: "server"`) | not in playground — config alternative |
-| §2 (`api/residents/index.ts`) | `src/pages/api/residents/index.ts` |
-| §2 (page using `fetch`) | `src/pages/residents/list.astro` |
+| Post section                  | Playground file                             |
+| ----------------------------- | ------------------------------------------- |
+| §1 (`prerender = false`)      | any of `api/residents/*.ts`                 |
+| §1 (`output: "server"`)       | not in playground — config alternative      |
+| §2 (`api/residents/index.ts`) | `src/pages/api/residents/index.ts`          |
+| §2 (page using `fetch`)       | `src/pages/residents/list.astro`            |
 | §2 (page using direct import) | `src/pages/residents/index.astro` (the hub) |
-| §3 (`[id].ts`) | `src/pages/api/residents/[id].ts` |
-| §4 (`join-redirect.ts`) | `src/pages/api/residents/join-redirect.ts` |
-| §4 (form) | `src/pages/residents/join-redirect.astro` |
-| §4 (`rejected.astro`) | `src/pages/rejected.astro` |
-| §5 (`join-json.ts`) | `src/pages/api/residents/join-json.ts` |
-| §5 (form + script) | `src/pages/residents/join-json.astro` |
-| §6 (`actions/index.ts`) | `src/actions/index.ts` |
-| §6 (`join-action.astro`) | `src/pages/residents/join-action.astro` |
+| §3 (`[id].ts`)                | `src/pages/api/residents/[id].ts`           |
+| §4 (`join-redirect.ts`)       | `src/pages/api/residents/join-redirect.ts`  |
+| §4 (form)                     | `src/pages/residents/join-redirect.astro`   |
+| §4 (`rejected.astro`)         | `src/pages/rejected.astro`                  |
+| §5 (`join-json.ts`)           | `src/pages/api/residents/join-json.ts`      |
+| §5 (form + script)            | `src/pages/residents/join-json.astro`       |
+| §6 (`actions/index.ts`)       | `src/actions/index.ts`                      |
+| §6 (`join-action.astro`)      | `src/pages/residents/join-action.astro`     |
 
 If any block has drifted, edit the post to match.
 

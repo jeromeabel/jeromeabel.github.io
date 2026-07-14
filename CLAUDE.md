@@ -8,13 +8,13 @@ Personal portfolio and blog site for Jerome Abel, built with Astro 5, Tailwind C
 
 ## Commands
 
-| Command | Description |
-|---|---|
-| `pnpm dev` | Dev server at localhost:4321 |
-| `pnpm build` | Production build to `dist/` |
-| `pnpm preview` | Serve production build locally |
+| Command             | Description                    |
+| ------------------- | ------------------------------ |
+| `pnpm dev`          | Dev server at localhost:4321   |
+| `pnpm build`        | Production build to `dist/`    |
+| `pnpm preview`      | Serve production build locally |
 | `pnpm format:check` | Check formatting with Prettier |
-| `pnpm format:write` | Auto-format all files |
+| `pnpm format:write` | Auto-format all files          |
 
 Package manager is **pnpm**. No test suite or linter configured.
 
@@ -38,6 +38,7 @@ All collection queries go through `src/utils/repository.ts`. This centralizes dr
 ### Routing
 
 File-based routing in `src/pages/`. Dynamic routes use `getStaticPaths()`:
+
 - `/blog/[id]` — individual posts
 - `/blog/[serie]` — serie landing pages
 - `/blog/[serie]/[post]` — serie posts with prev/next navigation
@@ -53,6 +54,7 @@ File-based routing in `src/pages/`. Dynamic routes use `getStaticPaths()`:
 ### Components
 
 Organized by feature domain in `src/components/`:
+
 - `app/` — Header, Footer, SEO, ThemeToggle
 - `ui/` — Shared primitives (H1, H2, P, Link, Prose, CustomImage, etc.)
 - `blog/`, `work/`, `hero/`, `about/`, `contact/`, `skills/` — Feature-specific
@@ -75,6 +77,7 @@ Organized by feature domain in `src/components/`:
 ## TypeScript
 
 Strict mode (`astro/tsconfigs/strict`). Path aliases:
+
 - `@components/*` → `src/components/*`
 - `@layouts/*` → `src/layouts/*`
 - `@assets/*` → `src/assets/*`

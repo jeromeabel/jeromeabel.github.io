@@ -9,7 +9,7 @@ draft: false
 
 Astro's file-based routing doesn't stop at `.astro` pages. Drop a `.ts` file in the `pages/` directory, export an HTTP method handler, and you have an API endpoint. No Express, no separate server — just the same routing convention you already know.
 
-This post walks through a small companion project *Heroes Retirement Home*: browse the current residents, look them up by id, and apply to join via three different POST patterns. Each section maps to a real page you can try.
+This post walks through a small companion project _Heroes Retirement Home_: browse the current residents, look them up by id, and apply to join via three different POST patterns. Each section maps to a real page you can try.
 
 - Live demo: [https://astro-jeromeabel.netlify.app/](https://astro-jeromeabel.netlify.app/residents)
 - Code: [astro-playground](https://github.com/jeromeabel/astro-playground)
@@ -25,7 +25,7 @@ By default, Astro renders every route to static HTML at build time. Endpoints th
 export const prerender = false;
 ```
 
-That's the Astro 6 idiom for a mostly-static project that wants a few server routes. The `hybrid` mode that used to live alongside `static` and `server` was merged into `static` in Astro 5 — the per-route opt-out *is* the modern hybrid.
+That's the Astro 6 idiom for a mostly-static project that wants a few server routes. The `hybrid` mode that used to live alongside `static` and `server` was merged into `static` in Astro 5 — the per-route opt-out _is_ the modern hybrid.
 
 If you'd rather flip everything to on-demand, set `output: "server"` in `astro.config.mjs` and skip the per-route flag:
 
@@ -55,8 +55,20 @@ export type Hero = {
 };
 
 export const heroes: Hero[] = [
-  { id: 1, name: "Bob Dude",     alias: "Super Yellow",     email: "bob@super.com",   retiredYear: 2021 },
-  { id: 2, name: "Jane Doe",     alias: "Wonder Great",     email: "jane@super.com",  retiredYear: 2019 },
+  {
+    id: 1,
+    name: "Bob Dude",
+    alias: "Super Yellow",
+    email: "bob@super.com",
+    retiredYear: 2021,
+  },
+  {
+    id: 2,
+    name: "Jane Doe",
+    alias: "Wonder Great",
+    email: "jane@super.com",
+    retiredYear: 2019,
+  },
   // ...
 ];
 
@@ -120,19 +132,18 @@ const response = await fetch(`${Astro.url.origin}/api/residents/`);
 const residents: Hero[] = await response.json();
 
 const images = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/assets/heroes/*.jpg"
+  "/src/assets/heroes/*.jpg",
 );
 ---
 
-{residents.map((h) => (
-  <a href={`/residents/${h.id}`}>
-    <Image
-      src={images[`/src/assets/heroes/${h.id}.jpg`]()}
-      alt={h.alias}
-    />
-    <p>{h.alias}</p>
-  </a>
-))}
+{
+  residents.map((h) => (
+    <a href={`/residents/${h.id}`}>
+      <Image src={images[`/src/assets/heroes/${h.id}.jpg`]()} alt={h.alias} />
+      <p>{h.alias}</p>
+    </a>
+  ))
+}
 ```
 
 `import.meta.glob` builds a map of all matching file paths to lazy importers at bundle time. At render time, `images['/src/assets/heroes/1.jpg']()` resolves to the `ImageMetadata` that `<Image>` needs — dimensions, format, and optimized source. This is the [documented pattern](https://docs.astro.build/en/recipes/dynamically-importing-images/) for dynamic image imports in Astro.
@@ -228,14 +239,11 @@ if (!res.ok) return Astro.redirect("/404");
 const hero: Hero = await res.json();
 
 const images = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/assets/heroes/*.jpg"
+  "/src/assets/heroes/*.jpg",
 );
 ---
 
-<Image
-  src={images[`/src/assets/heroes/${hero.id}.jpg`]()}
-  alt={hero.alias}
-/>
+<Image src={images[`/src/assets/heroes/${hero.id}.jpg`]()} alt={hero.alias} />
 <h1>{hero.alias}</h1>
 <p>{hero.name} · {hero.email} · Retired {hero.retiredYear}</p>
 ```
@@ -265,7 +273,10 @@ export const POST: APIRoute = async ({ request, redirect }: APIContext) => {
 
   const firstName = hero.name.split(" ")[0];
   if (residents.find((r) => r.email === email)) {
-    return redirect(`/welcome?name=${encodeURIComponent(firstName)}&already=1`, 307);
+    return redirect(
+      `/welcome?name=${encodeURIComponent(firstName)}&already=1`,
+      307,
+    );
   }
 
   residents.push(hero);
@@ -344,7 +355,10 @@ export const POST: APIRoute = async ({ request }: APIContext) => {
 
   const hero = heroes.find((h) => h.email === email);
   if (!hero) {
-    return json({ ok: false, msg: `Sorry, ${email} is not on the hero roster.` });
+    return json({
+      ok: false,
+      msg: `Sorry, ${email} is not on the hero roster.`,
+    });
   }
 
   const firstName = hero.name.split(" ")[0];
@@ -364,7 +378,7 @@ function json(body: JoinResponse, status = 200): Response {
 }
 ```
 
-Note that *both* the rejection and the "already settled in" branches return `200`. They aren't transport-level errors — they're business outcomes the client renders verbatim. The `ok` flag tells the UI which style to use.
+Note that _both_ the rejection and the "already settled in" branches return `200`. They aren't transport-level errors — they're business outcomes the client renders verbatim. The `ok` flag tells the UI which style to use.
 
 The page wires up a submit handler that intercepts the form:
 
@@ -424,10 +438,18 @@ export const server = {
       }
       const firstName = hero.name.split(" ")[0];
       if (residents.find((r) => r.email === email)) {
-        return { email, name: hero.name, message: `${firstName}, you're already settled in!` };
+        return {
+          email,
+          name: hero.name,
+          message: `${firstName}, you're already settled in!`,
+        };
       }
       residents.push(hero);
-      return { email, name: hero.name, message: `Welcome, ${firstName}! Your slippers await.` };
+      return {
+        email,
+        name: hero.name,
+        message: `Welcome, ${firstName}! Your slippers await.`,
+      };
     },
   }),
 };
@@ -449,12 +471,8 @@ const result = Astro.getActionResult(actions.join);
   <button type="submit">Apply</button>
 </form>
 
-{result && !result.error && (
-  <p class="success">{result.data.message}</p>
-)}
-{result?.error && (
-  <p class="error">⚠ {result.error.message}</p>
-)}
+{result && !result.error && <p class="success">{result.data.message}</p>}
+{result?.error && <p class="error">⚠ {result.error.message}</p>}
 ```
 
 `Astro.getActionResult()` reads the result of the most recent submission for that action. The success branch types `result.data` from the handler's return; the error branch types `result.error` from `ActionError`. It's the same code path as Pattern B's JSON, but Astro is doing the wiring for you.
@@ -463,13 +481,13 @@ const result = Astro.getActionResult(actions.join);
 
 ## Comparing the three POST patterns
 
-| Pattern | JS required on client? | Page navigation? | Validation style | When to pick |
-|---|---|---|---|---|
-| POST + redirect | No | Yes (full nav) | Manual in handler | Progressive enhancement, server-only flows |
-| POST + JSON | Yes | No (DOM update) | Manual in handler | Inline feedback, smoother UX, single-page flows |
-| Astro Action | No (zero-JS by default) | No (page re-renders) | Zod via `defineAction` | New code in Astro 5+ — the modern default |
+| Pattern         | JS required on client?  | Page navigation?     | Validation style       | When to pick                                    |
+| --------------- | ----------------------- | -------------------- | ---------------------- | ----------------------------------------------- |
+| POST + redirect | No                      | Yes (full nav)       | Manual in handler      | Progressive enhancement, server-only flows      |
+| POST + JSON     | Yes                     | No (DOM update)      | Manual in handler      | Inline feedback, smoother UX, single-page flows |
+| Astro Action    | No (zero-JS by default) | No (page re-renders) | Zod via `defineAction` | New code in Astro 5+ — the modern default       |
 
-All three share the same data and the same business rules. They differ in *how the result reaches the user*: a navigation, a JSON response, or a re-rendered page reading `Astro.getActionResult()`.
+All three share the same data and the same business rules. They differ in _how the result reaches the user_: a navigation, a JSON response, or a re-rendered page reading `Astro.getActionResult()`.
 
 If you're starting fresh, use Actions. If you need to work without JavaScript and don't want to re-render the whole page, redirect. If you have an existing client-side flow and want a simple JSON contract, return JSON.
 

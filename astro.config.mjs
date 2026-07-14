@@ -4,8 +4,8 @@ import { unified } from "@astrojs/markdown-remark";
 import partytown from "@astrojs/partytown";
 import icon from "astro-icon";
 import { defineConfig } from "astro/config";
-import rehypeExternalLinks from 'rehype-external-links';
-import { remarkReadingTime } from './src/utils/remark-reading-time.mjs';
+import rehypeExternalLinks from "rehype-external-links";
+import { remarkReadingTime } from "./src/utils/remark-reading-time.mjs";
 
 import tailwindcss from "@tailwindcss/vite";
 
@@ -29,11 +29,23 @@ export default defineConfig({
 
     icon({
       include: {
-        lucide: ['download', 'arrow-right', 'arrow-left', 'arrow-up-right', 'sun', 'moon', 'handshake',  'clock',  'calendar', 'chevron-right', 'mail'],
-        'fa6-brands': ['github', 'linkedin-in', 'bluesky'],
+        lucide: [
+          "download",
+          "arrow-right",
+          "arrow-left",
+          "arrow-up-right",
+          "sun",
+          "moon",
+          "handshake",
+          "clock",
+          "calendar",
+          "chevron-right",
+          "mail",
+        ],
+        "fa6-brands": ["github", "linkedin-in", "bluesky"],
       },
-      iconDir: "src/assets/icons"
-    })
+      iconDir: "src/assets/icons",
+    }),
   ],
 
   vite: {
@@ -42,19 +54,20 @@ export default defineConfig({
 
   markdown: {
     syntaxHighlight: {
-      type: 'shiki',
-      excludeLangs: ['mermaid', 'math'],
+      type: "shiki",
+      excludeLangs: ["mermaid", "math"],
     },
     processor: unified({
       remarkPlugins: [remarkReadingTime],
-      rehypePlugins: [[
-        rehypeExternalLinks,
-        {
-          target: '_blank',
-          rel: ['nofollow, noopener, noreferrer'],
-        },
-      ]],
+      rehypePlugins: [
+        [
+          rehypeExternalLinks,
+          {
+            target: "_blank",
+            rel: ["nofollow, noopener, noreferrer"],
+          },
+        ],
+      ],
     }),
   },
 });
-

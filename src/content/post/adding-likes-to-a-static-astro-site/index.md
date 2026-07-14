@@ -9,7 +9,6 @@ draft: false
 
 I wanted to add some interactivity to my static comic blog — a heart button so visitors could vote for their favorite strips. The site is built with Astro, fully static, served from Netlify's CDN. The challenge: where does the vote count live?
 
-
 ## Approach 1: Astro's hybrid pattern
 
 Astro has a clean answer. Mark one file as server-rendered, everything else stays static:
@@ -41,7 +40,7 @@ const Vote = defineTable({
     visitorId: column.text(),
     createdAt: column.date({ default: NOW }),
   },
-  indexes: [{ on: ['comicId', 'visitorId'], unique: true }],
+  indexes: [{ on: ["comicId", "visitorId"], unique: true }],
 });
 ```
 
@@ -51,17 +50,16 @@ For the index page (all comics listed with their counts), round-trips matter mor
 
 ```ts
 const [comicsCounts, userVotes] = await Promise.all([
-  db.select({ comicId: Vote.comicId, value: count() })
+  db
+    .select({ comicId: Vote.comicId, value: count() })
     .from(Vote)
     .where(inArray(Vote.comicId, comicIds))
     .groupBy(Vote.comicId),
 
-  db.select({ comicId: Vote.comicId })
+  db
+    .select({ comicId: Vote.comicId })
     .from(Vote)
-    .where(and(
-      inArray(Vote.comicId, comicIds),
-      eq(Vote.visitorId, visitorId)
-    )),
+    .where(and(inArray(Vote.comicId, comicIds), eq(Vote.visitorId, visitorId))),
 ]);
 ```
 
@@ -69,10 +67,9 @@ In production, Astro DB connects to [Turso](https://docs.turso.tech/) — hosted
 
 The whole setup took a few hours to wire together. Schema, API route, client-side optimistic UI — done.
 
-
 ## Anonymous identity with a cookie
 
-Both approaches need to know *who* is voting without a login system. A cookie isn't true identification — someone can clear it and vote again — but for a heart button on a comic blog, it's plenty. Simple, built into every browser, no signup flow.
+Both approaches need to know _who_ is voting without a login system. A cookie isn't true identification — someone can clear it and vote again — but for a heart button on a comic blog, it's plenty. Simple, built into every browser, no signup flow.
 
 A random ID stored in an `httpOnly` cookie is enough:
 
@@ -94,10 +91,9 @@ if (!$visitorId) {
 
 `httponly` means even if an attacker injects a script (XSS), they can't steal the cookie. `domain=.jeromeabel.net` makes the cookie available to both `api.jeromeabel.net` and `leconceptdelapreuve.jeromeabel.net`. `SameSite=None` is required here — the browser sees `fetch()` from one subdomain to another as a cross-origin request, and `Lax` would block the cookie on those subresource requests. `Secure` is mandatory when using `SameSite=None`. Can someone clear their cookies and vote again? Sure. The threat model is "don't let someone spam-click," not "secure an election."
 
-
 ## Optimistic UI
 
-The vote POST will succeed the vast majority of the time. So the UI updates *before* the server responds — immediate feedback. If the request fails, roll back.
+The vote POST will succeed the vast majority of the time. So the UI updates _before_ the server responds — immediate feedback. If the request fails, roll back.
 
 ```ts
 const prev = state.get(comicId) ?? { count: 0, voted: false };
@@ -133,17 +129,16 @@ State lives in a `Map<string, VoteState>` inside a closure — not in the DOM. T
 
 Then I opened DevTools to have numbers data about a bad feeling of frustration. It takes too much time to get the vote counts.
 
-| Phase | Duration |
-|-------|----------|
-| Queueing | 1.40 ms |
-| Stalled | 0.73 ms |
-| Request sent | 0.15 ms |
+| Phase                           | Duration      |
+| ------------------------------- | ------------- |
+| Queueing                        | 1.40 ms       |
+| Stalled                         | 0.73 ms       |
+| Request sent                    | 0.15 ms       |
 | **Waiting for server response** | **663.18 ms** |
-| Content Download | 1.55 ms |
-| **Total** | **667.01 ms** |
+| Content Download                | 1.55 ms       |
+| **Total**                       | **667.01 ms** |
 
 663ms waiting for the server. The Netlify Function wakes up from a cold start, connects to Turso's remote database, runs two queries over the network, serializes the response. Too much infrastructure, too many network hops, for a feature this small.
-
 
 ## Approach 2: PHP + MySQL on shared hosting
 
@@ -228,14 +223,14 @@ The cookies work across subdomains because `api.jeromeabel.net` and `leconceptde
 
 The result:
 
-| Phase | Duration |
-|-------|----------|
-| Queueing | 0.78 ms |
-| Stalled | 0.52 ms |
-| Request sent | 0.20 ms |
+| Phase                           | Duration     |
+| ------------------------------- | ------------ |
+| Queueing                        | 0.78 ms      |
+| Stalled                         | 0.52 ms      |
+| Request sent                    | 0.20 ms      |
 | **Waiting for server response** | **48.60 ms** |
-| Content Download | 14.66 ms |
-| **Total** | **64.75 ms** |
+| Content Download                | 14.66 ms     |
+| **Total**                       | **64.75 ms** |
 
 48ms server wait, down from 663ms, powered by an ultra-low 1.7ms internal latency between the PHP and MySQL servers. By moving to a localized private network, the "serverless tax" is eliminated and the project returns to a fully static build—no more `prerender = false` or `--remote` flags.
 
@@ -269,11 +264,10 @@ export const VOTE_API_URL =
 
 The `PUBLIC_VOTE_API_URL` env var allows overriding in CI if needed. By default, `pnpm dev` hits the staging endpoint, and production builds hit the real one. Netlify deploy previews also hit the staging table — the regex pattern in `$ALLOWED_ORIGIN_PATTERNS` matches both `deploy-preview-*` and `branch-*` URLs, so branch previews get CORS access to the staging endpoint without touching production data.
 
-
 ## What I Learned
 
-* Astro DB + Turso is genuinely pleasant to work with — schema, ORM, and hosting in one integration
-* Serverless cold starts add up when the feature is trivial
-* Co-located PHP + MySQL on shared hosting can be faster than a modern serverless stack — because physics wins: same machine, no network hop
-* A cookie identity pattern transfers across stacks without changes
-* Optimistic UI decouples the user experience from backend latency
+- Astro DB + Turso is genuinely pleasant to work with — schema, ORM, and hosting in one integration
+- Serverless cold starts add up when the feature is trivial
+- Co-located PHP + MySQL on shared hosting can be faster than a modern serverless stack — because physics wins: same machine, no network hop
+- A cookie identity pattern transfers across stacks without changes
+- Optimistic UI decouples the user experience from backend latency

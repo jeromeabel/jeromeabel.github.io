@@ -9,7 +9,7 @@ img: ./cover.jpg
 
 I work on a speech analytics web app built with Vue.js at [Uhlive](https://uh.live/). Customer analysts use it to search, filter, and review recorded calls — transcripts, tags, metrics. To get a sense of scale, some customers have millions of calls.
 
-Our performance was bad. Loading times reached 6–8 seconds. Users told us: *"it's a bit long"*, *"it grinds"*. That feedback was the trigger — we decided to focus a development cycle on performance.
+Our performance was bad. Loading times reached 6–8 seconds. Users told us: _"it's a bit long"_, _"it grinds"_. That feedback was the trigger — we decided to focus a development cycle on performance.
 
 I wanted to take a data-driven approach with our team — identify what matters, avoid guessing, prove each change with numbers. Sometimes it was obvious. Sometimes the results were unexpected, often in the wrong direction, and sometimes decoupled from the actual experience improvements.
 
@@ -46,14 +46,13 @@ Performance optimizations don't happen in a vacuum. The product can't be paused 
 
 ![Call List: LCP & INP over 6 months](./call-list-lcp-inp-2025-2026.png)
 
-
-| Phase | Period | Main Driver | LCP Impact | INP Impact |
-|-------|--------|-------------|-----------|-----------|
-| **1. Backend optimization** | Oct–Nov | Query optimizations + pagination | **−52%** | +202% (tradeoff) |
-| **2. Request cleanup** | Nov–Dec | Dead code removal, reduced polling | −22% | **−57%** |
-| **3. Virtual scrolling** | Jan–Feb | TanStack Virtual replacing PrimeVue DataTable | **−67%** | **−65%** |
-| **4. Feature debt** | Feb–Mar | Adding features, global router growth | +156% | −22% |
-| **5. Earning it back** | Mar–Apr | Endpoint migration, filter rewrite | **−63%** | +35% |
+| Phase                       | Period  | Main Driver                                   | LCP Impact | INP Impact       |
+| --------------------------- | ------- | --------------------------------------------- | ---------- | ---------------- |
+| **1. Backend optimization** | Oct–Nov | Query optimizations + pagination              | **−52%**   | +202% (tradeoff) |
+| **2. Request cleanup**      | Nov–Dec | Dead code removal, reduced polling            | −22%       | **−57%**         |
+| **3. Virtual scrolling**    | Jan–Feb | TanStack Virtual replacing PrimeVue DataTable | **−67%**   | **−65%**         |
+| **4. Feature debt**         | Feb–Mar | Adding features, global router growth         | +156%      | −22%             |
+| **5. Earning it back**      | Mar–Apr | Endpoint migration, filter rewrite            | **−63%**   | +35%             |
 
 ### Phase 1 — The backend win (and its tradeoff)
 
@@ -79,7 +78,7 @@ The most uncomfortable phase to write about. Over 5 weeks, Call List LCP crept f
 
 We were shipping features and every PR added a small cost. A new blocking API call on every page load, an eager watcher with localStorage for every user, and 53 restructured files adding parse-time overhead. Plus 13 PRs touching global router files, and three new runtime libraries (~45KB combined) landing silently.
 
-The metaphor I keep coming back to is a budget. Performance is a budget, and every feature spends from it. The uncomfortable truth about Phase 4 is that nothing went *wrong* — we were doing normal product work, shipping things users needed. Each PR added a small cost. None had a compensating optimization. The budget was gone.
+The metaphor I keep coming back to is a budget. Performance is a budget, and every feature spends from it. The uncomfortable truth about Phase 4 is that nothing went _wrong_ — we were doing normal product work, shipping things users needed. Each PR added a small cost. None had a compensating optimization. The budget was gone.
 
 ### Phase 5 — Earning it back
 
@@ -135,16 +134,16 @@ I needed per-PR feedback. Chrome DevTools performance traces and Lighthouse repo
 
 I wrote Python scripts with Claude Code that parsed the trace's `CrRendererMain` thread events and extracted a diagnostic chain — each metric pointing toward the next root cause:
 
-| Layer | Before | After | Root cause | Fix |
-|-------|-------:|------:|-----------|-----|
-| **FPS** | 45 fps | 50 fps | Frame cost 22.8ms (budget: 16.67ms) | — |
-| **Rendering** | 185 ms/s | 135 ms/s | 6,797 DOM nodes; 329 segment components | Virtual scroll — render ~20 visible segments |
-| **Scripting** | 807 ms/s | 671 ms/s | `FireAnimationFrame` × 60/s × 329 segments = 20K comparisons/s | O(1) active index; watch transitions (~30×/10s) not timecodes (~600×/10s) |
-| **Longest task** | 115 ms | 76 ms | `analyze_longest_task` traced child calls to source | Rewrote the composable |
+| Layer            |   Before |    After | Root cause                                                     | Fix                                                                       |
+| ---------------- | -------: | -------: | -------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| **FPS**          |   45 fps |   50 fps | Frame cost 22.8ms (budget: 16.67ms)                            | —                                                                         |
+| **Rendering**    | 185 ms/s | 135 ms/s | 6,797 DOM nodes; 329 segment components                        | Virtual scroll — render ~20 visible segments                              |
+| **Scripting**    | 807 ms/s | 671 ms/s | `FireAnimationFrame` × 60/s × 329 segments = 20K comparisons/s | O(1) active index; watch transitions (~30×/10s) not timecodes (~600×/10s) |
+| **Longest task** |   115 ms |    76 ms | `analyze_longest_task` traced child calls to source            | Rewrote the composable                                                    |
 
-*Lighthouse before: 33/100 · TBT: 600ms+ · TTI: 28s*
+_Lighthouse before: 33/100 · TBT: 600ms+ · TTI: 28s_
 
-Each number was a clue. Lighthouse confirmed the structural problems — too many nodes, too much blocking script — but the traces told us *where to cut*. We parallelized API calls (5 sequential → 3 parallel), virtualized the transcript (−73% DOM nodes, −94% segment nodes), and optimized the layout. The lab data proved every change worked.
+Each number was a clue. Lighthouse confirmed the structural problems — too many nodes, too much blocking script — but the traces told us _where to cut_. We parallelized API calls (5 sequential → 3 parallel), virtualized the transcript (−73% DOM nodes, −94% segment nodes), and optimized the layout. The lab data proved every change worked.
 
 ### The Graph That Didn't Move
 
@@ -178,25 +177,25 @@ We compared two standalone 12-week windows in Amplitude's Page Engagement report
 
 A caveat on these numbers: we're working with a small user base — around 50-70 weekly active users, roughly 400-700 unique visitors per 12-week window. This is a B2B tool, not a consumer app. With this sample size, a single power user changing their habits can move a metric by a few percent. The trends are directional, not statistically significant in the way a 100K-user A/B test would be.
 
-| Page | Metric | Before (12w) | After (12w) | Change |
-|------|--------|-------------:|------------:|-------:|
-| **All pages** | Unique visitors | ~48 / week | ~77 / week | **+60%** |
-| **All pages** | Bounce Rate | 17.2% | 14.2% | **−17.4%** |
-| **All pages** | Views/Session | 20.0 | 21.1 | +5.5% |
-| **All pages** | Time/Session | 392s | 438s | +11.7% |
-| **Call List** | Views/Session | 11.7 | 14.3 | **+22.6%** |
-| **Call List** | Exit Rate | 17.8% | 13.9% | **−21.7%** |
-| **Call List** | Time/Session | 400s | 335s | **−16.2%** |
-| **Call Details** | Bounce Rate | 26.5% | 26.3% | −0.7% |
-| **Call Details** | Time/Session | 789s | 880s | **+11.5%** |
+| Page             | Metric          | Before (12w) | After (12w) |     Change |
+| ---------------- | --------------- | -----------: | ----------: | ---------: |
+| **All pages**    | Unique visitors |   ~48 / week |  ~77 / week |   **+60%** |
+| **All pages**    | Bounce Rate     |        17.2% |       14.2% | **−17.4%** |
+| **All pages**    | Views/Session   |         20.0 |        21.1 |      +5.5% |
+| **All pages**    | Time/Session    |         392s |        438s |     +11.7% |
+| **Call List**    | Views/Session   |         11.7 |        14.3 | **+22.6%** |
+| **Call List**    | Exit Rate       |        17.8% |       13.9% | **−21.7%** |
+| **Call List**    | Time/Session    |         400s |        335s | **−16.2%** |
+| **Call Details** | Bounce Rate     |        26.5% |       26.3% |      −0.7% |
+| **Call Details** | Time/Session    |         789s |        880s | **+11.5%** |
 
-*Exit rate: the percentage of sessions where a user left the app from a specific page. Bounce rate: the percentage of sessions where that page was the only one visited.*
+_Exit rate: the percentage of sessions where a user left the app from a specific page. Bounce rate: the percentage of sessions where that page was the only one visited._
 
 Three things stand out:
 
 **Call List became a better search tool.** Users browse 22.6% more pages per session while spending 16.2% less time — they find what they need faster. The exit rate dropped 21.7%, meaning users who reach Call List continue deeper into the app instead of leaving. This aligns with what both user types need: supervisors scanning more calls quickly, analysts finding their target calls sooner.
 
-**Call Details held users for real work.** Time spent per session increased 11.5% (789s → 880s) while bounce rate stayed flat. Users who open a call now spend *more* time reviewing transcripts and tags — the work the tool was built for. Before optimization, opening a call was painful (LCP 4–5 seconds, sequential API calls). After parallelizing API calls, virtualizing the transcript, and adding skeletons, the page became usable enough for analysts to settle in and work. (We also added a read/unread indicator per call during this period, which likely contributed to the increased engagement.)
+**Call Details held users for real work.** Time spent per session increased 11.5% (789s → 880s) while bounce rate stayed flat. Users who open a call now spend _more_ time reviewing transcripts and tags — the work the tool was built for. Before optimization, opening a call was painful (LCP 4–5 seconds, sequential API calls). After parallelizing API calls, virtualizing the transcript, and adding skeletons, the page became usable enough for analysts to settle in and work. (We also added a read/unread indicator per call during this period, which likely contributed to the increased engagement.)
 
 **Overall bounce rate dropped 17.4%.** From 17.2% to 14.2%. Fewer users abandon after the first page. With ~50 weekly users, this represents roughly 1–2 fewer bounces per week — a small absolute change, but a consistent one across the 12-week window.
 
