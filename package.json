@@ -18,9 +18,9 @@
     "@fontsource/fira-code": "^5.2.7",
     "@fontsource/ibm-plex-sans": "^5.2.8",
     "@iconify-json/fa-brands": "^1.2.2",
-    "@iconify-json/lucide": "^1.2.116",
+    "@iconify-json/lucide": "^1.2.117",
     "@tailwindcss/vite": "^4.3.2",
-    "astro": "^7.0.6",
+    "astro": "^7.0.7",
     "astro-icon": "^1.1.5",
     "class-variance-authority": "^0.7.1",
     "mdast-util-to-string": "^4.0.0",
@@ -32,7 +32,7 @@
   "devDependencies": {
     "@iconify-json/fa6-brands": "^1.2.6",
     "@tailwindcss/typography": "^0.5.20",
-    "prettier": "^3.9.4",
+    "prettier": "^3.9.5",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.6.14"
   },
