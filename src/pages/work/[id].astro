@@ -29,7 +29,7 @@ const publishedDate = new Date(work.data.date);
       <WorkHeader data={work.data} />
       <CustomImage img={work.data.img} alt={work.data.title} />
     </div>
-    <Prose class="md:mx-auto">
+    <Prose class="md:mx-auto" data-expand-image="inline">
       <Content />
     </Prose>
   </main>
