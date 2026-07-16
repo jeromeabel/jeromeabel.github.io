@@ -54,7 +54,7 @@ Two axes are worth exploring:
 
 A "hero" image arrives fast, but not instantly. On a slow connection, a few seconds can pass between "the page appeared" and "the images loaded", and without a placeholder each slot is an empty box — the page looks broken. This is _perceived_ performance.
 
-![Blurred LQIP placeholders Vs Skeletons filling each slot before the sharp images arrive](./optimg-lqip.png)
+![Blurred LQIP placeholders Vs Skeletons](./optimg-lqip.png)
 
 The options form a spectrum, from simplest to most polished. At one end, the **skeleton**: a solid block of color (zero bytes, zero decoding). At the other, the **LQIP**: a blurred thumbnail that hints at the final image. In between sit the LQIP variants — a few-pixel image stretched so it blurs "for free", blur baked in at build or generated on demand, inline SVG or `data:uri`. I stick to the two ends here, `skeleton` and `LQIP`: they're enough to measure what a placeholder costs.
 

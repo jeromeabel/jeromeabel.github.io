@@ -27,12 +27,15 @@ const order = index + 1;
     name="lucide:arrow-right"
     class="text-muted absolute -translate-x-8 transition-transform group-hover:translate-x-2"
   />
-  <h3 class="flex-1 transition-transform group-hover:translate-x-8">
+  <div
+    class="flex flex-1 items-center gap-0 transition-transform group-hover:translate-x-8"
+  >
     <span class="text-muted">
-      {order} 🞄
+      {order}
     </span>
-    {post.data.title}
-  </h3>
+    <Icon name="lucide:dot" class="text-muted" />
+    <h3>{post.data.title}</h3>
+  </div>
   <div class="text-muted flex gap-2 font-mono text-xs md:text-sm">
     <p class="hidden sm:block">{remarkPluginFrontmatter.minutesRead} -</p>
     <time>{getFormattedDate(post.data.date)}</time>

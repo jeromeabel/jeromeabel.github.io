@@ -41,6 +41,7 @@ export default defineConfig({
           "calendar",
           "chevron-right",
           "mail",
+          "dot",
         ],
         "fa6-brands": ["github", "linkedin-in", "bluesky"],
       },
