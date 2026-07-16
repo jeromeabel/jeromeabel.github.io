@@ -20,6 +20,9 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content, remarkPluginFrontmatter } = await render(entry);
+const minutesRead =
+  (entry.data as { minutesRead?: string }).minutesRead ??
+  remarkPluginFrontmatter.minutesRead;
 const publishedDate = new Date(entry.data.date);
 const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
 ---
@@ -50,7 +53,7 @@ const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
           <Icon name="lucide:calendar" />
           <time class="text-sm">{getFormattedDate(entry.data.date)}</time>
           <Icon name="lucide:clock" class="ms-4 lg:ms-6" />
-          <span class="text-sm">{remarkPluginFrontmatter.minutesRead}</span>
+          <span class="text-sm">{minutesRead}</span>
         </div>
 
         <SocialShare

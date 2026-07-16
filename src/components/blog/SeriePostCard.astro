@@ -1,8 +1,9 @@
 ---
 import { Icon } from "astro-icon/components";
 import type { CollectionEntry } from "astro:content";
-import { getCollection, render } from "astro:content";
+import { getCollection } from "astro:content";
 import { getFormattedDate } from "src/utils/format-date";
+import { getMinutesReadFromBody } from "src/utils/get-minutes-read";
 
 interface Props {
   post: CollectionEntry<"seriePost">;
@@ -13,8 +14,7 @@ const { post } = Astro.props;
 if (!post) {
   throw new Error("Sorry, could not find post");
 }
-
-const { remarkPluginFrontmatter } = await render(post);
+const minutesRead = getMinutesReadFromBody(post.body);
 
 const series = await getCollection("serie");
 
@@ -44,8 +44,13 @@ if (!serie) {
   <div class="text-muted mt-auto flex items-center justify-end gap-2">
     <Icon name="lucide:calendar" />
     <time class="text-sm">{getFormattedDate(post.data.date)}</time>
-
-    <Icon name="lucide:clock" class="ms-6" />
-    <span class="text-sm">{remarkPluginFrontmatter.minutesRead}</span>
+    {
+      minutesRead && (
+        <>
+          <Icon name="lucide:clock" class="ms-6" />
+          <span class="text-sm">{minutesRead}</span>
+        </>
+      )
+    }
   </div>
 </a>

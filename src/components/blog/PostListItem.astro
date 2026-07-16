@@ -1,19 +1,20 @@
 ---
 import { Icon } from "astro-icon/components";
 import type { CollectionEntry } from "astro:content";
-import { render } from "astro:content";
 import { getFormattedDate } from "src/utils/format-date";
+import { getMinutesReadFromBody } from "src/utils/get-minutes-read";
 
 interface Props {
   post: CollectionEntry<"post">;
 }
 
 const { post } = Astro.props;
-const { remarkPluginFrontmatter } = await render(post);
 
 if (!post) {
   throw new Error("Sorry, could not find post");
 }
+
+const minutesRead = getMinutesReadFromBody(post.body);
 ---
 
 <a
@@ -28,7 +29,7 @@ if (!post) {
     {post.data.title}
   </h3>
   <div class="text-muted flex gap-2 font-mono text-xs md:text-sm">
-    <p class="hidden sm:block">{remarkPluginFrontmatter.minutesRead} -</p>
+    {minutesRead && <p class="hidden sm:block">{minutesRead} -</p>}
     <time>{getFormattedDate(post.data.date)}</time>
   </div>
 </a>

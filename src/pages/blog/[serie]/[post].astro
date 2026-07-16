@@ -48,6 +48,9 @@ if (!currentPost) {
   throw new Error("Sorry, could not find serie");
 }
 const { Content, remarkPluginFrontmatter } = await render(currentPost);
+const minutesRead =
+  (currentPost.data as { minutesRead?: string }).minutesRead ??
+  remarkPluginFrontmatter.minutesRead;
 const publishedDate = new Date(currentPost.data.date);
 
 const hasPagination = nextPost !== null || prevPost !== null;
@@ -94,7 +97,7 @@ const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
           <Icon name="lucide:calendar" />
           <time class="text-sm">{getFormattedDate(currentPost.data.date)}</time>
           <Icon name="lucide:clock" class="ms-4 lg:ms-6" />
-          <span class="text-sm">{remarkPluginFrontmatter.minutesRead}</span>
+          <span class="text-sm">{minutesRead}</span>
         </div>
 
         <SocialShare
