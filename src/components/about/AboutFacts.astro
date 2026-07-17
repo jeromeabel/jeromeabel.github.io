@@ -1,0 +1,20 @@
+---
+const facts = [
+  { value: "2010", label: "coding since" },
+  { value: "185", label: "merged PRs · current role" },
+  { value: "21", label: "articles published" },
+  { value: "5000+", label: "framework downloads" },
+  { value: "1000+", label: "people trained" },
+];
+---
+
+<dl class="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
+  {
+    facts.map((fact) => (
+      <div class="flex flex-col">
+        <dd class="font-title text-3xl tracking-wide">{fact.value}</dd>
+        <dt class="text-muted text-sm">{fact.label}</dt>
+      </div>
+    ))
+  }
+</dl>
