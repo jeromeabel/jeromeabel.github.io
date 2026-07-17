@@ -133,11 +133,11 @@ So the component exposes an `ABOVE_FOLD_FADE = false` flag. Since the viewport i
 
 ### The LQIP benchmark
 
-| Strategy | Mobile — bytes (KB) / LCP | Desktop — bytes (KB) / LCP |
-| -------- | ------------------------- | -------------------------- |
-| auto (`<Picture>`)    | 597 / 3789 ms             | 716 / 348 ms               |
-| skeleton              | 597 / 3803 ms             | 716 / 398 ms               |
-| lqip                  | 597 / 3816 ms             | 716 / 404 ms               |
+| Strategy           | Mobile — bytes (KB) / LCP | Desktop — bytes (KB) / LCP |
+| ------------------ | ------------------------- | -------------------------- |
+| auto (`<Picture>`) | 597 / 3789 ms             | 716 / 348 ms               |
+| skeleton           | 597 / 3803 ms             | 716 / 398 ms               |
+| lqip               | 597 / 3816 ms             | 716 / 404 ms               |
 
 On **mobile**, `skeleton` adds +14 ms to `auto` (negligible) and `lqip` +27 ms (decoding the blurred preview). On **desktop**, the three become equivalent: `auto` lands at 339–385 ms, `skeleton` 337–466 ms and `lqip` 387–488 ms. The +50 / +56 ms in the medians are inseparable from measurement noise. A placeholder weighs almost nothing here. And choosing between a skeleton or a blurred image is a UX decision.
 
@@ -172,8 +172,11 @@ On a periodic grid of lines, the effect turns extreme: the bars shift phase and 
 To avoid resampling, `CustomImage` computes `sizes` from the real layout CSS tokens — page max-width, padding, gap, the grid:
 
 ```ts
-const sizesAttr = [ `(min-width: 768px) calc((min(100vw, ${pageMaxPx}px) -
-${chromePx + gapPx}px) / 2)`, `calc(100vw - ${mobileChromePx}px)`, ].join(", ");
+const sizesAttr = [
+  `(min-width: 768px) calc((min(100vw, ${pageMaxPx}px) -
+${chromePx + gapPx}px) / 2)`,
+  `calc(100vw - ${mobileChromePx}px)`,
+].join(", ");
 ```
 
 The effect depends entirely on the **slot size**, and that's where the benchmark surprises:

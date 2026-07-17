@@ -26,9 +26,11 @@
 ### Task 0: Create the working branch
 
 **Files:**
+
 - Commit (already on disk, uncommitted): `docs/superpowers/specs/2026-07-17-seniority-update-design.md`, `docs/superpowers/plans/2026-07-17-seniority-update.md`
 
 **Interfaces:**
+
 - Consumes: nothing.
 - Produces: branch `feat/seniority-update` — every later task commits onto it; Task 11 opens the PR from it.
 
@@ -62,10 +64,12 @@ Expected: `feat/seniority-update`.
 ### Task 1: Zero-risk fixes — blog page bug + section flip, footer links
 
 **Files:**
+
 - Modify: `src/pages/blog.astro`
 - Modify: `src/components/app/Footer.astro:6-13`
 
 **Interfaces:**
+
 - Consumes: nothing new.
 - Produces: nothing other tasks depend on.
 
@@ -141,6 +145,7 @@ git commit -m "fix(blog): correct Layout page prop, put series first; drop Frama
 ### Task 2: `featured` schema field + frontmatter ranks
 
 **Files:**
+
 - Modify: `src/content.config.ts`
 - Modify: `src/content/work/leconceptdelapreuve/index.md`
 - Modify: `src/content/work/portfolio/index.md`
@@ -150,6 +155,7 @@ git commit -m "fix(blog): correct Layout page prop, put series first; drop Frama
 - Modify: `src/content/serie/testing-a-simple-nuxt-feature/index.md`
 
 **Interfaces:**
+
 - Consumes: nothing.
 - Produces: `featured?: number` on `work`, `serie`, and both post collections (`post`, `seriePost` share `PostSchema`). Absent = not featured; value = display rank, 1 first. Task 3's repository functions read `entry.data.featured`.
 
@@ -184,13 +190,13 @@ In the `work` collection schema, after `date`:
 
 Add one line to each file's frontmatter, directly under the `date:` line:
 
-| File | Line to add |
-|---|---|
-| `src/content/work/leconceptdelapreuve/index.md` | `featured: 1` |
-| `src/content/work/portfolio/index.md` | `featured: 2` |
-| `src/content/work/chimeres-orchestra/index.md` | `featured: 3` |
-| `src/content/work/logariat/index.md` | `featured: 4` |
-| `src/content/serie/web-performance/index.md` | `featured: 1` |
+| File                                                       | Line to add   |
+| ---------------------------------------------------------- | ------------- |
+| `src/content/work/leconceptdelapreuve/index.md`            | `featured: 1` |
+| `src/content/work/portfolio/index.md`                      | `featured: 2` |
+| `src/content/work/chimeres-orchestra/index.md`             | `featured: 3` |
+| `src/content/work/logariat/index.md`                       | `featured: 4` |
+| `src/content/serie/web-performance/index.md`               | `featured: 1` |
 | `src/content/serie/testing-a-simple-nuxt-feature/index.md` | `featured: 2` |
 
 No post files get `featured` for now (home falls back to latest posts — Task 3).
@@ -212,10 +218,12 @@ git commit -m "feat(content): add featured rank field to schemas and set initial
 ### Task 3: Repository as single query point + reading-time number helper
 
 **Files:**
+
 - Modify: `src/utils/get-minutes-read.ts`
 - Modify: `src/utils/repository.ts`
 
 **Interfaces:**
+
 - Consumes: `featured` field from Task 2; existing `getAllPosts`, `getPostsFromSerie`.
 - Produces (exact signatures — Tasks 4, 5, 7 import these from `src/utils/repository`):
   - `getFeaturedSeries(): Promise<CollectionEntry<"serie">[]>` — featured series, rank asc.
@@ -315,11 +323,13 @@ git commit -m "feat(utils): add featured/era repository queries and numeric read
 ### Task 4: `SerieCard` + `BlogPreview` → `SelectedWriting`
 
 **Files:**
+
 - Create: `src/components/blog/SerieCard.astro`
 - Rename: `src/components/blog/BlogPreview.astro` → `src/components/blog/SelectedWriting.astro` (then rewrite contents)
 - Modify: `src/pages/index.astro`
 
 **Interfaces:**
+
 - Consumes: `getFeaturedSeries`, `getFeaturedPosts`, `getSerieStats` from `src/utils/repository` (Task 3); existing `PostCard.astro`.
 - Produces: `<SelectedWriting />` section with `id="writing"` — Task 6's hero CTA anchors to `#writing`. `<SerieCard serie={...} />` takes `serie: CollectionEntry<"serie">`.
 
@@ -390,8 +400,7 @@ const posts = await getFeaturedPosts(2);
 <section id="writing" class="container flex flex-col gap-4 lg:gap-8">
   <H2>Selected Writing</H2>
   <P
-    >How I approach performance, architecture, and the craft of web
-    engineering.
+    >How I approach performance, architecture, and the craft of web engineering.
   </P>
   <div class="grid gap-4 md:grid-cols-2 lg:gap-8">
     {series.map((serie) => <SerieCard {serie} />)}
@@ -418,10 +427,13 @@ In `src/pages/index.astro`, change:
 ```astro
 import BlogPreview from "@components/blog/BlogPreview.astro";
 ```
+
 to
+
 ```astro
 import SelectedWriting from "@components/blog/SelectedWriting.astro";
 ```
+
 and `<BlogPreview />` to `<SelectedWriting />`.
 
 - [ ] **Step 4: Verify build**
@@ -447,11 +459,13 @@ git commit -m "feat(home): replace latest-posts preview with Selected Writing (s
 ### Task 5: `WorkMiniCard` + `WorksPreview` → `WorksStrip`
 
 **Files:**
+
 - Create: `src/components/work/WorkMiniCard.astro`
 - Rename: `src/components/work/WorksPreview.astro` → `src/components/work/WorksStrip.astro` (then rewrite contents)
 - Modify: `src/pages/index.astro`
 
 **Interfaces:**
+
 - Consumes: `getFeaturedWorks` from `src/utils/repository` (Task 3).
 - Produces: `<WorkMiniCard work={...} />` takes `work: CollectionEntry<"work">` — reused by Task 7 for "earlier work" grids. `<WorksStrip />` home section.
 
@@ -540,6 +554,7 @@ In `src/pages/index.astro`, change `WorksPreview` import/usage to:
 ```astro
 import WorksStrip from "@components/work/WorksStrip.astro";
 ```
+
 and `<WorksPreview />` to `<WorksStrip />`. Final `src/pages/index.astro`:
 
 ```astro
@@ -582,10 +597,12 @@ git commit -m "feat(home): compact works strip with featured mini-cards via repo
 ### Task 6: Hero rewrite + CTA
 
 **Files:**
+
 - Modify: `src/components/hero/HeroText.astro`
 - Modify: `astro.config.mjs:32-45` (icon include list)
 
 **Interfaces:**
+
 - Consumes: `id="writing"` anchor from Task 4; existing `Link.astro` variants.
 - Produces: nothing other tasks depend on.
 
@@ -648,9 +665,11 @@ git commit -m "feat(hero): facts-only copy with writing CTA, drop uhlive link, f
 ### Task 7: Work page — featured + era-grouped earlier work
 
 **Files:**
+
 - Modify: `src/pages/work.astro`
 
 **Interfaces:**
+
 - Consumes: `getFeaturedWorks`, `getEarlierWorksByEra` from `src/utils/repository` (Task 3); `WorkCard.astro` (existing); `WorkMiniCard.astro` (Task 5).
 - Produces: nothing other tasks depend on. `/work/[id].astro` untouched — all deep links stay live.
 
@@ -678,8 +697,8 @@ const eras = await getEarlierWorksByEra();
     <header class="flex w-full flex-col gap-4 lg:w-2/3 lg:gap-8">
       <H1>Work</H1>
       <P>
-        Fifteen years of open work — art systems, tools, experiments — where
-        you can see how I think. What I build at work is private; <Link
+        Fifteen years of open work — art systems, tools, experiments — where you
+        can see how I think. What I build at work is private; <Link
           href="/blog"
           label="the writing"
         /> covers how I build now.
@@ -698,7 +717,9 @@ const eras = await getEarlierWorksByEra();
         <section>
           <H2>{era.label}</H2>
           <div class="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4 lg:gap-8">
-            {era.works.map((work) => <WorkMiniCard {work} />)}
+            {era.works.map((work) => (
+              <WorkMiniCard {work} />
+            ))}
           </div>
         </section>
       ))
@@ -731,10 +752,12 @@ git commit -m "feat(work): featured section + era-grouped earlier work via repos
 ### Task 8: About — engineering-first bio, stat row, teaching, CV
 
 **Files:**
+
 - Create: `src/components/about/AboutFacts.astro`
 - Modify: `src/components/about/AboutText.astro`
 
 **Interfaces:**
+
 - Consumes: nothing from other tasks.
 - Produces: `<AboutFacts />` (no props).
 
@@ -784,9 +807,9 @@ import { Icon } from "astro-icon/components";
   <H1>About</H1>
   <Prose>
     <p>
-      <strong>I build web applications</strong> with Vue and TypeScript. After
-      an intensive reconversion to web development, I deepened my Vue and
-      Kotlin skills at Raccourci Agency, and now work at <Link
+      <strong>I build web applications</strong> with Vue and TypeScript. After an
+      intensive reconversion to web development, I deepened my Vue and Kotlin skills
+      at Raccourci Agency, and now work at <Link
         label="uhlive"
         href="https://uh.live/"
       />, on the front end of an AI-driven call-intelligence product.
@@ -818,9 +841,9 @@ import { Icon } from "astro-icon/components";
     </p>
 
     <p>
-      <strong>Teaching</strong> has run through all of it: fablab workshops,
-      schools, and artist residencies, where I trained more than 1000 people in
-      electronics, programming, and open-source tools.
+      <strong>Teaching</strong> has run through all of it: fablab workshops, schools,
+      and artist residencies, where I trained more than 1000 people in electronics,
+      programming, and open-source tools.
     </p>
 
     <p>
@@ -865,12 +888,14 @@ git commit -m "feat(about): engineering-first bio with stat row, teaching and OS
 ### Task 9: RSS feed + sitemap + footer RSS link
 
 **Files:**
+
 - Create: `src/pages/rss.xml.ts`
 - Modify: `astro.config.mjs`
 - Modify: `src/components/app/Footer.astro` (links array from Task 1)
 - Modify: `package.json` (via pnpm add)
 
 **Interfaces:**
+
 - Consumes: `getAllBlogPosts` from `src/utils/repository` (existing — posts + serie posts, draft-filtered, date desc).
 - Produces: `/rss.xml` endpoint; sitemap at `/sitemap-index.xml`.
 
@@ -938,9 +963,11 @@ git commit -m "feat(app): add RSS feed, sitemap integration, and footer RSS link
 ### Task 10: Format + full verification pass
 
 **Files:**
+
 - Modify: whatever `pnpm format:write` touches.
 
 **Interfaces:**
+
 - Consumes: everything.
 - Produces: clean, formatted final state.
 
@@ -981,9 +1008,11 @@ git commit -m "style: format after seniority update"
 ### Task 11: Code review + pull request
 
 **Files:**
+
 - Modify: whatever review findings require.
 
 **Interfaces:**
+
 - Consumes: the finished `feat/seniority-update` branch (Tasks 0–10).
 - Produces: an open PR against `main`. **Do not merge** — the human reviews and merges.
 
