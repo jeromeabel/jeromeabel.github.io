@@ -54,8 +54,8 @@ export const getFeaturedWorks = async () =>
     );
 
 const WORK_ERAS = [
-  { label: "Training & first web projects (2022–2024)", from: 2022, to: 2100 },
-  { label: "Interactive art & research (2012–2021)", from: 1900, to: 2021 },
+  { label: "Training & first web projects (2022–present)", from: 2022, to: 2100 },
+  { label: "Interactive art & research (until 2021)", from: 1900, to: 2021 },
 ];
 
 export const getEarlierWorksByEra = async () => {
