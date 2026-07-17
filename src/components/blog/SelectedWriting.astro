@@ -1,0 +1,32 @@
+---
+import PostCard from "@components/blog/PostCard.astro";
+import SerieCard from "@components/blog/SerieCard.astro";
+import H2 from "@components/ui/H2.astro";
+import Link from "@components/ui/Link.astro";
+import P from "@components/ui/P.astro";
+import { getFeaturedPosts, getFeaturedSeries } from "src/utils/repository";
+
+const series = (await getFeaturedSeries()).slice(0, 2);
+const posts = await getFeaturedPosts(2);
+---
+
+<section id="writing" class="container flex flex-col gap-4 lg:gap-8">
+  <H2>Selected Writing</H2>
+  <P
+    >How I approach performance, architecture, and the craft of web
+    engineering.
+  </P>
+  <div class="grid gap-4 md:grid-cols-2 lg:gap-8">
+    {series.map((serie) => <SerieCard {serie} />)}
+  </div>
+  <div class="grid gap-4 md:grid-cols-2 lg:gap-8">
+    {posts.map((post) => <PostCard {post} />)}
+  </div>
+  <Link
+    class="mt-8"
+    label="All posts"
+    href="/blog"
+    icon="lucide:arrow-right"
+    variant="secondary"
+  />
+</section>
