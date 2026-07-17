@@ -3,6 +3,7 @@ title: "Testing a Simple Nuxt Feature"
 description: Implementation of a simple version banner in a Nuxt app serves as a practical guide to learning how to write tests in Nuxt.
 abstract: Implementation of a simple version banner in a Nuxt app serves as a practical guide to learning how to write tests in Nuxt.
 date: "2025-03-18"
+featured: 2
 posts:
   - testing-a-simple-nuxt-feature/01-how-to-share-development-process
   - testing-a-simple-nuxt-feature/02-all-in-one-component

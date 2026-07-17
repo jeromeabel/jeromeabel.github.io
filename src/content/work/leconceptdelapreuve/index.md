@@ -1,6 +1,7 @@
 ---
 title: "Le concept de la preuve"
 date: 2026-02-20
+featured: 1
 img: ./screen.jpg
 img_placeholder: ./small.jpg
 img_preview: ./preview.jpg

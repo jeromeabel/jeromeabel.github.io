@@ -1,6 +1,7 @@
 ---
 title: Portfolio
 date: 2025-03-16
+featured: 2
 img: ./screens.png
 img_placeholder: ./screens-small.jpg
 img_preview: ./preview.png

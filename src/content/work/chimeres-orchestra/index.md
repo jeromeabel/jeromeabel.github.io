@@ -1,6 +1,7 @@
 ---
 title: Chimères Orchestra
 date: 2021-12-01
+featured: 3
 img: ./exhibition.jpg
 img_placeholder: ./exhibition-small.jpg
 img_preview: ./preview.jpg

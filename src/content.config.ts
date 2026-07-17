@@ -13,6 +13,7 @@ const PostSchema = ({ image }: { image: ImageFunction }) =>
     description: z.string(),
     abstract: z.string(),
     draft: z.boolean().default(true),
+    featured: z.number().optional(),
     img: image().optional(),
   });
 
@@ -31,6 +32,7 @@ const serie = defineCollection({
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
+    featured: z.number().optional(),
     description: z.string(),
     abstract: z.string(),
     posts: z.array(reference("seriePost")),
@@ -43,6 +45,7 @@ const work = defineCollection({
     z.object({
       title: z.string(),
       date: z.coerce.date(),
+      featured: z.number().optional(),
       img: image(),
       img_placeholder: image(),
       img_preview: image(),
