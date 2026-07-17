@@ -2,6 +2,7 @@
 import netlify from "@astrojs/netlify";
 import { unified } from "@astrojs/markdown-remark";
 import partytown from "@astrojs/partytown";
+import sitemap from "@astrojs/sitemap";
 import icon from "astro-icon";
 import { defineConfig } from "astro/config";
 import rehypeExternalLinks from "rehype-external-links";
@@ -48,6 +49,8 @@ export default defineConfig({
       },
       iconDir: "src/assets/icons",
     }),
+
+    sitemap(),
   ],
 
   vite: {
