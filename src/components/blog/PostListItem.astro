@@ -1,14 +1,15 @@
 ---
 import { Icon } from "astro-icon/components";
 import type { CollectionEntry } from "astro:content";
-import { getFormattedDate } from "src/utils/format-date";
+import { getFormattedDate, getMonthYear } from "src/utils/format-date";
 import { getMinutesReadFromBody } from "src/utils/get-minutes-read";
 
 interface Props {
   post: CollectionEntry<"post"> | CollectionEntry<"seriePost">;
+  compact?: boolean;
 }
 
-const { post } = Astro.props;
+const { post, compact } = Astro.props;
 
 if (!post) {
   throw new Error("Sorry, could not find post");
@@ -44,6 +45,12 @@ const updatedLabel = post.data.updated
   <div class="text-muted flex items-center gap-2 font-mono text-xs md:text-sm">
     {post.data.topic && <span class="hidden md:inline">{post.data.topic}</span>}
     {minutesRead && <p class="hidden sm:block">{minutesRead} -</p>}
-    <time>{getFormattedDate(post.data.date)}</time>
+    <time
+      >{
+        compact
+          ? getMonthYear(post.data.date)
+          : getFormattedDate(post.data.date)
+      }</time
+    >
   </div>
 </a>
