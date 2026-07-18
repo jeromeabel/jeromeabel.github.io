@@ -99,7 +99,30 @@ cmd_index() {
   echo "Wrote $INDEX"
 }
 
+cmd_new() {
+  local slug="${1:-}" title="${2:-}"
+  [[ -n "$slug" ]] || die 'usage: specs.sh new <slug> ["title"]'
+  valid_slug "$slug"
+  [[ -e "$BACKLOG/$slug.md" || -e "$BACKLOG/$slug" || -e "$ACTIVE/$slug" || -e "$ARCHIVES/$slug" ]] \
+    && die "slug '$slug' already exists"
+  [[ -n "$title" ]] || title="$(echo "$slug" | tr '-' ' ')"
+  mkdir -p "$BACKLOG"
+  cat > "$BACKLOG/$slug.md" <<EOF
+---
+title: $title
+created: $(date +%F)
+---
+
+<what>. <why>.
+Ref:
+Size: S
+EOF
+  echo "Created $BACKLOG/$slug.md"
+  cmd_index
+}
+
 case "${1:-}" in
+  new)   shift; cmd_new "$@" ;;
   index) cmd_index ;;
   *)     die "usage: specs.sh {new|activate|archive|index}" ;;
 esac
