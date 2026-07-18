@@ -68,6 +68,15 @@ I've built also a minimal website in french and english, using HTML and W3CSS li
 
 ![Website](./hub.jpg)
 
+## Outcome
+
+- A free, open-source kit adopted by artists, students, and teachers in labs, schools, colleges, and faculties.
+- 5000+ downloads of the one-click, cross-platform software.
+- Around 150 Pure Data objects across six categories (input, output, audio, video, numbers, sequencers).
+- Still in use by downstream projects such as [BrutBox](https://brutlab.org/brutbox).
+
+<!-- TODO(author): add active-school count or notable workshops if you have figures. -->
+
 ## What I Learned
 
 - Maintain and develop a community project, with personas, user interviews and debug

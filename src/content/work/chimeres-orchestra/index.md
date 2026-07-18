@@ -110,6 +110,14 @@ The hardware design reflects aesthetics of insects and waterproof concerns.
 
 ![Blueprints for building metal pieces and electronics box](./tech.jpg)
 
+## Outcome
+
+- Exhibited around twenty times across Europe as a robotic sound installation.
+- Maintained and developed with [Reso-nance numérique](https://reso-nance.org/chimeres-orchestra/) for over a decade.
+- Documented with a running system, a Pure Data control patch, a `PdDroidParty` mobile remote, and a [video of the installation](https://vimeo.com/658636474).
+
+<!-- TODO(author): add specific venues/festivals and dates if you want named exhibitions here. -->
+
 ## What I Learned
 
 - Maintain and develop a project over 10 years! A formative journey towards quality and simplicity in fact.

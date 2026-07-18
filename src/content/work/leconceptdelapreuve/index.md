@@ -164,6 +164,14 @@ pipeline = sharp(imagePath)
 
 The result: CDN response time dominates static pages; the only variable latency is the vote API cold start, and the early-prefetch pattern effectively masks most of that.
 
+## Outcome
+
+- Live at [leconceptdelapreuve.jeromeabel.net](https://leconceptdelapreuve.jeromeabel.net), a fully static comic blog with a single dynamic voting endpoint.
+- Strips are published to Bluesky rather than fed to Instagram's data machine.
+- One-command publishing (`pnpm new`) keeps the drawing cadence regular — the constraint that makes me create more.
+
+<!-- TODO(author): add readership/Bluesky reach or number of strips published if you want concrete figures. -->
+
 ## What I learned
 
 - **Astro DB's local/remote split is delightful.** SQLite in dev, Turso in production; same ORM and queries with a `--remote` flag swap.
