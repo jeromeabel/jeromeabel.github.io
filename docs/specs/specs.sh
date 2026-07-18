@@ -121,8 +121,26 @@ EOF
   cmd_index
 }
 
+cmd_activate() {
+  local slug="${1:-}"
+  [[ -n "$slug" ]] || die "usage: specs.sh activate <slug>"
+  [[ -e "$ACTIVE/$slug" ]] && die "'$slug' is already active"
+  mkdir -p "$ACTIVE"
+  if [[ -f "$BACKLOG/$slug.md" ]]; then
+    mkdir -p "$ACTIVE/$slug"
+    git mv "$BACKLOG/$slug.md" "$ACTIVE/$slug/spec.md"
+  elif [[ -d "$BACKLOG/$slug" ]]; then
+    git mv "$BACKLOG/$slug" "$ACTIVE/$slug"
+  else
+    die "no backlog entry '$slug' (looked for $BACKLOG/$slug.md and $BACKLOG/$slug/)"
+  fi
+  echo "Activated $slug"
+  cmd_index
+}
+
 case "${1:-}" in
-  new)   shift; cmd_new "$@" ;;
-  index) cmd_index ;;
-  *)     die "usage: specs.sh {new|activate|archive|index}" ;;
+  new)      shift; cmd_new "$@" ;;
+  activate) shift; cmd_activate "$@" ;;
+  index)    cmd_index ;;
+  *)        die "usage: specs.sh {new|activate|archive|index}" ;;
 esac
