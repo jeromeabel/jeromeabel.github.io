@@ -1,7 +1,8 @@
 ---
 title: Chimères Orchestra
 date: 2021-12-01
-featured: 3
+featured: 1
+kicker: "Art · 2013–2019"
 img: ./exhibition.jpg
 img_placeholder: ./exhibition-small.jpg
 img_preview: ./preview.jpg

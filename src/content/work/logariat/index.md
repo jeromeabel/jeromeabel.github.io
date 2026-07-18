@@ -1,7 +1,6 @@
 ---
 title: Logariat
 date: 2019-11-23
-featured: 4
 img: ./screen.jpg
 img_placeholder: ./small2.jpg
 img_preview: ./preview.jpg

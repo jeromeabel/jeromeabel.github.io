@@ -1,7 +1,8 @@
 ---
 title: "Le concept de la preuve"
 date: 2026-02-20
-featured: 1
+featured: 3
+kicker: "Web · 2023"
 img: ./screen.jpg
 img_placeholder: ./small.jpg
 img_preview: ./preview.jpg
