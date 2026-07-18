@@ -1,3 +1,7 @@
+---
+shipped: 2026-07-19
+---
+
 # Blog Seniority Update — Design (v2)
 
 **Date**: 2026-07-17 (v2 — supersedes v1 same day)

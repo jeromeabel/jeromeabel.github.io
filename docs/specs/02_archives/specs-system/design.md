@@ -1,3 +1,7 @@
+---
+shipped: 2026-07-19
+---
+
 # Specs System — Design
 
 **Date:** 2026-07-18

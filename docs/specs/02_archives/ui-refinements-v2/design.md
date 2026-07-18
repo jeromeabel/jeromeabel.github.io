@@ -1,3 +1,7 @@
+---
+shipped: 2026-07-19
+---
+
 # UI Refinements v2 — Design Spec (2026-07-18)
 
 A second UI/UX refinement pass on `feat/seniority-update`, layered on top of the already-shipped home "Writing" section rebuild. Directions chosen with Jérôme via the options artifact (`https://claude.ai/code/artifact/594d0bad-a640-4914-967c-8f468cd47b97`).
