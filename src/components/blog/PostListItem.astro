@@ -22,6 +22,11 @@ const updatedLabel = post.data.updated
       month: "short",
     })
   : null;
+const topics = (post.data.topic ?? "")
+  .split(",")
+  .map((topic) => topic.trim())
+  .filter(Boolean)
+  .slice(0, 2);
 ---
 
 <a
@@ -43,7 +48,15 @@ const updatedLabel = post.data.updated
     }
   </h3>
   <div class="text-muted flex items-center gap-2 font-mono text-xs md:text-sm">
-    {post.data.topic && <span class="hidden md:inline">{post.data.topic}</span>}
+    {
+      topics.length > 0 && (
+        <span class="flex shrink-0 items-center gap-2">
+          {topics.map((topic) => (
+            <span class="border-muted-border border px-2 py-0.5">{topic}</span>
+          ))}
+        </span>
+      )
+    }
     {minutesRead && <p class="hidden sm:block">{minutesRead} -</p>}
     <time
       >{
