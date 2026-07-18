@@ -20,7 +20,7 @@ const dateOptions: Intl.DateTimeFormatOptions = {
 };
 
 const dateISOString = new Date(work.data.date).toLocaleDateString(
-  "en-EN",
+  "en-GB",
   dateOptions,
 );
 ---
@@ -67,11 +67,13 @@ const dateISOString = new Date(work.data.date).toLocaleDateString(
       {work.data.title}
     </p>
     <p class="line-clamp-3 pt-2">{work.data.description}</p>
-    <p class="text-muted mt-auto flex items-center gap-2 pt-6">
-      <Icon name="lucide:calendar" />
-      <time>
-        {dateISOString}
-      </time>
-    </p>
+    {
+      !work.data.kicker && (
+        <p class="text-muted mt-auto flex items-center gap-2 pt-6">
+          <Icon name="lucide:calendar" />
+          <time>{dateISOString}</time>
+        </p>
+      )
+    }
   </div>
 </a>

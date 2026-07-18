@@ -5,4 +5,4 @@ const dateOptions: Intl.DateTimeFormatOptions = {
 };
 
 export const getFormattedDate = (date: string | Date) =>
-  new Date(date).toLocaleDateString("en-EN", dateOptions);
+  new Date(date).toLocaleDateString("en-GB", dateOptions);

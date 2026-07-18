@@ -14,6 +14,11 @@ if (!serie) {
 }
 
 const { parts, minutes } = await getSerieStats(serie);
+
+const readLabel =
+  minutes >= 60
+    ? `~${Math.floor(minutes / 60)}h ${minutes % 60}m read`
+    : `${minutes} min read`;
 ---
 
 <a
@@ -26,9 +31,9 @@ const { parts, minutes } = await getSerieStats(serie);
   </h3>
   <p class="line-clamp-3">{serie.data.description}</p>
   <div class="text-muted mt-auto flex items-center justify-end gap-2 pt-2">
-    <Icon name="lucide:chevron-right" />
+    <Icon name="lucide:layers" />
     <span class="text-sm">{parts} parts</span>
     <Icon name="lucide:clock" class="ms-6" />
-    <span class="text-sm">{minutes} min total</span>
+    <span class="text-sm">{readLabel}</span>
   </div>
 </a>

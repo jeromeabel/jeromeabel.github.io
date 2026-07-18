@@ -42,6 +42,7 @@ export default defineConfig({
           "clock",
           "calendar",
           "chevron-right",
+          "layers",
           "mail",
           "dot",
         ],

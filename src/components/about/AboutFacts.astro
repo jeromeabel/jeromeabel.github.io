@@ -1,8 +1,12 @@
 ---
+import { getAllBlogPosts } from "src/utils/repository";
+
+const articleCount = (await getAllBlogPosts()).length;
+
 const facts = [
   { value: "2010", label: "coding since" },
-  { value: "21", label: "articles published" },
-  { value: "5000+", label: "framework downloads" },
+  { value: String(articleCount), label: "articles published" },
+  { value: "5000+", label: "Malinette downloads" },
   { value: "1000+", label: "people trained" },
 ];
 ---

@@ -33,7 +33,14 @@ const externalUrl = (data: CollectionEntry<"work">["data"]) =>
               <td class="text-muted py-3 pr-4 font-mono text-xs whitespace-nowrap">
                 {work.data.date.getFullYear()}
               </td>
-              <td class="py-3 pr-4 font-semibold">{work.data.title}</td>
+              <td class="py-3 pr-4 font-semibold">
+                <a
+                  href={`/work/${work.id}`}
+                  class="hover:text-foreground border-b border-dashed border-current hover:border-solid"
+                >
+                  {work.data.title}
+                </a>
+              </td>
               <td class="text-muted hidden py-3 pr-4 sm:table-cell">
                 {work.data.type}
               </td>
@@ -46,7 +53,8 @@ const externalUrl = (data: CollectionEntry<"work">["data"]) =>
                     href={url}
                     target="_blank"
                     rel="nofollow noopener noreferrer"
-                    class="border-current border-b border-dashed hover:border-solid"
+                    aria-label={`Visit ${work.data.title} (external)`}
+                    class="border-b border-dashed border-current hover:border-solid"
                   >
                     Visit
                   </a>

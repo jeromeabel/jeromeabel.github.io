@@ -16,7 +16,7 @@ if (!post) {
 
 const minutesRead = getMinutesReadFromBody(post.body);
 const updatedLabel = post.data.updated
-  ? new Date(post.data.updated).toLocaleDateString("en-EN", {
+  ? new Date(post.data.updated).toLocaleDateString("en-GB", {
       year: "numeric",
       month: "short",
     })

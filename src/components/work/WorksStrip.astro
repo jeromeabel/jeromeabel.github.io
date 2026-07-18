@@ -9,8 +9,8 @@ const works = await getFeaturedWorks();
 ---
 
 <section class="container flex flex-col gap-4 lg:gap-8">
-  <H2>Works</H2>
-  <P>15 years of building — from robotic drummers to web apps.</P>
+  <H2>Work</H2>
+  <P>Building since 2010 — from robotic drummers to web apps.</P>
   <div class="grid grid-cols-2 gap-4 md:grid-cols-4 lg:gap-8">
     {works.map((work) => <WorkMiniCard {work} />)}
   </div>
