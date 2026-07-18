@@ -27,7 +27,6 @@ pnpm-debug.log*
 .netlify/
 
 .claude
-docs/specs
 
 # visual brainstorm companion
 .superpowers/
