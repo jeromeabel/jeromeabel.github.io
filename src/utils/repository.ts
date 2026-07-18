@@ -53,8 +53,17 @@ export const getFeaturedWorks = async () =>
         b.data.date.valueOf() - a.data.date.valueOf(),
     );
 
+export const getArchiveWorks = async () =>
+  (await getCollection("work"))
+    .filter((work) => work.data.featured === undefined)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
 const WORK_ERAS = [
-  { label: "Training & first web projects (2022–present)", from: 2022, to: 2100 },
+  {
+    label: "Training & first web projects (2022–present)",
+    from: 2022,
+    to: 2100,
+  },
   { label: "Interactive art & research (until 2021)", from: 1900, to: 2021 },
 ];
 

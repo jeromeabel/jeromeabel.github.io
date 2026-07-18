@@ -56,6 +56,7 @@ const work = defineCollection({
       description: z.string(),
       abstract: z.string(),
       type: z.string(),
+      kicker: z.string().optional(),
       git: z.string().optional(),
       website: z.string().optional(),
       live: z.string().optional(),
