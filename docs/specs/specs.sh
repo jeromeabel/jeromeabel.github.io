@@ -24,22 +24,40 @@ artifacts() {
   echo "${labels[*]}"
 }
 
-# Print the `shipped:` frontmatter value from a folder's design.md/spec.md (empty if none).
+# Print the `shipped:` frontmatter value from a folder's design.md/spec.md (empty
+# if none). Only the frontmatter block (line 1 `---` to the next `---`) is scanned,
+# so a `shipped:` example inside the document body is never mistaken for the stamp.
 shipped_date() {
   local dir="$1" f
   for f in "$dir/design.md" "$dir/spec.md"; do
     if [[ -f "$f" ]]; then
-      awk -F': *' '/^shipped:/ { print $2; exit }' "$f"
+      awk -F': *' '
+        NR==1 && $0!="---" { exit }   # no frontmatter block
+        NR>1 && $0=="---"  { exit }   # end of frontmatter
+        NR>1 && /^shipped:/ { print $2; exit }
+      ' "$f"
       return
     fi
   done
+}
+
+# True if the file's frontmatter block already carries a `shipped:` key (body
+# occurrences are ignored).
+has_shipped() {
+  # awk `exit` still runs END, so decide the exit code only there via a flag.
+  awk '
+    NR==1 && $0!="---" { exit }     # no frontmatter → not stamped
+    NR>1 && $0=="---"  { exit }     # reached end of frontmatter → not stamped
+    NR>1 && /^shipped:/ { found=1; exit }
+    END { exit !found }
+  ' "$1"
 }
 
 # Insert `shipped: <today>` into a file's frontmatter (creating a block if absent).
 stamp_shipped() {
   local f="$1" today
   today="$(date +%F)"
-  grep -q '^shipped:' "$f" && return 0
+  has_shipped "$f" && return 0
   if head -1 "$f" | grep -qx -- '---'; then
     awk -v d="$today" 'NR==1 && $0=="---" { print; print "shipped: " d; next } { print }' \
       "$f" > "$f.tmp" && mv "$f.tmp" "$f"
