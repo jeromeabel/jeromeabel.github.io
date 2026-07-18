@@ -1,24 +1,27 @@
 ---
-import PostListItem from "@components/blog/PostListItem.astro";
+import PostRow from "@components/blog/PostRow.astro";
 import SerieCard from "@components/blog/SerieCard.astro";
 import H2 from "@components/ui/H2.astro";
 import Link from "@components/ui/Link.astro";
-import { getFeaturedPosts, getFeaturedSeries } from "src/utils/repository";
+import { getFeaturedSeries, getLatestWriting } from "src/utils/repository";
 
 const series = (await getFeaturedSeries()).slice(0, 2);
-const posts = await getFeaturedPosts(2);
+const latest = await getLatestWriting(5);
 ---
 
 <section
   id="writing"
   class="container flex scroll-mt-16 flex-col gap-4 lg:gap-8"
 >
-  <H2>Start here</H2>
+  <H2>Writing</H2>
   <div class="grid gap-4 md:grid-cols-2 lg:gap-8">
     {series.map((serie) => <SerieCard {serie} />)}
   </div>
-  <div class="border-muted-border mt-4 border-t">
-    {posts.map((post) => <PostListItem {post} />)}
+  <div class="mt-4 flex flex-col">
+    <span class="text-muted pb-2 font-mono text-sm uppercase">Latest</span>
+    <div class="border-muted-border border-t">
+      {latest.map(({ post, serie }) => <PostRow {post} {serie} />)}
+    </div>
   </div>
   <Link
     class="mt-8"

@@ -1,11 +1,6 @@
 import { getCollection, getEntries, type CollectionEntry } from "astro:content";
 import { getMinutesFromBody } from "./get-minutes-read";
 
-export const getAllPosts = async () =>
-  (await getCollection("post"))
-    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-    .filter((post) => (import.meta.env.PROD ? post.data.draft !== true : true));
-
 export const getAllSeriePosts = async () =>
   (await getCollection("seriePost"))
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
@@ -34,15 +29,6 @@ export const getFeaturedSeries = async () =>
   (await getCollection("serie"))
     .filter((serie) => serie.data.featured !== undefined)
     .sort((a, b) => (a.data.featured ?? 0) - (b.data.featured ?? 0));
-
-export const getFeaturedPosts = async (count: number) => {
-  const posts = await getAllPosts();
-  const featured = posts
-    .filter((post) => post.data.featured !== undefined)
-    .sort((a, b) => (a.data.featured ?? 0) - (b.data.featured ?? 0));
-  const rest = posts.filter((post) => post.data.featured === undefined);
-  return [...featured, ...rest].slice(0, count);
-};
 
 export const getFeaturedWorks = async () =>
   (await getCollection("work"))
