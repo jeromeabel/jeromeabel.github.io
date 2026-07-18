@@ -10,7 +10,10 @@ const series = (await getFeaturedSeries()).slice(0, 2);
 const posts = await getFeaturedPosts(2);
 ---
 
-<section id="writing" class="container flex flex-col gap-4 lg:gap-8">
+<section
+  id="writing"
+  class="container flex scroll-mt-16 flex-col gap-4 lg:gap-8"
+>
   <H2>Selected Writing</H2>
   <P
     >How I approach performance, architecture, and the craft of web engineering.
