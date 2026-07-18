@@ -1,10 +1,23 @@
 ---
-import PostList from "@components/blog/PostList.astro";
-import SerieList from "@components/blog/SerieList.astro";
+import PostListItem from "@components/blog/PostListItem.astro";
+import SerieCard from "@components/blog/SerieCard.astro";
 import H1 from "@components/ui/H1.astro";
 import H2 from "@components/ui/H2.astro";
 import P from "@components/ui/P.astro";
 import Layout from "@layouts/Layout.astro";
+import { getAllBlogPosts, getFeaturedSeries } from "src/utils/repository";
+
+const posts = await getAllBlogPosts();
+const series = await getFeaturedSeries();
+
+// Group the already-date-desc list into year buckets, preserving order.
+const byYear: { year: number; posts: typeof posts }[] = [];
+for (const post of posts) {
+  const year = post.data.date.getFullYear();
+  const bucket = byYear.at(-1);
+  if (bucket && bucket.year === year) bucket.posts.push(post);
+  else byYear.push({ year, posts: [post] });
+}
 ---
 
 <Layout page="Blog">
@@ -18,13 +31,34 @@ import Layout from "@layouts/Layout.astro";
     </header>
 
     <section>
-      <H2>Series</H2>
-      <SerieList />
+      <H2>Latest</H2>
+      <div class="mt-8 flex flex-col gap-8">
+        {
+          byYear.map((group) => (
+            <div>
+              <p class="text-muted mb-2 font-mono text-sm">{group.year}</p>
+              <div class="border-muted-border border-t">
+                {group.posts.map((post) => (
+                  <PostListItem {post} />
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
     </section>
 
-    <section>
-      <H2>Posts</H2>
-      <PostList />
-    </section>
+    {
+      series.length > 0 && (
+        <section>
+          <H2>Series</H2>
+          <div class="mt-8 grid gap-4 md:grid-cols-2 lg:gap-8">
+            {series.map((serie) => (
+              <SerieCard {serie} />
+            ))}
+          </div>
+        </section>
+      )
+    }
   </main>
 </Layout>
