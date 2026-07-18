@@ -7,7 +7,6 @@ _none_
 
 ## Backlog
 - [illustration-system](00_backlog/illustration-system/) — design
-- [ux-copy-review-findings](00_backlog/ux-copy-review-findings/) — notes
 - [blog-toc](00_backlog/blog-toc.md)
 - [blog-v2-1](00_backlog/blog-v2-1.md)
 - [contact-images-animation](00_backlog/contact-images-animation.md)
@@ -23,3 +22,4 @@ _none_
 - [site-refinements](02_archives/site-refinements/) — design,plan
 - [specs-system](02_archives/specs-system/) — shipped 2026-07-19
 - [ui-refinements-v2](02_archives/ui-refinements-v2/) — shipped 2026-07-19
+- [ux-copy-review-findings](02_archives/ux-copy-review-findings/) — shipped 2026-07-19
