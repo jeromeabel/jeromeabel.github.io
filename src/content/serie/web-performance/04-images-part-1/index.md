@@ -1,6 +1,7 @@
 ---
 title: "Optimizing Images with Astro (part 1)"
 date: 2026-07-08
+topic: "astro, performance"
 description: "Images are usually the heaviest thing a page loads. Astro's asset pipeline automates the tedious parts — modern formats, srcset, reserved dimensions against CLS — but to choose a strategy you need a benchmark, and my first one measured two variables at once."
 abstract: "From hand-resizing images to Astro and the Netlify Image CDN: what the framework automates for free (AVIF/WebP, srcset, CLS), and how a flawed first benchmark — measuring strategy and deploy pipeline at once — pushed me to a cleaner method where Astro's zero-config `<Picture>` wins the baseline."
 draft: false

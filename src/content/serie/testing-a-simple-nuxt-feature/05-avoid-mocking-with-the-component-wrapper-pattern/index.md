@@ -1,6 +1,7 @@
 ---
 title: "Avoid Mocks With the 'Component Wrapper' Pattern"
 date: 2025-03-28
+topic: "nuxt, testing"
 description: "Version 3 of our banner implements the 'Component Wrapper' Pattern, allowing us to avoid mocks."
 abstract: "In this fifth episode, we finally have enough confidence in our tests and design, thanks to something I call the 'Component Wrapper' Pattern. It will help us simplify the tests by avoiding mocks."
 draft: false

@@ -1,6 +1,7 @@
 ---
 title: "Benchmarking a 10,000-Row Table: v-for, PrimeVue, and TanStack"
 date: 2026-06-17
+topic: "astro, performance"
 description: "The same 10,000-row table built three ways, measured two layers deep. The v-for baseline scores 100 on Lighthouse and renders at 0.7 FPS. The component library fails under real throttling. Owning the DOM wins."
 abstract: "A side-by-side benchmark of three Vue table approaches on 10,000 rows with expandable detail rows — Lighthouse, Chrome traces, and in-app metrics. The composite score and the wall-clock disagree, and the gap is where the architecture decision lives."
 draft: false

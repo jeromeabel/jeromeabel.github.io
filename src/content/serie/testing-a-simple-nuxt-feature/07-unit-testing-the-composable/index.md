@@ -1,6 +1,7 @@
 ---
 title: "Unit Testing the Composable"
 date: 2025-04-05
+topic: "nuxt, testing"
 abstract: In this seventh episode, we simplify testing by replacing `onMounted` with an explicit `init` method. This small refactor leads us to deeper questions about dependencies inside composables. Should we mock them—or inject them? We explore both approaches and their trade-offs.
 description: Version 5 of our banner continues the exploration of testable composables. By removing `onMounted`, mocking `useRuntimeConfig`, and even `localStorage`, we move closer to unit tests that are truly isolated. But at what cost? We reflect on the complexity this introduces and whether dependency injection might offer a cleaner solution.
 draft: false

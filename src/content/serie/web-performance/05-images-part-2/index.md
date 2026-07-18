@@ -1,6 +1,7 @@
 ---
 title: "Optimizing Images with Astro (part 2)"
 date: 2026-07-14
+topic: "astro, performance"
 description: "Astro's zero-config `<Picture>` wins the baseline, but it under-sizes big slots and over-sizes small ones. Four levers stack on top: priority hints, LQIP placeholders, a cache-aware fade, and pixel-perfect sizing — and this is where the mobile and desktop numbers invert."
 abstract: "Building on the zero-config `<Picture>` baseline from Part 1: eager/lazy split above the fold, LQIP placeholders and a cache-aware fade, pixel-perfect sizing from real layout tokens, and the final combined stack. The sizes contract turns out to be the biggest byte lever — and it flips between mobile and desktop."
 draft: false

@@ -1,6 +1,7 @@
 ---
 title: "Mocking the composable"
 date: 2025-03-27
+topic: "nuxt, testing"
 description: "Fourth episode: Mocking the composable will help us isolate the component test without relying on Nuxt's real interactions or localStorage behavior."
 abstract: "In this fourth episode, we will mock the composable. This will help us isolate the component test without relying on Nuxt's real interactions or localStorage behavior."
 draft: false

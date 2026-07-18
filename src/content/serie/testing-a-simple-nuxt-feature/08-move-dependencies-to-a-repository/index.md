@@ -1,6 +1,7 @@
 ---
 title: "Move Dependencies to a Repository"
 date: 2025-04-06
+topic: "nuxt, testing"
 abstract: "In this eighth episode, we move external dependencies—like `useRuntimeConfig` and `localStorage`—outside of the composable. By injecting a version repository, we make the logic more focused and the tests more reliable. We discuss the benefits of this design and how it improves both testability and separation of concerns."
 description: "Version 6 of our banner takes a bigger step toward clean architecture. We define a repository interface, inject it into our composable, and provide two implementations: one for the browser and one for unit tests. This approach helps decouple the logic from I/O and keeps our tests fast and focused. We also reflect on what's next: using app.config, wrapping version in an entity, and writing integration tests."
 draft: false

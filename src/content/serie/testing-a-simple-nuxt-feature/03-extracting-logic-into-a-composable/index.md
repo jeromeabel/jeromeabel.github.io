@@ -1,6 +1,7 @@
 ---
 title: "Extracting Logic into a Composable "
 date: 2025-03-24
+topic: "nuxt, testing"
 description: Split the all-in-one component into two files following the Presenter/Humble Component Pattern
 abstract: In this third episode, we make our first refactoring. The idea is to split the all-in-one component into two files following the Presenter/Humble Component Pattern.
 draft: false
