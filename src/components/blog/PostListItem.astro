@@ -5,7 +5,7 @@ import { getFormattedDate } from "src/utils/format-date";
 import { getMinutesReadFromBody } from "src/utils/get-minutes-read";
 
 interface Props {
-  post: CollectionEntry<"post">;
+  post: CollectionEntry<"post"> | CollectionEntry<"seriePost">;
 }
 
 const { post } = Astro.props;
@@ -15,6 +15,12 @@ if (!post) {
 }
 
 const minutesRead = getMinutesReadFromBody(post.body);
+const updatedLabel = post.data.updated
+  ? new Date(post.data.updated).toLocaleDateString("en-EN", {
+      year: "numeric",
+      month: "short",
+    })
+  : null;
 ---
 
 <a
@@ -27,8 +33,16 @@ const minutesRead = getMinutesReadFromBody(post.body);
   />
   <h3 class="flex-1 transition-transform group-hover:translate-x-8">
     {post.data.title}
+    {
+      updatedLabel && (
+        <span class="text-muted ms-2 font-mono text-xs">
+          · updated {updatedLabel}
+        </span>
+      )
+    }
   </h3>
-  <div class="text-muted flex gap-2 font-mono text-xs md:text-sm">
+  <div class="text-muted flex items-center gap-2 font-mono text-xs md:text-sm">
+    {post.data.topic && <span class="hidden md:inline">{post.data.topic}</span>}
     {minutesRead && <p class="hidden sm:block">{minutesRead} -</p>}
     <time>{getFormattedDate(post.data.date)}</time>
   </div>

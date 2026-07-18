@@ -10,6 +10,8 @@ const PostSchema = ({ image }: { image: ImageFunction }) =>
   z.object({
     title: z.string(),
     date: z.date(),
+    updated: z.date().optional(),
+    topic: z.string().optional(),
     description: z.string(),
     abstract: z.string(),
     draft: z.boolean().default(true),
