@@ -13,6 +13,7 @@ A second UI/UX refinement pass on `feat/seniority-update`, layered on top of the
 **Current** (`src/components/blog/PostRow.astro`): `flex flex-col` `<a>`; serie kicker (folder + title + part), title row (title + `min · MonthYear`), 1-line clamped description, up to 2 topic tags. No hover animation.
 
 **Target:**
+
 - **Drop the description entirely.** Serie kicker + topic tags carry the topic signal. Rows become: kicker (if serie) / title + meta / tags (if any).
 - **Add the blog-post arrow animation** — identical mechanics to `PostListItem.astro`:
   - Root `<a>` gains `group relative overflow-hidden`.
@@ -30,6 +31,7 @@ A second UI/UX refinement pass on `feat/seniority-update`, layered on top of the
 **Current** (`src/pages/blog.astro`): H1 "Blog" + intro P; `<H2>Latest</H2>` over year-bucketed `PostListItem` rows; `<H2>Series</H2>` + `SerieCard` grid below.
 
 **Target — "year rail":**
+
 - **Remove the `<H2>Latest</H2>` heading.** The year label becomes the structural spine — no redundant section title.
 - Each year group renders as a two-column rail:
   - `sm`+: `grid grid-cols-[3rem_1fr] gap-x-3` — left cell = the year (mono, bold, `text-accent`-equivalent → since there is no accent token, use `text-foreground` bold to stand out from muted rows; year is the one strong mark). Right cell = the rows, with a `border-l border-muted-border pl-3` rail.
@@ -48,6 +50,7 @@ A second UI/UX refinement pass on `feat/seniority-update`, layered on top of the
 **Current** (`src/components/work/WorkCard.astro`): bordered `<a>`, image block `aspect-video flex-1 lg:aspect-square lg:flex-none` (near-square, dominant), text block with kicker/title/description(clamp-3)/date-if-no-kicker, plus a hover overlay rotating a `cross-big` icon. Grid `sm:grid-cols-2`.
 
 **Target — horizontal split (denser):**
+
 - Card becomes a **horizontal row**: image left (fixed width ~38%), text right. On mobile (base) stack vertically (image on top), switch to horizontal at `sm`+.
   - Suggested classes on the `<a>`: `flex flex-col sm:flex-row` (remove the `lg:flex-col` reversal).
   - Image block: `sm:w-[38%] sm:flex-none aspect-video` (landscape crop; keep `aspect-video` on mobile top image too). Remove the `lg:aspect-square`/`lg:flex-none` square treatment.
@@ -64,6 +67,7 @@ A second UI/UX refinement pass on `feat/seniority-update`, layered on top of the
 **Current** (`src/pages/work.astro` + `src/components/work/ArchiveTable.astro`): `<H2>Archive</H2>` over a table Year | Project | Type | Built with | Link; rows are `<tr align-top>`; only the Project-title cell and the external "Visit" cell are links.
 
 **Target:**
+
 - **Rename heading `Archive` → `More projects`** (`work.astro` H2). Component filename `ArchiveTable.astro` may stay (internal name) — do not churn imports; only the user-facing H2 changes. (Optional: rename to `MoreProjectsTable.astro` for clarity — low value, skip unless trivial.)
 - **Whole row is a link to the internal project page** (`/work/[id]`), not just the title cell. Implement by making each `<tr>` behave as a link: wrap the row's content so a click anywhere navigates. Astro/HTML can't nest `<a>` around `<tr>`; use a JS-free pattern: put the primary `<a href="/work/{id}">` on the Project cell as a **stretched link** — `class="... after:absolute after:inset-0"` on the anchor with the `<tr>` set `relative` — so the whole row is clickable while the external "Visit" link stays a separate, higher-`z` anchor. Keep `Visit` external link as the secondary action.
 - **Vertical-center rows:** change `align-top` → `align-middle` on the `<tr>`.
@@ -79,8 +83,9 @@ A second UI/UX refinement pass on `feat/seniority-update`, layered on top of the
 **Current** (`src/components/about/AboutText.astro`): single 2/3-width column — H1 "About", intro Prose (with inline uhlive link), `<AboutFacts />` (4 stats), `<AboutTimeline />` (5-dot year timeline), Download CV link, then more Prose.
 
 **Target — "Lead + narrative", one column:**
+
 - Keep the single 2/3-width column (one narrative line).
-- **Add an emphasized lead sentence** directly under H1 — larger type, `text-balance`, sets the story in one line before the prose flows. **It must NOT contain "since 2010"** — the About page already carries the year twice (the facts stat "2010 / coding since" and the prose "Open source since 2010"); a third is redundant (see "since 2010" placement note below). Reframe thematically around the art→web throughline. Draft (author to finalize): *"Artist turned web developer — I build things meant to be used, not just seen."* Must differ from the hero paragraph.
+- **Add an emphasized lead sentence** directly under H1 — larger type, `text-balance`, sets the story in one line before the prose flows. **It must NOT contain "since 2010"** — the About page already carries the year twice (the facts stat "2010 / coding since" and the prose "Open source since 2010"); a third is redundant (see "since 2010" placement note below). Reframe thematically around the art→web throughline. Draft (author to finalize): _"Artist turned web developer — I build things meant to be used, not just seen."_ Must differ from the hero paragraph.
 - **Keep `<AboutFacts />`** (2010 · articles · downloads · trained) — 4-stat row stays.
 - **Remove `<AboutTimeline />`** (the 5-dot dates row) — delete the component usage and the file if it has no other consumer.
 - Keep Download CV link and the trailing Prose blocks.
@@ -94,6 +99,7 @@ A second UI/UX refinement pass on `feat/seniority-update`, layered on top of the
 **Current** (`src/components/hero/Hero.astro`, `HeroText.astro`, `HeroSocials.astro`): `HeroSocials` gap `gap-4 lg:gap-6`; "Start reading" scroll cue is `absolute bottom-0`, `text-muted`, `hidden lg:flex` (desktop-only), targeting `#writing`.
 
 **Target:**
+
 - **Icon buttons closer:** `HeroSocials` gap `gap-4 lg:gap-6` → `gap-3 lg:gap-4`.
 - **"Start reading" more prominent + always visible:**
   - Promote it from a muted text link to a visible pill: border (dashed→matches `Link` icon idiom) + `text-foreground` on hover, small `lucide:arrow-down`. Give it breathing room (`gap-2`, padding).
@@ -111,7 +117,7 @@ A second UI/UX refinement pass on `feat/seniority-update`, layered on top of the
 4. **Unify work metadata order** — canonical order wherever type/date/stack appear together:
    - **Kicker** format = `"{Type} · {years}"` (already the convention; verify all featured works follow it).
    - **WorkHeader** (`src/components/work/WorkHeader.astro`) metadata table rows → order **TYPE · DATE · STACK** (verify current order matches; reorder if not).
-   - **More-projects table** columns stay **Year · Project · Type · Built with** (year leads because the table is chronological — acceptable divergence; the *type/stack* sub-order is consistent).
+   - **More-projects table** columns stay **Year · Project · Type · Built with** (year leads because the table is chronological — acceptable divergence; the _type/stack_ sub-order is consistent).
    - Ensure `en-GB` date formatting everywhere (already standardized in the prior pass).
 
 ---
@@ -120,17 +126,17 @@ A second UI/UX refinement pass on `feat/seniority-update`, layered on top of the
 
 The phrase was echoing across five surfaces. Rationalized so each page states the year once as a sentence, and the About page carries it as data + a scoped claim rather than a repeated headline:
 
-| Surface | Role | Verdict |
-| --- | --- | --- |
-| `HeroText.astro:13` "making things with code since 2010…" | Canonical career identity | **Keep** |
-| `WorksStrip.astro:13` "Building since 2010…" | Duplicate of hero | **Delete** (§7.1) |
-| `work.astro:20` "Open work since 2010…" | Work page's own framing | **Keep** — sole echo once WorksStrip is gone |
-| `AboutFacts.astro:7` stat "2010 / coding since" | The number's data home | **Keep** |
-| `AboutText.astro:56` "Open source since 2010…" | Scoped claim (open source specifically) | **Keep** — distinct meaning |
-| About new lead (§5) | — | **No year** — reframe thematically |
-| `AboutTimeline.astro:3` "2010 / Open source…" | — | **Removed** with the timeline (§5) |
+| Surface                                                   | Role                                    | Verdict                                      |
+| --------------------------------------------------------- | --------------------------------------- | -------------------------------------------- |
+| `HeroText.astro:13` "making things with code since 2010…" | Canonical career identity               | **Keep**                                     |
+| `WorksStrip.astro:13` "Building since 2010…"              | Duplicate of hero                       | **Delete** (§7.1)                            |
+| `work.astro:20` "Open work since 2010…"                   | Work page's own framing                 | **Keep** — sole echo once WorksStrip is gone |
+| `AboutFacts.astro:7` stat "2010 / coding since"           | The number's data home                  | **Keep**                                     |
+| `AboutText.astro:56` "Open source since 2010…"            | Scoped claim (open source specifically) | **Keep** — distinct meaning                  |
+| About new lead (§5)                                       | —                                       | **No year** — reframe thematically           |
+| `AboutTimeline.astro:3` "2010 / Open source…"             | —                                       | **Removed** with the timeline (§5)           |
 
-Rule of thumb: "since 2010" as a *sentence* appears once per page (Hero, Work). On About it lives as a stat and one scoped prose claim — never as the lead.
+Rule of thumb: "since 2010" as a _sentence_ appears once per page (Hero, Work). On About it lives as a stat and one scoped prose claim — never as the lead.
 
 ## Cross-area consistency notes
 
