@@ -28,3 +28,6 @@ pnpm-debug.log*
 
 .claude
 docs/specs
+
+# visual brainstorm companion
+.superpowers/
