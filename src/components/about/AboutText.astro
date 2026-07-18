@@ -1,6 +1,5 @@
 ---
 import AboutFacts from "@components/about/AboutFacts.astro";
-import AboutTimeline from "@components/about/AboutTimeline.astro";
 import H1 from "@components/ui/H1.astro";
 import Link from "@components/ui/Link.astro";
 import Prose from "@components/ui/Prose.astro";
@@ -9,6 +8,10 @@ import { Icon } from "astro-icon/components";
 
 <section class="flex w-full flex-col gap-6 sm:gap-8 lg:w-2/3">
   <H1>About</H1>
+  <p class="font-title text-2xl tracking-wide text-balance sm:text-3xl">
+    Artist turned web developer — I build things meant to be used, not just
+    seen.
+  </p>
   <Prose>
     <p>
       <strong>I build web applications</strong> with Vue and TypeScript. After an
@@ -21,8 +24,6 @@ import { Icon } from "astro-icon/components";
   </Prose>
 
   <AboutFacts />
-
-  <AboutTimeline />
 
   <Link
     label="Download CV"
