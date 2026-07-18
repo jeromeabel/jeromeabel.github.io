@@ -29,14 +29,14 @@ const externalUrl = (data: CollectionEntry<"work">["data"]) =>
         works.map((work) => {
           const url = externalUrl(work.data);
           return (
-            <tr class="border-muted-border hover:bg-muted-background/50 border-b align-top">
+            <tr class="border-muted-border hover:bg-muted-background/50 relative border-b align-middle">
               <td class="text-muted py-3 pr-4 font-mono text-xs whitespace-nowrap">
                 {work.data.date.getFullYear()}
               </td>
               <td class="py-3 pr-4 font-semibold">
                 <a
                   href={`/work/${work.id}`}
-                  class="hover:text-foreground border-b border-dashed border-current hover:border-solid"
+                  class="hover:text-foreground border-b border-dashed border-current after:absolute after:inset-0 hover:border-solid"
                 >
                   {work.data.title}
                 </a>
@@ -47,7 +47,7 @@ const externalUrl = (data: CollectionEntry<"work">["data"]) =>
               <td class="text-muted hidden py-3 pr-4 font-mono text-xs md:table-cell">
                 {work.data.stack?.join(", ") ?? "—"}
               </td>
-              <td class="py-3">
+              <td class="relative z-10 py-3">
                 {url ? (
                   <a
                     href={url}
