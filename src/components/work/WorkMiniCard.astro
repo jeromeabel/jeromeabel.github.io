@@ -16,7 +16,7 @@ if (!work) {
 <a
   href={"/work/" + work.id}
   title={`Open the "${work.data.title}" project`}
-  class="group border-muted-border hover:bg-muted-background/50 flex flex-col gap-2 border p-2 outline-offset-4 outline-black focus:outline-2 dark:outline-white"
+  class="group flex flex-col gap-2 outline-offset-4 outline-black focus:outline-2 dark:outline-white"
 >
   <div class="aspect-square overflow-hidden">
     <Image
@@ -24,8 +24,8 @@ if (!work) {
       alt={`${work.data.title} preview`}
       class="block h-full w-full object-cover transition-transform duration-1000 motion-safe:group-hover:scale-105"
       loading="lazy"
-      widths={[160, 240, 360]}
-      sizes="(max-width: 767px) calc((100vw - 3rem) / 2), 220px"
+      widths={[160, 240, 320, 480, 640]}
+      sizes="(max-width: 767px) calc((100vw - 3rem) / 2), 280px"
     />
   </div>
   <p class="text-sm font-semibold tracking-wide lg:text-base">
