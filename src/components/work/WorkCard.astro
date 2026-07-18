@@ -28,34 +28,20 @@ const dateISOString = new Date(work.data.date).toLocaleDateString(
 <a
   href={"/work/" + work.id}
   title={`Open the "${work.data.title}" project`}
-  class="border-muted-border hover:bg-muted-background group flex flex-col border outline-offset-4 outline-black focus:outline-2 md:flex-row lg:flex-col"
+  class="border-muted-border hover:bg-muted-background group flex flex-col border outline-offset-4 outline-black focus:outline-2 sm:flex-row"
 >
-  <div
-    class="relative aspect-video flex-1 overflow-hidden lg:aspect-square lg:flex-none"
-  >
+  <div class="relative aspect-video overflow-hidden sm:w-[38%] sm:flex-none">
     <Image
       src={work.data.img_preview}
       alt={`${work.data.title} preview`}
       class="block h-full w-full object-cover transition-transform duration-1000 motion-safe:group-hover:scale-105"
       loading="lazy"
       widths={[240, 360, 540, 768, 960]}
-      sizes={`(max-width: 767px) calc(100vw - 2rem), (max-width: 1023px) calc((100vw - 2rem) / 2), (min-width: 1280px) 395px, calc((100vw - 6rem) / 3)`}
+      sizes={`(max-width: 639px) calc(100vw - 2rem), (min-width: 640px) 38vw`}
     />
-    <div
-      class="absolute inset-0 grid items-center duration-500 group-hover:bg-black/85 motion-reduce:transition-all dark:group-hover:bg-black/90"
-    >
-      <div
-        class="flex flex-col items-center justify-center gap-6 p-4 opacity-0 duration-500 group-hover:opacity-100"
-      >
-        <Icon
-          name="cross-big"
-          class="text-5xl transition-all delay-100 duration-500 group-hover:rotate-0 motion-safe:-rotate-45 lg:text-8xl"
-        />
-      </div>
-    </div>
   </div>
 
-  <div class="flex flex-col p-6 md:flex-1 lg:flex-auto lg:p-8">
+  <div class="flex flex-col p-6 sm:flex-1 lg:p-8">
     {
       work.data.kicker && (
         <p class="text-muted font-mono text-xs tracking-wide uppercase">
