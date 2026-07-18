@@ -38,7 +38,10 @@ const posts = await getPostsFromSerie(entry);
           <Link href="/blog" label="BLOG" variant="menuInactive" />
           <Icon name="lucide:chevron-right" />
         </nav>
-        <H1>{entry.data.title}</H1>
+        <div class="flex items-center gap-3">
+          <Icon name="lucide:folder" class="text-muted text-2xl" />
+          <H1>{entry.data.title}</H1>
+        </div>
       </div>
 
       <P>
