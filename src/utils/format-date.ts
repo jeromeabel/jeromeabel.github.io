@@ -6,3 +6,11 @@ const dateOptions: Intl.DateTimeFormatOptions = {
 
 export const getFormattedDate = (date: string | Date) =>
   new Date(date).toLocaleDateString("en-GB", dateOptions);
+
+const monthYearOptions: Intl.DateTimeFormatOptions = {
+  year: "numeric",
+  month: "short",
+};
+
+export const getMonthYear = (date: string | Date) =>
+  new Date(date).toLocaleDateString("en-GB", monthYearOptions);

@@ -66,3 +66,31 @@ export const getSerieStats = async (serie: CollectionEntry<"serie">) => {
   );
   return { parts: posts.length, minutes: Math.ceil(minutes) };
 };
+
+export type WritingEntry = {
+  post: CollectionEntry<"post"> | CollectionEntry<"seriePost">;
+  serie?: { title: string; id: string; part: number };
+};
+
+export const getLatestWriting = async (
+  count: number,
+): Promise<WritingEntry[]> => {
+  const latest = (await getAllBlogPosts()).slice(0, count);
+
+  const membership = new Map<
+    string,
+    { title: string; id: string; part: number }
+  >();
+  for (const serie of await getAllSeries()) {
+    const posts = await getPostsFromSerie(serie);
+    posts.forEach((post, index) => {
+      membership.set(post.id, {
+        title: serie.data.title,
+        id: serie.id,
+        part: index + 1,
+      });
+    });
+  }
+
+  return latest.map((post) => ({ post, serie: membership.get(post.id) }));
+};
