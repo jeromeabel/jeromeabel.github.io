@@ -1,3 +1,7 @@
+---
+shipped: 2026-07-18
+---
+
 # CV System — Design
 
 > **Status:** Design (ratifies spec §10). Separate project; its own implementation plan follows.
