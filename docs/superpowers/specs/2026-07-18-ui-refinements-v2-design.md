@@ -80,7 +80,7 @@ A second UI/UX refinement pass on `feat/seniority-update`, layered on top of the
 
 **Target — "Lead + narrative", one column:**
 - Keep the single 2/3-width column (one narrative line).
-- **Add an emphasized lead sentence** directly under H1 — larger type, `text-balance`, sets the story in one line before the prose flows. Draft (author may tweak): *"Coding since 2010 — from robotic orchestras to open-source tools to the web."* Must use the **"since 2010"** framing (site standard — self-updating, never a hardcoded year count), and must differ from the hero paragraph to avoid new redundancy; the hero lists the same arc as *what*, so About's lead should lean shorter/thematic. **Author to finalize the exact sentence.**
+- **Add an emphasized lead sentence** directly under H1 — larger type, `text-balance`, sets the story in one line before the prose flows. **It must NOT contain "since 2010"** — the About page already carries the year twice (the facts stat "2010 / coding since" and the prose "Open source since 2010"); a third is redundant (see "since 2010" placement note below). Reframe thematically around the art→web throughline. Draft (author to finalize): *"Artist turned web developer — I build things meant to be used, not just seen."* Must differ from the hero paragraph.
 - **Keep `<AboutFacts />`** (2010 · articles · downloads · trained) — 4-stat row stays.
 - **Remove `<AboutTimeline />`** (the 5-dot dates row) — delete the component usage and the file if it has no other consumer.
 - Keep Download CV link and the trailing Prose blocks.
@@ -115,6 +115,22 @@ A second UI/UX refinement pass on `feat/seniority-update`, layered on top of the
    - Ensure `en-GB` date formatting everywhere (already standardized in the prior pass).
 
 ---
+
+## "since 2010" placement (one owner per meaning)
+
+The phrase was echoing across five surfaces. Rationalized so each page states the year once as a sentence, and the About page carries it as data + a scoped claim rather than a repeated headline:
+
+| Surface | Role | Verdict |
+| --- | --- | --- |
+| `HeroText.astro:13` "making things with code since 2010…" | Canonical career identity | **Keep** |
+| `WorksStrip.astro:13` "Building since 2010…" | Duplicate of hero | **Delete** (§7.1) |
+| `work.astro:20` "Open work since 2010…" | Work page's own framing | **Keep** — sole echo once WorksStrip is gone |
+| `AboutFacts.astro:7` stat "2010 / coding since" | The number's data home | **Keep** |
+| `AboutText.astro:56` "Open source since 2010…" | Scoped claim (open source specifically) | **Keep** — distinct meaning |
+| About new lead (§5) | — | **No year** — reframe thematically |
+| `AboutTimeline.astro:3` "2010 / Open source…" | — | **Removed** with the timeline (§5) |
+
+Rule of thumb: "since 2010" as a *sentence* appears once per page (Hero, Work). On About it lives as a stat and one scoped prose claim — never as the lead.
 
 ## Cross-area consistency notes
 
