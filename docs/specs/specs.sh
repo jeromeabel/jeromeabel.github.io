@@ -138,9 +138,26 @@ cmd_activate() {
   cmd_index
 }
 
+cmd_archive() {
+  local slug="${1:-}"
+  [[ -n "$slug" ]] || die "usage: specs.sh archive <slug>"
+  [[ -d "$ACTIVE/$slug" ]] || die "no active entry '$slug'"
+  [[ -e "$ARCHIVES/$slug" ]] && die "'$slug' is already archived"
+  mkdir -p "$ARCHIVES"
+  git mv "$ACTIVE/$slug" "$ARCHIVES/$slug"
+  local f target=""
+  for f in "$ARCHIVES/$slug/design.md" "$ARCHIVES/$slug/spec.md"; do
+    [[ -f "$f" ]] && { target="$f"; break; }
+  done
+  [[ -n "$target" ]] && stamp_shipped "$target"
+  echo "Archived $slug"
+  cmd_index
+}
+
 case "${1:-}" in
   new)      shift; cmd_new "$@" ;;
   activate) shift; cmd_activate "$@" ;;
+  archive)  shift; cmd_archive "$@" ;;
   index)    cmd_index ;;
   *)        die "usage: specs.sh {new|activate|archive|index}" ;;
 esac
