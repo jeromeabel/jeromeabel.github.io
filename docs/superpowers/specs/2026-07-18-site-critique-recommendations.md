@@ -1,6 +1,6 @@
 # Site refinements — decided spec (2026-07-18)
 
-Follow-up to the seniority update (PR #103). Research-backed critique of home/blog/work/about pages, brainstormed 2026-07-18; all decisions below are final unless marked *(later)*.
+Follow-up to the seniority update (PR #103). Research-backed critique of home/blog/work/about pages, brainstormed 2026-07-18; all decisions below are final unless marked _(later)_.
 
 Research inputs: 13 senior-dev hero texts (Comeau, Fu, Soueidan, Appleton, Wathan…), portfolio IA patterns (Chiang archive model, DesLauriers, Rauno), art-portfolio conventions; visual comparison artifact for the work page (approach A chosen).
 
@@ -27,7 +27,7 @@ Research inputs: 13 senior-dev hero texts (Comeau, Fu, Soueidan, Appleton, Watha
 
 - Heading: **"Start here"** (replaces "Selected Writing").
 - Intro sentence: **deleted** on home (redundant with /blog; re-listed topics).
-- Ordering: featured curation stays on home; /blog stays published-date desc; *updated* date never reorders — show a small "updated <month year>" badge on revised posts instead. RSS keeps pubDate.
+- Ordering: featured curation stays on home; /blog stays published-date desc; _updated_ date never reorders — show a small "updated <month year>" badge on revised posts instead. RSS keeps pubDate.
 
 ## 4. Home — Series vs posts distinction
 
@@ -44,7 +44,7 @@ Link order (identity → social → contact → subscribe):
 
 - **Flip + merge**: lead with **"Latest"** — one merged reverse-chron list via existing `getAllBlogPosts()` (posts + serie posts interleaved) in `PostListItem` style. **"Series"** section below with the two series cards.
 - Line-list enhancements: year separators (mono, muted); optional right-aligned topic tag (`font-mono text-xs`); updated badge per §3.
-- Covers: existing article covers kept; **no image generation now**. *(later)* Illustration system: unify all cover/thumbnail images under one artistic direction (palette, contrast, texture) — generative and/or hand-drawn; also usable as OG-image pipeline.
+- Covers: existing article covers kept; **no image generation now**. _(later)_ Illustration system: unify all cover/thumbnail images under one artistic direction (palette, contrast, texture) — generative and/or hand-drawn; also usable as OG-image pipeline.
 
 ## 7. Work page — approach A (tiered), decided via mockup comparison
 
@@ -56,7 +56,7 @@ Link order (identity → social → contact → subscribe):
   - Case-study structure on detail pages: problem → constraints → process/decisions → outcome → learnings.
 - **"Archive"** table replaces the era-grouped mini-card sections: Year | Project | Type (Art/Web/Training/Volunteer/Teaching) | Built with | Link. One line per project, external links, **no detail pages owed** to shallow entries. Honest one-liners for volunteer/training work.
 - Era grouping (`getEarlierWorksByEra`) retired in favor of the table (year column already carries chronology).
-- *(later, optional)* Compact 5-dot career strip on the About page — the timeline idea at the scale where it works.
+- _(later, optional)_ Compact 5-dot career strip on the About page — the timeline idea at the scale where it works.
 
 ## 8. About page
 
@@ -68,7 +68,7 @@ Link order (identity → social → contact → subscribe):
 - `WorkMiniCard`: remove border/padding box — bare image tile + title (previous minimal style).
 - **Retina blur fix**: `widths={[160, 240, 320, 480, 640]}` and `sizes` matched to real rendered widths per breakpoint (tiles render ~220–280px CSS → need 2× candidates). Verify source images ≥ 2× largest display size. Sanity-check `WorkCard` sizes too.
 
-## 10. CV system — separate project *(own plan)*
+## 10. CV system — separate project _(own plan)_
 
 New repo `~/code/projects/cv`, **Typst + YAML**:
 
@@ -89,4 +89,4 @@ New repo `~/code/projects/cv`, **Typst + YAML**:
 5. Case-study content writing (Chimères, Malinette, Le Concept de la Preuve) — content work, can trail the layout.
 6. CV project — separate repo/plan.
 
-Backlog *(later)*: illustration system for covers; About career strip.
+Backlog _(later)_: illustration system for covers; About career strip.

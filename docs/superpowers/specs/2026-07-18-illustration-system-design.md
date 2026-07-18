@@ -43,8 +43,9 @@ defined **once** and consumed twice, so parity is structural, not maintained by 
                  └──────────────┬──────────────────┘
              ┌──────────────────┴──────────────────┐
      runtime │                                     │ build
-   Illustration.astro / NodeGraph.astro     scripts/bake-illustration.mjs (sharp)
-   inline SVG filter or seeded graph         real .avif/.webp files → OG + baked opt-out
+   Illustration.astro / NodeGraph.astro     static image endpoints (sharp)
+   inline SVG filter or seeded graph         src/pages/og/…png.ts + /illustration/…webp.ts
+                                             → OG images + baked opt-out (§8)
 ```
 
 `direction.mjs` is plain `.mjs` (JSDoc types), so **both** the Astro components _and_ the Node build
@@ -68,11 +69,13 @@ Everything a future edit touches — palette, contrast, dot density, graph densi
   grid).
 - **Node-graph generator** — `graphFromSlug(seed) → { nodes, edges }`. Hash the seed → deterministic
   node count (4–7), positions, edges, spot-color assignment. Pure function; identical output at
-  runtime and in the bake.
+  runtime and in the bake. Plus `renderGraphSvg(graph, { width, height, theme }) → string`: the ONE
+  SVG serializer. `NodeGraph.astro` injects it via `set:html`; the bake endpoints rasterize the same
+  string with sharp — byte-identical markup by construction, not by convention.
 - **Resolvers**
   - `resolveStyle(entry)` → `"duotone" | "riso"`. Default: source image present → `duotone`; absent
     → `riso` (node-graph). `style: "riso"` on a photo entry forces riso **over the photo** (posterize
-    + halftone), not a graph.
+    - halftone), not a graph.
   - `resolveSeed(entry)` → `entry.data.illustration?.seed ?? entry.id`.
   - `resolveMode(entry, context)` → `"runtime" | "baked"`. Default: on-page `runtime`; OG always
     `baked`.
@@ -80,7 +83,7 @@ Everything a future edit touches — palette, contrast, dot density, graph densi
   ```js
   export const DISPLAY = {
     treatDetailCovers: false, // apply treatment on detail-page hero covers
-    listThumbnails:    false, // show thumbnails in blog list items + serie cards (changes layout)
+    listThumbnails: false, // show thumbnails in blog list items + serie cards (changes layout)
   };
   ```
 
@@ -90,16 +93,15 @@ One optional object added to `post`, `seriePost`, `serie`, `work` schemas in
 `src/content.config.ts`. **Absent = fully automatic**, so no existing content needs editing.
 
 ```ts
-illustration: z
-  .object({
-    style: z.enum(["duotone", "riso", "auto"]).default("auto"),
-    mode: z.enum(["runtime", "baked"]).default("runtime"),
-    seed: z.string().optional(), // override the slug used to seed the node-graph
-  })
-  .optional();
+illustration: z.object({
+  style: z.enum(["duotone", "riso", "auto"]).default("auto"),
+  mode: z.enum(["runtime", "baked"]).default("runtime"),
+  seed: z.string().optional(), // override the slug used to seed the node-graph
+}).optional();
 ```
 
 **Source-image resolution** (drives `auto`):
+
 - `post` / `seriePost` → `data.img` (optional; ~3/5 standalone posts and ~15/19 serie posts have one).
 - `work` → `data.img_preview` on cards, `data.img` on the detail hero.
 - `serie` → **no image field exists** → always node-graph. This is what finally gives serie cards a
@@ -111,6 +113,7 @@ entry. This satisfies the "per-item choice" decision while `auto` keeps the grid
 ## 4. Components & files
 
 **Created**
+
 - `src/illustration/direction.mjs` — the one art file (§2).
 - `src/illustration/grain.png` — single tiling grain texture (or a data-URI constant inside
   `direction.mjs`; decide during implementation by file size).
@@ -120,11 +123,16 @@ entry. This satisfies the "per-item choice" decision while `auto` keeps the grid
   renders `<NodeGraph>`.
 - `src/components/ui/NodeGraph.astro` — inline SVG from `graphFromSlug(seed)`. `aria-hidden`,
   decorative, no runtime randomness.
-- `scripts/bake-illustration.mjs` — Node + **sharp** (already installed). Renders the _same_ tokens
-  and graph to real `.avif`/`.webp` files: SVG→raster for node-graphs; grayscale→tint→composite-grain
-  pipeline for photo duotone/riso. Feeds OG images and any `mode: "baked"` entry. No new dependency.
+- `src/pages/og/[...slug].png.ts` and `src/pages/illustration/[...slug].webp.ts` — static image
+  endpoints (Phase 4, §8). Prerendered at `astro build` via `getStaticPaths` + `getCollection`;
+  import `direction.mjs` + **sharp** (already installed) and emit real files into `dist/`. Feeds OG
+  images and any `mode: "baked"` entry. No new dependency, no standalone script (§8 rationale).
+- `src/illustration/og.ts` — `ogImageFor(entry)` helper returning
+  `{ src: "/og/<collection>/<id>.png", width: 1200, height: 630 }` for detail pages to pass to
+  `Layout`/`SEO` (matches the existing `defaultImage` literal pattern in `SEO.astro`).
 
 **Modified**
+
 - `src/content.config.ts` — optional `illustration` object on the four schemas (§3).
 - `src/components/work/WorkCard.astro`, `src/components/work/WorkMiniCard.astro` — route
   `img_preview` through `Illustration` (duotone default), preserving the bare-tile layout from the
@@ -135,8 +143,11 @@ entry. This satisfies the "per-item choice" decision while `auto` keeps the grid
 - `src/components/blog/PostListItem.astro`, `src/components/blog/SerieCard.astro` — when
   `DISPLAY.listThumbnails`, add a small square thumbnail slot rendered by `Illustration`; otherwise
   today's text-only row. (Layout change — gated behind the toggle.)
-- `src/components/app/SEO.astro` — OG image resolves to the baked illustration when present (Phase 4);
-  falls back to the current static `public/jeromeabel-social.png` otherwise.
+- `src/pages/work/[id].astro`, `src/pages/blog/[id].astro`, `src/pages/blog/[serie]/[post].astro`,
+  `src/pages/blog/[serie]/index route` — pass `image={ogImageFor(entry)}` to `Layout` (Phase 4).
+  **`SEO.astro` itself is unchanged** — it already accepts a plain `{src,width,height}` literal
+  (its own `defaultImage` is one); pages without an entry keep the static
+  `public/jeromeabel-social.png` fallback.
 
 **Not modified:** `src/utils/repository.ts` — resolution lives in `direction.mjs`, not the data
 layer. Components pass the entry to `Illustration`.
@@ -151,9 +162,9 @@ Each phase is independently shippable and leaves `pnpm build` green.
 - **Phase 2 — Fill the empties.** Flip `listThumbnails`: node-graph thumbnails on blog list + serie
   cards; posts with covers show duotone. The "walls of text" fix.
 - **Phase 3 — Detail covers.** Flip `treatDetailCovers`; treat detail-page heroes.
-- **Phase 4 — OG bake (optional).** `scripts/bake-illustration.mjs` + `SEO.astro` wiring. sharp
-  rasterizes the same graph/duotone to 1200×630. Wire a build step (e.g. a `prebuild`/`gen:og`
-  script) that regenerates when source or palette changes.
+- **Phase 4 — OG bake (optional).** Static image endpoints + `ogImageFor()` wiring on the four
+  detail routes. sharp rasterizes the same graph/duotone to 1200×630 PNG at every `astro build` —
+  no separate build step, no cache invalidation. Full detail in §8.
 
 ## 6. Guardrails & constraints
 
@@ -180,3 +191,59 @@ Each phase is independently shippable and leaves `pnpm build` green.
   closely enough (Phase 4 only; may accept minor divergence).
 - Whether `Illustration.astro` takes a whole `entry` or explicit props (`img?`, `seed`, `style?`,
   `type`) — lean explicit props for testability; decide when wiring the first consumer.
+
+## 8. Phase 4 — bake pipeline (spec pass 2026-07-18)
+
+### Mechanism: static image endpoints, not a standalone script
+
+The original `scripts/bake-illustration.mjs` idea is **rejected**. A standalone Node script would
+have to (a) re-glob content dirs and re-parse frontmatter (the schemas use Astro's `image()`, so
+`data.img` only exists inside Astro), (b) write into `public/` and maintain a manifest so
+`SEO.astro` knows what exists, and (c) hook into the build — and pnpm does **not** run `prebuild`
+lifecycle scripts by default, and this repo has no `netlify.toml` to add a build wrapper.
+
+Astro static endpoints kill all three problems at once:
+
+- `src/pages/og/[...slug].png.ts` — OG images, 1200×630 PNG, one per detail-page entry across all
+  four collections (`work`, `post`, `seriePost`, `serie`). `getStaticPaths` enumerates via
+  `getCollection` (same repository filters), the body imports `direction.mjs` + sharp and returns
+  the encoded buffer.
+- `src/pages/illustration/[...slug].webp.ts` — on-page baked tiles for `mode: "baked"` entries
+  only. Single format (`webp` is universally supported now); square 600px and cover 1248px match
+  `CustomImage`'s size ceilings.
+- Source resolution happens **inside Astro**: `entry.data.img` is real `ImageMetadata`; sharp
+  reads the original file via its `fsPath` property. (`fsPath` is what the satori/og-canvas
+  ecosystem relies on, but it is loosely documented — **verify on Astro 5 first**; fallback is
+  resolving the frontmatter path against `entry.filePath`.)
+- URLs are pure convention — `/og/<collection>/<id>.png`, `/illustration/<collection>/<id>.webp` —
+  computed identically by `ogImageFor()` / `Illustration.astro`. No manifest, no fs checks.
+- Regeneration is a non-problem: endpoints re-run on every `astro build` (~45 entries × sharp ≈
+  seconds). No hashing, no cache invalidation, no "regenerate when palette changes" machinery.
+
+### sharp recipes (must mirror §2 numbers)
+
+- **Duotone** — `greyscale()` → per-channel `linear(slope, offset)` where
+  `out = ink + luminance × (paper − ink)`; slopes/offsets derived from the same `tableValues`
+  endpoints in `direction.mjs` (export them as numbers, derive both the SVG table and the sharp
+  coefficients from one constant).
+- **Riso posterize** — sharp has no posterize op: extract raw pixels, quantize luminance to the 4
+  `discrete` steps from `direction.mjs`, re-encode, then apply the duotone map + composite the
+  halftone-dot SVG (generated from the same dot spec) and the shared grain texture.
+- **Node-graph** — rasterize `renderGraphSvg()` output directly (sharp/libvips handles SVG).
+
+### Constraints & decisions
+
+- **No text in baked images.** sharp rasterizes SVG with system fonts; Netlify build images don't
+  have IBM Plex, and font-embedding in librsvg is unreliable. OG cards are pure graphic — the
+  title already travels in `og:title`. (Text-on-OG would need satori = new dependency = out.)
+- **Light theme only**, as already decided in §6. For on-page use this means a `mode: "baked"`
+  tile sits light-locked inside a dark-mode grid — acceptable because `baked` on-page is a
+  per-item perf escape hatch, not the default; the limitation moves to the frontmatter docs.
+- **`mode: "baked"` before Phase 4** — the schema field ships in Phase 1 (§3) but nothing serves
+  the files until Phase 4. Until then `resolveMode` clamps to `"runtime"` and logs a build
+  warning if an entry requests `baked`.
+- **OG dimensions** — endpoints emit 1200×630; `SEO.astro`'s `defaultImage` stays 1200×628 (it
+  describes the existing static PNG). Pages with an entry never see the default, so no conflict.
+- **Verification** — `pnpm build` green; spot-check `dist/og/work/<id>.png` opens and matches the
+  runtime rendering of the same slug (determinism guardrail from §6); paste a deployed URL into a
+  social-card debugger once live.
