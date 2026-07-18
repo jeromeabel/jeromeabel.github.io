@@ -1,15 +1,15 @@
 ---
+import ArchiveTable from "@components/work/ArchiveTable.astro";
 import H1 from "@components/ui/H1.astro";
 import H2 from "@components/ui/H2.astro";
 import Link from "@components/ui/Link.astro";
 import P from "@components/ui/P.astro";
 import WorkCard from "@components/work/WorkCard.astro";
-import WorkMiniCard from "@components/work/WorkMiniCard.astro";
 import Layout from "@layouts/Layout.astro";
-import { getEarlierWorksByEra, getFeaturedWorks } from "src/utils/repository";
+import { getArchiveWorks, getFeaturedWorks } from "src/utils/repository";
 
-const featured = await getFeaturedWorks();
-const eras = await getEarlierWorksByEra();
+const selected = await getFeaturedWorks();
+const archive = await getArchiveWorks();
 ---
 
 <Layout page="Work">
@@ -26,23 +26,15 @@ const eras = await getEarlierWorksByEra();
     </header>
 
     <section>
-      <H2>Featured</H2>
+      <H2>Selected work</H2>
       <div class="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2">
-        {featured.map((work) => <WorkCard {work} />)}
+        {selected.map((work) => <WorkCard {work} />)}
       </div>
     </section>
 
-    {
-      eras.map((era) => (
-        <section>
-          <H2>{era.label}</H2>
-          <div class="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4 lg:gap-8">
-            {era.works.map((work) => (
-              <WorkMiniCard {work} />
-            ))}
-          </div>
-        </section>
-      ))
-    }
+    <section>
+      <H2>Archive</H2>
+      <ArchiveTable works={archive} />
+    </section>
   </main>
 </Layout>

@@ -58,29 +58,6 @@ export const getArchiveWorks = async () =>
     .filter((work) => work.data.featured === undefined)
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-const WORK_ERAS = [
-  {
-    label: "Training & first web projects (2022–present)",
-    from: 2022,
-    to: 2100,
-  },
-  { label: "Interactive art & research (until 2021)", from: 1900, to: 2021 },
-];
-
-export const getEarlierWorksByEra = async () => {
-  const earlier = (await getCollection("work"))
-    .filter((work) => work.data.featured === undefined)
-    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
-  return WORK_ERAS.map((era) => ({
-    label: era.label,
-    works: earlier.filter((work) => {
-      const year = work.data.date.getFullYear();
-      return year >= era.from && year <= era.to;
-    }),
-  })).filter((era) => era.works.length > 0);
-};
-
 export const getSerieStats = async (serie: CollectionEntry<"serie">) => {
   const posts = await getPostsFromSerie(serie);
   const minutes = posts.reduce(

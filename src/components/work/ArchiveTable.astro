@@ -1,0 +1,63 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  works: CollectionEntry<"work">[];
+}
+
+const { works } = Astro.props;
+
+const externalUrl = (data: CollectionEntry<"work">["data"]) =>
+  data.live || data.website || data.git || "";
+---
+
+<div class="mt-8 overflow-x-auto">
+  <table class="w-full border-collapse text-sm md:text-base">
+    <thead>
+      <tr
+        class="text-muted border-muted-border border-b text-left font-mono text-xs uppercase"
+      >
+        <th class="py-2 pr-4 font-normal">Year</th>
+        <th class="py-2 pr-4 font-normal">Project</th>
+        <th class="hidden py-2 pr-4 font-normal sm:table-cell">Type</th>
+        <th class="hidden py-2 pr-4 font-normal md:table-cell">Built with</th>
+        <th class="py-2 font-normal">Link</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        works.map((work) => {
+          const url = externalUrl(work.data);
+          return (
+            <tr class="border-muted-border hover:bg-muted-background/50 border-b align-top">
+              <td class="text-muted py-3 pr-4 font-mono text-xs whitespace-nowrap">
+                {work.data.date.getFullYear()}
+              </td>
+              <td class="py-3 pr-4 font-semibold">{work.data.title}</td>
+              <td class="text-muted hidden py-3 pr-4 sm:table-cell">
+                {work.data.type}
+              </td>
+              <td class="text-muted hidden py-3 pr-4 font-mono text-xs md:table-cell">
+                {work.data.stack?.join(", ") ?? "—"}
+              </td>
+              <td class="py-3">
+                {url ? (
+                  <a
+                    href={url}
+                    target="_blank"
+                    rel="nofollow noopener noreferrer"
+                    class="border-current border-b border-dashed hover:border-solid"
+                  >
+                    Visit
+                  </a>
+                ) : (
+                  <span class="text-muted">—</span>
+                )}
+              </td>
+            </tr>
+          );
+        })
+      }
+    </tbody>
+  </table>
+</div>
