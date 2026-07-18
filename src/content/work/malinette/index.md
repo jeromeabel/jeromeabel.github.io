@@ -1,7 +1,7 @@
 ---
 title: La Malinette
 date: 2020-01-01
-featured: 2
+featured: 4
 kicker: "Open source · 2013–2021"
 img: ./malinette.png
 img_placeholder: ./small.jpg
