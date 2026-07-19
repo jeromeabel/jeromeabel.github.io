@@ -102,7 +102,7 @@ Net: ~45 components in scope.
 
 ## Rollout (phased)
 
-- **Phase 1 — pattern proof:** wire the integration + dev-gating; story all `ui/` primitives (`H1`, `H2`, `P`, `Link`, `Prose`, `CustomImage`, `SocialShare`, `LinkNavPost`). Verify `/styleguide` renders in dev, absent in prod build. Establishes the story idiom and the `satisfies ComponentProps` drift guard end-to-end.
+- **Phase 1 — pattern proof + render gate:** wire the integration + dev-gating, then story **one** primitive (`Link`, has CVA variants + `astro-icon`) as a smoke test. **Hard gate — verify before storying anything else:** `/styleguide` renders in dev and the component shows correctly inside astrobook's shell, i.e. (a) global CSS + `@theme` tokens resolve, (b) `astro-icon` icons render, (c) dark mode works or is at least not broken, (d) prod `pnpm build` emits no `/styleguide` route. Only once the gate passes: story the rest of the `ui/` primitives (`H1`, `H2`, `P`, `Prose`, `CustomImage`, `SocialShare`, `LinkNavPost`). Establishes the story idiom and the `satisfies ComponentProps` drift guard end-to-end. **If the gate fails** (astrobook can't resolve site CSS/tokens/icons and no small fix exists via `css`/`head` config options), stop — the approach is unviable; fall back to a hand-rolled `styleguide.astro`.
 - **Phase 2 — remaining domains:** `app/`, `hero/`, `about/`, `work/`, `blog/`, `contact/`, `skills/`, using real `repository.ts` data for content-dependent components. Includes the 3 dead components.
 
 ## Risks
