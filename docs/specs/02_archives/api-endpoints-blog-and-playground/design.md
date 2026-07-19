@@ -1,3 +1,7 @@
+---
+shipped: 2026-07-18
+---
+
 # Astro API Endpoints — Blog Post & Playground Realignment
 
 **Date:** 2026-05-07

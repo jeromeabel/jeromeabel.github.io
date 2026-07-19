@@ -1,3 +1,7 @@
+---
+shipped: 2026-07-18
+---
+
 # Home "Writing" section — design spec (2026-07-18)
 
 Rebuild of the homepage writing block (`SelectedWriting.astro`, currently headed "Start here"). Fixes a live bug, replaces the sparse post list with a richer two-line row, and introduces a consistent folder-icon marker for series.

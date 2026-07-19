@@ -1,3 +1,7 @@
+---
+shipped: 2026-07-18
+---
+
 # Site refinements — decided spec (2026-07-18)
 
 Follow-up to the seniority update (PR #103). Research-backed critique of home/blog/work/about pages, brainstormed 2026-07-18; all decisions below are final unless marked _(later)_.
