@@ -1,4 +1,5 @@
 ---
+import TopicChips from "@components/blog/TopicChips.astro";
 import CustomImage from "@components/ui/CustomImage.astro";
 import H1 from "@components/ui/H1.astro";
 import Link from "@components/ui/Link.astro";
@@ -99,6 +100,7 @@ const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
           <Icon name="lucide:clock" class="ms-4 lg:ms-6" />
           <span class="text-sm">{minutesRead}</span>
         </div>
+        <TopicChips topic={currentPost.data.topic} />
 
         <SocialShare
           url={canonicalWebsiteURL}
