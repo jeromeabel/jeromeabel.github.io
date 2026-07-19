@@ -1,3 +1,7 @@
+---
+shipped: 2026-07-19
+---
+
 # v3 Redesign — design
 
 Version: **3.0.0** (tags exist for v1.0, v2.0). Branch: `redesign/v3`.
