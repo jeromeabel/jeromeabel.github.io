@@ -1,9 +1,11 @@
 ---
 import AboutFacts from "@components/about/AboutFacts.astro";
+import AboutFactsStrip from "@components/about/AboutFactsStrip.astro";
 import H1 from "@components/ui/H1.astro";
 import Link from "@components/ui/Link.astro";
 import Prose from "@components/ui/Prose.astro";
 import { Icon } from "astro-icon/components";
+import { VARIANTS } from "src/config/variants";
 ---
 
 <section class="flex w-full flex-col gap-6 sm:gap-8 lg:w-2/3">
@@ -15,15 +17,15 @@ import { Icon } from "astro-icon/components";
   <Prose>
     <p>
       <strong>I build web applications</strong> with Vue and TypeScript. After an
-      intensive career change into web development, I deepened my Vue and Kotlin skills
-      at Raccourci Agency, and now work at{" "}<Link
+      intensive career change into web development, I deepened my Vue and Kotlin
+      skills at Raccourci Agency, and now work at{" "}<Link
         label="uhlive"
         href="https://uh.live/"
       />, on the front end of an AI-driven call-intelligence product.
     </p>
   </Prose>
 
-  <AboutFacts />
+  {VARIANTS.aboutFacts === "strip" ? <AboutFactsStrip /> : <AboutFacts />}
 
   <Link
     label="Download CV"
