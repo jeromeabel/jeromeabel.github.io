@@ -1,4 +1,5 @@
 ---
+shipped: 2026-07-19
 title: Work / About / Blog relationship
 created: 2026-07-18
 ---
