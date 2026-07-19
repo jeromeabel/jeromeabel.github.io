@@ -16,11 +16,6 @@ if (!post) {
 }
 
 const minutes = Math.ceil(getMinutesFromBody(post.body));
-const topics = (post.data.topic ?? "")
-  .split(",")
-  .map((topic) => topic.trim())
-  .filter(Boolean)
-  .slice(0, 2);
 ---
 
 <a
@@ -48,16 +43,5 @@ const topics = (post.data.topic ?? "")
         {minutes} min · {getMonthYear(post.data.date)}
       </span>
     </div>
-    {
-      topics.length > 0 && (
-        <div class="mt-1 flex gap-2">
-          {topics.map((topic) => (
-            <span class="border-muted-border text-muted border px-2 py-0.5 font-mono text-xs">
-              {topic}
-            </span>
-          ))}
-        </div>
-      )
-    }
   </div>
 </a>
