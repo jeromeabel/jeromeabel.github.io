@@ -74,7 +74,7 @@ const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
   image={currentPost.data.img}
 >
   <main
-    class="container flex flex-col gap-8 overflow-auto py-8 lg:gap-12 lg:py-24"
+    class="container flex flex-col gap-8 py-8 lg:gap-12 lg:py-24"
   >
     <header
       class="border-muted-border flex w-full flex-col gap-4 border-b pb-6 lg:w-2/3 lg:gap-8 lg:pb-12"
@@ -133,7 +133,7 @@ const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
 
     {
       showToc && (
-        <details class="border-muted-border rounded-lg border p-4 lg:hidden">
+        <details class="border-muted-border rounded-lg border p-4 md:hidden">
           <summary class="text-muted cursor-pointer text-sm font-medium uppercase">
             On this page
           </summary>
@@ -150,7 +150,7 @@ const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
       </Prose>
       {
         showToc && (
-          <aside class="sticky top-24 hidden max-h-[calc(100vh-8rem)] w-56 shrink-0 overflow-y-auto lg:block">
+          <aside class="sticky top-24 hidden max-h-[calc(100vh-8rem)] w-56 shrink-0 overflow-y-auto md:block">
             <TableOfContents headings={tocHeadings} />
           </aside>
         )

@@ -102,7 +102,7 @@ const relatedWork = entry.data.related_work
 
     {
       showToc && (
-        <details class="border-muted-border rounded-lg border p-4 lg:hidden">
+        <details class="border-muted-border rounded-lg border p-4 md:hidden">
           <summary class="text-muted cursor-pointer text-sm font-medium uppercase">
             On this page
           </summary>
@@ -119,7 +119,7 @@ const relatedWork = entry.data.related_work
       </Prose>
       {
         showToc && (
-          <aside class="sticky top-24 hidden max-h-[calc(100vh-8rem)] w-56 shrink-0 overflow-y-auto lg:block">
+          <aside class="sticky top-24 hidden max-h-[calc(100vh-8rem)] w-56 shrink-0 overflow-y-auto md:block">
             <TableOfContents headings={tocHeadings} />
           </aside>
         )
