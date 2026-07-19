@@ -36,7 +36,68 @@ lands on the right shelf.
 
 ---
 
-## Loop 1 — five directions (2026-07-19)
+## Loop 2 — web-first, robots as the wink (2026-07-19)
+
+Feedback on loop 1: none killed by name, but a new constraint kills the
+whole batch's shape — **recruiters must see web-now engagement first**; the
+background is a quick funny reference, or surfaces via his love of sharing
+with the craft/maker community. Loop-1 drafts all led with robots (❌ as
+openers; imagery stays available).
+
+### D6 — Now / previously
+
+> These days: web apps, TypeScript, and writing about how to build them
+> well. Previously: a decade of robots, synths, and teaching makers.
+
+- Works: skim-proof — "web apps" is word three; "previously" does the arc in
+  one word; list stays concrete.
+- Risk: fragment style may feel clipped for a hero.
+
+### D7 — Day job + good story
+
+> Front-end developer on an AI product. I write about performance, testing,
+> and how AI is changing the work. The robot drummers? Old story — a good one.
+
+- Works: credential first, blog second, robots as literal aside; the
+  question-answer beat is conversational.
+- Risk: three ideas in three sentences — densest of the batch.
+
+### D8 — The sharer
+
+> I build web apps and I like showing my work — performance deep-dives,
+> testing guides, lessons from ten years of teaching makers to solder.
+
+- Works: leads web, lands on the sharing/teaching identity he loves;
+  "teaching makers to solder" is bottom-rung concrete.
+- Risk: no robots at all — loses the funniest fact.
+
+### D9 — Plain with a wink
+
+> I'm a front-end developer who writes about the craft — performance,
+> testing, AI workflows. Ask me about the robot drummers sometime.
+
+- Works: "Ask me about…" is the purest funny-thing-about-me move; warm,
+  short, zero pose. Blog topics named plainly.
+- Risk: "the craft" brushes a banned word (here as topic list, arguably ok).
+
+### D10 — Proof first
+
+> I spend my days building the front end of an AI product, and my evenings
+> writing about performance and testing. There are also robots in my past.
+
+- Works: day/evening rhythm shows engagement without claiming it;
+  final sentence is a 7-word deadpan aside.
+- Risk: "evenings" implies a posting cadence the blog must honor.
+
+### Recommendation (loop 2)
+
+**D9** first (recruiter-proof + human wink, shortest path to done),
+**D6** second (most scannable). D7 if the AI-product credential should
+lead. Loop-3 move: pick one, tune word by word.
+
+---
+
+## Loop 1 — five directions (2026-07-19) — ❌ shape rejected (robots led)
 
 Each: draft, why it might work, why it might die.
 

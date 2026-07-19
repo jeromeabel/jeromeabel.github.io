@@ -46,6 +46,12 @@ Jérôme; this file is the shared context between loops.
 
 ## Hard constraints
 
+- **Weight order (loop-2 constraint, 2026-07-19): web NOW leads.** Recruiters
+  must see deep current engagement with the web first. The art/robot
+  background appears as a quick reference — a funny/charming thing about him,
+  or through his love of sharing with the craft/software/maker community.
+  Never let the robots open the tagline.
+
 - No "since 2010" — it appeared 4× across the site (hero, work intro, about,
   facts). At most ONE dated anchor on the whole site (the About facts strip
   keeps "2010"). The hero gets zero dates or at most a loose "a decade".

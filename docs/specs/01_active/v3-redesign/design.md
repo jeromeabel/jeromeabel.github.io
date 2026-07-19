@@ -54,11 +54,11 @@ intro, About lead (current About lead likely survives as-is).
 - **Mobile:** all variants collapse to 1-col (16:9) or 2-col (1:1) at
   `sm`; card text always below image; no hover-dependent info.
 - Current horizontal-split WorkCard: delete from work page (superseded).
-- **Portfolio as featured? Recommendation: demote.** It's a meta-project
-  (site featuring itself) and its description is CV-speak. Drop to the
-  More-projects table → 3 featured (Le concept 2026, Chimères, Malinette),
-  which fits paco.me precedent and makes `gallery-3col-1x1` a clean 3×1.
-  Final call: Jérôme's, during review.
+- **Portfolio demoted (decided 2026-07-19).** Meta-project, CV-speak
+  description; moves to the More-projects table. Featured set = 3:
+  Le concept de la preuve (2026), Chimères Orchestra, La Malinette —
+  paco.me precedent; `gallery-3col-1x1` renders a clean 3×1.
+  Remove `featured:` from `src/content/work/portfolio/index.md`.
 - More projects: ArchiveTable stays as-is (already matches researched
   table pattern).
 
@@ -107,9 +107,13 @@ intro, About lead (current About lead likely survives as-is).
 
 ## Open questions for review
 
-1. Portfolio featured demotion — accept rec?
+1. ~~Portfolio featured demotion~~ — accepted 2026-07-19 (see §2).
 2. Post `description` frontmatter coverage — audit result may adjust §3.
 3. Blog page PostListItem: also de-arrow for consistency, or keep?
+
+Design approved by Jérôme 2026-07-19 → proceed to plan.md (writing-plans).
+Hero copy loops continue in parallel; loop-2 constraint: web-now leads,
+background = quick funny aside (see hero-copy-context.md).
 
 ## Research receipts (partial)
 
