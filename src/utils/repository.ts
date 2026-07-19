@@ -33,11 +33,7 @@ export const getFeaturedSeries = async () =>
 export const getFeaturedWorks = async () =>
   (await getCollection("work"))
     .filter((work) => work.data.featured !== undefined)
-    .sort(
-      (a, b) =>
-        (a.data.featured ?? 0) - (b.data.featured ?? 0) ||
-        b.data.date.valueOf() - a.data.date.valueOf(),
-    );
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 export const getArchiveWorks = async () =>
   (await getCollection("work"))
