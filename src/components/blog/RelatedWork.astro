@@ -1,0 +1,23 @@
+---
+import WorkMiniCard from "@components/work/WorkMiniCard.astro";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  works: CollectionEntry<"work">[];
+}
+
+const { works } = Astro.props;
+---
+
+{
+  works.length > 0 && (
+    <section class="flex flex-col gap-4">
+      <p class="text-muted text-sm font-medium uppercase">Related work</p>
+      <div class="grid grid-cols-2 gap-4 sm:grid-cols-3">
+        {works.map((work) => (
+          <WorkMiniCard {work} />
+        ))}
+      </div>
+    </section>
+  )
+}

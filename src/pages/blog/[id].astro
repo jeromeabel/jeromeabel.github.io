@@ -1,4 +1,5 @@
 ---
+import RelatedWork from "@components/blog/RelatedWork.astro";
 import TableOfContents from "@components/blog/TableOfContents.astro";
 import TopicChips from "@components/blog/TopicChips.astro";
 import CustomImage from "@components/ui/CustomImage.astro";
@@ -10,7 +11,7 @@ import Prose from "@components/ui/Prose.astro";
 import SocialShare from "@components/ui/SocialShare.astro";
 import Layout from "@layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
-import { getCollection, render } from "astro:content";
+import { getCollection, getEntries, render } from "astro:content";
 import { getFormattedDate } from "src/utils/format-date";
 import { getAllStandalonePosts } from "src/utils/repository";
 
@@ -39,6 +40,10 @@ const prevPost =
   index >= 0 && index < standalonePosts.length - 1
     ? standalonePosts[index + 1]
     : null;
+
+const relatedWork = entry.data.related_work
+  ? await getEntries(entry.data.related_work)
+  : [];
 ---
 
 <Layout
@@ -120,6 +125,8 @@ const prevPost =
         )
       }
     </div>
+
+    {relatedWork.length > 0 && <RelatedWork works={relatedWork} />}
 
     {
       (prevPost || nextPost) && (

@@ -3,7 +3,8 @@
 _Ordering across designed backlog items. Derived from cross-dependency analysis of each `design.md` (2026-07-19). INDEX.md is status-only; sequence lives here._
 
 **Tier 1 shipped 2026-07-19**: blog-v3a, flashless-dark-mode, home-animation-toggle, contact-images-animation.
-**Tier 2 shipped 2026-07-19**: work-about-blog S1, blog-toc, blog-v3b. Tier 3 up next (work-about-blog S2/S3).
+**Tier 2 shipped 2026-07-19**: work-about-blog S1, blog-toc, blog-v3b.
+**Tier 3 shipped 2026-07-19**: work-about-blog S2 (`related_posts`/`related_work` schema refs + `RelatedWriting`/`RelatedWork` modules, curated: api-endpoints-with-astro ↔ medito-fundraising/leconceptdelapreuve) and S3 (`AboutStrip.astro` homepage bio strip, between WorksStrip and Contact; copy supplied by Jérôme, unblocking the hero-copy freeze dependency).
 
 Legend: size after split, → = "must precede".
 

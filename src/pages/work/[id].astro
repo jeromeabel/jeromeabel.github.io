@@ -2,9 +2,10 @@
 import CustomImage from "@components/ui/CustomImage.astro";
 import Link from "@components/ui/Link.astro";
 import Prose from "@components/ui/Prose.astro";
+import RelatedWriting from "@components/work/RelatedWriting.astro";
 import WorkHeader from "@components/work/WorkHeader.astro";
 import Layout from "@layouts/Layout.astro";
-import { getCollection, render } from "astro:content";
+import { getCollection, getEntries, render } from "astro:content";
 import { getArchiveWorks, getFeaturedWorks } from "src/utils/repository";
 
 export async function getStaticPaths() {
@@ -28,6 +29,10 @@ const nextWork =
   index >= 0 && index < orderedWorks.length - 1
     ? orderedWorks[index + 1]
     : null;
+
+const relatedPosts = work.data.related_posts
+  ? await getEntries(work.data.related_posts)
+  : [];
 ---
 
 <Layout
@@ -44,6 +49,13 @@ const nextWork =
     <Prose class="md:mx-auto" data-expand-image="inline">
       <Content />
     </Prose>
+    {
+      relatedPosts.length > 0 && (
+        <div class="container mt-12 lg:mt-16">
+          <RelatedWriting posts={relatedPosts} />
+        </div>
+      )
+    }
     <div class="container mt-8 flex flex-col gap-4 sm:flex-row lg:mt-12">
       <Link
         label="All work"

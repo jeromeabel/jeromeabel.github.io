@@ -17,6 +17,7 @@ const PostSchema = ({ image }: { image: ImageFunction }) =>
     draft: z.boolean().default(true),
     featured: z.number().int().positive().optional(),
     img: image().optional(),
+    related_work: z.array(reference("work")).optional(),
   });
 
 const post = defineCollection({
@@ -62,6 +63,7 @@ const work = defineCollection({
       live: z.string().optional(),
       video: z.string().optional(),
       stack: z.array(z.string()).optional(),
+      related_posts: z.array(reference("post")).optional(),
     }),
 });
 

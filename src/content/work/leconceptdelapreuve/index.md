@@ -20,6 +20,8 @@ stack:
   - Netlify
   - Sharp
 type: Web, Comics
+related_posts:
+  - api-endpoints-with-astro
 ---
 
 I've wanted to make **humorous** strips for a long time — something outside work where I could be freely ironic and dark. A couple and their kid navigate the absurdity of everyday life.

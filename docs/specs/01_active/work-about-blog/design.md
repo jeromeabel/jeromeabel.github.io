@@ -14,7 +14,7 @@ Design pass 2026-07-19. Written against the just-shipped v3 redesign
 feature — the deliverable is concrete nav + cross-linking proposals, and a
 split into shippable sub-items.
 
-**Status:** S1 (connective tissue) shipped 2026-07-19. S2 (related modules) and S3 (homepage bio strip) still pending — deferred to Tier 3.
+**Status:** S1 (connective tissue), S2 (related modules), and S3 (homepage bio strip) all shipped 2026-07-19. S3 unblocked by Jérôme supplying the strip copy directly ("Front-end engineer, writing about performance, testing, and AI workflows. I used to build robot drummers. Ask me sometime."); `AboutStrip.astro` sits between WorksStrip and Contact in `index.astro`, additive, reuses `Link variant="secondary"` + `.reveal reveal-bottom` motion gate.
 
 ## Problem / context
 
