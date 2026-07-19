@@ -38,6 +38,8 @@ export default defineConfig({
           "arrow-down",
           "sun",
           "moon",
+          "play",
+          "pause",
           "handshake",
           "clock",
           "calendar",

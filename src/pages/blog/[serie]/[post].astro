@@ -63,6 +63,9 @@ const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
   page={currentPost.data.title}
   description={currentPost.data.description}
   {publishedDate}
+  updatedDate={currentPost.data.updated}
+  topic={currentPost.data.topic}
+  type="article"
   image={currentPost.data.img}
 >
   <main
@@ -97,6 +100,13 @@ const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
         <div class="text-muted flex items-center gap-2 md:mt-4">
           <Icon name="lucide:calendar" />
           <time class="text-sm">{getFormattedDate(currentPost.data.date)}</time>
+          {
+            currentPost.data.updated && (
+              <span class="text-sm">
+                · Updated {getFormattedDate(currentPost.data.updated)}
+              </span>
+            )
+          }
           <Icon name="lucide:clock" class="ms-4 lg:ms-6" />
           <span class="text-sm">{minutesRead}</span>
         </div>

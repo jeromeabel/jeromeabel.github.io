@@ -25,7 +25,7 @@ const typeName = isNext ? "Next" : "Previous";
   {!isNext && <Icon name={iconName} class="text-muted text-xl sm:text-2xl" />}
   <div class=`${positionType}`>
     <p class="text-muted">{typeName}</p>
-    <p class="hidden text-xl sm:block md:text-2xl">{title}</p>
+    <p class="text-xl md:text-2xl">{title}</p>
   </div>
   {isNext && <Icon name={iconName} class="text-muted text-xl sm:text-2xl" />}
 </a>

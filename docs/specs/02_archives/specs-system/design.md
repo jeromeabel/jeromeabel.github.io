@@ -35,7 +35,7 @@ Status = location. Numbered prefixes sort folders in lifecycle order: backlog �
 ---
 title: Flashless dark mode
 created: 2026-07-18
-shipped: 2026-08-02   # added by `specs.sh archive`
+shipped: 2026-08-02 # added by `specs.sh archive`
 ---
 ```
 
@@ -60,12 +60,12 @@ Size: S
 
 Pure bash + `git mv`, no dependencies. Fails loud on missing slug; refuses to overwrite an existing slug.
 
-| Command | Effect |
-| --- | --- |
-| `new <slug> ["title"]` | Create `00_backlog/<slug>.md` from template |
-| `activate <slug>` | `git mv` backlog file → `01_active/<slug>/spec.md` |
-| `archive <slug>` | `git mv 01_active/<slug>` → `02_archives/<slug>/`, stamp `shipped:` |
-| `index` | Regenerate `INDEX.md` from folder scan |
+| Command                | Effect                                                              |
+| ---------------------- | ------------------------------------------------------------------- |
+| `new <slug> ["title"]` | Create `00_backlog/<slug>.md` from template                         |
+| `activate <slug>`      | `git mv` backlog file → `01_active/<slug>/spec.md`                  |
+| `archive <slug>`       | `git mv 01_active/<slug>` → `02_archives/<slug>/`, stamp `shipped:` |
+| `index`                | Regenerate `INDEX.md` from folder scan                              |
 
 `new`, `activate`, and `archive` call `index` automatically, so `INDEX.md` never drifts.
 
@@ -77,13 +77,16 @@ Generated only — never hand-edited. Three sections:
 # Specs Index
 
 ## Active
+
 - [ui-refinements-v2](01_active/ui-refinements-v2/) — design, plan
 
 ## Backlog
+
 - [flashless-dark-mode](00_backlog/flashless-dark-mode.md)
 - ...
 
 ## Done
+
 - [seniority-update](02_archives/seniority-update/) — shipped 2026-07-17
 - ...
 ```

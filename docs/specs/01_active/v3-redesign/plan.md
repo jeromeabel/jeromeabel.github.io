@@ -22,9 +22,11 @@
 ### Task 1: Variants config
 
 **Files:**
+
 - Create: `src/config/variants.ts`
 
 **Interfaces:**
+
 - Produces: `VARIANTS` const with fields `workFeatured: "gallery-2x2-16x9" | "gallery-2x2-1x1" | "gallery-3col-1x1"`, `homePosts: "calm-rows" | "arrow-rows"`, `worksStrip: "mini-card" | "overlay-card"`, `aboutFacts: "strip" | "grid"`. Later tasks import `{ VARIANTS }` from `src/config/variants`.
 
 - [ ] **Step 1: Create the file**
@@ -36,9 +38,7 @@
 // See docs/specs/01_active/v3-redesign/design.md
 
 export type WorkFeaturedVariant =
-  | "gallery-2x2-16x9"
-  | "gallery-2x2-1x1"
-  | "gallery-3col-1x1";
+  "gallery-2x2-16x9" | "gallery-2x2-1x1" | "gallery-3col-1x1";
 export type HomePostsVariant = "calm-rows" | "arrow-rows";
 export type WorksStripVariant = "mini-card" | "overlay-card";
 export type AboutFactsVariant = "strip" | "grid";
@@ -76,10 +76,13 @@ git commit -m "feat(v3): add build-time layout variant switches"
 ### Task 2: Featured works — latest-first + Portfolio demotion
 
 **Files:**
+
 - Modify: `src/utils/repository.ts:33-40` (`getFeaturedWorks`)
 - Modify: `src/content/work/portfolio/index.md` (frontmatter)
+- Modify: `src/content/work/leconceptdelapreuve/index.md` (kicker year fix)
 
 **Interfaces:**
+
 - Consumes: nothing new.
 - Produces: `getFeaturedWorks(): Promise<CollectionEntry<"work">[]>` — unchanged signature, now sorted by `date` desc; `featured:` frontmatter is membership-only. Featured set becomes exactly 3: leconceptdelapreuve (2026-02-20), chimeres-orchestra (2021-12-01), malinette (2020-01-01).
 
@@ -104,6 +107,18 @@ featured: 1
 
 Leave `kicker:` in place (harmless; only featured entries render kickers).
 
+- [ ] **Step 2b: Fix leconceptdelapreuve kicker year**
+
+The kicker read `Web · 2023` but the entry `date:` is `2026-02-20`. In
+`src/content/work/leconceptdelapreuve/index.md` set:
+
+```yaml
+kicker: "Web · 2026"
+```
+
+Commit this separately (`fix(content):`) — unrelated to the featured/demote
+logic in Steps 1–2.
+
 - [ ] **Step 3: Verify**
 
 Run: `pnpm build`
@@ -124,11 +139,13 @@ git commit -m "feat(v3): featured works latest-first, demote portfolio to archiv
 ### Task 3: Work gallery card + work page variants
 
 **Files:**
+
 - Create: `src/components/work/WorkGalleryCard.astro`
 - Modify: `src/pages/work.astro`
 - Delete: `src/components/work/WorkCard.astro` (horizontal split, rejected)
 
 **Interfaces:**
+
 - Consumes: `VARIANTS` (Task 1), `getFeaturedWorks` (Task 2).
 - Produces: `WorkGalleryCard` with props `{ work: CollectionEntry<"work">; ratio?: "square" | "video" }` (default `"square"`).
 
@@ -250,11 +267,13 @@ git commit -m "feat(v3): work featured compact gallery with ratio variants"
 ### Task 4: Topic chips on post pages
 
 **Files:**
+
 - Create: `src/components/blog/TopicChips.astro`
 - Modify: `src/pages/blog/[id].astro` (header meta block, around line 52)
 - Modify: `src/pages/blog/[serie]/[post].astro` (same insertion; find the date/clock meta block by grepping `lucide:clock`)
 
 **Interfaces:**
+
 - Produces: `TopicChips` with props `{ topic?: string | undefined }`; renders nothing when the field is empty.
 
 - [ ] **Step 1: Create `TopicChips.astro`**
@@ -314,10 +333,12 @@ git commit -m "feat(v3): render topic chips on post page headers"
 ### Task 5: Remove topic chips from list rows
 
 **Files:**
+
 - Modify: `src/components/blog/PostRow.astro` (delete lines 19–23 topics const and 51–61 chips block)
 - Modify: `src/components/blog/PostListItem.astro` (delete lines 25–29 topics const and 51–59 chips block)
 
 **Interfaces:**
+
 - Consumes: Task 4 must land first (topics stay visible somewhere).
 - Produces: both rows render kicker/title/meta only.
 
@@ -383,10 +404,12 @@ git commit -m "feat(v3): drop topic chips from list rows (post pages keep them)"
 ### Task 6: Calm home rows + homePosts switch
 
 **Files:**
+
 - Create: `src/components/blog/PostRowCalm.astro`
 - Modify: `src/components/blog/SelectedWriting.astro`
 
 **Interfaces:**
+
 - Consumes: `VARIANTS.homePosts` (Task 1); `getLatestWriting`, `WritingEntry` from `src/utils/repository`; `PostRow` (arrow variant, Task 5 state).
 - Produces: `PostRowCalm` with props `{ post: CollectionEntry<"post"> | CollectionEntry<"seriePost">; serie?: { title: string; id: string; part: number } | undefined }`.
 
@@ -478,11 +501,13 @@ git commit -m "feat(v3): calm home post rows with description, homePosts variant
 ### Task 7: Works strip — quiet hover + overlay-card variant
 
 **Files:**
+
 - Modify: `src/components/work/WorkMiniCard.astro:25` (hover)
 - Create: `src/components/work/WorkOverlayCard.astro` (resurrected main-branch overlay card)
 - Modify: `src/components/work/WorksStrip.astro`
 
 **Interfaces:**
+
 - Consumes: `VARIANTS.worksStrip` (Task 1).
 - Produces: `WorkOverlayCard` with props `{ work: CollectionEntry<"work"> }`.
 
@@ -597,10 +622,12 @@ git commit -m "feat(v3): quiet works strip hover, overlay-card variant, 3-col gr
 ### Task 8: About facts strip
 
 **Files:**
+
 - Create: `src/components/about/AboutFactsStrip.astro`
 - Modify: `src/components/about/AboutText.astro:26` (the `<AboutFacts />` slot)
 
 **Interfaces:**
+
 - Consumes: `VARIANTS.aboutFacts` (Task 1); `getAllBlogPosts` from repository.
 - Produces: `AboutFactsStrip`, no props.
 
@@ -667,6 +694,7 @@ git commit -m "feat(v3): about facts as one-line strip, grid kept as variant"
 ### Task 9: Version bump + final sweep
 
 **Files:**
+
 - Modify: `package.json:4` (`"version": "2.0.0"` → `"3.0.0"`)
 
 - [ ] **Step 1: Bump version**

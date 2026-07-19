@@ -114,8 +114,8 @@ Rejected as "too bullshit" (marketing cadence, abstract nouns, thinker-pose):
   browsers. Today I build web products with the same obsession: interfaces
   that feel right."
 
-Diagnosis: all three *tell* the reader what to conclude ("thinker",
-"craftsman") instead of *showing* one concrete image and letting the reader
+Diagnosis: all three _tell_ the reader what to conclude ("thinker",
+"craftsman") instead of _showing_ one concrete image and letting the reader
 conclude it. The Chimères description proves he doesn't need to.
 
 ## Working principles for the next drafts
@@ -134,4 +134,4 @@ conclude it. The Chimères description proves he doesn't need to.
 
 `hero-copy-approaches.md` (same folder) — analysis + current draft round,
 one section per loop, latest loop on top. Add new loops there, never here;
-this file only gains *facts* or *new constraints*.
+this file only gains _facts_ or _new constraints_.

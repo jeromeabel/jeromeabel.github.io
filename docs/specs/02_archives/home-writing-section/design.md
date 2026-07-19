@@ -57,16 +57,16 @@ All posts →
 
 ### Decisions (locked)
 
-| Aspect | Decision |
-|---|---|
-| Heading | **"Writing"** (drop "Start here") |
-| Series on home | **Keep** the 2 featured `SerieCard`s (unchanged grid) |
-| Latest feed | **5 rows**, two-line `PostRow` style |
-| Row content | title + one-line description + 1–2 topic tags + read-time·date |
-| Topic tags | **1–2**, topic-only (astro, performance, vue…), **non-clickable** |
-| Serie membership clue | **Kicker above the title** (Position A): folder icon + serie title + `· part N` |
-| Serie clue clickable? | **No** — plain label; the whole row links to the post |
-| Icon system | **folder** = series identity (everywhere a series appears); **layers** = parts count; **clock** = read time; **posts get no icon** |
+| Aspect                | Decision                                                                                                                           |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| Heading               | **"Writing"** (drop "Start here")                                                                                                  |
+| Series on home        | **Keep** the 2 featured `SerieCard`s (unchanged grid)                                                                              |
+| Latest feed           | **5 rows**, two-line `PostRow` style                                                                                               |
+| Row content           | title + one-line description + 1–2 topic tags + read-time·date                                                                     |
+| Topic tags            | **1–2**, topic-only (astro, performance, vue…), **non-clickable**                                                                  |
+| Serie membership clue | **Kicker above the title** (Position A): folder icon + serie title + `· part N`                                                    |
+| Serie clue clickable? | **No** — plain label; the whole row links to the post                                                                              |
+| Icon system           | **folder** = series identity (everywhere a series appears); **layers** = parts count; **clock** = read time; **posts get no icon** |
 
 ---
 

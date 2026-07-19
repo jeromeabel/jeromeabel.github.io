@@ -3,11 +3,15 @@
 Read `hero-copy-context.md` first. This file: deep analysis, then draft
 rounds. Latest loop on top. Mark drafts ✅ kept / ❌ dead / ✏️ remix.
 
+**Career-strategy resources** (cross-checked in loop 5 vs job/title fit):
+`~/career-ops` (job-search tooling, `data/platform-research-2026-07-17.md`),
+`/home/jabel/secondbrain/ATLAS/year/Career 2026 - Strategy and Roadmap.md`.
+
 ## Analysis — why hero taglines go wrong here
 
 **The credibility paradox.** Jérôme's story (robot drummers → AI product
 front end) is genuinely unusual. Unusual stories tempt writers into
-*announcing* the unusualness ("versatile", "from X to Y", "the constant is…").
+_announcing_ the unusualness ("versatile", "from X to Y", "the constant is…").
 But announced remarkableness reads as bragging; shown remarkableness reads as
 fact. The fix: state two facts from the two lives, side by side, flatly. The
 reader builds the arc themselves — and a conclusion the reader builds is one
@@ -36,6 +40,114 @@ lands on the right shelf.
 
 ---
 
+## Loop 5 — title cross-checked vs job strategy (2026-07-19)
+
+Checked the locked title against the career strategy (CV/LinkedIn research,
+platform-research 2026-07-17). Verdict: **aligned, nothing to change.**
+
+- **"Engineer" ✅** — matches actual role title and the #1 ranked search
+  title "Front-End Engineer (Vue/React/TypeScript)" (95% fit). Loop 4's
+  rejection of "Software engineer" / "Web engineer" stands.
+- **"Full stack" absent, correctly.** Strategy rule: never claim full-stack
+  in a title (65% fit until gap project). "Building toward full-stack"
+  belongs in the LinkedIn headline as a search-keyword move — LinkedIn
+  headline and site hero serve different functions. Keyword-stuffing the
+  hero would break the no-marketing rule.
+- **Creative-technologist differentiator ✅** — the robot-drummers line IS
+  it, at concrete altitude ("robot drummers", not "creative technologist"),
+  per the abstraction-ladder analysis above.
+- **Applied-AI / broadening signal ✅** — "AI workflows" in the topic list
+  covers direction without claiming a stack not held.
+
+Known gap, accepted: hero has no stack keyword (Vue/TypeScript). Fine —
+hero's job is "make them scroll", not be searchable; work grid + blog show
+the stack immediately, LinkedIn headline carries keywords.
+
+**Still open:** background-line pick (Loop 4 options; rec unchanged: 1 or 5).
+
+---
+
+## Loop 4 — title swap + background-line variants (2026-07-19)
+
+Jérôme's call: "developer" → **"engineer"** in the finalist (locked, not a
+variant — matches his actual title). Also asked for variations on the
+background/wink half-sentence.
+
+### Title swap (locked)
+
+> Front-end **engineer**, writing about performance, testing, and AI
+> workflows.
+
+(Considered "Software engineer" / "Web engineer" as broader alternatives —
+rejected: "Front-end engineer" matches his actual role, no reason to
+loosen it.)
+
+### Background-line variants (second half, not yet locked)
+
+1. Ask me about the robot drummers sometime. _(loop-3 original — plain invite)_
+2. Ask about the robot drummers — long story. _(tighter, implies depth, no date)_
+3. There's also a decade of robot drummers behind it. _(states fact, drops the invite/wink)_
+4. Before that: a decade of robot drummers and synths. _(adds synths; colon reintroduces the theme-cadence tell — weak)_
+5. I used to build robot drummers. Ask me sometime. _(splits into two short beats, most conversational)_
+6. Robot drummers were the last decade. Ask me sometime. _(fact-first then invite, no colon)_
+
+Recommendation: **1** or **5** — both keep the invite/wink and avoid the
+colon-cadence tell; 3/6 are quieter, flatter options if a wink reads too
+cute next to "engineer".
+
+### Current finalist (title locked, background pending pick)
+
+> Front-end engineer, writing about performance, testing, and AI
+> workflows. [Ask me about the robot drummers sometime. — background line,
+> pick from options above]
+
+---
+
+## Loop 3 — word-tuning D9 vs D6, finalist picked (2026-07-19)
+
+Word-by-word pass on loop 2's two survivors, checked against the Analysis
+section's own marketing-tell list and the hard constraints — not just
+vibes.
+
+**D6 — killed, not just "clipped".** "These days: … Previously: …" is
+exactly the "colons announcing a theme" cadence the Analysis section names
+as a marketing tell. Loop 2 called this a minor risk; on inspection it's
+disqualifying — the two-colon structure reads like a slide, not a
+sentence. ❌.
+
+**D9 — two fixable problems, no disqualifying one.**
+
+1. "writes about the craft" uses the banned noun. Loop 2 waved it through
+   as "arguably ok" for a topic list — the context pack's ban has no
+   carve-out for that. Cut it.
+2. Headline is "Hi, I'm Jérôme." D9's opener "I'm a front-end developer"
+   repeats "I'm" one beat after the reader already read it. Reads flatter
+   read aloud than on the page. Drop the second "I'm", let the line sit as
+   apposition off the headline.
+
+### Finalist
+
+> Front-end developer, writing about performance, testing, and AI
+> workflows. Ask me about the robot drummers sometime.
+
+- 16 words, well under the ≤30 budget.
+- Web leads word one; zero dates; wink lands last, warm and short.
+- No "craft", no duplicated "I'm", no colon-theme cadence.
+- Checked against the superlative anti-pattern from the portfolio-copy
+  research pass (no praise words — "award-winning" etc. — present at all).
+
+✅ kept, pending Jérôme's read-aloud test (context pack: must be sayable
+out loud, not just readable).
+
+### Recommendation (loop 3)
+
+Ship the finalist above. If it survives a read-aloud pass, cascade lock:
+WORK intro and About lead stay as currently drafted (About lead already
+passes every rule; WORK intro needs its own short pass once hero is
+locked — not done here).
+
+---
+
 ## Loop 2 — web-first, robots as the wink (2026-07-19)
 
 Feedback on loop 1: none killed by name, but a new constraint kills the
@@ -44,7 +156,7 @@ background is a quick funny reference, or surfaces via his love of sharing
 with the craft/maker community. Loop-1 drafts all led with robots (❌ as
 openers; imagery stays available).
 
-### D6 — Now / previously
+### D6 — Now / previously ❌ killed loop 3 (colon-theme cadence)
 
 > These days: web apps, TypeScript, and writing about how to build them
 > well. Previously: a decade of robots, synths, and teaching makers.
@@ -71,7 +183,7 @@ openers; imagery stays available).
   "teaching makers to solder" is bottom-rung concrete.
 - Risk: no robots at all — loses the funniest fact.
 
-### D9 — Plain with a wink
+### D9 — Plain with a wink ✏️ remixed loop 3 → finalist
 
 > I'm a front-end developer who writes about the craft — performance,
 > testing, AI workflows. Ask me about the robot drummers sometime.

@@ -115,11 +115,33 @@ Design approved by Jérôme 2026-07-19 → proceed to plan.md (writing-plans).
 Hero copy loops continue in parallel; loop-2 constraint: web-now leads,
 background = quick funny aside (see hero-copy-context.md).
 
-## Research receipts (partial)
+## Research receipts (complete)
 
-13 claims verified 3-0 (paco.me text-first 3-project list; brittanychiang
-4-row featured + table archive + inline numbers, no stats row; thecrit
-taxonomy 3–6 → gallery/magazine; skills-laundry-list anti-pattern; exemplar
-pool incl. szymonkaliski.com). Synthesis + hiring-manager claims lost to
-session limit — resumable: workflow run `wf_c846c753-01d`, resume after
-limit reset replays cached agents and re-runs only the dead ones.
+Workflow `wf_c846c753-01d`, 100 agents, 0 errors, synthesized.
+
+- paco.me: text-first 3-project list, zero images — confirms §2 gallery
+  isn't the only acclaimed pattern, just the one that fits this site's
+  featured-work image assets.
+- emilkowal.ski: projects AND posts both plain title+one-line-description,
+  no images/tags/dates anywhere in markup — same-family precedent for §5
+  (no chips in rows) and the calm-rows pacing in §3.
+- rauno.me/projects: index links out to each project's own external
+  site rather than embedded case studies; photography kept in a **separate**
+  full-screen gallery page, not merged with the text-first project list —
+  supports keeping art/robot work visually distinct rather than blended
+  into the product-work gallery, if that's ever revisited.
+- brittanychiang.com: 4-row featured + table archive + inline numbers,
+  no stats row (§2, §6 archive-table precedent already matches).
+- thecrit.co taxonomy: 7 named patterns (Gallery Grid, Story Scroll,
+  Business Card, Magazine, Case Study First, Sidebar Nav, The Minimal);
+  "Magazine"/"The Minimal" closest fit; 3–6 projects → Gallery or Magazine.
+- vanschneider.com: 3 named About lead-line approaches (Philosophical,
+  Personality Play, Polished Professional); Mackey Saturday's
+  philosophy-first tagline reverified live 2026.
+- semplice.com: draft About copy in spoken register first, refine after;
+  named anti-pattern — superlative inflation ("award-winning",
+  "revolutionizing") reads as trying too hard. Relevant to the About lead
+  and hero-copy tracks, not just facts-strip (§6).
+- No source gave a concrete "more projects" grid (vs table) example beyond
+  brittanychiang — stays an open non-issue since ArchiveTable already
+  ships as a table.

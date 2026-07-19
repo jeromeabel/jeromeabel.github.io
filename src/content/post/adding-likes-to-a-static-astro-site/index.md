@@ -1,7 +1,7 @@
 ---
 title: Adding Likes to a Static Astro Site
 date: 2026-02-24
-topic: "astro, performance"
+topic: "astro"
 description: Two approaches to adding dynamic votes to a static Astro site — first with Astro DB and Turso (elegant, 667ms), then with PHP and MySQL (fast, 118ms).
 abstract: Astro DB + Turso gave me votes in an afternoon. Then I measured the response time. A single PHP file on shared hosting replaced the entire serverless stack.
 img: ./adding-likes-to-a-static-astro-site.jpg

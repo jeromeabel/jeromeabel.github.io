@@ -1,7 +1,7 @@
 ---
 title: "Nuxt Clean Architecture: A Practical Guide"
 date: 2024-11-14
-topic: "nuxt, architecture"
+topic: "nuxt"
 description: "Learn how to implement Clean Architecture in a Nuxt application with a real-world example: a modular, testable, and scalable newsletter subscription feature."
 abstract: "This article explores the application of Clean Architecture principles in Nuxt 4, demonstrating how to structure a newsletter subscription feature using a layered approach. By leveraging the new Nuxt 4 file structure, we ensure better modularity, maintainability, and testability, making it easier to evolve and scale the application over time."
 img: ./nuxt-clean-architecture-jerome-abel.png

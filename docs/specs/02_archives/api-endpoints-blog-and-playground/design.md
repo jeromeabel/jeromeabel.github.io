@@ -8,6 +8,7 @@ shipped: 2026-07-18
 **Status:** Draft, awaiting review
 **Owner:** Jerome Abel
 **Repos involved:**
+
 - Blog: `/home/jabel/code/projects/jeromeabel.github.io` (post lives at `src/content/post/api-endpoints-with-astro/index.md`)
 - Playground: `/home/jabel/code/projects/astro-playground` (companion runnable code)
 
@@ -15,7 +16,7 @@ shipped: 2026-07-18
 
 ## 1. Goal
 
-Realign the blog post *Adding API Endpoints to an Astro Project* and its companion playground so they teach a single, coherent progression of server-side request handling in Astro:
+Realign the blog post _Adding API Endpoints to an Astro Project_ and its companion playground so they teach a single, coherent progression of server-side request handling in Astro:
 
 1. `GET` endpoint
 2. `GET` with dynamic params (`[id].ts`)
@@ -43,7 +44,7 @@ A reader following the post cannot copy-paste its core POST examples and see the
 
 ### 3.1 Theme
 
-Avengers Retirement Home — a retirement home open to all heroes (not just retired Avengers). Heroes apply to *join*; once accepted they become *residents*.
+Avengers Retirement Home — a retirement home open to all heroes (not just retired Avengers). Heroes apply to _join_; once accepted they become _residents_.
 
 ### 3.2 Data
 
@@ -58,19 +59,19 @@ export type Hero = {
   retiredYear: number;
 };
 
-export const heroes: Hero[];      // 10 heroes — the eligibility roster
-export const residents: Hero[];   // pre-seeded with 3 (Tony, Natasha, Thor)
+export const heroes: Hero[]; // 10 heroes — the eligibility roster
+export const residents: Hero[]; // pre-seeded with 3 (Tony, Natasha, Thor)
 ```
 
 `retiredYear` is shown in the UI as flavor (e.g. "retired 2019") but is **not** used as an eligibility filter.
 
 ### 3.3 Rules
 
-| Submission | Outcome |
-|---|---|
-| Email matches a hero in `heroes`, not yet in `residents` | Push to `residents`, show welcome message |
-| Email matches a hero already in `residents` | No-op, show "you're already settled in" message |
-| Email does not match any hero (e.g. `bob@example.com`) | Reject with humorous message (Pattern A redirects to `/rejected`; Pattern B returns rejection JSON; Pattern C throws `ActionError({ code: "FORBIDDEN" })`) |
+| Submission                                               | Outcome                                                                                                                                                    |
+| -------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Email matches a hero in `heroes`, not yet in `residents` | Push to `residents`, show welcome message                                                                                                                  |
+| Email matches a hero already in `residents`              | No-op, show "you're already settled in" message                                                                                                            |
+| Email does not match any hero (e.g. `bob@example.com`)   | Reject with humorous message (Pattern A redirects to `/rejected`; Pattern B returns rejection JSON; Pattern C throws `ActionError({ code: "FORBIDDEN" })`) |
 
 `residents` is in-memory only. It resets on dev restart and on every Netlify cold start. This is honest about being a demo and is mentioned in the post's "What I learned" section with a one-line callout pointing readers at "swap for a DB call in production".
 
@@ -108,18 +109,18 @@ astro-playground/
 ### 4.2 Naming rationale
 
 - **`/residents/...`** for pages, **`/api/residents/...`** for endpoints — domain noun matches between pages and API.
-- **`join-redirect.ts` / `join-json.ts`** instead of `add.ts` / `add2.ts` — names communicate both the domain action (*join*) and the teaching pattern (*redirect* vs *json*).
+- **`join-redirect.ts` / `join-json.ts`** instead of `add.ts` / `add2.ts` — names communicate both the domain action (_join_) and the teaching pattern (_redirect_ vs _json_).
 - **Action named `join`** instead of `subscribe` — matches the new vocabulary.
 
 ### 4.3 Data flow per pattern
 
-| Pattern | Browser | Network | Server | Result |
-|---|---|---|---|---|
-| GET list | `await fetch('/api/residents/')` from page frontmatter | 1 HTTP | reads `residents` | server-rendered list |
-| GET by id | direct request to `/api/residents/3` | 1 HTTP | reads `heroes` | one hero JSON |
-| POST redirect | `<form method="POST" action="/api/residents/join-redirect">` | 1 HTTP, then redirect | mutates `residents`, returns 307 | full page nav to `/welcome` or `/rejected` |
-| POST JSON | `<form>` + JS handler intercepts submit, calls `fetch()` | 1 fetch | mutates `residents`, returns JSON | DOM update in place, no nav |
-| Action | `<form action={actions.join}>` | 1 HTTP managed by Astro | Zod-validated `join` handler | page re-renders, reads via `Astro.getActionResult()` |
+| Pattern       | Browser                                                      | Network                 | Server                            | Result                                               |
+| ------------- | ------------------------------------------------------------ | ----------------------- | --------------------------------- | ---------------------------------------------------- |
+| GET list      | `await fetch('/api/residents/')` from page frontmatter       | 1 HTTP                  | reads `residents`                 | server-rendered list                                 |
+| GET by id     | direct request to `/api/residents/3`                         | 1 HTTP                  | reads `heroes`                    | one hero JSON                                        |
+| POST redirect | `<form method="POST" action="/api/residents/join-redirect">` | 1 HTTP, then redirect   | mutates `residents`, returns 307  | full page nav to `/welcome` or `/rejected`           |
+| POST JSON     | `<form>` + JS handler intercepts submit, calls `fetch()`     | 1 fetch                 | mutates `residents`, returns JSON | DOM update in place, no nav                          |
+| Action        | `<form action={actions.join}>`                               | 1 HTTP managed by Astro | Zod-validated `join` handler      | page re-renders, reads via `Astro.getActionResult()` |
 
 ### 4.4 GET demo (`/residents/list`) — implementation note
 
@@ -141,18 +142,18 @@ Pick the direct-import version as the default in the page (matches what `subscri
 
 Target length: ~2000 words, ~10 code blocks. (Current draft is ~1500 words; growth comes from full Actions section.)
 
-| # | Section | Length | Maps to playground |
-|---|---|---|---|
-| 0 | Frontmatter + intro paragraph + live demo link | ~120 words | live Netlify URL at top |
-| 1 | Static → server: opting routes in | ~150 words | `astro.config.mjs` snippet |
-| 2 | GET: list residents | ~200 words + 2 code blocks | `/residents/list` + `/api/residents/index.ts` |
-| 3 | GET by id: dynamic routes | ~120 words + 1 code block | `/api/residents/[id].ts` |
-| 4 | POST + redirect (Pattern A) | ~250 words + 3 code blocks | `/residents/join-redirect` + `/welcome` + `/rejected` |
-| 5 | POST + JSON (Pattern B) | ~250 words + 2 code blocks | `/residents/join-json` |
-| 6 | Astro Actions (Pattern C) | ~250 words + 2 code blocks | `/residents/join-action` + `actions/index.ts` |
-| 7 | Comparing the three POST patterns | ~200 words + small table | (no new code) |
-| 8 | Astro documentation | ~80 words, 4 links | — |
-| 9 | What I learned | ~250 words, 6 bullets | — |
+| #   | Section                                        | Length                     | Maps to playground                                    |
+| --- | ---------------------------------------------- | -------------------------- | ----------------------------------------------------- |
+| 0   | Frontmatter + intro paragraph + live demo link | ~120 words                 | live Netlify URL at top                               |
+| 1   | Static → server: opting routes in              | ~150 words                 | `astro.config.mjs` snippet                            |
+| 2   | GET: list residents                            | ~200 words + 2 code blocks | `/residents/list` + `/api/residents/index.ts`         |
+| 3   | GET by id: dynamic routes                      | ~120 words + 1 code block  | `/api/residents/[id].ts`                              |
+| 4   | POST + redirect (Pattern A)                    | ~250 words + 3 code blocks | `/residents/join-redirect` + `/welcome` + `/rejected` |
+| 5   | POST + JSON (Pattern B)                        | ~250 words + 2 code blocks | `/residents/join-json`                                |
+| 6   | Astro Actions (Pattern C)                      | ~250 words + 2 code blocks | `/residents/join-action` + `actions/index.ts`         |
+| 7   | Comparing the three POST patterns              | ~200 words + small table   | (no new code)                                         |
+| 8   | Astro documentation                            | ~80 words, 4 links         | —                                                     |
+| 9   | What I learned                                 | ~250 words, 6 bullets      | —                                                     |
 
 ### 5.1 Section 1 — opening idiom change
 
@@ -160,11 +161,11 @@ Current draft leads with `output: "server"` as the primary approach. Change: lea
 
 ### 5.2 Section 7 — comparison table (proposed)
 
-| Pattern | JS required on client? | Page navigation? | Validation style | When to pick |
-|---|---|---|---|---|
-| POST + redirect | No | Yes (full nav) | Manual in handler | Progressive enhancement, server-only flows |
-| POST + JSON | Yes | No (DOM update) | Manual in handler | Inline feedback, smoother UX |
-| Astro Action | No (zero-JS by default) | No (page re-renders) | Zod via `defineAction` | New code in Astro 5+ |
+| Pattern         | JS required on client?  | Page navigation?     | Validation style       | When to pick                               |
+| --------------- | ----------------------- | -------------------- | ---------------------- | ------------------------------------------ |
+| POST + redirect | No                      | Yes (full nav)       | Manual in handler      | Progressive enhancement, server-only flows |
+| POST + JSON     | Yes                     | No (DOM update)      | Manual in handler      | Inline feedback, smoother UX               |
+| Astro Action    | No (zero-JS by default) | No (page re-renders) | Zod via `defineAction` | New code in Astro 5+                       |
 
 ### 5.3 What I learned (refresh — 6 bullets)
 
@@ -180,9 +181,9 @@ Current draft leads with `output: "server"` as the primary approach. Change: lea
 1. Install `@astrojs/netlify` in the playground.
 2. Edit `astro.config.mjs`:
    ```js
-   import { defineConfig } from 'astro/config';
-   import netlify from '@astrojs/netlify';
-   import tailwindcss from '@tailwindcss/vite';
+   import { defineConfig } from "astro/config";
+   import netlify from "@astrojs/netlify";
+   import tailwindcss from "@tailwindcss/vite";
 
    export default defineConfig({
      adapter: netlify(),
@@ -235,13 +236,13 @@ Current draft leads with `output: "server"` as the primary approach. Change: lea
 
 ## 9. Risks and mitigations
 
-| Risk | Mitigation |
-|---|---|
-| Live demo `residents` array drifts from post text (someone joins, list looks different than post screenshots) | Pre-seed list documented; no screenshots — readers see live state |
-| Netlify cold start latency on first request makes demo feel broken | Add a one-line "first request may be slow" note in the demo page |
-| Astro 6 minor releases break `defineAction` or adapter API | Pin Astro version in playground `package.json`; mention version in post |
-| Netlify subdomain `astro-playground` already taken | Fall back to alternative; update spec post-deploy with the chosen URL |
-| Reader confusion if they hit `/subscribers` (old URL) | The blog post is currently `draft: true` — the `/subscribers` URL was never publicly indexed. Default 404 on the deleted route is acceptable; no redirect needed. |
+| Risk                                                                                                          | Mitigation                                                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Live demo `residents` array drifts from post text (someone joins, list looks different than post screenshots) | Pre-seed list documented; no screenshots — readers see live state                                                                                                 |
+| Netlify cold start latency on first request makes demo feel broken                                            | Add a one-line "first request may be slow" note in the demo page                                                                                                  |
+| Astro 6 minor releases break `defineAction` or adapter API                                                    | Pin Astro version in playground `package.json`; mention version in post                                                                                           |
+| Netlify subdomain `astro-playground` already taken                                                            | Fall back to alternative; update spec post-deploy with the chosen URL                                                                                             |
+| Reader confusion if they hit `/subscribers` (old URL)                                                         | The blog post is currently `draft: true` — the `/subscribers` URL was never publicly indexed. Default 404 on the deleted route is acceptable; no redirect needed. |
 
 ## 10. Acceptance criteria
 

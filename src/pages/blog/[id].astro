@@ -32,6 +32,9 @@ const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
   page={entry.data.title}
   description={entry.data.description}
   {publishedDate}
+  updatedDate={entry.data.updated}
+  topic={entry.data.topic}
+  type="article"
   image={entry.data.img}
 >
   <main class="container flex flex-col gap-8 py-8 lg:gap-12 lg:py-24">
@@ -53,6 +56,13 @@ const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
         <div class="text-muted flex items-center gap-2 md:mt-4">
           <Icon name="lucide:calendar" />
           <time class="text-sm">{getFormattedDate(entry.data.date)}</time>
+          {
+            entry.data.updated && (
+              <span class="text-sm">
+                · Updated {getFormattedDate(entry.data.updated)}
+              </span>
+            )
+          }
           <Icon name="lucide:clock" class="ms-4 lg:ms-6" />
           <span class="text-sm">{minutesRead}</span>
         </div>
