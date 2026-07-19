@@ -1,5 +1,12 @@
 # Hero copy — analysis & approaches
 
+> **🔒 FROZEN 2026-07-19 — loop closed.** Jérôme locked the hero line:
+> **"Front-end engineer, writing about performance, testing, and AI
+> workflows. I used to build robot drummers. Ask me sometime."**
+> Loop-3 finalist with "developer"→"engineer" (title lock, loop 2) and the
+> robot-drummers wink reworded to first person. Live in `HeroText.astro`.
+> The loops below are kept as the decision record; no further iteration.
+
 Read `hero-copy-context.md` first. This file: deep analysis, then draft
 rounds. Latest loop on top. Mark drafts ✅ kept / ❌ dead / ✏️ remix.
 

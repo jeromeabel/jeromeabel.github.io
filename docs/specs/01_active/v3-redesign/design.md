@@ -112,8 +112,9 @@ intro, About lead (current About lead likely survives as-is).
 3. Blog page PostListItem: also de-arrow for consistency, or keep?
 
 Design approved by Jérôme 2026-07-19 → proceed to plan.md (writing-plans).
-Hero copy loops continue in parallel; loop-2 constraint: web-now leads,
-background = quick funny aside (see hero-copy-context.md).
+Hero copy **frozen 2026-07-19** (see hero-copy-approaches.md 🔒): "Front-end
+engineer, writing about performance, testing, and AI workflows. I used to
+build robot drummers. Ask me sometime." Live in `HeroText.astro`.
 
 ## Research receipts (complete)
 
