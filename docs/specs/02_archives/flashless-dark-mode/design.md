@@ -37,7 +37,7 @@ The applier (`src/scripts/theme.ts`):
 13 applyTheme();
 ```
 
-It's loaded as a **processed** script — `<script src="../scripts/theme.ts">` (`src/layouts/Layout.astro:35`). Astro bundles/hoists processed scripts into the head as `type="module"`, which are **implicitly deferred**: they run *after* HTML parse and CSS, i.e. after first paint. That deferral is the flash. Line 13 (`applyTheme()`) runs too late; line 12 (the swap listener) is for view transitions and is unrelated to the first-paint flash.
+It's loaded as a **processed** script — `<script src="../scripts/theme.ts">` (`src/layouts/Layout.astro:35`). Astro bundles/hoists processed scripts into the head as `type="module"`, which are **implicitly deferred**: they run _after_ HTML parse and CSS, i.e. after first paint. That deferral is the flash. Line 13 (`applyTheme()`) runs too late; line 12 (the swap listener) is for view transitions and is unrelated to the first-paint flash.
 
 Toggle logic lives separately in `src/components/app/ThemeToggle.astro:14-26` — an `is:inline` script that flips `localStorage.theme` and the class on click, attached on `astro:page-load`.
 
@@ -94,7 +94,8 @@ Inline the first-paint apply, and instead of re-applying on `astro:after-swap`, 
     })();
   </script>
   <SEO {page} {description} {publishedDate} {image} />
-  ...
+  ...</head
+>
 ```
 
 **`src/scripts/theme.ts`** — delete (logic moved inline; grep confirms it's referenced only from Layout.astro:35).
@@ -106,9 +107,9 @@ Optional polish (mention, not required): set `color-scheme` on the root inside t
 ## Risks / edge cases
 
 - **View transitions:** covered — the `astro:after-swap` re-apply is kept inside the inline block; the `document` listener persists across swaps, so it registers once. Verify nav between two pages with dark active shows no flash.
-- **Inline script re-execution on swap:** an `is:inline` head script is *not* re-run on navigation by default. That's fine — `apply()` runs once at load, then the swap listener carries it. Do **not** add `data-astro-rerun` (would re-register the listener each nav → duplicates).
+- **Inline script re-execution on swap:** an `is:inline` head script is _not_ re-run on navigation by default. That's fine — `apply()` runs once at load, then the swap listener carries it. Do **not** add `data-astro-rerun` (would re-register the listener each nav → duplicates).
 - **No-JS:** page falls back to the light default (`bg-background`, no `.dark`). Same as today; acceptable — the toggle already requires JS.
-- **SSR/prerender:** output is static (netlify adapter, no per-page `prerender=false` seen). The server can't know the user's theme, so client-side application before paint is the only option — exactly what A does. No SSR mismatch because the server always emits light and the inline script corrects it *before* paint.
+- **SSR/prerender:** output is static (netlify adapter, no per-page `prerender=false` seen). The server can't know the user's theme, so client-side application before paint is the only option — exactly what A does. No SSR mismatch because the server always emits light and the inline script corrects it _before_ paint.
 - **`localStorage` blocked** (privacy mode / sandboxed iframe): `localStorage.theme` access can throw. Current code doesn't guard it and this spec keeps parity; wrap in try/catch only if we see errors (out of scope otherwise).
 - **CSP:** none today, so inline is fine. If a strict CSP lands later, this needs a `script-src` hash/nonce — note it in that future work.
 - **`meta[name=theme-color]`** is hardcoded light `#f5ffe1` (`SEO.astro:46-47`). Not a paint flash, but the mobile browser chrome stays light in dark mode. Out of scope; flag as a possible follow-up.

@@ -1,4 +1,5 @@
 ---
+shipped: 2026-07-19
 title: Blog table of contents
 created: 2026-07-18
 ---

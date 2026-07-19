@@ -1,9 +1,11 @@
 ---
 import CustomImage from "@components/ui/CustomImage.astro";
+import Link from "@components/ui/Link.astro";
 import Prose from "@components/ui/Prose.astro";
 import WorkHeader from "@components/work/WorkHeader.astro";
 import Layout from "@layouts/Layout.astro";
 import { getCollection, render } from "astro:content";
+import { getArchiveWorks, getFeaturedWorks } from "src/utils/repository";
 
 export async function getStaticPaths() {
   const works = await getCollection("work");
@@ -16,6 +18,16 @@ export async function getStaticPaths() {
 const { work } = Astro.props;
 const { Content } = await render(work);
 const publishedDate = new Date(work.data.date);
+
+const orderedWorks = [
+  ...(await getFeaturedWorks()),
+  ...(await getArchiveWorks()),
+];
+const index = orderedWorks.findIndex((entry) => entry.id === work.id);
+const nextWork =
+  index >= 0 && index < orderedWorks.length - 1
+    ? orderedWorks[index + 1]
+    : null;
 ---
 
 <Layout
@@ -32,5 +44,23 @@ const publishedDate = new Date(work.data.date);
     <Prose class="md:mx-auto" data-expand-image="inline">
       <Content />
     </Prose>
+    <div class="container mt-8 flex flex-col gap-4 sm:flex-row lg:mt-12">
+      <Link
+        label="All work"
+        href="/work"
+        icon="lucide:arrow-right"
+        variant="secondary"
+      />
+      {
+        nextWork && (
+          <Link
+            label={`Next: ${nextWork.data.title}`}
+            href={`/work/${nextWork.id}`}
+            icon="lucide:arrow-right"
+            variant="secondary"
+          />
+        )
+      }
+    </div>
   </main>
 </Layout>

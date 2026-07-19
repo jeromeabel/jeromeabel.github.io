@@ -6,6 +6,11 @@ export const getAllSeriePosts = async () =>
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
     .filter((post) => (import.meta.env.PROD ? post.data.draft !== true : true));
 
+export const getAllStandalonePosts = async () =>
+  (await getCollection("post"))
+    .filter((post) => (import.meta.env.PROD ? post.data.draft !== true : true))
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
 export const getAllBlogPosts = async () => {
   const posts = await getCollection("post");
   const seriePosts = await getCollection("seriePost");

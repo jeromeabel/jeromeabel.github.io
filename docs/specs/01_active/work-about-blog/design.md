@@ -14,6 +14,8 @@ Design pass 2026-07-19. Written against the just-shipped v3 redesign
 feature — the deliverable is concrete nav + cross-linking proposals, and a
 split into shippable sub-items.
 
+**Status:** S1 (connective tissue) shipped 2026-07-19. S2 (related modules) and S3 (homepage bio strip) still pending — deferred to Tier 3.
+
 ## Problem / context
 
 Every top page is reachable from the header, but once you're _on_ a page the
@@ -48,18 +50,18 @@ between them.
 
 ### Pages & internal link graph
 
-| Page | File | Internal out-links | Bottom-of-page |
-| --- | --- | --- | --- |
-| Home | `src/pages/index.astro:11-16` | `/blog` (All posts), `/work` (All work), post/serie/work cards; **no `/about`** | Contact (mailto + socials) |
-| About | `src/pages/about.astro:14` → `AboutText.astro` | **none internal** — all external (`AboutText.astro:21,42,45,62,65`) | nothing |
-| Blog | `src/pages/blog.astro` | `/blog/[id]`, `/blog/[serie]` | Series grid |
-| Post | `src/pages/blog/[id].astro:42-45` | breadcrumb `/blog` only | **nothing** (no prev/next, no related) |
-| Serie | `src/pages/blog/[serie]/index.astro:37-44` | breadcrumb `/blog`, its posts | post list |
-| Serie post | `src/pages/blog/[serie]/[post].astro:75-89,123-151` | breadcrumb `/blog` + serie; prev/next **within serie only** | serie pagination |
-| Work | `src/pages/work.astro:29-34` | `/blog` ("the writing"), `/work/[id]` cards, archive rows | More-projects table |
-| Project | `src/pages/work/[id].astro:27-35` → `WorkHeader.astro:14-19` | breadcrumb `/work`, external project links | **nothing** (no related, no next) |
-| Header (global) | `src/components/app/Header.astro:5-10` | `/`, `/blog`, `/work`, `/about` | — |
-| Footer (global) | `src/components/app/Footer.astro:6-13` | **none internal** — GitHub, art portfolio, Bluesky, LinkedIn, Email, RSS | — |
+| Page            | File                                                         | Internal out-links                                                              | Bottom-of-page                         |
+| --------------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------- | -------------------------------------- |
+| Home            | `src/pages/index.astro:11-16`                                | `/blog` (All posts), `/work` (All work), post/serie/work cards; **no `/about`** | Contact (mailto + socials)             |
+| About           | `src/pages/about.astro:14` → `AboutText.astro`               | **none internal** — all external (`AboutText.astro:21,42,45,62,65`)             | nothing                                |
+| Blog            | `src/pages/blog.astro`                                       | `/blog/[id]`, `/blog/[serie]`                                                   | Series grid                            |
+| Post            | `src/pages/blog/[id].astro:42-45`                            | breadcrumb `/blog` only                                                         | **nothing** (no prev/next, no related) |
+| Serie           | `src/pages/blog/[serie]/index.astro:37-44`                   | breadcrumb `/blog`, its posts                                                   | post list                              |
+| Serie post      | `src/pages/blog/[serie]/[post].astro:75-89,123-151`          | breadcrumb `/blog` + serie; prev/next **within serie only**                     | serie pagination                       |
+| Work            | `src/pages/work.astro:29-34`                                 | `/blog` ("the writing"), `/work/[id]` cards, archive rows                       | More-projects table                    |
+| Project         | `src/pages/work/[id].astro:27-35` → `WorkHeader.astro:14-19` | breadcrumb `/work`, external project links                                      | **nothing** (no related, no next)      |
+| Header (global) | `src/components/app/Header.astro:5-10`                       | `/`, `/blog`, `/work`, `/about`                                                 | —                                      |
+| Footer (global) | `src/components/app/Footer.astro:6-13`                       | **none internal** — GitHub, art portfolio, Bluesky, LinkedIn, Email, RSS        | —                                      |
 
 ### Dead-ends, concretely
 
@@ -166,6 +168,7 @@ it's copy-blocked, not just code.
 ## Implementation sketch
 
 **A (sub-item S1):**
+
 - `Footer.astro:6-16` — add an internal-links group (Home/Blog/Work/About);
   keep the external group + RSS. Two `<ul>`s in the existing flex row.
 - `work/[id].astro` (after line 33) — "← All work" link + optional
@@ -178,6 +181,7 @@ it's copy-blocked, not just code.
   by SelectedWriting/WorksStrip CTAs.
 
 **B (sub-item S2):**
+
 - `content.config.ts` — add optional `related_posts` / `related_work`
   references to `work` and/or `post` schemas.
 - New `RelatedWriting.astro` (wraps `PostRowCalm`) on `work/[id]`; new
@@ -186,6 +190,7 @@ it's copy-blocked, not just code.
 - Content pass: add `related_*` frontmatter to the few entries that connect.
 
 **C (sub-item S3):**
+
 - New `AboutStrip.astro` (or `HomeAbout`) inserted in `index.astro:12-16`,
   additive — v3 Writing/Work sections untouched.
 - Extend About's closing strip (from S1) into a fuller hub section if desired.

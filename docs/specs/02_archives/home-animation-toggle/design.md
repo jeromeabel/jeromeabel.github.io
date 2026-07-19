@@ -102,9 +102,15 @@ html[data-motion="on"] .reveal {
     opacity 1.3s 0.1s ease-in-out,
     transform 1.3s 0.1s ease-in-out;
 }
-html[data-motion="on"] .reveal-anim { opacity: 1; }
-html[data-motion="on"] .reveal.reveal-bottom { transform: translateY(5rem); }
-html[data-motion="on"] .reveal.reveal-bottom.reveal-anim { transform: translateY(0); }
+html[data-motion="on"] .reveal-anim {
+  opacity: 1;
+}
+html[data-motion="on"] .reveal.reveal-bottom {
+  transform: translateY(5rem);
+}
+html[data-motion="on"] .reveal.reveal-bottom.reveal-anim {
+  transform: translateY(0);
+}
 ```
 
 (Smooth scroll: swap `motion-safe:scroll-smooth` on `Layout.astro:30` for an attribute-driven rule, or leave it OS-gated — low stakes, decide at build.)

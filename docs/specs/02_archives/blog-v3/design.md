@@ -1,4 +1,5 @@
 ---
+shipped: 2026-07-19
 title: Blog v3
 created: 2026-07-18
 ---
@@ -9,7 +10,7 @@ Original stub: _"Follow-up refinements after the blog v2 rebuild: polish reading
 
 This doc gives that stub concrete scope. It audits the shipped blog, proposes a prioritized punch-list, and marks what's in for v3 vs deferred.
 
-**Status:** v3a (metadata & correctness, #1/#2/#3/#7/#8) shipped 2026-07-19. v3b (series navigation, #4/#5/#6) still pending.
+**Status:** v3a (metadata & correctness, #1/#2/#3/#7/#8) shipped 2026-07-19. v3b (series navigation, #4/#5/#6) shipped 2026-07-19.
 
 ---
 
@@ -36,6 +37,7 @@ What v2 already shipped (don't re-propose):
 Gaps and bugs found:
 
 **Metadata (SEO.astro)**
+
 - `SEO.astro:69` — `<meta property="”article:published_time”" ...>`: the property name is wrapped in **typographic curly quotes** (`”…”`), so the tag is invalid and crawlers ignore it. Broken today.
 - `SEO.astro:72` — `og:type` is **hardcoded `"website"`** for every page, including posts. Blog posts should be `article`.
 - No `article:modified_time`, `article:author`, `article:tag`, or `article:section` — even though `updated` and `topic` exist in frontmatter.
@@ -44,6 +46,7 @@ Gaps and bugs found:
 - `[serie]/index.astro:20` — serie landing passes `publishedDate = new Date()` (today) to `Layout`, so its published-time signal is always wrong.
 
 **Series navigation**
+
 - Serie post breadcrumb shows only the bare index number — `{index + 1}` (`[serie]/[post].astro:87`), no "Part N of M". No progress sense.
 - On the **last** post of a serie, `nextPost` is null so only the prev block renders — left-aligned at `w-1/2`, right half empty, no "you finished / back to series" affordance (`[serie]/[post].astro:142-148`).
 - `LinkNavPost` hides the title on mobile (`hidden … sm:block`, `LinkNavPost.astro:28`) — on phones prev/next read only "Previous"/"Next" with no title.
@@ -51,6 +54,7 @@ Gaps and bugs found:
 - Serie landing (`[serie]/index.astro`) shows no parts-count / total-read-time header, even though `SerieCard` already computes both via `getSerieStats`.
 
 **Reading experience**
+
 - Standalone posts have **no "read next"** — the article just ends. Serie posts at least have prev/next.
 - `updated` date is shown in the **list** (`PostListItem.astro:19-24`) but **never on the post page itself** — a reader on the article can't tell it was revised.
 - `Prose.astro` is solid; no changes needed for v3 beyond an optional `scroll-mt` on headings (which really belongs with `blog-toc`).
@@ -59,18 +63,18 @@ Gaps and bugs found:
 
 ## Proposed punch-list (prioritized)
 
-| # | Item | Size | Notes |
-|---|------|------|-------|
-| 1 | **Fix broken OG/article metadata**: curly-quote `article:published_time`, `og:type=article` for posts | XS | Pure bug fix, ship first |
-| 2 | **Per-post article metadata**: `article:modified_time` (from `updated`), `article:tag` (from `topic`), `article:author` | S | Needs optional props threaded from post pages → Layout → SEO |
-| 3 | **Show `updated` on the post page** ("Updated {date}" in the meta row) | XS | Field already exists; both templates |
-| 4 | **Series "Part N of M" + progress** in breadcrumb/header of serie posts | S | Replaces bare `{index+1}`; `numberOfPosts` already computed |
-| 5 | **Fix last-post prev/next**: add "Back to {serie}" / "Series complete" next-slot fallback so the row stays balanced | S | Mirror the existing prev-fallback logic |
-| 6 | **Inline "series contents" list** on serie posts (all parts, current marked) | M | The biggest UX win; approach below. Watch `blog-toc` overlap |
-| 7 | **Serie landing header stats** (parts · total read time · date range) | XS | Reuse `getSerieStats` |
-| 8 | **Show prev/next titles on mobile** | XS | Drop the `hidden sm:block` on the title |
-| 9 | **JSON-LD `BlogPosting`** structured data | S | Approach below; nice-to-have, not a bug |
-| 10 | **"Read next" for standalone posts** (2-3 rows) | M | Approach below; borders `work-about-blog` — keep blog→blog only |
+| #   | Item                                                                                                                    | Size | Notes                                                           |
+| --- | ----------------------------------------------------------------------------------------------------------------------- | ---- | --------------------------------------------------------------- |
+| 1   | **Fix broken OG/article metadata**: curly-quote `article:published_time`, `og:type=article` for posts                   | XS   | Pure bug fix, ship first                                        |
+| 2   | **Per-post article metadata**: `article:modified_time` (from `updated`), `article:tag` (from `topic`), `article:author` | S    | Needs optional props threaded from post pages → Layout → SEO    |
+| 3   | **Show `updated` on the post page** ("Updated {date}" in the meta row)                                                  | XS   | Field already exists; both templates                            |
+| 4   | **Series "Part N of M" + progress** in breadcrumb/header of serie posts                                                 | S    | Replaces bare `{index+1}`; `numberOfPosts` already computed     |
+| 5   | **Fix last-post prev/next**: add "Back to {serie}" / "Series complete" next-slot fallback so the row stays balanced     | S    | Mirror the existing prev-fallback logic                         |
+| 6   | **Inline "series contents" list** on serie posts (all parts, current marked)                                            | M    | The biggest UX win; approach below. Watch `blog-toc` overlap    |
+| 7   | **Serie landing header stats** (parts · total read time · date range)                                                   | XS   | Reuse `getSerieStats`                                           |
+| 8   | **Show prev/next titles on mobile**                                                                                     | XS   | Drop the `hidden sm:block` on the title                         |
+| 9   | **JSON-LD `BlogPosting`** structured data                                                                               | S    | Approach below; nice-to-have, not a bug                         |
+| 10  | **"Read next" for standalone posts** (2-3 rows)                                                                         | M    | Approach below; borders `work-about-blog` — keep blog→blog only |
 
 ---
 
@@ -90,7 +94,7 @@ A reader deep in a 9-part series (Testing a Simple Nuxt Feature) has no in-page 
   - Pros: tiny; pairs naturally with #4/#5; no sidebar.
   - Cons: doesn't show the full list of parts.
 
-**Recommendation:** **A1 for v3** (inline block), and defer any sticky-rail version until `blog-toc` lands and owns the rail — then the series list can slot into the *same* shell as a second panel. A1 + #4 + #5 together fully cover "where am I in this series" without touching sidebar real estate.
+**Recommendation:** **A1 for v3** (inline block), and defer any sticky-rail version until `blog-toc` lands and owns the rail — then the series list can slot into the _same_ shell as a second panel. A1 + #4 + #5 together fully cover "where am I in this series" without touching sidebar real estate.
 
 ### B. Article structured metadata (#1, #2, #9)
 
@@ -127,12 +131,15 @@ Standalone posts dead-end. What should follow?
 v3 is bigger than one "M". Split it:
 
 **v3a — Metadata & correctness (Size S)** — do first, mostly bug fixes:
+
 - #1 fix broken OG tags, #2 per-post article meta, #3 show `updated` on page, #7 serie landing stats, #8 mobile prev/next titles.
 
 **v3b — Series navigation (Size M)** — the reading-experience core:
+
 - #4 Part N of M, #5 last-post fallback, #6 inline series-contents (approach A1).
 
 **Deferred out of v3:**
+
 - #9 JSON-LD — stretch goal, else v3.1.
 - #10 "Read next" — defer; overlaps `work-about-blog`, and C3 is low-value. Revisit when that item is scoped.
 - Any sticky series rail — wait for `blog-toc`.
@@ -141,7 +148,7 @@ v3 is bigger than one "M". Split it:
 
 ## Overlap notes
 
-- **`blog-toc`** — heading-level table of contents (auto-generated from `##`/`###`, sticky, scroll-spy). **Different thing** from v3 #6 (a list of *series parts*, not in-page headings). But both want the desktop side-rail. **Do not build a sticky series rail in v3** — ship #6 as an inline block (A1). If `blog-toc` lands first, its rail becomes the natural home for a future series panel. Sequence: `blog-toc` **before** any sidebar version of series nav.
+- **`blog-toc`** — heading-level table of contents (auto-generated from `##`/`###`, sticky, scroll-spy). **Different thing** from v3 #6 (a list of _series parts_, not in-page headings). But both want the desktop side-rail. **Do not build a sticky series rail in v3** — ship #6 as an inline block (A1). If `blog-toc` lands first, its rail becomes the natural home for a future series panel. Sequence: `blog-toc` **before** any sidebar version of series nav.
 - **`work-about-blog`** — cross-section navigation/cross-linking between Work, About, Blog. v3 stays **inside the blog**: series ↔ post, post ↔ post-in-same-blog. Cross-section "from this post, see related Work" belongs to `work-about-blog`, **not here**. The #10 "read next" component, if ever built, is the shared seam — build it in `work-about-blog`, not v3.
 
 ---

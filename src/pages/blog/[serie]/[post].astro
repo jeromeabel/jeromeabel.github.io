@@ -1,4 +1,6 @@
 ---
+import SerieContents from "@components/blog/SerieContents.astro";
+import TableOfContents from "@components/blog/TableOfContents.astro";
 import TopicChips from "@components/blog/TopicChips.astro";
 import CustomImage from "@components/ui/CustomImage.astro";
 import H1 from "@components/ui/H1.astro";
@@ -48,7 +50,10 @@ const nextPost = index + 1 === numberOfPosts ? null : currentPosts[index + 1];
 if (!currentPost) {
   throw new Error("Sorry, could not find serie");
 }
-const { Content, remarkPluginFrontmatter } = await render(currentPost);
+const { Content, headings, remarkPluginFrontmatter } =
+  await render(currentPost);
+const tocHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
+const showToc = tocHeadings.length >= 4;
 const minutesRead =
   (currentPost.data as { minutesRead?: string }).minutesRead ??
   remarkPluginFrontmatter.minutesRead;
@@ -87,7 +92,7 @@ const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
               variant="menuInactive"
             />
             <Icon name="lucide:chevron-right" />
-            {index + 1}
+            Part {index + 1} of {numberOfPosts}
           </div>
         </nav>
         <H1>{currentPost.data.title}</H1>
@@ -126,9 +131,37 @@ const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
       )
     }
 
-    <Prose class="mt-4 md:mx-auto md:mt-8" data-expand-image="inline">
-      <Content />
-    </Prose>
+    {
+      showToc && (
+        <details class="border-muted-border rounded-lg border p-4 lg:hidden">
+          <summary class="text-muted cursor-pointer text-sm font-medium uppercase">
+            On this page
+          </summary>
+          <div class="mt-3">
+            <TableOfContents headings={tocHeadings} showLabel={false} />
+          </div>
+        </details>
+      )
+    }
+
+    <div class="mt-4 flex items-start gap-12 md:mt-8">
+      <Prose class="min-w-0 flex-1 md:mx-auto" data-expand-image="inline">
+        <Content />
+      </Prose>
+      {
+        showToc && (
+          <aside class="sticky top-24 hidden max-h-[calc(100vh-8rem)] w-56 shrink-0 overflow-y-auto lg:block">
+            <TableOfContents headings={tocHeadings} />
+          </aside>
+        )
+      }
+    </div>
+
+    <SerieContents
+      serieTitle={currentSerie.data.title}
+      posts={currentPosts}
+      currentId={currentPost.id}
+    />
 
     {
       hasPagination && (
@@ -154,6 +187,14 @@ const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
               type="next"
               title={nextPost.data.title}
               id={nextPost.id}
+            />
+          )}
+
+          {!nextPost && (
+            <LinkNavPost
+              type="next"
+              title={`Back to ${currentSerie.data.title}`}
+              id={currentSerie.id}
             />
           )}
         </div>
