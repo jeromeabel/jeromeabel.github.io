@@ -203,6 +203,29 @@ card `href` links, list container classes). `pnpm build` still passes.
 `PostList` does not appear in the astrobook sidebar (no `.stories.ts`
 file), confirming the skip took effect cleanly.
 
+## Task 4 — final verification
+
+Re-verified (this task, no regressions since Tasks 2–3):
+
+- **`Legacy/<Name>` title field present in all 8 story files** — confirmed
+  by grepping each `.stories.ts`'s default export directly (not by
+  checking sidebar grouping, which — per the astrobook limitation
+  documented above — doesn't visually separate legacy from live stories):
+  `work/WorkCard.stories.ts`, `work/WorkCardImage.stories.ts`,
+  `work/WorksPreview.stories.ts`, `blog/BlogPreview.stories.ts`,
+  `blog/PostCard.stories.ts`, `blog/SerieList.stories.ts`,
+  `blog/SerieListItem.stories.ts`, `blog/SeriePostCard.stories.ts` all
+  have `title: "Legacy/<Name>"` matching their component name.
+- **All 8 storied legacy components render** — re-checked live via
+  `pnpm dev` + `/styleguide`: every story's dashboard preview route
+  (`/styleguide/dashboard/src/components/<dir>/<slug>/default`) returns
+  HTTP 200 with real markup (`href="/work/…"` or `href="/blog/…"` links
+  to actual content), no `astro-error-overlay` or compiler-error markers.
+- **Orphan re-check clean** —
+  `git grep -l -E "(BlogPreview|PostCard|PostList|SerieList|SerieListItem|SeriePostCard|WorkCard|WorkCardImage|WorksPreview)\.astro" -- 'src/pages' 'src/layouts'`
+  returns no output (exit 1): none of the 9 legacy components are
+  imported by any page or layout. Still fully orphaned, as intended.
+
 ## Legacy component delete-vs-adopt verdicts
 
 Placeholder — decide after eyeballing all 9 in `/styleguide` now that
