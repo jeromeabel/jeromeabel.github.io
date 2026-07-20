@@ -226,6 +226,27 @@ Re-verified (this task, no regressions since Tasks 2–3):
   returns no output (exit 1): none of the 9 legacy components are
   imported by any page or layout. Still fully orphaned, as intended.
 
+### Astrobook `Legacy/` grouping — resolved
+
+Closing the loop flagged in the Task 2 section above ("flagging for Task 4
+… to resolve or re-scope"): the human decided to accept the alphabetical
+interleaving of legacy and live stories per-folder, since astrobook 0.13.2
+has no title-based sidebar grouping. `title: "Legacy/<Name>"` stays in
+every story anyway (harmless, forward-compatible if astrobook ever adds
+support) but does not currently produce a visually separate group. No
+further action needed — Task 4 verified the titles are present (above),
+which is the only part of this that's actually checkable today.
+
+### Prettier note
+
+All 9 restored `.astro` files fail `pnpm format:check` — Prettier would
+reflow the single-line `{/* LEGACY ... */}` comment into a 3-line block,
+which would defeat the "byte-identical to `main`, position-only" property
+the fence-fix relies on. This is intentional and not CI-gated (deploy
+only runs `pnpm build`), but a future `pnpm format:write` across the repo
+would silently reflow these 9 files. If that's undesired, add them to
+`.prettierignore` before running a repo-wide format pass.
+
 ## Legacy component delete-vs-adopt verdicts
 
 Placeholder — decide after eyeballing all 9 in `/styleguide` now that
