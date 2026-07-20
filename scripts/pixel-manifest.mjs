@@ -125,8 +125,12 @@ export const MANIFEST = [
     storyPath:
       "/styleguide/dashboard/src/components/blog/post-row-calm/calm-row",
     liveUrl: `${BASE}/`,
-    selector:
-      'a[href="/blog/adding-likes-to-a-static-astro-site"][class*="border-b"]',
+    // "adding-likes-to-a-static-astro-site" is not one of the current 4
+    // "Latest" posts (verified live: curl `/` and grep the calm-row hrefs -
+    // they are web-performance/05-images-part-2, 04-images-part-1,
+    // 03-benchmark-tables, api-endpoints-with-astro). Repointed to a post
+    // that is actually rendered live right now.
+    selector: 'a[href="/blog/api-endpoints-with-astro"][class*="border-b"]',
     masks: [],
   },
   {
@@ -166,7 +170,10 @@ export const MANIFEST = [
     storyPath:
       "/styleguide/dashboard/src/components/blog/serie-contents/default",
     liveUrl: `${BASE}/blog/web-performance/03-benchmark-tables`,
-    selector: 'nav[aria-label="Series contents"]',
+    // SerieContents.astro renders a <section aria-label="Series contents">,
+    // not a <nav> (confirmed live: curl the page and grep the tag - only
+    // <section aria-label="Series contents" ...> appears).
+    selector: 'section[aria-label="Series contents"]',
     masks: [],
   },
   {
@@ -195,14 +202,27 @@ export const MANIFEST = [
   },
   {
     id: "blog-tableofcontents--default",
-    storyPath:
-      "/styleguide/dashboard/src/components/blog/table-of-contents/default",
-    liveUrl: `${BASE}/blog/web-performance/03-benchmark-tables`,
-    // TableOfContents renders twice (mobile + desktop breakpoints); pick the
-    // first DOM instance deterministically rather than disambiguating by nth-child
-    // positional guessing across unrelated siblings.
-    selector: 'nav[aria-label="Table of contents"]:first-of-type',
-    masks: [],
+    skip: true,
+    // TableOfContents renders twice per post page ([serie]/[post].astro:136-155):
+    // once inside a mobile-only <details class="... md:hidden"> (no `open`
+    // attribute) and once inside a desktop-only <aside class="hidden md:block">.
+    // `:first-of-type` matches BOTH navs (each is the only nav-type child of its
+    // own parent), so a plain `.first()` always grabs the document-order-first
+    // (mobile/details) instance regardless of viewport - broken for desktop
+    // captures. Live Playwright check at both Task 3 viewports
+    // (deploy-preview-104, /blog/web-performance/03-benchmark-tables):
+    //   1280px: raw nav count=2, isVisible=[false, true] (aside instance visible;
+    //     `nav[aria-label="Table of contents"]:visible` correctly resolves to 1
+    //     match and waitFor({state:'visible'}) succeeds)
+    //   390px:  raw nav count=2, isVisible=[false, false] - NEITHER instance is
+    //     visible, because the mobile <details> has no `open` attribute, so its
+    //     content (including the nav) stays collapsed/non-visible without a user
+    //     click. `:visible` count=0 and waitFor({state:'visible'}) times out.
+    // Since the mobile instance is never visible without interaction, no single
+    // selector can satisfy Task 3's single-selector + `.first()` +
+    // `waitFor({state:'visible'})` shoot() pattern at both viewports.
+    reason:
+      "renders twice per page (mobile/desktop); mobile instance lives inside a closed <details> with no `open` attribute, so it is never visible without a user click - a single selector can't target the visible instance at both viewports",
   },
   {
     id: "blog-topicchips--default",
