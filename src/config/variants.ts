@@ -14,8 +14,8 @@ export const VARIANTS: {
   worksStrip: WorksStripVariant;
   aboutFacts: AboutFactsVariant;
 } = {
-  workFeatured: "gallery-2x2-1x1",
+  workFeatured: "gallery-3col-1x1",
   homePosts: "calm-rows",
-  worksStrip: "mini-card",
-  aboutFacts: "strip",
+  worksStrip: "overlay-card",
+  aboutFacts: "grid",
 };
