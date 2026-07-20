@@ -263,3 +263,106 @@ Tasks 2 and 3 are both complete.
 - `blog/SerieList` — keep / delete / adopt — decide after eyeballing.
 - `blog/SerieListItem` — keep / delete / adopt — decide after eyeballing.
 - `blog/SeriePostCard` — keep / delete / adopt — decide after eyeballing.
+
+## Pixel verification (Plan D, Task 4)
+
+Full `pnpm pixel-check` run against `deploy-preview-104` (commit-synced),
+two viewports (1280 desktop / 390 mobile), strict identity
+(`threshold: 0.1`, 0-pixel budget). Report artifacts in `.pixel-report/`
+(gitignored).
+
+**Tally:** 2 pass · 55 fail · 22 skip · 23 error (102 story×viewport cells).
+
+### Headline finding — astrobook boxes stories at a fixed 976px frame
+
+53 of 55 fails are **size mismatches**, not content mismatches. Astrobook
+renders every story inside a fixed ~**976px content column** that does
+**not** track the Playwright viewport width: the story capture is 976px
+wide at both the 1280 and 390 runs, while the live component inherits its
+real page width — a page `container` (measured 832px on `/about`) or a
+full-bleed section (1280px for `Header`, `WorksStrip`, `Hero`). Width
+never matches, so `pixelmatch`'s size guard trips before a single content
+pixel is compared.
+
+This is proven, not inferred: three entries — `ui-customimage--default`
+@mobile and `work-workoverlaycard--overlaycard` @desktop+@mobile — report
+**0 mismatched pixels within the overlapping region** and fail *only* on
+the size guard. Pixel-identical content, different frame width. If the
+story frame matched the live width, they would pass outright.
+
+**Consequence:** strict 0-pixel identity between astrobook stories and
+live pages is **not achievable for any width-sensitive component** while
+astrobook constrains the story canvas to 976px and live widths vary per
+page/section. The plan's "container mismatch" bucket (Task 4 Step 1) is
+real and dominant — but its suggested fix (wrap the story in *the* site
+container) is insufficient on its own, because there is no single live
+width: `container` sections want 832px, full-bleed sections want 1280px,
+and astrobook still caps the canvas at 976px on top of that.
+
+**Follow-up options (not done this pass — each is a separate reviewed
+change):**
+1. Investigate astrobook config for a full-width / viewport-driven story
+   canvas (would fix the full-bleed components: Header, Hero, WorksStrip).
+2. Per-story width decorators that reproduce each component's real live
+   container width (832 for container sections, etc.) — resolves the
+   remaining size fails but is per-component bespoke.
+3. Accept that only intrinsic-size components (icons, toggles,
+   aspect-locked cards) are strict-diffable in astrobook, and scope
+   pixel-check to those.
+
+### Real content discrepancies (same size, non-zero diff)
+
+- `app-motiontoggle--default` @desktop + @mobile — **64px** diff, sizes
+  match. A genuine story↔live rendering difference (toggle icon/state or
+  theme resolution), not a framing artifact. The only true content finding
+  in the run. Root-cause TBD — likely default toggle state or
+  dark/light icon differs between the isolated story and the live header.
+
+### Passes (2)
+
+- `app-themetoggle--default` @desktop + @mobile — intrinsic-size control,
+  pixel-identical. The one component that clears strict identity outright.
+
+### Errors (23) — selector resolution, not component defects
+
+22 of 23 are `locator.waitFor` timeouts where the manifest selector (derived
+from the **live** DOM) does not resolve on the **story** side. Buckets:
+
+- **href-specific selectors** (`ui-link--default` → `href="https://jeromeabel.net"`,
+  `ui-linknavpost--previous/next` → post-specific hrefs): the story renders
+  the component with different mock props, so the live-anchored href never
+  appears story-side.
+- **title-specific selectors** (`ui-link--iconbutton/secondary/external` →
+  `a[title="…"]`): same class of mismatch — story mock titles differ.
+- **bare-tag selectors** (`ui-h1`, `ui-h2` → `h1`/`h2`): ambiguous across the
+  astrobook dashboard chrome and the story content; `.first()` is unreliable.
+- **dark-mode-dependent class** (`ui-prose--default` → `[class*="prose-invert"]`):
+  `prose-invert` only exists in dark mode; theme differs story↔live.
+- **exact long class + responsive visibility** (`contact-contactimage--default`
+  → `hidden … sm:block`): genuinely `display:none` at the 390px mobile
+  viewport (correct component behavior — not a bug), and exact `[class="…"]`
+  match is brittle desktop-side. `ui-p--default` likewise uses a full exact
+  class string.
+
+Fix (follow-up): re-anchor these to selectors that resolve in **both**
+contexts — prefer a stable CVA/owned class over href/title/tag, and drop
+`hidden`-at-mobile entries from the mobile pass. Not done this pass; the
+size-frame finding above makes a full re-anchor moot until the width issue
+is resolved (a re-anchored selector would still size-fail).
+
+1 of 23 is a `page.goto` networkidle 30s timeout on `ui-socialshare--default`
+@desktop — a live-preview flake (content-heavy blog post page never settles
+to networkidle). Switching `waitUntil: 'networkidle'` → `'load'` (fonts are
+awaited separately; component images are masked) would remove this class of
+flake. Deferred with the other tooling follow-ups.
+
+### Tooling fix applied this pass
+
+The image-decode ready-wait was aborting every **mobile** capture: at 390px
+the page is taller, more `<img>` sit below the fold, and a lazy/offscreen
+image's `.decode()` promise never settles → the 10s budget expired and the
+whole `shoot()` threw. Fixed in `scripts/pixel-check.mjs`: filter to
+already-loaded images (`img.complete && naturalWidth > 0`) and treat a
+decode stall as **non-fatal** (component images are masked, so page-level
+decode state can't affect the diff). This turned ~40 mobile `error` cells
+into real `fail`/`pass` results, surfacing the 976px-frame finding above.

@@ -48,15 +48,29 @@ async function shoot(page, url, selector, masks, width) {
     10000,
     "document.fonts.ready",
   );
-  await withTimeout(
-    page.evaluate(async () => {
-      await Promise.all(
-        [...document.images].map((i) => i.decode().catch(() => {})),
-      );
-    }),
-    10000,
-    "image decode",
-  );
+  // Best-effort: decode already-loaded images so their painted pixels are
+  // stable before capture. Filter to complete images — a lazy/offscreen <img>
+  // (common at the 390px mobile viewport, where the page is taller and more
+  // images sit below the fold) may never trigger load, so its .decode()
+  // promise neither resolves nor rejects and hangs the whole 10s budget.
+  // Treat a stall as non-fatal instead of aborting the capture: the component
+  // under test always masks its own <img>/canvas regions, so page-level decode
+  // state cannot affect the diff.
+  try {
+    await withTimeout(
+      page.evaluate(async () => {
+        await Promise.all(
+          [...document.images]
+            .filter((i) => i.complete && i.naturalWidth > 0)
+            .map((i) => i.decode().catch(() => {})),
+        );
+      }),
+      10000,
+      "image decode",
+    );
+  } catch (err) {
+    console.log(`  (non-fatal) ${err.message} @ ${url}`);
+  }
   const el = page.locator(selector).first();
   await el.waitFor({ state: "visible", timeout: 15000 });
   // .screenshot() resolves with a Buffer of PNG-encoded bytes (default
