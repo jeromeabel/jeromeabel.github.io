@@ -1,4 +1,4 @@
-import Footer from './Footer.astro';
+import Footer from "./Footer.astro";
 
 export default { component: Footer };
 

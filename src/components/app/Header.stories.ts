@@ -1,4 +1,4 @@
-import Header from './Header.astro';
+import Header from "./Header.astro";
 
 export default { component: Header };
 

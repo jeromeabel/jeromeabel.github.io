@@ -1,4 +1,4 @@
-import MotionToggle from './MotionToggle.astro';
+import MotionToggle from "./MotionToggle.astro";
 
 export default { component: MotionToggle };
 
