@@ -1,4 +1,3 @@
-{/* LEGACY — main-only, not wired into any v3 page. Kept for styleguide delete-vs-adopt review. See docs/specs/01_active/dev-styleguide. */}
 ---
 import SeriePostListItem from "@components/blog/SeriePostListItem.astro";
 import { type CollectionEntry } from "astro:content";
@@ -17,6 +16,7 @@ if (!serie) {
 const posts = await getPostsFromSerie(serie);
 ---
 
+{/* LEGACY — main-only, not wired into any v3 page. Kept for styleguide delete-vs-adopt review. See docs/specs/01_active/dev-styleguide. */}
 <div class="border-muted-border flex flex-col gap-2 md:border-s md:ps-8">
   <a
     href={`/blog/${serie.id}`}
