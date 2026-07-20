@@ -7,6 +7,7 @@ import icon from "astro-icon";
 import { defineConfig } from "astro/config";
 import rehypeExternalLinks from "rehype-external-links";
 import { remarkReadingTime } from "./src/utils/remark-reading-time.mjs";
+import astrobook from "astrobook";
 
 import tailwindcss from "@tailwindcss/vite";
 
@@ -55,7 +56,11 @@ export default defineConfig({
     }),
 
     sitemap(),
-  ],
+
+    process.env.NODE_ENV === 'development'
+      ? astrobook({ subpath: '/styleguide' })
+      : null,
+  ].filter(Boolean),
 
   vite: {
     plugins: [tailwindcss()],

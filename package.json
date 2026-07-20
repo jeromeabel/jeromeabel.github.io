@@ -34,6 +34,7 @@
   "devDependencies": {
     "@iconify-json/fa6-brands": "^1.2.6",
     "@tailwindcss/typography": "^0.5.20",
+    "astrobook": "^0.13.2",
     "prettier": "^3.9.5",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.6.14"
