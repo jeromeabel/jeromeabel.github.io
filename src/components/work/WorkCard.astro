@@ -1,4 +1,3 @@
-{/* LEGACY — main-only, not wired into any v3 page. Kept for styleguide delete-vs-adopt review. See docs/specs/01_active/dev-styleguide. */}
 ---
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
@@ -26,6 +25,7 @@ const dateISOString = new Date(work.data.date).toLocaleDateString(
 );
 ---
 
+{/* LEGACY — main-only, not wired into any v3 page. Kept for styleguide delete-vs-adopt review. See docs/specs/01_active/dev-styleguide. */}
 <a
   href={"/work/" + work.id}
   title={`Open the "${work.data.title}" project`}
