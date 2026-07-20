@@ -1,0 +1,11 @@
+{/* LEGACY — main-only, not wired into any v3 page. Kept for styleguide delete-vs-adopt review. See docs/specs/01_active/dev-styleguide. */}
+---
+import SerieListItem from "@components/blog/SerieListItem.astro";
+import { getAllSeries } from "src/utils/repository";
+
+const allSeries = await getAllSeries();
+---
+
+<div class="mt-8 flex flex-col gap-16 text-base md:text-xl">
+  {allSeries.map((serie) => <SerieListItem {serie} />)}
+</div>
