@@ -1,6 +1,6 @@
-import type { ComponentProps } from 'astro/types';
-import PostRow from './PostRow.astro';
-import { getAllStandalonePosts } from '../../utils/repository';
+import type { ComponentProps } from "astro/types";
+import PostRow from "./PostRow.astro";
+import { getAllStandalonePosts } from "../../utils/repository";
 
 const posts = await getAllStandalonePosts();
 
@@ -14,6 +14,6 @@ export const ArrowRow = {
 export const WithSerie = {
   args: {
     post: posts[0],
-    serie: { title: 'Web performance', id: 'web-performance', part: 1 },
+    serie: { title: "Web performance", id: "web-performance", part: 1 },
   } satisfies ComponentProps<typeof PostRow>,
 };

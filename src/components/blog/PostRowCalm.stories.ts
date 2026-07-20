@@ -1,6 +1,6 @@
-import type { ComponentProps } from 'astro/types';
-import PostRowCalm from './PostRowCalm.astro';
-import { getAllStandalonePosts } from '../../utils/repository';
+import type { ComponentProps } from "astro/types";
+import PostRowCalm from "./PostRowCalm.astro";
+import { getAllStandalonePosts } from "../../utils/repository";
 
 const posts = await getAllStandalonePosts();
 

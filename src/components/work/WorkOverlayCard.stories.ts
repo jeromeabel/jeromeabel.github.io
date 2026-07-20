@@ -1,6 +1,6 @@
-import type { ComponentProps } from 'astro/types';
-import WorkOverlayCard from './WorkOverlayCard.astro';
-import { getFeaturedWorks } from '../../utils/repository';
+import type { ComponentProps } from "astro/types";
+import WorkOverlayCard from "./WorkOverlayCard.astro";
+import { getFeaturedWorks } from "../../utils/repository";
 
 const works = await getFeaturedWorks();
 
