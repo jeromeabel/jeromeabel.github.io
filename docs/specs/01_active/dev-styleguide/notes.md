@@ -127,18 +127,90 @@ colocated file paths — flagging for **Task 4** (which does the "confirm a
 `Legacy/` group holds the 9, visually separate" check) to resolve or
 re-scope.
 
+## Task 3 (`blog/` legacy stories) — findings
+
+### Frontmatter-fence fix applied to all 6 restored `blog/` files
+
+Same defect and same fix as Task 2 (see above): the Task-1 restore
+prepended the LEGACY header comment as line 1, before the opening `---`
+fence, in all 6 `blog/` files too. Moved the identical comment text to
+immediately after the closing `---` fence (first line of the template
+section) in `BlogPreview.astro`, `PostCard.astro`, `PostList.astro`,
+`SerieList.astro`, `SerieListItem.astro`, and `SeriePostCard.astro` —
+position only, byte-identical text, no reformatting (Prettier's `--write`
+would have reflowed the single-line `{/* ... */}` comment into a 3-line
+`{\n  /* ... */\n}` block; that was reverted to preserve the "position
+change only" constraint, matching Task 2's precedent — Task 2's 3
+`work/` files also still fail `prettier --check` for the same reason and
+were left as-is).
+
+Verified with `@astrojs/compiler`'s `parse()`: zero diagnostics for all 6
+files after the fix (previously: "The closing frontmatter fence (---) is
+missing an opening fence" on all 6, confirmed in Task 2's spot-check of
+`PostCard` and `BlogPreview`).
+
+Applied to `PostList.astro` as well even though it isn't storied (see
+below) — the file stays restored + tagged + fence-fixed, per the task
+brief, in case a future incompatibility fix un-skips it.
+
+### Prop drift: none
+
+All 5 storied components' `Props` (or self-fetch signature) are compatible
+with the current content-collection schema (`src/content.config.ts`) and
+current `src/utils/repository.ts` exports. No inline fixtures were needed;
+every story uses real data with `satisfies ComponentProps<typeof X>` (or
+`args: {}` for the two self-fetching components, matching the
+`WorksPreview` convention).
+
+- `BlogPreview.astro` — no `Props`; self-fetches via `getAllBlogPosts()`.
+  Story uses `args: {}`. Note: its own import line reads
+  `@components/blog//SeriePostCard.astro` (double slash) — a pre-existing
+  typo carried over from `main`, not introduced by any restore/fix step.
+  It resolves fine (verified: story renders 200 with real post content) so
+  left untouched, out of scope for this task.
+- `PostCard.astro` — `{ post: CollectionEntry<"post"> }`. Uses
+  `post.data.{title,description,date}` and `post.body` — all present in
+  the current `post` schema. Fed with `getAllStandalonePosts()[0]`.
+- `PostList.astro` — **skipped, no story.** Imports the removed
+  `getAllPosts` export from `src/utils/repository` (current repository.ts
+  has no such export — closest analogues are `getAllStandalonePosts`,
+  `getAllBlogPosts`, `getAllSeriePosts`). This is a genuine missing-export
+  incompatibility, not prop drift, and not something a story-level fixture
+  can paper over without editing the component itself (out of scope — the
+  brief and Task 1 Step 3b both call this a pre-known skip). Fence fix was
+  still applied (see above) for restore consistency.
+- `SerieList.astro` — no `Props`; self-fetches via `getAllSeries()`. Story
+  uses `args: {}`.
+- `SerieListItem.astro` — `{ serie: CollectionEntry<"serie"> }`. Uses
+  `serie.data.{title,abstract}` and `getPostsFromSerie(serie)` — both
+  compatible with the current `serie` schema and repository export. Fed
+  with `getAllSeries()[0]`.
+- `SeriePostCard.astro` — `{ post: CollectionEntry<"seriePost"> }`. Uses
+  `post.data.{title,description,date}`, `post.body`, and self-fetches
+  `getCollection("serie")` to locate the parent serie/index — all
+  compatible with the current schema. Fed with `getAllSeriePosts()[0]`.
+
+Verified live via `pnpm dev` + `/styleguide`: all 5 story pages
+(`blog/BlogPreview`, `blog/PostCard`, `blog/SerieList`,
+`blog/SerieListItem`, `blog/SeriePostCard`) return 200 with real rendered
+content (checked for component-specific markup: "Latest Posts" heading,
+card `href` links, list container classes). `pnpm build` still passes.
+`PostList` does not appear in the astrobook sidebar (no `.stories.ts`
+file), confirming the skip took effect cleanly.
+
 ## Legacy component delete-vs-adopt verdicts
 
-Placeholder — decide after eyeballing all 9 in `/styleguide` once Tasks 2–3
-are both complete (blog/ legacy stories not yet written as of this note).
+Placeholder — decide after eyeballing all 9 in `/styleguide` now that
+Tasks 2 and 3 are both complete.
 
 - `work/WorkCard` — keep / delete / adopt — decide after eyeballing.
 - `work/WorkCardImage` — keep / delete / adopt — decide after eyeballing.
 - `work/WorksPreview` — keep / delete / adopt — decide after eyeballing.
-- `blog/BlogPreview` — not yet storied (Task 3).
-- `blog/PostCard` — not yet storied (Task 3).
+- `blog/BlogPreview` — keep / delete / adopt — decide after eyeballing.
+- `blog/PostCard` — keep / delete / adopt — decide after eyeballing.
 - `blog/PostList` — pre-known incompatible (imports removed `getAllPosts`
-  export) — skip story, per Task 1 Step 3b / plan-c.md.
-- `blog/SerieList` — not yet storied (Task 3).
-- `blog/SerieListItem` — not yet storied (Task 3).
-- `blog/SeriePostCard` — not yet storied (Task 3).
+  export) — skipped story, per Task 1 Step 3b / plan-c.md. Fence-fixed but
+  unstoried; stays restored for now.
+- `blog/SerieList` — keep / delete / adopt — decide after eyeballing.
+- `blog/SerieListItem` — keep / delete / adopt — decide after eyeballing.
+- `blog/SeriePostCard` — keep / delete / adopt — decide after eyeballing.
