@@ -144,6 +144,11 @@ change only" constraint, matching Task 2's precedent — Task 2's 3
 `work/` files also still fail `prettier --check` for the same reason and
 were left as-is).
 
+**Correction (post-review):** `SeriePostCard.astro`'s comment was
+accidentally dropped entirely in the original Task 3 commit rather than
+moved — the task reviewer caught it (the file had zero `LEGACY` matches).
+Fixed by reinserting the identical comment text after the closing fence.
+
 Verified with `@astrojs/compiler`'s `parse()`: zero diagnostics for all 6
 files after the fix (previously: "The closing frontmatter fence (---) is
 missing an opening fence" on all 6, confirmed in Task 2's spot-check of
