@@ -49,3 +49,9 @@ test("container max-width resolves --breakpoint-xl to 1280px", () => {
   assert.equal(byName(d, "container-max-width").px, 1280);
   assert.equal(byName(d, "container-padding-inline").px, 16); // 1rem × 16
 });
+test("root font-size guard scans global.css (no false positives on real file)", () => {
+  // Verifies the guard's new global.css scan doesn't fail on the actual codebase.
+  // global.css has no html//:root font-size override; extractor should run cleanly.
+  const d = run();
+  assert.equal(d.rootPx, 16, "extractor completed with guard passing");
+});

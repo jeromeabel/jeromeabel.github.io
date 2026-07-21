@@ -40,13 +40,33 @@ function block(css, header) {
 
 const css = read(CSS);
 
-// 1. Root font-size guard — Layout.astro must not override html font-size.
+// 1. Root font-size guard — neither Layout.astro nor global.css must override html font-size.
 {
   const layout = read(LAYOUT);
-  const m = layout.match(/html[^{]*\{[^}]*font-size:\s*([\d.]+)px/s);
-  if (m && Number(m[1]) !== ROOT_PX) {
+  const layoutMatch = layout.match(/html[^{]*\{[^}]*font-size:\s*([\d.]+)px/s);
+  if (layoutMatch && Number(layoutMatch[1]) !== ROOT_PX) {
     console.error(
-      `ROOT FONT-SIZE GUARD FAILED: Layout.astro sets ${m[1]}px, expected ${ROOT_PX}px — ` +
+      `ROOT FONT-SIZE GUARD FAILED: Layout.astro sets ${layoutMatch[1]}px, expected ${ROOT_PX}px — ` +
+        `all rem→px conversions invalid. Update ROOT_PX only after verifying the app change.`,
+    );
+    process.exit(1);
+  }
+
+  // Check global.css for html { font-size } declaration
+  const cssHtmlMatch = css.match(/html[^{]*\{[^}]*font-size:\s*([\d.]+)px/s);
+  if (cssHtmlMatch && Number(cssHtmlMatch[1]) !== ROOT_PX) {
+    console.error(
+      `ROOT FONT-SIZE GUARD FAILED: global.css html rule sets ${cssHtmlMatch[1]}px, expected ${ROOT_PX}px — ` +
+        `all rem→px conversions invalid. Update ROOT_PX only after verifying the app change.`,
+    );
+    process.exit(1);
+  }
+
+  // Check global.css for :root { font-size } declaration
+  const cssRootMatch = css.match(/:root[^{]*\{[^}]*font-size:\s*([\d.]+)px/s);
+  if (cssRootMatch && Number(cssRootMatch[1]) !== ROOT_PX) {
+    console.error(
+      `ROOT FONT-SIZE GUARD FAILED: global.css :root rule sets ${cssRootMatch[1]}px, expected ${ROOT_PX}px — ` +
         `all rem→px conversions invalid. Update ROOT_PX only after verifying the app change.`,
     );
     process.exit(1);
