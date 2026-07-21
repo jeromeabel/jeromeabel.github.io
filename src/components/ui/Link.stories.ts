@@ -1,5 +1,7 @@
 import type { ComponentProps } from "astro/types";
 import Link from "./Link.astro";
+import StoryContainer from "../styleguide/StoryContainer.astro";
+import StorySection from "../styleguide/StorySection.astro";
 
 export default { component: Link };
 
@@ -9,6 +11,7 @@ export const Default = {
     variant: "default",
     label: "Default link",
   } satisfies ComponentProps<typeof Link>,
+  decorators: [{ component: StoryContainer }],
 };
 
 export const Cta = {
@@ -27,6 +30,7 @@ export const IconButton = {
     label: "Menu",
     "aria-label": "Menu",
   } satisfies ComponentProps<typeof Link>,
+  decorators: [{ component: StoryContainer }],
 };
 
 export const Secondary = {
@@ -35,6 +39,7 @@ export const Secondary = {
     variant: "secondary",
     label: "Secondary link",
   } satisfies ComponentProps<typeof Link>,
+  decorators: [{ component: StoryContainer }],
 };
 
 export const External = {
@@ -43,4 +48,5 @@ export const External = {
     variant: "external",
     label: "External link",
   } satisfies ComponentProps<typeof Link>,
+  decorators: [{ component: StorySection }],
 };

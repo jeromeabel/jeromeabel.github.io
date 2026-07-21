@@ -1,5 +1,6 @@
 import type { ComponentProps } from "astro/types";
 import WorkGalleryCard from "./WorkGalleryCard.astro";
+import StoryContainer from "../styleguide/StoryContainer.astro";
 import { getFeaturedWorks } from "../../utils/repository";
 
 const works = await getFeaturedWorks();
@@ -13,6 +14,7 @@ export const Square = {
   args: { work: works[0], ratio: "square" } satisfies ComponentProps<
     typeof WorkGalleryCard
   >,
+  decorators: [{ component: StoryContainer }],
 };
 
 // workFeatured: gallery-2x2-16x9 → video (16:9) card

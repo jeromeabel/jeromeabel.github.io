@@ -1,5 +1,6 @@
 import type { ComponentProps } from "astro/types";
 import WorkHeader from "./WorkHeader.astro";
+import StorySection from "../styleguide/StorySection.astro";
 import { getFeaturedWorks } from "../../utils/repository";
 
 const works = await getFeaturedWorks();
@@ -14,4 +15,5 @@ export default { component: WorkHeader };
 
 export const Default = {
   args: { data: works[0].data } satisfies ComponentProps<typeof WorkHeader>,
+  decorators: [{ component: StorySection }],
 };

@@ -30,6 +30,7 @@ export const MANIFEST = [
     liveUrl: `${BASE}/about`,
     selector: 'dl[class="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4"]',
     masks: [],
+    wrapper: "container",
   },
   {
     id: "about-aboutfactsstrip--strip",
@@ -44,6 +45,7 @@ export const MANIFEST = [
     selector:
       'section[class="reveal reveal-bottom container flex flex-col gap-6 lg:gap-8"]',
     masks: [],
+    wrapper: "none",
   },
   {
     id: "about-abouttext--default",
@@ -52,6 +54,7 @@ export const MANIFEST = [
     liveUrl: `${BASE}/about`,
     selector: 'section[class="flex w-full flex-col gap-6 sm:gap-8 lg:w-2/3"]',
     masks: [],
+    wrapper: "section",
   },
   {
     id: "about-aboutvalues--default",
@@ -73,6 +76,7 @@ export const MANIFEST = [
     liveUrl: `${BASE}/`,
     selector: "footer",
     masks: [],
+    wrapper: "none",
   },
   {
     id: "app-header--default",
@@ -80,6 +84,7 @@ export const MANIFEST = [
     liveUrl: `${BASE}/`,
     selector: 'header[class="py-4 lg:py-6"]',
     masks: [],
+    wrapper: "none",
   },
   {
     id: "app-motiontoggle--default",
@@ -88,6 +93,7 @@ export const MANIFEST = [
     liveUrl: `${BASE}/`,
     selector: "#motion-toggle",
     masks: [],
+    wrapper: "container",
   },
   {
     id: "app-themetoggle--default",
@@ -96,6 +102,7 @@ export const MANIFEST = [
     liveUrl: `${BASE}/`,
     selector: "#theme-toggle",
     masks: [],
+    wrapper: "container",
   },
 
   // ---------------------------------------------------------------------
@@ -119,6 +126,7 @@ export const MANIFEST = [
     selector:
       'a[class="border-muted-border hover:bg-muted-background group relative flex flex-row items-center justify-between gap-8 overflow-hidden border-b py-4"]',
     masks: [],
+    wrapper: "container",
   },
   {
     id: "blog-postrowcalm--calmrow",
@@ -132,6 +140,7 @@ export const MANIFEST = [
     // that is actually rendered live right now.
     selector: 'a[href="/blog/api-endpoints-with-astro"][class*="border-b"]',
     masks: [],
+    wrapper: "container",
   },
   {
     id: "blog-postrow--arrowrow",
@@ -149,6 +158,7 @@ export const MANIFEST = [
     liveUrl: `${BASE}/blog/api-endpoints-with-astro`,
     selector: 'section[class="flex flex-col gap-4"]',
     masks: ["img"],
+    wrapper: "container",
   },
   {
     id: "blog-selectedwriting--default",
@@ -157,6 +167,7 @@ export const MANIFEST = [
     liveUrl: `${BASE}/`,
     selector: "#writing",
     masks: [],
+    wrapper: "none",
   },
   {
     id: "blog-seriecard--default",
@@ -164,6 +175,7 @@ export const MANIFEST = [
     liveUrl: `${BASE}/blog`,
     selector: 'a[href="/blog/web-performance"]',
     masks: [],
+    wrapper: "container",
   },
   {
     id: "blog-seriecontents--default",
@@ -175,6 +187,7 @@ export const MANIFEST = [
     // <section aria-label="Series contents" ...> appears).
     selector: 'section[aria-label="Series contents"]',
     masks: [],
+    wrapper: "container",
   },
   {
     id: "blog-serielistitem--default",
@@ -199,6 +212,7 @@ export const MANIFEST = [
     selector:
       'a[class="border-muted-border hover:bg-muted-background group relative flex flex-row items-center justify-between gap-8 overflow-hidden border-b py-4 text-lg"]',
     masks: [],
+    wrapper: "container",
   },
   {
     id: "blog-tableofcontents--default",
@@ -230,6 +244,7 @@ export const MANIFEST = [
     liveUrl: `${BASE}/blog/adding-likes-to-a-static-astro-site`,
     selector: 'div[class="flex flex-wrap gap-2"]',
     masks: [],
+    wrapper: "container",
   },
 
   // ---------------------------------------------------------------------
@@ -242,6 +257,7 @@ export const MANIFEST = [
     liveUrl: `${BASE}/`,
     selector: 'div[class="reveal reveal-bottom relative hidden flex-1 sm:block"]',
     masks: ["svg"],
+    wrapper: "container",
   },
   {
     id: "contact-contactnoise--default",
@@ -256,6 +272,7 @@ export const MANIFEST = [
     // Contact contains an infinite CSS bounce (LinkedIn icon) and a pulsing
     // shadow animation (see concerns in task-2-report.md) - masked defensively.
     masks: ["svg", 'a[class*="animate-"]', ".anim-shadow"],
+    wrapper: "none",
   },
   {
     id: "contact-contacttext--default",
@@ -264,6 +281,7 @@ export const MANIFEST = [
     liveUrl: `${BASE}/`,
     selector: 'div[class="flex flex-col gap-8"]',
     masks: ['a[class*="animate-"]', ".anim-shadow"],
+    wrapper: "container",
   },
 
   // ---------------------------------------------------------------------
@@ -286,6 +304,7 @@ export const MANIFEST = [
     liveUrl: `${BASE}/`,
     selector: 'div[class="mt-6 flex items-center gap-3 lg:mt-10 lg:gap-4"]',
     masks: [],
+    wrapper: "container",
   },
   {
     id: "hero-hero--default",
@@ -296,6 +315,7 @@ export const MANIFEST = [
     // @keyframes float-rotate / shadow-pulse on .shape / .shape-shadow) -
     // masked here so the wrapper story stays diffable.
     masks: [".shape", ".shape-shadow"],
+    wrapper: "none",
   },
   {
     id: "hero-herotext--default",
@@ -303,6 +323,7 @@ export const MANIFEST = [
     liveUrl: `${BASE}/`,
     selector: "h1",
     masks: [],
+    wrapper: "container",
   },
 
   // ---------------------------------------------------------------------
@@ -329,6 +350,7 @@ export const MANIFEST = [
     liveUrl: `${BASE}/blog/adding-likes-to-a-static-astro-site`,
     selector: 'div[class="reveal-img relative overflow-hidden shadow-lg dark:shadow-none"]',
     masks: ["img"],
+    wrapper: "container",
   },
   {
     id: "ui-customimage--square",
@@ -341,6 +363,7 @@ export const MANIFEST = [
     liveUrl: `${BASE}/about`,
     selector: "h1",
     masks: [],
+    wrapper: "container",
   },
   {
     id: "ui-h2--default",
@@ -348,6 +371,7 @@ export const MANIFEST = [
     liveUrl: `${BASE}/blog`,
     selector: "h2",
     masks: [],
+    wrapper: "container",
   },
   {
     id: "ui-linknavpost--previous",
@@ -356,6 +380,7 @@ export const MANIFEST = [
     liveUrl: `${BASE}/blog/adding-likes-to-a-static-astro-site`,
     selector: 'a[href="/blog/nuxt-clean-architecture"]',
     masks: [],
+    wrapper: "container",
   },
   {
     id: "ui-linknavpost--next",
@@ -363,6 +388,7 @@ export const MANIFEST = [
     liveUrl: `${BASE}/blog/adding-likes-to-a-static-astro-site`,
     selector: 'a[href="/blog/clickable-images-astro-markdown"]',
     masks: [],
+    wrapper: "container",
   },
   {
     id: "ui-link--default",
@@ -370,6 +396,7 @@ export const MANIFEST = [
     liveUrl: `${BASE}/about`,
     selector: 'a[href="https://jeromeabel.net"]',
     masks: [],
+    wrapper: "container",
   },
   {
     id: "ui-link--cta",
@@ -382,6 +409,7 @@ export const MANIFEST = [
     liveUrl: `${BASE}/`,
     selector: 'a[title="Email"]',
     masks: [],
+    wrapper: "container",
   },
   {
     id: "ui-link--secondary",
@@ -389,6 +417,7 @@ export const MANIFEST = [
     liveUrl: `${BASE}/`,
     selector: 'a[title="All work"]',
     masks: [],
+    wrapper: "container",
   },
   {
     id: "ui-link--external",
@@ -396,6 +425,7 @@ export const MANIFEST = [
     liveUrl: `${BASE}/work/malinette`,
     selector: 'a[title="Website"]',
     masks: [],
+    wrapper: "section",
   },
   {
     id: "ui-prose--default",
@@ -405,6 +435,7 @@ export const MANIFEST = [
     // Prose renders arbitrary remark-processed markdown body content, which
     // may include inline images.
     masks: ["img"],
+    wrapper: "container",
   },
   {
     id: "ui-p--default",
@@ -413,6 +444,7 @@ export const MANIFEST = [
     selector:
       'p[class="text-xl text-pretty md:text-2xl md:tracking-wide xl:text-3xl xl:leading-tight"]',
     masks: [],
+    wrapper: "container",
   },
   {
     id: "ui-socialshare--default",
@@ -420,6 +452,7 @@ export const MANIFEST = [
     liveUrl: `${BASE}/blog/adding-likes-to-a-static-astro-site`,
     selector: 'div[class="text-muted flex items-center gap-2"]',
     masks: [],
+    wrapper: "container",
   },
 
   // ---------------------------------------------------------------------
@@ -431,6 +464,7 @@ export const MANIFEST = [
     liveUrl: `${BASE}/work`,
     selector: 'table[class="w-full border-collapse text-sm md:text-base"]',
     masks: [],
+    wrapper: "container",
   },
   {
     id: "work-relatedwriting--default",
@@ -439,6 +473,7 @@ export const MANIFEST = [
     liveUrl: `${BASE}/work/leconceptdelapreuve`,
     selector: 'section[class="flex flex-col gap-4"]',
     masks: [],
+    wrapper: "container",
   },
   {
     id: "work-workcardimage--default",
@@ -460,6 +495,7 @@ export const MANIFEST = [
     selector:
       'a[class="border-muted-border hover:bg-muted-background group flex flex-col border outline-offset-4 outline-black focus:outline-2 dark:outline-white"]',
     masks: ["img"],
+    wrapper: "container",
   },
   {
     id: "work-workgallerycard--video",
@@ -472,6 +508,7 @@ export const MANIFEST = [
     liveUrl: `${BASE}/work/malinette`,
     selector: 'header[class="flex w-full flex-col gap-4 lg:w-2/3 lg:gap-8"]',
     masks: [],
+    wrapper: "section",
   },
   {
     id: "work-workminicard--minicard",
@@ -483,6 +520,7 @@ export const MANIFEST = [
     selector:
       'a[class="group flex flex-col gap-2 outline-offset-4 outline-black focus:outline-2 dark:outline-white"]',
     masks: ["img"],
+    wrapper: "container",
   },
   {
     id: "work-workoverlaycard--overlaycard",
@@ -492,6 +530,7 @@ export const MANIFEST = [
     selector:
       'a[class="group relative block aspect-square overflow-hidden outline-offset-4 outline-black focus:outline-2 dark:outline-white"]',
     masks: ["img"],
+    wrapper: "container",
   },
   {
     id: "work-workspreview--default",
@@ -504,5 +543,6 @@ export const MANIFEST = [
     liveUrl: `${BASE}/`,
     selector: 'section[class="container flex flex-col gap-4 lg:gap-8"]',
     masks: ["img"],
+    wrapper: "none",
   },
 ];

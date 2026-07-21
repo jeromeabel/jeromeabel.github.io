@@ -1,5 +1,6 @@
 import type { ComponentProps } from "astro/types";
 import SeriePostListItem from "./SeriePostListItem.astro";
+import StoryContainer from "../styleguide/StoryContainer.astro";
 import { getAllSeriePosts } from "../../utils/repository";
 
 const posts = await getAllSeriePosts();
@@ -11,4 +12,5 @@ export const Default = {
     post: posts[0],
     index: 0,
   } satisfies ComponentProps<typeof SeriePostListItem>,
+  decorators: [{ component: StoryContainer }],
 };

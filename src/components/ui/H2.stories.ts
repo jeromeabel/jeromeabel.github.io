@@ -1,6 +1,10 @@
 import type { ComponentProps } from "astro/types";
 import H2 from "./H2.astro";
+import StoryContainer from "../styleguide/StoryContainer.astro";
 
 export default { component: H2 };
 
-export const Default = { args: {} satisfies ComponentProps<typeof H2> };
+export const Default = {
+  args: {} satisfies ComponentProps<typeof H2>,
+  decorators: [{ component: StoryContainer }],
+};
