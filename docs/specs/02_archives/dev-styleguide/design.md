@@ -1,4 +1,5 @@
 ---
+shipped: 2026-07-21
 title: Dev-only component styleguide (astrobook)
 created: 2026-07-20
 ---
