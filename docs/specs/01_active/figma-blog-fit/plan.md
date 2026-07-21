@@ -1218,7 +1218,7 @@ ids. Screenshot-gate each master against its story preview. The known non-action
 from Task 10/11/13 apply (font-prop "(absent)" on non-TEXT roots, container-width deltas,
 `gap: "normal"` string quirk) — log any batch-specific delta or named-debt in `notes.md`.
 
-- [ ] **Step 5: Commit the notes**
+- [x] **Step 5: Commit the notes**
 
 ```bash
 git add docs/specs/01_active/figma-blog-fit/notes.md
