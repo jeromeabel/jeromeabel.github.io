@@ -424,3 +424,67 @@ prop-subset read exactly, one node type's API standing in for the other's.
 
 **Committed**: `scripts/figma/dump-tokens.md` (procedure). `geometry.figma.json` is git-ignored
 per Task 1's `.gitignore` entry — not committed, regenerate via the recorded procedure.
+
+---
+
+## Task 10 — geometry diff + repair worklist
+
+`scripts/figma/diff-geometry.mjs` + `diff-geometry.test.mjs` written per plan (4/4 tests pass),
+run against the real Task-8/9 outputs: `node scripts/figma/diff-geometry.mjs geometry.web.json
+geometry.figma.json`. 133 worklist lines across 40 ids. Categorized (full raw output not pasted
+here — regenerate via the command above):
+
+1. **25× "missing in Figma"** — every id with no matched master (the Task 9 gap list). Expected;
+   closes only when Task 11/13 build those masters.
+2. **Font props (`fontSize`/`fontFamily`/`fontWeight`/`color`) reported "(absent)" on ~13 of the
+   15 matched non-text-root ids** (Header, Footer, toggles, cards, LinkNavPost) — a **methodology
+   artifact, not real drift**: `getComputedStyle` always returns inherited font-shorthand values
+   even on a non-text DOM element (`<header>`, `<div>`), but the Task-9 Figma reader only reads
+   `fontSize`/`fontFamily`/`fontWeight`/`color` when the root Figma node's own `type === "TEXT"` —
+   most of these masters' roots are `FRAME`/`COMPONENT` containers, so there's no comparable
+   Figma-side value to read off the root itself. Two matched ids (`ui-link--*`,
+   `ui-linknavpost--*`) whose web root IS the text-bearing element still show "(absent)" too,
+   because their Figma master root is the outer auto-layout frame, not the nested TEXT child —
+   same root-cause, applies uniformly. **Not actionable as-is**: Task 11's repair pass needs to
+   either read a representative descendant TEXT node's style per master (richer traversal) or
+   accept root-level font comparison only applies to the handful of masters whose root actually
+   is a TEXT node. Flagged, not fixed, here (Task 10 is diff-only).
+3. **Width deltas on every matched card/chip/row id** (e.g. `blog-postrowcalm--calmrow` 1248px
+   web vs 560px figma; `blog-seriecard--default` 1248px vs 380px; `blog-topicchips--default`
+   1248px vs 52px) — web geometry was captured at the desktop `.container` width (Task 8, via
+   `StoryContainer`/`StorySection` decorators), while these Figma masters are authored at their
+   own intrinsic/hug content width, not stretched to a 1248px container. Expected for
+   non-full-bleed masters; **`app-header--default`/`app-footer--default` widths match exactly
+   (1280px both)** since those are genuinely full-bleed in both. Real signal for Task 11: card
+   masters should either get a resize pass showing them **inside** their live grid/list context
+   (matches the pixel-check "wrapper" decorator logic from Task 5) or the diff basis needs a
+   per-component comparison width, not a blanket desktop/1248 default.
+4. **Real, actionable geometry deltas** (not explained by 2 or 3, worth a Task-11 repair line):
+   - `app-header--default`/`app-footer--default`: `paddingRight`/`paddingLeft` 0px web vs 16px
+     figma (inverted — web's own inline padding is 0, Figma masters carry the container's 16px
+     padding baked into the component instead of applying it at the template/instance level).
+   - `app-header--default`: `gap` "normal" web vs 40px figma — web's selector root isn't itself a
+     flex container (children's flex/gap lives one level deeper); needs selector or Figma
+     re-check, not a value mismatch per se.
+   - `blog-topicchips--default`: `borderTopColor` `rgb(0,0,0)` web (default color palette, chip
+     probably resolves border color at a deeper element) vs `rgb(209,221,187)` figma — needs
+     component-level check.
+   - `app-motiontoggle--default`/`app-themetoggle--default`/`ui-link--iconbutton`/
+     `ui-link--secondary`/`ui-link--external`: `borderRadius` `3.35544e+07px` web vs `9999px`
+     figma — both mean "fully round" (CSS `9999px`/`rounded-full` on a small box renders as a huge
+     `getComputedStyle` pixel value); **cosmetic tolerance gap in the diff script**, not a design
+     mismatch — `diff-geometry.mjs`'s px-tolerance compares literal numbers, so "practically
+     infinite" (web) vs "999px" (figma) never match even though both render fully-rounded. Worth
+     a follow-up: treat `borderRadius` ≥ some large threshold (e.g. ≥ 1000px) as "pill/circle" on
+     both sides before the numeric compare, rather than 0.5px tolerance. Flagged, not patched here
+     (would change diff-geometry.mjs behavior — a scoping decision for whoever owns Task 11).
+   - `ui-link--default`/`ui-link--secondary`/`ui-link--external`: small width deltas (85.8 vs 81,
+     186.9 vs 143, 146.6 vs 155) — content-driven (different label text length between story
+     fixture and Figma's authored label), same class as the pixel-check Task-7 residuals; not a
+     structural bug.
+
+**Not fixed in this task** — Task 10's scope is the diff script + one recorded run, not Figma
+repairs. Categories 1/3/4 above are the Task-11 repair-worklist input; category 2 needs a
+Task-11-time decision on read methodology before it's actionable.
+
+Commit: `feat(geometry): web↔figma geometry diff with repair worklist`.
