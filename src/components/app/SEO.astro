@@ -7,6 +7,9 @@ export interface Props {
   description?: string | undefined;
   image?: ImageMetadata | undefined;
   publishedDate?: Date | undefined;
+  updatedDate?: Date | undefined;
+  topic?: string | undefined;
+  type?: "website" | "article";
 }
 
 const defaultImage: ImageMetadata = {
@@ -21,6 +24,9 @@ const {
   description = "I'm Jérôme Abel, a front-end engineer and digital artist. Let's talk together to build amazing apps and websites.",
   image = defaultImage,
   publishedDate = new Date(),
+  updatedDate,
+  topic,
+  type = "website",
 } = Astro.props;
 
 const title = `${page} - Jérôme Abel`;
@@ -28,6 +34,10 @@ const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site);
 const socialImageURL = new URL(image.src, Astro.url);
 
 const publishedDateString = publishedDate.toISOString().slice(0, 10);
+const updatedDateString = updatedDate
+  ? new Date(updatedDate).toISOString().slice(0, 10)
+  : undefined;
+const tags = topic?.split(",").map((t) => t.trim()) ?? [];
 ---
 
 <meta charset="utf-8" />
@@ -36,6 +46,12 @@ const publishedDateString = publishedDate.toISOString().slice(0, 10);
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
 <link rel="manifest" href="/site.webmanifest" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title="Jérôme Abel — Blog"
+  href="/rss.xml"
+/>
 
 <meta name="msapplication-TileColor" content="#f5ffe1" />
 <meta name="theme-color" content="#f5ffe1" />
@@ -60,10 +76,8 @@ const publishedDateString = publishedDate.toISOString().slice(0, 10);
   name="keywords"
   content="web, frontend, front-end, creative coder, web developer, frontend developer, media artist, vite, nuxt, vuejs, astro, react, javascript, css, tailwind, reactjs, astrojs, frontend engineer, clean architecture"
 />
-<meta property="”article:published_time”" content={publishedDateString} />
-
 <meta property="og:site_name" content="Jérôme Abel Developer" />
-<meta property="og:type" content="website" />
+<meta property="og:type" content={type} />
 <meta property="og:url" content={canonicalWebsiteURL} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
@@ -71,6 +85,21 @@ const publishedDateString = publishedDate.toISOString().slice(0, 10);
 <meta property="og:image:alt" content={title} />
 <meta property="og:image:width" content={image.width.toString()} />
 <meta property="og:image:height" content={image.height.toString()} />
+
+{
+  type === "article" && (
+    <>
+      <meta property="article:published_time" content={publishedDateString} />
+      {updatedDateString && (
+        <meta property="article:modified_time" content={updatedDateString} />
+      )}
+      <meta property="article:author" content="Jérôme Abel" />
+      {tags.map((tag) => (
+        <meta property="article:tag" content={tag} />
+      ))}
+    </>
+  )
+}
 
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={canonicalWebsiteURL} />

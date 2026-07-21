@@ -1,6 +1,7 @@
 ---
 title: "The All-In-One Component"
 date: 2025-03-23
+topic: "nuxt, testing"
 description: First implementation of the version banner feature in a single component.
 abstract: "This second episode will present the simplest way to implement the version banner feature in a single component. The question becomes: are you confident enough with this version?"
 draft: false

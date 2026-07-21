@@ -1,0 +1,80 @@
+---
+import type { MarkdownHeading } from "astro";
+
+interface Props {
+  headings: MarkdownHeading[];
+  minDepth?: number;
+  maxDepth?: number;
+  showLabel?: boolean;
+}
+
+const { headings, minDepth = 2, maxDepth = 3, showLabel = true } = Astro.props;
+
+const filtered = headings.filter(
+  (h) => h.depth >= minDepth && h.depth <= maxDepth,
+);
+
+type TocItem = { slug: string; text: string; children: TocItem[] };
+
+const tree: TocItem[] = [];
+for (const heading of filtered) {
+  const item: TocItem = {
+    slug: heading.slug,
+    text: heading.text,
+    children: [],
+  };
+  if (heading.depth === minDepth || tree.length === 0) {
+    tree.push(item);
+  } else {
+    tree[tree.length - 1].children.push(item);
+  }
+}
+---
+
+{
+  tree.length > 0 && (
+    <nav aria-label="Table of contents">
+      {showLabel && (
+        <p class="text-muted mb-3 text-sm font-medium uppercase">
+          On this page
+        </p>
+      )}
+      <ol class="flex flex-col gap-2 text-sm">
+        {tree.map((item) => (
+          <li>
+            <a
+              href={`#${item.slug}`}
+              data-toc-link={item.slug}
+              class="text-muted hover:text-foreground border-muted-border block border-s-2 ps-3 transition-colors"
+            >
+              {item.text}
+            </a>
+            {item.children.length > 0 && (
+              <ol class="mt-2 flex flex-col gap-2 ps-3">
+                {item.children.map((child) => (
+                  <li>
+                    <a
+                      href={`#${child.slug}`}
+                      data-toc-link={child.slug}
+                      class="text-muted hover:text-foreground border-muted-border block border-s-2 ps-3 transition-colors"
+                    >
+                      {child.text}
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            )}
+          </li>
+        ))}
+      </ol>
+    </nav>
+  )
+}
+
+<style>
+  a[data-toc-link][aria-current] {
+    color: var(--color-foreground-accent);
+    border-color: var(--color-foreground-accent);
+    font-weight: 500;
+  }
+</style>

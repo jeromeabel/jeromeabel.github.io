@@ -10,6 +10,7 @@ const allPosts = await getAllBlogPosts();
 const filteredPosts = allPosts.slice(0, NB_POSTS);
 ---
 
+{/* LEGACY — main-only, not wired into any v3 page. Kept for styleguide delete-vs-adopt review. See docs/specs/01_active/dev-styleguide. */}
 <section class="container flex flex-col gap-4 lg:gap-8">
   <H2>Latest Posts</H2>
   <div class="grid gap-4 md:grid-cols-2 lg:gap-8">

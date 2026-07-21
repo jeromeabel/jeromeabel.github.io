@@ -1,31 +1,49 @@
 ---
-import { getCollection } from "astro:content";
-
+import ArchiveTable from "@components/work/ArchiveTable.astro";
 import H1 from "@components/ui/H1.astro";
+import H2 from "@components/ui/H2.astro";
+import Link from "@components/ui/Link.astro";
 import P from "@components/ui/P.astro";
-import WorkCardImage from "@components/work/WorkCardImage.astro";
+import WorkGalleryCard from "@components/work/WorkGalleryCard.astro";
 import Layout from "@layouts/Layout.astro";
+import { VARIANTS } from "src/config/variants";
+import { getArchiveWorks, getFeaturedWorks } from "src/utils/repository";
 
-const works = (await getCollection("work")).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
-);
+const selected = await getFeaturedWorks();
+const archive = await getArchiveWorks();
+
+const ratio = VARIANTS.workFeatured === "gallery-2x2-16x9" ? "video" : "square";
+const gridClass =
+  VARIANTS.workFeatured === "gallery-3col-1x1"
+    ? "grid-cols-2 sm:grid-cols-3"
+    : VARIANTS.workFeatured === "gallery-2x2-1x1"
+      ? "grid-cols-2"
+      : "grid-cols-1 sm:grid-cols-2";
 ---
 
 <Layout page="Work">
-  <main class="container py-8 lg:py-24">
+  <main class="container flex flex-col gap-16 py-8 md:gap-24 lg:py-24">
     <header class="flex w-full flex-col gap-4 lg:w-2/3 lg:gap-8">
       <H1>Work</H1>
       <P>
-        Here, you'll find a collection of my web development projects and
-        creative software explorations, combining technical skills with
-        thoughtful design.
+        Open work since 2010 — art systems, tools, experiments — where you can
+        see how I think. What I build at my day job is private; <Link
+          href="/blog"
+          label="the writing"
+        /> covers how I build now.
       </P>
     </header>
 
-    <section
-      class="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:mt-24 lg:grid-cols-3"
-    >
-      {works.map((work) => <WorkCardImage {work} />)}
+    <section>
+      <H2>Selected work</H2>
+      <div class:list={["mt-8 grid gap-4 lg:gap-8", gridClass]}>
+        {selected.map((work) => <WorkGalleryCard {work} {ratio} />)}
+      </div>
+    </section>
+
+    <section>
+      <H2>More projects</H2>
+      <ArchiveTable works={archive} />
     </section>
   </main>
 </Layout>

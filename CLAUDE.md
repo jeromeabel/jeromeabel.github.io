@@ -74,6 +74,18 @@ Organized by feature domain in `src/components/`:
 - **Analytics**: Umami via `@astrojs/partytown` (offloaded to web worker).
 - **Icons**: `astro-icon` with Iconify sets (lucide, fa6-brands) plus custom SVGs in `src/assets/icons/`.
 
+## Specs & Planning
+
+Project ideas and their design/plan artifacts live in `docs/specs/`, organized by lifecycle:
+`00_backlog/` (ideas) → `01_active/` (in-flight) → `02_archives/` (shipped). **Status is the folder.**
+See `docs/specs/CLAUDE.md` for conventions and `docs/specs/INDEX.md` for the current dashboard.
+
+- The **brainstorming** skill writes designs to `docs/specs/01_active/<slug>/design.md`.
+- The **writing-plans** skill writes plans to `docs/specs/01_active/<slug>/plan.md`.
+- Ship a topic with `./docs/specs/specs.sh archive <slug>` (stamps `shipped:` and updates INDEX).
+
+Both skills honor an explicit user location override.
+
 ## TypeScript
 
 Strict mode (`astro/tsconfigs/strict`). Path aliases:

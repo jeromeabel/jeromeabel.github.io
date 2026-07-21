@@ -1,0 +1,43 @@
+---
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  work: CollectionEntry<"work">;
+}
+
+const { work } = Astro.props;
+
+if (!work) {
+  throw new Error("Sorry, could not find work");
+}
+---
+
+<a
+  href={"/work/" + work.id}
+  title={`Open the "${work.data.title}" project`}
+  class="group relative block aspect-square overflow-hidden outline-offset-4 outline-black focus:outline-2 dark:outline-white"
+>
+  <Image
+    src={work.data.img_preview}
+    alt={`${work.data.title} preview`}
+    class="block h-full w-full object-cover transition-transform duration-1000 motion-safe:group-hover:scale-110"
+    loading="lazy"
+    widths={[160, 240, 320, 480, 640]}
+    sizes="(max-width: 767px) calc((100vw - 3rem) / 2), 280px"
+  />
+  <div
+    class="absolute inset-0 grid items-center duration-500 group-hover:bg-black/85 motion-reduce:transition-all dark:group-hover:bg-black/90"
+  >
+    <div
+      class="flex flex-col items-center justify-center gap-4 p-4 opacity-0 duration-500 group-hover:opacity-100"
+    >
+      <Icon
+        name="cross-big"
+        class="text-5xl text-white transition-all delay-100 duration-500 group-hover:rotate-0 motion-safe:-rotate-45"
+      />
+      <p class="font-title text-xl text-white">{work.data.title}</p>
+    </div>
+  </div>
+</a>

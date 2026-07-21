@@ -1,32 +1,68 @@
 ---
+import AboutFacts from "@components/about/AboutFacts.astro";
+import AboutFactsStrip from "@components/about/AboutFactsStrip.astro";
 import H1 from "@components/ui/H1.astro";
 import Link from "@components/ui/Link.astro";
 import Prose from "@components/ui/Prose.astro";
 import { Icon } from "astro-icon/components";
+import { VARIANTS } from "src/config/variants";
 ---
 
 <section class="flex w-full flex-col gap-6 sm:gap-8 lg:w-2/3">
   <H1>About</H1>
+  <p class="font-title text-2xl tracking-wide text-balance sm:text-3xl">
+    Artist turned web developer — I build things meant to be used, not just
+    seen.
+  </p>
   <Prose>
     <p>
-      <strong>Art is beautiful</strong>. For over a decade, I’ve explored
-      software arts, working with embedded systems, creative frameworks, and
-      multiple programming languages. My projects have been exhibited in
-      Brussels, Dakar, Montreal, Dubrovnik, Neuss, Tunis, Dublin, Paris, and
-      beyond. This journey has been filled with collaboration, discovery, and
-      meaningful experiences. If you're curious, you can check out my artistic
-      work at <Link href="https://jeromeabel.net" label="jeromeabel.net" />.
+      <strong>I build web applications</strong> with Vue and TypeScript. After an
+      intensive career change into web development, I deepened my Vue and Kotlin skills
+      at Raccourci Agency, and now work at{" "}<Link
+        label="uhlive"
+        href="https://uh.live/"
+      />, on the front end of an AI-driven call-intelligence product.
+    </p>
+  </Prose>
+
+  {VARIANTS.aboutFacts === "strip" ? <AboutFactsStrip /> : <AboutFacts />}
+
+  <Link
+    label="Download CV"
+    href="/CV_JeromeAbel_en.pdf"
+    icon="lucide:download"
+    variant="external"
+  />
+
+  <Prose>
+    <p>
+      <strong>Before the web</strong>, I spent over a decade in software arts —
+      embedded systems, creative frameworks, many programming languages. My
+      projects have been exhibited in Brussels, Dakar, Montreal, Dubrovnik,
+      Neuss, Tunis, Dublin, Paris, and beyond; my artistic work lives at{
+        " "
+      }<Link href="https://jeromeabel.net" label="jeromeabel.net" />. I built
+      and maintained{" "}<Link
+        href="https://reso-nance.org/malinette/"
+        label="La Malinette"
+      />, an open-source creative-coding framework used in schools — 5000+
+      downloads.
     </p>
 
     <p>
-      Today, <strong>I focus on front-end development</strong>, crafting modern,
-      maintainable, and well-tested web applications. In 2023, I completed a
-      year-long Front-End and React program at OpenClassrooms. My experience at
-      Raccourci Agency further deepened my skills in Vue and Kotlin. Now, I’m
-      fully engaged in building a great product at <Link
-        label="uhlive"
-        href="https://uh.live/"
-      />, an innovative company at the forefront of AI-driven Call Intelligence.
+      <strong>Teaching</strong> has run through all of it: fablab workshops, schools,
+      and artist residencies, where I trained more than 1000 people in electronics,
+      programming, and open-source tools.
+    </p>
+
+    <p>
+      <strong>Open source since 2010</strong> — creative-coding tools first on{
+        " "
+      }
+      <Link href="https://framagit.org/jeromeabel" label="Framagit" />, now on{
+        " "
+      }
+      <Link href="https://github.com/jeromeabel" label="GitHub" />.
     </p>
 
     <p>
@@ -40,11 +76,19 @@ import { Icon } from "astro-icon/components";
       />
     </p>
   </Prose>
-  <!-- <Link
-    label="Download CV"
-    href="/CV_JeromeAbel_en.pdf"
-    icon="lucide:download"
-    variant="external"
-    class="mt-4"
-  /> -->
+
+  <div class="flex flex-col gap-4 sm:flex-row">
+    <Link
+      label="See the work"
+      href="/work"
+      icon="lucide:arrow-right"
+      variant="secondary"
+    />
+    <Link
+      label="Read the writing"
+      href="/blog"
+      icon="lucide:arrow-right"
+      variant="secondary"
+    />
+  </div>
 </section>

@@ -1,6 +1,7 @@
 ---
 title: "A Balanced Shift"
 date: 2025-12-25
+topic: "ai"
 description: "A developer's honest take on AI in software engineering: navigating productivity myths, automation fatigue, and why specs—not prompts—are becoming the new code."
 abstract: "AI is reshaping software development, but the reality is messier than the demos suggest. This post explores the paradigm shift, the productivity paradox between greenfield and legacy codebases, and why engineering foundations and specification-driven workflows matter more than ever in the age of assisted technologies."
 draft: false

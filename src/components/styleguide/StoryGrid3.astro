@@ -1,0 +1,17 @@
+---
+// Decorator: for grid-cell card components (WorkGalleryCard, WorkOverlayCard,
+// WorkMiniCard) that have no intrinsic width of their own — they're sized by
+// their live CSS grid parent (WorksStrip.astro, work.astro, RelatedWork.astro
+// all use a 2/3-column responsive grid). Captured under plain `.container`
+// with no grid, a lone card stretches/collapses to the full container width
+// instead of a grid-cell fraction, producing false pixel-check size
+// mismatches. A single child in a 3-column grid occupies only the first
+// cell (auto-placement, no span), so this reproduces the real column width
+// without needing sibling cards.
+---
+
+<div class="container">
+  <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:gap-8">
+    <slot />
+  </div>
+</div>

@@ -1,6 +1,7 @@
 ---
 title: Portfolio
 date: 2025-03-16
+kicker: "Web · 2024–now"
 img: ./screens.png
 img_placeholder: ./screens-small.jpg
 img_preview: ./preview.png

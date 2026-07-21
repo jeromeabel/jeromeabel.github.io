@@ -1,6 +1,7 @@
 ---
 title: "Web Performance Tactics Cheatsheet"
 date: 2026-03-27
+topic: "astro, performance"
 description: "A reference companion to the Web Performance Journey series. Metrics, measurement strategy, optimization tactics by category, and local setup."
 abstract: "Quick-reference cheatsheet covering business impact, Core Web Vitals thresholds, three types of performance data, optimization tactics organized by metric, and local development setup."
 draft: false

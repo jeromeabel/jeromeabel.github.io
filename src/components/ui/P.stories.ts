@@ -1,0 +1,10 @@
+import type { ComponentProps } from "astro/types";
+import P from "./P.astro";
+import StoryContainer from "../styleguide/StoryContainer.astro";
+
+export default { component: P };
+
+export const Default = {
+  args: {} satisfies ComponentProps<typeof P>,
+  decorators: [{ component: StoryContainer }],
+};

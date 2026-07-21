@@ -1,0 +1,43 @@
+---
+import PostRow from "@components/blog/PostRow.astro";
+import PostRowCalm from "@components/blog/PostRowCalm.astro";
+import SerieCard from "@components/blog/SerieCard.astro";
+import H2 from "@components/ui/H2.astro";
+import Link from "@components/ui/Link.astro";
+import { VARIANTS } from "src/config/variants";
+import { getFeaturedSeries, getLatestWriting } from "src/utils/repository";
+
+const series = (await getFeaturedSeries()).slice(0, 2);
+const latest = await getLatestWriting(4);
+---
+
+<section
+  id="writing"
+  class="container flex scroll-mt-16 flex-col gap-4 lg:gap-8"
+>
+  <H2>Writing</H2>
+  <div class="grid gap-4 md:grid-cols-2 lg:gap-8">
+    {series.map((serie) => <SerieCard {serie} />)}
+  </div>
+  <div class="mt-4 flex flex-col">
+    <span class="text-muted pb-2 font-mono text-sm uppercase">Latest</span>
+    <div class="border-muted-border border-t">
+      {
+        latest.map(({ post, serie }) =>
+          VARIANTS.homePosts === "calm-rows" ? (
+            <PostRowCalm {post} {serie} />
+          ) : (
+            <PostRow {post} {serie} />
+          ),
+        )
+      }
+    </div>
+  </div>
+  <Link
+    class="mt-8"
+    label="All posts"
+    href="/blog"
+    icon="lucide:arrow-right"
+    variant="secondary"
+  />
+</section>

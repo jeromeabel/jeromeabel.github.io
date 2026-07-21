@@ -1,0 +1,34 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  work: CollectionEntry<"work">;
+}
+
+const { work } = Astro.props;
+
+if (!work) {
+  throw new Error("Sorry, could not find work");
+}
+---
+
+<a
+  href={"/work/" + work.id}
+  title={`Open the "${work.data.title}" project`}
+  class="group flex flex-col gap-2 outline-offset-4 outline-black focus:outline-2 dark:outline-white"
+>
+  <div class="aspect-square overflow-hidden">
+    <Image
+      src={work.data.img_preview}
+      alt={`${work.data.title} preview`}
+      class="block h-full w-full object-cover transition-opacity duration-300 group-hover:opacity-85"
+      loading="lazy"
+      widths={[160, 240, 320, 480, 640]}
+      sizes="(max-width: 767px) calc((100vw - 3rem) / 2), 280px"
+    />
+  </div>
+  <p class="text-sm font-semibold tracking-wide lg:text-base">
+    {work.data.title}
+  </p>
+</a>

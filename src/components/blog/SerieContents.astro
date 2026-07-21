@@ -1,0 +1,46 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  serieTitle: string;
+  posts: CollectionEntry<"seriePost">[];
+  currentId: string;
+}
+
+const { serieTitle, posts, currentId } = Astro.props;
+---
+
+<section
+  aria-label="Series contents"
+  class="border-muted-border rounded-lg border p-4 md:p-6"
+>
+  <p class="text-muted mb-3 text-sm font-medium uppercase">
+    In this series — {serieTitle}
+  </p>
+  <ol class="flex flex-col gap-2 text-sm md:text-base">
+    {
+      posts.map((post, i) => {
+        const isCurrent = post.id === currentId;
+        return (
+          <li>
+            {isCurrent ? (
+              <span
+                aria-current="page"
+                class="text-foreground-accent font-medium"
+              >
+                {i + 1}. {post.data.title}
+              </span>
+            ) : (
+              <a
+                href={`/blog/${post.id}`}
+                class="text-muted hover:text-foreground transition-colors"
+              >
+                {i + 1}. {post.data.title}
+              </a>
+            )}
+          </li>
+        );
+      })
+    }
+  </ol>
+</section>

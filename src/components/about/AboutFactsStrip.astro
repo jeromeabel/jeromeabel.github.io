@@ -1,0 +1,25 @@
+---
+import { getAllBlogPosts } from "src/utils/repository";
+
+const articleCount = (await getAllBlogPosts()).length;
+
+const facts = [
+  { value: "2010", label: "coding since" },
+  { value: String(articleCount), label: "articles" },
+  { value: "5000+", label: "downloads" },
+  { value: "1000+", label: "people trained" },
+];
+---
+
+<dl
+  class="border-muted-border text-muted flex flex-wrap gap-x-6 gap-y-2 border-y py-3 font-mono text-sm"
+>
+  {
+    facts.map((fact) => (
+      <div class="flex gap-2">
+        <dd class="font-bold">{fact.value}</dd>
+        <dt>{fact.label}</dt>
+      </div>
+    ))
+  }
+</dl>

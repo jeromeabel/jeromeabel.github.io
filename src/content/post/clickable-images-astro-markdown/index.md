@@ -1,6 +1,7 @@
 ---
 title: "Clickable Images in Astro Markdown: Inline Expand and Lightbox"
 date: 2026-04-16
+topic: "astro"
 description: "How to make images in Astro markdown blog posts clickable — with two modes: inline expand (breaking out of the prose container) and lightbox modal. No dependencies, no MDX required."
 abstract: "A step-by-step guide to adding click-to-expand and lightbox behavior to images inside Astro markdown content, using a client-side script, a few CSS rules, and a data attribute on the prose wrapper."
 draft: false

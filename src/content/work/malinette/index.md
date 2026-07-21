@@ -1,6 +1,8 @@
 ---
 title: La Malinette
 date: 2020-01-01
+featured: 4
+kicker: "Open source · 2013–2021"
 img: ./malinette.png
 img_placeholder: ./small.jpg
 img_preview: ./preview.png
@@ -65,6 +67,15 @@ Some utilities have been developed, such as "pd2png". It allows taking png scree
 I've built also a minimal website in french and english, using HTML and W3CSS library, and a click counter in AJAX/PHP.
 
 ![Website](./hub.jpg)
+
+## Outcome
+
+- A free, open-source kit adopted by artists, students, and teachers in labs, schools, colleges, and faculties.
+- 5000+ downloads of the one-click, cross-platform software.
+- Around 150 Pure Data objects across six categories (input, output, audio, video, numbers, sequencers).
+- Still in use by downstream projects such as [BrutBox](https://brutlab.org/brutbox).
+
+<!-- TODO(author): add active-school count or notable workshops if you have figures. -->
 
 ## What I Learned
 

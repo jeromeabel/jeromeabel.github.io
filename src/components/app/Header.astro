@@ -1,4 +1,5 @@
 ---
+import MotionToggle from "@components/app/MotionToggle.astro";
 import ThemeToggle from "@components/app/ThemeToggle.astro";
 import Link from "@components/ui/Link.astro";
 
@@ -36,6 +37,7 @@ const variant = (href: string) =>
           </li>
         ))
       }
+      <li><MotionToggle /></li>
       <li><ThemeToggle /></li>
     </ul>
   </nav>

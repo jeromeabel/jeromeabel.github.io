@@ -5,11 +5,15 @@
   margin-inline: auto;
   padding-inline: 1rem;
   max-width: var(--breakpoint-xl);
-  overflow-x: hidden;
+  /* clip (not hidden): prevents horizontal overflow without forcing
+     overflow-y to compute to auto, which added a stray vertical scrollbar
+     wherever a child bled vertically (e.g. footer links' tap-area pseudo). */
+  overflow-x: clip;
   overflow-wrap: break-word;
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
+@custom-variant motion-off (&:where(html[data-motion="off"] *));
 
 @theme {
   --font-sans:
@@ -88,27 +92,24 @@
   border-radius: 4px;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .reveal {
-    opacity: 1;
-    transition-property: none;
-  }
+html[data-motion="off"] .reveal {
+  opacity: 1;
+  transition-property: none;
+  transform: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .reveal {
-    opacity: 0;
-    transition:
-      opacity 1.3s 0.1s ease-in-out,
-      transform 1.3s 0.1s ease-in-out;
-  }
-  .reveal-anim {
-    opacity: 1;
-  }
-  .reveal.reveal-bottom {
-    transform: translateY(5rem);
-  }
-  .reveal.reveal-bottom.reveal-anim {
-    transform: translateY(0);
-  }
+html[data-motion="on"] .reveal {
+  opacity: 0;
+  transition:
+    opacity 1.3s 0.1s ease-in-out,
+    transform 1.3s 0.1s ease-in-out;
+}
+html[data-motion="on"] .reveal-anim {
+  opacity: 1;
+}
+html[data-motion="on"] .reveal.reveal-bottom {
+  transform: translateY(5rem);
+}
+html[data-motion="on"] .reveal.reveal-bottom.reveal-anim {
+  transform: translateY(0);
 }

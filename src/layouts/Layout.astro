@@ -19,20 +19,54 @@ export interface Props {
   page?: string | undefined;
   description?: string | undefined;
   publishedDate?: Date | undefined;
+  updatedDate?: Date | undefined;
+  topic?: string | undefined;
+  type?: "website" | "article";
   image?: ImageMetadata | undefined;
 }
 
-const { page, description, publishedDate, image } = Astro.props;
+const { page, description, publishedDate, updatedDate, topic, type, image } =
+  Astro.props;
 ---
 
 <html
   lang="en"
-  class="bg-background text-foreground w-screen overflow-x-hidden break-words motion-safe:scroll-smooth"
+  class="bg-background text-foreground w-screen overflow-x-clip break-words motion-safe:scroll-smooth"
 >
   <head>
-    <SEO {page} {description} {publishedDate} {image} />
+    <script is:inline>
+      (function () {
+        const applyTheme = () => {
+          const dark =
+            localStorage.theme === "dark" ||
+            (!("theme" in localStorage) &&
+              matchMedia("(prefers-color-scheme: dark)").matches);
+          document.documentElement.classList.toggle("dark", dark);
+        };
+        applyTheme();
+        document.addEventListener("astro:after-swap", applyTheme);
 
-    <script src="../scripts/theme.ts"></script>
+        const applyMotion = () => {
+          const stored = localStorage.motion;
+          const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+          const on = stored ? stored === "on" : !reduce;
+          document.documentElement.dataset.motion = on ? "on" : "off";
+        };
+        applyMotion();
+        document.addEventListener("astro:after-swap", applyMotion);
+      })();
+    </script>
+
+    <SEO
+      {page}
+      {description}
+      {publishedDate}
+      {updatedDate}
+      {topic}
+      {type}
+      {image}
+    />
+
     <script
       is:inline
       data-astro-rerun
@@ -47,5 +81,6 @@ const { page, description, publishedDate, image } = Astro.props;
     <Footer />
     <script src="../scripts/reveal-anim.ts"></script>
     <script src="../scripts/image-zoom.ts"></script>
+    <script src="../scripts/toc-spy.ts"></script>
   </body>
 </html>

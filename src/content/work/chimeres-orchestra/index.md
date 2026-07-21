@@ -1,6 +1,8 @@
 ---
 title: Chimères Orchestra
 date: 2021-12-01
+featured: 3
+kicker: "Art · 2013–2019"
 img: ./exhibition.jpg
 img_placeholder: ./exhibition-small.jpg
 img_preview: ./preview.jpg
@@ -107,6 +109,14 @@ As robots are often placed quite high from the ground, I've built a mobile app w
 The hardware design reflects aesthetics of insects and waterproof concerns.
 
 ![Blueprints for building metal pieces and electronics box](./tech.jpg)
+
+## Outcome
+
+- Exhibited around twenty times across Europe as a robotic sound installation.
+- Maintained and developed with [Reso-nance numérique](https://reso-nance.org/chimeres-orchestra/) for over a decade.
+- Documented with a running system, a Pure Data control patch, a `PdDroidParty` mobile remote, and a [video of the installation](https://vimeo.com/658636474).
+
+<!-- TODO(author): add specific venues/festivals and dates if you want named exhibitions here. -->
 
 ## What I Learned
 

@@ -1,0 +1,44 @@
+---
+import { Icon } from "astro-icon/components";
+import type { CollectionEntry } from "astro:content";
+import { getSerieStats } from "src/utils/repository";
+
+interface Props {
+  serie: CollectionEntry<"serie">;
+}
+
+const { serie } = Astro.props;
+
+if (!serie) {
+  throw new Error("Sorry, could not find serie");
+}
+
+const { parts, minutes } = await getSerieStats(serie);
+
+const readLabel =
+  minutes >= 60
+    ? `~${Math.floor(minutes / 60)}h ${minutes % 60}m read`
+    : `${minutes} min read`;
+---
+
+<a
+  href={`/blog/${serie.id}`}
+  class="border-muted-border hover:bg-muted-background/50 flex flex-col gap-2 border-2 p-4 lg:p-6"
+>
+  <span
+    class="text-muted flex items-center gap-2 text-base font-normal uppercase"
+  >
+    <Icon name="lucide:folder" />
+    Series
+  </span>
+  <h3 class="text-xl font-bold tracking-wide lg:text-2xl">
+    {serie.data.title}
+  </h3>
+  <p class="line-clamp-3">{serie.data.description}</p>
+  <div class="text-muted mt-auto flex items-center justify-end gap-2 pt-2">
+    <Icon name="lucide:layers" />
+    <span class="text-sm">{parts} parts</span>
+    <Icon name="lucide:clock" class="ms-6" />
+    <span class="text-sm">{readLabel}</span>
+  </div>
+</a>

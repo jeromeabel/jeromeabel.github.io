@@ -6,7 +6,7 @@ import P from "@components/ui/P.astro";
 import Layout from "@layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
 import { getCollection } from "astro:content";
-import { getPostsFromSerie } from "src/utils/repository";
+import { getPostsFromSerie, getSerieStats } from "src/utils/repository";
 
 export async function getStaticPaths() {
   const series = await getCollection("serie");
@@ -17,13 +17,18 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const publishedDate = new Date();
 
 if (!entry) {
   throw new Error("Sorry, could not find serie");
 }
 
+const publishedDate = entry.data.date;
 const posts = await getPostsFromSerie(entry);
+const { parts, minutes } = await getSerieStats(entry);
+const readLabel =
+  minutes >= 60
+    ? `~${Math.floor(minutes / 60)}h ${minutes % 60}m read`
+    : `${minutes} min read`;
 ---
 
 <Layout
@@ -38,12 +43,22 @@ const posts = await getPostsFromSerie(entry);
           <Link href="/blog" label="BLOG" variant="menuInactive" />
           <Icon name="lucide:chevron-right" />
         </nav>
-        <H1>{entry.data.title}</H1>
+        <div class="flex items-center gap-3">
+          <Icon name="lucide:folder" class="text-muted text-2xl" />
+          <H1>{entry.data.title}</H1>
+        </div>
       </div>
 
       <P>
         {entry.data.abstract}
       </P>
+
+      <div class="text-muted flex items-center gap-2">
+        <Icon name="lucide:layers" />
+        <span class="text-sm">{parts} parts</span>
+        <Icon name="lucide:clock" class="ms-6" />
+        <span class="text-sm">{readLabel}</span>
+      </div>
     </header>
 
     <div class="border-muted-border border-t">

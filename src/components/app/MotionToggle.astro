@@ -1,0 +1,30 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<button
+  id="motion-toggle"
+  class="group bg-muted-background text-muted hover:bg-muted-background-accent flex rounded-full p-2 transition-colors hover:cursor-pointer"
+  aria-label="Toggle animations"
+  aria-pressed="false"
+>
+  <Icon name="lucide:pause" class="motion-off:block hidden h-5 w-5" />
+  <Icon name="lucide:play" class="motion-off:hidden h-5 w-5" />
+</button>
+
+<script is:inline>
+  document.addEventListener("astro:page-load", () => {
+    const button = document.getElementById("motion-toggle");
+    if (!button) return;
+    button.setAttribute(
+      "aria-pressed",
+      String(document.documentElement.dataset.motion !== "off"),
+    );
+    button.addEventListener("click", () => {
+      const off = document.documentElement.dataset.motion === "off";
+      localStorage.motion = off ? "on" : "off";
+      document.documentElement.dataset.motion = off ? "on" : "off";
+      button.setAttribute("aria-pressed", String(off));
+    });
+  });
+</script>

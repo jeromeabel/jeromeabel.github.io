@@ -1,0 +1,48 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  work: CollectionEntry<"work">;
+  ratio?: "square" | "video";
+}
+
+const { work, ratio = "square" } = Astro.props;
+
+if (!work) {
+  throw new Error("Sorry, could not find work");
+}
+---
+
+<a
+  href={"/work/" + work.id}
+  title={`Open the "${work.data.title}" project`}
+  class="border-muted-border hover:bg-muted-background group flex flex-col border outline-offset-4 outline-black focus:outline-2 dark:outline-white"
+>
+  <div
+    class:list={[
+      "overflow-hidden",
+      ratio === "video" ? "aspect-video" : "aspect-square",
+    ]}
+  >
+    <Image
+      src={work.data.img_preview}
+      alt={`${work.data.title} preview`}
+      class="block h-full w-full object-cover transition-opacity duration-300 group-hover:opacity-90"
+      loading="lazy"
+      widths={[240, 360, 540, 768]}
+      sizes="(max-width: 639px) calc(100vw - 2rem), (max-width: 1023px) calc((100vw - 3rem) / 2), 380px"
+    />
+  </div>
+  <div class="flex flex-col gap-1 p-4">
+    {
+      work.data.kicker && (
+        <span class="text-muted font-mono text-xs uppercase">
+          {work.data.kicker}
+        </span>
+      )
+    }
+    <p class="font-title text-xl tracking-wide">{work.data.title}</p>
+    <p class="text-muted line-clamp-2 text-sm">{work.data.description}</p>
+  </div>
+</a>

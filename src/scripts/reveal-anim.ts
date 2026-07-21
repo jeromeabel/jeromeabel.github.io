@@ -1,4 +1,6 @@
 document.addEventListener("astro:page-load", () => {
+  const motionOff = document.documentElement.dataset.motion === "off";
+
   function handleImageFadeIn() {
     document
       .querySelectorAll<HTMLElement>(".reveal-img")
@@ -14,8 +16,8 @@ document.addEventListener("astro:page-load", () => {
           if (placeholder) placeholder.style.opacity = "0";
         };
 
-        if (imgElement.complete) {
-          showImage(); // Image chargée depuis le cache
+        if (motionOff || imgElement.complete) {
+          showImage(); // Image chargée depuis le cache, ou motion désactivé
         } else {
           picture.style.transition = "opacity 1200ms ease";
           if (placeholder) placeholder.style.transition = "opacity 1200ms ease";
@@ -26,6 +28,8 @@ document.addEventListener("astro:page-load", () => {
   }
 
   function setupRevealAnimations() {
+    if (motionOff) return;
+
     const reveals = document.querySelectorAll<HTMLElement>(".reveal");
 
     if (reveals.length === 0) return;

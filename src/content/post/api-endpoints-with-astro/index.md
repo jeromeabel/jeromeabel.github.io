@@ -1,10 +1,14 @@
 ---
 title: Adding API Endpoints to an Astro Project
 date: 2026-05-11
+topic: "astro"
 description: "Astro's file-based routing extends naturally to API endpoints — GET, POST, dynamic params, and three patterns for handling forms."
 abstract: "A walkthrough of building server-side routes in Astro: GET endpoints, dynamic [id] routes, two manual POST patterns (redirect and JSON), and Astro Actions — the modern default."
 img: ./api-endpoints-with-astro.jpg
 draft: false
+related_work:
+  - medito-fundraising
+  - leconceptdelapreuve
 ---
 
 Astro's file-based routing doesn't stop at `.astro` pages. Drop a `.ts` file in the `pages/` directory, export an HTTP method handler, and you have an API endpoint. No Express, no separate server — just the same routing convention you already know.

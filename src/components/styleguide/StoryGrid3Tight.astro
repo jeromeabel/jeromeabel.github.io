@@ -1,0 +1,13 @@
+---
+// Decorator: same 2/3-column grid as StoryGrid3, but without the lg:gap-8
+// step — matches RelatedWork.astro's grid exactly ("grid grid-cols-2 gap-4
+// sm:grid-cols-3"), the live parent for WorkMiniCard. WorksStrip.astro and
+// work.astro (WorkOverlayCard/WorkGalleryCard's live parents) both add
+// lg:gap-8, which StoryGrid3 covers.
+---
+
+<div class="container">
+  <div class="grid grid-cols-2 gap-4 sm:grid-cols-3">
+    <slot />
+  </div>
+</div>

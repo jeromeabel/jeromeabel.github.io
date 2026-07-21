@@ -1,6 +1,7 @@
 ---
 title: "Bonus: Add Integration Tests"
 date: 2025-04-07
+topic: "nuxt, testing"
 description: A minimal integration test to verify the behavior of a composable using localStorage in a Nuxt app.
 abstract: As a simple bonus, this post shows how to write a basic integration test for the `useVersion` composable using a real localStorage repository. It helps confirm that the logic for displaying a version banner works as expected.
 draft: false

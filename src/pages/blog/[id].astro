@@ -1,14 +1,19 @@
 ---
+import RelatedWork from "@components/blog/RelatedWork.astro";
+import TableOfContents from "@components/blog/TableOfContents.astro";
+import TopicChips from "@components/blog/TopicChips.astro";
 import CustomImage from "@components/ui/CustomImage.astro";
 import H1 from "@components/ui/H1.astro";
 import Link from "@components/ui/Link.astro";
+import LinkNavPost from "@components/ui/LinkNavPost.astro";
 import P from "@components/ui/P.astro";
 import Prose from "@components/ui/Prose.astro";
 import SocialShare from "@components/ui/SocialShare.astro";
 import Layout from "@layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
-import { getCollection, render } from "astro:content";
+import { getCollection, getEntries, render } from "astro:content";
 import { getFormattedDate } from "src/utils/format-date";
+import { getAllStandalonePosts } from "src/utils/repository";
 
 export async function getStaticPaths() {
   const posts = await getCollection("post");
@@ -19,18 +24,35 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content, remarkPluginFrontmatter } = await render(entry);
+const { Content, headings, remarkPluginFrontmatter } = await render(entry);
+const tocHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
+const showToc = tocHeadings.length >= 4;
 const minutesRead =
   (entry.data as { minutesRead?: string }).minutesRead ??
   remarkPluginFrontmatter.minutesRead;
 const publishedDate = new Date(entry.data.date);
 const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
+
+const standalonePosts = await getAllStandalonePosts();
+const index = standalonePosts.findIndex((post) => post.id === entry.id);
+const nextPost = index > 0 ? standalonePosts[index - 1] : null;
+const prevPost =
+  index >= 0 && index < standalonePosts.length - 1
+    ? standalonePosts[index + 1]
+    : null;
+
+const relatedWork = entry.data.related_work
+  ? await getEntries(entry.data.related_work)
+  : [];
 ---
 
 <Layout
   page={entry.data.title}
   description={entry.data.description}
   {publishedDate}
+  updatedDate={entry.data.updated}
+  topic={entry.data.topic}
+  type="article"
   image={entry.data.img}
 >
   <main class="container flex flex-col gap-8 py-8 lg:gap-12 lg:py-24">
@@ -52,9 +74,17 @@ const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
         <div class="text-muted flex items-center gap-2 md:mt-4">
           <Icon name="lucide:calendar" />
           <time class="text-sm">{getFormattedDate(entry.data.date)}</time>
+          {
+            entry.data.updated && (
+              <span class="text-sm">
+                · Updated {getFormattedDate(entry.data.updated)}
+              </span>
+            )
+          }
           <Icon name="lucide:clock" class="ms-4 lg:ms-6" />
           <span class="text-sm">{minutesRead}</span>
         </div>
+        <TopicChips topic={entry.data.topic} />
 
         <SocialShare
           url={canonicalWebsiteURL}
@@ -70,8 +100,61 @@ const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
       )
     }
 
-    <Prose class="mt-4 md:mx-auto md:mt-8" data-expand-image="inline">
-      <Content />
-    </Prose>
+    {
+      showToc && (
+        <details class="border-muted-border rounded-lg border p-4 md:hidden">
+          <summary class="text-muted cursor-pointer text-sm font-medium uppercase">
+            On this page
+          </summary>
+          <div class="mt-3">
+            <TableOfContents headings={tocHeadings} showLabel={false} />
+          </div>
+        </details>
+      )
+    }
+
+    <div class="mt-4 flex items-start gap-12 md:mt-8">
+      <Prose class="min-w-0 flex-1 md:mx-auto" data-expand-image="inline">
+        <Content />
+      </Prose>
+      {
+        showToc && (
+          <aside class="sticky top-24 hidden max-h-[calc(100vh-8rem)] w-56 shrink-0 overflow-y-auto md:block">
+            <TableOfContents headings={tocHeadings} />
+          </aside>
+        )
+      }
+    </div>
+
+    {relatedWork.length > 0 && <RelatedWork works={relatedWork} />}
+
+    {
+      (prevPost || nextPost) && (
+        <div class="mt-16 flex justify-between gap-2 md:gap-8">
+          {prevPost && (
+            <LinkNavPost
+              type="prev"
+              title={prevPost.data.title}
+              id={prevPost.id}
+            />
+          )}
+          {nextPost && (
+            <LinkNavPost
+              type="next"
+              title={nextPost.data.title}
+              id={nextPost.id}
+            />
+          )}
+        </div>
+      )
+    }
+
+    <Link
+      class="self-start"
+      label="All blog"
+      href="/blog"
+      icon="lucide:arrow-right"
+      variant="secondary"
+    />
   </main>
 </Layout>

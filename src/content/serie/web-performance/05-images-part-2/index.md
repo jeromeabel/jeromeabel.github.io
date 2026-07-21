@@ -1,6 +1,7 @@
 ---
 title: "Optimizing Images with Astro (part 2)"
 date: 2026-07-14
+topic: "astro, performance"
 description: "Astro's zero-config `<Picture>` wins the baseline, but it under-sizes big slots and over-sizes small ones. Four levers stack on top: priority hints, LQIP placeholders, a cache-aware fade, and pixel-perfect sizing — and this is where the mobile and desktop numbers invert."
 abstract: "Building on the zero-config `<Picture>` baseline from Part 1: eager/lazy split above the fold, LQIP placeholders and a cache-aware fade, pixel-perfect sizing from real layout tokens, and the final combined stack. The sizes contract turns out to be the biggest byte lever — and it flips between mobile and desktop."
 draft: false
@@ -133,11 +134,11 @@ So the component exposes an `ABOVE_FOLD_FADE = false` flag. Since the viewport i
 
 ### The LQIP benchmark
 
-| Strategy | Mobile — bytes (KB) / LCP | Desktop — bytes (KB) / LCP |
-| -------- | ------------------------- | -------------------------- |
-| auto (`<Picture>`)    | 597 / 3789 ms             | 716 / 348 ms               |
-| skeleton              | 597 / 3803 ms             | 716 / 398 ms               |
-| lqip                  | 597 / 3816 ms             | 716 / 404 ms               |
+| Strategy           | Mobile — bytes (KB) / LCP | Desktop — bytes (KB) / LCP |
+| ------------------ | ------------------------- | -------------------------- |
+| auto (`<Picture>`) | 597 / 3789 ms             | 716 / 348 ms               |
+| skeleton           | 597 / 3803 ms             | 716 / 398 ms               |
+| lqip               | 597 / 3816 ms             | 716 / 404 ms               |
 
 On **mobile**, `skeleton` adds +14 ms to `auto` (negligible) and `lqip` +27 ms (decoding the blurred preview). On **desktop**, the three become equivalent: `auto` lands at 339–385 ms, `skeleton` 337–466 ms and `lqip` 387–488 ms. The +50 / +56 ms in the medians are inseparable from measurement noise. A placeholder weighs almost nothing here. And choosing between a skeleton or a blurred image is a UX decision.
 
@@ -172,8 +173,11 @@ On a periodic grid of lines, the effect turns extreme: the bars shift phase and 
 To avoid resampling, `CustomImage` computes `sizes` from the real layout CSS tokens — page max-width, padding, gap, the grid:
 
 ```ts
-const sizesAttr = [ `(min-width: 768px) calc((min(100vw, ${pageMaxPx}px) -
-${chromePx + gapPx}px) / 2)`, `calc(100vw - ${mobileChromePx}px)`, ].join(", ");
+const sizesAttr = [
+  `(min-width: 768px) calc((min(100vw, ${pageMaxPx}px) -
+${chromePx + gapPx}px) / 2)`,
+  `calc(100vw - ${mobileChromePx}px)`,
+].join(", ");
 ```
 
 The effect depends entirely on the **slot size**, and that's where the benchmark surprises:

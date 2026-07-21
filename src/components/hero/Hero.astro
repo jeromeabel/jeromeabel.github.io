@@ -1,9 +1,19 @@
 ---
 import HeroAnimation from "@components/hero/HeroAnimation.astro";
 import HeroText from "@components/hero/HeroText.astro";
+import { Icon } from "astro-icon/components";
 ---
 
-<section class="container my-16 flex items-center gap-8 md:my-32 lg:h-[500px]">
+<section
+  class="relative container my-16 flex flex-col items-stretch gap-8 md:my-32 lg:h-[500px] lg:flex-row lg:items-center"
+>
   <HeroText />
   <HeroAnimation />
+  <a
+    href="#writing"
+    class="text-muted hover:text-foreground border-muted-border mt-8 flex items-center justify-center gap-2 self-center border border-dashed px-4 py-2 transition-colors lg:absolute lg:bottom-0 lg:left-1/2 lg:mt-0 lg:-translate-x-1/2 lg:self-auto"
+  >
+    <Icon name="lucide:arrow-down" />
+    Start reading
+  </a>
 </section>

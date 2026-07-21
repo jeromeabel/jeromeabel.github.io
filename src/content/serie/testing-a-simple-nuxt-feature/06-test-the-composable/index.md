@@ -1,6 +1,7 @@
 ---
 title: "Test the composable"
 date: 2025-04-04
+topic: "nuxt, testing"
 abstract: "In this sixth episode, we face a common challenge when testing composables that use `onMounted`. Should the lifecycle hook live in the composable or in the component? We explore multiple ways to test it and the trade-offs of each approach."
 description: "Version 4 of our banner introduces a tricky scenario: testing a composable that uses `onMounted`. We explore various testing strategies—including using `withSetup`, wrapper components, and the decision to move lifecycle logic outside the composable—to understand when and how to simplify our tests."
 draft: false

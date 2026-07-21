@@ -1,6 +1,7 @@
 ---
 title: "Exploring a Data-Driven Approach to Web Performance"
 date: 2026-04-16
+topic: "astro, performance"
 description: "Six months of performance work on a Vue.js speech analytics app — what the RUM data revealed, where metrics fell short, and what user feedback proved better than any dashboard."
 abstract: "A practical account of using field data, lab measurements, and behavioral analytics to drive and evaluate performance improvements on a real B2B tool."
 draft: false

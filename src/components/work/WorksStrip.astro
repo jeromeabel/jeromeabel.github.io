@@ -1,0 +1,32 @@
+---
+import H2 from "@components/ui/H2.astro";
+import Link from "@components/ui/Link.astro";
+import WorkMiniCard from "@components/work/WorkMiniCard.astro";
+import WorkOverlayCard from "@components/work/WorkOverlayCard.astro";
+import { getFeaturedWorks } from "src/utils/repository";
+import { VARIANTS } from "src/config/variants";
+
+const works = await getFeaturedWorks();
+---
+
+<section class="container flex flex-col gap-4 lg:gap-8">
+  <H2>Work</H2>
+  <div class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:gap-8">
+    {
+      works.map((work) =>
+        VARIANTS.worksStrip === "mini-card" ? (
+          <WorkMiniCard {work} />
+        ) : (
+          <WorkOverlayCard {work} />
+        ),
+      )
+    }
+  </div>
+  <Link
+    class="mt-8"
+    label="All work"
+    href="/work"
+    icon="lucide:arrow-right"
+    variant="secondary"
+  />
+</section>

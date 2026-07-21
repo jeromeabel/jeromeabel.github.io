@@ -2,10 +2,12 @@
 import netlify from "@astrojs/netlify";
 import { unified } from "@astrojs/markdown-remark";
 import partytown from "@astrojs/partytown";
+import sitemap from "@astrojs/sitemap";
 import icon from "astro-icon";
 import { defineConfig } from "astro/config";
 import rehypeExternalLinks from "rehype-external-links";
 import { remarkReadingTime } from "./src/utils/remark-reading-time.mjs";
+import astrobook from "astrobook";
 
 import tailwindcss from "@tailwindcss/vite";
 
@@ -34,12 +36,17 @@ export default defineConfig({
           "arrow-right",
           "arrow-left",
           "arrow-up-right",
+          "arrow-down",
           "sun",
           "moon",
+          "play",
+          "pause",
           "handshake",
           "clock",
           "calendar",
           "chevron-right",
+          "layers",
+          "folder",
           "mail",
           "dot",
         ],
@@ -47,7 +54,13 @@ export default defineConfig({
       },
       iconDir: "src/assets/icons",
     }),
-  ],
+
+    sitemap(),
+
+    process.env.NODE_ENV === 'development'
+      ? astrobook({ subpath: '/styleguide', css: ['./src/styles/global.css'] })
+      : null,
+  ].filter(Boolean),
 
   vite: {
     plugins: [tailwindcss()],

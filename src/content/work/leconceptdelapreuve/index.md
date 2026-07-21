@@ -1,6 +1,8 @@
 ---
 title: "Le concept de la preuve"
 date: 2026-02-20
+featured: 2
+kicker: "Web · 2026"
 img: ./screen.jpg
 img_placeholder: ./small.jpg
 img_preview: ./preview.jpg
@@ -18,6 +20,8 @@ stack:
   - Netlify
   - Sharp
 type: Web, Comics
+related_posts:
+  - api-endpoints-with-astro
 ---
 
 I've wanted to make **humorous** strips for a long time — something outside work where I could be freely ironic and dark. A couple and their kid navigate the absurdity of everyday life.
@@ -161,6 +165,14 @@ pipeline = sharp(imagePath)
 **Scripts.** Analytics (Umami) loads via `requestIdleCallback`. The vote prefetch runs only when `earlyVoteIds` are present. Client code is vanilla TypeScript — no extra runtime.
 
 The result: CDN response time dominates static pages; the only variable latency is the vote API cold start, and the early-prefetch pattern effectively masks most of that.
+
+## Outcome
+
+- Live at [leconceptdelapreuve.jeromeabel.net](https://leconceptdelapreuve.jeromeabel.net), a fully static comic blog with a single dynamic voting endpoint.
+- Strips are published to Bluesky rather than fed to Instagram's data machine.
+- One-command publishing (`pnpm new`) keeps the drawing cadence regular — the constraint that makes me create more.
+
+<!-- TODO(author): add readership/Bluesky reach or number of strips published if you want concrete figures. -->
 
 ## What I learned
 

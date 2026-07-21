@@ -1,8 +1,9 @@
 ---
-import BlogPreview from "@components/blog/BlogPreview.astro";
+import AboutStrip from "@components/about/AboutStrip.astro";
+import SelectedWriting from "@components/blog/SelectedWriting.astro";
 import Contact from "@components/contact/Contact.astro";
 import Hero from "@components/hero/Hero.astro";
-import WorksPreview from "@components/work/WorksPreview.astro";
+import WorksStrip from "@components/work/WorksStrip.astro";
 import Layout from "@layouts/Layout.astro";
 ---
 
@@ -10,8 +11,9 @@ import Layout from "@layouts/Layout.astro";
   <div>
     <Hero />
     <main class="mb-32 flex flex-col gap-16 lg:gap-24 xl:gap-36">
-      <BlogPreview />
-      <WorksPreview />
+      <SelectedWriting />
+      <WorksStrip />
+      <AboutStrip />
     </main>
     <Contact />
   </div>

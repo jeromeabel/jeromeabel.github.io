@@ -19,6 +19,8 @@ stack:
   - Tailwind CSS
   - Resend
 type: Challenge, Web
+related_posts:
+  - api-endpoints-with-astro
 ---
 
 Medito foundation needs a versatile single web page that can be adapted for various fundraising initiatives, such as hiring personnel, creating ad campaigns, or developing new features.

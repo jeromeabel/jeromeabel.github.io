@@ -10,10 +10,14 @@ const PostSchema = ({ image }: { image: ImageFunction }) =>
   z.object({
     title: z.string(),
     date: z.date(),
+    updated: z.date().optional(),
+    topic: z.string().optional(),
     description: z.string(),
     abstract: z.string(),
     draft: z.boolean().default(true),
+    featured: z.number().int().positive().optional(),
     img: image().optional(),
+    related_work: z.array(reference("work")).optional(),
   });
 
 const post = defineCollection({
@@ -31,6 +35,7 @@ const serie = defineCollection({
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
+    featured: z.number().int().positive().optional(),
     description: z.string(),
     abstract: z.string(),
     posts: z.array(reference("seriePost")),
@@ -43,6 +48,7 @@ const work = defineCollection({
     z.object({
       title: z.string(),
       date: z.coerce.date(),
+      featured: z.number().int().positive().optional(),
       img: image(),
       img_placeholder: image(),
       img_preview: image(),
@@ -51,11 +57,13 @@ const work = defineCollection({
       description: z.string(),
       abstract: z.string(),
       type: z.string(),
+      kicker: z.string().optional(),
       git: z.string().optional(),
       website: z.string().optional(),
       live: z.string().optional(),
       video: z.string().optional(),
       stack: z.array(z.string()).optional(),
+      related_posts: z.array(reference("post")).optional(),
     }),
 });
 
