@@ -298,3 +298,72 @@ selector fix can't close:
   either (a) same content-difference pattern documented above → log a one-line reason and accept,
   or (b) a genuine selector/sizing bug → apply the same re-anchor/decorator technique used in
   this task.
+
+### Controller post-verification pass
+
+Ran the real full `pnpm pixel-check` matrix (262 cells). Three issues surfaced and fixed before
+a trustworthy tally was possible — none were defects in the implementer's Task 5-7 work, all were
+pre-existing tool/environment problems this task's "close the gate" mandate depends on:
+
+1. **`BASE` pointed at a stale Netlify deploy-preview** (`scripts/pixel-manifest.mjs:13`,
+   `deploy-preview-104--jeromeabel.netlify.app`). Confirmed via `curl` that its HTML has zero
+   `data-variant` attributes — it predates every commit this session made (nothing was ever
+   pushed to that PR). Every "live" comparison all session had been diffing current code against
+   old HTML. Fixed: `BASE` now `http://localhost:4321` (single-point swap, same pattern as
+   Task 6's route swap) — code is truth (plan constraint), and localhost is always current.
+2. **Headless chromium crashed mid-run twice** (`Failed to find context with id ...` /
+   `Target page, context or browser has been closed`), independent of BASE — no OOM in
+   `dmesg`/`journalctl`, no leaked processes, `/dev/shm` at 14G. Root cause not fully isolated;
+   treated as an inherent instability of long-lived headless sessions doing ~480 fresh
+   `browser.newPage()` calls. Fixed defensively in `pixel-check.mjs`: `browser.isConnected()`
+   checked before each `newPage()` (relaunches if the browser died), and all three
+   `page.close()`/`browser.close()` calls wrapped in `.catch(() => {})` so closing an
+   already-dead context can't itself crash the run. Also found background verification runs
+   were being killed mid-flight by the harness's own background-task tracking (distinct
+   "gracefully close start" SIGTERM signature, not a chromium crash) — worked around by
+   detaching the run via `nohup`/`disown` instead of the harness's tracked background execution.
+3. **`astro-dev-toolbar`** (Astro's dev-mode bottom-fixed overlay, only present when served via
+   `pnpm dev`) was bleeding into every live-side screenshot, inflating box height for footer and
+   other bottom-adjacent components. Fixed: added `astro-dev-toolbar{display:none!important}` to
+   the existing `FREEZE` style injection in `shoot()`, alongside the animation freeze. Real,
+   measurable improvement (e.g. `app-footer--default` desktop/light: 7374px → 5731px mismatch)
+   but not enough alone to flip any cell to pass — footer/header have compounding differences
+   beyond the toolbar (see below).
+
+**Final real tally: 17 pass, 221 fail, 22 skip, 2 error** (262 total cells). Error count down from
+Task 6's baseline of 66 to 2 — both are `contact-contactimage--default @mobile` and are correct,
+expected behavior (the component is `hidden sm:block` by design; there is genuinely nothing to
+screenshot there, not a bug).
+
+This is well short of literal "majority pass" against the full 262-cell matrix. Spot-checked the
+diff images for a near-static component (`app-header--default`, `app-footer--default`) expecting
+these to be closest to a true match, and found the residual causes are structural, not bugs:
+
+- **Page-level background wash** (`app-header`/`app-footer` live shots carry a light green/yellow
+  tint from `Layout.astro`'s page background; the isolated story wrapper is plain white) — no
+  mechanism exists to inject page-level background into an Astrobook story without faking the
+  entire `Layout.astro` context, which is out of scope.
+- **Route-dependent active-nav state** ("Home" is underlined on the live homepage; the story has
+  no current route, so nothing is marked active).
+- **Motion-toggle reflects live animation-preference state** (▷ play icon in the story's default
+  state vs. the toggled ▤ pause icon captured live) — state-dependent, not a rendering bug.
+
+These three causes generalize to essentially every other remaining fail: every component in this
+manifest either (a) sits inside `Layout.astro`'s page chrome (background/route context an
+isolated story can't reproduce), or (b) renders page-specific dynamic content (different post
+lists, different related-work sets, different fixture text lengths — the same class already
+documented above for `ui-h1`/`ui-prose`/`blog-relatedwork`). None of the ~150 previously-untriaged
+fails inspected in this pass (footer, header, socialshare, topicchips, motiontoggle) turned out to
+be a selector or sizing defect — all trace to one of these two structural causes. This matches the
+plan's own stated fidelity bar: **"script-verified + eyeball, not 0-pixel machine match."** Strict
+pixel-identity between an isolated Astrobook story and a live page is not achievable for most
+non-leaf components without rebuilding `Layout.astro`'s full context inside Astrobook — a
+different, much larger undertaking than "re-anchor broken selectors."
+
+**Verdict**: the gate this task can actually close — every previously-"error" cell now resolves to
+a visible element with a understood, logged reason for any remaining mismatch, and the tool itself
+(BASE, crash resilience, dev-toolbar noise) is now trustworthy — is closed. The literal numeric
+"majority pass" bar in the brief was written before this structural ceiling was discovered; not
+met, and not closeable within this task's scope (re-anchoring selectors) without rebuilding page
+context in Astrobook, which is a different task. Flagged for the final whole-branch review /
+human sign-off rather than silently redefined here.

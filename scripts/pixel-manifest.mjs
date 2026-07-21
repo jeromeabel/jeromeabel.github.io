@@ -9,8 +9,11 @@
 //
 // id convention here: <domain>-<component-lowercase>--<variant-kebab>
 //
-// Base preview URL for all liveUrl entries below (Plan D deploy preview):
-const BASE = "https://deploy-preview-104--jeromeabel.netlify.app";
+// Base preview URL for all liveUrl entries below. Was a Netlify deploy-preview
+// (Plan D), discovered stale mid-Task-7: preview-104 predates every commit this
+// session made (no push occurred), so it was diffing current code against old
+// HTML. Local dev server is always current — code is truth (plan constraint).
+const BASE = "http://localhost:4321";
 
 // VARIANTS at the commit this preview was built from (src/config/variants.ts,
 // re-derived at impl time, not trusted from the brief or from stale prior context):

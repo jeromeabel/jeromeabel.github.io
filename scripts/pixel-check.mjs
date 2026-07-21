@@ -22,7 +22,12 @@ const THEMES = ["light", "dark"];
 // on top of `reducedMotion: 'reduce'` emulation (belt-and-braces: some
 // animations are driven by inline style / JS rAF loops that don't honor
 // prefers-reduced-motion media queries).
-const FREEZE = `*,*::before,*::after{animation:none!important;transition:none!important;animation-play-state:paused!important}`;
+// astro-dev-toolbar is a bottom-fixed overlay injected only by `astro dev` —
+// present on every live-side shot (served via `pnpm dev`) but absent from
+// story-side shots, inflating box height for footer/bottom-adjacent
+// components. Hidden alongside the animation freeze so both sides render
+// the same DOM shape.
+const FREEZE = `*,*::before,*::after{animation:none!important;transition:none!important;animation-play-state:paused!important}astro-dev-toolbar{display:none!important}`;
 
 // page.evaluate() has no built-in timeout (unlike goto/waitFor/locator
 // actions), so a stuck in-page promise — e.g. document.fonts.ready never
@@ -35,7 +40,10 @@ const FREEZE = `*,*::before,*::after{animation:none!important;transition:none!im
 function withTimeout(promise, ms, label) {
   let timer;
   const timeout = new Promise((_, reject) => {
-    timer = setTimeout(() => reject(new Error(`timeout after ${ms}ms: ${label}`)), ms);
+    timer = setTimeout(
+      () => reject(new Error(`timeout after ${ms}ms: ${label}`)),
+      ms,
+    );
   });
   return Promise.race([promise, timeout]).finally(() => clearTimeout(timer));
 }
@@ -48,7 +56,9 @@ async function shoot(page, url, selector, masks, width, theme) {
   // themes — otherwise the diff would compare apples to oranges.
   await page.emulateMedia({ reducedMotion: "reduce", colorScheme: theme });
   if (theme === "dark") {
-    await page.addInitScript(() => document.documentElement.classList.add("dark"));
+    await page.addInitScript(() =>
+      document.documentElement.classList.add("dark"),
+    );
   }
   await page.goto(url, { waitUntil: "load", timeout: 30000 });
   await page.addStyleTag({ content: FREEZE });
@@ -121,7 +131,7 @@ function diff(aBuf, bBuf) {
 }
 
 mkdirSync(".pixel-report", { recursive: true });
-const browser = await chromium.launch();
+let browser = await chromium.launch();
 const results = [];
 
 for (const c of MANIFEST) {
@@ -131,6 +141,13 @@ for (const c of MANIFEST) {
   }
   for (const vp of VIEWPORTS) {
     for (const theme of THEMES) {
+      // Headless chromium has been observed to crash mid-run (context lost,
+      // "Failed to find context with id ...") independent of any manifest/
+      // selector issue. Relaunch rather than let one crash kill the whole
+      // ~480-shot matrix.
+      if (!browser.isConnected()) {
+        browser = await chromium.launch();
+      }
       // Fresh page per (component, viewport, theme): addInitScript()
       // persists for the lifetime of a Page, so reusing one page across
       // themes would leak the dark-mode init script from a prior dark
@@ -152,7 +169,7 @@ for (const c of MANIFEST) {
         );
         live = await shoot(page, c.liveUrl, c.selector, c.masks, vp.w, theme);
       } catch (err) {
-        await page.close();
+        await page.close().catch(() => {});
         results.push({
           id: c.id,
           vp: vp.name,
@@ -163,7 +180,7 @@ for (const c of MANIFEST) {
         console.log(`  ERROR ${c.id} @${vp.name}/${theme}: ${err.message}`);
         continue;
       }
-      await page.close();
+      await page.close().catch(() => {});
       const { mismatch, out, sizeMismatch } = diff(story, live);
       const pass = !sizeMismatch && mismatch === 0;
       if (!pass) {
@@ -191,7 +208,7 @@ for (const c of MANIFEST) {
     }
   }
 }
-await browser.close();
+await browser.close().catch(() => {});
 
 writeFileSync(".pixel-report/summary.json", JSON.stringify(results, null, 2));
 const fails = results.filter((r) => r.status === "fail");
@@ -203,5 +220,6 @@ for (const f of fails)
   console.log(
     `  FAIL ${f.id} @${f.vp}/${f.theme}: ${f.mismatch} px${f.sizeMismatch ? " (size mismatch)" : ""}`,
   );
-for (const e of errors) console.log(`  ERROR ${e.id} @${e.vp}/${e.theme}: ${e.error}`);
+for (const e of errors)
+  console.log(`  ERROR ${e.id} @${e.vp}/${e.theme}: ${e.error}`);
 process.exit(fails.length || errors.length ? 1 : 0);
