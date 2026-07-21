@@ -168,3 +168,21 @@ brief.
 4. **`ui-link--external` → "section"** derives its verdict from its live host, `WorkHeader`
    (itself judged "section"), not from a Prose/markdown ancestor — Link's own manifest `liveUrl`
    is `/work/malinette`, inside WorkHeader's dedicated container+py wrapper.
+
+## Task 6 — pixel-check matrix rehab: first run tally
+
+`pnpm pixel-check` rehabbed to the full 3×2 matrix (desktop/tablet/mobile × light/dark) against
+Astrobook preview routes (`/styleguide/stories/...`, not the dashboard) with `waitUntil: "load"`.
+First full run against the still-unrepaired manifest (selectors not yet re-anchored — that's
+Task 7):
+
+```
+pixel-check: 8 pass, 166 fail, 22 skip, 66 error
+```
+
+Expected at this stage: the majority of fails/errors are pre-existing broken/stale manifest
+selectors (dashboard-era selectors that don't resolve at Astrobook's new preview-route DOM, or
+components whose live markup shifted since the manifest was authored) — not a pixel-check script
+defect. The matrix itself is confirmed working end-to-end: no `networkidle` timeouts observed;
+every failure/error carries real `theme`/`vp` (including `tablet`) data in
+`.pixel-report/summary.json`. Re-anchoring selectors to close this gate is Task 7's scope.

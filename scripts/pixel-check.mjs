@@ -13,8 +13,10 @@ import { MANIFEST } from "./pixel-manifest.mjs";
 
 const VIEWPORTS = [
   { w: 1280, name: "desktop" },
+  { w: 768, name: "tablet" },
   { w: 390, name: "mobile" },
 ];
+const THEMES = ["light", "dark"];
 
 // Freezes CSS animations/transitions so both captures are deterministic,
 // on top of `reducedMotion: 'reduce'` emulation (belt-and-braces: some
@@ -38,10 +40,17 @@ function withTimeout(promise, ms, label) {
   return Promise.race([promise, timeout]).finally(() => clearTimeout(timer));
 }
 
-async function shoot(page, url, selector, masks, width) {
+async function shoot(page, url, selector, masks, width, theme) {
   await page.setViewportSize({ width, height: 1200 });
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto(url, { waitUntil: "networkidle", timeout: 30000 });
+  // Same mechanism as the site's real dark-mode toggle (ThemeToggle.astro):
+  // add/remove `.dark` on <html>. Applied identically to both the story
+  // (Astrobook) and live captures so light/dark pairs are shot in matching
+  // themes — otherwise the diff would compare apples to oranges.
+  await page.emulateMedia({ reducedMotion: "reduce", colorScheme: theme });
+  if (theme === "dark") {
+    await page.addInitScript(() => document.documentElement.classList.add("dark"));
+  }
+  await page.goto(url, { waitUntil: "load", timeout: 30000 });
   await page.addStyleTag({ content: FREEZE });
   await withTimeout(
     page.evaluate(() => document.fonts.ready),
@@ -121,52 +130,65 @@ for (const c of MANIFEST) {
     continue;
   }
   for (const vp of VIEWPORTS) {
-    const page = await browser.newPage();
-    let story, live;
-    try {
-      story = await shoot(
-        page,
-        `http://localhost:4321${c.storyPath}`,
-        c.selector,
-        c.masks,
-        vp.w,
-      );
-      live = await shoot(page, c.liveUrl, c.selector, c.masks, vp.w);
-    } catch (err) {
+    for (const theme of THEMES) {
+      // Fresh page per (component, viewport, theme): addInitScript()
+      // persists for the lifetime of a Page, so reusing one page across
+      // themes would leak the dark-mode init script from a prior dark
+      // capture into a later light capture.
+      const page = await browser.newPage();
+      let story, live;
+      try {
+        const previewPath = c.storyPath.replace(
+          "/styleguide/dashboard/",
+          "/styleguide/stories/",
+        );
+        story = await shoot(
+          page,
+          `http://localhost:4321${previewPath}`,
+          c.selector,
+          c.masks,
+          vp.w,
+          theme,
+        );
+        live = await shoot(page, c.liveUrl, c.selector, c.masks, vp.w, theme);
+      } catch (err) {
+        await page.close();
+        results.push({
+          id: c.id,
+          vp: vp.name,
+          theme,
+          status: "error",
+          error: err.message,
+        });
+        console.log(`  ERROR ${c.id} @${vp.name}/${theme}: ${err.message}`);
+        continue;
+      }
       await page.close();
+      const { mismatch, out, sizeMismatch } = diff(story, live);
+      const pass = !sizeMismatch && mismatch === 0;
+      if (!pass) {
+        const tag = `${c.id}.${vp.name}.${theme}`;
+        writeFileSync(`.pixel-report/${tag}.expected.png`, live);
+        writeFileSync(`.pixel-report/${tag}.actual.png`, story);
+        writeFileSync(`.pixel-report/${tag}.diff.png`, PNG.sync.write(out));
+      }
       results.push({
         id: c.id,
         vp: vp.name,
-        status: "error",
-        error: err.message,
+        theme,
+        status: pass ? "pass" : "fail",
+        mismatch,
+        sizeMismatch,
       });
-      console.log(`  ERROR ${c.id} @${vp.name}: ${err.message}`);
-      continue;
+      // Progress line per component/viewport/theme: without this, a stall
+      // (as seen in dev — page.evaluate() hanging on document.fonts.ready
+      // with no Playwright-level timeout, see withTimeout above) is silent
+      // for the ~13 minutes it takes the whole run to finish, with no
+      // signal of which entry is stuck.
+      console.log(
+        `  [${results.length}] ${c.id} @${vp.name}/${theme}: ${pass ? "pass" : "fail"}`,
+      );
     }
-    await page.close();
-    const { mismatch, out, sizeMismatch } = diff(story, live);
-    const pass = !sizeMismatch && mismatch === 0;
-    if (!pass) {
-      const tag = `${c.id}.${vp.name}`;
-      writeFileSync(`.pixel-report/${tag}.expected.png`, live);
-      writeFileSync(`.pixel-report/${tag}.actual.png`, story);
-      writeFileSync(`.pixel-report/${tag}.diff.png`, PNG.sync.write(out));
-    }
-    results.push({
-      id: c.id,
-      vp: vp.name,
-      status: pass ? "pass" : "fail",
-      mismatch,
-      sizeMismatch,
-    });
-    // Progress line per component/viewport: without this, a stall (as seen
-    // in dev — page.evaluate() hanging on document.fonts.ready with no
-    // Playwright-level timeout, see withTimeout above) is silent for the
-    // ~13 minutes it takes the whole run to finish, with no signal of
-    // which entry is stuck.
-    console.log(
-      `  [${results.length}] ${c.id} @${vp.name}: ${pass ? "pass" : "fail"}`,
-    );
   }
 }
 await browser.close();
@@ -179,7 +201,7 @@ console.log(
 );
 for (const f of fails)
   console.log(
-    `  FAIL ${f.id} @${f.vp}: ${f.mismatch} px${f.sizeMismatch ? " (size mismatch)" : ""}`,
+    `  FAIL ${f.id} @${f.vp}/${f.theme}: ${f.mismatch} px${f.sizeMismatch ? " (size mismatch)" : ""}`,
   );
-for (const e of errors) console.log(`  ERROR ${e.id} @${e.vp}: ${e.error}`);
+for (const e of errors) console.log(`  ERROR ${e.id} @${e.vp}/${e.theme}: ${e.error}`);
 process.exit(fails.length || errors.length ? 1 : 0);
