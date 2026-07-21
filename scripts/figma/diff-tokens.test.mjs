@@ -77,3 +77,11 @@ test("token-map value that isn't a string exits 0", () => {
   const out = runDiff({ tokens: [] }, { collections: [] }, { map: { x: 123 }, ignore: [] });
   assert.match(out, /## Orphaned in Figma[\s]*_none_/);
 });
+test("null top-level figma/code JSON and wrong-typed nested fields all exit 0", () => {
+  assert.doesNotThrow(() => runDiff(null, { collections: [] }, { map: {}, ignore: [] }));
+  assert.doesNotThrow(() => runDiff({ tokens: [] }, null, { map: {}, ignore: [] }));
+  assert.doesNotThrow(() => runDiff({ tokens: [] }, { collections: [null] }, { map: {}, ignore: [] }));
+  assert.doesNotThrow(() => runDiff({ tokens: [null] }, { collections: [] }, { map: {}, ignore: [] }));
+  assert.doesNotThrow(() => runDiff({ tokens: [{ name: "x" }] }, { collections: [] }, { map: {}, ignore: 5 }));
+  assert.doesNotThrow(() => runDiff({ tokens: [] }, { collections: [{ name: "Color", variables: {} }] }, { map: {}, ignore: [] }));
+});
