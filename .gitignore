@@ -31,3 +31,10 @@ pnpm-debug.log*
 
 # visual brainstorm companion
 .superpowers/
+
+# figma-blog-fit generated artifacts
+tokens.code.json
+tokens.figma.json
+geometry.web.json
+geometry.figma.json
+.pixel-report/
