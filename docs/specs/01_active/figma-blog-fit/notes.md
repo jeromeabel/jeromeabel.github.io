@@ -361,7 +361,7 @@ non-leaf components without rebuilding `Layout.astro`'s full context inside Astr
 different, much larger undertaking than "re-anchor broken selectors."
 
 **Verdict**: the gate this task can actually close — every previously-"error" cell now resolves to
-a visible element with a understood, logged reason for any remaining mismatch, and the tool itself
+a visible element with an understood, logged reason for any remaining mismatch, and the tool itself
 (BASE, crash resilience, dev-toolbar noise) is now trustworthy — is closed. The literal numeric
 "majority pass" bar in the brief was written before this structural ceiling was discovered; not
 met, and not closeable within this task's scope (re-anchoring selectors) without rebuilding page
