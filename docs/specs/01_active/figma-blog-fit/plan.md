@@ -1081,7 +1081,7 @@ git commit -m "docs(geometry): master repair log + screenshot-gate results"
 
 Verified: `PostList.astro:3` currently `import { getAllPosts } from "src/utils/repository";` — `getAllPosts` is NOT exported; `getAllBlogPosts` IS.
 
-- [ ] **Step 1: Fix the import**
+- [x] **Step 1: Fix the import**
 
 Edit `src/components/blog/PostList.astro:3`:
 
@@ -1091,7 +1091,7 @@ import { getAllBlogPosts } from "src/utils/repository";
 
 Then update the call site in the same file (find `getAllPosts(` and rename to `getAllBlogPosts(`). This intentionally breaks the "restored verbatim" property from the dev-styleguide spec — legacy components are kept as variant material, superseding the delete-vs-adopt verdict.
 
-- [ ] **Step 2: Create the story**
+- [x] **Step 2: Create the story**
 
 Create `src/components/blog/PostList.stories.ts`:
 
@@ -1107,12 +1107,12 @@ export default {
 export const Default = { args: {} };
 ```
 
-- [ ] **Step 3: Verify it renders**
+- [x] **Step 3: Verify it renders**
 
 Run: `pnpm dev`, open `http://localhost:4321/styleguide/stories/src/components/blog/post-list/default`
 Expected: PostList renders a list of real posts, no `getAllPosts` error.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add src/components/blog/PostList.astro src/components/blog/PostList.stories.ts
@@ -1146,6 +1146,83 @@ Run the Task-9 read over the legacy masters, then `node scripts/figma/diff-geome
 ```bash
 git add docs/specs/01_active/figma-blog-fit/notes.md scripts/pixel-manifest.mjs
 git commit -m "docs(legacy): 🗄️ Legacy Figma page build + geometry/screenshot log"
+```
+
+---
+
+## STAGE 3c — Missing component masters (unblocks Task 14)
+
+> **Why this stage exists:** Task 9's live inventory (notes.md) found the `🧩 Components` page
+> holds masters for only **15 of the 40** manifest components; Task 13 added the legacy 9. That
+> leaves **25 manifest components with no master**. Task 14 builds template frames from
+> **instances only** (F2) — a component with no master has no instance, so Home/Blog/Work/About
+> cannot be assembled faithfully until these masters exist. This stage closes the gap.
+>
+> **Scope triage of the 25 missing (per analysis 2026-07-21):**
+> - **4 = text styles, NOT masters** — `ui-h1`, `ui-h2`, `ui-p`, `ui-prose`. Covered by S0 text
+>   styles (`Title/H1`, `Heading/H2`, `Body/Base`). No build; documented in Step 0 below.
+> - **4 = utility/image plumbing, skip** — `ui-customimage`, `contact-contactimage`,
+>   `ui-socialshare`, `hero-herosocials`. Astro image/effect wrappers, not DS content. No build.
+> - **5 = page-section compositions** — `hero-hero`, `about-aboutstrip`, `blog-selectedwriting`,
+>   `work-worksstrip`, `contact-contact`. Built as **Task 14 template frame sections**, not
+>   standalone masters. No build here.
+> - **12 = genuine missing masters** — built here in 3 batches.
+>
+> Web geometry for all 12 already exists in `geometry.web.json` (they are manifest ids captured
+> by Task 8) — no `extract-web-geometry` re-run needed; only the Figma-side read + build + diff.
+
+### Task 13b: Build the 12 missing component masters (interactive)
+
+**Files:**
+- Modify: Figma file (`🧩 Components` page — extend existing sections / add new ones; these are
+  live v3 components, so they belong on Components, **not** the 🗄️ Legacy page)
+- Append: `docs/specs/01_active/figma-blog-fit/notes.md`
+
+> **Interactive task — no unit test.** Same gate as Task 13 per master: bound to S0
+> variables/text styles, real collection content (F9), instances-only where a master already
+> exists (F2), `diff-geometry` clean-or-named-debt, `get_screenshot` judged visually identical to
+> the story preview PNG (token+layout bar, not pixel-diff). Read `/figma-use` before any
+> `use_figma` call. One batched write per batch.
+
+- [x] **Step 0: Record the no-build set in notes.md**
+
+Before building, write a short section in `notes.md` listing the 13 documented no-build ids (4
+text-style + 4 utility + 5 template-section) with the one-line reason each, so the gap is closed
+on paper and never re-surfaces as "missing" without explanation. Cross-reference: text-style ids
+map to S0 text styles; section ids map to Task 14 frames.
+
+- [x] **Step 1: Batch A — Blog masters (4)**
+
+Build masters for `blog-postlistitem`, `blog-relatedwork`, `blog-seriecontents`,
+`blog-seriepostlistitem`. Per master, in one batched `use_figma` write: build on the `🧩
+Components` page (extend the relevant section or add one), bind S0 variables + text styles (F4),
+use real collection content (F9). Story preview routes for reflow/content reference:
+`http://localhost:4321/styleguide/stories/src/components/blog/<kebab>/default`
+(`post-list-item`, `related-work`, `serie-contents`, `serie-post-list-item`).
+
+- [x] **Step 2: Batch B — Work masters (4)**
+
+Same procedure for `work-archivetable`, `work-relatedwriting`, `work-workgallerycard`,
+`work-workheader`. Preview routes under `.../work/<kebab>/...` (`work-gallery-card` has `square`
++ `video` variants — build both as a component set or note the single canonical variant chosen).
+
+- [x] **Step 3: Batch C — About + text-block masters (4)**
+
+Same procedure for `about-aboutfacts`, `about-abouttext`, `hero-herotext`, `contact-contacttext`.
+
+- [x] **Step 4: Geometry + screenshot gate (per batch)**
+
+After each batch, run the Task-9 Figma geometry read over the new masters, then
+`node scripts/figma/diff-geometry.mjs geometry.web.json geometry.figma.json` filtered to the batch
+ids. Screenshot-gate each master against its story preview. The known non-actionable categories
+from Task 10/11/13 apply (font-prop "(absent)" on non-TEXT roots, container-width deltas,
+`gap: "normal"` string quirk) — log any batch-specific delta or named-debt in `notes.md`.
+
+- [ ] **Step 5: Commit the notes**
+
+```bash
+git add docs/specs/01_active/figma-blog-fit/notes.md
+git commit -m "docs(masters): 12 missing component masters (blog/work/about batches) + no-build set"
 ```
 
 ---
