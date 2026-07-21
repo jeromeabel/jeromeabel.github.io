@@ -42,7 +42,7 @@ if (typeof map !== "object" || map === null) {
 // index figma variables by "Collection/var/path"
 const figVars = new Map();
 for (const col of figma.collections)
-  for (const v of col.variables) figVars.set(`${col.name}/${v.name}`, v);
+  for (const v of col.variables ?? []) figVars.set(`${col.name}/${v.name}`, v);
 
 const missing = [], mismatch = [], unmapped = [];
 const consumed = new Set();
@@ -63,7 +63,7 @@ for (const t of code.tokens) {
 }
 
 // orphans: variables in collections the map targets, consumed by no code token
-const mappedCollections = new Set(Object.values(map).map((p) => p.split("/")[0]));
+const mappedCollections = new Set(Object.values(map).map((p) => String(p).split("/")[0]));
 const orphaned = [...figVars.keys()].filter(
   (k) => mappedCollections.has(k.split("/")[0]) && !consumed.has(k),
 );

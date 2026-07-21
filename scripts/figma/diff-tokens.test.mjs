@@ -69,3 +69,11 @@ test("missing 'map' key in token-map.json defaults to empty", () => {
   // Should not throw and should exit 0
   assert.match(out, /## Unmapped[\s]*_none_/);
 });
+test("figma collection missing 'variables' array exits 0", () => {
+  const out = runDiff({ tokens: [] }, { collections: [{ name: "Color", modes: ["Light"] }] }, { map: {}, ignore: [] });
+  assert.match(out, /## Missing in Figma[\s]*_none_/);
+});
+test("token-map value that isn't a string exits 0", () => {
+  const out = runDiff({ tokens: [] }, { collections: [] }, { map: { x: 123 }, ignore: [] });
+  assert.match(out, /## Orphaned in Figma[\s]*_none_/);
+});
