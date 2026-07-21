@@ -1,0 +1,27 @@
+{
+  "map": {
+    "light/color-background": "Color/Light/background",
+    "light/color-foreground": "Color/Light/foreground",
+    "light/color-background-accent": "Color/Light/background-accent",
+    "light/color-foreground-accent": "Color/Light/foreground-accent",
+    "light/color-muted": "Color/Light/muted",
+    "light/color-muted-border": "Color/Light/muted-border",
+    "light/color-muted-background": "Color/Light/muted-background",
+    "light/color-muted-background-accent": "Color/Light/muted-background-accent",
+    "dark/color-background": "Color/Dark/background",
+    "dark/color-foreground": "Color/Dark/foreground",
+    "dark/color-background-accent": "Color/Dark/background-accent",
+    "dark/color-foreground-accent": "Color/Dark/foreground-accent",
+    "dark/color-muted": "Color/Dark/muted",
+    "dark/color-muted-border": "Color/Dark/muted-border",
+    "dark/color-muted-background": "Color/Dark/muted-background",
+    "dark/color-muted-background-accent": "Color/Dark/muted-background-accent"
+  },
+  "ignore": [
+    "font-sans",
+    "font-title",
+    "font-mono",
+    "container-max-width",
+    "container-padding-inline"
+  ]
+}

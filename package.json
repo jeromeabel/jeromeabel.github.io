@@ -9,7 +9,9 @@
     "astro": "astro",
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",
-    "pixel-check": "node scripts/pixel-check.mjs"
+    "pixel-check": "node scripts/pixel-check.mjs",
+    "test": "node --test scripts/figma/**/*.test.mjs",
+    "figma:verify": "node scripts/figma/extract-code-tokens.mjs tokens.code.json && node scripts/figma/diff-tokens.mjs tokens.code.json tokens.figma.json scripts/figma/token-map.json"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "^7.2.1",
