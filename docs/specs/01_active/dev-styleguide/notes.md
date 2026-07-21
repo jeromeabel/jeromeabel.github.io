@@ -249,20 +249,23 @@ would silently reflow these 9 files. If that's undesired, add them to
 
 ## Legacy component delete-vs-adopt verdicts
 
-Placeholder — decide after eyeballing all 9 in `/styleguide` now that
-Tasks 2 and 3 are both complete.
+**Verdict (human decision): keep all 9.** They've already been designed
+in Figma — see the Blog design file:
+https://www.figma.com/design/Wf4iomVMYUXlFIBV3Z8bx4/Blog-JeromeAbel?node-id=78-2
+— so these are future adoption candidates, not dead code. Stay orphaned
+(not wired into any page/layout) but restored, storied, and fence-fixed
+per Plans C's Task 1-4.
 
-- `work/WorkCard` — keep / delete / adopt — decide after eyeballing.
-- `work/WorkCardImage` — keep / delete / adopt — decide after eyeballing.
-- `work/WorksPreview` — keep / delete / adopt — decide after eyeballing.
-- `blog/BlogPreview` — keep / delete / adopt — decide after eyeballing.
-- `blog/PostCard` — keep / delete / adopt — decide after eyeballing.
-- `blog/PostList` — pre-known incompatible (imports removed `getAllPosts`
-  export) — skipped story, per Task 1 Step 3b / plan-c.md. Fence-fixed but
-  unstoried; stays restored for now.
-- `blog/SerieList` — keep / delete / adopt — decide after eyeballing.
-- `blog/SerieListItem` — keep / delete / adopt — decide after eyeballing.
-- `blog/SeriePostCard` — keep / delete / adopt — decide after eyeballing.
+- `work/WorkCard` — keep (Figma-designed, pending adoption).
+- `work/WorkCardImage` — keep (Figma-designed, pending adoption).
+- `work/WorksPreview` — keep (Figma-designed, pending adoption).
+- `blog/BlogPreview` — keep (Figma-designed, pending adoption).
+- `blog/PostCard` — keep (Figma-designed, pending adoption).
+- `blog/PostList` — keep. Fixed + storied in Task 12 (figma-blog-fit);
+  no longer references the removed `getAllPosts` export.
+- `blog/SerieList` — keep (Figma-designed, pending adoption).
+- `blog/SerieListItem` — keep (Figma-designed, pending adoption).
+- `blog/SeriePostCard` — keep (Figma-designed, pending adoption).
 
 ## Pixel verification (Plan D, Task 4) — final
 
