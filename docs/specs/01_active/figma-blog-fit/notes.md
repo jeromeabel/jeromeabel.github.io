@@ -367,3 +367,60 @@ a visible element with an understood, logged reason for any remaining mismatch, 
 met, and not closeable within this task's scope (re-anchoring selectors) without rebuilding page
 context in Astrobook, which is a different task. Flagged for the final whole-branch review /
 human sign-off rather than silently redefined here.
+
+---
+
+## Task 9 — Figma geometry read
+
+**Inventory (`use_figma`, file `Wf4iomVMYUXlFIBV3Z8bx4`):** 4 pages — `📖 Cover` (0:1),
+`🎨 Foundations` (5:14, 2 frames: Colors/Typography/Scale — 3 actually, see below), `🧩 Components`
+(52:2, 13 sections), `📄 Pages` (44:328, 4 template sections: ABOUT/HOME/BLOG/WORK, desktop-1480
+only — Stage 4's responsive/dark frames not built yet, expected).
+
+**Gap found vs. prior "FULL build complete" status note**: the `🧩 Components` page's 13 sections
+(HEADER, FOOTER, TYPOGRAPHY, ICONS, TOC, LINK-NAV-POST, VALUE-CARD, LINK, WORK-CARDS, POST-ROW,
+SERIE-CARD, TOGGLE, TOPIC-CHIP) contain masters for only **15 of the 40** manifest components with
+web geometry (Task 8). Matched:
+
+| manifest id | figma node | id |
+|---|---|---|
+| app-header--default | Header | 41:3 |
+| app-footer--default | Footer | 42:3 |
+| ui-linknavpost--previous | Type=Previous | 34:3 |
+| ui-linknavpost--next | Type=Next | 34:10 |
+| ui-link--default | Variant=default | 12:7 |
+| ui-link--iconbutton | Variant=icon | 13:9 |
+| ui-link--secondary | Variant=secondary | 13:4 |
+| ui-link--external | Variant=external | 13:6 |
+| work-workoverlaycard--overlaycard | WorkOverlayCard | 32:3 |
+| work-workminicard--minicard | WorkMiniCard | 32:9 |
+| blog-postrowcalm--calmrow | PostRow | 31:13 |
+| app-themetoggle--default | State=Light | 16:3 |
+| app-motiontoggle--default | State=Off | 16:9 |
+| blog-topicchips--default | TopicChip | 15:9 |
+| blog-seriecard--default | SerieCard (INSTANCE, not a master — no SerieCard component exists yet) | 52:314 |
+
+**No Figma master exists** for the other 25: `about-aboutfacts`, `about-aboutstrip`,
+`about-abouttext`, `blog-postlistitem`, `blog-relatedwork`, `blog-selectedwriting`,
+`blog-seriecontents`, `blog-seriepostlistitem`, `contact-contactimage`, `contact-contact`,
+`contact-contacttext`, `hero-herosocials`, `hero-hero`, `hero-herotext`, `ui-customimage`,
+`ui-h1`, `ui-h2`, `ui-prose`, `ui-p`, `ui-socialshare`, `work-archivetable`,
+`work-relatedwriting`, `work-workgallerycard`, `work-workheader`, `work-worksstrip`. These will
+surface as "missing in Figma" in the Task 10 diff — correct signal, not a diff-script bug. Closing
+them is Stage 3 Task 11 (master repairs) / Stage 3b Task 13 (legacy 9) territory, not this task's
+scope (Task 9 is read-only).
+
+**Read procedure**: recorded in `scripts/figma/dump-tokens.md` ("Geometry read (Task 9)" section).
+Props sourced from Plugin API node properties (not `getComputedStyle`, which doesn't exist in
+Figma): `width` ← `node.width`; `borderRadius` ← `node.cornerRadius`; `backgroundColor`/
+`borderTopColor` ← first visible solid fill/stroke as `rgb(...)`; `paddingTop/Right/Bottom/Left` +
+`gap` only when `node.layoutMode !== "NONE"`; `fontSize`/`fontFamily`/`fontWeight`/`color` only
+when the root node itself is `TEXT` — mirroring `extract-web-geometry.mjs`'s root-only,
+prop-subset read exactly, one node type's API standing in for the other's.
+
+**Output**: `geometry.figma.json` written (git-ignored) with the 15 matched entries, each
+`{ root: {...} }` keyed by manifest id — directly comparable to `geometry.web.json`'s
+`<id>.desktop.light.root` by Task 10's diff.
+
+**Committed**: `scripts/figma/dump-tokens.md` (procedure). `geometry.figma.json` is git-ignored
+per Task 1's `.gitignore` entry — not committed, regenerate via the recorded procedure.
