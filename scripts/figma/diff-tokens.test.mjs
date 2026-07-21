@@ -58,3 +58,14 @@ test("unreadable input exits 0 (warn-only invariant)", () => {
     execFileSync("node", [script, "/tmp/nope1.json", "/tmp/nope2.json", "/tmp/nope3.json"],
       { encoding: "utf8", stdio: ["pipe", "pipe", "pipe"] }));
 });
+test("empty figma/code JSON objects (malformed structure) exits 0", () => {
+  const out = runDiff({}, {}, { map: {}, ignore: [] });
+  // With empty code.tokens and figma.collections, all sections should be empty
+  assert.match(out, /## Unmapped[\s]*_none_/);
+  assert.match(out, /## Missing in Figma[\s]*_none_/);
+});
+test("missing 'map' key in token-map.json defaults to empty", () => {
+  const out = runDiff({ tokens: [] }, { collections: [] }, { ignore: [] });
+  // Should not throw and should exit 0
+  assert.match(out, /## Unmapped[\s]*_none_/);
+});

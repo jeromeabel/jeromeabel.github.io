@@ -25,6 +25,20 @@ try {
   process.exit(0);
 }
 
+// Normalize structure: guard against missing/malformed collections and tokens
+if (!Array.isArray(figma.collections)) {
+  console.error("warn: figma.collections missing or malformed — treating as empty");
+  figma.collections = [];
+}
+if (!Array.isArray(code.tokens)) {
+  console.error("warn: code.tokens missing or malformed — treating as empty");
+  code.tokens = [];
+}
+if (typeof map !== "object" || map === null) {
+  console.error("warn: token-map.json missing 'map' key or malformed — treating as empty");
+  map = {};
+}
+
 // index figma variables by "Collection/var/path"
 const figVars = new Map();
 for (const col of figma.collections)
