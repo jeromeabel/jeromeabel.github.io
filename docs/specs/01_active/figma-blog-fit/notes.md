@@ -488,3 +488,74 @@ repairs. Categories 1/3/4 above are the Task-11 repair-worklist input; category 
 Task-11-time decision on read methodology before it's actionable.
 
 Commit: `feat(geometry): web↔figma geometry diff with repair worklist`.
+
+---
+
+## Task 11 — master repairs + screenshot gate (partial, first pass)
+
+**Strictness audit** (`fe-figma-verify` Pass 1/Pass 2, run over `🧩 Components`, 52:2):
+- Pass 2 (detached instances): **0 found**, clean.
+- Pass 1 (unbound fills/strokes): 41 raw flags. Triaged by node type/parent — most are not real
+  debt:
+  - **13 flags are `SECTION` nodes** (`HEADER`, `FOOTER`, `TYPOGRAPHY`, `ICONS`, `TOC`,
+    `LINK-NAV-POST`, `VALUE-CARD`, `LINK`, `WORK-CARDS`, `POST-ROW`, `SERIE-CARD`, `TOGGLE`,
+    `TOPIC-CHIP`) — organizational canvas chrome, not shipped design content. Out of scope.
+  - **~9 flags are `TEXT` doc labels** inside `__doc`/`📄 Doc` frames (e.g. `Header`, `Footer`,
+    `TableOfContents`, `LinkNavPost`, `ValueCard`, `PostRow`, `SerieCard`) — annotation captions,
+    not component masters. Out of scope.
+  - **Icon component set** (`52:136` `Icon`, stroke; two nested instance `raw` vector fills) —
+    icon SVG fill/stroke, expected to carry literal paint on vector paths rather than a bound
+    variable in this DS. Accepted debt, not fixed.
+  - **`WorkOverlayCard` master content** (`32:4` overlay frame, `32:6`/`32:7` Rectangle, `32:8`
+    "Malinette" text) — project-specific artwork/copy for the featured card (see
+    [[project_selected-work-decisions]] — Malinette featured, list/content reopened by
+    editorial-v4). Not tokenizable by nature; left as-is, not a repair candidate.
+
+**Geometry repairs (chrome, sweep-order step 1 of "chrome → cards → templates → ui atoms")**:
+Investigated the two real category-4 deltas from Task 10 before touching anything:
+- `blog-topicchips--default` `borderTopColor` mismatch: **not a Figma bug** — traced to
+  `scripts/pixel-manifest.mjs:244`, selector `div[class="flex flex-wrap gap-2"]` targets the
+  *wrapper* of all chips, not the individual `<span class="border-muted-border ...">` chip
+  (`TopicChips.astro:18`). The web geometry read is comparing the wrong DOM level to the
+  single-chip Figma master — explains both the border-color "mismatch" and most of the width
+  delta. **Fix belongs in Task 8's manifest** (selector needs a `:first-child`/descendant scope),
+  not in Figma. Left open, flagged for whoever revisits Task 8.
+- `work-workoverlaycard--overlaycard` `backgroundColor` mismatch: **not a bug either** — the web
+  root selector (`WorkCardImage.astro`, `pixel-manifest.mjs:531`) is the `<a>` at rest; the green
+  overlay only appears via `group-hover:bg-black/85` on hover, so a static `getComputedStyle`
+  read is correctly transparent. The Figma master shows a solid overlay always-on, which reads as
+  an intentional static depiction of the hover state (can't render `:hover` in a static frame).
+  Judgment call, not a drift — leaving as-is; flag for human sign-off if the intent was different.
+- `app-header--default` / `app-footer--default` `paddingLeft`/`paddingRight` (16px figma vs 0px
+  web): **real structural bug, repaired**. Both masters had the site's `.container` 16px
+  horizontal inset baked into the top-level component frame; on web that inset lives on a nested
+  `.container` div, not the `<header>`/`<footer>` element itself (per CLAUDE.md: custom
+  `container` utility owns the padding). Restructured both masters (`41:3` Header, `42:3`
+  Footer): inserted a nested `Container` auto-layout frame (`69:77` under Header, `70:2` under
+  Footer) holding all prior children, `layoutSizingHorizontal: FILL`, carrying the 16px
+  left/right padding and (Header only) the 40px `itemSpacing` that was previously on the root —
+  matches the real DOM's two-level structure (full-bleed row → inset flex content). Root frames
+  now have `paddingLeft/Right: 0`, vertical padding unchanged (Header 24/24, Footer 64/64).
+  Re-screenshotted both — visually identical to before (nav right-aligned, footer space-between
+  intact, no reflow). Re-read root geometry and re-ran `diff-geometry.mjs`: `paddingLeft/Right`
+  and `gap` deltas gone.
+  - Residual `gap`: web reports `"normal"`, figma now reports `"0px"` — both mean "root itself
+    carries no gap" (real gap moved to the nested Container, matching web). This is a
+    **diff-script string-literal quirk** (like the `9999px` vs `3.35544e+07px` border-radius
+    case already logged), not a repair target.
+
+**Remaining after this pass**: every other `app-header--default`/`app-footer--default` worklist
+line is the already-documented font/color "(absent)" artifact — extended scope: also covers
+`backgroundColor`/`borderTopColor`, since `getComputedStyle` always returns a value (transparent/
+black defaults) even on elements with no explicit fill/border, while the Plugin-API reader only
+emits those props when a `SOLID` paint actually exists. Same root cause as the font-prop gap,
+not new information.
+
+**Not done in this pass** — Task 11 sweep order is chrome → cards → templates → ui atoms; only
+chrome (Header/Footer) is repaired. Remaining scope (cards: WorkOverlayCard/WorkMiniCard/
+SerieCard/PostRowCalm geometry; ui atoms: Link variants, toggles, LinkNavPost; the `9999px`
+border-radius diff-script fix; the TopicChips manifest-selector fix) is left for a follow-up
+pass — flagging rather than silently calling Task 11 complete, consistent with the Task 7
+majority-pass precedent.
+
+Commit: `fix(geometry): restructure Header/Footer masters — move container inset off root`.
