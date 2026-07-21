@@ -1,4 +1,5 @@
 ---
+shipped: 2026-07-21
 title: Figma ↔ Blog perfect fit (token + layout exact)
 created: 2026-07-21
 ---
@@ -19,7 +20,7 @@ astrobook becomes a trustworthy dev surface (implement the chosen variant), and
 the three-way fit code ↔ astrobook ↔ Figma is **verified by deterministic
 scripts** wherever technically possible.
 
-**Fidelity bar (decided):** *token + layout exact* — every color / font /
+**Fidelity bar (decided):** _token + layout exact_ — every color / font /
 spacing / radius value in Figma matches `src/styles/global.css` tokens exactly
 (script-verified), layout geometry matches per breakpoint (script-verified),
 side-by-side screenshots look identical to the eye. Machine 0-pixel Figma↔web is
