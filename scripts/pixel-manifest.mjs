@@ -25,10 +25,10 @@ export const MANIFEST = [
   // ---------------------------------------------------------------------
   {
     id: "about-aboutfacts--grid",
-    storyPath:
-      "/styleguide/dashboard/src/components/about/about-facts/grid",
+    storyPath: "/styleguide/dashboard/src/components/about/about-facts/grid",
     liveUrl: `${BASE}/about`,
-    selector: 'dl[class="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4"]',
+    selector:
+      'dl[class="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4"]',
     masks: [],
     wrapper: "container",
   },
@@ -39,8 +39,7 @@ export const MANIFEST = [
   },
   {
     id: "about-aboutstrip--default",
-    storyPath:
-      "/styleguide/dashboard/src/components/about/about-strip/default",
+    storyPath: "/styleguide/dashboard/src/components/about/about-strip/default",
     liveUrl: `${BASE}/`,
     selector:
       'section[class="reveal reveal-bottom container flex flex-col gap-6 lg:gap-8"]',
@@ -49,8 +48,7 @@ export const MANIFEST = [
   },
   {
     id: "about-abouttext--default",
-    storyPath:
-      "/styleguide/dashboard/src/components/about/about-text/default",
+    storyPath: "/styleguide/dashboard/src/components/about/about-text/default",
     liveUrl: `${BASE}/about`,
     selector: 'section[class="flex w-full flex-col gap-6 sm:gap-8 lg:w-2/3"]',
     masks: [],
@@ -88,8 +86,7 @@ export const MANIFEST = [
   },
   {
     id: "app-motiontoggle--default",
-    storyPath:
-      "/styleguide/dashboard/src/components/app/motion-toggle/default",
+    storyPath: "/styleguide/dashboard/src/components/app/motion-toggle/default",
     liveUrl: `${BASE}/`,
     selector: "#motion-toggle",
     masks: [],
@@ -97,8 +94,7 @@ export const MANIFEST = [
   },
   {
     id: "app-themetoggle--default",
-    storyPath:
-      "/styleguide/dashboard/src/components/app/theme-toggle/default",
+    storyPath: "/styleguide/dashboard/src/components/app/theme-toggle/default",
     liveUrl: `${BASE}/`,
     selector: "#theme-toggle",
     masks: [],
@@ -255,7 +251,8 @@ export const MANIFEST = [
     storyPath:
       "/styleguide/dashboard/src/components/contact/contact-image/default",
     liveUrl: `${BASE}/`,
-    selector: 'div[class="reveal reveal-bottom relative hidden flex-1 sm:block"]',
+    selector:
+      'div[class="reveal reveal-bottom relative hidden flex-1 sm:block"]',
     masks: ["svg"],
     wrapper: "container",
   },
@@ -299,8 +296,7 @@ export const MANIFEST = [
   },
   {
     id: "hero-herosocials--default",
-    storyPath:
-      "/styleguide/dashboard/src/components/hero/hero-socials/default",
+    storyPath: "/styleguide/dashboard/src/components/hero/hero-socials/default",
     liveUrl: `${BASE}/`,
     selector: 'div[class="mt-6 flex items-center gap-3 lg:mt-10 lg:gap-4"]',
     masks: [],
@@ -345,17 +341,18 @@ export const MANIFEST = [
   // ---------------------------------------------------------------------
   {
     id: "ui-customimage--default",
-    storyPath:
-      "/styleguide/dashboard/src/components/ui/custom-image/default",
+    storyPath: "/styleguide/dashboard/src/components/ui/custom-image/default",
     liveUrl: `${BASE}/blog/adding-likes-to-a-static-astro-site`,
-    selector: 'div[class="reveal-img relative overflow-hidden shadow-lg dark:shadow-none"]',
+    selector:
+      'div[class="reveal-img relative overflow-hidden shadow-lg dark:shadow-none"]',
     masks: ["img"],
     wrapper: "container",
   },
   {
     id: "ui-customimage--square",
     skip: true,
-    reason: 'no live caller passes type="square" (all 3 usages default to type="cover")',
+    reason:
+      'no live caller passes type="square" (all 3 usages default to type="cover")',
   },
   {
     id: "ui-h1--default",
@@ -375,10 +372,9 @@ export const MANIFEST = [
   },
   {
     id: "ui-linknavpost--previous",
-    storyPath:
-      "/styleguide/dashboard/src/components/ui/link-nav-post/previous",
+    storyPath: "/styleguide/dashboard/src/components/ui/link-nav-post/previous",
     liveUrl: `${BASE}/blog/adding-likes-to-a-static-astro-site`,
-    selector: 'a[href="/blog/nuxt-clean-architecture"]',
+    selector: 'a[data-type="prev"]',
     masks: [],
     wrapper: "container",
   },
@@ -386,7 +382,7 @@ export const MANIFEST = [
     id: "ui-linknavpost--next",
     storyPath: "/styleguide/dashboard/src/components/ui/link-nav-post/next",
     liveUrl: `${BASE}/blog/adding-likes-to-a-static-astro-site`,
-    selector: 'a[href="/blog/clickable-images-astro-markdown"]',
+    selector: 'a[data-type="next"]',
     masks: [],
     wrapper: "container",
   },
@@ -394,20 +390,20 @@ export const MANIFEST = [
     id: "ui-link--default",
     storyPath: "/styleguide/dashboard/src/components/ui/link/default",
     liveUrl: `${BASE}/about`,
-    selector: 'a[href="https://jeromeabel.net"]',
+    selector: 'a[data-variant="default"]',
     masks: [],
     wrapper: "container",
   },
   {
     id: "ui-link--cta",
     skip: true,
-    reason: "orphaned variant, no live caller passes variant=\"cta\"",
+    reason: 'orphaned variant, no live caller passes variant="cta"',
   },
   {
     id: "ui-link--iconbutton",
     storyPath: "/styleguide/dashboard/src/components/ui/link/icon-button",
     liveUrl: `${BASE}/`,
-    selector: 'a[title="Email"]',
+    selector: 'a[data-variant="icon"]',
     masks: [],
     wrapper: "container",
   },
@@ -415,7 +411,7 @@ export const MANIFEST = [
     id: "ui-link--secondary",
     storyPath: "/styleguide/dashboard/src/components/ui/link/secondary",
     liveUrl: `${BASE}/`,
-    selector: 'a[title="All work"]',
+    selector: 'a[data-variant="secondary"]',
     masks: [],
     wrapper: "container",
   },
@@ -423,7 +419,7 @@ export const MANIFEST = [
     id: "ui-link--external",
     storyPath: "/styleguide/dashboard/src/components/ui/link/external",
     liveUrl: `${BASE}/work/malinette`,
-    selector: 'a[title="Website"]',
+    selector: 'a[data-variant="external"]',
     masks: [],
     wrapper: "section",
   },
@@ -460,7 +456,8 @@ export const MANIFEST = [
   // ---------------------------------------------------------------------
   {
     id: "work-archivetable--default",
-    storyPath: "/styleguide/dashboard/src/components/work/archive-table/default",
+    storyPath:
+      "/styleguide/dashboard/src/components/work/archive-table/default",
     liveUrl: `${BASE}/work`,
     selector: 'table[class="w-full border-collapse text-sm md:text-base"]',
     masks: [],
@@ -515,7 +512,8 @@ export const MANIFEST = [
     // NOT variant-skipped: WorkMiniCard is hardcoded (unconditionally, not
     // VARIANTS-gated) inside blog/RelatedWork.astro, independent of the
     // worksStrip variant selection used by WorksStrip.astro.
-    storyPath: "/styleguide/dashboard/src/components/work/work-mini-card/mini-card",
+    storyPath:
+      "/styleguide/dashboard/src/components/work/work-mini-card/mini-card",
     liveUrl: `${BASE}/blog/api-endpoints-with-astro`,
     selector:
       'a[class="group flex flex-col gap-2 outline-offset-4 outline-black focus:outline-2 dark:outline-white"]',

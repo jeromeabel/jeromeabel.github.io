@@ -1,0 +1,12 @@
+---
+// Decorator: for components that are a `flex-1` child relying on the
+// browser's default `align-items: stretch` to receive their real height
+// from a flex sibling (e.g. ContactImage next to ContactText in Contact.astro).
+// In isolation there is no sibling to stretch against, so the component
+// collapses to 0 height. This reproduces a fixed-height flex row so the
+// story renders at a comparable size to its live usage.
+---
+
+<div class="container flex" style="height: 15.125rem">
+  <slot />
+</div>

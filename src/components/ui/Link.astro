@@ -50,7 +50,13 @@ const iconName = icon || (isVariantExternal ? "lucide:arrow-up-right" : "");
 const classes = linkVariants({ variant, className });
 ---
 
-<a class={classes} title={label} {...externalAttrs} {...props}>
+<a
+  class={classes}
+  title={label}
+  data-variant={variant}
+  {...externalAttrs}
+  {...props}
+>
   {showLabel && label}
   <slot />
   {iconName && <Icon name={iconName} />}

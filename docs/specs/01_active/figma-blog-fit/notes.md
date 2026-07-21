@@ -95,54 +95,54 @@ work/[id].astro:59: <div class="container mt-8 flex flex-col gap-4 sm:flex-row l
 
 `index.astro` composes `Hero`, `AboutStrip`, `SelectedWriting`, `WorksStrip`, `Contact` —
 each of those top-level section components applies its own `.container`/full-bleed markup
-internally (verified by reading each `.astro` file), so children rendered *inside* them
+internally (verified by reading each `.astro` file), so children rendered _inside_ them
 (e.g. `AboutFacts`, `PostRowCalm`, `WorkOverlayCard`) still need a decorator when isolated
 in Astrobook, but the section components themselves (`AboutStrip`, `SelectedWriting`,
 `Contact`) do not — and `Hero`/`Footer`/`Header`/`WorksStrip` are explicitly full-bleed by
 brief.
 
-| manifest id | live parent (grep evidence) | verdict | wrapper |
-|---|---|---|---|
-| about-aboutfacts--grid | about.astro:8 `.container` → AboutText → AboutFacts | container | container |
-| about-aboutstrip--default | index.astro → AboutStrip.astro renders own `section.container` | self-sufficient | none |
-| about-abouttext--default | about.astro:8 `.container`, AboutText is a `<section class="... lg:w-2/3">` two-col child, no independent container/py of its own — nearest dedicated ancestor combines container+py | section | section |
-| app-footer--default | brief-named full-bleed | full-bleed | none |
-| app-header--default | brief-named full-bleed | full-bleed | none |
-| app-motiontoggle--default | app/Header.astro toolbar inside `header` container | container | container |
-| app-themetoggle--default | app/Header.astro toolbar inside `header` container | container | container |
-| blog-postlistitem--default | blog.astro:24 `.container` → PostListItem row | container | container |
-| blog-postrowcalm--calmrow | index.astro → SelectedWriting.astro `#writing` → PostRowCalm rows | container | container |
-| blog-relatedwork--default | blog/[id].astro:58 `.container` → RelatedWork section | container | container |
-| blog-selectedwriting--default | index.astro → SelectedWriting.astro renders own `section#writing.container` | self-sufficient | none |
-| blog-seriecard--default | blog.astro:24 `.container` → SerieCard | container | container |
-| blog-seriecontents--default | blog/[serie]/[post].astro:77 `.container` → SerieContents | container | container |
-| blog-seriepostlistitem--default | blog/[serie]/index.astro:39 `.container` → SeriePostListItem row | container | container |
-| blog-topicchips--default | blog/[id].astro `.container` (Prose ancestor) → TopicChips | container | container |
-| contact-contactimage--default | index.astro → Contact.astro `section[role=complementary]` → ContactImage | container | container |
-| contact-contact--default | index.astro → Contact.astro renders own `section[role=complementary]` wrapper | self-sufficient | none |
-| contact-contacttext--default | index.astro → Contact.astro → ContactText | container | container |
-| hero-herosocials--default | index.astro → Hero.astro (full-bleed) → HeroSocials | container (own component width-bound by design token, not full-bleed) | container |
-| hero-hero--default | brief-named full-bleed | full-bleed | none |
-| hero-herotext--default | index.astro → Hero.astro (full-bleed) → HeroText `h1` | container | container |
-| ui-customimage--default | blog/[id].astro `.container` → Prose → CustomImage | container | container |
-| ui-h1--default | about.astro:8 `.container` → H1 | container | container |
-| ui-h2--default | blog.astro:24 `.container` → H2 | container | container |
-| ui-linknavpost--previous | blog/[id].astro `.container` → LinkNavPost prev | container | container |
-| ui-linknavpost--next | blog/[id].astro `.container` → LinkNavPost next | container | container |
-| ui-link--default | about.astro:8 `.container` → Link (default variant) | container | container |
-| ui-link--iconbutton | index.astro → Header/HeroSocials `.container` → Link (icon variant) | container | container |
-| ui-link--secondary | index.astro → WorksStrip "All work" `.container`-scoped link | container | container |
-| ui-link--external | work/[id].astro:45 `.container` → WorkHeader (section-wrapped, see below) → Link (external variant) | section (inherits WorkHeader's section wrapper) | section |
-| ui-prose--default | blog/[id].astro:58 `.container` → Prose | container | container |
-| ui-p--default | blog.astro:24 `.container` → P (intro paragraph) | container | container |
-| ui-socialshare--default | blog/[id].astro `.container` → SocialShare | container | container |
-| work-archivetable--default | work.astro:25 `.container` → ArchiveTable | container | container |
-| work-relatedwriting--default | work/[id].astro:45 `.container` → RelatedWriting | container | container |
-| work-workgallerycard--square | work.astro:25 `.container` → WorkGalleryCard grid | container | container |
-| work-workheader--default | work/[id].astro:45 `<div class="container flex flex-col gap-8 py-8 lg:gap-12 lg:py-24">` — combined container+vertical-rhythm wrapper dedicated to WorkHeader | section | section |
-| work-workminicard--minicard | blog/[id].astro `.container` → RelatedWork → WorkMiniCard (hardcoded, not variant-gated) | container | container |
-| work-workoverlaycard--overlaycard | index.astro → WorksStrip (full-bleed) → WorkOverlayCard grid item | container | container |
-| work-worksstrip--default | brief-named full-bleed | full-bleed | none |
+| manifest id                       | live parent (grep evidence)                                                                                                                                                          | verdict                                                               | wrapper   |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------- | --------- |
+| about-aboutfacts--grid            | about.astro:8 `.container` → AboutText → AboutFacts                                                                                                                                  | container                                                             | container |
+| about-aboutstrip--default         | index.astro → AboutStrip.astro renders own `section.container`                                                                                                                       | self-sufficient                                                       | none      |
+| about-abouttext--default          | about.astro:8 `.container`, AboutText is a `<section class="... lg:w-2/3">` two-col child, no independent container/py of its own — nearest dedicated ancestor combines container+py | section                                                               | section   |
+| app-footer--default               | brief-named full-bleed                                                                                                                                                               | full-bleed                                                            | none      |
+| app-header--default               | brief-named full-bleed                                                                                                                                                               | full-bleed                                                            | none      |
+| app-motiontoggle--default         | app/Header.astro toolbar inside `header` container                                                                                                                                   | container                                                             | container |
+| app-themetoggle--default          | app/Header.astro toolbar inside `header` container                                                                                                                                   | container                                                             | container |
+| blog-postlistitem--default        | blog.astro:24 `.container` → PostListItem row                                                                                                                                        | container                                                             | container |
+| blog-postrowcalm--calmrow         | index.astro → SelectedWriting.astro `#writing` → PostRowCalm rows                                                                                                                    | container                                                             | container |
+| blog-relatedwork--default         | blog/[id].astro:58 `.container` → RelatedWork section                                                                                                                                | container                                                             | container |
+| blog-selectedwriting--default     | index.astro → SelectedWriting.astro renders own `section#writing.container`                                                                                                          | self-sufficient                                                       | none      |
+| blog-seriecard--default           | blog.astro:24 `.container` → SerieCard                                                                                                                                               | container                                                             | container |
+| blog-seriecontents--default       | blog/[serie]/[post].astro:77 `.container` → SerieContents                                                                                                                            | container                                                             | container |
+| blog-seriepostlistitem--default   | blog/[serie]/index.astro:39 `.container` → SeriePostListItem row                                                                                                                     | container                                                             | container |
+| blog-topicchips--default          | blog/[id].astro `.container` (Prose ancestor) → TopicChips                                                                                                                           | container                                                             | container |
+| contact-contactimage--default     | index.astro → Contact.astro `section[role=complementary]` → ContactImage                                                                                                             | container                                                             | container |
+| contact-contact--default          | index.astro → Contact.astro renders own `section[role=complementary]` wrapper                                                                                                        | self-sufficient                                                       | none      |
+| contact-contacttext--default      | index.astro → Contact.astro → ContactText                                                                                                                                            | container                                                             | container |
+| hero-herosocials--default         | index.astro → Hero.astro (full-bleed) → HeroSocials                                                                                                                                  | container (own component width-bound by design token, not full-bleed) | container |
+| hero-hero--default                | brief-named full-bleed                                                                                                                                                               | full-bleed                                                            | none      |
+| hero-herotext--default            | index.astro → Hero.astro (full-bleed) → HeroText `h1`                                                                                                                                | container                                                             | container |
+| ui-customimage--default           | blog/[id].astro `.container` → Prose → CustomImage                                                                                                                                   | container                                                             | container |
+| ui-h1--default                    | about.astro:8 `.container` → H1                                                                                                                                                      | container                                                             | container |
+| ui-h2--default                    | blog.astro:24 `.container` → H2                                                                                                                                                      | container                                                             | container |
+| ui-linknavpost--previous          | blog/[id].astro `.container` → LinkNavPost prev                                                                                                                                      | container                                                             | container |
+| ui-linknavpost--next              | blog/[id].astro `.container` → LinkNavPost next                                                                                                                                      | container                                                             | container |
+| ui-link--default                  | about.astro:8 `.container` → Link (default variant)                                                                                                                                  | container                                                             | container |
+| ui-link--iconbutton               | index.astro → Header/HeroSocials `.container` → Link (icon variant)                                                                                                                  | container                                                             | container |
+| ui-link--secondary                | index.astro → WorksStrip "All work" `.container`-scoped link                                                                                                                         | container                                                             | container |
+| ui-link--external                 | work/[id].astro:45 `.container` → WorkHeader (section-wrapped, see below) → Link (external variant)                                                                                  | section (inherits WorkHeader's section wrapper)                       | section   |
+| ui-prose--default                 | blog/[id].astro:58 `.container` → Prose                                                                                                                                              | container                                                             | container |
+| ui-p--default                     | blog.astro:24 `.container` → P (intro paragraph)                                                                                                                                     | container                                                             | container |
+| ui-socialshare--default           | blog/[id].astro `.container` → SocialShare                                                                                                                                           | container                                                             | container |
+| work-archivetable--default        | work.astro:25 `.container` → ArchiveTable                                                                                                                                            | container                                                             | container |
+| work-relatedwriting--default      | work/[id].astro:45 `.container` → RelatedWriting                                                                                                                                     | container                                                             | container |
+| work-workgallerycard--square      | work.astro:25 `.container` → WorkGalleryCard grid                                                                                                                                    | container                                                             | container |
+| work-workheader--default          | work/[id].astro:45 `<div class="container flex flex-col gap-8 py-8 lg:gap-12 lg:py-24">` — combined container+vertical-rhythm wrapper dedicated to WorkHeader                        | section                                                               | section   |
+| work-workminicard--minicard       | blog/[id].astro `.container` → RelatedWork → WorkMiniCard (hardcoded, not variant-gated)                                                                                             | container                                                             | container |
+| work-workoverlaycard--overlaycard | index.astro → WorksStrip (full-bleed) → WorkOverlayCard grid item                                                                                                                    | container                                                             | container |
+| work-worksstrip--default          | brief-named full-bleed                                                                                                                                                               | full-bleed                                                            | none      |
 
 ### Judgment calls / deviations (see task-5-report.md for full disclosure)
 
@@ -186,3 +186,115 @@ components whose live markup shifted since the manifest was authored) — not a 
 defect. The matrix itself is confirmed working end-to-end: no `networkidle` timeouts observed;
 every failure/error carries real `theme`/`vp` (including `tablet`) data in
 `.pixel-report/summary.json`. Re-anchoring selectors to close this gate is Task 7's scope.
+
+## Task 7 — re-anchor broken selectors
+
+Root-caused all 11 "error"-status manifest ids (66 cells) from the Task-6 baseline into 3
+buckets, fixed each, and spot-verified fixed selectors directly against the dev server
+(`localhost:4321`, both `/styleguide/stories/...` and live routes) at all 3 pixel-check
+viewports (390/768/1280) before committing — not yet re-verified via a full `pnpm pixel-check`
+matrix run (left to the controller per Task-7 brief).
+
+**Bucket A — story fixture content didn't match a live-content-specific selector (0 elements
+found).** `Link.astro`/`LinkNavPost.astro` had no CVA/semantic hook; manifest selectors keyed on
+literal live text/href (`a[title="Email"]`, `a[href="/blog/nuxt-clean-architecture"]`, etc.) that
+the story's generic fixture args never produce. Fix: added `data-variant={variant}` to
+`Link.astro`'s `<a>` (owns the CVA variant already) and `data-type={type}` to
+`LinkNavPost.astro`'s `<a>`, then re-anchored the 6 manifest selectors to those attributes:
+
+- `ui-link--default`: `a[href="https://jeromeabel.net"]` → `a[data-variant="default"]`
+- `ui-link--iconbutton`: `a[title="Email"]` → `a[data-variant="icon"]`
+- `ui-link--secondary`: `a[title="All work"]` → `a[data-variant="secondary"]`
+- `ui-link--external`: `a[title="Website"]` → `a[data-variant="external"]`
+- `ui-linknavpost--previous`: `a[href="/blog/nuxt-clean-architecture"]` → `a[data-type="prev"]`
+- `ui-linknavpost--next`: `a[href="/blog/clickable-images-astro-markdown"]` → `a[data-type="next"]`
+  Verified live-DOM: `data-variant`/`data-type` now present and matched at all 3 viewports on
+  both live pages and stories; `.first()` resolves to the intended element in every case.
+
+**Bucket B — empty `<slot />` collapses to zero height in Astrobook (no children-passing
+mechanism exists for stories — confirmed by reading `@astrobook/core`'s `Story` type).** `H1`,
+`H2`, `P`, `Prose` are pure slot-wrapper atoms with no `args`-driven text. Fix: added Astro
+`<slot>fallback</slot>` content (`Heading`, `Heading`, `Paragraph text.`,
+`<p>Sample prose content.</p>` respectively) — fallback renders only when no children are
+passed, so production usage (which always passes children) is unaffected. No manifest changes
+needed (selectors were already correct; the elements just couldn't be found/visible). Verified:
+`ui-h2--default` story box now exactly matches its live box (1248×30 both); `ui-h1--default`
+height matches live (60px) though width differs (story's plain `.container` vs. live's narrower
+in-page text column on `/about` — content-context width difference, not a selector bug, logged
+below as a residual).
+
+**Bucket C — flex-stretch dependency: `ContactImage.astro` is a bare `flex-1` child of a flex
+row whose only content is `position:absolute`, so it gets real height in production only via
+`align-items:stretch` against its `ContactText` sibling; alone in Astrobook it collapses to 0.**
+Fix: new decorator `src/components/styleguide/StoryFlexHeight.astro` (`.container.flex` with a
+fixed `height: 15.125rem`, tuned to match the live desktop height of 242px) swapped in for
+`ContactImage.stories.ts`'s `Default` export (was `StoryContainer`). Verified: story height now
+242px, exact match to live. Width remains full-container (1248px) vs. live's 1056px (live width
+is constrained by the `ContactText` sibling taking some of the flex row — not reproduced without
+a second fake sibling in the decorator); logged as a residual below. Note: `ContactImage` is
+`hidden sm:block` by design — genuinely not visible at the mobile viewport on both story and
+live, so the mobile cell for `contact-contactimage--default` is expected to stay non-comparable
+(pre-existing manifest scope, not part of this fix).
+
+**Bonus fix — systemic grid-context sizing bug found while triaging the large "fail" bucket
+(not an error-bucket id, but same root-cause class as Bucket C: an isolated story lacks a
+context its live parent provides).** `WorkGalleryCard`, `WorkOverlayCard`, `WorkMiniCard` have no
+intrinsic width; each is sized by its live CSS-grid parent (`work.astro`'s dynamic grid,
+`WorksStrip.astro`'s grid, `RelatedWork.astro`'s grid respectively). Wrapped only in plain
+`.container` (no grid) in Astrobook, `WorkOverlayCard`'s `aspect-square` with no width
+constraint stretched to the full container (1248×1248 vs. live's 394×394 grid cell) — confirmed
+`mismatch: 0, sizeMismatch: true` in the Task-6 baseline, i.e. pixel-identical content, wrong
+box. Fix: two new decorators —
+
+- `StoryGrid3.astro` (`grid grid-cols-2 gap-4 sm:grid-cols-3 lg:gap-8`, matching
+  `WorksStrip.astro`/`work.astro`'s grid) for `WorkGalleryCard.stories.ts` (`Square`) and
+  `WorkOverlayCard.stories.ts` (`OverlayCard`).
+- `StoryGrid3Tight.astro` (same grid, no `lg:gap-8` — matches `RelatedWork.astro`'s grid
+  exactly) for `WorkMiniCard.stories.ts` (`MiniCard`), since `RelatedWork.astro` doesn't add
+  the `lg:gap-8` step and using `StoryGrid3` there left a small residual size gap.
+  A lone child in an N-column CSS grid occupies exactly one auto-placed cell, so no second fake
+  sibling card is needed for these three. Verified at 1280×900: `work-workoverlaycard--overlaycard`
+  story box (394.65625×394.65625) now bit-for-bit matches its live grid-cell box;
+  `work-workminicard--minicard` story box (405.328125×437.328125) now exact-matches live;
+  `work-workgallerycard--square` story box (394.65625×518.65625) matches live
+  (394.65625×518.671875, sub-pixel rounding only). No manifest selector changes needed for these
+  3 — selectors were already correct, only sizing was wrong.
+
+### Residuals — content/context differences, not selector bugs (logged, not fixed)
+
+These are cases where the selector now resolves correctly and the element is visible, but the
+story's synthetic fixture content differs from the specific live page's real content in a way a
+selector fix can't close:
+
+- `ui-h1--default`, `ui-p--default`: story renders under plain `.container` (full 1248px column);
+  live `/about` h1 and `/blog` intro p render inside a narrower in-page text column (832px) —
+  height/line-count differs from the fallback text. Context-width difference, not a hidden/error
+  bug anymore.
+- `ui-link--default/secondary/external`, `ui-linknavpost--previous/next`: box height now matches
+  or is close (icon-button variant is an exact 56×56 match on desktop); width/height still
+  differs modestly because the story's fixture label text ("Secondary link", "A previous post
+  title", etc.) is a different length than the live page's real link text/title — expected,
+  content-driven.
+- `ui-prose--default`: story fallback is one `<p>`; live renders a full markdown post body
+  (~9700px tall vs. 36px). Structurally unfixable via selector — Prose's whole purpose is to
+  render arbitrary per-post content. `masks: ["img"]` already applied; the remaining diff is
+  text/length, not an image-animation artifact.
+- `contact-contactimage--default`: width residual (1248px story vs. 1056px live) — see Bucket C
+  above.
+- `blog-relatedwork--default`: story uses `getFeaturedWorks()` fixture data; the live per-post
+  "related work" query returns a different set/count of works for the specific post used in
+  `liveUrl`. Genuine content difference (different cards, different images), not a layout or
+  selector bug — same class of issue as `ui-prose--default`.
+- The remaining ~150 "fail" cells (across ~30 other manifest ids not touched this session — e.g.
+  `work-archivetable--default`, `work-workheader--default`, `blog-selectedwriting--default`,
+  `blog-seriecard--default`, `blog-postlistitem--default`, `blog-postrowcalm--calmrow`, and
+  others) were **not individually triaged this session** — time-boxed to the 11 confirmed
+  error-bucket ids plus the one clearly-systemic grid-sizing bug found along the way. Spot checks
+  of several of the largest mismatches (`work-archivetable`, `work-workheader`,
+  `blog-selectedwriting`) suggest most follow the same "story fixture data vs. specific live page
+  data differs" pattern seen above (different row counts, different title/description lengths),
+  rather than broken selectors — but this is not verified per-entry. **Left for the controller's
+  post-verification pass**: re-run `pnpm pixel-check`, and for each residual fail, classify as
+  either (a) same content-difference pattern documented above → log a one-line reason and accept,
+  or (b) a genuine selector/sizing bug → apply the same re-anchor/decorator technique used in
+  this task.

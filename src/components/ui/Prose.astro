@@ -9,5 +9,7 @@ const { class: className, ...attrs } = Astro.props;
     [className],
   ]}
 >
-  <slot />
+  <slot>
+    <p>Sample prose content.</p>
+  </slot>
 </section>
