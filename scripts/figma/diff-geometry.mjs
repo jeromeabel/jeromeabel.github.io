@@ -28,9 +28,17 @@ for (const [id, viewports] of Object.entries(web)) {
     const fVal = figRoot[prop];
     if (fVal == null) { rows.push(`- \`${id}\`.${prop}: web **${wVal}** vs figma **(absent)**`); continue; }
     const wPx = px(wVal), fPx = px(fVal);
-    const ok = !Number.isNaN(wPx) && !Number.isNaN(fPx)
-      ? Math.abs(wPx - fPx) <= 0.5
-      : String(wVal).replace(/\s+/g, "").toLowerCase() === String(fVal).replace(/\s+/g, "").toLowerCase();
+    // rounded-full renders as an enormous px value in getComputedStyle
+    // (browsers cap border-radius at half the box size); Figma expresses the
+    // same "fully round" intent as 9999px. Both are "very round" - treat as
+    // equal instead of flagging a five-decade delta.
+    const bothPracticallyRound =
+      prop === "borderRadius" && wPx >= 999 && fPx >= 999;
+    const ok = bothPracticallyRound
+      ? true
+      : !Number.isNaN(wPx) && !Number.isNaN(fPx)
+        ? Math.abs(wPx - fPx) <= 0.5
+        : String(wVal).replace(/\s+/g, "").toLowerCase() === String(fVal).replace(/\s+/g, "").toLowerCase();
     if (!ok) rows.push(`- \`${id}\`.${prop}: web **${wVal}** vs figma **${fVal}**`);
   }
 }

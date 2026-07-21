@@ -241,7 +241,9 @@ export const MANIFEST = [
     id: "blog-topicchips--default",
     storyPath: "/styleguide/dashboard/src/components/blog/topic-chips/default",
     liveUrl: `${BASE}/blog/adding-likes-to-a-static-astro-site`,
-    selector: 'div[class="flex flex-wrap gap-2"]',
+    // Figma master is a single chip, not the flex-wrap row — scope to the
+    // first `span` (one chip), not the wrapper `div` (Task 11).
+    selector: 'div[class="flex flex-wrap gap-2"] > span',
     masks: [],
     wrapper: "container",
   },

@@ -559,3 +559,73 @@ pass — flagging rather than silently calling Task 11 complete, consistent with
 majority-pass precedent.
 
 Commit: `fix(geometry): restructure Header/Footer masters — move container inset off root`.
+
+**Geometry repairs (cards, sweep-order step 2)**:
+- `blog-postrowcalm--calmrow`: **real bug, repaired.** Web root (`PostRowCalm.astro:` root `<a>`,
+  `px-1 py-4`) has 4px horizontal padding; Figma master (`31:13` PostRow) had `paddingLeft/Right:
+  0`. Rebound both to the existing `spacing/1` variable (`VariableID:4:3`, 4px) — already used for
+  `itemSpacing` on the same node, so this reuses rather than introduces a token. Screenshot
+  verified (no reflow/regression); re-diff confirms padding delta gone.
+- `work-workoverlaycard--overlaycard`, `work-workminicard--minicard`: no new actionable deltas —
+  everything left in the worklist for these two is either the font/color "(absent)" artifact or
+  the already-accepted static-hover-state judgment call logged in the chrome pass. Nothing to fix.
+- `blog-seriecard--default`: **no master to repair** — only a bare instance exists on the
+  Components page, no component/component-set. Building one is Task 13 scope ("legacy 9
+  components" / missing-master creation), not a Task 11 repair. Deferred, not attempted.
+
+**Geometry repairs (ui atoms, sweep-order step 4 — "templates" step skipped, out of scope for
+this component-level pass)**:
+- `ui-link--default`: **real bug, repaired.** Web has no `py-*`/`pb-*` class on the `default`
+  variant (`Link.astro:12`, just `border-dashed border-current border-b`), so computed
+  `paddingBottom` is `0`. Figma master (`12:7`) had a raw (unbound) `paddingBottom: 2`. Set to `0`
+  — no token needed since the correct value is zero. Screenshot verified; re-diff clean.
+  - `borderTopColor` (web `rgb(0,0,0)` vs figma `rgb(30,30,30)`): **not a bug** — same ambient-
+    color methodology gap as the font-prop "(absent)" cases, one level removed: `Link.astro`
+    relies on `border-current` inheriting the ambient text color, which `Layout.astro` sets at the
+    `<body>` level; the isolated Astrobook story has no such ancestor, so `currentColor` resolves
+    to the browser's initial black instead of `--color-foreground` (#1e1e1e = `rgb(30,30,30)`).
+    Figma's master is bound to the real foreground token and is therefore *correct* — it's the web
+    geometry read that's context-starved. Left as-is (repairing Figma to match would make it
+    wrong).
+- `ui-link--secondary`: **real bug, repaired.** Web variant is `py-4` (16px); Figma master
+  (`13:4`) had `paddingTop/Bottom` bound to `spacing/2` (`VariableID:4:4`, 8px) — half the correct
+  value. Rebound both to `spacing/4` (`VariableID:4:6`, 16px). Screenshot verified (pill shape,
+  no regression, height 42→58px as expected); re-diff clean.
+- `ui-link--iconbutton`: width delta (web `56px` desktop capture vs figma `40px` master) is
+  **named debt, not repaired** — `Link.astro`'s `icon` variant is responsive (`h-10 w-10 lg:h-14
+  lg:w-14`, i.e. 40px base / 56px at `lg:`). `geometry.web.json` only captures the desktop/1280
+  viewport, so it necessarily sees the `lg:` size; the Figma master represents the single
+  canonical size and would need a second variant/frame to represent the breakpoint split. That's
+  exactly what Task 14 (Stage 4 — responsive/dark template frames) owns; resizing the master here
+  would just swap which breakpoint it silently misrepresents. Flagged, deferred to Task 14.
+- `app-themetoggle--default`, `app-motiontoggle--default`, `ui-linknavpost--previous/next`: no new
+  actionable deltas — remaining worklist lines are font/color "(absent)" artifacts, the `gap:
+  "normal"` string quirk, or (LinkNavPost) content-width variance (web captures live prev/next
+  post titles at container width; Figma master is intrinsic-width). Nothing to fix.
+
+**Script fixes**:
+- `scripts/pixel-manifest.mjs` (`blog-topicchips--default`): selector changed from
+  `div[class="flex flex-wrap gap-2"]` (the multi-chip wrapper) to `div[class="flex flex-wrap
+  gap-2"] > span` (one chip, matching the Figma master). `pixel-check.mjs` already calls
+  `.first()` on every selector, so this scopes both the pixel-check and the geometry-extract
+  pipelines (both consume the same manifest) to the correct DOM level. Re-ran
+  `extract-web-geometry.mjs` to regenerate `geometry.web.json`; re-diffed — the `borderTopColor`
+  mismatch and most of the padding/width noise for this id are gone. Residual `width` (54 vs 52px)
+  is real-text-content variance ("topic" render width vs Figma's placeholder), same
+  content-context pattern as elsewhere — not a bug.
+- `scripts/figma/diff-geometry.mjs`: added a `borderRadius`-specific normalization — when both web
+  and figma values parse as px and are both `>= 999`, treat as equal instead of flagging (e.g. web
+  `3.35544e+07px` from `rounded-full`'s browser-computed cap vs figma's `9999px` "full" token —
+  both mean "fully round," a five-decade delta was pure noise). This was the Task 10 "flagged, not
+  patched" item, explicitly left for Task 11 to decide; decided to patch it since it's a
+  self-contained tolerance fix with no design-side risk.
+
+**Final re-diff for this session's scope**: `ui-link--default`, `ui-link--secondary`,
+`blog-postrowcalm--calmrow`, and `blog-topicchips--default`'s border/padding are all clean.
+Remaining worklist entries across every id touched this session are one of: the font/color
+"(absent)" methodology artifact, the `gap: "normal"` string quirk, content-width variance, or the
+two explicitly named-debt items above (`ui-link--iconbutton` width → Task 14; `SerieCard` missing
+master → Task 13). No unexplained deltas remain in scope.
+
+Commit: `fix(geometry): repair PostRow padding + Link default/secondary padding, fix TopicChips
+selector + borderRadius diff tolerance`.

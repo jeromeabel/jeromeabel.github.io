@@ -1041,24 +1041,24 @@ git commit -m "feat(geometry): web↔figma geometry diff with repair worklist"
 
 > **Interactive task — no unit test.** Gate per master: `diff-geometry` clean-or-named-debt, and Figma `get_screenshot` vs the story PNG judged visually identical (token+layout bar, not pixel-diff).
 
-- [ ] **Step 1: Run the strictness audit passes**
+- [x] **Step 1: Run the strictness audit passes**
 
 Run Pass 1 (unbound fills/strokes) and Pass 2 (detached instances) from the `fe-figma-verify` SKILL (generic, reuse verbatim) over each component page. Fold Pass-1 unbound-hex flags into the repair worklist.
 
-- [ ] **Step 2: Repair masters, in sweep order**
+- [x] **Step 2: Repair masters, in sweep order**
 
 Sweep order: chrome (Header/Footer) → cards → templates → ui atoms. Per master, in batched `use_figma` writes: fix the worklist geometry deltas on the **master only, never assembled templates** (F2); bind token variables, never paste raw hex (F4); use real collection content, never invented strings (F9).
 
-- [ ] **Step 3: Re-diff until clean or named-debt**
+- [x] **Step 3: Re-diff until clean or named-debt**
 
 Run: `node scripts/figma/diff-geometry.mjs geometry.web.json geometry.figma.json` (re-run the Task-9 read first if masters changed geometry).
 Expected: worklist empty, or each remaining line has a named-debt reason in `notes.md`.
 
-- [ ] **Step 4: Screenshot gate per master**
+- [x] **Step 4: Screenshot gate per master**
 
 For each repaired master, `get_screenshot` and compare to that component's story preview PNG. Judge visually identical (bar is token+layout, not pixel). Log any accepted visual delta in `notes.md`.
 
-- [ ] **Step 5: Commit the notes**
+- [x] **Step 5: Commit the notes**
 
 ```bash
 git add docs/specs/01_active/figma-blog-fit/notes.md
