@@ -629,3 +629,87 @@ master → Task 13). No unexplained deltas remain in scope.
 
 Commit: `fix(geometry): repair PostRow padding + Link default/secondary padding, fix TopicChips
 selector + borderRadius diff tolerance`.
+
+## Task 13 — 🗄️ Legacy Figma page (interactive)
+
+**Step 2 — build.** New page `🗄️ Legacy`, separate from `🧩 Components`, one section per
+component, S0 variables/text styles bound throughout, real collection content (not placeholder
+lorem). 9 masters:
+
+| Section | Root | Content source |
+|---|---|---|
+| PostCard | `78:3` | real post (title/description/date/minutesRead) |
+| SeriePostCard | `79:2` | real serie post + badge (`serie title 🞄 index`) |
+| SerieListItem | `79:12` | WEB PERFORMANCE serie, 2/5 posts shown |
+| WorkCard | `90:77` | real work |
+| WorkCardImage | `90:86` | real work image card |
+| WorksPreview | `92:2` | live works grid |
+| BlogPreview | `94:6` | live 2×2 post/seriePost grid, 4/4 posts (no truncation needed) |
+| PostList | `97:6` | 8/21 posts shown, 13 older rows omitted (documented in-frame) |
+| SerieList | `100:6` | WEB PERFORMANCE 2/5, MY AI JOURNEY 2/2, NUXT FEATURE 3/9 — drops documented in-frame |
+
+Content pulled from a prior segment's Playwright capture (`legacy-content-2.json`), not
+re-extracted.
+
+**Bugs found + fixed during build:**
+1. **WorksPreview heading wrong style** — "Latest Works" used `Heading/H3` (22px, normal-case)
+   instead of `Heading/H2` (30px, uppercase). Root cause: style picked without checking
+   `H2.astro`'s actual classes (`uppercase text-3xl tracking-widest`). Generalizes the earlier
+   card-title H2→H3 fix: **section headings ("Latest X") = H2; card/doc titles = H3.** Fixed on
+   `92:3` before building BlogPreview, so BlogPreview/PostList/SerieList headings were correct
+   from the start.
+2. **BlogPreview grid collapsed to one column** — `card.counterAxisSizingMode = "AUTO"` was set
+   *after* `card.resize(464, h)` + `layoutSizingHorizontal = "FIXED"`, overriding the fixed width
+   back to content-hug; the long unwrapped description ballooned the card and pushed the second
+   column off-canvas. Fix: re-query `FRAME[name=SeriePostCard], FRAME[name=PostCard]`, force
+   `counterAxisSizingMode = "FIXED"` + re-`resize(464, h)` on each. Verified via before/after
+   screenshot (broken single-column → correct 2×2).
+3. **SerieList build threw `FILL can only be set on children of auto-layout frames`** — per-serie
+   `block` frame had `layoutSizingHorizontal = "FILL"` set before `comp.appendChild(block)`
+   (skill rule 12: append first, then FILL/HUG). Script is atomic, nothing partially created.
+   Removed the premature assignment, kept the correctly-ordered duplicate; retry succeeded.
+
+**Screenshot gate**: all 9 masters visually verified against their Astrobook story preview
+(`get_screenshot` + inline compare), done incrementally as each was built — `wp-solo.png`,
+`bp-solo.png`→`bp-solo2.png` (post-fix), `pl-solo.png`, `sl-solo.png` plus earlier-segment shots
+for PostCard/SeriePostCard/SerieListItem/WorkCard/WorkCardImage. No open visual mismatches.
+
+**Step 3 — geometry diff.** `node scripts/figma/diff-geometry.mjs geometry.web.json
+geometry.figma.json`, filtered to the 9 legacy ids. Categorized (same buckets as Task 10/11):
+
+1. **Font props (`fontSize`/`fontFamily`/`fontWeight`/`color`) "(absent)" on every id** — same
+   methodology artifact as Task 10 category 2: these roots are `FRAME`/`COMPONENT`/`SECTION`
+   containers, not `TEXT` nodes, so the Figma reader has nothing comparable to read off the root.
+   Not actionable here.
+2. **Width deltas on every id** (e.g. `blog-postcard--default` 1280px web vs 400px figma;
+   `blog-blogpreview--default`/`work-workspreview--default` 1280px vs 960px;
+   `blog-serielistitem--default` 1280px vs 560px) — same Task 10 category 3: web geometry is
+   captured at the desktop `.container`/viewport width, Figma masters are authored at their
+   intended design width (card column / 960px content width), not stretched full-bleed. Expected,
+   non-actionable.
+3. **`paddingRight`/`paddingLeft` 16px web vs 0px figma** on `blog-blogpreview--default` and
+   `work-workspreview--default` — inverse of the Task 11 header/footer case (there it was figma-
+   has-padding-web-doesn't; here web's selector *is* the `.container` element itself, so its own
+   16px inset reads directly, while the Figma master represents the 960px content column without
+   an outer page-container inset). Consistent with the container-owns-padding convention
+   (CLAUDE.md); these are legacy/unwired masters (`PostList.astro`/`SerieList.astro` are
+   `LEGACY — main-only, not wired into any v3 page`), so no page-frame context to inset against.
+   Left as-is, not a repair candidate.
+4. **`backgroundColor` `rgb(255,255,255)` figma vs transparent (`rgba(0,0,0,0)`) web** on
+   `blog-postcard--default`, `blog-seriepostcard--default`, `blog-serielistitem--default` — Figma
+   frames need an explicit fill; white is the deliberate canvas background for a standalone master
+   on a white page, not a token mismatch. Not actionable.
+5. **`gap: "normal"` (web) vs numeric (figma)** on `blog-postlist--default`, `work-workcard--default`
+   — same Task 10/11 string-quirk: web root isn't itself a flex/gap container (spacing comes from
+   child `border-b`/`py-4`, not a parent `gap`), so `getComputedStyle` reports the CSS default
+   string `"normal"` instead of a px value. Not a real delta.
+6. **`work-workcardimage--default` width `auto` (web) vs `400px` (figma)** — web root sizes to
+   whatever parent grid column it's dropped into (no intrinsic width); Figma master fixes it at
+   400px to match `WorkCard`'s column width for standalone legibility. Reasonable authoring
+   choice, not a bug.
+
+No unexplained deltas remain for the 9 legacy ids — every worklist line falls into one of the six
+categories above, all previously-established patterns from Task 10/11 or direct consequences of
+this task's real vs. sample-page content choices.
+
+Commit: `docs(legacy): 🗄️ Legacy Figma page build + geometry/screenshot log`.
