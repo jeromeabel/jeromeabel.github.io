@@ -4,17 +4,17 @@
 
 ## Global Constraints Table → Story Exports
 
-| `VARIANTS` key | value | leaf component | story file | export name |
-| --- | --- | --- | --- | --- |
-| `workFeatured` | `gallery-2x2-16x9` | `WorkGalleryCard` | `src/components/work/WorkGalleryCard.stories.ts` | `Video` |
-| `workFeatured` | `gallery-2x2-1x1` | `WorkGalleryCard` | `src/components/work/WorkGalleryCard.stories.ts` | `Square` |
-| `workFeatured` | `gallery-3col-1x1` | `WorkGalleryCard` | `src/components/work/WorkGalleryCard.stories.ts` | `Square` |
-| `homePosts` | `calm-rows` | `PostRowCalm` | `src/components/blog/PostRowCalm.stories.ts` | `CalmRow` |
-| `homePosts` | `arrow-rows` | `PostRow` | `src/components/blog/PostRow.stories.ts` | `ArrowRow` |
-| `worksStrip` | `mini-card` | `WorkMiniCard` | `src/components/work/WorkMiniCard.stories.ts` | `MiniCard` |
-| `worksStrip` | `overlay-card` | `WorkOverlayCard` | `src/components/work/WorkOverlayCard.stories.ts` | `OverlayCard` |
-| `aboutFacts` | `strip` | `AboutFactsStrip` | `src/components/about/AboutFactsStrip.stories.ts` | `Strip` |
-| `aboutFacts` | `grid` | `AboutFacts` | `src/components/about/AboutFacts.stories.ts` | `Grid` |
+| `VARIANTS` key | value              | leaf component    | story file                                        | export name   |
+| -------------- | ------------------ | ----------------- | ------------------------------------------------- | ------------- |
+| `workFeatured` | `gallery-2x2-16x9` | `WorkGalleryCard` | `src/components/work/WorkGalleryCard.stories.ts`  | `Video`       |
+| `workFeatured` | `gallery-2x2-1x1`  | `WorkGalleryCard` | `src/components/work/WorkGalleryCard.stories.ts`  | `Square`      |
+| `workFeatured` | `gallery-3col-1x1` | `WorkGalleryCard` | `src/components/work/WorkGalleryCard.stories.ts`  | `Square`      |
+| `homePosts`    | `calm-rows`        | `PostRowCalm`     | `src/components/blog/PostRowCalm.stories.ts`      | `CalmRow`     |
+| `homePosts`    | `arrow-rows`       | `PostRow`         | `src/components/blog/PostRow.stories.ts`          | `ArrowRow`    |
+| `worksStrip`   | `mini-card`        | `WorkMiniCard`    | `src/components/work/WorkMiniCard.stories.ts`     | `MiniCard`    |
+| `worksStrip`   | `overlay-card`     | `WorkOverlayCard` | `src/components/work/WorkOverlayCard.stories.ts`  | `OverlayCard` |
+| `aboutFacts`   | `strip`            | `AboutFactsStrip` | `src/components/about/AboutFactsStrip.stories.ts` | `Strip`       |
+| `aboutFacts`   | `grid`             | `AboutFacts`      | `src/components/about/AboutFacts.stories.ts`      | `Grid`        |
 
 **Status:** ✓ All 9 variant values have named exports.
 

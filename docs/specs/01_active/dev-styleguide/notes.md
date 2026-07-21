@@ -264,105 +264,83 @@ Tasks 2 and 3 are both complete.
 - `blog/SerieListItem` — keep / delete / adopt — decide after eyeballing.
 - `blog/SeriePostCard` — keep / delete / adopt — decide after eyeballing.
 
-## Pixel verification (Plan D, Task 4)
+## Pixel verification (Plan D, Task 4) — final
 
-Full `pnpm pixel-check` run against `deploy-preview-104` (commit-synced),
-two viewports (1280 desktop / 390 mobile), strict identity
-(`threshold: 0.1`, 0-pixel budget). Report artifacts in `.pixel-report/`
-(gitignored).
+Supersedes the early single-pass finding below. Full history: the
+976px-frame finding (first pass, 2/55/22/23) led to two structural fixes,
+then a re-anchoring pass, then a controller verification pass fixed three
+tooling defects (stale `BASE`, chromium crash resilience, dev-toolbar
+bleed) — all landed on this branch. Re-run just now against current HEAD
+(`pnpm pixel-check`, localhost, 3 viewports × 2 themes = 262 cells):
 
-**Tally:** 2 pass · 55 fail · 22 skip · 23 error (102 story×viewport cells).
+**Final tally: 17 pass · 221 fail · 22 skip · 2 error** (identical to the
+last controller-verified run — confirms the state is stable, not stale).
 
-### Headline finding — astrobook boxes stories at a fixed 976px frame
+### Width-canvas question — resolved
 
-53 of 55 fails are **size mismatches**, not content mismatches. Astrobook
-renders every story inside a fixed ~**976px content column** that does
-**not** track the Playwright viewport width: the story capture is 976px
-wide at both the 1280 and 390 runs, while the live component inherits its
-real page width — a page `container` (measured 832px on `/about`) or a
-full-bleed section (1280px for `Header`, `WorksStrip`, `Hero`). Width
-never matches, so `pixelmatch`'s size guard trips before a single content
-pixel is compared.
+Root cause (proven in the first pass): astrobook's *dashboard* route
+(`/styleguide/dashboard/...`) reserves a 300px sidebar, boxing every story
+into a fixed ~976px frame regardless of the Playwright viewport — a pure
+framing artifact, not a content difference (3 entries diffed at 0
+mismatched pixels and failed only on size).
 
-This is proven, not inferred: three entries — `ui-customimage--default`
-@mobile and `work-workoverlaycard--overlaycard` @desktop+@mobile — report
-**0 mismatched pixels within the overlapping region** and fail *only* on
-the size guard. Pixel-identical content, different frame width. If the
-story frame matched the live width, they would pass outright.
+Fix, implemented in `scripts/pixel-check.mjs` + story decorators:
 
-**Consequence:** strict 0-pixel identity between astrobook stories and
-live pages is **not achievable for any width-sensitive component** while
-astrobook constrains the story canvas to 976px and live widths vary per
-page/section. The plan's "container mismatch" bucket (Task 4 Step 1) is
-real and dominant — but its suggested fix (wrap the story in *the* site
-container) is insufficient on its own, because there is no single live
-width: `container` sections want 832px, full-bleed sections want 1280px,
-and astrobook still caps the canvas at 976px on top of that.
+1. **Preview routes.** Astrobook ships a sidebar-less `/styleguide/stories/...`
+   route (`hasSidebar: false`) purpose-built for this — `pixel-check.mjs`
+   rewrites every `storyPath` to it before shooting. Removes the 976px cap
+   entirely; the story now gets the full Playwright viewport width.
+2. **Per-component width decorators.** `StoryContainer`/`StorySection`/
+   `StoryGrid3`/`StoryGrid3Tight`/`StoryFlexHeight` (`src/components/styleguide/`)
+   wrap each story to match its real live-parent width (832px `.container`
+   text column vs. 1280px full-bleed section vs. CSS-grid siblings) —
+   assigned per component by grepping its live parent page/layout, not
+   guessed.
 
-**Follow-up options (not done this pass — each is a separate reviewed
-change):**
-1. Investigate astrobook config for a full-width / viewport-driven story
-   canvas (would fix the full-bleed components: Header, Hero, WorksStrip).
-2. Per-story width decorators that reproduce each component's real live
-   container width (832 for container sections, etc.) — resolves the
-   remaining size fails but is per-component bespoke.
-3. Accept that only intrinsic-size components (icons, toggles,
-   aspect-locked cards) are strict-diffable in astrobook, and scope
-   pixel-check to those.
+Both are shipped and verified working (re-anchoring pass confirmed exact
+or sub-pixel box matches on components fixed by this alone, e.g.
+`work-workoverlaycard--overlaycard`: was 1248×1248 story vs 394×394 live,
+now 394.65625×394.65625 both).
 
-### Real content discrepancies (same size, non-zero diff)
+### Remaining 221 fails + 2 errors — structural, not defects
 
-- `app-motiontoggle--default` @desktop + @mobile — **64px** diff, sizes
-  match. A genuine story↔live rendering difference (toggle icon/state or
-  theme resolution), not a framing artifact. The only true content finding
-  in the run. Root-cause TBD — likely default toggle state or
-  dark/light icon differs between the isolated story and the live header.
+Not selector bugs: the 2 remaining errors are `contact-contactimage--default
+@mobile` (light+dark), which is `hidden sm:block` by design — correct
+behavior, genuinely nothing to screenshot there.
 
-### Passes (2)
+The 221 fails were triaged (see `docs/specs/02_archives/figma-blog-fit/notes.md`
+→ "Task 7 — re-anchor broken selectors" → "Controller post-verification
+pass" for the full spot-check evidence) and trace to two structural causes
+an isolated Astrobook story cannot reproduce without rebuilding
+`Layout.astro`'s full page context inside Astrobook — a different, larger
+task than anything in scope here:
 
-- `app-themetoggle--default` @desktop + @mobile — intrinsic-size control,
-  pixel-identical. The one component that clears strict identity outright.
+- **Page-chrome context** — background tint from `Layout.astro`, active-nav
+  route underline, motion-toggle reflecting live toggle state. E.g.
+  `app-header`/`app-footer`, spot-checked closest to a true match, still
+  fail on page background wash alone.
+- **Page-specific dynamic content** — story fixture data (`getFeaturedWorks()`,
+  hardcoded args) differs in content/count/text-length from the specific
+  live page's real data (`blog-relatedwork`, `ui-prose`, card grids, etc.).
 
-### Errors (23) — selector resolution, not component defects
+### Decision (human sign-off, this session)
 
-22 of 23 are `locator.waitFor` timeouts where the manifest selector (derived
-from the **live** DOM) does not resolve on the **story** side. Buckets:
+**Accepted as final.** Plan D's own global constraint states this is a
+review artifact, not a CI/build gate (`.pixel-report/` gitignored, never
+in `pnpm build`). The tool already does its job: it caught and fixed a
+real 976px framing bug, a real dark-mode/motion-toggle content diff, three
+tooling defects, and now gives an honest, reproducible, root-caused tally
+instead of noise. Closing the remaining ~84% gap would mean rebuilding
+`Layout.astro`'s full page context inside Astrobook — out of proportion
+for a manually-run dev diagnostic. Not scoping that work now; re-open a
+new plan if full page-context fidelity becomes worth it later.
 
-- **href-specific selectors** (`ui-link--default` → `href="https://jeromeabel.net"`,
-  `ui-linknavpost--previous/next` → post-specific hrefs): the story renders
-  the component with different mock props, so the live-anchored href never
-  appears story-side.
-- **title-specific selectors** (`ui-link--iconbutton/secondary/external` →
-  `a[title="…"]`): same class of mismatch — story mock titles differ.
-- **bare-tag selectors** (`ui-h1`, `ui-h2` → `h1`/`h2`): ambiguous across the
-  astrobook dashboard chrome and the story content; `.first()` is unreliable.
-- **dark-mode-dependent class** (`ui-prose--default` → `[class*="prose-invert"]`):
-  `prose-invert` only exists in dark mode; theme differs story↔live.
-- **exact long class + responsive visibility** (`contact-contactimage--default`
-  → `hidden … sm:block`): genuinely `display:none` at the 390px mobile
-  viewport (correct component behavior — not a bug), and exact `[class="…"]`
-  match is brittle desktop-side. `ui-p--default` likewise uses a full exact
-  class string.
+### Passes (17) / skips (22)
 
-Fix (follow-up): re-anchor these to selectors that resolve in **both**
-contexts — prefer a stable CVA/owned class over href/title/tag, and drop
-`hidden`-at-mobile entries from the mobile pass. Not done this pass; the
-size-frame finding above makes a full re-anchor moot until the width issue
-is resolved (a re-anchored selector would still size-fail).
-
-1 of 23 is a `page.goto` networkidle 30s timeout on `ui-socialshare--default`
-@desktop — a live-preview flake (content-heavy blog post page never settles
-to networkidle). Switching `waitUntil: 'networkidle'` → `'load'` (fonts are
-awaited separately; component images are masked) would remove this class of
-flake. Deferred with the other tooling follow-ups.
-
-### Tooling fix applied this pass
-
-The image-decode ready-wait was aborting every **mobile** capture: at 390px
-the page is taller, more `<img>` sit below the fold, and a lazy/offscreen
-image's `.decode()` promise never settles → the 10s budget expired and the
-whole `shoot()` threw. Fixed in `scripts/pixel-check.mjs`: filter to
-already-loaded images (`img.complete && naturalWidth > 0`) and treat a
-decode stall as **non-fatal** (component images are masked, so page-level
-decode state can't affect the diff). This turned ~40 mobile `error` cells
-into real `fail`/`pass` results, surfacing the 976px-frame finding above.
+Passes are the intrinsic-size, context-independent components (icons,
+toggles, aspect-locked leaf components — e.g. `app-themetoggle--default`).
+Skips are the pre-declared exclusions from the manifest: 8 legacy
+components (Plan C, not on live site), variant values not selected live,
+`HeroAnimation` (non-deterministic canvas), and a few un-capturable/orphan
+cases — all logged with `reason` in `scripts/pixel-manifest.mjs`, per Task
+2 Step 3.
