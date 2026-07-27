@@ -14,7 +14,7 @@ import { hash } from "./util.mjs";
 import { magick, imageSize } from "./magick.mjs";
 import { cropBox, resolveCrop } from "./geometry.mjs";
 import { resolveSettings } from "./resolve.mjs";
-import { STYLES } from "./styles.mjs";
+import { STYLES, subjectSpec } from "./styles.mjs";
 
 export function applicableStyles(entry, requested, eff) {
   const base = entry.img
@@ -48,6 +48,89 @@ export function renderKey(entry, styleName, sizeName, eff, crop) {
   ).toString(16);
 }
 
+export function prepareInput(entry, eff, crop, sizeName, dir) {
+  const dims = eff.settings.sizes[sizeName];
+  if (dims === undefined) throw new Error(`unknown size: ${sizeName}`);
+  if (entry.img && dims) {
+    const src = imageSize(entry.img);
+    const box = cropBox(src.w, src.h, dims.w, dims.h, crop);
+    const tmp = join(dir, `.crop_${entry.slug}_${sizeName}.png`);
+    magick([
+      entry.img,
+      "-crop",
+      `${box.w}x${box.h}+${box.x}+${box.y}`,
+      "+repage",
+      "-resize",
+      `${dims.w}x${dims.h}!`,
+      tmp,
+    ]);
+    return {
+      input: tmp,
+      w: dims.w,
+      h: dims.h,
+      cleanup: () => rmSync(tmp, { force: true }),
+    };
+  }
+  if (entry.img) {
+    const { w, h } = imageSize(entry.img);
+    return { input: entry.img, w, h, cleanup() {} };
+  }
+  const { w, h } = dims ?? eff.settings.mesh.fallback;
+  return { input: null, w, h, cleanup() {} };
+}
+
+// Subject layer for the studio's live preview (studio-design.md §3): the
+// pre-composite subject for *-mesh styles (mesh + opacity applied by the
+// browser), or the finished raster for flat styles.
+export function renderLayer(entry, eff, crop, sizeName, styleName, dir) {
+  const st = STYLES[styleName];
+  if (!st) throw new Error(`unknown style: ${styleName}`);
+  const prep = prepareInput(entry, eff, crop, sizeName, dir);
+  try {
+    const ctx = {
+      slug: entry.slug,
+      size: sizeName,
+      w: prep.w,
+      h: prep.h,
+      eff,
+      out: dir,
+    };
+    const spec = subjectSpec(styleName, prep.input, ctx);
+    if (spec) {
+      const outFile = join(dir, `.layer_${entry.slug}.png`);
+      try {
+        magick([...spec.args, outFile]);
+      } finally {
+        spec.cleanup();
+      }
+      return outFile;
+    }
+    st.apply(prep.input, dir, ctx);
+    return join(dir, st.outputs(entry.slug, sizeName, eff)[0]);
+  } finally {
+    prep.cleanup();
+  }
+}
+
+export function renderExact(entry, eff, crop, sizeName, styleName, dir) {
+  const st = STYLES[styleName];
+  if (!st) throw new Error(`unknown style: ${styleName}`);
+  const prep = prepareInput(entry, eff, crop, sizeName, dir);
+  try {
+    st.apply(prep.input, dir, {
+      slug: entry.slug,
+      size: sizeName,
+      w: prep.w,
+      h: prep.h,
+      eff,
+      out: dir,
+    });
+    return join(dir, st.outputs(entry.slug, sizeName, eff)[0]);
+  } finally {
+    prep.cleanup();
+  }
+}
+
 export function renderEntry(
   entry,
   styleName,
@@ -77,34 +160,18 @@ export function renderEntry(
     return false;
   }
 
-  let input = entry.img;
-  let w, h;
-  let tmp = null;
-  if (entry.img && dims) {
-    const src = imageSize(entry.img);
-    const box = cropBox(src.w, src.h, dims.w, dims.h, crop);
-    tmp = `${out}/.crop_${entry.slug}_${sizeName}.png`;
-    magick([
-      entry.img,
-      "-crop",
-      `${box.w}x${box.h}+${box.x}+${box.y}`,
-      "+repage",
-      "-resize",
-      `${dims.w}x${dims.h}!`,
-      tmp,
-    ]);
-    input = tmp;
-    ({ w, h } = dims);
-  } else if (entry.img) {
-    ({ w, h } = imageSize(entry.img));
-  } else {
-    ({ w, h } = dims ?? eff.settings.mesh.fallback);
-  }
-
+  const prep = prepareInput(entry, eff, crop, sizeName, out);
   try {
-    st.apply(input, out, { slug: entry.slug, size: sizeName, w, h, eff, out });
+    st.apply(prep.input, out, {
+      slug: entry.slug,
+      size: sizeName,
+      w: prep.w,
+      h: prep.h,
+      eff,
+      out,
+    });
   } finally {
-    if (tmp) rmSync(tmp, { force: true });
+    prep.cleanup();
   }
   if (manifest) manifest[key] = val;
   return true;

@@ -2,11 +2,11 @@ import { execFileSync } from "node:child_process";
 import { hash } from "./util.mjs";
 
 export function magick(args) {
-  execFileSync("convert", args, { stdio: "inherit" });
+  execFileSync("convert", args, { stdio: ["ignore", "inherit", "pipe"] });
 }
 
 export function potrace(args) {
-  execFileSync("potrace", args, { stdio: "inherit" });
+  execFileSync("potrace", args, { stdio: ["ignore", "inherit", "pipe"] });
 }
 
 export function imageSize(file) {

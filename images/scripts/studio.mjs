@@ -20,6 +20,7 @@ import {
   loadIllustration,
   saveIllustration,
 } from "./lib/store.mjs";
+import { renderLayer, renderExact } from "./lib/render.mjs";
 import { pageHtml } from "./studio/page.mjs";
 
 const portArg = process.argv.indexOf("--port");
@@ -27,6 +28,10 @@ const port = portArg > -1 ? Number(process.argv[portArg + 1]) : 4380;
 
 // Malformed illustration.json must refuse to boot, not silently reset (§9).
 loadIllustration();
+
+const PREVIEW_DIR = join(ROOT, "images/out/.preview");
+rmSync(PREVIEW_DIR, { recursive: true, force: true });
+mkdirSync(PREVIEW_DIR, { recursive: true });
 
 const entries = scanContent();
 const bySlug = Object.fromEntries(entries.map((e) => [e.slug, e]));
@@ -137,6 +142,26 @@ const server = createServer(async (req, res) => {
           images: Object.keys(illustration.images ?? {}).length,
         }),
       );
+    } else if (
+      (url.pathname === "/api/layer" || url.pathname === "/api/render") &&
+      req.method === "POST"
+    ) {
+      const { slug, style, size, effective, crop } = await readJson(req);
+      const entry = bySlug[slug];
+      if (!entry) return sendErr(res, 404, `unknown slug: ${slug}`);
+      const fn = url.pathname === "/api/layer" ? renderLayer : renderExact;
+      let file;
+      try {
+        file = fn(entry, effective, crop ?? {}, size, style, PREVIEW_DIR);
+      } catch (err) {
+        const msg = err.stderr?.toString() || err.message;
+        return sendErr(res, /^unknown /.test(err.message) ? 400 : 500, msg);
+      }
+      res.writeHead(200, {
+        "content-type": "image/png",
+        "cache-control": "no-store",
+      });
+      res.end(readFileSync(file));
     } else {
       sendErr(res, 404, `not found: ${url.pathname}`);
     }
