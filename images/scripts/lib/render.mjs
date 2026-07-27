@@ -5,18 +5,31 @@ import { rmSync } from "node:fs";
 import { SETTINGS } from "../settings.mjs";
 import { magick, imageSize } from "./magick.mjs";
 import { cropBox, resolveCrop } from "./geometry.mjs";
+import { resolveSettings } from "./resolve.mjs";
 import { STYLES } from "./styles.mjs";
 
-export function applicableStyles(entry, requested) {
-  return entry.img
+export function applicableStyles(entry, requested, eff) {
+  const base = entry.img
     ? requested.filter((s) => s !== "mesh")
     : requested.filter((s) => s === "mesh");
+  if (eff?.style) return base.includes(eff.style) ? [eff.style] : [];
+  return base;
 }
 
-export function renderEntry(entry, styleName, sizeName, { out, crops }) {
-  const fn = STYLES[styleName];
-  if (!fn) throw new Error(`unknown style: ${styleName}`);
-  const dims = SETTINGS.sizes[sizeName];
+export function renderEntry(
+  entry,
+  styleName,
+  sizeName,
+  { out, crops, illustration },
+) {
+  const st = STYLES[styleName];
+  if (!st) throw new Error(`unknown style: ${styleName}`);
+  const { effective: eff } = resolveSettings(
+    entry.slug,
+    illustration ?? { types: {}, images: {} },
+    SETTINGS,
+  );
+  const dims = eff.settings.sizes[sizeName];
   if (dims === undefined) throw new Error(`unknown size: ${sizeName}`);
 
   let input = entry.img;
@@ -46,11 +59,11 @@ export function renderEntry(entry, styleName, sizeName, { out, crops }) {
   } else if (entry.img) {
     ({ w, h } = imageSize(entry.img));
   } else {
-    ({ w, h } = dims ?? SETTINGS.mesh.fallback);
+    ({ w, h } = dims ?? eff.settings.mesh.fallback);
   }
 
   try {
-    fn(input, out, { slug: entry.slug, size: sizeName, w, h });
+    st.apply(input, out, { slug: entry.slug, size: sizeName, w, h, eff, out });
   } finally {
     if (tmp) rmSync(tmp, { force: true });
   }

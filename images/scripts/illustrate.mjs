@@ -23,7 +23,8 @@ import {
   contrastRatio as paletteContrast,
 } from "./lib/util.mjs";
 import { ROOT, scanContent } from "./lib/content.mjs";
-import { loadCrops } from "./lib/store.mjs";
+import { loadCrops, loadIllustration } from "./lib/store.mjs";
+import { resolveSettings } from "./lib/resolve.mjs";
 import { applicableStyles, renderEntry } from "./lib/render.mjs";
 
 // Compat re-exports — crop-ui.mjs consumes these until the studio absorbs it
@@ -106,11 +107,17 @@ function main() {
   );
 
   const crops = loadCrops();
+  const illustration = loadIllustration();
   let entries = scanContent().filter((e) => e.slug.includes(match));
   entries = entries.slice(0, limit);
 
   for (const entry of entries) {
-    const applicable = applicableStyles(entry, styles);
+    const { effective: eff } = resolveSettings(
+      entry.slug,
+      illustration,
+      SETTINGS,
+    );
+    const applicable = applicableStyles(entry, styles, eff);
     for (const sizeName of sizeNames) {
       if (SETTINGS.sizes[sizeName] === undefined) {
         console.error(`unknown size: ${sizeName}`);
@@ -118,7 +125,7 @@ function main() {
       }
       for (const styleName of applicable) {
         try {
-          renderEntry(entry, styleName, sizeName, { out, crops });
+          renderEntry(entry, styleName, sizeName, { out, crops, illustration });
         } catch (err) {
           console.error(
             `${entry.slug} ${styleName} ${sizeName} FAILED: ${err.message}`,
