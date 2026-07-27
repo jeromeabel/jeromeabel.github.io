@@ -109,9 +109,12 @@ const server = createServer(async (req, res) => {
         }),
       );
     } else if (url.pathname.startsWith("/img/")) {
-      const entry = bySlug[decodeURIComponent(url.pathname.slice(5))];
-      if (!entry?.img || !existsSync(entry.img))
-        return sendErr(res, 404, "unknown slug or no cover");
+      const slug = decodeURIComponent(url.pathname.slice(5));
+      const entry = bySlug[slug];
+      if (!entry?.img || !existsSync(entry.img)) {
+        const msg = !entry ? `unknown slug: ${slug}` : `no cover: ${slug}`;
+        return sendErr(res, 404, msg);
+      }
       res.writeHead(200, {
         "content-type":
           MIME[extname(entry.img).toLowerCase()] ?? "application/octet-stream",
