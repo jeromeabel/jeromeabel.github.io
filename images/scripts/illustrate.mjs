@@ -11,6 +11,7 @@
 //   node images/scripts/illustrate.mjs --limit 3
 //   node images/scripts/illustrate.mjs --sheet             # + contact sheet
 //   node images/scripts/illustrate.mjs --out images/out/review
+//   node images/scripts/illustrate.mjs --force             # ignore manifest
 // ============================================================================
 import { mkdirSync, readdirSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
@@ -25,7 +26,12 @@ import {
 import { ROOT, scanContent } from "./lib/content.mjs";
 import { loadCrops, loadIllustration } from "./lib/store.mjs";
 import { resolveSettings } from "./lib/resolve.mjs";
-import { applicableStyles, renderEntry } from "./lib/render.mjs";
+import {
+  applicableStyles,
+  renderEntry,
+  openManifest,
+  flushManifest,
+} from "./lib/render.mjs";
 
 // Compat re-exports — crop-ui.mjs consumes these until the studio absorbs it
 // (studio-plan-3). Remove them there.
@@ -95,6 +101,8 @@ function main() {
   const limit = Number(arg("limit", Infinity));
   const out = resolve(ROOT, arg("out", SETTINGS.out));
   mkdirSync(out, { recursive: true });
+  openManifest(out);
+  const force = process.argv.includes("--force");
 
   const paper = paletteLighten(
     SETTINGS.palette,
@@ -111,6 +119,8 @@ function main() {
   let entries = scanContent().filter((e) => e.slug.includes(match));
   entries = entries.slice(0, limit);
 
+  let rendered = 0;
+  let skipped = 0;
   for (const entry of entries) {
     const { effective: eff } = resolveSettings(
       entry.slug,
@@ -125,7 +135,14 @@ function main() {
       }
       for (const styleName of applicable) {
         try {
-          renderEntry(entry, styleName, sizeName, { out, crops, illustration });
+          const did = renderEntry(entry, styleName, sizeName, {
+            out,
+            crops,
+            illustration,
+            force,
+          });
+          if (did) rendered++;
+          else skipped++;
         } catch (err) {
           console.error(
             `${entry.slug} ${styleName} ${sizeName} FAILED: ${err.message}`,
@@ -139,7 +156,10 @@ function main() {
   }
 
   if (process.argv.includes("--sheet")) writeSheet(out);
-  console.log(`\n${entries.length} entries → ${out}`);
+  flushManifest();
+  console.log(
+    `\n${entries.length} entries → ${out} (${rendered} rendered, ${skipped} skipped)`,
+  );
 }
 
 if (
