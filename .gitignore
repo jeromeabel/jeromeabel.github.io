@@ -47,3 +47,4 @@ images/*
 !images/scripts/
 !images/custom/
 !images/crops.json
+!images/illustration.json

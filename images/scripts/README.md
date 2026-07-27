@@ -77,6 +77,79 @@ The crop math (largest box at target ratio, centered on focus, ÷ zoom) and the 
 resolution are duplicated in `illustrate.mjs` (`cropBox()`, `resolveCrop()`) and the page script
 in `crop-ui.mjs` — change both together.
 
+### illustration.json
+
+Hand-tuned per-image effect settings, sibling to `crops.json`. Three-tier merge (`SETTINGS` →
+image-type recommendation → per-slug override) lets global changes propagate to every image that
+hasn't explicitly overridden a knob.
+
+Two top-level maps: `types` holds consistency decisions (one recommendation per image type), `images`
+holds one entry per slug. Six reserved keys in an image entry; every other key is a `SETTINGS`
+group override. Type entries take the same shape minus `type`.
+
+```json
+{
+  "types": {
+    "hand-drawing": { "style": "dither" },
+    "ui-screenshot": { "style": "framed" },
+    "digital-drawing": { "style": "duotone" }
+  },
+  "images": {
+    "adding-likes": { "type": "hand-drawing" },
+    "chimeres-orchestra": {
+      "type": "photo",
+      "style": "photo-mesh",
+      "mix": { "opacity": 0.92, "blend": "Multiply" },
+      "accent": "coral",
+      "seed": "chimeres-2",
+      "mesh": {
+        "blobs": [
+          {
+            "cx": 300,
+            "cy": 420,
+            "rx": 350,
+            "ry": 300,
+            "rot": -12,
+            "op": 0.1,
+            "fill": "tint"
+          }
+        ]
+      },
+      "dither": { "level": "25%,75%" },
+      "duotone": { "paperLift": 0.6 }
+    }
+  }
+}
+```
+
+| Key      | Meaning                                                                 |
+| -------- | ----------------------------------------------------------------------- |
+| `type`   | image type; pulls in the matching `types` recommendation                |
+| `style`  | pins the chosen style; absent = render every style in `SETTINGS.styles` |
+| `mix`    | subject `opacity` + `blend` mode for the `*-mesh` composites            |
+| `accent` | `teal` \| `coral`; absent = slug-hash default                           |
+| `seed`   | mesh RNG seed; absent = slug                                            |
+| `mesh`   | materialized blob array (see studio-design.md §6)                       |
+| _other_  | deep-merged over the matching `SETTINGS` group                          |
+
+**Merge order:** `SETTINGS` → `types[entry.type]` → image entry. `adding-likes` above renders
+dither with zero per-slug tuning; re-deciding the hand-drawing verdict propagates to every hand
+drawing that hasn't overridden `style`.
+
+`style` doubles as the review verdict. Absent, the entry behaves exactly as today — all nine
+styles rendered. Set, the lab emits only that one, which is what step-1 exit needs recorded per
+image.
+
+`resolveSettings(slug)` returns `{ effective, source }` — the merged config plus, per dotted
+path, which tier set it (`global` | `type` | `image`). That drives the UI's inherited/recommended/overridden markers and per-knob reset.
+
+**Absent entry = fully automatic.** All entries render with an empty file, exactly as now.
+
+**Incremental rendering:** `pnpm illustrate --force` regenerates everything; the default skips
+outputs whose settings-hash (source, effective settings, style, size) is unchanged. The manifest
+tracking this lives at `images/out/review/.manifest.json`, regenerable and git-ignored as part
+of `images/out/`.
+
 ### Contact sheet
 
 `pnpm illustrate:sheet` writes `images/out/review/index.html`: one table per style, columns per
