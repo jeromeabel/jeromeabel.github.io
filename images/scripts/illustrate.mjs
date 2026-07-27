@@ -33,14 +33,6 @@ import {
 } from "./lib/render.mjs";
 import { accentOf } from "./lib/styles.mjs";
 
-// Compat re-exports — crop-ui.mjs consumes these until the studio absorbs it
-// (studio-plan-3). Remove them there.
-export { SETTINGS } from "./settings.mjs";
-export { ROOT, scanContent } from "./lib/content.mjs";
-export { loadCrops } from "./lib/store.mjs";
-export { cropBox, resolveCrop } from "./lib/geometry.mjs";
-export { imageSize } from "./lib/magick.mjs";
-
 const color = (k) => paletteColor(SETTINGS.palette, k);
 
 // ============================================================================

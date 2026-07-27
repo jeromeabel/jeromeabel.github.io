@@ -8,11 +8,12 @@ is integrated into `src/` (step 2).
 
 ## Scripts
 
-| Command                 | Does                                                    |
-| ----------------------- | ------------------------------------------------------- |
-| `pnpm illustrate`       | Generate all styles × all sizes for all content entries |
-| `pnpm illustrate:sheet` | Same + write a contact sheet (`index.html`) for review  |
-| `pnpm crop`             | Crop UI at http://localhost:4380                        |
+| Command                 | Does                                                                |
+| ----------------------- | ------------------------------------------------------------------- |
+| `pnpm illustrate`       | Generate all styles × all sizes for all content entries             |
+| `pnpm illustrate:sheet` | Same + write a contact sheet (`index.html`) for review              |
+| `pnpm studio`           | Illustration Studio (Crop + Effects + Run) at http://127.0.0.1:4380 |
+| `pnpm crop`             | Alias for `pnpm studio` (same app, kept for muscle memory)          |
 
 ### illustrate.mjs
 
@@ -40,42 +41,117 @@ Sizes: `cover` (original, no crop), `thumb` 575×300, `small` 240×140, `square`
 judge. Accent per image is picked deterministically from the slug hash; mesh geometry is seeded
 by slug (same slug = same image, forever).
 
-### crop-ui.mjs
+### studio.mjs — Illustration Studio
 
-Local page to set a **focal point + zoom** per cover, overridable per output size.
+`pnpm studio` (alias `pnpm crop`) starts a local `node:http` server at
+`http://127.0.0.1:4380` and opens it in the browser. Three tabs over a shared thumb rail:
 
-1. `pnpm crop` — browser opens; left rail lists every cover (green dot = crop set, `+n` = n
-   size overrides).
-2. Click a thumbnail, then click **or drag** on the big image to place the focal point —
-   previews follow the pointer live.
-3. Zoom slider (1–3×) tightens the crop.
-4. Tab bar picks what you edit: `base` (used by every size) or one size (`thumb` / `small` /
-   `square`). Clicking a preview jumps to that size's tab. A dashed marker means the tab is
-   inheriting base; a solid one means it has its own crop. `•` on a tab = own crop.
-5. `Reset all` (base tab) clears the image; `Inherit base` (size tab) drops just that override.
-   `Save` (coral = unsaved) writes `images/crops.json`; closing the tab with unsaved edits
-   prompts first.
-6. Regenerate: `pnpm illustrate:sheet`, open `images/out/review/index.html`.
+- **Crop** — set a **focal point + zoom** per cover, overridable per output size.
+  1. Left rail lists every cover (green dot = crop set, `+n` = n size overrides).
+  2. Click a thumbnail, then click **or drag** on the big image to place the focal point —
+     previews follow the pointer live.
+  3. Zoom slider (1–3×) tightens the crop.
+  4. Tab bar picks what you edit: `base` (used by every size) or one size (`thumb` / `small` /
+     `square`). Clicking a preview jumps to that size's tab. A dashed marker means the tab is
+     inheriting base; a solid one means it has its own crop. `•` on a tab = own crop.
+  5. `Reset all` (base tab) clears the image; `Inherit base` (size tab) drops just that override.
 
-Entry shape — the root is the base, `sizes.<name>` overrides it field by field, so a size can
-pin only its zoom and keep tracking the base focus. Old single-crop entries still work.
+  Entry shape — the root is the base, `sizes.<name>` overrides it field by field, so a size can
+  pin only its zoom and keep tracking the base focus. Old single-crop entries still work.
 
-```json
-{
-  "api-endpoints-with-astro": {
-    "focus": [0.3, 0.55],
-    "zoom": 1.5,
-    "sizes": {
-      "square": { "focus": [0.5, 0.2], "zoom": 2 },
-      "small": { "zoom": 1 }
+  ```json
+  {
+    "api-endpoints-with-astro": {
+      "focus": [0.3, 0.55],
+      "zoom": 1.5,
+      "sizes": {
+        "square": { "focus": [0.5, 0.2], "zoom": 2 },
+        "small": { "zoom": 1 }
+      }
     }
   }
-}
+  ```
+
+- **Effects** — tune the per-image `illustration.json` entry (style, mix, accent, seed, mesh
+  blobs, per-effect knob overrides) against a live preview, with inherited/overridden markers
+  per §5 of `studio-design.md`. Mesh blobs drag directly on the preview; reroll assigns a new
+  seed and discards materialized blobs (confirms first — destructive if blobs were hand-placed).
+
+- **Run** — kick off batch jobs (`render-dirty`, `render-all`, `sheet`) against the currently
+  **saved** state and poll progress without leaving the browser.
+
+`Save` (coral = unsaved) writes `images/crops.json` and `images/illustration.json` together;
+closing the tab with unsaved edits prompts first (`beforeunload` guard). Regenerate the contact
+sheet from the Run tab, or `pnpm illustrate:sheet` from the CLI, then open
+`images/out/review/index.html`.
+
+The crop math (`cropBox()`, `resolveCrop()`) and mesh geometry (`meshSvg()`) live once, in
+`lib/geometry.mjs` and `lib/mesh.mjs`, and are served to the browser byte-identical to disk (see
+Module layout below) — there is no hand-synced duplicate to keep in sync anymore.
+
+#### Routes
+
+| Route               | Purpose                                                             |    Cost |
+| ------------------- | ------------------------------------------------------------------- | ------: |
+| `GET /`             | page shell                                                          |       — |
+| `GET /lib/*.mjs`    | `util.mjs`, `geometry.mjs`, `mesh.mjs`, `resolve.mjs` as ES modules |       — |
+| `GET /studio/*.mjs` | `crop.mjs`, `fx.mjs`, `run.mjs` client panels                       |       — |
+| `GET /api/data`     | slugs, crops, illustration, `SETTINGS`, sizes                       |       — |
+| `GET /img/<slug>`   | original image                                                      |       — |
+| `POST /api/layer`   | subject layer only, transparent PNG                                 |  ~40 ms |
+| `POST /api/render`  | full exact composite (**Render exact** button)                      | ~300 ms |
+| `POST /api/save`    | writes `crops.json` + `illustration.json`                           |       — |
+| `POST /api/job`     | starts a batch job (`render-dirty` \| `render-all` \| `sheet`)      |       — |
+| `GET /api/job`      | poll job progress                                                   |       — |
+
+The render routes are POST because the body is the full effective settings object (too large
+for a query string) and lets the preview reflect unsaved edits rather than reading from disk.
+
+#### Security posture
+
+Local-only by construction (design.md §9): the server binds `127.0.0.1` only, and every request
+checks `Host` is loopback; POSTs additionally reject a foreign `Origin` header (CSRF guard). Only
+whitelisted module names are servable under `/lib/` and `/studio/` — no arbitrary filesystem
+reads. Malformed `illustration.json` refuses to boot rather than silently resetting hand-tuned
+work.
+
+#### Module layout
+
+```
+images/scripts/
+  settings.mjs        # SETTINGS only — the one file you edit to tune globally
+  lib/
+    util.mjs          # hash, rng, lerp, color, lighten, contrastRatio, accentFor
+    magick.mjs        # magick(), potrace(), imageSize(), grainArgs()
+    geometry.mjs      # cropBox, resolveCrop        ← served to the browser verbatim
+    mesh.mjs          # meshSvg()                   ← served to the browser verbatim
+    content.mjs       # scanContent()
+    store.mjs         # load/save/merge crops.json + illustration.json
+    styles.mjs        # STYLES registry
+    render.mjs        # renderEntry(entry, style, size, opts) → path
+  illustrate.mjs      # CLI + contact sheet (thin)
+  studio.mjs          # HTTP server + routes (thin)
+  studio/
+    page.mjs          # shell HTML/CSS
+    crop.mjs          # crop panel client JS
+    fx.mjs            # effects panel client JS
+    run.mjs           # Run panel client JS (batch jobs + progress polling)
+  checks/
+    signatures.sh     # pixel-signature manifest of a render dir (no-regression diff)
+    served-lib.mjs    # asserts served /lib/*.mjs == disk bytes, mesh generation deterministic
 ```
 
-The crop math (largest box at target ratio, centered on focus, ÷ zoom) and the base/override
-resolution are duplicated in `illustrate.mjs` (`cropBox()`, `resolveCrop()`) and the page script
-in `crop-ui.mjs` — change both together.
+#### checks/
+
+- `bash images/scripts/checks/signatures.sh [dir]` — prints `identify -format '%#'` pixel hashes
+  (sorted by filename) for every PNG in `dir` (default `images/out/review`). Pixel-only hashing
+  sidesteps PNG date-chunk noise, so two runs are comparable even though `md5sum` on the raw files
+  would not be. Used to prove a refactor is behaviour-preserving: snapshot before, snapshot after,
+  diff.
+- `node images/scripts/checks/served-lib.mjs [port]` — with the studio running (default port
+  4380), asserts `/lib/util.mjs`, `/lib/geometry.mjs`, `/lib/mesh.mjs`, `/lib/resolve.mjs` are
+  served byte-identical to the files on disk, and that `meshSvg()` produces the same output
+  string for the same input twice (determinism guardrail, studio-design.md §6).
 
 ### illustration.json
 
