@@ -209,8 +209,10 @@ export function imageSize(file) {
   return { w, h };
 }
 
-function grainArgs(w, h, { attenuate, blend }) {
+function grainArgs(w, h, { attenuate, blend }, seedStr) {
   return [
+    "-seed",
+    String(hash(seedStr)),
     "(",
     "-size",
     `${w}x${h}`,
@@ -374,7 +376,7 @@ function meshBackdrop(out, slug, w, h) {
   const svg = `${out}/.bg_${slug}.svg`;
   const png = `${out}/.bg_${slug}.png`;
   writeFileSync(svg, meshSvg(slug, SETTINGS.onMesh.theme, w, h));
-  magick([svg, ...grainArgs(w, h, s.grain), png]);
+  magick([svg, ...grainArgs(w, h, s.grain, `${slug}:bg:${w}x${h}`), png]);
   rmSync(svg, { force: true });
   return png;
 }
@@ -451,7 +453,7 @@ const STYLES = {
       String(s.posterizeSteps),
       "+level-colors",
       `${color("ink")},${color("paper")}`,
-      ...grainArgs(w, h, s.grain),
+      ...grainArgs(w, h, s.grain, `${slug}:riso:${w}x${h}`),
       `${out}/${slug}_riso_${size}.png`,
     ]);
   },
@@ -543,7 +545,7 @@ const STYLES = {
       writeFileSync(tmp, meshSvg(slug, theme, w, h));
       magick([
         tmp,
-        ...grainArgs(w, h, s.grain),
+        ...grainArgs(w, h, s.grain, `${slug}:mesh-${theme}:${w}x${h}`),
         `${out}/${slug}_mesh-${theme}_${size}.png`,
       ]);
       rmSync(tmp);
