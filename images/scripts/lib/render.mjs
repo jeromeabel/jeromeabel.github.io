@@ -51,6 +51,8 @@ export function renderKey(entry, styleName, sizeName, eff, crop) {
 export function prepareInput(entry, eff, crop, sizeName, dir) {
   const dims = eff.settings.sizes[sizeName];
   if (dims === undefined) throw new Error(`unknown size: ${sizeName}`);
+  if (!/^[A-Za-z0-9_-]+$/.test(sizeName))
+    throw new Error(`unknown size: ${sizeName}`);
   if (entry.img && dims) {
     const src = imageSize(entry.img);
     const box = cropBox(src.w, src.h, dims.w, dims.h, crop);
