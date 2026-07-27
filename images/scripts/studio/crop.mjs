@@ -66,6 +66,15 @@ export function initCrop(ctx, root) {
     (n) => ctx.data.sizes[n],
   );
 
+  // Entries with no cover image have nothing to crop — /img/<slug> 404s,
+  // #big's naturalWidth/naturalHeight land on 0, and cropBox/placeFocus
+  // dividing by that zero width can produce Infinity or NaN that then gets
+  // written straight into the git-tracked images/crops.json. Gate the whole
+  // panel on hasImg so loadImage/render/placeFocus never run for such a slug.
+  const hasImg = (slug) =>
+    !!ctx.data.slugs.find((s) => s.slug === slug)?.hasImg;
+  const noImg = () => !hasImg(ctx.current);
+
   // The crop actually stored for this tab (null = inheriting / unset).
   function ownCrop(entry, name) {
     if (!entry) return null;
@@ -118,6 +127,12 @@ export function initCrop(ctx, root) {
   // the shell now owns.
   function loadImage(slug) {
     const img = $("#big");
+    if (!hasImg(slug)) {
+      img.onload = null;
+      img.removeAttribute("src");
+      render();
+      return;
+    }
     img.onload = render;
     img.src = "/img/" + encodeURIComponent(slug);
     for (const name of cropSizes) previewEls[name].img.src = img.src;
@@ -128,6 +143,20 @@ export function initCrop(ctx, root) {
     if (!ctx.current) return;
     buildTabs();
     const img = $("#big");
+    const previews = $("#previews");
+    if (noImg()) {
+      // Nothing to crop — no coordinate math against a broken/zero-size image.
+      img.removeAttribute("src");
+      $("#marker").style.display = "none";
+      $("#zoom").disabled = true;
+      $("#reset").disabled = true;
+      $("#hint").textContent = "no cover image — nothing to crop";
+      previews.style.display = "none";
+      updateCount();
+      return;
+    }
+    previews.style.display = "";
+    $("#zoom").disabled = false;
     const entry = ctx.crops[ctx.current];
     const active = resolveTab(entry, tab);
     const own = ownCrop(entry, tab);
@@ -197,6 +226,16 @@ export function initCrop(ctx, root) {
   // active tab. Pointer capture keeps the drag alive outside the image bounds.
   function placeFocus(e) {
     const r = $("#big").getBoundingClientRect();
+    // Belt-and-suspenders: noImg() already keeps this from running against a
+    // broken/zero-size image, but never divide by a zero or non-finite rect
+    // dimension regardless (would otherwise yield ±Infinity/NaN into focus).
+    if (
+      !Number.isFinite(r.width) ||
+      !r.width ||
+      !Number.isFinite(r.height) ||
+      !r.height
+    )
+      return;
     const clamp01 = (v) => Math.min(Math.max(v, 0), 1);
     const round = (v) => Math.round(clamp01(v) * 1000) / 1000;
     const z = Number($("#zoom").value);
@@ -217,7 +256,7 @@ export function initCrop(ctx, root) {
   const stage = $("#stage");
 
   stage.onpointerdown = (e) => {
-    if (!ctx.current) return;
+    if (!ctx.current || noImg()) return;
     e.preventDefault();
     stage.setPointerCapture(e.pointerId);
     stage.classList.add("dragging");
@@ -227,7 +266,8 @@ export function initCrop(ctx, root) {
   };
 
   stage.onpointermove = (e) => {
-    if (!ctx.current || !stage.hasPointerCapture(e.pointerId)) return;
+    if (!ctx.current || noImg() || !stage.hasPointerCapture(e.pointerId))
+      return;
     if (dragFrame) return; // one update per frame
     dragFrame = requestAnimationFrame(() => {
       dragFrame = null;
@@ -249,14 +289,14 @@ export function initCrop(ctx, root) {
 
   $("#zoom").oninput = () => {
     $("#zoomval").textContent = Number($("#zoom").value).toFixed(2);
-    if (!ctx.current) return;
+    if (!ctx.current || noImg()) return;
     writeTarget({ zoom: Number($("#zoom").value) });
     ctx.refreshRail();
     render();
   };
 
   $("#reset").onclick = () => {
-    if (!ctx.current) return;
+    if (!ctx.current || noImg()) return;
     if (tab === "base") delete ctx.crops[ctx.current];
     else delete ctx.crops[ctx.current]?.sizes?.[tab];
     ctx.markDirty();

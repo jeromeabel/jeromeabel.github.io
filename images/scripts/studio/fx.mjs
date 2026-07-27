@@ -216,7 +216,15 @@ export function initFx(ctx, root) {
   };
 
   // ---------- blob drag (materialize, §6) ----------
+  // Pointer capture lives on the STABLE #fx-blobs svg (never destroyed mid-drag),
+  // not on the <ellipse> being dragged — renderControlsAndMesh() replaces the
+  // svg's innerHTML on every settled frame, which would otherwise blow away the
+  // captured element (and its handlers) after one frame. During the drag we
+  // only mutate the dragged ellipse's cx/cy attributes directly (cheap); the
+  // full materialize-into-ctx.ill write + mesh redraw happens once, on
+  // pointerup, same as the reference pattern in crop.mjs's #stage drag.
   let dragFrame = null;
+  let dragIndex = null; // index of the ellipse being dragged, set at pointerdown
   function renderBlobHandles(blobs, meshCfg, dims) {
     const svg = $("#fx-blobs");
     const vb = meshCfg.viewBox;
@@ -228,40 +236,61 @@ export function initFx(ctx, root) {
           `<ellipse data-i="${i}" cx="${b.cx}" cy="${b.cy}" rx="${b.rx}" ry="${b.ry}" transform="rotate(${b.rot} ${b.cx} ${b.cy})"/>`,
       )
       .join("");
-    for (const el of svg.querySelectorAll("ellipse")) {
-      el.onpointerdown = (e) => {
-        e.preventDefault();
-        el.setPointerCapture(e.pointerId);
-        const i = Number(el.dataset.i);
-        el.onpointermove = (ev) => {
-          if (!el.hasPointerCapture(ev.pointerId) || dragFrame) return;
-          dragFrame = requestAnimationFrame(() => {
-            dragFrame = null;
-            // Materialize on first touch: the file becomes the truth (§6).
-            const { effective: eff } = resolved();
-            const theme =
-              activeStyle(eff) === "mesh" ? "light" : eff.settings.onMesh.theme;
-            const cur =
-              entry().mesh?.blobs ??
-              structuredClone(
-                eff.mesh?.blobs ??
-                  generateBlobs(`${eff.seed}:${theme}`, eff.settings.mesh),
-              );
-            const pt = svgPoint(svg, ev);
-            cur[i] = { ...cur[i], cx: Math.round(pt.x), cy: Math.round(pt.y) };
-            (entry().mesh ??= {}).blobs = cur;
-            clearExact();
-            ctx.markDirty();
-            ctx.refreshRail();
-            renderControlsAndMesh(); // mesh redraw only — no server call (§3)
-          });
-        };
-        el.onpointerup = el.onpointercancel = () => {
-          el.releasePointerCapture(e.pointerId);
-          el.onpointermove = null;
-        };
-      };
-    }
+    svg.onpointerdown = (e) => {
+      const el = e.target.closest("ellipse");
+      if (!el) return;
+      e.preventDefault();
+      svg.setPointerCapture(e.pointerId);
+      dragIndex = Number(el.dataset.i);
+    };
+    svg.onpointermove = (ev) => {
+      if (
+        dragIndex === null ||
+        !svg.hasPointerCapture(ev.pointerId) ||
+        dragFrame
+      )
+        return;
+      dragFrame = requestAnimationFrame(() => {
+        dragFrame = null;
+        const el = svg.querySelector(`ellipse[data-i="${dragIndex}"]`);
+        if (!el) return;
+        const pt = svgPoint(svg, ev);
+        const cx = Math.round(pt.x);
+        const cy = Math.round(pt.y);
+        el.setAttribute("cx", cx);
+        el.setAttribute("cy", cy);
+        el.setAttribute(
+          "transform",
+          `rotate(${blobs[dragIndex].rot} ${cx} ${cy})`,
+        );
+      });
+    };
+    svg.onpointerup = svg.onpointercancel = (e) => {
+      if (dragIndex === null) return;
+      svg.releasePointerCapture(e.pointerId);
+      const i = dragIndex;
+      dragIndex = null;
+      const el = svg.querySelector(`ellipse[data-i="${i}"]`);
+      const cx = Number(el?.getAttribute("cx"));
+      const cy = Number(el?.getAttribute("cy"));
+      if (!Number.isFinite(cx) || !Number.isFinite(cy)) return;
+      // Materialize on drag end: the file becomes the truth (§6).
+      const { effective: eff } = resolved();
+      const theme =
+        activeStyle(eff) === "mesh" ? "light" : eff.settings.onMesh.theme;
+      const cur =
+        entry().mesh?.blobs ??
+        structuredClone(
+          eff.mesh?.blobs ??
+            generateBlobs(`${eff.seed}:${theme}`, eff.settings.mesh),
+        );
+      cur[i] = { ...cur[i], cx, cy };
+      (entry().mesh ??= {}).blobs = cur;
+      clearExact();
+      ctx.markDirty();
+      ctx.refreshRail();
+      renderControlsAndMesh(); // mesh redraw only — no server call (§3)
+    };
   }
   function svgPoint(svg, e) {
     const p = svg.createSVGPoint();
@@ -352,14 +381,23 @@ export function initFx(ctx, root) {
     }
   }
 
+  // Mirrors applicableStyles' base partition in lib/render.mjs (image-less
+  // entries: mesh only; image-bearing entries: everything but pure mesh) —
+  // that file isn't served to the client (it touches node:fs), so the
+  // predicate is duplicated here rather than imported. Keep in sync with
+  // lib/render.mjs's applicableStyles if that partition ever changes.
+  const applicableStyle = (s) => (hasImg() ? s !== "mesh" : s === "mesh");
+
   function buildStyleRadios(eff, source) {
     const opts = [
       '<label><input type="radio" name="fxstyle" value="">auto (all styles)</label>',
     ].concat(
-      ctx.data.styles.map(
-        (s) =>
-          `<label><input type="radio" name="fxstyle" value="${s}" ${eff.style === s ? "checked" : ""}>${s}</label>`,
-      ),
+      ctx.data.styles
+        .filter(applicableStyle)
+        .map(
+          (s) =>
+            `<label><input type="radio" name="fxstyle" value="${s}" ${eff.style === s ? "checked" : ""}>${s}</label>`,
+        ),
     );
     if (!eff.style) opts[0] = opts[0].replace(">auto", " checked>auto");
     $("#fx-styles").innerHTML = opts.join(" ") + tierMark(source, "style");
@@ -471,6 +509,14 @@ export function initFx(ctx, root) {
     const { effective: eff, source } = resolved();
     const style = activeStyle(eff);
     const dims = eff.settings.sizes[previewSize] ?? eff.settings.mesh.fallback;
+    // #fx-preview has no CSS size of its own — it's normally sized by the
+    // in-flow #fx-subject img, but fetchSubject clears that img's src for
+    // image-less entries and the pure "mesh" style, which would otherwise
+    // collapse the container (and the absolutely-positioned mesh/blob SVGs
+    // with it) to 0×0. Pin the container to the resolved render dims
+    // unconditionally so it holds its size regardless of style/hasImg state.
+    $("#fx-preview").style.width = dims.w + "px";
+    $("#fx-preview").style.height = dims.h + "px";
     buildTypeSelect(eff);
     buildStyleRadios(eff, source);
     buildAccentRadios(eff, source);

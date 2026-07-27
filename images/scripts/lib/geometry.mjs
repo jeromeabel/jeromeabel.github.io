@@ -3,7 +3,6 @@
 // hand-synced duplicate that lived in crop-ui.mjs.
 
 // Largest box at target ratio w:h centered on the focal point, shrunk by zoom.
-// Shared contract with crop-ui.mjs previews — keep the math in sync.
 export function cropBox(
   srcW,
   srcH,
@@ -27,7 +26,7 @@ export function cropBox(
 
 // A crops.json entry is `{ focus, zoom, sizes?: { <size>: { focus?, zoom? } } }`.
 // The root focus/zoom is the base for every size; `sizes[name]` overrides it
-// field by field. Shared contract with crop-ui.mjs — keep in sync.
+// field by field.
 export function resolveCrop(entry, sizeName) {
   const base = { focus: entry?.focus ?? [0.5, 0.5], zoom: entry?.zoom ?? 1 };
   const over = entry?.sizes?.[sizeName];
