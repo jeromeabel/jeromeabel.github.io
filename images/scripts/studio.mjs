@@ -81,8 +81,14 @@ export function readJson(req) {
 function serveModule(res, dir, name, whitelist) {
   if (!whitelist.includes(name))
     return sendErr(res, 404, `not served: ${name}`);
+  let content;
+  try {
+    content = readFileSync(new URL(`${dir}/${name}`, scriptsDir));
+  } catch {
+    return sendErr(res, 404, `not found: ${dir}/${name}`);
+  }
   res.writeHead(200, { "content-type": "text/javascript; charset=utf-8" });
-  res.end(readFileSync(new URL(`${dir}/${name}`, scriptsDir)));
+  res.end(content);
 }
 
 const server = createServer(async (req, res) => {
