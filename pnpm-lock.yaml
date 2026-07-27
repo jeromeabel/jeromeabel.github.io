@@ -31,7 +31,7 @@ importers:
         version: 1.2.2
       '@iconify-json/lucide':
         specifier: ^1.2.117
-        version: 1.2.117
+        version: 1.2.119
       '@tailwindcss/vite':
         specifier: ^4.3.2
         version: 4.3.2(vite@8.1.5(@types/node@26.1.1)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
@@ -635,8 +635,8 @@ packages:
   '@iconify-json/fa6-brands@1.2.6':
     resolution: {integrity: sha512-twL3X4KWcxAhbc1vz/mIDsVr+CAItk1/EIfxKUVQtpv6O4eydk5KNYqTZWdvJNHGInUgd6vKg21aWfVgb5DXEg==}
 
-  '@iconify-json/lucide@1.2.117':
-    resolution: {integrity: sha512-7isYKJKWRZ8NfLNSY8pIYmRWiMBkopL4/X22gZfFmePFhc7az0hQ5biqBLG6vdDEvMctFu2suZB3yQ29RL+8tA==}
+  '@iconify-json/lucide@1.2.119':
+    resolution: {integrity: sha512-KbrC7fT5wPshV1KLRM0k91poP0OH4eKEVywEOH0FCczKb+qth8Pcq1Hy9kS2tXeF52s23qzLnG8AJsExPSupeA==}
 
   '@iconify/tools@4.2.0':
     resolution: {integrity: sha512-WRxPva/ipxYkqZd1+CkEAQmd86dQmrwH0vwK89gmp2Kh2WyyVw57XbPng0NehP3x4V1LzLsXUneP1uMfTMZmUA==}
@@ -5330,7 +5330,7 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/lucide@1.2.117':
+  '@iconify-json/lucide@1.2.119':
     dependencies:
       '@iconify/types': 2.0.0
 
