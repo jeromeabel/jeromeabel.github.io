@@ -17,17 +17,9 @@
 //   node images/scripts/illustrate.mjs --out images/out/review
 // ============================================================================
 
-import { execFileSync } from "node:child_process";
-import {
-  mkdirSync,
-  readFileSync,
-  readdirSync,
-  writeFileSync,
-  rmSync,
-  existsSync,
-} from "node:fs";
-import { join, dirname, resolve } from "node:path";
-import { fileURLToPath, pathToFileURL } from "node:url";
+import { mkdirSync, readdirSync, writeFileSync, rmSync } from "node:fs";
+import { join, resolve } from "node:path";
+import { pathToFileURL } from "node:url";
 import { SETTINGS } from "./settings.mjs";
 import {
   hash,
@@ -38,11 +30,14 @@ import {
   lighten as paletteLighten,
   contrastRatio as paletteContrast,
 } from "./lib/util.mjs";
+import { magick, potrace, imageSize, grainArgs } from "./lib/magick.mjs";
+import { cropBox, resolveCrop } from "./lib/geometry.mjs";
+import { ROOT, scanContent } from "./lib/content.mjs";
+import { loadCrops } from "./lib/store.mjs";
 
 // ============================================================================
 // Helpers
 // ============================================================================
-export const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 
 // Bound to the global palette so existing call sites read exactly as before.
 const color = (k) => paletteColor(SETTINGS.palette, k);
@@ -50,120 +45,13 @@ const accentFor = (slug) => paletteAccent(SETTINGS.palette, slug);
 const lighten = (c, amount) => paletteLighten(SETTINGS.palette, c, amount);
 const contrastRatio = (a, b) => paletteContrast(SETTINGS.palette, a, b);
 
-function magick(args) {
-  execFileSync("convert", args, { stdio: "inherit" });
-}
-
-function potrace(args) {
-  execFileSync("potrace", args, { stdio: "inherit" });
-}
-
-// Re-export for crop-ui compat
+// Compat re-exports — crop-ui.mjs consumes these until the studio absorbs it
+// (studio-plan-3). Remove them there.
 export { SETTINGS } from "./settings.mjs";
-
-export function imageSize(file) {
-  const out = execFileSync("identify", ["-format", "%w %h", `${file}[0]`], {
-    encoding: "utf8",
-  });
-  const [w, h] = out.trim().split(" ").map(Number);
-  return { w, h };
-}
-
-function grainArgs(w, h, { attenuate, blend }, seedStr) {
-  return [
-    "-seed",
-    String(hash(seedStr)),
-    "(",
-    "-size",
-    `${w}x${h}`,
-    "xc:gray50",
-    "-attenuate",
-    String(attenuate),
-    "+noise",
-    "Gaussian",
-    "-colorspace",
-    "Gray",
-    ")",
-    "-compose",
-    blend,
-    "-composite",
-  ];
-}
-
-// Largest box at target ratio w:h centered on the focal point, shrunk by zoom.
-// Shared contract with crop-ui.mjs previews — keep the math in sync.
-export function cropBox(
-  srcW,
-  srcH,
-  w,
-  h,
-  { focus = [0.5, 0.5], zoom = 1 } = {},
-) {
-  const ratio = w / h;
-  let boxW = Math.min(srcW, srcH * ratio) / zoom;
-  let boxH = boxW / ratio;
-  const clamp = (v, max) => Math.min(Math.max(v, 0), max);
-  const x = clamp(focus[0] * srcW - boxW / 2, srcW - boxW);
-  const y = clamp(focus[1] * srcH - boxH / 2, srcH - boxH);
-  return {
-    x: Math.round(x),
-    y: Math.round(y),
-    w: Math.round(boxW),
-    h: Math.round(boxH),
-  };
-}
-
-// A crops.json entry is `{ focus, zoom, sizes?: { <size>: { focus?, zoom? } } }`.
-// The root focus/zoom is the base for every size; `sizes[name]` overrides it
-// field by field. Shared contract with crop-ui.mjs — keep in sync.
-export function resolveCrop(entry, sizeName) {
-  const base = { focus: entry?.focus ?? [0.5, 0.5], zoom: entry?.zoom ?? 1 };
-  const over = entry?.sizes?.[sizeName];
-  return over
-    ? { focus: over.focus ?? base.focus, zoom: over.zoom ?? base.zoom }
-    : base;
-}
-
-export function loadCrops() {
-  const file = join(ROOT, SETTINGS.cropsFile);
-  return existsSync(file) ? JSON.parse(readFileSync(file, "utf8")) : {};
-}
-
-// ============================================================================
-// Content scan — entries = { slug, img? } from frontmatter `img:` lines
-// ============================================================================
-export function scanContent() {
-  const entries = [];
-  const push = (file, slug) => {
-    const head = readFileSync(file, "utf8").slice(0, 2000);
-    const m = head.match(/^img(?:_preview)?:\s*(?:"([^"]+)"|(\S+))\s*$/m);
-    const rel = m?.[1] ?? m?.[2];
-    entries.push({ slug, img: rel ? resolve(dirname(file), rel) : null });
-  };
-
-  for (const coll of ["post", "work"]) {
-    const base = join(ROOT, "src/content", coll);
-    for (const dir of readdirSync(base, { withFileTypes: true })) {
-      if (dir.isDirectory()) push(join(base, dir.name, "index.md"), dir.name);
-    }
-  }
-  const serieBase = join(ROOT, "src/content/serie");
-  for (const item of readdirSync(serieBase, { withFileTypes: true })) {
-    if (item.isFile() && item.name.endsWith(".md")) {
-      push(join(serieBase, item.name), item.name.replace(/\.md$/, ""));
-    } else if (item.isDirectory()) {
-      for (const f of readdirSync(join(serieBase, item.name))) {
-        if (f.endsWith(".md")) {
-          push(
-            join(serieBase, item.name, f),
-            `${item.name}--${f.replace(/\.md$/, "")}`,
-          );
-        }
-      }
-    }
-  }
-  return entries;
-}
+export { ROOT, scanContent } from "./lib/content.mjs";
+export { loadCrops } from "./lib/store.mjs";
+export { cropBox, resolveCrop } from "./lib/geometry.mjs";
+export { imageSize } from "./lib/magick.mjs";
 
 // ============================================================================
 // Styles — fn(src, out, ctx) with ctx = { slug, size, w, h }
