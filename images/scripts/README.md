@@ -132,6 +132,11 @@ group override. Type entries take the same shape minus `type`.
 | `mesh`   | materialized blob array (see studio-design.md §6)                       |
 | _other_  | deep-merged over the matching `SETTINGS` group                          |
 
+> `mesh` is a reserved key (table above), so the `mesh` `SETTINGS` group itself (blur, themes,
+> radius, grain, blobs, tintOpacity, etc.) currently cannot be overridden per-type or per-image —
+> only the reserved `mesh` seed/blob field can be pinned. Known limitation; revisit if per-image
+> mesh-group tuning is needed.
+
 **Merge order:** `SETTINGS` → `types[entry.type]` → image entry. `adding-likes` above renders
 dither with zero per-slug tuning; re-deciding the hand-drawing verdict propagates to every hand
 drawing that hasn't overridden `style`.
@@ -149,6 +154,10 @@ path, which tier set it (`global` | `type` | `image`). That drives the UI's inhe
 outputs whose settings-hash (source, effective settings, style, size) is unchanged. The manifest
 tracking this lives at `images/out/review/.manifest.json`, regenerable and git-ignored as part
 of `images/out/`.
+
+> The settings-hash does **not** cover the renderer's own code (`styles.mjs`, `mesh.mjs`,
+> `magick.mjs`, etc.) — after editing rendering code, run `pnpm illustrate --force`, or a plain
+> `pnpm illustrate` will report "0 rendered" and silently keep serving pre-edit pixels.
 
 ### Contact sheet
 

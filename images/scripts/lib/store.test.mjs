@@ -18,8 +18,11 @@ const restore = () => {
 
 test("missing file → empty maps", () => {
   rmSync(file, { force: true });
-  assert.deepEqual(loadIllustration(), { types: {}, images: {} });
-  restore();
+  try {
+    assert.deepEqual(loadIllustration(), { types: {}, images: {} });
+  } finally {
+    restore();
+  }
 });
 
 test("round trip is byte-identical (§10.3)", () => {
@@ -28,16 +31,22 @@ test("round trip is byte-identical (§10.3)", () => {
     images: { "adding-likes": { type: "hand-drawing" } },
   };
   saveIllustration(data);
-  const bytes1 = readFileSync(file, "utf8");
-  saveIllustration(loadIllustration());
-  assert.equal(readFileSync(file, "utf8"), bytes1);
-  assert.ok(bytes1.endsWith("\n"));
-  restore();
+  try {
+    const bytes1 = readFileSync(file, "utf8");
+    saveIllustration(loadIllustration());
+    assert.equal(readFileSync(file, "utf8"), bytes1);
+    assert.ok(bytes1.endsWith("\n"));
+  } finally {
+    restore();
+  }
 });
 
 test("malformed file → throws naming the file, never resets (§9)", () => {
   writeFileSync(file, "{ not json");
-  assert.throws(() => loadIllustration(), /illustration\.json/);
-  assert.equal(readFileSync(file, "utf8"), "{ not json"); // untouched
-  restore();
+  try {
+    assert.throws(() => loadIllustration(), /illustration\.json/);
+    assert.equal(readFileSync(file, "utf8"), "{ not json"); // untouched
+  } finally {
+    restore();
+  }
 });

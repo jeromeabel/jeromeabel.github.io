@@ -19,7 +19,6 @@ import { pathToFileURL } from "node:url";
 import { SETTINGS } from "./settings.mjs";
 import {
   color as paletteColor,
-  accentFor as paletteAccent,
   lighten as paletteLighten,
   contrastRatio as paletteContrast,
 } from "./lib/util.mjs";
@@ -32,6 +31,7 @@ import {
   openManifest,
   flushManifest,
 } from "./lib/render.mjs";
+import { accentOf } from "./lib/styles.mjs";
 
 // Compat re-exports — crop-ui.mjs consumes these until the studio absorbs it
 // (studio-plan-3). Remove them there.
@@ -129,7 +129,7 @@ function main() {
     );
     const applicable = applicableStyles(entry, styles, eff);
     for (const sizeName of sizeNames) {
-      if (SETTINGS.sizes[sizeName] === undefined) {
+      if (eff.settings.sizes[sizeName] === undefined) {
         console.error(`unknown size: ${sizeName}`);
         continue;
       }
@@ -151,7 +151,7 @@ function main() {
       }
     }
     console.log(
-      `${entry.slug} → ${applicable.join(",")} × ${sizeNames.join(",")}${entry.img ? "" : ` (accent: ${paletteAccent(SETTINGS.palette, entry.slug)})`}`,
+      `${entry.slug} → ${applicable.join(",")} × ${sizeNames.join(",")}${entry.img ? "" : ` (accent: ${accentOf(eff, entry.slug)})`}`,
     );
   }
 

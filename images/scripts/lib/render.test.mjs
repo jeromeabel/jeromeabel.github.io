@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { renderKey } from "./render.mjs";
+import { applicableStyles, renderKey } from "./render.mjs";
 import { resolveSettings } from "./resolve.mjs";
 import { SETTINGS } from "../settings.mjs";
 
@@ -17,7 +17,10 @@ test("renderKey is stable for identical inputs", () => {
 
 test("renderKey changes when settings, crop, style or size change", () => {
   const base = renderKey(entry, "mesh", "thumb", eff(), { zoom: 1 });
-  const tweaked = eff({ types: {}, images: { s: { mesh: { blur: 50 } } } });
+  const tweaked = eff({
+    types: {},
+    images: { s: { dither: { pixelate: 70 } } },
+  });
   assert.notEqual(
     renderKey(entry, "mesh", "thumb", tweaked, { zoom: 1 }),
     base,
@@ -27,5 +30,21 @@ test("renderKey changes when settings, crop, style or size change", () => {
   assert.notEqual(
     renderKey(entry, "duotone", "thumb", eff(), { zoom: 1 }),
     base,
+  );
+});
+
+test("applicableStyles: pinned style incompatible with entry returns empty", () => {
+  const withImg = { slug: "s", img: "photo.jpg" };
+  assert.deepEqual(
+    applicableStyles(withImg, ["duotone", "mesh"], { style: "mesh" }),
+    [],
+  );
+});
+
+test("applicableStyles: pinned nonexistent style name returns empty", () => {
+  const withImg = { slug: "s", img: "photo.jpg" };
+  assert.deepEqual(
+    applicableStyles(withImg, ["duotone", "riso"], { style: "bogus-style" }),
+    [],
   );
 });

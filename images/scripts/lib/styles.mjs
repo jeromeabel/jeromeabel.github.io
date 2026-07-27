@@ -13,7 +13,8 @@ import { generateBlobs, meshSvg } from "./mesh.mjs";
 // Per-render helpers over the EFFECTIVE settings (three-tier merged).
 const pal = (eff) => eff.settings.palette;
 const C = (eff, k) => paletteColor(pal(eff), k);
-const accentOf = (eff, slug) => eff.accent ?? paletteAccent(pal(eff), slug);
+export const accentOf = (eff, slug) =>
+  eff.accent ?? paletteAccent(pal(eff), slug);
 
 function meshColors(eff, slug, theme) {
   return {
