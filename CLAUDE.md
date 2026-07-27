@@ -74,6 +74,15 @@ Organized by feature domain in `src/components/`:
 - **Analytics**: Umami via `@astrojs/partytown` (offloaded to web worker).
 - **Icons**: `astro-icon` with Iconify sets (lucide, fa6-brands) plus custom SVGs in `src/assets/icons/`.
 
+## Illustration Lab
+
+Cover/thumbnail generation tooling lives in `images/scripts/` (see its
+[README](images/scripts/README.md)): `pnpm illustrate` (all styles × sizes from content `img:`
+frontmatter), `pnpm illustrate:sheet` (+ contact sheet), `pnpm crop` (focal-point crop UI →
+`images/crops.json`). All effect numbers in the `SETTINGS` block of
+`images/scripts/illustrate.mjs`. Spec: `docs/specs/01_active/illustration-system/design.md`
+(two-step process — this is step 1; nothing in `src/` changes until step-1 exit).
+
 ## Specs & Planning
 
 Project ideas and their design/plan artifacts live in `docs/specs/`, organized by lifecycle:

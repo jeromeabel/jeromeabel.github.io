@@ -37,4 +37,13 @@ tokens.code.json
 tokens.figma.json
 geometry.web.json
 geometry.figma.json
+raw-values.figma.json
 .pixel-report/
+
+# illustration lab — track the tooling, not the pixels.
+# images/out/ is fully regenerable with `pnpm illustrate`; the loose
+# .png/.jpg/.pgm at the top level are scratch (real inputs live in src/content).
+images/*
+!images/scripts/
+!images/custom/
+!images/crops.json

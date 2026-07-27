@@ -41,6 +41,11 @@ Open the browser at the address: http://localhost:4321/
 
 See more infos on this page: https://dev.jeromeabel.net/work/portfolio/
 
+## 🎨 Illustration lab
+
+Cover/thumbnail generation tooling (styles, sizes, crops): see
+[images/scripts/README.md](./images/scripts/README.md).
+
 ## 🎉 Results
 
 ![Screenshot of Pagespeed scores](./docs/report.png)

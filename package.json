@@ -10,8 +10,12 @@
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",
     "pixel-check": "node scripts/pixel-check.mjs",
+    "illustrate": "node images/scripts/illustrate.mjs",
+    "illustrate:sheet": "node images/scripts/illustrate.mjs --sheet",
+    "crop": "node images/scripts/crop-ui.mjs",
     "test": "node --test scripts/figma/**/*.test.mjs",
     "figma:verify": "node scripts/figma/extract-code-tokens.mjs tokens.code.json && node scripts/figma/diff-tokens.mjs tokens.code.json tokens.figma.json scripts/figma/token-map.json",
+    "figma:verify-raw": "node scripts/figma/diff-raw-values.mjs raw-values.figma.json scripts/figma/named-debt.json",
     "geometry:web": "node scripts/figma/extract-web-geometry.mjs"
   },
   "dependencies": {
