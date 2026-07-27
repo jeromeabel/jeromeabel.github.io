@@ -20,7 +20,16 @@ import {
   loadIllustration,
   saveIllustration,
 } from "./lib/store.mjs";
-import { renderLayer, renderExact } from "./lib/render.mjs";
+import {
+  renderLayer,
+  renderExact,
+  openManifest,
+  flushManifest,
+  renderEntry,
+  applicableStyles,
+} from "./lib/render.mjs";
+import { resolveSettings } from "./lib/resolve.mjs";
+import { writeSheet } from "./illustrate.mjs";
 import { pageHtml } from "./studio/page.mjs";
 
 const portArg = process.argv.indexOf("--port");
@@ -47,6 +56,49 @@ const MIME = {
 
 const LIB_WHITELIST = ["util.mjs", "geometry.mjs", "mesh.mjs", "resolve.mjs"];
 const STUDIO_WHITELIST = ["crop.mjs", "fx.mjs", "run.mjs"];
+
+let job = { step: null, running: false, done: 0, total: 0, errors: [] };
+const yieldLoop = () => new Promise((r) => setImmediate(r)); // keep GET /api/job responsive
+
+async function runJob(step) {
+  job = { step, running: true, done: 0, total: 0, errors: [] };
+  const out = join(ROOT, SETTINGS.out);
+  mkdirSync(out, { recursive: true });
+  try {
+    if (step === "sheet") {
+      job.total = 1;
+      writeSheet(out);
+      job.done = 1;
+      return;
+    }
+    // Jobs run against SAVED state (§7) — reload both files from disk.
+    const crops = loadCrops();
+    const illustration = loadIllustration();
+    openManifest(out);
+    const force = step === "render-all";
+    const work = [];
+    for (const e of entries) {
+      const { effective } = resolveSettings(e.slug, illustration, SETTINGS);
+      for (const st of applicableStyles(e, SETTINGS.styles, effective))
+        for (const sz of Object.keys(SETTINGS.sizes)) work.push([e, st, sz]);
+    }
+    job.total = work.length;
+    for (const [e, st, sz] of work) {
+      try {
+        renderEntry(e, st, sz, { out, crops, illustration, force });
+      } catch (err) {
+        job.errors.push(
+          `${e.slug} ${st} ${sz}: ${err.stderr?.toString() || err.message}`,
+        );
+      }
+      job.done++;
+      await yieldLoop();
+    }
+    flushManifest();
+  } finally {
+    job.running = false;
+  }
+}
 
 export function sendErr(res, code, msg) {
   res.writeHead(code, { "content-type": "text/plain; charset=utf-8" });
@@ -162,6 +214,18 @@ const server = createServer(async (req, res) => {
         "cache-control": "no-store",
       });
       res.end(readFileSync(file));
+    } else if (url.pathname === "/api/job" && req.method === "POST") {
+      const { step } = await readJson(req);
+      if (!["render-dirty", "render-all", "sheet"].includes(step))
+        return sendErr(res, 400, `unknown step: ${step}`);
+      if (job.running)
+        return sendErr(res, 409, `job already running: ${job.step}`);
+      runJob(step); // intentionally not awaited — bg job (§7)
+      res.writeHead(202, { "content-type": "application/json" });
+      res.end('{"started":true}');
+    } else if (url.pathname === "/api/job" && req.method === "GET") {
+      res.writeHead(200, { "content-type": "application/json" });
+      res.end(JSON.stringify(job));
     } else {
       sendErr(res, 404, `not found: ${url.pathname}`);
     }
