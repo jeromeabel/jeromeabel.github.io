@@ -95,6 +95,8 @@ async function runJob(step) {
       await yieldLoop();
     }
     flushManifest();
+  } catch (err) {
+    job.errors.push(`job failed: ${err.stderr?.toString() || err.message}`);
   } finally {
     job.running = false;
   }
