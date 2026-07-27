@@ -62,9 +62,9 @@ const yieldLoop = () => new Promise((r) => setImmediate(r)); // keep GET /api/jo
 
 async function runJob(step) {
   job = { step, running: true, done: 0, total: 0, errors: [] };
-  const out = join(ROOT, SETTINGS.out);
-  mkdirSync(out, { recursive: true });
   try {
+    const out = join(ROOT, SETTINGS.out);
+    mkdirSync(out, { recursive: true });
     if (step === "sheet") {
       job.total = 1;
       writeSheet(out);
