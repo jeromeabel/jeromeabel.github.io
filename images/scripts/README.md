@@ -8,11 +8,11 @@ is integrated into `src/` (step 2).
 
 ## Scripts
 
-| Command                      | Does                                                    |
-| ---------------------------- | ------------------------------------------------------- |
-| `pnpm illustrate`            | Generate all styles × all sizes for all content entries |
-| `pnpm illustrate:sheet`      | Same + write a contact sheet (`index.html`) for review  |
-| `pnpm crop`                  | Crop UI at http://localhost:4380                        |
+| Command                 | Does                                                    |
+| ----------------------- | ------------------------------------------------------- |
+| `pnpm illustrate`       | Generate all styles × all sizes for all content entries |
+| `pnpm illustrate:sheet` | Same + write a contact sheet (`index.html`) for review  |
+| `pnpm crop`             | Crop UI at http://localhost:4380                        |
 
 ### illustrate.mjs
 
@@ -65,7 +65,10 @@ pin only its zoom and keep tracking the base focus. Old single-crop entries stil
   "api-endpoints-with-astro": {
     "focus": [0.3, 0.55],
     "zoom": 1.5,
-    "sizes": { "square": { "focus": [0.5, 0.2], "zoom": 2 }, "small": { "zoom": 1 } }
+    "sizes": {
+      "square": { "focus": [0.5, 0.2], "zoom": 2 },
+      "small": { "zoom": 1 }
+    }
   }
 }
 ```
