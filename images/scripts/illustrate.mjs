@@ -1,11 +1,7 @@
 #!/usr/bin/env node
 // ============================================================================
-// Illustration lab — one script, all styles, all sizes, centralized settings.
-//
-// Scans content collections for cover images (frontmatter `img:` in index.md),
-// crops each cover per output size (focal point + zoom from images/crops.json,
-// set via crop-ui.mjs), applies every enabled style via ImageMagick, and
-// generates seeded mesh backgrounds for entries without a cover.
+// Illustration lab CLI + contact sheet. All logic lives in ./lib (see
+// docs/specs/01_active/illustration-system/studio-design.md §4).
 //
 // Usage:
 //   node images/scripts/illustrate.mjs                     # everything
@@ -16,8 +12,7 @@
 //   node images/scripts/illustrate.mjs --sheet             # + contact sheet
 //   node images/scripts/illustrate.mjs --out images/out/review
 // ============================================================================
-
-import { mkdirSync, readdirSync, writeFileSync, rmSync } from "node:fs";
+import { mkdirSync, readdirSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { SETTINGS } from "./settings.mjs";
@@ -27,21 +22,9 @@ import {
   lighten as paletteLighten,
   contrastRatio as paletteContrast,
 } from "./lib/util.mjs";
-import { magick, imageSize } from "./lib/magick.mjs";
-import { cropBox, resolveCrop } from "./lib/geometry.mjs";
 import { ROOT, scanContent } from "./lib/content.mjs";
 import { loadCrops } from "./lib/store.mjs";
-import { STYLES } from "./lib/styles.mjs";
-
-// ============================================================================
-// Helpers
-// ============================================================================
-
-// Bound to the global palette so existing call sites read exactly as before.
-const color = (k) => paletteColor(SETTINGS.palette, k);
-const accentFor = (slug) => paletteAccent(SETTINGS.palette, slug);
-const lighten = (c, amount) => paletteLighten(SETTINGS.palette, c, amount);
-const contrastRatio = (a, b) => paletteContrast(SETTINGS.palette, a, b);
+import { applicableStyles, renderEntry } from "./lib/render.mjs";
 
 // Compat re-exports — crop-ui.mjs consumes these until the studio absorbs it
 // (studio-plan-3). Remove them there.
@@ -51,10 +34,12 @@ export { loadCrops } from "./lib/store.mjs";
 export { cropBox, resolveCrop } from "./lib/geometry.mjs";
 export { imageSize } from "./lib/magick.mjs";
 
+const color = (k) => paletteColor(SETTINGS.palette, k);
+
 // ============================================================================
 // Contact sheet — one HTML grid, style × size × slug
 // ============================================================================
-function writeSheet(out) {
+export function writeSheet(out) {
   const files = readdirSync(out)
     .filter((f) => f.endsWith(".png"))
     .sort();
@@ -110,11 +95,14 @@ function main() {
   const out = resolve(ROOT, arg("out", SETTINGS.out));
   mkdirSync(out, { recursive: true });
 
-  // Contrast readout for the duotone paper end — tune `paperLift` against it.
-  const paper = lighten("paper", SETTINGS.duotone.paperLift);
+  const paper = paletteLighten(
+    SETTINGS.palette,
+    "paper",
+    SETTINGS.duotone.paperLift,
+  );
   console.log(
     `duotone ink→paper ${color("ink")}→${paper} ` +
-      `(lift ${SETTINGS.duotone.paperLift}) — contrast ${contrastRatio("ink", paper).toFixed(2)}:1\n`,
+      `(lift ${SETTINGS.duotone.paperLift}) — contrast ${paletteContrast(SETTINGS.palette, "ink", paper).toFixed(2)}:1\n`,
   );
 
   const crops = loadCrops();
@@ -122,66 +110,24 @@ function main() {
   entries = entries.slice(0, limit);
 
   for (const entry of entries) {
-    const applicable = entry.img
-      ? styles.filter((st) => st !== "mesh")
-      : styles.filter((st) => st === "mesh");
-    const src = entry.img ? imageSize(entry.img) : null;
-
+    const applicable = applicableStyles(entry, styles);
     for (const sizeName of sizeNames) {
-      const dims = SETTINGS.sizes[sizeName];
-      if (dims === undefined) {
+      if (SETTINGS.sizes[sizeName] === undefined) {
         console.error(`unknown size: ${sizeName}`);
         continue;
       }
-
-      // resolve per-size input + final dimensions
-      let input = entry.img;
-      let w, h;
-      let tmp = null;
-      if (entry.img && dims) {
-        const box = cropBox(
-          src.w,
-          src.h,
-          dims.w,
-          dims.h,
-          resolveCrop(crops[entry.slug], sizeName),
-        );
-        tmp = `${out}/.crop_${entry.slug}_${sizeName}.png`;
-        magick([
-          entry.img,
-          "-crop",
-          `${box.w}x${box.h}+${box.x}+${box.y}`,
-          "+repage",
-          "-resize",
-          `${dims.w}x${dims.h}!`,
-          tmp,
-        ]);
-        input = tmp;
-        ({ w, h } = dims);
-      } else if (entry.img) {
-        ({ w, h } = src);
-      } else {
-        ({ w, h } = dims ?? SETTINGS.mesh.fallback);
-      }
-
       for (const styleName of applicable) {
-        const fn = STYLES[styleName];
-        if (!fn) {
-          console.error(`unknown style: ${styleName}`);
-          continue;
-        }
         try {
-          fn(input, out, { slug: entry.slug, size: sizeName, w, h });
+          renderEntry(entry, styleName, sizeName, { out, crops });
         } catch (err) {
           console.error(
             `${entry.slug} ${styleName} ${sizeName} FAILED: ${err.message}`,
           );
         }
       }
-      if (tmp) rmSync(tmp, { force: true });
     }
     console.log(
-      `${entry.slug} → ${applicable.join(",")} × ${sizeNames.join(",")}${entry.img ? "" : ` (accent: ${accentFor(entry.slug)})`}`,
+      `${entry.slug} → ${applicable.join(",")} × ${sizeNames.join(",")}${entry.img ? "" : ` (accent: ${paletteAccent(SETTINGS.palette, entry.slug)})`}`,
     );
   }
 
