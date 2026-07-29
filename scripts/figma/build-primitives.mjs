@@ -101,6 +101,7 @@ const pkg = JSON.parse(
 
 const variables = [];
 const seen = new Set();
+let spacingBasePx = 4; // Will be overwritten when --spacing is parsed
 
 function figmaName(prop) {
   const ns = NAMESPACES.find((n) => prop === n || prop.startsWith(n + "-"));
@@ -124,7 +125,7 @@ for (const m of css.matchAll(/^\s*--([\w-]+):\s*([^;]+);/gm)) {
   const raw = rawValue.trim();
 
   let entry = null;
-  const okl = raw.match(/^oklch\(\s*([\d.]+)%\s+([\d.]+)\s+([\d.]+)/);
+  const okl = raw.match(/^oklch\(\s*([\d.]+)%\s+([\d.]+)\s+([\d.]+|none)/);
   const hex = raw.match(/^#([0-9a-fA-F]{3,8})$/);
   const rem = raw.match(/^(-?[\d.]+)rem$/);
   const px = raw.match(/^(-?[\d.]+)px$/);
@@ -132,11 +133,14 @@ for (const m of css.matchAll(/^\s*--([\w-]+):\s*([^;]+);/gm)) {
   const pct = raw.match(/^(-?[\d.]+)%$/);
   const em = raw.match(/^(-?[\d.]+)em$/);
 
-  if (okl)
+  if (okl) {
+    // Handle achromatic colors (hue=none for zero-chroma colors)
+    const hue = okl[3] === "none" ? 0 : Number(okl[3]);
     entry = {
       type: "COLOR",
-      value: oklchToHex(Number(okl[1]) / 100, Number(okl[2]), Number(okl[3])),
+      value: oklchToHex(Number(okl[1]) / 100, Number(okl[2]), hue),
     };
+  }
   else if (hex) {
     // Normalize short hex codes to 6-digit format
     let hexVal = hex[1].toLowerCase();
@@ -148,12 +152,15 @@ for (const m of css.matchAll(/^\s*--([\w-]+):\s*([^;]+);/gm)) {
     }
     entry = { type: "COLOR", value: "#" + hexVal };
   }
-  else if (rem)
-    entry = {
-      type: "FLOAT",
-      value: Math.round(Number(rem[1]) * ROOT_PX * 1000) / 1000,
-    };
-  else if (px) entry = { type: "FLOAT", value: Number(px[1]) };
+  else if (rem) {
+    const remValue = Number(rem[1]);
+    const pxValue = Math.round(remValue * ROOT_PX * 1000) / 1000;
+    entry = { type: "FLOAT", value: pxValue };
+    // Capture spacing base unit for later synthesis
+    if (name === "spacing/DEFAULT") {
+      spacingBasePx = pxValue;
+    }
+  } else if (px) entry = { type: "FLOAT", value: Number(px[1]) };
   else if (num) entry = { type: "FLOAT", value: Number(num[1]) };
   else if (pct) entry = { type: "FLOAT", value: Number(pct[1]) };
   else if (em)
@@ -167,6 +174,28 @@ for (const m of css.matchAll(/^\s*--([\w-]+):\s*([^;]+);/gm)) {
 
   seen.add(name);
   variables.push({ name, ...entry });
+}
+
+// Synthesize Tailwind's canonical spacing scale from the base unit.
+// These keys match Tailwind's default config; values are multiples of spacingBasePx.
+const SPACING_KEYS = [
+  "0", "px", "0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "5", "6", "7",
+  "8", "9", "10", "11", "12", "14", "16", "20", "24", "28", "32", "36", "40",
+  "44", "48", "52", "56", "60", "64", "72", "80", "96",
+];
+for (const key of SPACING_KEYS) {
+  const name = `spacing/${key}`;
+  if (seen.has(name)) continue;
+  let value;
+  if (key === "0") {
+    value = 0;
+  } else if (key === "px") {
+    value = 1; // 1px literal
+  } else {
+    value = Math.round(Number(key) * spacingBasePx * 1000) / 1000;
+  }
+  seen.add(name);
+  variables.push({ name, type: "FLOAT", value });
 }
 
 for (const [name, value] of Object.entries(brand)) {

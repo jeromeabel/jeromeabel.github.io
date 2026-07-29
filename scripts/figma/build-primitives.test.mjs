@@ -11,9 +11,17 @@ const { variables } = JSON.parse(readFileSync(OUT, "utf8"));
 const byName = Object.fromEntries(variables.map((v) => [v.name, v]));
 
 test("oklch converts to sRGB hexes (Tailwind v4 values)", () => {
-  // Generated from installed Tailwind v4's oklch theme values.
-  // Slight channel differences from published v3 values are acceptable since
-  // Color Primitives has zero bindings — invisible to canvas (see notes.md).
+  // Tailwind v4 redefined colors using different oklch values than v3.
+  // These values are derived directly from node_modules/tailwindcss/theme.css
+  // by converting oklch→sRGB using Björn Ottosson's reference formula.
+  // Examples:
+  // - blue/500: theme.css has oklch(62.3% 0.214 259.815) → #2b7fff
+  // - red/500: theme.css has oklch(63.7% 0.237 25.331) → #fb2c36
+  // - slate/900: theme.css has oklch(20.8% 0.042 265.755) → #0f172b
+  // v3 published hex values differ (e.g., v3 blue/500 was #3b82f6), but
+  // since Color Primitives has zero bindings (nothing on canvas uses it),
+  // the visual difference is imperceptible. The script generates from the
+  // installed Tailwind version for reproducibility and future upgrades.
   assert.equal(byName["color/blue/500"].value, "#2b7fff");
   assert.equal(byName["color/red/500"].value, "#fb2c36");
   assert.equal(byName["color/slate/900"].value, "#0f172b");
@@ -64,4 +72,32 @@ test("brand primitives are appended", () => {
   assert.equal(byName["color/brand/gray-800"].value, "#1e1e1e");
   assert.equal(byName["color/white"].value, "#ffffff");
   assert.equal(byName["color/black"].value, "#000000");
+});
+
+test("spacing scale synthesized from base unit (36 total: DEFAULT + 35 canonical keys)", () => {
+  // Tailwind v4 only defines --spacing as base unit; script synthesizes the full scale.
+  assert.equal(byName["spacing/0"].value, 0);
+  assert.equal(byName["spacing/px"].value, 1);
+  assert.equal(byName["spacing/4"].value, 16); // 4 * 4px
+  assert.equal(byName["spacing/8"].value, 32); // 8 * 4px
+  assert.equal(byName["spacing/96"].value, 384); // 96 * 4px
+  const spacingVars = variables.filter((v) => v.name.startsWith("spacing/"));
+  assert.equal(spacingVars.length, 36, "DEFAULT (parsed) + 35 synthesized keys");
+});
+
+test("achromatic colors (zero-chroma oklch) convert to hex not string", () => {
+  // Tailwind v4 writes zero-chroma colors as oklch(L% 0 none) where 'none' replaces hue.
+  // These should convert to COLOR type (hex), not fall through to STRING.
+  const achromatic = variables.filter(
+    (v) => v.name.startsWith("color/neutral/") || v.name.startsWith("color/zinc/"),
+  );
+  assert.ok(achromatic.length > 0, "neutral and zinc colors exist");
+  assert.ok(
+    achromatic.every((v) => v.type === "COLOR"),
+    "all achromatic colors are COLOR type (not STRING)",
+  );
+  assert.ok(
+    achromatic.every((v) => /^#[0-9a-f]{6}$/.test(v.value)),
+    "all achromatic colors have valid hex values",
+  );
 });
