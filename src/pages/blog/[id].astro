@@ -57,10 +57,12 @@ const relatedWork = entry.data.related_work
 >
   <main class="container flex flex-col gap-8 py-8 lg:gap-12 lg:py-24">
     <header
-      class="border-muted-border flex w-full flex-col gap-4 border-b pb-6 lg:w-2/3 lg:gap-8 lg:pb-12"
+      class="border-border flex w-full flex-col gap-4 border-b pb-6 lg:w-2/3 lg:gap-8 lg:pb-12"
     >
       <div>
-        <nav class="text-muted mb-2 flex items-center gap-1 uppercase">
+        <nav
+          class="text-foreground-muted mb-2 flex items-center gap-1 uppercase"
+        >
           <Link href="/blog" label="BLOG" variant="menuInactive" />
           <Icon name="lucide:chevron-right" />
         </nav>
@@ -71,7 +73,7 @@ const relatedWork = entry.data.related_work
       <div
         class="mt-4 flex flex-col justify-between gap-4 sm:flex-row md:items-center md:gap-2"
       >
-        <div class="text-muted flex items-center gap-2 md:mt-4">
+        <div class="text-foreground-muted flex items-center gap-2 md:mt-4">
           <Icon name="lucide:calendar" />
           <time class="text-sm">{getFormattedDate(entry.data.date)}</time>
           {
@@ -102,8 +104,8 @@ const relatedWork = entry.data.related_work
 
     {
       showToc && (
-        <details class="border-muted-border rounded-lg border p-4 md:hidden">
-          <summary class="text-muted cursor-pointer text-sm font-medium uppercase">
+        <details class="border-border rounded-lg border p-4 md:hidden">
+          <summary class="text-foreground-muted cursor-pointer text-sm font-medium uppercase">
             On this page
           </summary>
           <div class="mt-3">

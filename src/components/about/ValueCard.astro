@@ -10,7 +10,7 @@ const { title, imgUrl } = Astro.props;
 ---
 
 <article
-  class="dark:bg-muted-background reveal flex flex-col gap-6 bg-gradient-to-r from-white from-30% p-4 md:flex-row md:p-8 lg:flex-col lg:bg-gradient-to-b dark:bg-none"
+  class="dark:bg-surface reveal flex flex-col gap-6 bg-gradient-to-r from-white from-30% p-4 md:flex-row md:p-8 lg:flex-col lg:bg-gradient-to-b dark:bg-none"
 >
   <div class="flex justify-center lg:flex-none">
     <Image
@@ -22,7 +22,7 @@ const { title, imgUrl } = Astro.props;
     />
   </div>
   <div
-    class="border-muted border-t border-dashed p-6 md:border-t-0 md:border-l lg:border-t lg:border-l-0 lg:p-0 lg:pt-6"
+    class="border-foreground-muted border-t border-dashed p-6 md:border-t-0 md:border-l lg:border-t lg:border-l-0 lg:p-0 lg:pt-6"
   >
     <h2 class="font-title text-3xl tracking-wide uppercase sm:text-4xl">
       {title}

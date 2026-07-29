@@ -73,14 +73,14 @@ const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
   type="article"
   image={currentPost.data.img}
 >
-  <main
-    class="container flex flex-col gap-8 py-8 lg:gap-12 lg:py-24"
-  >
+  <main class="container flex flex-col gap-8 py-8 lg:gap-12 lg:py-24">
     <header
-      class="border-muted-border flex w-full flex-col gap-4 border-b pb-6 lg:w-2/3 lg:gap-8 lg:pb-12"
+      class="border-border flex w-full flex-col gap-4 border-b pb-6 lg:w-2/3 lg:gap-8 lg:pb-12"
     >
       <div>
-        <nav class="text-muted mb-4 flex flex-col gap-1 uppercase md:flex-row">
+        <nav
+          class="text-foreground-muted mb-4 flex flex-col gap-1 uppercase md:flex-row"
+        >
           <div class="flex items-center gap-1">
             <Link href="/blog" label="Blog" variant="menuInactive" />
             <Icon name="lucide:chevron-right" />
@@ -102,7 +102,7 @@ const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
       <div
         class="mt-4 flex flex-col justify-between gap-4 sm:flex-row md:items-center md:gap-2"
       >
-        <div class="text-muted flex items-center gap-2 md:mt-4">
+        <div class="text-foreground-muted flex items-center gap-2 md:mt-4">
           <Icon name="lucide:calendar" />
           <time class="text-sm">{getFormattedDate(currentPost.data.date)}</time>
           {
@@ -133,8 +133,8 @@ const canonicalWebsiteURL = new URL(Astro.url.pathname, Astro.site).toString();
 
     {
       showToc && (
-        <details class="border-muted-border rounded-lg border p-4 md:hidden">
-          <summary class="text-muted cursor-pointer text-sm font-medium uppercase">
+        <details class="border-border rounded-lg border p-4 md:hidden">
+          <summary class="text-foreground-muted cursor-pointer text-sm font-medium uppercase">
             On this page
           </summary>
           <div class="mt-3">

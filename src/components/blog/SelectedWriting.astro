@@ -20,8 +20,10 @@ const latest = await getLatestWriting(4);
     {series.map((serie) => <SerieCard {serie} />)}
   </div>
   <div class="mt-4 flex flex-col">
-    <span class="text-muted pb-2 font-mono text-sm uppercase">Latest</span>
-    <div class="border-muted-border border-t">
+    <span class="text-foreground-muted pb-2 font-mono text-sm uppercase"
+      >Latest</span
+    >
+    <div class="border-border border-t">
       {
         latest.map(({ post, serie }) =>
           VARIANTS.homePosts === "calm-rows" ? (

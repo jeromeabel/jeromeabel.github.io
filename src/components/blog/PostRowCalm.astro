@@ -20,11 +20,11 @@ const minutes = Math.ceil(getMinutesFromBody(post.body));
 
 <a
   href={`/blog/${post.id}`}
-  class="border-muted-border hover:bg-muted-background flex flex-col gap-1 border-b px-1 py-4 transition-colors"
+  class="border-border hover:bg-surface flex flex-col gap-1 border-b px-1 py-4 transition-colors"
 >
   {
     serie && (
-      <span class="text-muted flex items-center gap-2 font-mono text-xs uppercase">
+      <span class="text-foreground-muted flex items-center gap-2 font-mono text-xs uppercase">
         <Icon name="lucide:folder" />
         {serie.title} · part {serie.part}
       </span>
@@ -32,9 +32,11 @@ const minutes = Math.ceil(getMinutesFromBody(post.body));
   }
   <div class="flex items-baseline justify-between gap-8">
     <h3 class="flex-1 font-bold">{post.data.title}</h3>
-    <span class="text-muted shrink-0 font-mono text-xs">
+    <span class="text-foreground-muted shrink-0 font-mono text-xs">
       {minutes} min · {getMonthYear(post.data.date)}
     </span>
   </div>
-  <p class="text-muted line-clamp-1 text-sm">{post.data.description}</p>
+  <p class="text-foreground-muted line-clamp-1 text-sm">
+    {post.data.description}
+  </p>
 </a>

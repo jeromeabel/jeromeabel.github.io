@@ -8,6 +8,6 @@ const allPosts = await getAllBlogPosts();
 {
   /* LEGACY — main-only, not wired into any v3 page. Kept for styleguide delete-vs-adopt review. See docs/specs/01_active/dev-styleguide. */
 }
-<div class="border-muted-border mt-8 w-full border-t text-base md:text-xl">
+<div class="border-border mt-8 w-full border-t text-base md:text-xl">
   {allPosts.map((post) => <PostListItem {post} />)}
 </div>

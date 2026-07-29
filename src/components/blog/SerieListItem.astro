@@ -16,8 +16,10 @@ if (!serie) {
 const posts = await getPostsFromSerie(serie);
 ---
 
-{/* LEGACY — main-only, not wired into any v3 page. Kept for styleguide delete-vs-adopt review. See docs/specs/01_active/dev-styleguide. */}
-<div class="border-muted-border flex flex-col gap-2 md:border-s md:ps-8">
+{
+  /* LEGACY — main-only, not wired into any v3 page. Kept for styleguide delete-vs-adopt review. See docs/specs/01_active/dev-styleguide. */
+}
+<div class="border-border flex flex-col gap-2 md:border-s md:ps-8">
   <a
     href={`/blog/${serie.id}`}
     class="text-xl font-semibold uppercase hover:text-white"
@@ -26,7 +28,7 @@ const posts = await getPostsFromSerie(serie);
       {serie.data.title}
     </h3></a
   >
-  <p class="text-muted max-w-prose">{serie.data.abstract}</p>
+  <p class="text-foreground-muted max-w-prose">{serie.data.abstract}</p>
   <div class="mt-4">
     {posts.map((post, index) => <SeriePostListItem {post} {index} />)}
   </div>

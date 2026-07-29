@@ -17,16 +17,20 @@ if (!post) {
 const minutesRead = getMinutesReadFromBody(post.body);
 ---
 
-{/* LEGACY — main-only, not wired into any v3 page. Kept for styleguide delete-vs-adopt review. See docs/specs/01_active/dev-styleguide. */}
+{
+  /* LEGACY — main-only, not wired into any v3 page. Kept for styleguide delete-vs-adopt review. See docs/specs/01_active/dev-styleguide. */
+}
 <a
   href=`/blog/${post.id}`
-  class="border-muted-border hover:bg-muted-background/50 flex flex-col gap-2 border p-4 lg:p-6"
+  class="border-border hover:bg-surface/50 flex flex-col gap-2 border p-4 lg:p-6"
 >
   <h2 class="text-xl font-bold tracking-wide lg:text-2xl">
     {post.data.title}
   </h2>
   <p class="line-clamp-2">{post.data.description}</p>
-  <div class="text-muted mt-auto flex items-center justify-end gap-2">
+  <div
+    class="text-foreground-muted mt-auto flex items-center justify-end gap-2"
+  >
     <Icon name="lucide:calendar" />
     <time class="text-sm">{getFormattedDate(post.data.date)}</time>
     {

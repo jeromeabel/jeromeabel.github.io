@@ -4,7 +4,7 @@ import { Icon } from "astro-icon/components";
 import type { CollectionEntry } from "astro:content";
 
 const variants = {
-  home: { article: "aspect-square", a: "border-muted-border border-2" },
+  home: { article: "aspect-square", a: "border-border border-2" },
   work: { article: "aspect-square", a: "" },
 };
 
@@ -22,7 +22,9 @@ if (!work) {
 }
 ---
 
-{/* LEGACY — main-only, not wired into any v3 page. Kept for styleguide delete-vs-adopt review. See docs/specs/01_active/dev-styleguide. */}
+{
+  /* LEGACY — main-only, not wired into any v3 page. Kept for styleguide delete-vs-adopt review. See docs/specs/01_active/dev-styleguide. */
+}
 <a
   href={"/work/" + work.id}
   title={`Open the "${work.data.title}" project`}
@@ -48,9 +50,7 @@ if (!work) {
           name="cross-big"
           class="text-5xl transition-all delay-100 duration-500 group-hover:rotate-0 motion-safe:-rotate-45 lg:text-8xl"
         />
-        <p
-          class="font-title text-3xl text-white lg:text-4xl"
-        >
+        <p class="font-title text-3xl text-white lg:text-4xl">
           {work?.data.title}
         </p>
       </div>

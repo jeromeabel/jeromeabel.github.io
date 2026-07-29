@@ -35,7 +35,7 @@ for (const heading of filtered) {
   tree.length > 0 && (
     <nav aria-label="Table of contents">
       {showLabel && (
-        <p class="text-muted mb-3 text-sm font-medium uppercase">
+        <p class="text-foreground-muted mb-3 text-sm font-medium uppercase">
           On this page
         </p>
       )}
@@ -45,7 +45,7 @@ for (const heading of filtered) {
             <a
               href={`#${item.slug}`}
               data-toc-link={item.slug}
-              class="text-muted hover:text-foreground border-muted-border block border-s-2 ps-3 transition-colors"
+              class="text-foreground-muted hover:text-foreground border-border block border-s-2 ps-3 transition-colors"
             >
               {item.text}
             </a>
@@ -56,7 +56,7 @@ for (const heading of filtered) {
                     <a
                       href={`#${child.slug}`}
                       data-toc-link={child.slug}
-                      class="text-muted hover:text-foreground border-muted-border block border-s-2 ps-3 transition-colors"
+                      class="text-foreground-muted hover:text-foreground border-border block border-s-2 ps-3 transition-colors"
                     >
                       {child.text}
                     </a>
@@ -73,8 +73,8 @@ for (const heading of filtered) {
 
 <style>
   a[data-toc-link][aria-current] {
-    color: var(--color-foreground-accent);
-    border-color: var(--color-foreground-accent);
+    color: var(--color-foreground-strong);
+    border-color: var(--color-foreground-strong);
     font-weight: 500;
   }
 </style>

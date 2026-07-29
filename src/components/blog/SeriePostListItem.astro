@@ -21,22 +21,22 @@ const minutesRead = getMinutesReadFromBody(post.body);
 
 <a
   href=`/blog/${post.id}`
-  class="border-muted-border hover:bg-muted-background group relative flex flex-row items-center justify-between gap-8 overflow-hidden border-b py-4 text-lg"
+  class="border-border hover:bg-surface group relative flex flex-row items-center justify-between gap-8 overflow-hidden border-b py-4 text-lg"
 >
   <Icon
     name="lucide:arrow-right"
-    class="text-muted absolute -translate-x-8 transition-transform group-hover:translate-x-2"
+    class="text-foreground-muted absolute -translate-x-8 transition-transform group-hover:translate-x-2"
   />
   <div
     class="flex flex-1 items-center gap-0 transition-transform group-hover:translate-x-8"
   >
-    <span class="text-muted">
+    <span class="text-foreground-muted">
       {order}
     </span>
-    <Icon name="lucide:dot" class="text-muted" />
+    <Icon name="lucide:dot" class="text-foreground-muted" />
     <h3>{post.data.title}</h3>
   </div>
-  <div class="text-muted flex gap-2 font-mono text-xs md:text-sm">
+  <div class="text-foreground-muted flex gap-2 font-mono text-xs md:text-sm">
     {minutesRead && <p class="hidden sm:block">{minutesRead} -</p>}
     <time>{getFormattedDate(post.data.date)}</time>
   </div>

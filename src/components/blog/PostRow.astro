@@ -20,18 +20,18 @@ const minutes = Math.ceil(getMinutesFromBody(post.body));
 
 <a
   href={`/blog/${post.id}`}
-  class="border-muted-border hover:bg-muted-background group relative flex flex-col gap-1 overflow-hidden border-b py-4"
+  class="border-border hover:bg-surface group relative flex flex-col gap-1 overflow-hidden border-b py-4"
 >
   <Icon
     name="lucide:arrow-right"
-    class="text-muted absolute top-1/2 -translate-x-8 -translate-y-1/2 transition-transform group-hover:translate-x-2"
+    class="text-foreground-muted absolute top-1/2 -translate-x-8 -translate-y-1/2 transition-transform group-hover:translate-x-2"
   />
   <div
     class="flex flex-col gap-1 transition-transform group-hover:translate-x-8"
   >
     {
       serie && (
-        <span class="text-muted flex items-center gap-2 font-mono text-xs uppercase">
+        <span class="text-foreground-muted flex items-center gap-2 font-mono text-xs uppercase">
           <Icon name="lucide:folder" />
           {serie.title} · part {serie.part}
         </span>
@@ -39,7 +39,7 @@ const minutes = Math.ceil(getMinutesFromBody(post.body));
     }
     <div class="flex items-baseline justify-between gap-8">
       <h3 class="flex-1 font-bold">{post.data.title}</h3>
-      <span class="text-muted shrink-0 font-mono text-xs">
+      <span class="text-foreground-muted shrink-0 font-mono text-xs">
         {minutes} min · {getMonthYear(post.data.date)}
       </span>
     </div>

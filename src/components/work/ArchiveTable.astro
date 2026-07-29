@@ -15,7 +15,7 @@ const externalUrl = (data: CollectionEntry<"work">["data"]) =>
   <table class="w-full border-collapse text-sm md:text-base">
     <thead>
       <tr
-        class="text-muted border-muted-border border-b text-left font-mono text-xs uppercase"
+        class="text-foreground-muted border-border border-b text-left font-mono text-xs uppercase"
       >
         <th class="py-2 pr-4 font-normal">Year</th>
         <th class="py-2 pr-4 font-normal">Project</th>
@@ -29,8 +29,8 @@ const externalUrl = (data: CollectionEntry<"work">["data"]) =>
         works.map((work) => {
           const url = externalUrl(work.data);
           return (
-            <tr class="border-muted-border hover:bg-muted-background/50 relative border-b align-middle">
-              <td class="text-muted py-3 pr-4 font-mono text-xs whitespace-nowrap">
+            <tr class="border-border hover:bg-surface/50 relative border-b align-middle">
+              <td class="text-foreground-muted py-3 pr-4 font-mono text-xs whitespace-nowrap">
                 {work.data.date.getFullYear()}
               </td>
               <td class="py-3 pr-4 font-semibold">
@@ -41,10 +41,10 @@ const externalUrl = (data: CollectionEntry<"work">["data"]) =>
                   {work.data.title}
                 </a>
               </td>
-              <td class="text-muted hidden py-3 pr-4 sm:table-cell">
+              <td class="text-foreground-muted hidden py-3 pr-4 sm:table-cell">
                 {work.data.type}
               </td>
-              <td class="text-muted hidden py-3 pr-4 font-mono text-xs md:table-cell">
+              <td class="text-foreground-muted hidden py-3 pr-4 font-mono text-xs md:table-cell">
                 {work.data.stack?.join(", ") ?? "—"}
               </td>
               <td class="relative z-10 py-3">
@@ -59,7 +59,7 @@ const externalUrl = (data: CollectionEntry<"work">["data"]) =>
                     Visit
                   </a>
                 ) : (
-                  <span class="text-muted">—</span>
+                  <span class="text-foreground-muted">—</span>
                 )}
               </td>
             </tr>

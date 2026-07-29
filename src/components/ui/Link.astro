@@ -7,18 +7,18 @@ const linkVariants = cva("transition-colors", {
   variants: {
     variant: {
       menuActive: "text-foreground underline underline-offset-8",
-      menuInactive: "text-muted hover:text-foreground",
+      menuInactive: "text-foreground-muted hover:text-foreground",
       default:
         "relative inline-flex items-center border-dashed border-current border-b max-w-fit hover:border-solid hover:text-foreground after:absolute after:-inset-y-2 after:-inset-x-1 after:content-['']",
       bold: "font-semibold hover:text-white",
       cta: "hover-fx rounded-full px-4 lg:px-6 h-10 lg:h-14 inline-flex items-center justify-center gap-5 bg-foreground text-background border border-foreground",
-      icon: "h-10 w-10 lg:h-14 lg:w-14 grid place-items-center text-xl lg:text-3xl rounded-full border border-dashed border-muted hover:border-solid hover:bg-muted-background",
+      icon: "h-10 w-10 lg:h-14 lg:w-14 grid place-items-center text-xl lg:text-3xl rounded-full border border-dashed border-foreground-muted hover:border-solid hover:bg-surface",
       iconSmall:
-        "h-6 w-6 lg:h-8 lg:w-8 grid place-items-center text-sm rounded-full border border-dashed border-muted hover:border-solid hover:bg-muted-background",
+        "h-6 w-6 lg:h-8 lg:w-8 grid place-items-center text-sm rounded-full border border-dashed border-foreground-muted hover:border-solid hover:bg-surface",
       secondary:
-        "min-h-11 max-w-fit border-foreground text-foreground flex py-4 justify-between items-center gap-2 rounded-full border w-full px-6 text-xl hover:bg-muted-background",
+        "min-h-11 max-w-fit border-foreground text-foreground flex py-4 justify-between items-center gap-2 rounded-full border w-full px-6 text-xl hover:bg-surface",
       external:
-        "text-foreground hover:bg-muted-background flex w-fit rounded-full border border-dashed px-4 py-2 transition-all hover:border-solid flex items-center gap-1",
+        "text-foreground hover:bg-surface flex w-fit rounded-full border border-dashed px-4 py-2 transition-all hover:border-solid flex items-center gap-1",
     },
   },
 });
