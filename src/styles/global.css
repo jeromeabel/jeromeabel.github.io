@@ -27,25 +27,23 @@
 
   --color-background: #f5ffe1;
   --color-foreground: #1e1e1e;
-  --color-background-accent: #f7f7f7;
-  --color-foreground-accent: #101010;
+  --color-foreground-strong: #101010;
 
-  --color-muted: #5b5b5b;
-  --color-muted-border: #d1ddbb;
-  --color-muted-background: #e0eec4;
-  --color-muted-background-accent: #d1ddbb;
+  --color-foreground-muted: #5b5b5b;
+  --color-border: #d1ddbb;
+  --color-surface: #e0eec4;
+  --color-surface-hover: #d1ddbb;
 }
 
 @variant dark {
   --color-background: #1e1e1e;
   --color-foreground: #ececec;
-  --color-background-accent: #101010;
-  --color-foreground-accent: #f7f7f7;
+  --color-foreground-strong: #f7f7f7;
 
-  --color-muted: #9b9b9b;
-  --color-muted-border: #4c4c4c;
-  --color-muted-background: #343434;
-  --color-muted-background-accent: #4c4c4c;
+  --color-foreground-muted: #9b9b9b;
+  --color-border: #4c4c4c;
+  --color-surface: #343434;
+  --color-surface-hover: #4c4c4c;
 }
 
 /* Image zoom: expand (desktop only) */
