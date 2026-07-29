@@ -268,3 +268,61 @@ since those are the collections Plan 2 actually touches.
 - **The dump is worth trimming.** v1.0 has 13 collections / 928+ variables; an
   unfiltered dump is unreadable and expensive. Restricted to
   `{"2 Theme", "Scale"}`, matching what `token-map.json` actually consumes.
+
+## Plan 2 — Task 3
+
+Created the `1 Primitives` variable collection in file `ihWIWmvtQPTWgUxlrVjC2c`
+("Blog Design System v1.0") from `primitives.json` (443 variables, ground
+truth per Task 1 — the plan's "~480" estimate was stale). Collection id
+`VariableCollectionId:2013:2`, mode `2013:0`, `hiddenFromPublishing: true`.
+Loaded in 4 batches of ~111 via `use_figma` (batch running totals: 111, 222,
+333, 443 — final batch required one retry, see concern below).
+
+**Final `byFolder` breakdown (443 total):**
+
+| Folder | Count | | Folder | Count |
+|---|---|---|---|---|
+| color | 299 | | leading | 5 |
+| spacing | 36 | | perspective | 5 |
+| container | 13 | | breakpoint | 5 |
+| text | 13 | | text-shadow | 5 |
+| radius | 9 | | tracking | 6 |
+| shadow | 9 | | ease | 3 |
+| font-weight | 9 | | font | 3 |
+| blur | 8 | | inset-shadow | 3 |
+| drop-shadow | 7 | | aspect | 1 |
+| animate | 4 | | | |
+
+All folder names are Tailwind/Figma namespace segments (no raw CSS property
+name like `bg`/`p` leaked through).
+
+**Spot-checks (Step 5) — all pass:**
+
+| Variable | Expected | Actual |
+|---|---|---|
+| `color/blue/500` | Tailwind blue-500, `#2b7fff` | r/g/b → `#2b7fff` exact |
+| `spacing/4` | `16` (px) | `16` |
+| `radius/2xl` | `16` (px) | `16` |
+| `color/brand/lime-100` | pale lime, `#f5ffe1` | r/g/b → `#f5ffe1` exact |
+
+Confirmed via `getVariableByIdAsync(...).valuesByMode`, not a UI screenshot —
+exact hex/px match is stronger evidence than eyeballing a swatch.
+
+**Concern — Figma rejects `.` in variable names.** `createVariable` throws
+`"invalid variable name"` for any name containing a literal period, anywhere
+in the string (confirmed both as a trailing segment `spacing/2.5` and
+mid-token `spacing/2.5x`). This hit 4 of `primitives.json`'s 443 entries:
+`spacing/0.5`, `spacing/1.5`, `spacing/2.5`, `spacing/3.5`. Worked around by
+substituting `_` for `.` in the Figma variable name only (`spacing/0_5`,
+`spacing/1_5`, `spacing/2_5`, `spacing/3_5`) — `primitives.json` itself was
+not touched. **Task 6 (rebind consumers) needs to know about this
+underscore exception** when mapping `primitives.json` names to the Figma
+variables it just created.
+
+A first attempt at batch 4 failed atomically on this error (no partial
+writes — confirmed by `total` staying at 333). A follow-up diagnostic script
+probed 17 candidate names individually and, in doing so, created 16 of them
+with the wrong resolved type (all hardcoded `FLOAT`) and no values/scopes —
+these were deleted (`variable.remove()`) before the real batch 4 ran, so the
+final collection contains no leftover cruft. Confirmed via the total dropping
+back to 333 post-cleanup, then to 443 after the corrected batch 4.
