@@ -78,6 +78,13 @@ const css = read(CSS);
   const theme = block(css, "@theme");
   for (const m of theme.matchAll(/--(font-[\w-]+):\s*([\s\S]*?);/g))
     push(m[1], m[2].replace(/\s+/g, " ").trim(), null, "font", "global.css @theme");
+  for (const m of theme.matchAll(/--(font-[\w-]+):\s*([\s\S]*?);/g)) {
+    const stack = m[2].replace(/\s+/g, " ").trim();
+    // First family only — Figma FONT_FAMILY variables hold one family, not a
+    // fallback stack, so this is the value the diff can actually compare.
+    const first = stack.split(",")[0].trim().replace(/^["']|["']$/g, "");
+    push(`${m[1]}-primary`, first, null, "font", "global.css @theme");
+  }
   for (const m of theme.matchAll(/--(color-[\w-]+):\s*(#[0-9a-fA-F]{3,8})\s*;/g))
     push(`light/${m[1]}`, m[2].toLowerCase(), null, "color", "global.css @theme");
 }

@@ -55,3 +55,15 @@ test("root font-size guard scans global.css (no false positives on real file)", 
   const d = run();
   assert.equal(d.rootPx, 16, "extractor completed with guard passing");
 });
+test("emits a *-primary token holding only the first font family", () => {
+  const d = run();
+  const byNameMap = Object.fromEntries(d.tokens.map((t) => [t.name, t]));
+
+  assert.equal(byNameMap["font-sans-primary"].raw, "IBM Plex Sans");
+  assert.equal(byNameMap["font-title-primary"].raw, "Bubbler One");
+  assert.equal(byNameMap["font-mono-primary"].raw, "Fira Code");
+  assert.equal(byNameMap["font-sans-primary"].class, "font");
+
+  // the full stack token still exists, unchanged
+  assert.match(byNameMap["font-sans"].raw, /^"IBM Plex Sans", sans-serif/);
+});
