@@ -16,7 +16,15 @@ for (const c of await figma.variables.getLocalVariableCollectionsAsync()) {
       let value = v.valuesByMode[m.modeId];
       if (value && value.type === "VARIABLE_ALIAS") {
         const ref = await figma.variables.getVariableByIdAsync(value.id);
-        value = { alias: ref.name };
+        const refVal = ref.valuesByMode[Object.keys(ref.valuesByMode)[0]];
+        const h = (x) =>
+          Math.round(x * 255)
+            .toString(16)
+            .padStart(2, "0");
+        value =
+          ref.resolvedType === "COLOR" && refVal
+            ? `#${h(refVal.r)}${h(refVal.g)}${h(refVal.b)}`
+            : { alias: ref.name };
       } else if (v.resolvedType === "COLOR" && value) {
         const h = (x) =>
           Math.round(x * 255)
