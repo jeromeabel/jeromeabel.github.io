@@ -153,6 +153,111 @@ now a **read-only backup** for the duration of the migration.
   been re-checked against v1.0. Flagged in a header block there; re-inventory
   (Pass 0) before trusting any id from it.
 
+## Plan 2 — before
+
+Read-only baseline captured 2026-07-29 against `ihWIWmvtQPTWgUxlrVjC2c` ("Blog
+Design System v1.0"), branch `redesign/v3`, ahead of the primitives-merge
+mutations. Nothing in Figma was created/edited/deleted for this task.
+
+### Step 1 — reference screenshots
+
+`PAGE/HOME` (section `52:648`) exists on `📄 Pages` (`44:328`) exactly as the
+brief names it. Under it:
+
+- **Light — `52:649`** (`Home — 1280 — Light`, FRAME, 1280×2611).
+  Screenshot shows: dark header bar (Home/Blog/Work/About nav + theme toggle,
+  top-right), hero "Hi, I'm Jérôme." headline with intro paragraph on the
+  left; **right-hand hero slot is an empty dashed placeholder box** labelled
+  "HeroAnimation — decorative motion asset (CSS keyframes), not replicated in
+  static Figma" (i.e. this frame never carries the live CSS hero animation).
+  Below: pill-shaped "Start reading ↓" CTA; "SELECTED WRITING" heading with
+  two series cards + three post rows (all placeholder-duplicated "Deep Dive
+  Into Web Performance" / "Optimizing Images with Astro (part 2)" content);
+  "SELECTED WORK" heading with three square black project tiles (Le Concept
+  de la Preuve / Chimères Orchestra / La Malinette, each with an "X"
+  ideogram mark); a bio strip ("Artist turned web developer…" + "More about
+  me" pill); "LET'S TALK" section with email + social icons on the left and
+  a dashed "ContactImage" placeholder box on the right; footer with
+  copyright + nav links.
+  **Notable file-state fact**: this frame has `explicitVariableModes: {}`
+  (no per-frame override), and the whole `📄 Pages` page itself carries a
+  page-level override forcing `VariableCollectionId:3:2` ("2 Theme") to mode
+  `3:1` ("Dark"). So despite the "— Light" name, this frame currently
+  **renders with the Dark mode value** of every bound theme-color variable
+  (background fill resolves to `{0.1176, 0.1176, 0.1176}` either way, bound
+  to `VariableID:3:3`). This is a pre-existing quirk of the file, not
+  something this task changed — flagged so a later "did colors change"
+  comparison isn't fooled by it.
+
+- **Dark — `111:495`** (`Home — 1280 — Dark`, FRAME, 1280×2611). Same layout
+  and copy as the Light frame, **identical background/text colors** (same
+  root cause as above — this frame instead carries its own explicit
+  override `explicitVariableModes: {"VariableCollectionId:3:2": "3:1"}`,
+  i.e. Dark, matching the page default). The one visible content
+  difference from the Light frame: the hero slot on this frame **shows the
+  actual illustration assets** (a stylized dark accessory/jewelry
+  illustration — a "2"-shaped charm, a rounded pendant, a bangle — instead
+  of the dashed placeholder). Everything else (nav, cards, tiles, footer) is
+  pixel-identical to the Light frame in this screenshot.
+
+- **Component master with corner radius — `13:13`** (`Link`, COMPONENT_SET,
+  760×297, page `🧩 Components (back)` = `52:2`). No `illustration/screen`
+  master exists in this fork (only `illustration/performance`, `398:8921`,
+  which has zero radius bindings) — `Link` is the closest equivalent: 35
+  variants across the set each bind all four corner fields
+  (`topLeftRadius`/`topRightRadius`/`bottomLeftRadius`/`bottomRightRadius`,
+  140 bindings total, all resolving into the `Radius` collection). Screenshot
+  shows the variant grid: underlined "Menu link" (active/inactive/disabled
+  states), underlined italic "Inline link", bold "Bold link", a filled
+  light-grey pill "Contact me →", an outlined pill "Start reading ↓", two
+  outlined rounded-rect "Secondary" buttons (with/without arrow), a dashed
+  outlined "External link →" pill, and two small circular icon-only arrow
+  buttons — the full range of corner-radius values (fully round pill, rounded
+  rect, circular) is visible in one shot.
+
+Screenshots were downloaded locally for inspection (not committed —
+scratch): `home-light.png`, `home-dark.png`, `link-component.png`.
+
+### Step 2 — binding counts (before)
+
+Per-page `byCol` dumps (script per Task 2 brief / future
+`scripts/figma/dump-bindings.md`), run read-only, `rows` discarded:
+
+| Page | id | 2 Theme (Color) | Scale | Radius | Typography | Container | Breakpoint | Color Tokens |
+|---|---|---|---|---|---|---|---|---|
+| 📖 Cover | `0:1` | 1 | – | – | – | – | – | – |
+| 🎨 Foundations | `5:14` | 16 | – | – | – | – | – | – |
+| 🧩 Components (back) | `52:2` | 578 | 566 | 24 | 4 | 2 | – | 6 |
+| 🗄️ Legacy | `78:2` | *page does not exist in this fork* — skipped | | | | | | |
+| 📄 Pages | `44:328` | 4297 | 3961 | 124 | 27 | 4 | 4 | 20 |
+| Pages Experiment | `442:5352` | 174 | 216 | 16 | 5 | 3 | 3 | 3 |
+| **Merged total** | | **5066** | **4743** | **164** | **36** | **9** | **7** | **29** |
+
+(Collection is literally named `2 Theme` in this file, not `Color` — kept
+both labels since the plan's earlier audit used `Color`.)
+
+**Vs. plan's expected rough totals** (`Color` ~5225, `Scale` ~4834, `Radius`
+~164, `Typography` ~33, `Container` ~9, `Breakpoint` ~9, `Color Tokens`
+~29):
+
+| Collection | Expected | Actual | Delta |
+|---|---|---|---|
+| Color / 2 Theme | ~5225 | 5066 | −159 (−3.0%) |
+| Scale | ~4834 | 4743 | −91 (−1.9%) |
+| Radius | ~164 | 164 | 0 |
+| Typography | ~33 | 36 | +3 |
+| Container | ~9 | 9 | 0 |
+| Breakpoint | ~9 | 7 | −2 |
+| Color Tokens | ~29 | 29 | 0 |
+
+All within a few percent — no alarming discrepancy. The small shortfalls in
+Color/Scale/Breakpoint are consistent with the already-documented fact that
+`🗄️ Legacy` (`78:2`) no longer exists in the v1.0 fork (confirmed via
+`getNodeByIdAsync("78:2")` → `null` this session) — the original audit that
+produced the expected totals likely counted bindings on that page before it
+was dropped. Radius/Container/Color Tokens match exactly, which is reassuring
+since those are the collections Plan 2 actually touches.
+
 ### Renaming a Figma collection
 
 - **Rename in place; never delete-and-recreate.** 26 frames on 📄 Pages carry
