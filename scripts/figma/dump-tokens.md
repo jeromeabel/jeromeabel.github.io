@@ -1,7 +1,7 @@
 # Figma token dump — figma-blog-fit
 
 1. Read the `/figma-use` skill (required before any `use_figma` call this session).
-2. Run ONE `use_figma` call on file `Wf4iomVMYUXlFIBV3Z8bx4` with the script below.
+2. Run ONE `use_figma` call on file `ihWIWmvtQPTWgUxlrVjC2c` ("Blog Design System v1.0" — the live DS file since 2026-07-29; `Wf4iomVMYUXlFIBV3Z8bx4` is the read-only backup) with the script below.
 3. Save the returned JSON to `tokens.figma.json` at repo root.
 4. Run `pnpm figma:verify` and record verdicts in `notes.md`.
 
@@ -54,7 +54,8 @@ Produces `geometry.figma.json`, addressable by the same manifest `id` used in
 
 1. `get_metadata`/`use_figma` inventory pass — list pages, then the target page's
    top-level sections, to scope node IDs (token economy; don't traverse the whole file
-   blind). File id `Wf4iomVMYUXlFIBV3Z8bx4`, `🧩 Components` page `52:2`.
+   blind). File id `ihWIWmvtQPTWgUxlrVjC2c`, `🧩 Components (back)` page `52:2` (v1.0 also has a
+   newer `Components (new)` page at `461:759` — confirm which one the run targets).
 2. One batched `use_figma` traversal reads a fixed prop subset per master/instance root
    node — mirrors `extract-web-geometry.mjs`'s `PROPS` list, sourced from Plugin API
    properties instead of `getComputedStyle`:
