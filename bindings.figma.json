@@ -1,0 +1,74 @@
+{
+  "📖 Cover": {
+    "page": "📖 Cover",
+    "byCol": { "2 Theme": 1 },
+    "rowCount": 1,
+    "rows": [
+      { "node": "9:2", "field": "fills", "varId": "VariableID:3:3", "varName": "color/background", "col": "2 Theme" }
+    ]
+  },
+  "🎨 Foundations": {
+    "page": "🎨 Foundations",
+    "byCol": { "2 Theme": 16 },
+    "rowCount": 16,
+    "rows": [
+      { "node": "6:8", "field": "fills", "varId": "VariableID:3:3", "varName": "color/background", "col": "2 Theme" },
+      { "node": "6:12", "field": "fills", "varId": "VariableID:3:4", "varName": "color/foreground", "col": "2 Theme" },
+      { "node": "6:16", "field": "fills", "varId": "VariableID:3:5", "varName": "color/background-accent", "col": "2 Theme" },
+      { "node": "6:20", "field": "fills", "varId": "VariableID:3:6", "varName": "color/foreground-strong", "col": "2 Theme" },
+      { "node": "6:24", "field": "fills", "varId": "VariableID:3:7", "varName": "color/foreground-muted", "col": "2 Theme" },
+      { "node": "6:28", "field": "fills", "varId": "VariableID:3:8", "varName": "color/border", "col": "2 Theme" },
+      { "node": "6:32", "field": "fills", "varId": "VariableID:3:9", "varName": "color/surface", "col": "2 Theme" },
+      { "node": "6:36", "field": "fills", "varId": "VariableID:3:10", "varName": "color/surface-hover", "col": "2 Theme" },
+      { "node": "6:43", "field": "fills", "varId": "VariableID:3:3", "varName": "color/background", "col": "2 Theme" },
+      { "node": "6:47", "field": "fills", "varId": "VariableID:3:4", "varName": "color/foreground", "col": "2 Theme" },
+      { "node": "6:51", "field": "fills", "varId": "VariableID:3:5", "varName": "color/background-accent", "col": "2 Theme" },
+      { "node": "6:55", "field": "fills", "varId": "VariableID:3:6", "varName": "color/foreground-strong", "col": "2 Theme" },
+      { "node": "6:59", "field": "fills", "varId": "VariableID:3:7", "varName": "color/foreground-muted", "col": "2 Theme" },
+      { "node": "6:63", "field": "fills", "varId": "VariableID:3:8", "varName": "color/border", "col": "2 Theme" },
+      { "node": "6:67", "field": "fills", "varId": "VariableID:3:9", "varName": "color/surface", "col": "2 Theme" },
+      { "node": "6:71", "field": "fills", "varId": "VariableID:3:10", "varName": "color/surface-hover", "col": "2 Theme" }
+    ]
+  },
+  "🧩 Components": {
+    "page": "🧩 Components (back)",
+    "byCol": { "2 Theme": 576, "Scale": 566, "Radius": 24, "Typography": 4, "Color Tokens": 6, "Container": 2 },
+    "rowCount": 1178,
+    "rows": null,
+    "note": "Row-level detail not retained in this artifact (session compaction dropped the raw row arrays from 15 subtree-chunk use_figma calls: C1-C6, C9 direct, plus 6 single-root replacement calls for originally-truncated C7/C8 batches). byCol/rowCount are reconciled totals, cross-verified against the two truncated batch calls' own byCol aggregates (which survive truncation intact) — exact match on Scale/Radius/Typography/Container/Color Tokens; 2 Theme is 576 vs the Task 2 baseline's implied ~578 for this page, a 2-row deviation not further investigated. To recover row-level detail, re-run the per-page script in dump-bindings.md against page 52:2, chunked by top-level child (9 subtrees: see notes.md 'Plan 2 — before' for boundaries)."
+  },
+  "📄 Pages": {
+    "page": "📄 Pages",
+    "byCol": { "2 Theme": 4289, "Scale": 3945, "Breakpoint": 6, "Typography": 27, "Container": 4, "Radius": 124, "Color Tokens": 20 },
+    "rowCount": 8415,
+    "rowsCoverage": "partial — 2109 of 8415 rows itemized (PAGE/ABOUT ×6 variants, PAGE/WORK ×6 variants, PAGE/SERIE ×6 variants, SelectedWriting section ×4 subtrees + root). byCol/rowCount above are from a whole-page findAll and are complete/authoritative. Rows NOT itemized here (~6306): PAGE/HOME ×7, PAGE/BLOG ×7, PAGE/POST ×6, PAGE/SERIE-POST ×6, PAGE/WORK-DETAIL ×6 variants (each ≥113 rows, several ≥160-185, judged too close to the ~140-190 row/20KB truncation ceiling to chunk safely within budget), and the two top-level 'V3/1 - Home — 1536 — Dark' experiment frames (349:4570, 406:7011; each has a ~210-221 row 'main' child not yet even sub-chunked). Recover via dump-bindings.md, single-root calls per variant/frame.",
+    "rows": [
+      { "node": "44:329", "field": "fills", "varId": "VariableID:3:3", "varName": "color/background", "col": "2 Theme" },
+      { "node": "44:330", "field": "paddingTop", "varId": "VariableID:4:8", "varName": "spacing/6", "col": "Scale" },
+      { "node": "44:330", "field": "paddingBottom", "varId": "VariableID:4:8", "varName": "spacing/6", "col": "Scale" },
+      { "node": "I44:330;41:46", "field": "strokes", "varId": "VariableID:3:4", "varName": "color/foreground", "col": "2 Theme" },
+      { "node": "I44:330;41:46;12:4", "field": "fills", "varId": "VariableID:3:4", "varName": "color/foreground", "col": "2 Theme" },
+      { "node": "I44:330;41:48;12:6", "field": "fills", "varId": "VariableID:3:7", "varName": "color/foreground-muted", "col": "2 Theme" },
+      { "node": "I44:330;41:50;12:6", "field": "fills", "varId": "VariableID:3:7", "varName": "color/foreground-muted", "col": "2 Theme" },
+      { "node": "I44:330;41:52;12:6", "field": "fills", "varId": "VariableID:3:7", "varName": "color/foreground-muted", "col": "2 Theme" },
+      { "node": "I44:330;41:58", "field": "paddingLeft", "varId": "VariableID:4:4", "varName": "spacing/2", "col": "Scale" },
+      { "node": "I44:330;41:58", "field": "paddingTop", "varId": "VariableID:4:4", "varName": "spacing/2", "col": "Scale" },
+      { "node": "I44:330;41:58", "field": "paddingRight", "varId": "VariableID:4:4", "varName": "spacing/2", "col": "Scale" },
+      { "node": "I44:330;41:58", "field": "paddingBottom", "varId": "VariableID:4:4", "varName": "spacing/2", "col": "Scale" },
+      { "node": "I44:330;41:58", "field": "topLeftRadius", "varId": "VariableID:4:19", "varName": "radius/full", "col": "Scale" },
+      { "node": "I44:330;41:58", "field": "topRightRadius", "varId": "VariableID:4:19", "varName": "radius/full", "col": "Scale" },
+      { "node": "I44:330;41:58", "field": "bottomLeftRadius", "varId": "VariableID:4:19", "varName": "radius/full", "col": "Scale" },
+      { "node": "I44:330;41:58", "field": "bottomRightRadius", "varId": "VariableID:4:19", "varName": "radius/full", "col": "Scale" },
+      { "node": "I44:330;41:58", "field": "fills", "varId": "VariableID:3:9", "varName": "color/surface", "col": "2 Theme" },
+      { "node": "I44:330;41:58;26:2;23:57", "field": "strokes", "varId": "VariableID:3:7", "varName": "color/foreground-muted", "col": "2 Theme" }
+    ],
+    "rowsNote": "The full 2109-row set for this partial coverage is retained in the session's tool-call history for the 22 dump-bindings.md calls (ABOUT×6, WORK×6, SERIE×6, SelectedWriting×4) but only a representative sample (one full variant, 18 rows) is embedded above to keep this artifact reviewable; re-run the listed subtree roots via dump-bindings.md to regenerate the complete 2109-row set verbatim."
+  },
+  "Pages Experiment": {
+    "page": "Pages Experiment",
+    "byCol": { "Breakpoint": 4, "2 Theme": 170, "Scale": 208, "Typography": 5, "Container": 3, "Radius": 16, "Color Tokens": 3 },
+    "rowCount": 409,
+    "rows": null,
+    "note": "Counts-only. byCol/rowCount from a whole-page findAll (complete, authoritative). No row-level detail was captured this session — the page's two top-level frames ('V3/1 - Home' at 442:5353, 'Blog' at 445:6085) each break into Header/main/Footer, with main at 210 and 128 rows respectively, close to the ~140-190 row truncation ceiling. Recover via dump-bindings.md, single-root calls per Header/main/Footer subtree."
+  }
+}
