@@ -15,6 +15,7 @@
     "studio": "node images/scripts/studio.mjs",
     "crop": "node images/scripts/studio.mjs",
     "test": "node --test scripts/figma/**/*.test.mjs",
+    "figma:primitives": "node scripts/figma/build-primitives.mjs primitives.json",
     "figma:verify": "node scripts/figma/extract-code-tokens.mjs tokens.code.json && node scripts/figma/diff-tokens.mjs tokens.code.json tokens.figma.json scripts/figma/token-map.json",
     "figma:verify-raw": "node scripts/figma/diff-raw-values.mjs raw-values.figma.json scripts/figma/named-debt.json",
     "geometry:web": "node scripts/figma/extract-web-geometry.mjs"
