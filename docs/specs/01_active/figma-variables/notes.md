@@ -477,3 +477,51 @@ badge to preserve.
 blocks proceeding to Task 2/3 until a human/plan-level call is made.
 `Color Tokens` must **not** be deleted while this override is outstanding —
 deleting the collection would silently drop the override.
+
+### Override resolution (plan owner decision: rebind, not keep-alive)
+
+Plan owner chose option (a) — rebind the frame to a `2 Theme` mode override
+— rather than keeping `Color Tokens` alive. Applied as a scoped Figma write
+against node `2134:697` only, page `Components (new)` (`461:759`):
+
+1. Read `2 Theme`'s modes live (did not assume `3:1`):
+   `[{"name":"Light","modeId":"3:0"},{"name":"Dark","modeId":"3:1"}]` —
+   `Dark` confirmed as `3:1`.
+2. `node.setExplicitVariableModeForCollection(themeCollection, "3:1")` —
+   sets an explicit Dark-mode override for `VariableCollectionId:3:2`
+   (`2 Theme`) on `2134:697`.
+3. `node.clearExplicitVariableModeForCollection(colorTokensCollection)` —
+   removes the stale override for `VariableCollectionId:368:322`
+   (`Color Tokens`) on the same node, so Task 3's deletion no longer relies
+   on Figma silently dropping it.
+
+**Verification** — re-read `node.explicitVariableModes` in the same script,
+before and after:
+
+| | `Color Tokens` (`368:322`) | `2 Theme` (`3:2`) |
+|---|---|---|
+| Before | `368:5` (Dark) | *(absent)* |
+| After | *(absent)* | `3:1` (Dark) |
+
+Exactly the expected shape — `Color Tokens` entry gone, `2 Theme` entry
+present and pointing at Dark. Screenshotted the node post-change: renders
+correctly dark (dark card background, light heading/meta text, teal/lime
+accent images) with no fallback-to-light or missing-colour artifacts. (Two
+`screenshot()` calls were issued — one immediately before the mutation, one
+after — but only the post-change image surfaced in the tool output; not
+investigated further since the only mutated state was the mode override,
+not any fill/stroke/paint, so there is no code path by which the visual
+result could differ from a same-frame pre-change render for the properties
+this override governs.)
+
+**This override is now resolved — no longer a blocker for Task 2/3.**
+`Color Tokens` no longer carries any known live mode override anywhere in
+the file (0 overrides found across all 6 pages in Step 2, plus this one now
+cleared), so it is safe for Task 3 to delete once Task 2's remap is applied.
+
+### Binding total — not an action item, just a correction of scope
+
+The 122-vs-29 gap above is not a data error and needs no further action
+from this task: Task 2 applies the remap table (8 distinct source
+variables, see table above) across all 122 binding instances, not just the
+29 the plan was originally scoped against.
