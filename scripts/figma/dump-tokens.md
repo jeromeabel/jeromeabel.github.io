@@ -37,7 +37,7 @@
      a false Missing/Mismatch. Confirmed and fixed 2026-08-03 (Plan 3 Task 6).
 3. Save the returned (or merged) JSON to `tokens.figma.json` at repo root.
 4. Run `pnpm figma:verify` and record verdicts in
-   `docs/specs/01_active/figma-variables/notes.md` (not
+   `docs/specs/02_archives/figma-variables/notes.md` (not
    `scripts/figma/notes.md` — that file is generator-conversion notes, not
    the migration execution log).
 

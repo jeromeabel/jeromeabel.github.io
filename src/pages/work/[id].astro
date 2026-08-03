@@ -42,7 +42,9 @@ const relatedPosts = work.data.related_posts
   image={work.data.img_social || work.data.img}
 >
   <main class="min-w-screen">
-    <div class="container flex flex-col gap-8 py-section lg:gap-12 lg:py-section-lg">
+    <div
+      class="py-section lg:py-section-lg container flex flex-col gap-8 lg:gap-12"
+    >
       <WorkHeader data={work.data} />
       <CustomImage img={work.data.img} alt={work.data.title} />
     </div>

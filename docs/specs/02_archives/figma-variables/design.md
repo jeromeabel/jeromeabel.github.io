@@ -160,7 +160,7 @@ already expressible as `font-weight/500`. That is why the collection lands at
 ~480 (528 spread across the eleven source collections, minus the 60 floats,
 plus white/black and the 11 brand hexes below).
 
-### `2 Theme` — Light / Dark — 7 vars
+### `2 Theme` — Light / Dark — 10 vars
 
 The **existing `Color` collection, renamed in place**, so
 `VariableCollectionId:3:2` and every dark-frame mode override survive. Values
@@ -327,7 +327,7 @@ that step 3 was priced and gated on (see
 | `Typography`             | 52   | **33** (all `fontWeight`) | font families bound **nowhere**                                                                         |
 | `Container`              | 13   | **9**                     |                                                                                                          |
 | `Breakpoint`             | 5    | **9**                     |                                                                                                          |
-| `Color Tokens`           | 392  | **29**                    | Plan 3 handles these                                                                                     |
+| `Color Tokens`           | 392  | **29**                    | Plan 3 handles these (corrected to 122 — see the audit above)                                             |
 | `Color Primitives`       | 299  | **0**                     | free to delete                                                                                            |
 | `Spacing`                | 35   | **0**                     | dead duplicate of `Scale`                                                                                 |
 | `Opacity`                | 21   | **0**                     | free                                                                                                      |
@@ -352,8 +352,9 @@ Four findings that changed the plan:
    therefore be **by resolved value, never by name**; a name-based remap would
    silently halve every 16px corner in the file. (`radius/md`→`radius/lg`,
    `radius/lg`→`radius/2xl`.)
-4. **`Color Tokens` has 29 live bindings**, contrary to the assumption that the
-   blog uses none of it. They rebind to `1 Primitives` / `2 Theme` in step 4.
+4. **`Color Tokens` has 29 live bindings** (corrected to 122 — see the audit
+   above), contrary to the assumption that the blog uses none of it. They
+   rebind to `1 Primitives` / `2 Theme` in step 4.
 
 No font family is bound anywhere, so correcting Merriweather / Inter / JetBrains
 Mono costs zero rebinds.

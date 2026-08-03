@@ -130,7 +130,15 @@ Only trust `bindings.figma.json` once every page passes this check.
 ## Expected totals (baseline, from Task 2's 2026-07-29 audit)
 
 Merged `byCol` across the 5 real pages (see
-`docs/specs/01_active/figma-variables/notes.md`, "Plan 2 — before"):
+`docs/specs/02_archives/figma-variables/notes.md`, "Plan 2 — before"):
+
+> **Historical snapshot, not current state.** This table is a pre-migration
+> baseline captured before the figma-variables Plan 2 + Plan 3 cleanup. Since
+> then `Scale`, `Radius`, `Typography`, `Container`, and `Breakpoint` were
+> deleted and `Color Tokens` was rebound into `1 Primitives` (which now
+> carries 446 vars, including the 122 rebound from `Color Tokens`). Kept here
+> as a record of the pre-migration audit — do not use it as the expected
+> totals for a fresh `pnpm run figma:dump-bindings` run.
 
 | Collection | Expected total |
 |---|---|

@@ -533,7 +533,7 @@ this override governs.)
 
 **This override is now resolved — no longer a blocker for Task 2/3.**
 `Color Tokens` no longer carries any known live mode override anywhere in
-the file (0 overrides found across all 6 pages in Step 2, plus this one now
+the file (this was the only override found across all 6 pages in Step 2, now
 cleared), so it is safe for Task 3 to delete once Task 2's remap is applied.
 
 ### Binding total — not an action item, just a correction of scope
@@ -780,3 +780,20 @@ Tablet mode) never leaks into the Tablet column.
 (`1 Primitives`, `2 Theme`, `3 Responsive`). No git commit made (Figma-only
 work); this section is folded into `notes.md`'s existing uncommitted state
 alongside earlier Plan 3 entries.
+
+## Plan 3 — Task 6 gate baseline
+
+`pnpm figma:verify`'s expected, steady-state `Orphaned` count as of Task 6
+is **11**, not the 3 shown in Task 3's gate transcript above (that transcript
+predates `3 Responsive`'s creation in Task 5). The 11 break down as:
+
+- **3** pre-existing `2 Theme/Dark/font/*` rows (`font/sans`, `font/title`,
+  `font/mono`) — unrelated to this plan, same ones documented since the
+  "Execution log — steps 1–2" section.
+- **8** from `3 Responsive` — its 4 variables × 3 modes = 12 per-mode rows,
+  minus the 4 that `token-map.json` maps, leaves 8 unmapped.
+
+The archived plan brief's "Expected: zero Orphaned" is a pre-existing
+inaccuracy in that plan text, not corrected here. Any `Orphaned` entry beyond
+these 11 in a future `pnpm figma:verify` run should be treated as real drift,
+not expected noise.

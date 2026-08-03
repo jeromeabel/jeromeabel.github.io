@@ -8,17 +8,18 @@ Personal portfolio and blog site for Jerome Abel, built with Astro 5, Tailwind C
 
 ## Commands
 
-| Command             | Description                    |
-| ------------------- | ------------------------------ |
-| `pnpm dev`          | Dev server at localhost:4321   |
-| `pnpm build`        | Production build to `dist/`    |
-| `pnpm preview`      | Serve production build locally |
-| `pnpm format:check` | Check formatting with Prettier |
-| `pnpm format:write` | Auto-format all files          |
-| `pnpm figma:verify` | Diff code design tokens against the Figma variable dump (drift check) |
+| Command                 | Description                                                                                    |
+| ----------------------- | ---------------------------------------------------------------------------------------------- |
+| `pnpm dev`              | Dev server at localhost:4321                                                                   |
+| `pnpm build`            | Production build to `dist/`                                                                    |
+| `pnpm preview`          | Serve production build locally                                                                 |
+| `pnpm format:check`     | Check formatting with Prettier                                                                 |
+| `pnpm format:write`     | Auto-format all files                                                                          |
+| `pnpm figma:verify`     | Diff code design tokens against the Figma variable dump (drift check)                          |
 | `pnpm figma:primitives` | Regenerate `primitives.json` (Figma `1 Primitives` source) from the installed Tailwind version |
+| `pnpm test`             | Node test runner over `scripts/figma/*.test.mjs`                                               |
 
-Package manager is **pnpm**. No test suite or linter configured.
+Package manager is **pnpm**. No linter configured.
 
 ## Architecture
 
