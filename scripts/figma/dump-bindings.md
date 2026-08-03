@@ -5,16 +5,36 @@ file). Dumps every node field that points at a variable — `node`/`field`/`varI
 (+ `varName`/`col` where the payload allows it) — per page, so a bad rewrite
 can be diagnosed against real before-state, not a screenshot.
 
+**`use_figma` silently truncates its output at roughly 20KB** — not an error,
+just a cut string, discovered the hard way across three failed rounds trying
+one call per page. A page with thousands of bindings (`🧩 Components`,
+`📄 Pages`, `Pages Experiment`) never fits in one call's response. The fix
+is smaller calls, not a smaller payload shape as a "fallback" — chunking is
+mandatory, not an escape hatch for exceptionally large pages.
+
 1. Read the `/figma-use` skill (required before any `use_figma` call this
    session).
-2. Run **one `use_figma` call per page**, file `ihWIWmvtQPTWgUxlrVjC2c` ("Blog
-   Design System v1.0" — the live DS file since 2026-07-29;
-   `Wf4iomVMYUXlFIBV3Z8bx4` is the read-only backup, never write to it). Never
-   loop `setCurrentPageAsync` inside one script — one page per call, fan the
-   calls out in parallel in a single message.
-3. Merge the returned `{ page, byCol, rows }` objects into `bindings.figma.json`
-   at repo root, keyed by page name.
-4. Commit both this file and `bindings.figma.json`.
+2. Per page, fan out **one `use_figma` call per frame/section (or small
+   group of frames/sections)**, capped at roughly **≤200 rows per call** —
+   never a whole page in one shot once it has more than a couple hundred
+   bindings. Use compact row format (`[nodeId, field, varId]` triples, not
+   verbose `{node, field, varId}` objects) — this alone cuts payload size
+   significantly for the same row count and buys headroom before the 20KB
+   wall. All calls for a given fan-out round go in **a single message, in
+   parallel** (per the `figma-use` skill's page-fanout rule) — never issued
+   sequentially, and never looped inside one script/agent turn. Many
+   sequential `use_figma` calls accumulating in one context carry the same
+   truncation/thrashing risk as one large call, even when each individual
+   call is small.
+3. The orchestrating agent — not another `use_figma` call or sub-agent —
+   merges the per-chunk results deterministically (plain code/concatenation)
+   into `{ page, byCol, rows }` objects, then verifies
+   `rows.length === sum(byCol)` (or the per-page total) before treating the
+   merged dump as trustworthy. A mismatch means a chunk silently truncated or
+   was dropped — re-run that chunk, don't average over the gap.
+4. Merge the per-page objects into `bindings.figma.json` at repo root, keyed
+   by page name.
+5. Commit both this file and `bindings.figma.json`.
 
 ## Pages
 
@@ -31,13 +51,16 @@ current v1.0 fork (verified by Task 2, re-confirmed here via
 | 📄 Pages | `44:328` | real |
 | Pages Experiment | `442:5352` | real |
 
-## Per-page script
+## Per-chunk script
 
-Run once per real page id above, substituting `PAGE_ID`:
+Run once per frame/section (or small group), substituting `PAGE_ID` and
+`ROOT_ID` (the frame/section node to scope the traversal to — swap
+`page.findAll` for `root.findAll` once scoped):
 
 ```js
 const page = await figma.getNodeByIdAsync("PAGE_ID");
 await figma.setCurrentPageAsync(page);
+const root = await figma.getNodeByIdAsync("ROOT_ID"); // frame/section, not the page
 const cols = await figma.variables.getLocalVariableCollectionsAsync();
 const colById = {};
 for (const c of cols) colById[c.id] = c.name;
@@ -60,38 +83,49 @@ function collect(obj, field, out) {
   for (const k of Object.keys(obj))
     collect(obj[k], field === null ? k : field, out);
 }
+// Compact row shape — [nodeId, field, varId] triples, not {node, field, varId}
+// objects. Same information, smaller payload, more headroom under the ~20KB
+// use_figma response ceiling.
 const rows = [],
   byCol = {};
-for (const n of page.findAll(() => true)) {
+for (const n of root.findAll(() => true)) {
   if (!n.boundVariables) continue;
   const o = [];
   collect(n.boundVariables, null, o);
   for (const a of o) {
     const i = await info(a.id);
     byCol[i.col] = (byCol[i.col] || 0) + 1;
-    rows.push({
-      node: n.id,
-      name: n.name,
-      field: a.field,
-      varId: a.id,
-      varName: i.name,
-      col: i.col,
-    });
+    rows.push([n.id, a.field, a.id]);
   }
 }
-return { page: page.name, byCol, rows };
+return { page: page.name, root: root.name, byCol, rows };
 ```
 
-## Row-shrinking fallback
+If a chunk's `rows` still exceeds ~200, split the root further (a section
+into its child frames, a large frame into its top-level children) and re-run
+— don't fall back to dropping fields from the row shape. The compact triple
+is already minimal; the lever that actually works is fewer nodes per call.
 
-The `rows` payload can be unwieldy on pages with thousands of bindings
-(`🧩 Components`, `📄 Pages`, `Pages Experiment`). If a page's response is too
-large to return in full, drop `name` from each row object — keep only
-`node`/`field`/`varId`/`varName`/`col`, which is what a recovery actually
-needs (the node's display name is a convenience, not load-bearing: it can
-always be re-looked-up from `node` via `getNodeByIdAsync`). Do this by
-removing the `name: n.name,` line from the `rows.push(...)` call above before
-running that page's script.
+## Merging chunks
+
+Plain code in the orchestrating agent, not another tool call:
+
+```js
+const merged = {}; // page name -> { byCol, rows }
+for (const chunk of allChunkResults) {
+  const m = (merged[chunk.page] ??= { byCol: {}, rows: [] });
+  m.rows.push(...chunk.rows);
+  for (const [col, n] of Object.entries(chunk.byCol))
+    m.byCol[col] = (m.byCol[col] || 0) + n;
+}
+for (const [page, m] of Object.entries(merged)) {
+  const sum = Object.values(m.byCol).reduce((a, b) => a + b, 0);
+  if (sum !== m.rows.length)
+    throw new Error(`${page}: byCol sum ${sum} !== rows.length ${m.rows.length}`);
+}
+```
+
+Only trust `bindings.figma.json` once every page passes this check.
 
 ## Expected totals (baseline, from Task 2's 2026-07-29 audit)
 

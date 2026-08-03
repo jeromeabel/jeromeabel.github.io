@@ -4,7 +4,9 @@
 // diff. Units policy: Figma stores pixels, so rem × 16 here; unitless stays
 // unitless. Colours: Tailwind v4 ships oklch(), Figma wants sRGB — converted below.
 // Usage: node scripts/figma/build-primitives.mjs [outPath]   (default ./primitives.json)
-// Exit: 0 ok · 2 tailwind theme.css not found · 3 unparseable value.
+// Exit: 0 ok · 2 tailwind theme.css not found. A value that matches none of the
+// parsed shapes (oklch/hex/rem/px/number/percent/em) does NOT fail the build —
+// it falls back to type STRING with the raw CSS text as its value.
 import { readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
@@ -101,7 +103,11 @@ const pkg = JSON.parse(
 
 const variables = [];
 const seen = new Set();
-let spacingBasePx = 4; // Will be overwritten when --spacing is parsed
+// Must be set from Tailwind's --spacing while parsing theme.css below (rem
+// units only — see the `rem` branch and the throw right after the loop). No
+// silent default: an unparseable or missing --spacing fails the build loudly
+// rather than generating a wrong 36-entry spacing scale off a made-up base.
+let spacingBasePx = null;
 
 function figmaName(prop) {
   const ns = NAMESPACES.find((n) => prop === n || prop.startsWith(n + "-"));
@@ -167,6 +173,13 @@ for (const m of css.matchAll(/^\s*--([\w-]+):\s*([^;]+);/gm)) {
     entry = { type: "FLOAT", value: Number(em[1]) * 100, referenceOnly: true }; // tracking
   else entry = { type: "STRING", value: raw }; // shadows, easings, keyframes
 
+  if (name === "spacing/DEFAULT" && !rem) {
+    throw new Error(
+      `Expected Tailwind's --spacing to be expressed in rem (e.g. "0.25rem"), ` +
+        `got "${raw}" — the spacing scale synthesis below assumes a rem base unit.`,
+    );
+  }
+
   // tracking/* must never be bound: Figma coerces bound letter-spacing to px,
   // destroying size-independence. Kept for reference, marked so the Figma build
   // gives it no LETTER_SPACING scope.
@@ -174,6 +187,13 @@ for (const m of css.matchAll(/^\s*--([\w-]+):\s*([^;]+);/gm)) {
 
   seen.add(name);
   variables.push({ name, ...entry });
+}
+
+if (spacingBasePx === null) {
+  throw new Error(
+    "Tailwind's --spacing custom property was not found in theme.css — " +
+      "cannot derive the spacing scale base unit.",
+  );
 }
 
 // Synthesize Tailwind's canonical spacing scale from the base unit.

@@ -72,7 +72,7 @@ Required before any `use_figma` call this session.
 
 - [ ] **Step 2: Find every binding and every mode override**
 
-One call per page, fanned out in parallel in a single message. Page ids: `📖 Cover` `0:1`, `🎨 Foundations` `5:14`, `🧩 Components` `52:2`, `🗄️ Legacy` `78:2`, `📄 Pages` `44:328`, `Pages Experiment` `442:5352`.
+One call per page, fanned out in parallel in a single message. Page ids: `📖 Cover` `0:1`, `🎨 Foundations` `5:14`, `🧩 Components` `52:2`, `📄 Pages` `44:328`, `Pages Experiment` `442:5352`, `Components (new)` (page id **not confirmed from this static checkout — reconfirm live before execution**, page ids can drift between sessions). `🗄️ Legacy` (`78:2`) is dropped from this list: it does not exist in the live v1.0 fork (confirmed via `getNodeByIdAsync` returning `null`, Plan 2 Task 2/5). `Components (new)` is added: it does exist and was discovered live during Plan 2 Task 6 carrying 1,045+ bindings — it was not in this plan's original page inventory.
 
 ```js
 const page = await figma.getNodeByIdAsync("PAGE_ID");
@@ -136,6 +136,8 @@ return {
 ```
 
 Expected across all six pages: **29 bindings**. `overrides` is expected to be empty — the dark-frame overrides point at `VariableCollectionId:3:2` (now `2 Theme`), not at `Color Tokens`. **If any override turns up, stop and resolve it before Task 3**: rebind that frame to a `2 Theme` mode override, or keep `Color Tokens` and revise this plan.
+
+**Caveat:** the total-29 figure is Plan 2 Task 5/6's file-wide `Color Tokens` binding count and likely still holds — but the *per-page* distribution needs re-verification at execution time, since the page inventory itself changed after Plan 2 (the corrected page list above — `🗄️ Legacy` dropped, `Components (new)` added — differs from what this plan was originally drafted against, and `Components (new)`'s share of the 29 is unknown until re-dumped).
 
 - [ ] **Step 3: Resolve each bound variable to a hex and pick its `1 Primitives` target**
 

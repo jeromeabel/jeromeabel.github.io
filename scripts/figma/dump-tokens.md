@@ -3,7 +3,10 @@
 1. Read the `/figma-use` skill (required before any `use_figma` call this session).
 2. Run ONE `use_figma` call on file `ihWIWmvtQPTWgUxlrVjC2c` ("Blog Design System v1.0" — the live DS file since 2026-07-29; `Wf4iomVMYUXlFIBV3Z8bx4` is the read-only backup) with the script below.
 3. Save the returned JSON to `tokens.figma.json` at repo root.
-4. Run `pnpm figma:verify` and record verdicts in `notes.md`.
+4. Run `pnpm figma:verify` and record verdicts in
+   `docs/specs/01_active/figma-variables/notes.md` (not
+   `scripts/figma/notes.md` — that file is generator-conversion notes, not
+   the migration execution log).
 
 ```js
 const out = { collections: [], textStyles: [] };

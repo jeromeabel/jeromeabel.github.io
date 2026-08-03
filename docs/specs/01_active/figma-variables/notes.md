@@ -81,6 +81,35 @@ the decisions; this holds the _why_ in reusable form.
   remain visible, and published components carry their bindings. Number scopes
   (`spacing/*` → auto layout, `radius/*` → corner radius, `border-width/*` →
   stroke) filter the property pickers the same way color scopes do.
+- **Array-shaped text fields are silently skipped by naive `setBoundVariable`
+  calls.** `VariableBindableTextField` entries that are *arrays* (mixed-value
+  ranges — `fontWeight`, `letterSpacing`, `fontSize`, `lineHeight`, `tracking`
+  on TEXT nodes with non-uniform styling) need an explicit branch; a script
+  with no array-shape handling raises zero exceptions and logs zero failures
+  while quietly leaving those bindings untouched. (Plan 2 Task 6: 130 live
+  bindings across 5 pages survived an "apply" pass that self-reported
+  complete, because of exactly this gap.)
+- **`setBoundVariable` does not overwrite an existing array-valued binding —
+  it appends.** Calling it again on an array field leaves `[OLD, NEW]`
+  instead of replacing the entry, even though the call succeeds and reports
+  success. The actual fix for these fields is
+  `node.setRangeBoundVariable(0, characters.length, field, newVar)`, which
+  replaces rather than appends.
+- **`setBoundVariable` can be a genuine silent no-op on deeply-nested instance
+  sublayers.** Observed on `width` fields of 3+-segment compound-ID INSTANCE
+  sublayers ("Icon" children) — the node exists, isn't locked, `layoutSizing`
+  is `FIXED` on both axes (not a sizing-mode rejection), the call reports
+  success, but the binding never changes. Clearing the field to `null` does
+  succeed; re-setting the now-unbound field afterward also silently no-ops.
+  When old and new values are pixel-identical, leaving the field unbound
+  (rather than rebound) sidesteps the bug without any visual change — but
+  this only works when the values happen to match; it is not a general fix.
+- **Never trust an apply script's own self-reported success counters.** Every
+  one of the above three modes was caught only by an *independent,
+  from-scratch* rescan afterward — not by re-running the apply script's own
+  counting logic, which reported "complete" or "success" in all three cases
+  despite the actual gap. Always verify with a rescan that doesn't share code
+  with the thing being verified.
 
 ## Pipeline hygiene
 
