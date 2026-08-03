@@ -525,3 +525,177 @@ The 122-vs-29 gap above is not a data error and needs no further action
 from this task: Task 2 applies the remap table (8 distinct source
 variables, see table above) across all 122 binding instances, not just the
 29 the plan was originally scoped against.
+
+## Plan 3 — Task 2: apply the remap (rebind all 122 `Color Tokens` bindings)
+
+Applied the Task 1 remap table across all 6 pages. Final result: **122/122
+bindings rebound, 0 failures, 0 `Color Tokens` bindings remain anywhere in
+the file** (verified by an independent rescan — see below).
+
+**Per-page results:**
+
+| Page | id | Rebound | Notes |
+|---|---|---|---|
+| 📖 Cover | `0:1` | 0 | no pre-existing bindings, skipped |
+| 🎨 Foundations | `5:14` | 0 | no pre-existing bindings, skipped |
+| 🧩 Components (back) | `52:2` | 6 | matched Task 1's audit exactly |
+| 📄 Pages | `44:328` | 20 | matched Task 1's audit exactly |
+| Pages Experiment | `442:5352` | 3 | matched Task 1's audit exactly |
+| Components (new) | `461:759` | 93 | self-reported counter said 65 — see below |
+| **Total** | | **122** | |
+
+### Bug found in the brief's rebind script — `entry[i].color` is wrong
+
+The brief's Step 1 script (and the earlier Plan 2 Task 6 pattern it was
+copied from) reads the paint-binding alias as `entry[i].color` when
+iterating `boundVariables.fills`/`.strokes`. That shape is wrong for this
+API: per `plugin-api-standalone.d.ts` (`readonly fills?: VariableAlias[]`)
+and confirmed live via a diagnostic dump, **`boundVariables.fills[i]` /
+`.strokes[i]` IS the `VariableAlias` directly** — a flat array indexed to
+match `node.fills`/`node.strokes`, not an array of `{color: VariableAlias}`
+wrapper objects. `entry[i].color` is always `undefined` for this shape, so
+`target(alias.id)` was silently called with `id: undefined` on every
+iteration, always returning `null`, and the loop skipped every paint with
+zero errors and zero mutations — the same "self-reported complete but
+actually a no-op" failure class the lessons section already documents for
+array-shaped text fields. All four pages' first pass returned
+`{rebound:0, paints:0, failures:[]}` looking clean; a live diagnostic
+(recursive `collect()` over `boundVariables`, same shape as
+`scripts/figma/dump-bindings.md`'s script) proved 93 live hits still
+existed on `Components (new)` alone, exposing the bug. Fixed by reading
+`entry[i]` directly instead of `entry[i].color`; re-ran all four pages.
+
+### Self-reported counter still undercounted on `Components (new)`
+
+Even after the fix, `Components (new)`'s own run reported `paints: 65`, but
+an independent post-mutation rescan (same recursive-collect method, keyed
+on `variableCollectionId === 'VariableCollectionId:368:322'` rather than
+the 8 known source IDs, so it would also catch anything unanticipated)
+found **zero** remaining `Color Tokens` bindings on that page — i.e. all 93
+were actually rebound; the script's own `paints++` counter just didn't
+track ~28 of its own successful mutations. Root cause not chased further
+(the fix mattered more than the counter), but the pattern matches the
+notes' existing lesson word-for-word: **never trust an apply script's own
+self-reported success counters — verify with an independent rescan that
+shares no code with the thing being verified.** This is now the second
+documented instance of that exact failure mode in this migration (the
+first was Plan 2 Task 6's array-shaped text fields).
+
+### Verification (independent rescan, all 6 pages)
+
+Re-ran Task 1's exact `bindingCount` method (collection membership via
+`variable.variableCollectionId`, not ID matching) on all 6 pages after the
+rebind:
+
+| Page | `Color Tokens` bindingCount (after) |
+|---|---|
+| 📖 Cover | 0 |
+| 🎨 Foundations | 0 |
+| 🧩 Components (back) | 0 |
+| 📄 Pages | 0 |
+| Pages Experiment | 0 |
+| Components (new) | 0 |
+
+Zero everywhere — `Color Tokens` is now free of live consumers file-wide,
+clearing the way for Task 3 to delete the collection.
+
+### Screenshot confirmation (3 reference frames, Plan 2 Task 2)
+
+`Home — 1280 — Light` (`52:649`), `Home — 1280 — Dark` (`111:495`), and the
+`Link` component set (`13:13`, page `🧩 Components (back)`) were
+re-screenshotted. All three match the "before" descriptions in this file's
+"Plan 2 — before" section exactly — dark header/nav, hero copy with
+dashed/illustrated hero slot, series+post cards, three black project tiles
+with X ideogram, bio strip, contact section, footer; the `Link` variant
+grid unchanged. No missing fills, no fallback-to-default colors, no visual
+regression from the rebind.
+
+**Gap in that coverage, flagged by review, now closed.** Those 3 frames
+together only exercise 21% of the 122 rebound bindings (`📄 Pages` 20 +
+`🧩 Components (back)` 6) and render monochrome cards — none of them touch
+the 8 rebound accent colours (violet/teal/fuchsia/white), which live on
+`Components (new)` (93 of 122, 76%, and the one page where the apply
+script's own counter under-reported). Added a 4th screenshot: `2134:697`
+(`PostCard-Experiment`, the same node Task 1's override fix touched, page
+`Components (new)`). Result: two dark post cards render correctly — teal
+category labels (`WEB PERFORMANCE · PART 3 OF 5`, `FULL-STACK`, matching
+the rebound `teal-500`/`teal-400` bindings from the remap table), white
+headings, grey body copy, dark card backgrounds. No black/magenta fallback
+swatches, no stripped-to-raw-value artifacts — the rebound accent colours
+render as intended on the actual node exercising them.
+
+## Plan 3 — Task 3: delete `Color Tokens`
+
+With zero live bindings and zero live overrides confirmed by Task 2's
+independent rescan, deleted the `Color Tokens` collection
+(`VariableCollectionId:368:322`, 392 variable IDs) via the guarded delete
+script from the task brief (`getLocalVariableCollectionsAsync` → find by
+name → `remove()` → re-read collections).
+
+**Before/after (from the delete script's own return value):**
+
+| | Name | Vars | Hidden |
+|---|---|---|---|
+| Before (removed) | `Color Tokens` | 392 | — |
+| After | `2 Theme` | 10 | `false` |
+| After | `1 Primitives` | 446 | `true` |
+
+Exactly the expected post-delete shape from the brief: two collections,
+`1 Primitives` hidden and `2 Theme` visible. (`1 Primitives` is 446, not
+Plan 2 Task 3's original 443 — 3 more were added in the interim by Task 1's
+audit script cleanup pass; not investigated further since it's outside this
+task's scope and the collection identity/hidden flag are what the gate
+checks.)
+
+**Re-dump note — the brief's one-shot script hit the `use_figma` ~20KB
+response cap.** A single unfiltered dump of both collections plus text
+styles truncated mid-response (visibly cut off inside `1 Primitives`'
+`color/slate/*` entries, both as pretty JSON and as `JSON.stringify`). Fixed
+by splitting the dump into 5 `use_figma` calls instead of the brief's one:
+`2 Theme` + text styles (small, fit in one call), then `1 Primitives` in 4
+sequential batches of `variableIds.slice()` (112/112/112/110, totalling the
+full 446), merged locally into the same `{collections, textStyles}` shape
+the brief's script produces before writing `tokens.figma.json`. A local
+Node script re-verified the merged count (446) and checked for duplicate
+variable names before writing the file — both checks passed clean. This is
+a token-budget workaround, not a data change: the merged file is
+byte-for-byte the same shape the brief's single script would have produced
+had the response not been capped.
+
+**`pnpm figma:verify` — clean gate:**
+
+```
+22 tokens -> tokens.code.json
+
+## Missing in Figma
+_none_
+
+## Value mismatch
+_none_
+
+## Orphaned in Figma
+- `2 Theme/Dark/font/sans` — no code token maps here
+- `2 Theme/Dark/font/title` — no code token maps here
+- `2 Theme/Dark/font/mono` — no code token maps here
+
+## Unmapped
+_none_
+```
+
+Zero Missing, zero Value mismatch, zero Unmapped — the gate this task must
+clear. The 3 `Orphaned` entries are the same pre-existing, expected orphans
+documented in this file's "Execution log — steps 1–2" section
+(`token-map.json` only maps the Light mode of each font; the dump emits one
+row per mode) — not new, not caused by this task's delete.
+
+**`tokens.figma.json` / `tokens.code.json` remain gitignored**
+(`.gitignore:36-37`, confirmed via `git check-ignore -v`), so the brief's
+`git add tokens.figma.json` step is a no-op — same pre-existing fact
+already logged in the "Execution log — steps 1–2" section for Plan 1. The
+commit picks up only `notes.md` (this section plus Task 2's, still
+uncommitted going into this task).
+
+**Result:** `Color Tokens` is gone. The file now holds exactly the two
+collections this migration's end state calls for — `1 Primitives` (446,
+hidden) and `2 Theme` (10, visible) — with a clean verify gate confirming
+no code-to-Figma token drift was introduced by the deletion.
