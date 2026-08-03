@@ -67,3 +67,12 @@ test("emits a *-primary token holding only the first font family", () => {
   // the full stack token still exists, unchanged
   assert.match(byNameMap["font-sans"].raw, /^"IBM Plex Sans", sans-serif/);
 });
+test("section rhythm tokens are extracted from @theme", () => {
+  const d = run();
+  const byNameMap = Object.fromEntries(d.tokens.map((t) => [t.name, t]));
+  assert.equal(byNameMap["spacing-section"].px, 32);
+  assert.equal(byNameMap["spacing-section"].raw, "2rem");
+  assert.equal(byNameMap["spacing-section"].class, "px-css");
+  assert.equal(byNameMap["spacing-section-lg"].px, 96);
+  assert.equal(byNameMap["spacing-section-lg"].raw, "6rem");
+});

@@ -25,6 +25,11 @@
     "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
 
+  /* Page-section vertical rhythm. Varies by width: 2rem below lg, 6rem at lg+.
+     Mirrored in Figma as `3 Responsive/section/rhythm-y`. */
+  --spacing-section: 2rem;
+  --spacing-section-lg: 6rem;
+
   --color-background: #f5ffe1;
   --color-foreground: #1e1e1e;
   --color-foreground-strong: #101010;

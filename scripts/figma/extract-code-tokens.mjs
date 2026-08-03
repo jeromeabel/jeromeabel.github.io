@@ -87,6 +87,12 @@ const css = read(CSS);
   }
   for (const m of theme.matchAll(/--(color-[\w-]+):\s*(#[0-9a-fA-F]{3,8})\s*;/g))
     push(`light/${m[1]}`, m[2].toLowerCase(), null, "color", "global.css @theme");
+  for (const m of theme.matchAll(
+    /--(spacing-section(?:-lg)?):\s*([\d.]+)(rem|px)\s*;/g,
+  )) {
+    const px = m[3] === "rem" ? round(Number(m[2]) * ROOT_PX) : Number(m[2]);
+    push(m[1], `${m[2]}${m[3]}`, px, "px-css", "global.css @theme");
+  }
 }
 
 // 3. @variant dark — dark color overrides
