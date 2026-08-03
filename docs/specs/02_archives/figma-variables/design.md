@@ -1,4 +1,5 @@
 ---
+shipped: 2026-08-03
 title: Figma variables — primitives / theme / responsive
 created: 2026-07-29
 ---
@@ -276,11 +277,35 @@ Measured usage before the rename:
    work happened live in Figma via `use_figma`, not in the repo; see
    `.superpowers/sdd/plan-2-primitives-merge/progress.md` for the task-by-task
    history.
-4. Delete `Color Tokens`.
-5. Add `3 Responsive`.
+4. ✅ **Shipped 2026-08-03** — Deleted `Color Tokens` (392 vars) after
+   auditing and rebinding all 122 live bindings (not the 29 originally
+   assumed — `Components (new)`, missing from the original page inventory,
+   carried 93 of them) and resolving one live `explicitVariableModes`
+   override that pointed at `Color Tokens` itself (rebound to an equivalent
+   `2 Theme` Dark override instead of deleting underneath it). `1 Primitives`
+   measured **446** post-delete — 3 more than the 443 recorded at creation in
+   step 3; cause not investigated, out of scope, flagged so it isn't mistaken
+   for an explained delta. No commit — Figma-only work; full audit, rebind,
+   and override-resolution log in `notes.md`'s "Plan 3 — Task 1/2/3" sections.
+5. ✅ **Shipped 2026-08-03** — Created `3 Responsive` (Desktop 1280 / Tablet
+   768 / Mobile 390), 4 variables: `container/max-width`, `container/gutter`,
+   `section/rhythm-y`, `viewport/width`. Only `section/rhythm-y` varies by
+   mode (96 Desktop, 32 Tablet, 32 Mobile) — `container/max-width` (1280) and
+   `container/gutter` (16) hold the same value in all three modes today, and
+   `viewport/width` (1280/768/390) is a raw per-mode float with no Tailwind
+   primitive to alias. The three constant-valued variables are colocated in
+   this collection by **concern** (container/viewport sizing), not by
+   variance; the collection's justification is the one variable that does
+   vary, plus the affordance of binding frame width to the mode. No commit —
+   Figma-only work; full creation and verification log in `notes.md`'s
+   "Plan 3 — Task 5" section.
 
-Steps 1–3 are shipped. Step 4 (delete `Color Tokens`) and step 5 (add
-`3 Responsive`) are Plan 3.
+All five migration steps are shipped. **Final state:** Figma holds exactly
+**3 collections** — `1 Primitives` (**446** vars, 1 mode, hidden from
+publishing), `2 Theme` (**10** vars, Light/Dark), `3 Responsive` (**4** vars,
+Desktop/Tablet/Mobile). (`1 Primitives`' final count is 446, not this
+document's earlier "~480" planning estimate — see step 3/4 above for the
+443→446 measured trail.)
 
 ## Resolved — the binding audit (2026-07-29)
 

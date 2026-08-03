@@ -15,6 +15,8 @@ Personal portfolio and blog site for Jerome Abel, built with Astro 5, Tailwind C
 | `pnpm preview`      | Serve production build locally |
 | `pnpm format:check` | Check formatting with Prettier |
 | `pnpm format:write` | Auto-format all files          |
+| `pnpm figma:verify` | Diff code design tokens against the Figma variable dump (drift check) |
+| `pnpm figma:primitives` | Regenerate `primitives.json` (Figma `1 Primitives` source) from the installed Tailwind version |
 
 Package manager is **pnpm**. No test suite or linter configured.
 

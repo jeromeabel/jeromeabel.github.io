@@ -141,6 +141,22 @@ the decisions; this holds the _why_ in reusable form.
   documented decision rule for what is/isn't semantic — that reads senior.
   Over-tokenizing a 7-color blog reads as cargo-culting.
 
+## Plan 3 — responsive tokens (transferable lessons)
+
+- **A mode axis is only worth its cost if something on it moves.** Three of
+  four `3 Responsive` variables are constant across modes; the collection is
+  justified by the one that isn't (`section/rhythm-y`), plus the affordance
+  of binding frame width to the mode.
+- **Breakpoint and mode are different axes.** `lg:` = 1024 sits between the
+  768 and 1280 modes, so the Tablet mode carries the mobile value. Copying a
+  `lg:` value into a tablet mode is the default mistake.
+- **Deleting a collection under a live `explicitVariableModes` override drops
+  the override silently.** Audit overrides before any collection removal,
+  not just bindings.
+- **One code token per mode-where-authoritative.** CSS has no mode axis, so a
+  responsive Figma variable maps to a single mode in the drift check —
+  mapping the pair to one mode makes the gate permanently red.
+
 ## Execution log — steps 1–2 (`plan-1-theme-rename.md`, 2026-07-29)
 
 What actually happened, and what was learned that the plan didn't predict.
@@ -703,3 +719,63 @@ uncommitted going into this task).
 collections this migration's end state calls for — `1 Primitives` (446,
 hidden) and `2 Theme` (10, visible) — with a clean verify gate confirming
 no code-to-Figma token drift was introduced by the deletion.
+
+## Plan 3 — Task 5: create `3 Responsive`
+
+Created the third and final collection, `3 Responsive`
+(`VariableCollectionId:2245:42`), with 3 modes and 4 variables, in file
+`ihWIWmvtQPTWgUxlrVjC2c` ("Blog Design System v1.0"). Values are derived from
+Task 4's measurements (the `--spacing-section`/`--spacing-section-lg` CSS
+tokens added to `global.css`, code-only, no Figma change).
+
+### Step 1 — collection + modes
+
+No mode-limit error (file's plan tier supports 3 modes on this collection).
+
+| Mode | modeId |
+|---|---|
+| Desktop | `2245:0` |
+| Tablet | `2245:1` |
+| Mobile | `2245:2` |
+
+### Step 2 — 4 variables created
+
+| Variable | id | Scopes |
+|---|---|---|
+| `container/max-width` | `VariableID:2245:43` | `WIDTH_HEIGHT` |
+| `container/gutter` | `VariableID:2245:44` | `GAP`, `WIDTH_HEIGHT` |
+| `section/rhythm-y` | `VariableID:2245:45` | `GAP`, `WIDTH_HEIGHT` |
+| `viewport/width` | `VariableID:2245:46` | `WIDTH_HEIGHT` |
+
+`container/max-width`, `container/gutter`, `section/rhythm-y` alias into
+`1 Primitives` per-mode (`breakpoint/xl`, `spacing/4`,
+`spacing/24`/`spacing/8`/`spacing/8` respectively — see brief table);
+`viewport/width` holds raw per-mode floats (390 has no Tailwind primitive
+to alias). No `missing primitive` throw — all referenced `1 Primitives`
+names (`breakpoint/xl`, `spacing/4`, `spacing/24`, `spacing/8`) resolved on
+the first try. `col.variableIds.length` confirmed 4 immediately after
+creation.
+
+### Step 3 — verification (resolved values per mode)
+
+Independent alias-resolution script (walks `VARIABLE_ALIAS` chains up to 5
+hops, reading each mode's first-mode value in the target collection) —
+matches Task 1/3's resolution pattern.
+
+| Variable | Desktop | Tablet | Mobile |
+|---|---|---|---|
+| `container/max-width` | 1280 | 1280 | 1280 |
+| `container/gutter` | 16 | 16 | 16 |
+| `section/rhythm-y` | 96 | **32** | 32 |
+| `viewport/width` | 1280 | 768 | 390 |
+
+Exact match to the brief's expected table, including the flagged gotcha:
+`section/rhythm-y` Tablet resolves to **32** (`spacing/8`), not 96 — the
+`spec.values.TABLET` for that variable was written as `alias("spacing/8")`
+in Step 2, not `spacing/24`, so the `lg:` breakpoint (1024, above the 768
+Tablet mode) never leaks into the Tablet column.
+
+**Result:** `3 Responsive` is live — 3 collections total in the file now
+(`1 Primitives`, `2 Theme`, `3 Responsive`). No git commit made (Figma-only
+work); this section is folded into `notes.md`'s existing uncommitted state
+alongside earlier Plan 3 entries.
