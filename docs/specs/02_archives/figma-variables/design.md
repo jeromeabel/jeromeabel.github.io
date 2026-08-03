@@ -289,16 +289,17 @@ Measured usage before the rename:
    and override-resolution log in `notes.md`'s "Plan 3 — Task 1/2/3" sections.
 5. ✅ **Shipped 2026-08-03** — Created `3 Responsive` (Desktop 1280 / Tablet
    768 / Mobile 390), 4 variables: `container/max-width`, `container/gutter`,
-   `section/rhythm-y`, `viewport/width`. Only `section/rhythm-y` varies by
-   mode (96 Desktop, 32 Tablet, 32 Mobile) — `container/max-width` (1280) and
-   `container/gutter` (16) hold the same value in all three modes today, and
-   `viewport/width` (1280/768/390) is a raw per-mode float with no Tailwind
-   primitive to alias. The three constant-valued variables are colocated in
-   this collection by **concern** (container/viewport sizing), not by
-   variance; the collection's justification is the one variable that does
-   vary, plus the affordance of binding frame width to the mode. No commit —
-   Figma-only work; full creation and verification log in `notes.md`'s
-   "Plan 3 — Task 5" section.
+   `section/rhythm-y`, `viewport/width`. Two of the four vary by mode:
+   `section/rhythm-y` (96 Desktop, 32 Tablet, 32 Mobile), which has a CSS
+   counterpart via the two `--spacing-section*` tokens, and `viewport/width`
+   (1280 Desktop, 768 Tablet, 390 Mobile), a Figma-only raw per-mode float
+   with no CSS counterpart. The other two — `container/max-width` (1280) and
+   `container/gutter` (16) — hold the same value in all three modes today and
+   are colocated in this collection by **concern** (container/viewport
+   sizing), not by variance; the collection's justification is the variables
+   that do vary, plus the affordance of binding frame width to the mode. No
+   commit — Figma-only work; full creation and verification log in
+   `notes.md`'s "Plan 3 — Task 5" section.
 
 All five migration steps are shipped. **Final state:** Figma holds exactly
 **3 collections** — `1 Primitives` (**446** vars, 1 mode, hidden from
