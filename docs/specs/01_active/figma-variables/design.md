@@ -265,17 +265,22 @@ Measured usage before the rename:
 2. ✅ **Shipped 2026-07-29** — Correct the font families in Figma
    (`Typography` → `2 Theme`). No commit: `font/sans`, `font/title`, `font/mono`
    created directly in `2 Theme`; `tokens.figma.json` is a gitignored artifact.
-3. Build `1 Primitives` (Tailwind mirror + `color/brand/*`), re-point `2 Theme`
-   values to brand aliases, hide the collection from publishing, rebind
-   consumers, delete the 11 old primitive collections.
+3. ✅ **Shipped 2026-08-03** — Built `1 Primitives` (443 base variables from
+   the Tailwind mirror + `color/brand/*`, plus a few later additions across
+   Plan 2 Tasks 1–7), re-pointed `2 Theme` values to brand aliases, hid the
+   collection from publishing, rebound every consumer. 12 old primitive
+   collections were deleted in the end, not 11 — a 14th, empty stray
+   collection literally named `Primitives` (`VariableCollectionId:453:2`) was
+   also found and deleted along with the rest. Figma now holds exactly 3
+   collections: `1 Primitives`, `2 Theme`, `Color Tokens`. No commits — this
+   work happened live in Figma via `use_figma`, not in the repo; see
+   `.superpowers/sdd/plan-2-primitives-merge/progress.md` for the task-by-task
+   history.
 4. Delete `Color Tokens`.
 5. Add `3 Responsive`.
 
-Steps 1–2 are safe and independently shippable, and are now done. Step 3 carries
-all the risk.
-
-Verified addition to step 3's deletion list: a 14th, empty collection named
-`Primitives` (`VariableCollectionId:453:2`) exists and goes with the others.
+Steps 1–3 are shipped. Step 4 (delete `Color Tokens`) and step 5 (add
+`3 Responsive`) are Plan 3.
 
 ## Resolved — the binding audit (2026-07-29)
 
@@ -284,24 +289,32 @@ Verified addition to step 3's deletion list: a 14th, empty collection named
 > `Border Width` and `Breakpoint` collections — or do they use raw numbers?**
 
 Every page was walked and every `boundVariables` alias resolved to its
-collection. **Answer: bound — but narrowly.**
+collection. **Answer: bound — but narrowly.** This is the verified inventory
+that step 3 was priced and gated on (see
+`plan-2-primitives-merge.md`'s "Verified binding inventory" section):
 
-| Collection                           | Vars       | Bindings | Verdict                                                   |
-| ------------------------------------ | ---------- | -------- | --------------------------------------------------------- |
-| `Color` (`VariableCollectionId:3:2`) | 8          | 5,225    | renamed in place, step 1                                  |
-| `Scale`                              | 21         | 4,834    | raw numbers — **the scale the file actually uses**        |
-| `Radius`                             | 10         | 164      | aliases into `Number Primitives`                          |
-| `Typography`                         | 52         | 33       | all `fontWeight`; **no font family bound anywhere**       |
-| `Container`                          | 13         | 9        |                                                           |
-| `Breakpoint`                         | 5          | 9        |                                                           |
-| `Color Tokens`                       | 392        | 29       | has live consumers — must rebind before step 4            |
-| `Color Primitives`                   | 299        | **0**    | free                                                      |
-| `Spacing`                            | 35         | **0**    | dead duplicate of `Scale`                                 |
-| `Opacity` / `Blur` / `Border Width`  | 21 / 7 / 5 | **0**    | free                                                      |
-| `Number Primitives`                  | 60         | 0 direct | alias target of the collections above                     |
-| `Primitives` (empty)                 | 0          | 0        | 14th collection, absent from the inventory above — delete |
+| Collection               | Vars | Bindings (whole file)     | Verdict                                                                                                |
+| ------------------------ | ---- | -------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `Color` → now `2 Theme`  | 8    | **5,225**                 | renamed in place (Plan 1) — untouched here                                                              |
+| `Scale`                  | 21   | **4,834**                 | `spacing/1…36` + `radius/*`, raw numbers. The scale the file actually uses.                             |
+| `Radius`                 | 10   | **164**                   | aliases into `Number Primitives`                                                                        |
+| `Typography`             | 52   | **33** (all `fontWeight`) | font families bound **nowhere**                                                                         |
+| `Container`              | 13   | **9**                     |                                                                                                          |
+| `Breakpoint`             | 5    | **9**                     |                                                                                                          |
+| `Color Tokens`           | 392  | **29**                    | Plan 3 handles these                                                                                     |
+| `Color Primitives`       | 299  | **0**                     | free to delete                                                                                            |
+| `Spacing`                | 35   | **0**                     | dead duplicate of `Scale`                                                                                 |
+| `Opacity`                | 21   | **0**                     | free                                                                                                      |
+| `Blur`                   | 7    | **0**                     | free                                                                                                      |
+| `Border Width`           | 5    | **0**                     | free                                                                                                      |
+| `Number Primitives`      | 60   | **0 direct**              | but `Spacing`/`Radius`/`Container`/`Breakpoint`/`Blur`/`Border Width`/`Typography` all alias _into_ it   |
+| `Primitives`             | 0    | 0                          | empty stray collection, not in this inventory — deleted alongside the others                             |
 
-Four findings that change the plan:
+Distribution by page: `📄 Pages` 5,219 bound nodes / 7,774 total; `🧩 Components`
+757 / 1,542; `Pages Experiment` 418; `🗄️ Legacy` 128; `🎨 Foundations` 16;
+`📖 Cover` 0.
+
+Four findings that changed the plan:
 
 1. **427 variables have zero consumers.** The entire rebinding cost is ~5,049
    bindings across 5 collections, and every one is a mechanical id-swap — one

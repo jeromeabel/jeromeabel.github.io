@@ -66,6 +66,12 @@ the decisions; this holds the _why_ in reusable form.
   designing a mode axis.
 - **Bound letter-spacing coerces to pixels** — `tracking/*` stays
   reference-only.
+- **Remap by resolved value, not by name.** Two collections can use the same
+  leaf name for different pixel values — `Scale`'s `radius/lg` is 16px,
+  Tailwind's `radius/lg` is 8px. A name-based remap is silent corruption (it
+  would have halved every 16px corner in the file); a value-based remap
+  catches the collision automatically and needs no hand-maintained exception
+  table.
 - **Variable binding is Figma's utility class.** `p-4` in code ≡ padding bound
   to `spacing/4` in Figma; same for gap, corner radius (`radius/lg`), stroke
   weight (`border-width/2`), font size, line height, min/max width. Components
@@ -88,6 +94,13 @@ the decisions; this holds the _why_ in reusable form.
 - **Verify bindings before pricing a migration** (the S0→S4 open question).
   Bound vs unbound consumers is the difference between "dominant effort" and
   "free cleanup"; dump real node data, never assume.
+- **Price a migration by walking real bindings, not by counting variables.**
+  928 variables in the file, but 427 of them had zero consumers and the whole
+  rebinding cost sat in 5 collections — variable count and migration cost are
+  unrelated numbers.
+- **A collection with zero bindings is free to regenerate.** That is what made
+  generating `1 Primitives`' colours from `theme.css` safe rather than risky —
+  no consumer could be broken by a value that was never bound anywhere.
 
 ## Process
 
