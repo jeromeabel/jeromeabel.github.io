@@ -143,10 +143,11 @@ the decisions; this holds the _why_ in reusable form.
 
 ## Plan 3 — responsive tokens (transferable lessons)
 
-- **A mode axis is only worth its cost if something on it moves.** Three of
-  four `3 Responsive` variables are constant across modes; the collection is
-  justified by the one that isn't (`section/rhythm-y`), plus the affordance
-  of binding frame width to the mode.
+- **A mode axis is only worth its cost if something on it moves.** Two of
+  four `3 Responsive` variables (`container/max-width`, `container/gutter`)
+  are constant across modes; the collection is justified by the two that
+  vary — `section/rhythm-y` (the one with a CSS counterpart) plus the
+  affordance of binding frame width (`viewport/width`) to the mode.
 - **Breakpoint and mode are different axes.** `lg:` = 1024 sits between the
   768 and 1280 modes, so the Tablet mode carries the mobile value. Copying a
   `lg:` value into a tablet mode is the default mistake.
