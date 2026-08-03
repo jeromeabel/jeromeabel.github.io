@@ -368,3 +368,112 @@ with the wrong resolved type (all hardcoded `FLOAT`) and no values/scopes —
 these were deleted (`variable.remove()`) before the real batch 4 ran, so the
 final collection contains no leftover cruft. Confirmed via the total dropping
 back to 333 post-cleanup, then to 443 after the corrected batch 4.
+
+## Plan 3 — Task 1: audit `Color Tokens` bindings + mode overrides
+
+**Live page inventory reconfirmed** (`figma.root.children`) before running
+Step 2 — differs from the brief's static list in two names, same ids where
+still present:
+
+| Page | id |
+|---|---|
+| 📖 Cover | `0:1` |
+| 🎨 Foundations | `5:14` |
+| 🧩 Components (back) | `52:2` (renamed from "🧩 Components" — same id) |
+| 📄 Pages | `44:328` |
+| Pages Experiment | `442:5352` |
+| Components (new) | `461:759` (not `52:2` as briefly guessed — confirmed live) |
+
+`🗄️ Legacy` confirmed absent (no such page in `figma.root.children`).
+
+### Binding counts per page
+
+| Page | `Color Tokens` bindings | Mode overrides on `Color Tokens` |
+|---|---|---|
+| 📖 Cover | 0 | 0 |
+| 🎨 Foundations | 0 | 0 |
+| 🧩 Components (back) | 6 | 0 |
+| 📄 Pages | 20 | 0 |
+| Pages Experiment | 3 | 0 |
+| Components (new) | 93 | **1** |
+| **Total** | **122** | **1** |
+
+`6 + 20 + 3 = 29` — exactly Plan 2 Task 5/6's file-wide figure. That count
+never included `Components (new)`, which wasn't in the original page
+inventory (per the brief's caveat) and turns out to carry 93 of the 122
+total bindings — by far the largest share. The "29" figure was correct for
+the pages it covered; it was never file-wide once `Components (new)` is in
+scope.
+
+### 🛑 BLOCKER — non-empty override on `Color Tokens`
+
+Node `2134:697` ("PostCard-Experiment", a `COMPONENT_SET`) on page
+`Components (new)`, inside section "Experiment", carries:
+
+```
+explicitVariableModes: { "VariableCollectionId:368:322": "368:5" }
+```
+
+`VariableCollectionId:368:322` **is** the `Color Tokens` collection id, and
+`368:5` is its `Dark` mode (`Color Tokens` has its own Light/Dark modes:
+`368:4`/`368:5` — separate from `2 Theme`'s `3:0`/`3:1`). This is exactly
+the scenario the brief said to stop for: the brief's assumption was that any
+dark-frame override in the file points at `2 Theme` (`VariableCollectionId:3:2`)
+and none point at `Color Tokens` directly. That assumption is false for this
+one node — the override targets `Color Tokens` itself.
+
+**Per the brief and task instructions: this is a plan-level decision, not
+mine to resolve.** Two ways to fix, from the brief: (a) rebind this frame to
+an equivalent `2 Theme` mode override instead, or (b) keep `Color Tokens`
+around (don't delete it in Task 3) and revise the plan. Reported as BLOCKED;
+Task 2/3 should not proceed — deleting `Color Tokens` while this override is
+live would silently drop the override and the component set would fall back
+to its default (Light) mode.
+
+### Remap table (Step 3 — read-only, does not touch the blocker above)
+
+8 distinct variables are bound across the 122 binding instances. All 8
+resolve cleanly to hex and all 8 land exactly on an existing `1 Primitives`
+variable — **0 unmatched, 0 ambiguous** — so no `brand-primitives.json`
+edits were needed and no theme-vs-primitive judgment call was required
+(none of the 8 hex values also exist in `2 Theme`, so there was never a `2
+Theme` hit competing with the `1 Primitives` one).
+
+**Resolve-chain gotcha:** every `Color Tokens` variable aliases one hop into
+a variable in a collection called `Color Primitives`
+(`VariableCollectionId:368:22`) — a *legacy* primitives collection distinct
+from the new `1 Primitives` (`VariableCollectionId:2013:2`). `Color
+Primitives` is **not** returned by `getLocalVariableCollectionsAsync()`
+(its own `variableIds` array reports empty, though the variables that
+belong to it still resolve fine via `getVariableByIdAsync` /
+`getVariableCollectionByIdAsync`). The brief's Step 3 script builds its
+collection list purely from `getLocalVariableCollectionsAsync()`, so the
+one-hop alias into `Color Primitives` throws (`cannot read property 'modes'
+of undefined`) unless the resolver falls back to
+`getVariableCollectionByIdAsync` for collections missing from that list.
+Noting this for whoever reuses this script pattern later — `Color
+Primitives` is presumably next in line for its own retirement (out of
+scope for this plan).
+
+| Source var (`Color Tokens`) | Hex | Target var | Rationale |
+|---|---|---|---|
+| `Utility/Violet/violet-400` (`VariableID:368:543`) | `#a684ff` | `1 Primitives/color/violet/400` (`VariableID:2016:66`) | Exact hex match, no `2 Theme` competitor |
+| `Utility/Teal/teal-500` (`VariableID:368:577`) | `#00bba7` | `1 Primitives/color/teal/500` (`VariableID:2016:57`) | Exact hex match, no `2 Theme` competitor |
+| `Utility/Teal/teal-400` (`VariableID:368:576`) | `#00d5be` | `1 Primitives/color/teal/400` (`VariableID:2016:55`) | Exact hex match, no `2 Theme` competitor |
+| `Utility/Teal/teal-50` (`VariableID:368:572`) | `#f0fdfa` | `1 Primitives/color/teal/50` (`VariableID:2016:56`) | Exact hex match, no `2 Theme` competitor |
+| `Text/white` (`VariableID:368:374`) | `#ffffff` | `1 Primitives/color/white` (`VariableID:2016:74`) | Exact hex match, no `2 Theme` competitor |
+| `Utility/Fuchsia/fuchsia-800` (`VariableID:368:514`) | `#8a0194` | `1 Primitives/color/fuchsia/800` (`VariableID:2014:84`) | Exact hex match, no `2 Theme` competitor |
+| `Utility/Teal/teal-600` (`VariableID:368:578`) | `#009689` | `1 Primitives/color/teal/600` (`VariableID:2016:58`) | Exact hex match, no `2 Theme` competitor |
+| `Utility/Teal/teal-800` (`VariableID:368:580`) | `#005f5a` | `1 Primitives/color/teal/800` (`VariableID:2016:60`) | Exact hex match, no `2 Theme` competitor |
+
+All 8 source variables are decorative "utility" accent colours (violet,
+teal, fuchsia badges/underlines on post cards) — none are part of the
+semantic light/dark colour system, so binding straight to `1 Primitives`
+(fixed, non-theming) is correct; there is no dark-mode variant of a teal-500
+badge to preserve.
+
+**`overrides` list:** exactly the one entry above (`2134:697`,
+`PostCard-Experiment`, mode `368:5`) — non-empty, so per the brief this
+blocks proceeding to Task 2/3 until a human/plan-level call is made.
+`Color Tokens` must **not** be deleted while this override is outstanding —
+deleting the collection would silently drop the override.
