@@ -642,10 +642,14 @@ name → `remove()` → re-read collections).
 
 Exactly the expected post-delete shape from the brief: two collections,
 `1 Primitives` hidden and `2 Theme` visible. (`1 Primitives` is 446, not
-Plan 2 Task 3's original 443 — 3 more were added in the interim by Task 1's
-audit script cleanup pass; not investigated further since it's outside this
-task's scope and the collection identity/hidden flag are what the gate
-checks.)
+Plan 2 Task 3's original 443 — 3 more variables exist in the collection now
+than at its creation. Cause unknown, not investigated: neither the Plan 2
+Task 3 section above (which documents a different, earlier 333→443 change
+during original primitives creation, not this 443→446 gap) nor Plan 3's
+Task 1 section — which never touches the `1 Primitives` count — accounts
+for it. Left uninvestigated because it's outside this task's scope and the
+collection identity/hidden flag are what the gate checks; flagged here so
+it isn't mistaken for an explained delta.)
 
 **Re-dump note — the brief's one-shot script hit the `use_figma` ~20KB
 response cap.** A single unfiltered dump of both collections plus text

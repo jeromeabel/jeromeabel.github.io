@@ -1,8 +1,33 @@
 # Figma token dump — figma-blog-fit
 
 1. Read the `/figma-use` skill (required before any `use_figma` call this session).
-2. Run ONE `use_figma` call on file `ihWIWmvtQPTWgUxlrVjC2c` ("Blog Design System v1.0" — the live DS file since 2026-07-29; `Wf4iomVMYUXlFIBV3Z8bx4` is the read-only backup) with the script below.
-3. Save the returned JSON to `tokens.figma.json` at repo root.
+2. Run `use_figma` on file `ihWIWmvtQPTWgUxlrVjC2c` ("Blog Design System v1.0" — the live DS file since 2026-07-29; `Wf4iomVMYUXlFIBV3Z8bx4` is the read-only backup) with the script below.
+   - **`use_figma` responses are capped around ~20KB.** A single unfiltered
+     dump across every collection (`1 Primitives` alone is ~446 variables)
+     will truncate mid-response — silently, with no error, just a cut-off
+     JSON string. Confirmed 2026-08-03 (Plan 3 Task 3 re-dump, both as
+     pretty JSON and as `JSON.stringify` output).
+   - **If the dump truncates, split it into multiple `use_figma` calls and
+     merge locally**, rather than trying to shrink the script further:
+     1. One call per small collection (e.g. `2 Theme`, 20 entries) plus
+        text styles — these fit in one response.
+     2. For large collections, batch `collection.variableIds.slice(offset,
+        offset + N)` across several sequential calls (N ≈ 100–120 worked in
+        practice) instead of looping the whole `variableIds` array in one
+        script.
+     3. Merge the batches locally (a small Node script, not another
+        `use_figma` call) into the same `{ collections: [...], textStyles:
+        [...] }` shape the script below produces.
+     4. Before writing `tokens.figma.json`, verify the merge: total
+        variable count matches the collection's live `variableIds.length`,
+        and no duplicate variable names across batches. Both checks are
+        cheap and catch a mis-sliced batch boundary immediately, rather
+        than surfacing later as a spurious `figma:verify` diff.
+   - This does not change what gets written — a correctly merged
+     multi-call dump is byte-for-byte the same shape as an unrestricted
+     one-shot dump would have produced. It's a token-budget workaround, not
+     a scope change to the dump itself.
+3. Save the returned (or merged) JSON to `tokens.figma.json` at repo root.
 4. Run `pnpm figma:verify` and record verdicts in
    `docs/specs/01_active/figma-variables/notes.md` (not
    `scripts/figma/notes.md` — that file is generator-conversion notes, not
