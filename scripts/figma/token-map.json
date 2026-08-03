@@ -16,13 +16,15 @@
     "dark/color-surface-hover": "2 Theme/Dark/color/surface-hover",
     "font-sans-primary": "2 Theme/Light/font/sans",
     "font-title-primary": "2 Theme/Light/font/title",
-    "font-mono-primary": "2 Theme/Light/font/mono"
+    "font-mono-primary": "2 Theme/Light/font/mono",
+    "container-max-width": "3 Responsive/Desktop/container/max-width",
+    "container-padding-inline": "3 Responsive/Desktop/container/gutter",
+    "spacing-section": "3 Responsive/Mobile/section/rhythm-y",
+    "spacing-section-lg": "3 Responsive/Desktop/section/rhythm-y"
   },
   "ignore": [
     "font-sans",
     "font-title",
-    "font-mono",
-    "container-max-width",
-    "container-padding-inline"
+    "font-mono"
   ]
 }
