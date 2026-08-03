@@ -27,6 +27,14 @@
      multi-call dump is byte-for-byte the same shape as an unrestricted
      one-shot dump would have produced. It's a token-budget workaround, not
      a scope change to the dump itself.
+   - **The script below resolves `VARIABLE_ALIAS` chains of any depth,
+     regardless of the aliased variable's type.** An earlier version only
+     resolved the hop when the *referenced* variable was `COLOR` (formatting
+     it as hex); any other type — e.g. a `FLOAT` alias, such as `3
+     Responsive`'s variables pointing into `1 Primitives` — was left as an
+     unresolved `{ alias: "<name>" }` object. `diff-tokens.mjs` expects
+     `v.value` to already be a plain number/string, so that shape reported as
+     a false Missing/Mismatch. Confirmed and fixed 2026-08-03 (Plan 3 Task 6).
 3. Save the returned (or merged) JSON to `tokens.figma.json` at repo root.
 4. Run `pnpm figma:verify` and record verdicts in
    `docs/specs/01_active/figma-variables/notes.md` (not
@@ -34,6 +42,35 @@
    the migration execution log).
 
 ```js
+const hex = (c) =>
+  "#" +
+  ["r", "g", "b"]
+    .map((k) => Math.round(c[k] * 255).toString(16).padStart(2, "0"))
+    .join("");
+
+// Resolves through a VARIABLE_ALIAS chain of any depth (capped at 5 hops as
+// a runaway guard) until it lands on a concrete value, regardless of the
+// resolvedType at each hop. Only the *final* variable's resolvedType decides
+// COLOR formatting — intermediate hops (e.g. a FLOAT alias into a primitive)
+// must not be short-circuited to `{ alias: name }`, or diff-tokens.mjs (which
+// expects `v.value` to already be a plain number/string) reports every such
+// token as a false mismatch/missing. Confirmed live 2026-08-03 (Plan 3 Task 6):
+// `3 Responsive`'s 4 variables are FLOAT aliases one hop into `1 Primitives`
+// (e.g. `container/max-width` → `breakpoint/xl`) — the prior COLOR-only hop
+// left them as unresolved `{ alias: "breakpoint/xl" }` objects.
+async function resolveValue(startVar, modeId) {
+  let v = startVar;
+  let value = v.valuesByMode[modeId];
+  let hops = 0;
+  while (value && value.type === "VARIABLE_ALIAS" && hops < 5) {
+    v = await figma.variables.getVariableByIdAsync(value.id);
+    value = v.valuesByMode[Object.keys(v.valuesByMode)[0]];
+    hops++;
+  }
+  if (v.resolvedType === "COLOR" && value) return hex(value);
+  return value;
+}
+
 const out = { collections: [], textStyles: [] };
 for (const c of await figma.variables.getLocalVariableCollectionsAsync()) {
   const multiMode = c.modes.length > 1;
@@ -41,29 +78,10 @@ for (const c of await figma.variables.getLocalVariableCollectionsAsync()) {
   for (const id of c.variableIds) {
     const v = await figma.variables.getVariableByIdAsync(id);
     for (const m of c.modes) {
-      let value = v.valuesByMode[m.modeId];
-      if (value && value.type === "VARIABLE_ALIAS") {
-        const ref = await figma.variables.getVariableByIdAsync(value.id);
-        const refVal = ref.valuesByMode[Object.keys(ref.valuesByMode)[0]];
-        const h = (x) =>
-          Math.round(x * 255)
-            .toString(16)
-            .padStart(2, "0");
-        value =
-          ref.resolvedType === "COLOR" && refVal
-            ? `#${h(refVal.r)}${h(refVal.g)}${h(refVal.b)}`
-            : { alias: ref.name };
-      } else if (v.resolvedType === "COLOR" && value) {
-        const h = (x) =>
-          Math.round(x * 255)
-            .toString(16)
-            .padStart(2, "0");
-        value = `#${h(value.r)}${h(value.g)}${h(value.b)}`;
-      }
       vars.push({
         name: multiMode ? `${m.name}/${v.name}` : v.name,
         type: v.resolvedType,
-        value,
+        value: await resolveValue(v, m.modeId),
         description: v.description,
       });
     }
