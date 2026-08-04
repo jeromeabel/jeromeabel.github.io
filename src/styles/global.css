@@ -38,6 +38,16 @@
   --color-border: #d1ddbb;
   --color-surface: #e0eec4;
   --color-surface-hover: #d1ddbb;
+
+  /* Single accent (teal). Budget: serie chips, section CTAs, active nav, focus
+     rings, hover underline decoration — nothing else. Steps differ per mode
+     because the same teal can't clear 4.5:1 on both backgrounds: teal-500 is
+     2.34:1 on the cream bg, teal-800 is 2.21:1 on the near-black one.
+     Mirrored in Figma as `2 Theme/color/accent*`. */
+  --color-accent: #00786f; /* teal-700 — 5.18:1 on --color-background */
+  --color-accent-hover: #005f5a; /* teal-800 — 7.28:1, darkens on hover */
+  --color-accent-strong: #0b4f4a; /* teal-900 — 9.09:1, high-emphasis */
+  --color-accent-subtle: #f0fdfa; /* teal-50  — tinted surface, not text */
 }
 
 @variant dark {
@@ -49,6 +59,12 @@
   --color-border: #4c4c4c;
   --color-surface: #343434;
   --color-surface-hover: #4c4c4c;
+
+  /* Accent flips direction in dark: hover brightens instead of darkening. */
+  --color-accent: #00bba7; /* teal-500 — 6.88:1 on --color-background */
+  --color-accent-hover: #00d5be; /* teal-400 — 8.94:1, brightens on hover */
+  --color-accent-strong: #46ecd5; /* teal-300 — 11.29:1, high-emphasis */
+  --color-accent-subtle: #022f2e; /* teal-950 — tinted surface, not text */
 }
 
 /* Image zoom: expand (desktop only) */
