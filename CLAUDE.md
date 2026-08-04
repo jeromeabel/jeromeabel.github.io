@@ -15,8 +15,11 @@ Personal portfolio and blog site for Jerome Abel, built with Astro 5, Tailwind C
 | `pnpm preview`          | Serve production build locally                                                                 |
 | `pnpm format:check`     | Check formatting with Prettier                                                                 |
 | `pnpm format:write`     | Auto-format all files                                                                          |
+| `pnpm figma:dump <f>`   | Extract `tokens.figma.json` from a local `.fig` export                                         |
 | `pnpm figma:verify`     | Diff code design tokens against the Figma variable dump (drift check)                          |
+| `pnpm figma:verify-raw` | Diff Figma raw (unbound) values against the `named-debt.json` allowlist                        |
 | `pnpm figma:primitives` | Regenerate `primitives.json` (Figma `1 Primitives` source) from the installed Tailwind version |
+| `pnpm geometry:web`     | Extract live-route computed geometry via Playwright (layout-exact prover, web side)            |
 | `pnpm test`             | Node test runner over `scripts/figma/*.test.mjs`                                               |
 
 Package manager is **pnpm**. No linter configured.
@@ -83,6 +86,19 @@ Cover/thumbnail generation moved to the standalone studio at
 `~/code/projects/cover-studio` (Vue app; `pnpm dev` there). It reads this
 repo's content frontmatter and writes back `cover.gen.png` + `illustration:`
 frontmatter via `pnpm export`. Spec: `.specs/02_archives/cover-studio/design.md`.
+
+## Figma Design Tokens
+
+Code↔Figma drift-check tooling lives in `scripts/figma/` (see its
+[README](scripts/figma/README.md)): `pnpm figma:dump <file.fig>` (Figma-side token dump),
+`pnpm figma:verify` (token diff, Pass 1), `pnpm figma:verify-raw` (raw-value allowlist diff,
+Pass 2), `pnpm figma:primitives` (regenerate `1 Primitives` from installed Tailwind),
+`pnpm geometry:web` (extract live computed geometry for the layout-exact prover). Figma has no
+dump API, but a local **File > Export** `.fig` carries the whole document: `fig-decode.mjs`
+parses that fig-kiwi binary into a node graph, which is how `figma:dump` works. Bindings and raw
+values still pair a deterministic diff with a manual `use_figma` MCP procedure doc
+(`dump-bindings.md`, `dump-raw-values.md`). Spec:
+`.specs/02_archives/figma-variables/design.md`.
 
 ## Specs & Planning
 

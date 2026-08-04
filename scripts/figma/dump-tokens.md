@@ -1,5 +1,11 @@
 # Figma token dump — figma-blog-fit
 
+> **Prefer `pnpm figma:dump <file.fig>`.** Since 2026-08-04, `extract-fig-tokens.mjs` produces
+> `tokens.figma.json` from a local **File > Export** `.fig` — same shape, no ~20KB cap, no
+> batching, no manual merge. This procedure is the fallback for when an export isn't available;
+> keep it in sync with the script if the dump shape changes. The **Geometry read** section below
+> has no scripted equivalent and is still the current procedure.
+
 1. Read the `/figma-use` skill (required before any `use_figma` call this session).
 2. Run `use_figma` on file `ihWIWmvtQPTWgUxlrVjC2c` ("Blog Design System v1.0" — the live DS file since 2026-07-29; `Wf4iomVMYUXlFIBV3Z8bx4` is the read-only backup) with the script below.
    - **`use_figma` responses are capped around ~20KB.** A single unfiltered
@@ -12,12 +18,12 @@
      1. One call per small collection (e.g. `2 Theme`, 20 entries) plus
         text styles — these fit in one response.
      2. For large collections, batch `collection.variableIds.slice(offset,
-        offset + N)` across several sequential calls (N ≈ 100–120 worked in
+offset + N)` across several sequential calls (N ≈ 100–120 worked in
         practice) instead of looping the whole `variableIds` array in one
         script.
      3. Merge the batches locally (a small Node script, not another
         `use_figma` call) into the same `{ collections: [...], textStyles:
-        [...] }` shape the script below produces.
+[...] }` shape the script below produces.
      4. Before writing `tokens.figma.json`, verify the merge: total
         variable count matches the collection's live `variableIds.length`,
         and no duplicate variable names across batches. Both checks are
@@ -29,15 +35,15 @@
      a scope change to the dump itself.
    - **The script below resolves `VARIABLE_ALIAS` chains of any depth,
      regardless of the aliased variable's type.** An earlier version only
-     resolved the hop when the *referenced* variable was `COLOR` (formatting
+     resolved the hop when the _referenced_ variable was `COLOR` (formatting
      it as hex); any other type — e.g. a `FLOAT` alias, such as `3
-     Responsive`'s variables pointing into `1 Primitives` — was left as an
+Responsive`'s variables pointing into `1 Primitives` — was left as an
      unresolved `{ alias: "<name>" }` object. `diff-tokens.mjs` expects
      `v.value` to already be a plain number/string, so that shape reported as
      a false Missing/Mismatch. Confirmed and fixed 2026-08-03 (Plan 3 Task 6).
 3. Save the returned (or merged) JSON to `tokens.figma.json` at repo root.
 4. Run `pnpm figma:verify` and record verdicts in
-   `docs/specs/02_archives/figma-variables/notes.md` (not
+   `.specs/02_archives/figma-variables/notes.md` (not
    `scripts/figma/notes.md` — that file is generator-conversion notes, not
    the migration execution log).
 
@@ -45,7 +51,11 @@
 const hex = (c) =>
   "#" +
   ["r", "g", "b"]
-    .map((k) => Math.round(c[k] * 255).toString(16).padStart(2, "0"))
+    .map((k) =>
+      Math.round(c[k] * 255)
+        .toString(16)
+        .padStart(2, "0"),
+    )
     .join("");
 
 // Resolves through a VARIABLE_ALIAS chain of any depth (capped at 5 hops as
@@ -137,18 +147,24 @@ const targets = [
   // ...one entry per manifest id with a matching Figma master, from the inventory pass
 ];
 
-const rgb = (c) => `rgb(${Math.round(c.r * 255)}, ${Math.round(c.g * 255)}, ${Math.round(c.b * 255)})`;
+const rgb = (c) =>
+  `rgb(${Math.round(c.r * 255)}, ${Math.round(c.g * 255)}, ${Math.round(c.b * 255)})`;
 const px = (n) => `${n}px`;
 
 async function readRoot(node) {
   const props = { width: px(node.width) };
-  if (typeof node.cornerRadius === "number") props.borderRadius = px(node.cornerRadius);
+  if (typeof node.cornerRadius === "number")
+    props.borderRadius = px(node.cornerRadius);
   if (Array.isArray(node.fills) && node.fills.length) {
-    const solid = node.fills.find((f) => f.type === "SOLID" && f.visible !== false);
+    const solid = node.fills.find(
+      (f) => f.type === "SOLID" && f.visible !== false,
+    );
     if (solid) props.backgroundColor = rgb(solid.color);
   }
   if (Array.isArray(node.strokes) && node.strokes.length) {
-    const solid = node.strokes.find((s) => s.type === "SOLID" && s.visible !== false);
+    const solid = node.strokes.find(
+      (s) => s.type === "SOLID" && s.visible !== false,
+    );
     if (solid) props.borderTopColor = rgb(solid.color);
   }
   if ("layoutMode" in node && node.layoutMode !== "NONE") {
@@ -160,10 +176,14 @@ async function readRoot(node) {
   }
   if (node.type === "TEXT") {
     if (typeof node.fontSize === "number") props.fontSize = px(node.fontSize);
-    if (node.fontName && node.fontName !== figma.mixed) props.fontFamily = node.fontName.family;
-    if (typeof node.fontWeight === "number") props.fontWeight = String(node.fontWeight);
+    if (node.fontName && node.fontName !== figma.mixed)
+      props.fontFamily = node.fontName.family;
+    if (typeof node.fontWeight === "number")
+      props.fontWeight = String(node.fontWeight);
     if (Array.isArray(node.fills) && node.fills.length) {
-      const solid = node.fills.find((f) => f.type === "SOLID" && f.visible !== false);
+      const solid = node.fills.find(
+        (f) => f.type === "SOLID" && f.visible !== false,
+      );
       if (solid) props.color = rgb(solid.color);
     }
   }
