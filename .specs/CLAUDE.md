@@ -17,10 +17,10 @@ Project ideas and their design/plan artifacts live here. **Status = folder locat
 ## Helper
 
 ```
-./docs/specs/specs.sh new <slug> ["title"]   # create a backlog stub
-./docs/specs/specs.sh activate <slug>          # backlog → active
-./docs/specs/specs.sh archive <slug>           # active → archives (stamps shipped:)
-./docs/specs/specs.sh index                    # regenerate INDEX.md
+./.specs/specs.sh new <slug> ["title"]   # create a backlog stub
+./.specs/specs.sh activate <slug>          # backlog → active
+./.specs/specs.sh archive <slug>           # active → archives (stamps shipped:)
+./.specs/specs.sh index                    # regenerate INDEX.md
 ```
 
 `new`, `activate`, and `archive` regenerate `INDEX.md` automatically.

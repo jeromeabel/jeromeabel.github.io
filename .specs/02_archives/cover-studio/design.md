@@ -3,6 +3,7 @@ created: 2026-07-28
 ---
 
 # Cover Studio — standalone Vue app (design)
+
 **Status:** designed — approved in brainstorm, pending plan
 **Decision:** Approach A — new blog-dedicated repo `~/code/projects/cover-studio`, Vue 3 + Vite + shadcn-vue frontend, current Node/ImageMagick pipeline ported as backend. Layout 1 (three-pane classic). Supersedes further UI work on `images/scripts/studio/` in this repo.
 
@@ -44,9 +45,9 @@ Usage profile: per-post quick tuning long-term; right now a batch of new images 
 ```
 
 - **Single process.** API is a Vite plugin middleware; `pnpm dev` serves UI + API on one origin with hot reload. Localhost tool, never deployed. Loopback host check + Origin CSRF guard ported from `studio.mjs`.
-- **Pipeline ported, not rewritten.** `lib/` modules move near-verbatim; 28 tests come along (vitest). Determinism contract (seed → RNG consumption order `op, cx, cy, rx, ry, rot`) preserved; existing tuned entries render identically (verified before/after).
+- **Pipeline ported, not rewritten.** `lib/` modules move near-verbatim; 28 tests come along (vitest). Determinism contract (seed → RNG consumption order `op, cx, cy, rx, ry, rot`) preserved; existing tuned entries render identically (verified before/after). **Ordering rule:** the determinism check runs against the _ported-verbatim_ resolve first (mesh reserved-key fix NOT applied); only after hashes match is the mesh fix landed as a separate, tracked change — `api-endpoints-with-astro` (carries `mesh.blur: 101`, previously ignored) is the one entry expected to change render at that point, re-baselined deliberately.
 - **Byte-serving machinery deleted.** Browser and server import the same pure modules through Vite; `LIB_WHITELIST`, raw-serving routes and `checks/served-lib.mjs` all die.
-- **Data moves.** `illustration.json` + `crops.json` live in `cover-studio/data/`, versioned there. Blog's future step-2 (runtime `Illustration.astro`, OG endpoints) is unaffected and stays a blog-side project.
+- **Data moves.** `illustration.json` + `crops.json` live in `cover-studio/data/`, versioned there. Blog's future step-2 (runtime `Illustration.astro`, OG endpoints) stays a blog-side project — but if it renders meshes at runtime it will need per-entry settings the blog no longer holds. Contract: `pnpm export` also emits each exported entry's _resolved_ settings (frontmatter `illustration:` block alongside the `img:` rewrite), so the blog owns everything its build needs; step-2's design decides whether to consume it. Cover-studio's `data/` is tool state, never a blog build input.
 - **System deps stay:** ImageMagick, mkbitmap, potrace (README documents them). No sharp rewrite.
 
 ## 3. Frontend
@@ -68,7 +69,7 @@ Per-leaf knob state: `{ value, defaultValue, tier: global|type|image, savedValue
 
 ### Presets
 
-The existing `type` tier *is* the preset system; it gets UI: "save current groups as preset for type <x>", apply preset, list/compare presets. Storage unchanged — writes `illustration.json → types`, which `resolve` already merges. No new format.
+The existing `type` tier _is_ the preset system; it gets UI: "save current groups as preset for type <x>", apply preset, list/compare presets. Storage unchanged — writes `illustration.json → types`, which `resolve` already merges. No new format.
 
 ### Mesh editor
 

@@ -15,7 +15,7 @@ A single, git-tracked home for project ideas and their design/plan artifacts, an
 ## Structure
 
 ```
-docs/specs/
+.specs/
 ├── INDEX.md        # generated dashboard: active / backlog / done
 ├── CLAUDE.md       # conventions (condensed from this design)
 ├── specs.sh        # helper: new | activate | archive | index
@@ -105,7 +105,7 @@ Titles read from frontmatter; artifact list (`design`, `plan`, `notes`) from fil
 
 ## Integration with skills
 
-Project `CLAUDE.md` gets a short section: brainstorming writes designs to `docs/specs/01_active/<slug>/design.md`, writing-plans writes to `docs/specs/01_active/<slug>/plan.md` (both skills honor user-preference location override). Shipped work is archived via `./docs/specs/specs.sh archive <slug>`.
+Project `CLAUDE.md` gets a short section: brainstorming writes designs to `.specs/01_active/<slug>/design.md`, writing-plans writes to `.specs/01_active/<slug>/plan.md` (both skills honor user-preference location override). Shipped work is archived via `./.specs/specs.sh archive <slug>`.
 
 ## Out of scope (YAGNI)
 

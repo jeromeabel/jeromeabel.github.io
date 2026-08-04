@@ -1,6 +1,6 @@
 // Build-time layout variant switches for the v3 redesign.
 // Change a value, restart `pnpm dev`, compare on the real site.
-// See docs/specs/01_active/v3-redesign/design.md
+// See .specs/01_active/v3-redesign/design.md
 
 export type WorkFeaturedVariant =
   "gallery-2x2-16x9" | "gallery-2x2-1x1" | "gallery-3col-1x1";

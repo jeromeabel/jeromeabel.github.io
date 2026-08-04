@@ -1034,8 +1034,8 @@ git commit -m "chore(figma): merge 12 primitive collections into 1 Primitives, r
 
 **Files:**
 
-- Modify: `docs/specs/01_active/figma-variables/design.md`
-- Modify: `docs/specs/01_active/figma-variables/notes.md`
+- Modify: `.specs/01_active/figma-variables/design.md`
+- Modify: `.specs/01_active/figma-variables/notes.md`
 
 - [ ] **Step 1: Replace the "Open question" section in `design.md`**
 
@@ -1052,7 +1052,7 @@ At minimum:
 - [ ] **Step 3: Commit**
 
 ```bash
-git add docs/specs/01_active/figma-variables/
+git add .specs/01_active/figma-variables/
 git commit -m "docs(specs): figma-variables — step 3 shipped, open question resolved"
 ```
 

@@ -355,7 +355,7 @@ Expected: zero Missing, zero Mismatch, zero Unmapped.
 - [ ] **Step 3: Commit**
 
 ```bash
-git add tokens.figma.json docs/specs/01_active/figma-variables/notes.md
+git add tokens.figma.json .specs/01_active/figma-variables/notes.md
 git commit -m "chore(figma): rebind and delete Color Tokens — two collections remain"
 ```
 
@@ -686,8 +686,8 @@ git commit -m "feat(figma): 3 Responsive collection under the drift check"
 
 **Files:**
 
-- Modify: `docs/specs/01_active/figma-variables/design.md`
-- Modify: `docs/specs/01_active/figma-variables/notes.md`
+- Modify: `.specs/01_active/figma-variables/design.md`
+- Modify: `.specs/01_active/figma-variables/notes.md`
 - Modify: `CLAUDE.md`
 
 - [ ] **Step 1: Mark migration steps 4–5 shipped in `design.md`**
@@ -710,8 +710,8 @@ The Illustration Lab section is unrelated, but the token pipeline now has a four
 - [ ] **Step 4: Archive the spec**
 
 ```bash
-./docs/specs/specs.sh archive figma-variables
-git add docs/specs CLAUDE.md
+./.specs/specs.sh archive figma-variables
+git add .specs CLAUDE.md
 git commit -m "docs(specs): archive figma-variables — three-collection structure shipped"
 ```
 
@@ -723,4 +723,4 @@ git commit -m "docs(specs): archive figma-variables — three-collection structu
 - Zero bindings to any deleted collection; the three reference frames screenshot-identical to Plan 2's "before" captures.
 - `--spacing-section` / `--spacing-section-lg` exist in `global.css` and are used at the 7 page-level call sites; browser rendering unchanged at 390 / 768 / 1280.
 - `pnpm test && pnpm build && pnpm figma:verify` all clean, with `container-*` and `spacing-section*` no longer in `token-map.json`'s `ignore` list.
-- `design.md` records the resolved binding audit; `notes.md` carries the transferable lessons; the topic is in `docs/specs/02_archives/`.
+- `design.md` records the resolved binding audit; `notes.md` carries the transferable lessons; the topic is in `.specs/02_archives/`.

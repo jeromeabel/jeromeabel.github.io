@@ -252,13 +252,13 @@ Shared responsive rules (apply wherever the element appears):
 
 **Files:**
 - `.claude/skills/figma-verify/knowledge/figma-ds-file.md` (update Page-templates table, gap note, change log)
-- `docs/specs/INDEX.md` (via `./docs/specs/specs.sh archive figma-detail-templates` when shipped)
+- `.specs/INDEX.md` (via `./.specs/specs.sh archive figma-detail-templates` when shipped)
 
 - [x] **Step 1: figma-verify sweep** — run the figma-verify Pass 0–3 audit over the four new sections. Confirm: instances only (zero hand-drawn), all fills/strokes token-bound (or listed as named debt), real content everywhere, no orphaned masters, no `[SUPERSEDED]` duplicates stacked. Done: 18 hand-built Link frames swapped to `secondaryIcon` instances; 204 raw values bound (itemSpacing/radius/text-style); 24 genuine gaps logged as named debt (28 total in `named-debt.json`); WORK-DETAIL confirmed already 0-gap; remaining 240 findings are inside shared-component instances, deferred to a master-level fix.
 - [x] **Step 2: Spot-check one Dark + one 390 frame per template** with `get_screenshot` against the live route to catch mode/responsive regressions. Done: 8 live-route screenshots (1280-Dark + 390-Light × 4 templates) confirmed structural match. Found (out of scope, flagged separately): POST + SERIE-POST overflow horizontally at 390px in the live code — a CSS bug, not a Figma drift.
 - [x] **Step 3: Update the ref doc** — rewrite the "Page templates" table (add PAGE/POST, PAGE/SERIE, PAGE/SERIE-POST, PAGE/WORK-DETAIL with their frame lists + resolved section IDs); delete the "no blog-post / serie / work-detail templates yet" gap paragraph; add a Change-log entry dated at ship time; record any PostRowCalm build + any named debt. Done in `figma-ds-file.md`.
 - [x] **Step 4: Update project memory** — note the detail-templates gap is closed and PostRowCalm status, updating `project_figma-design-system` memory. Done.
-- [ ] **Step 5: Archive** — when the user confirms shipped: `./docs/specs/specs.sh archive figma-detail-templates`.
+- [ ] **Step 5: Archive** — when the user confirms shipped: `./.specs/specs.sh archive figma-detail-templates`.
 
 ---
 

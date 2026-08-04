@@ -83,18 +83,18 @@ Cover/thumbnail generation tooling lives in `images/scripts/` (see its
 [README](images/scripts/README.md)): `pnpm illustrate` (all styles × sizes from content `img:`
 frontmatter), `pnpm illustrate:sheet` (+ contact sheet), `pnpm crop` (focal-point crop UI →
 `images/crops.json`). All effect numbers in the `SETTINGS` block of
-`images/scripts/illustrate.mjs`. Spec: `docs/specs/01_active/illustration-system/design.md`
+`images/scripts/illustrate.mjs`. Spec: `.specs/01_active/illustration-system/design.md`
 (two-step process — this is step 1; nothing in `src/` changes until step-1 exit).
 
 ## Specs & Planning
 
-Project ideas and their design/plan artifacts live in `docs/specs/`, organized by lifecycle:
+Project ideas and their design/plan artifacts live in `.specs/`, organized by lifecycle:
 `00_backlog/` (ideas) → `01_active/` (in-flight) → `02_archives/` (shipped). **Status is the folder.**
-See `docs/specs/CLAUDE.md` for conventions and `docs/specs/INDEX.md` for the current dashboard.
+See `.specs/CLAUDE.md` for conventions and `.specs/INDEX.md` for the current dashboard.
 
-- The **brainstorming** skill writes designs to `docs/specs/01_active/<slug>/design.md`.
-- The **writing-plans** skill writes plans to `docs/specs/01_active/<slug>/plan.md`.
-- Ship a topic with `./docs/specs/specs.sh archive <slug>` (stamps `shipped:` and updates INDEX).
+- The **brainstorming** skill writes designs to `.specs/01_active/<slug>/design.md`.
+- The **writing-plans** skill writes plans to `.specs/01_active/<slug>/plan.md`.
+- Ship a topic with `./.specs/specs.sh archive <slug>` (stamps `shipped:` and updates INDEX).
 
 Both skills honor an explicit user location override.
 

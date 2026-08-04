@@ -1,7 +1,7 @@
 // scripts/pixel-check.mjs
 //
 // Strict-identity pixel diff: astrobook story vs. live deploy anchor.
-// Dev-only tool — never referenced by `pnpm build`. See docs/specs/01_active/dev-styleguide/.
+// Dev-only tool — never referenced by `pnpm build`. See .specs/01_active/dev-styleguide/.
 //
 // Usage: pnpm dev (background, :4321) then `pnpm pixel-check`.
 

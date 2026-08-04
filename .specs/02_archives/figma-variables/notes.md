@@ -205,7 +205,7 @@ now a **read-only backup** for the duration of the migration.
   builds. Ids surviving does not mean the tree survived.
 - **Retarget the live references, not the archives.** Updated: the three plans,
   `design.md`, `scripts/figma/dump-tokens.md`, and the `figma-verify` /
-  `figma-replicate` skills. `docs/specs/02_archives/**` deliberately still names
+  `figma-replicate` skills. `.specs/02_archives/**` deliberately still names
   the old file — it is the record of what was true then.
 - **A retargeted node map is not a verified node map.** The skills' knowledge
   file had its key and URLs swapped, but its component/node inventory has not

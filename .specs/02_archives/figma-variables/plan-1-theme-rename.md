@@ -16,7 +16,7 @@ created: 2026-07-29
 ## Global Constraints
 
 - Figma file key: **`ihWIWmvtQPTWgUxlrVjC2c`** — "Blog Design System v1.0", the live design file from 2026-07-29 onward. All `use_figma` and `get_screenshot` calls in this plan target it.
-  - The previous file `Wf4iomVMYUXlFIBV3Z8bx4` (build `ds-blog-v3-01`) is a **read-only backup** for the duration of this migration. Never write to it. It stays referenced in `docs/specs/02_archives/**` as the historical record — do not rewrite those.
+  - The previous file `Wf4iomVMYUXlFIBV3Z8bx4` (build `ds-blog-v3-01`) is a **read-only backup** for the duration of this migration. Never write to it. It stays referenced in `.specs/02_archives/**` as the historical record — do not rewrite those.
   - v1.0 is a fork of the backup, so **the node and collection ids below are identical in both** (verified 2026-07-29: `VariableCollectionId:3:2` present with 8 vars and modes Light `3:0` / Dark `3:1`; 📄 Pages at `44:328`; 26 dark-frame `explicitVariableModes` overrides on `3:2`). Anything scripted against ids still works — only the `fileKey` argument changes.
   - v1.0 also carries work the backup does not: pages `Components (new)` (`461:759`) and `Pages Experiment` (`442:5352`), plus an empty collection `Primitives` (`VariableCollectionId:453:2`). This plan touches none of them.
 - **Never delete or recreate the `Color` collection** (`VariableCollectionId:3:2`). Rename it. Dark frames carry `explicitVariableModes = { "VariableCollectionId:3:2": "3:1" }`; replacing the collection breaks every one of them.
@@ -533,8 +533,8 @@ git commit -m "chore(figma): rename Color -> 2 Theme, correct font families, ref
 
 **Files:**
 
-- Modify: `docs/specs/01_active/figma-variables/design.md` (Migration order section)
-- Modify: `docs/specs/01_active/figma-variables/notes.md` (if anything new was learned)
+- Modify: `.specs/01_active/figma-variables/design.md` (Migration order section)
+- Modify: `.specs/01_active/figma-variables/notes.md` (if anything new was learned)
 
 - [ ] **Step 1: Mark steps 1–2 done in `design.md`**
 
@@ -547,7 +547,7 @@ Specifically: whether the `text-white` change on `WorkCardImage` held in dark mo
 - [ ] **Step 3: Commit**
 
 ```bash
-git add docs/specs/01_active/figma-variables/
+git add .specs/01_active/figma-variables/
 git commit -m "docs(specs): figma-variables — steps 1-2 shipped"
 ```
 

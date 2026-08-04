@@ -43,7 +43,7 @@ created: 2026-07-21
 - `scripts/figma/diff-geometry.test.mjs` — `node:test` for the geometry diff.
 - `src/components/styleguide/StoryContainer.astro` — `<div class="container"><slot/></div>` decorator.
 - `src/components/styleguide/StorySection.astro` — container + live section spacing decorator.
-- `docs/specs/01_active/figma-blog-fit/notes.md` — running log of residual pixel/geometry fails + one-line reasons, and the story→decorator mapping.
+- `.specs/01_active/figma-blog-fit/notes.md` — running log of residual pixel/geometry fails + one-line reasons, and the story→decorator mapping.
 
 **Modified:**
 - `package.json` — add `figma:verify`, `test`, `geometry:web` scripts.
@@ -488,7 +488,7 @@ git commit -m "feat(figma-verify): token diff, map skeleton, figma:verify + test
 **Files:**
 - Create: `scripts/figma/dump-tokens.md` (the paste-in script + procedure)
 - Modify: `scripts/figma/token-map.json` (correct paths to real Figma names)
-- Create/append: `docs/specs/01_active/figma-blog-fit/notes.md` (verdict log)
+- Create/append: `.specs/01_active/figma-blog-fit/notes.md` (verdict log)
 
 > **Interactive task — no unit test.** Gate = `pnpm figma:verify` produces a diff whose every finding is judged real-drift / expected-gap / map-update, and all real-drifts are repaired Figma-side. `use_figma` is LLM-mediated; read `/figma-use` first.
 
@@ -550,7 +550,7 @@ Using the Pass-0 inventory, fix each `map` path in `scripts/figma/token-map.json
 - [ ] **Step 5: Diff and judge every finding**
 
 Run: `pnpm figma:verify`
-For each line in `Value mismatch` / `Missing in Figma` / `Orphaned in Figma` / `Unmapped`, write a one-line verdict in `docs/specs/01_active/figma-blog-fit/notes.md`: `real-drift` (repair Figma), `expected-gap` (accept, add to `ignore`), or `map-update` (fix path in `token-map.json`).
+For each line in `Value mismatch` / `Missing in Figma` / `Orphaned in Figma` / `Unmapped`, write a one-line verdict in `.specs/01_active/figma-blog-fit/notes.md`: `real-drift` (repair Figma), `expected-gap` (accept, add to `ignore`), or `map-update` (fix path in `token-map.json`).
 
 - [ ] **Step 6: Repair real-drifts (one batched write)**
 
@@ -559,7 +559,7 @@ For every `real-drift` color: in ONE `use_figma` write call, set the Figma varia
 - [ ] **Step 7: Commit**
 
 ```bash
-git add scripts/figma/dump-tokens.md scripts/figma/token-map.json docs/specs/01_active/figma-blog-fit/notes.md
+git add scripts/figma/dump-tokens.md scripts/figma/token-map.json .specs/01_active/figma-blog-fit/notes.md
 git commit -m "feat(figma-verify): batched token dump procedure; token map + drift verdicts"
 ```
 
@@ -625,7 +625,7 @@ git commit -m "feat(styleguide): StoryContainer + StorySection width decorators"
 **Files:**
 - Modify: manifest-covered `*.stories.ts` (attach `decorators`)
 - Modify: `scripts/pixel-manifest.mjs` (record the assignment per entry)
-- Append: `docs/specs/01_active/figma-blog-fit/notes.md` (the story→decorator table)
+- Append: `.specs/01_active/figma-blog-fit/notes.md` (the story→decorator table)
 
 **Interfaces:**
 - Consumes: `StoryContainer` / `StorySection` (Task 4).
@@ -680,7 +680,7 @@ Expected: story content constrained to the `.container` max-width with 1rem padd
 - [ ] **Step 5: Commit**
 
 ```bash
-git add src/components/**/*.stories.ts scripts/pixel-manifest.mjs docs/specs/01_active/figma-blog-fit/notes.md
+git add src/components/**/*.stories.ts scripts/pixel-manifest.mjs .specs/01_active/figma-blog-fit/notes.md
 git commit -m "feat(styleguide): assign width decorators per live-parent context"
 ```
 
@@ -752,7 +752,7 @@ Expected: runs the full matrix without `networkidle` timeouts; `.pixel-report/su
 - [ ] **Step 6: Commit**
 
 ```bash
-git add scripts/pixel-check.mjs docs/specs/01_active/figma-blog-fit/notes.md
+git add scripts/pixel-check.mjs .specs/01_active/figma-blog-fit/notes.md
 git commit -m "feat(pixel-check): preview routes, 3x2 viewport/theme matrix, load waitUntil"
 ```
 
@@ -762,7 +762,7 @@ git commit -m "feat(pixel-check): preview routes, 3x2 viewport/theme matrix, loa
 
 **Files:**
 - Modify: `scripts/pixel-manifest.mjs`
-- Append: `docs/specs/01_active/figma-blog-fit/notes.md`
+- Append: `.specs/01_active/figma-blog-fit/notes.md`
 
 **Interfaces:**
 - Consumes: the Task-6 matrix run.
@@ -791,7 +791,7 @@ Expected: majority of (component × viewport × theme) cells pass. For each resi
 - [ ] **Step 4: Commit**
 
 ```bash
-git add scripts/pixel-manifest.mjs src/components docs/specs/01_active/figma-blog-fit/notes.md
+git add scripts/pixel-manifest.mjs src/components .specs/01_active/figma-blog-fit/notes.md
 git commit -m "fix(pixel-check): re-anchor broken selectors; majority-pass gate with logged residuals"
 ```
 
@@ -1037,7 +1037,7 @@ git commit -m "feat(geometry): web↔figma geometry diff with repair worklist"
 
 **Files:**
 - Modify: Figma masters (via `use_figma`)
-- Append: `docs/specs/01_active/figma-blog-fit/notes.md`
+- Append: `.specs/01_active/figma-blog-fit/notes.md`
 
 > **Interactive task — no unit test.** Gate per master: `diff-geometry` clean-or-named-debt, and Figma `get_screenshot` vs the story PNG judged visually identical (token+layout bar, not pixel-diff).
 
@@ -1061,7 +1061,7 @@ For each repaired master, `get_screenshot` and compare to that component's story
 - [x] **Step 5: Commit the notes**
 
 ```bash
-git add docs/specs/01_active/figma-blog-fit/notes.md
+git add .specs/01_active/figma-blog-fit/notes.md
 git commit -m "docs(geometry): master repair log + screenshot-gate results"
 ```
 
@@ -1125,7 +1125,7 @@ git commit -m "fix(blog): PostList getAllPosts→getAllBlogPosts + story (legacy
 
 **Files:**
 - Modify: Figma file (new page `🗄️ Legacy`, 9 masters)
-- Append: `docs/specs/01_active/figma-blog-fit/notes.md`
+- Append: `.specs/01_active/figma-blog-fit/notes.md`
 
 > **Interactive task — no unit test.** Legacy components have no live page — their story preview route IS the reference. Gate: 9 masters built, bound to S0 variables/text styles, real collection content, geometry read + screenshot-judged against each story preview. The story↔live pixel-check cell is skipped (nothing live to diff).
 
@@ -1144,7 +1144,7 @@ Run the Task-9 read over the legacy masters, then `node scripts/figma/diff-geome
 - [ ] **Step 4: Commit the notes**
 
 ```bash
-git add docs/specs/01_active/figma-blog-fit/notes.md scripts/pixel-manifest.mjs
+git add .specs/01_active/figma-blog-fit/notes.md scripts/pixel-manifest.mjs
 git commit -m "docs(legacy): 🗄️ Legacy Figma page build + geometry/screenshot log"
 ```
 
@@ -1176,7 +1176,7 @@ git commit -m "docs(legacy): 🗄️ Legacy Figma page build + geometry/screensh
 **Files:**
 - Modify: Figma file (`🧩 Components` page — extend existing sections / add new ones; these are
   live v3 components, so they belong on Components, **not** the 🗄️ Legacy page)
-- Append: `docs/specs/01_active/figma-blog-fit/notes.md`
+- Append: `.specs/01_active/figma-blog-fit/notes.md`
 
 > **Interactive task — no unit test.** Same gate as Task 13 per master: bound to S0
 > variables/text styles, real collection content (F9), instances-only where a master already
@@ -1221,7 +1221,7 @@ from Task 10/11/13 apply (font-prop "(absent)" on non-TEXT roots, container-widt
 - [x] **Step 5: Commit the notes**
 
 ```bash
-git add docs/specs/01_active/figma-blog-fit/notes.md
+git add .specs/01_active/figma-blog-fit/notes.md
 git commit -m "docs(masters): 12 missing component masters (blog/work/about batches) + no-build set"
 ```
 
@@ -1233,7 +1233,7 @@ git commit -m "docs(masters): 12 missing component masters (blog/work/about batc
 
 **Files:**
 - Modify: Figma file (template frames)
-- Append: `docs/specs/01_active/figma-blog-fit/notes.md`
+- Append: `.specs/01_active/figma-blog-fit/notes.md`
 
 > **Interactive task — no unit test.** Gate: 4 templates (Home / Blog / Work / About) × 3 widths (1280/768/390) × 2 themes = 24 frames, instances-only, superseded builds archived (F8). Screenshot-judged against live/story at each width+theme.
 
@@ -1259,13 +1259,13 @@ Run: `pnpm test && pnpm figma:verify`
 Expected: all tests pass; token diff clean or expected-gap only.
 
 ```bash
-git add docs/specs/01_active/figma-blog-fit/notes.md
+git add .specs/01_active/figma-blog-fit/notes.md
 git commit -m "docs(templates): 24 responsive+dark template frames; final audit log"
 ```
 
 - [ ] **Step 6: Archive the spec**
 
-Run: `./docs/specs/specs.sh archive figma-blog-fit`
+Run: `./.specs/specs.sh archive figma-blog-fit`
 Expected: stamps `shipped:` and updates `INDEX.md`.
 
 ---

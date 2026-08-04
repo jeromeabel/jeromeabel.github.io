@@ -14,7 +14,7 @@
 - The 9 components to restore (verified via `git diff --diff-filter=D main..redesign/v3`):
   `blog/BlogPreview`, `blog/PostCard`, `blog/PostList`, `blog/SerieList`, `blog/SerieListItem`, `blog/SeriePostCard`, `work/WorkCard`, `work/WorkCardImage`, `work/WorksPreview`.
 - Every restored file gets this exact header comment on line 1:
-  `{/* LEGACY — main-only, not wired into any v3 page. Kept for styleguide delete-vs-adopt review. See docs/specs/01_active/dev-styleguide. */}`
+  `{/* LEGACY — main-only, not wired into any v3 page. Kept for styleguide delete-vs-adopt review. See .specs/01_active/dev-styleguide. */}`
 - Every legacy story declares `title: 'Legacy/<Name>'` in its default export so it groups apart from live components.
 - **Do NOT** add any `import` of these components to any page, layout, or live component. Grep-verify at the end.
 - If a restored component fails to compile against current `repository.ts`/schema, use an inline fixture matching the **restored component's own** `Props`; if it still cannot compile, record it in `notes.md` under "legacy incompatibilities" and skip its story (the file stays restored + tagged).
@@ -48,7 +48,7 @@ Add as the very first line of each of the 9 files:
 
 ```astro
 {
-  /* LEGACY — main-only, not wired into any v3 page. Kept for styleguide delete-vs-adopt review. See docs/specs/01_active/dev-styleguide. */
+  /* LEGACY — main-only, not wired into any v3 page. Kept for styleguide delete-vs-adopt review. See .specs/01_active/dev-styleguide. */
 }
 ```
 
@@ -148,7 +148,7 @@ git commit -m "feat(styleguide): legacy blog component stories"
 
 **Files:**
 
-- Create: `docs/specs/01_active/dev-styleguide/notes.md` (if not already created in Tasks 2–3)
+- Create: `.specs/01_active/dev-styleguide/notes.md` (if not already created in Tasks 2–3)
 
 - [x] **Step 1: Confirm all 9 appear under `Legacy/` in the catalog**
 
@@ -164,7 +164,7 @@ Run: `git grep -l -E "(BlogPreview|PostCard|PostList|SerieList|SerieListItem|Ser
 Expected: no output (still orphaned). (`\.astro` suffix required — bare names substring-match live `PostListItem`/`SerieListItem` imports.)
 
 ```bash
-git add docs/specs/01_active/dev-styleguide/notes.md
+git add .specs/01_active/dev-styleguide/notes.md
 git commit -m "docs(styleguide): legacy delete-vs-adopt review notes"
 ```
 

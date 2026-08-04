@@ -181,7 +181,7 @@ these components already receive on the live site.
 
 - `git checkout main -- src/components/blog/BlogPreview.astro …` for the 9 files.
 - Each restored file gets a header comment on line 1:
-  `{/* LEGACY — main-only, not wired into any v3 page. Kept for styleguide delete-vs-adopt review. See docs/specs/01_active/dev-styleguide. */}`
+  `{/* LEGACY — main-only, not wired into any v3 page. Kept for styleguide delete-vs-adopt review. See .specs/01_active/dev-styleguide. */}`
 - Their stories declare a `Legacy/` title prefix (astrobook groups by `title`) so they sit
   in a separate catalog section, visually fenced off from live components.
 - **Prop drift is expected:** these components were written against the pre-v3 content

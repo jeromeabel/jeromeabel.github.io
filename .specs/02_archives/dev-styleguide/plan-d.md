@@ -237,10 +237,10 @@ Iterate `pnpm pixel-check` after each manifest/story tweak. Target: every non-sk
 
 - [x] **Step 3: Write the verification summary + commit**
 
-Append a "Pixel verification" section to `docs/specs/01_active/dev-styleguide/notes.md`: pass/fail/skip counts, the skip list with reasons, and any real discrepancies with root cause.
+Append a "Pixel verification" section to `.specs/01_active/dev-styleguide/notes.md`: pass/fail/skip counts, the skip list with reasons, and any real discrepancies with root cause.
 
 ```bash
-git add scripts/pixel-manifest.mjs src/components/**/*.stories.ts docs/specs/01_active/dev-styleguide/notes.md
+git add scripts/pixel-manifest.mjs src/components/**/*.stories.ts .specs/01_active/dev-styleguide/notes.md
 git commit -m "feat(pixel-check): tune manifest/masks; document story-vs-live findings"
 ```
 

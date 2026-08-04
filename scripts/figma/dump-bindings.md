@@ -130,7 +130,7 @@ Only trust `bindings.figma.json` once every page passes this check.
 ## Expected totals (baseline, from Task 2's 2026-07-29 audit)
 
 Merged `byCol` across the 5 real pages (see
-`docs/specs/02_archives/figma-variables/notes.md`, "Plan 2 — before"):
+`.specs/02_archives/figma-variables/notes.md`, "Plan 2 — before"):
 
 > **Historical snapshot, not current state.** This table is a pre-migration
 > baseline captured before the figma-variables Plan 2 + Plan 3 cleanup. Since

@@ -28,7 +28,7 @@ All 9 files restored in Task 1 got the legacy header comment prepended as
 **line 1, before the opening `---` frontmatter fence**:
 
 ```astro
-{/* LEGACY — main-only, not wired into any v3 page. Kept for styleguide delete-vs-adopt review. See docs/specs/01_active/dev-styleguide. */}
+{/* LEGACY — main-only, not wired into any v3 page. Kept for styleguide delete-vs-adopt review. See .specs/01_active/dev-styleguide. */}
 ---
 import ...
 ---
@@ -75,7 +75,7 @@ import { Icon } from "astro-icon/components";
 ...
 ---
 
-{/* LEGACY — main-only, not wired into any v3 page. Kept for styleguide delete-vs-adopt review. See docs/specs/01_active/dev-styleguide. */}
+{/* LEGACY — main-only, not wired into any v3 page. Kept for styleguide delete-vs-adopt review. See .specs/01_active/dev-styleguide. */}
 <a href={...}>
 ```
 
@@ -311,7 +311,7 @@ Not selector bugs: the 2 remaining errors are `contact-contactimage--default
 @mobile` (light+dark), which is `hidden sm:block` by design — correct
 behavior, genuinely nothing to screenshot there.
 
-The 221 fails were triaged (see `docs/specs/02_archives/figma-blog-fit/notes.md`
+The 221 fails were triaged (see `.specs/02_archives/figma-blog-fit/notes.md`
 → "Task 7 — re-anchor broken selectors" → "Controller post-verification
 pass" for the full spot-check evidence) and trace to two structural causes
 an isolated Astrobook story cannot reproduce without rebuilding
