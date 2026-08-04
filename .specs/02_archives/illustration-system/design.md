@@ -1,3 +1,7 @@
+---
+shipped: 2026-08-04
+---
+
 # Illustration system — design spec (2026-07-18)
 
 Unifies every cover/thumbnail on the site under **one artistic direction** and doubles as the

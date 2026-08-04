@@ -79,12 +79,10 @@ Organized by feature domain in `src/components/`:
 
 ## Illustration Lab
 
-Cover/thumbnail generation tooling lives in `images/scripts/` (see its
-[README](images/scripts/README.md)): `pnpm illustrate` (all styles × sizes from content `img:`
-frontmatter), `pnpm illustrate:sheet` (+ contact sheet), `pnpm crop` (focal-point crop UI →
-`images/crops.json`). All effect numbers in the `SETTINGS` block of
-`images/scripts/illustrate.mjs`. Spec: `.specs/01_active/illustration-system/design.md`
-(two-step process — this is step 1; nothing in `src/` changes until step-1 exit).
+Cover/thumbnail generation moved to the standalone studio at
+`~/code/projects/cover-studio` (Vue app; `pnpm dev` there). It reads this
+repo's content frontmatter and writes back `cover.gen.png` + `illustration:`
+frontmatter via `pnpm export`. Spec: `.specs/02_archives/cover-studio/design.md`.
 
 ## Specs & Planning
 
