@@ -1,4 +1,5 @@
 ---
+shipped: 2026-08-06
 title: Design system documentation — atomic spine, responsive modes, token verification
 created: 2026-08-06
 ---
