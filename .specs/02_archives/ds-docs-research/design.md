@@ -1,4 +1,5 @@
 ---
+shipped: 2026-08-06
 created: 2026-08-06
 title: DS docs expert research — prove documentation structure, capture into design-expert
 ---
