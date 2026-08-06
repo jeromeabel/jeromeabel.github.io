@@ -1491,7 +1491,7 @@ git commit -m "docs(specs): design-system-docs — task 9 components chapter"
 - Consumes: the eight named frames from Task 3
 - Produces: a `CHAPTER / 04 Pages` frame showing desktop and mobile side by side, at a scale that fits the 1600px sheet
 
-- [ ] **Step 1: Turn each of the eight page frames into a component so the chapter can instance them**
+- [x] **Step 1: Turn each of the eight page frames into a component so the chapter can instance them**
 
 A frame cannot be instanced; a component can. Converting the page frames to components is what keeps the Docs chapter live rather than a set of stale screenshots.
 
@@ -1508,7 +1508,7 @@ for (const f of [...page.children]) {
 return { createdNodeIds: made.map(m => m.id), made };
 ```
 
-- [ ] **Step 2: Build the chapter — one row per page, desktop left, mobile right, light row then dark row**
+- [x] **Step 2: Build the chapter — one row per page, desktop left, mobile right, light row then dark row**
 
 ```js
 const page = await figma.getNodeByIdAsync("2545:671");
@@ -1555,17 +1555,17 @@ return { createdNodeIds: created, missing };
 
 `rescale` on an instance scales the render without detaching it — the instance still tracks its master, so a component fix still propagates here.
 
-- [ ] **Step 3: Add the caption explaining the mechanism**
+- [x] **Step 3: Add the caption explaining the mechanism**
 
 This is the paragraph that answers "how do you handle responsive" for a reader who will not open the variables panel. Wrap at 900px, `IBM Plex Sans` 16, `color/foreground`:
 
 > Mobile is not a resized duplicate. Each frame pins two variable modes — one from `2 Theme` (Light or Dark) and one from `3 Responsive` (Desktop or Mobile). The frame's width is bound to `viewport/width`, its gutter to `container/gutter`, its section rhythm to `section/rhythm-y`, and the content container is capped by `container/max-width`. Switching the mode reflows the frame; the content stays instances of the same components documented above. Four frames per page, one source of truth.
 
-- [ ] **Step 4: Verify and screenshot**
+- [x] **Step 4: Verify and screenshot**
 
 Expected: four labelled rows, each with a desktop render and a narrow mobile render beside it, `missing` empty, and every instance still bound to a master.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add .specs/01_active/design-system-docs/plan.md
