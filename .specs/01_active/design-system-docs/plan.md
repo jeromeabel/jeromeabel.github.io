@@ -38,8 +38,9 @@ status: plan — ready to execute
 | `📚 Docs` | `2545:671` |
 | `🎨 Foundations` | `5:14` — 3 frames: `Foundations · Colors` `6:2`, `Foundations · Typography` `8:2`, `Tailwind Font Sizes` `365:55`. `Foundations · Scale` is gone. |
 | `🧩 Components` | `461:759` — 8 SECTIONs, 33 masters |
-| `Pages` | `2558:18264` |
-| `🗄️ Archive & XP` | `442:5352` — **still 57 top-level children.** The move to the backup file `Wf4iomVMYUXlFIBV3Z8bx4` is partial, not finished. Notably it still holds a live COMPONENT master `illustration/performance` `398:8921` and an INSTANCE `illustration/screen` `2558:9395`, plus 11 old `SECTION /` boards, three `V3/1 - Home — 1536 — Dark` copies, and ~20 stray `Frame NN` / loose TEXT nodes. |
+| `📄 Pages` | `2558:18264` |
+
+**`🗄️ Archive & XP` was deleted from this file on 2026-08-06** — its content lives in the backup `Wf4iomVMYUXlFIBV3Z8bx4`. Five pages remain. The removal left one defect that Task 2b fixes: three instances on the live page frames still reference an **orphaned local `Icon` component set `52:136`** whose parent chain no longer reaches a page. The live set is `Icon` `461:6204`.
 
 **Docs frames:** Light `2545:672`, Dark `2547:7597` (1600 × 4707 each).
 
@@ -314,6 +315,93 @@ Expected: during the Mobile pass the frame is 390 wide, not 1920. After the rese
 ```bash
 git add .specs/01_active/design-system-docs/plan.md
 git commit -m "docs(specs): design-system-docs — task 2 page containers bound to responsive vars"
+```
+
+---
+
+### Task 2b: Reconnect the orphaned `Icon` instances left by the Archive deletion
+
+Deleting `🗄️ Archive & XP` took a second `Icon` component set (`52:136`) with it, but three instances on the live page frames still point at it. They render, so nothing looks wrong — but their master is unreachable, so a library fix will never reach them and duplicating or publishing the file degrades them.
+
+**This must run before Task 3.** Task 3 clones each page frame three times; fixing three orphans now avoids fixing twelve later.
+
+**Files:**
+- Modify: `📄 Pages` `2558:18264` — frames `2558:18265` (Home), `2558:18273` (Blog)
+
+**Interfaces:**
+- Consumes: the live `Icon` set `461:6204` on `🧩 Components`
+- Produces: zero instances whose main component's ancestry fails to reach a page. Task 3 Step 5 and Task 11 Step 6 both re-assert this.
+
+- [ ] **Step 1: Map the orphans to their live equivalents by variant**
+
+```js
+const comps = await figma.getNodeByIdAsync("461:759");
+await figma.setCurrentPageAsync(comps);
+const liveSet = comps.findOne(n => n.type === 'COMPONENT_SET' && n.name === 'Icon');
+return {
+  liveSetId: liveSet && liveSet.id,
+  variants: liveSet ? liveSet.children.map(c => ({ id: c.id, name: c.name })) : [],
+  props: liveSet ? liveSet.componentPropertyDefinitions : null,
+};
+```
+
+Expected: a set at `461:6204` with variants named `icon=arrow-down`, `icon=arrow-right`, and the rest. Record the ids for `arrow-down` and `arrow-right` — Step 2 needs them as literals.
+
+- [ ] **Step 2: Swap each orphan onto the live variant**
+
+```js
+const page = await figma.getNodeByIdAsync("2558:18264");
+await figma.setCurrentPageAsync(page);
+
+// REPLACE with the variant ids returned by Step 1.
+const LIVE = { "icon=arrow-down": "461:6205", "icon=arrow-right": "461:6206" };
+
+const swapped = [], unresolved = [];
+for (const inst of page.findAllWithCriteria({ types: ['INSTANCE'] })) {
+  const mc = await inst.getMainComponentAsync();
+  if (!mc) { unresolved.push({ id: inst.id, why: "no main component" }); continue; }
+  let root = mc; while (root && root.type !== 'PAGE') root = root.parent;
+  if (root && root.type === 'PAGE') continue;          // healthy
+  const target = LIVE[mc.name];
+  if (!target) { unresolved.push({ id: inst.id, master: mc.name }); continue; }
+  const live = await figma.getNodeByIdAsync(target);
+  inst.swapComponent(live);
+  swapped.push({ id: inst.id, to: mc.name });
+}
+return { mutatedNodeIds: swapped.map(s => s.id), swapped, unresolved };
+```
+
+`swapComponent` preserves overrides where the two components share layer names — these are icon instances with no text overrides, so nothing is at risk. If `unresolved` is non-empty, an orphan exists that is not an Icon; do not guess a replacement, report it.
+
+- [ ] **Step 3: Verify zero orphans remain, and that the icons still look right**
+
+```js
+const page = await figma.getNodeByIdAsync("2558:18264");
+await figma.setCurrentPageAsync(page);
+const insts = page.findAllWithCriteria({ types: ['INSTANCE'] });
+const orphans = [];
+for (const i of insts) {
+  const mc = await i.getMainComponentAsync();
+  if (!mc) { orphans.push({ id: i.id, why: "null master" }); continue; }
+  let root = mc; while (root && root.type !== 'PAGE') root = root.parent;
+  if (!root || root.type !== 'PAGE') orphans.push({ id: i.id, master: mc.name });
+}
+const home = await figma.getNodeByIdAsync("2558:18265");
+await home.screenshot({ scale: 0.5 });
+return { instances: insts.length, orphans };
+```
+
+Expected: `orphans` empty, `instances` still 116. Check the screenshot for a missing or wrong-direction arrow — a swap onto the wrong variant is silent.
+
+- [ ] **Step 4: Sweep the whole file once**
+
+Run the same orphan check against `📚 Docs`, `🧩 Components` and `📖 Cover` as three parallel `use_figma` calls (one `setCurrentPageAsync` each — never loop pages inside one script). Any orphan found on the Components page is more serious: a master referencing a deleted master means a broken library, not just a broken frame.
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add .specs/01_active/design-system-docs/plan.md
+git commit -m "docs(specs): design-system-docs — task 2b reconnect orphaned Icon instances"
 ```
 
 ---
@@ -1464,7 +1552,6 @@ git commit -m "docs(specs): design-system-docs — task 10 pages chapter"
 - Modify: `📚 Docs` `2545:671` — replace the Dark frame `2547:7597`
 - Modify: `📖 Cover` `0:1`
 - Modify: `🎨 Foundations` `5:14`
-- Modify: `🗄️ Archive & XP` `442:5352`
 
 **Interfaces:**
 - Consumes: the finished light frame from Tasks 6–10
@@ -1550,48 +1637,37 @@ return { removedNodeIds: removedId ? [removedId] : [], pageName: src.name, remai
 
 Expected: `remaining` is `["Foundations · Colors", "Foundations · Typography"]`. If deleting feels too strong at execution time, `appendChild` it into the backup file's archive instead — but do not leave it in this file.
 
-- [ ] **Step 4: Finish the Archive move that is still half-done**
+- [ ] **Step 4: Confirm the Archive removal left nothing dangling**
 
-The intent was to move `🗄️ Archive & XP` wholesale into the backup file `Wf4iomVMYUXlFIBV3Z8bx4`. As of the 2026-08-06 re-scan the page still has **57 top-level children**: eleven old `SECTION /` boards (FOOTER, TYPOGRAPHY, ICONS, VALUE-CARD, LINK, TOGGLE, TOPIC-CHIP, BLOG, WORK, ABOUT, HOME/WRITING - Experiments, PAGE/ABOUT, PAGE/HOME), three `V3/1 - Home — 1536 — Dark` copies, a `Blog — 1280 — Dark`, and roughly twenty stray `Frame NN` / loose TEXT nodes.
-
-**Two nodes need care before anything is bulk-moved.** `illustration/performance` `398:8921` is a live `COMPONENT` **master** sitting on the archive page, and `illustration/screen` `2558:9395` is an `INSTANCE`. Deleting or exporting the master breaks the instance and any other reference to it. Resolve those two first:
+`🗄️ Archive & XP` was deleted from this file on 2026-08-06; its content lives in the backup `Wf4iomVMYUXlFIBV3Z8bx4`. Nothing to move — but a page deletion silently takes any component masters that lived on it, which is exactly what happened to the `Icon` set `52:136` (Task 2b). Re-assert that no master anywhere is unreachable:
 
 ```js
-const page = await figma.getNodeByIdAsync("442:5352");
-await figma.setCurrentPageAsync(page);
-const masters = page.findAllWithCriteria({ types: ['COMPONENT','COMPONENT_SET'] });
-const out = [];
-for (const m of masters) {
-  const insts = await m.getInstancesAsync();
-  out.push({ id: m.id, name: m.name, instanceCount: insts.length,
-    instancePages: [...new Set(insts.map(i => { let p = i; while (p && p.type !== 'PAGE') p = p.parent; return p && p.name; }))] });
-}
-return out;
+const missing = [];
+for (const p of figma.root.children) missing.push({ page: p.name, id: p.id });
+const comps = await figma.getNodeByIdAsync("461:759");
+await figma.setCurrentPageAsync(comps);
+const sets = comps.findAllWithCriteria({ types: ['COMPONENT_SET'] });
+const dupes = {};
+for (const s of sets) { dupes[s.name] = (dupes[s.name] || 0) + 1; }
+return { pages: missing, componentSets: sets.map(s => ({ id: s.id, name: s.name })),
+  duplicateNames: Object.entries(dupes).filter(([, n]) => n > 1) };
 ```
 
-If an archive master has instances on a live page, promote it to `🧩 Components` and classify it (it is a real component that was misfiled). If its only instances are also on the archive page, it is dead and goes to the backup file with everything else.
+Expected: five pages, no `duplicateNames`. A duplicate set name is how the orphaned `Icon` situation arose in the first place — two sets called `Icon`, one of them on a page that later got deleted.
 
-Figma's Plugin API cannot copy nodes between files, so the actual transfer is manual: select all on `🗄️ Archive & XP`, copy, paste into the backup file, verify the paste landed, then delete the page here with `page.remove()`. Script the verification, not the transfer:
-
-```js
-const page = figma.root.children.find(p => p.name === "🗄️ Archive & XP");
-return page ? { stillPresent: true, children: page.children.length } : { stillPresent: false };
-```
-
-Expected after the manual move: `{ stillPresent: false }`. If the page must stay for now, wrap the loose nodes in one `SECTION` named `ARCHIVE — pre-v3 material, kept as negative reference` so a shared link does not open onto scattered debris — but that is the fallback, not the goal.
+Also delete the old archive's leftovers from `scripts/figma/named-debt.json` in Task 12 if any logged node ids belonged to that page — a debt entry pointing at a deleted node is noise.
 
 - [ ] **Step 5: Order the page list so it reads top-down**
 
 ```js
-// If Step 4 finished, "🗄️ Archive & XP" is gone and simply won't be found — the loop skips it.
-const want = ["📖 Cover", "📚 Docs", "🧩 Components", "📄 Pages", "🎨 Foundations (reference)", "🗄️ Archive & XP"];
+const want = ["📖 Cover", "📚 Docs", "🧩 Components", "📄 Pages", "🎨 Foundations (reference)"];
 const byName = Object.fromEntries(figma.root.children.map(p => [p.name, p]));
 const moved = [];
 want.forEach((n, i) => { if (byName[n]) { figma.root.insertChild(i, byName[n]); moved.push(n); } });
 return { order: figma.root.children.map(p => p.name), moved };
 ```
 
-Rename `Pages` to `📄 Pages` in the same pass so every page carries an emoji and the sidebar scans.
+`Pages` was already renamed `📄 Pages` on 2026-08-06, so every page now carries an emoji and the sidebar scans — this step only fixes the order.
 
 - [ ] **Step 6: Final whole-file verification**
 
@@ -1676,7 +1752,7 @@ The "Figma Design Tokens" section describes the drift-check tooling but not the 
 - [ ] **Step 7: Verify nothing in the repo still points at dead nodes**
 
 ```bash
-rtk grep -rn "78:2\|44:328\|SPEC / Specimen\|🗄️ Legacy" --include=*.md . | grep -v node_modules | grep -v 02_archives
+rtk grep -rn "78:2\|44:328\|442:5352\|52:136\|SPEC / Specimen\|🗄️ Legacy\|Archive & XP" --include=*.md . | grep -v node_modules | grep -v 02_archives
 ```
 
 Expected: no hits outside `.specs/02_archives/` (archived specs are historical records and are left alone).
@@ -1699,6 +1775,7 @@ git add .specs && git commit -m "docs(specs): archive design-system-docs"
 
 **Known soft spots, stated rather than hidden.**
 
+0. Deleting a Figma page silently orphans any component master on it. That is how `Icon` `52:136` ended up unreachable while three live instances still pointed at it — and nothing looked broken, which is what makes it worth checking rather than assuming. Task 2b fixes it and Task 11 Step 4 re-asserts it; the duplicate-set-name check there is the cheap early warning for the same class of problem.
 1. Task 2 Step 3 is the real risk. Content composed at 1920 will overflow at 390 and the fix is at the masters, which is unbounded work. If overflow is widespread, the honest fallback is to ship Home responsive and document Blog desktop-only — say so, do not quietly narrow the scope.
 2. Task 4 Step 4 (font load per text node across 697 nodes) may exceed a single call's budget. Splitting it across calls is expected, not a failure.
 3. Task 8 Step 3 and Task 10 Step 2 carry literal `CELLS` / `PAGE_COMPONENTS` placeholders that are filled from the immediately preceding discovery step's return value. They are deliberate — component ids cannot be known before Task 3 and Task 5 run — but they must be substituted, not left as-is.
