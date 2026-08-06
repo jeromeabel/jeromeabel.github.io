@@ -3,10 +3,11 @@ import { Icon } from "astro-icon/components";
 import type { CollectionEntry } from "astro:content";
 import { getMonthYear } from "src/utils/format-date";
 import { getMinutesFromBody } from "src/utils/get-minutes-read";
+import type { SerieMembership } from "src/utils/repository";
 
 interface Props {
   post: CollectionEntry<"post"> | CollectionEntry<"seriePost">;
-  serie?: { title: string; id: string; part: number } | undefined;
+  serie?: SerieMembership | undefined;
 }
 
 const { post, serie } = Astro.props;
@@ -20,28 +21,25 @@ const minutes = Math.ceil(getMinutesFromBody(post.body));
 
 <a
   href={`/blog/${post.id}`}
-  class="border-border hover:bg-surface group relative flex flex-col gap-1 overflow-hidden border-b py-4"
+  class="border-border hover:bg-surface-hover flex flex-col gap-1 border-b px-1 py-4 transition-colors"
 >
-  <Icon
-    name="lucide:arrow-right"
-    class="text-foreground-muted absolute top-1/2 -translate-x-8 -translate-y-1/2 transition-transform group-hover:translate-x-2"
-  />
-  <div
-    class="flex flex-col gap-1 transition-transform group-hover:translate-x-8"
-  >
-    {
-      serie && (
-        <span class="text-foreground-muted flex items-center gap-2 font-mono text-xs uppercase">
-          <Icon name="lucide:folder" />
-          {serie.title} · part {serie.part}
+  {
+    serie && (
+      <span class="text-foreground-muted flex items-center gap-2 font-mono text-xs uppercase">
+        <Icon name="lucide:folder" />
+        <span aria-hidden="true">
+          {serie.title} · {serie.part}/{serie.total}
         </span>
-      )
-    }
-    <div class="flex items-baseline justify-between gap-8">
-      <h3 class="flex-1 font-bold">{post.data.title}</h3>
-      <span class="text-foreground-muted shrink-0 font-mono text-xs">
-        {minutes} min · {getMonthYear(post.data.date)}
+        <span class="sr-only">
+          {serie.title}, part {serie.part} of {serie.total}
+        </span>
       </span>
-    </div>
+    )
+  }
+  <div class="flex items-baseline justify-between gap-8">
+    <h3 class="flex-1 font-bold">{post.data.title}</h3>
+    <span class="text-foreground-muted shrink-0 font-mono text-xs">
+      {minutes} min · {getMonthYear(post.data.date)}
+    </span>
   </div>
 </a>

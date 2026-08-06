@@ -54,9 +54,16 @@ export const getSerieStats = async (serie: CollectionEntry<"serie">) => {
   return { parts: posts.length, minutes: Math.ceil(minutes) };
 };
 
+export type SerieMembership = {
+  title: string;
+  id: string;
+  part: number;
+  total: number;
+};
+
 export type WritingEntry = {
   post: CollectionEntry<"post"> | CollectionEntry<"seriePost">;
-  serie?: { title: string; id: string; part: number };
+  serie?: SerieMembership;
 };
 
 export const getLatestWriting = async (
@@ -64,10 +71,7 @@ export const getLatestWriting = async (
 ): Promise<WritingEntry[]> => {
   const latest = (await getAllBlogPosts()).slice(0, count);
 
-  const membership = new Map<
-    string,
-    { title: string; id: string; part: number }
-  >();
+  const membership = new Map<string, SerieMembership>();
   for (const serie of await getAllSeries()) {
     const posts = await getPostsFromSerie(serie);
     posts.forEach((post, index) => {
@@ -75,6 +79,7 @@ export const getLatestWriting = async (
         title: serie.data.title,
         id: serie.id,
         part: index + 1,
+        total: posts.length,
       });
     });
   }

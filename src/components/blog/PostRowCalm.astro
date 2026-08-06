@@ -3,10 +3,11 @@ import { Icon } from "astro-icon/components";
 import type { CollectionEntry } from "astro:content";
 import { getMonthYear } from "src/utils/format-date";
 import { getMinutesFromBody } from "src/utils/get-minutes-read";
+import type { SerieMembership } from "src/utils/repository";
 
 interface Props {
   post: CollectionEntry<"post"> | CollectionEntry<"seriePost">;
-  serie?: { title: string; id: string; part: number } | undefined;
+  serie?: SerieMembership | undefined;
 }
 
 const { post, serie } = Astro.props;
@@ -20,13 +21,18 @@ const minutes = Math.ceil(getMinutesFromBody(post.body));
 
 <a
   href={`/blog/${post.id}`}
-  class="border-border hover:bg-surface flex flex-col gap-1 border-b px-1 py-4 transition-colors"
+  class="border-border hover:bg-surface-hover flex flex-col gap-1 border-b px-1 py-4 transition-colors"
 >
   {
     serie && (
       <span class="text-foreground-muted flex items-center gap-2 font-mono text-xs uppercase">
         <Icon name="lucide:folder" />
-        {serie.title} · part {serie.part}
+        <span aria-hidden="true">
+          {serie.title} · {serie.part}/{serie.total}
+        </span>
+        <span class="sr-only">
+          {serie.title}, part {serie.part} of {serie.total}
+        </span>
       </span>
     )
   }

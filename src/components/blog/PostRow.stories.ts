@@ -14,6 +14,11 @@ export const ArrowRow = {
 export const WithSerie = {
   args: {
     post: posts[0],
-    serie: { title: "Web performance", id: "web-performance", part: 1 },
+    serie: {
+      title: "Web performance",
+      id: "web-performance",
+      part: 2,
+      total: 5,
+    },
   } satisfies ComponentProps<typeof PostRow>,
 };

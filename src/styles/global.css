@@ -37,7 +37,18 @@
   --color-foreground-muted: #5b5b5b;
   --color-border: #d1ddbb;
   --color-surface: #e0eec4;
-  --color-surface-hover: #d1ddbb;
+
+  /* Row/card hover tint. Stays close to the background so accent and muted text
+     keep AA on top of it: the old #d1ddbb dropped teal-700 to 3.77:1.
+     Benchmarked band (Study C, 12 row/list layouts): the tint sits ΔL* 2.5–4.5
+     from the background in light mode, 4.6–9.3 in dark — GitHub −2.5/+4.6,
+     jsr −3.7, Vercel −4.5/+9.3. Ours: −3.63/+6.27. Stay inside that band; the
+     pre-retune values (−12.15/+21.05) were 3–5× outside it and broke AA.
+     "Raised" = a surface stacked on an already-lifted one (topic chip on a
+     hovered row) — it steps AWAY from the background, which in light mode
+     means darker. Same per-mode direction logic as --color-accent-hover. */
+  --color-surface-hover: #eaf5d3; /* lime-150 — teal-700 4.72:1, muted 5.98:1 */
+  --color-surface-raised: #d3e3ae; /* lime-250 — muted 4.97:1 */
 
   /* Single accent (teal). Budget: serie chips, section CTAs, active nav, focus
      rings, hover underline decoration — nothing else. Steps differ per mode
@@ -55,10 +66,16 @@
   --color-foreground: #ececec;
   --color-foreground-strong: #f7f7f7;
 
-  --color-foreground-muted: #9b9b9b;
+  /* One step lighter than the old #9b9b9b, which was 4.48:1 on --color-surface
+     — under AA for the mono metadata that sits inside topic chips. */
+  --color-foreground-muted: #b0b0b0; /* 7.69:1 on bg, 5.74:1 on surface */
   --color-border: #4c4c4c;
   --color-surface: #343434;
-  --color-surface-hover: #4c4c4c;
+
+  /* Hover/raised flip direction in dark: stepping away from the background
+     means darker for hover, lighter for the chip stacked on top of it. */
+  --color-surface-hover: #2b2b2b; /* gray-750 — teal-500 5.84:1, fg 11.98:1 */
+  --color-surface-raised: #3f3f3f; /* gray-650 — muted 4.85:1 */
 
   /* Accent flips direction in dark: hover brightens instead of darkening. */
   --color-accent: #00bba7; /* teal-500 — 6.88:1 on --color-background */
