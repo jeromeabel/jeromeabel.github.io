@@ -167,6 +167,349 @@
       "name": "mobile-toc-details",
       "kind": "spacing",
       "reason": "same gap as 247:3098 (PAGE/SERIE-POST 390-Dark mobile-toc-details) — 6px itemSpacing has no matching spacing scale variable."
+    },
+    {
+      "id": "2001:1303",
+      "name": "Blog",
+      "kind": "text-style",
+      "reason": "IBM Plex Sans Medium 18 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "2001:1489",
+      "name": "Blog",
+      "kind": "text-style",
+      "reason": "IBM Plex Sans Medium 18 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "2001:1311",
+      "name": "Blog",
+      "kind": "text-style",
+      "reason": "IBM Plex Sans Medium 18 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "2001:1314",
+      "name": "Jérôme Abel",
+      "kind": "text-style",
+      "reason": "IBM Plex Sans Medium 22 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "2001:1487",
+      "name": "Jérôme Abel",
+      "kind": "text-style",
+      "reason": "IBM Plex Sans Medium 22 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "2001:1316",
+      "name": "Jérôme Abel",
+      "kind": "text-style",
+      "reason": "IBM Plex Sans Medium 22 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "I2001:1642;2001:1487",
+      "name": "Jérôme Abel",
+      "kind": "text-style",
+      "reason": "IBM Plex Sans Medium 22 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "I2001:1645;2001:1303",
+      "name": "Blog",
+      "kind": "text-style",
+      "reason": "IBM Plex Sans Medium 18 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "I2001:1646;2001:1303",
+      "name": "Blog",
+      "kind": "text-style",
+      "reason": "IBM Plex Sans Medium 18 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "I2001:1647;2001:1303",
+      "name": "Blog",
+      "kind": "text-style",
+      "reason": "IBM Plex Sans Medium 18 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "2012:6173",
+      "name": "Start reading",
+      "kind": "text-style",
+      "reason": "IBM Plex Sans Medium 18 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "2012:6182",
+      "name": "Start reading",
+      "kind": "text-style",
+      "reason": "IBM Plex Sans Medium 18 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "2041:278",
+      "name": "All posts",
+      "kind": "text-style",
+      "reason": "IBM Plex Sans Medium 18 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "2041:281",
+      "name": "All posts",
+      "kind": "text-style",
+      "reason": "IBM Plex Sans Medium 18 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "2097:683",
+      "name": "hello@jeromeabel.net",
+      "kind": "text-style",
+      "reason": "IBM Plex Sans SemiBold 18 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "2097:685",
+      "name": "hello@jeromeabel.net",
+      "kind": "text-style",
+      "reason": "IBM Plex Sans SemiBold 18 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "2097:687",
+      "name": "hello@jeromeabel.net",
+      "kind": "text-style",
+      "reason": "IBM Plex Sans SemiBold 18 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "I2012:6299;2012:6173",
+      "name": "Start reading",
+      "kind": "text-style",
+      "reason": "IBM Plex Sans Medium 18 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "I2041:500;2038:853;2371:10416",
+      "name": "Web Performance · 2/5",
+      "kind": "text-style",
+      "reason": "Fira Code Regular 11 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "I2041:502;2039:417;2371:10379",
+      "name": "Full-stack",
+      "kind": "text-style",
+      "reason": "Fira Code Regular 11 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "I2041:502;2039:418",
+      "name": "Adding API Endpoints to an Astro Project",
+      "kind": "text-style",
+      "reason": "IBM Plex Sans SemiBold 18 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "I2041:503;2039:417;2371:10379",
+      "name": "Full-stack",
+      "kind": "text-style",
+      "reason": "Fira Code Regular 11 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "I2041:503;2039:418",
+      "name": "Adding API Endpoints to an Astro Project",
+      "kind": "text-style",
+      "reason": "IBM Plex Sans SemiBold 18 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "I2041:504;2039:417;2371:10379",
+      "name": "Full-stack",
+      "kind": "text-style",
+      "reason": "Fira Code Regular 11 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "I2041:504;2039:418",
+      "name": "Adding API Endpoints to an Astro Project",
+      "kind": "text-style",
+      "reason": "IBM Plex Sans SemiBold 18 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "I2123:7673;2124:7943;2371:10416",
+      "name": "Web Performance · 2/5",
+      "kind": "text-style",
+      "reason": "Fira Code Regular 11 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "I2123:7674;2124:7928;2371:10379",
+      "name": "Full-stack",
+      "kind": "text-style",
+      "reason": "Fira Code Regular 11 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "I2123:7675;2124:7943;2371:10416",
+      "name": "Web Performance · 2/5",
+      "kind": "text-style",
+      "reason": "Fira Code Regular 11 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "I2123:7676;2124:7943;2371:10416",
+      "name": "Web Performance · 2/5",
+      "kind": "text-style",
+      "reason": "Fira Code Regular 11 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "I2124:7928;2371:10379",
+      "name": "Full-stack",
+      "kind": "text-style",
+      "reason": "Fira Code Regular 11 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "I2124:7943;2371:10416",
+      "name": "Web Performance · 2/5",
+      "kind": "text-style",
+      "reason": "Fira Code Regular 11 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "I2367:7174;2371:10379",
+      "name": "Full-stack",
+      "kind": "text-style",
+      "reason": "Fira Code Regular 11 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "I2367:7181;2371:10416",
+      "name": "Web Performance · 2/5",
+      "kind": "text-style",
+      "reason": "Fira Code Regular 11 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "2371:10379",
+      "name": "Full-stack",
+      "kind": "text-style",
+      "reason": "Fira Code Regular 11 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "2371:10416",
+      "name": "Web Performance · 2/5",
+      "kind": "text-style",
+      "reason": "Fira Code Regular 11 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "I2038:853;2371:10416",
+      "name": "Web Performance · 2/5",
+      "kind": "text-style",
+      "reason": "Fira Code Regular 11 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "2034:195",
+      "name": "Exploring a Data-Driven Approach to Web Performance",
+      "kind": "text-style",
+      "reason": "IBM Plex Sans SemiBold 32 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "I2385:7135;2371:10416",
+      "name": "Web Performance · 2/5",
+      "kind": "text-style",
+      "reason": "Fira Code Regular 11 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "2385:7136",
+      "name": "Exploring a Data-Driven Approach to Web Performance",
+      "kind": "text-style",
+      "reason": "IBM Plex Sans SemiBold 32 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "I2039:417;2371:10379",
+      "name": "Full-stack",
+      "kind": "text-style",
+      "reason": "Fira Code Regular 11 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "2039:418",
+      "name": "Adding API Endpoints to an Astro Project",
+      "kind": "text-style",
+      "reason": "IBM Plex Sans SemiBold 18 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "I2385:7145;2371:10379",
+      "name": "Full-stack",
+      "kind": "text-style",
+      "reason": "Fira Code Regular 11 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "2385:7146",
+      "name": "Adding API Endpoints to an Astro Project",
+      "kind": "text-style",
+      "reason": "IBM Plex Sans SemiBold 18 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "2045:373",
+      "name": "Web app · 2026",
+      "kind": "text-style",
+      "reason": "Fira Code Medium 11 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "I2045:417;2045:373",
+      "name": "Web app · 2026",
+      "kind": "text-style",
+      "reason": "Fira Code Medium 11 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "I2045:398;2045:373",
+      "name": "Web app · 2026",
+      "kind": "text-style",
+      "reason": "Fira Code Medium 11 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "I2045:408;2045:373",
+      "name": "Web app · 2026",
+      "kind": "text-style",
+      "reason": "Fira Code Medium 11 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "I2097:658;2097:685",
+      "name": "hello@jeromeabel.net",
+      "kind": "text-style",
+      "reason": "IBM Plex Sans SemiBold 18 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "I2114:7229;2097:658;2097:685",
+      "name": "hello@jeromeabel.net",
+      "kind": "text-style",
+      "reason": "IBM Plex Sans SemiBold 18 — no matching semantic local text style",
+      "loggedAt": "2026-08-06"
     }
   ]
 }

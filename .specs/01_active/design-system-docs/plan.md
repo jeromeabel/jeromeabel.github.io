@@ -548,7 +548,7 @@ Baseline from 2026-08-06: 99 unbound `itemSpacing`, 82 unstyled TEXT, 32 unbound
 - Consumes: the audit script below (reuse it verbatim in Task 5 and Task 11 so the numbers are comparable)
 - Produces: a `RESULT` object `{ scanned, fill, stroke, radius, gap, textStyle }` that Task 7 renders into the Docs "Verification" panel
 
-- [ ] **Step 1: Re-run the baseline audit and classify each gap**
+- [x] **Step 1: Re-run the baseline audit and classify each gap**
 
 ```js
 const page = await figma.getNodeByIdAsync("461:759");
@@ -581,7 +581,7 @@ return { scanned, counts: Object.fromEntries(Object.entries(gaps).map(([k,v]) =>
 
 Excluding art nodes should drop `fill` and `stroke` sharply from the 11/32 baseline. Whatever remains in `fill`/`stroke` is chrome and is a real defect.
 
-- [ ] **Step 2: Bind off-ladder `itemSpacing` to the spacing scale**
+- [x] **Step 2: Bind off-ladder `itemSpacing` to the spacing scale**
 
 `g=10` is the recurring offender and is not on the 4px ladder. Round each gap to the nearest scale step and bind it; report anything that does not land on a step.
 
@@ -617,7 +617,7 @@ return { mutatedNodeIds: bound, boundCount: bound.length, offLadder };
 
 Do **not** auto-snap the `offLadder` entries. Read the list, decide per case, and apply the snap in a follow-up call — `g=10` on `H1`/`HeroAnimation`/`PageDescription` should become `spacing/2` (8) or `spacing/3` (12) depending on what the component visually needs, and `g=300`/`g=183` on `HeaderContent`/`FooterContainer` are almost certainly a `SPACE_BETWEEN` layout expressed as a gap — those get `primaryAxisAlignItems = 'SPACE_BETWEEN'` and `itemSpacing = 0` instead of a binding.
 
-- [ ] **Step 3: Bind unbound radii to the three-value vocabulary**
+- [x] **Step 3: Bind unbound radii to the three-value vocabulary**
 
 Radius is `full`, `lg`, or `0`. Anything else is a defect, not a value to preserve.
 
@@ -652,7 +652,7 @@ return { mutatedNodeIds: bound, boundCount: bound.length, offVocabulary: odd };
 
 Expected: `offVocabulary` is empty. If it is not, those nodes violate the settled radius rule and must be set to `full`, `lg`, or `0` — that is a design fix, not a binding fix, and it should be applied at the master.
 
-- [ ] **Step 4: Assign text styles where an exact match exists**
+- [x] **Step 4: Assign text styles where an exact match exists**
 
 ```js
 const page = await figma.getNodeByIdAsync("461:759");
@@ -678,7 +678,7 @@ return { mutatedNodeIds: applied.map(a => a.split(' ')[0]), appliedCount: applie
 
 The font load before mutation is mandatory — skipping it throws `Cannot write to node with unloaded font`. Split this across two or three calls if it times out; `findAllWithCriteria` over 697 nodes plus a font load per node is the heaviest step in the plan.
 
-- [ ] **Step 5: Record the `noMatch` list as named debt, do not invent styles**
+- [x] **Step 5: Record the `noMatch` list as named debt, do not invent styles**
 
 Creating a `Body/30-regular` style to close the gap would change the settled type ramp. Log instead.
 
@@ -690,7 +690,7 @@ pnpm test
 
 Expected: `pnpm test` passes (the `scripts/figma/*.test.mjs` suite validates the debt file shape).
 
-- [ ] **Step 6: Re-run the Step 1 audit and diff**
+- [x] **Step 6: Re-run the Step 1 audit and diff**
 
 Run the Step 1 script again unchanged. Expected: `gap` and `radius` at or near zero, `textStyle` reduced by `appliedCount`, `fill`/`stroke` containing only genuine chrome defects. Record the before/after pair — Task 7 renders it.
 
