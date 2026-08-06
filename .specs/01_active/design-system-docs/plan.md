@@ -334,7 +334,7 @@ Deleting `🗄️ Archive & XP` took a second `Icon` component set (`52:136`) wi
 - Consumes: the live `Icon` set `461:6204` on `🧩 Components`
 - Produces: zero instances whose main component's ancestry fails to reach a page. Task 3 Step 5 and Task 11 Step 6 both re-assert this.
 
-- [ ] **Step 1: Map the orphans to their live equivalents by variant**
+- [x] **Step 1: Map the orphans to their live equivalents by variant**
 
 ```js
 const comps = await figma.getNodeByIdAsync("461:759");
@@ -349,14 +349,14 @@ return {
 
 Expected: a set at `461:6204` with variants named `icon=arrow-down`, `icon=arrow-right`, and the rest. Record the ids for `arrow-down` and `arrow-right` — Step 2 needs them as literals.
 
-- [ ] **Step 2: Swap each orphan onto the live variant**
+- [x] **Step 2: Swap each orphan onto the live variant**
 
 ```js
 const page = await figma.getNodeByIdAsync("2558:18264");
 await figma.setCurrentPageAsync(page);
 
 // REPLACE with the variant ids returned by Step 1.
-const LIVE = { "icon=arrow-down": "461:6205", "icon=arrow-right": "461:6206" };
+const LIVE = { "icon=arrow-down": "461:6205", "icon=arrow-right": "461:6211" };
 
 const swapped = [], unresolved = [];
 for (const inst of page.findAllWithCriteria({ types: ['INSTANCE'] })) {
@@ -375,7 +375,7 @@ return { mutatedNodeIds: swapped.map(s => s.id), swapped, unresolved };
 
 `swapComponent` preserves overrides where the two components share layer names — these are icon instances with no text overrides, so nothing is at risk. If `unresolved` is non-empty, an orphan exists that is not an Icon; do not guess a replacement, report it.
 
-- [ ] **Step 3: Verify zero orphans remain, and that the icons still look right**
+- [x] **Step 3: Verify zero orphans remain, and that the icons still look right**
 
 ```js
 const page = await figma.getNodeByIdAsync("2558:18264");
@@ -395,7 +395,7 @@ return { instances: insts.length, orphans };
 
 Expected: `orphans` empty, `instances` still 116. Check the screenshot for a missing or wrong-direction arrow — a swap onto the wrong variant is silent.
 
-- [ ] **Step 4: Sweep the whole file once**
+- [x] **Step 4: Sweep the whole file once**
 
 Run the same orphan check against `📚 Docs`, `🧩 Components` and `📖 Cover` as three parallel `use_figma` calls (one `setCurrentPageAsync` each — never loop pages inside one script). Any orphan found on the Components page is more serious: a master referencing a deleted master means a broken library, not just a broken frame.
 
@@ -418,7 +418,7 @@ git commit -m "docs(specs): design-system-docs — task 2b reconnect orphaned Ic
 - Consumes: bound frames from Task 2, mode ids from Task 1
 - Produces: eight frames named exactly `Home — Desktop — Light`, `Home — Desktop — Dark`, `Home — Mobile — Light`, `Home — Mobile — Dark`, and the same four for `Blog`. Task 10 references these by name.
 
-- [ ] **Step 1: Fix fixed-width masters flagged in Task 2**
+- [x] **Step 1: Fix fixed-width masters flagged in Task 2**
 
 For each master name flagged, set the offending container to `FILL` at the source component. Example shape — substitute the real names from the Task 2 report:
 
@@ -440,7 +440,7 @@ return { mutatedNodeIds: mutated, skipped };
 
 `FILL` only applies to a child of an auto-layout parent — if it throws `FILL can only be set on children of auto-layout frames`, the parent needs `layoutMode` first. Do not force it on absolute-positioned children.
 
-- [ ] **Step 2: Rename the two existing frames to the Desktop/Dark slots**
+- [x] **Step 2: Rename the two existing frames to the Desktop/Dark slots**
 
 ```js
 const page = await figma.getNodeByIdAsync("2558:18264");
@@ -452,7 +452,7 @@ blog.name = "Blog — Desktop — Dark";
 return { mutatedNodeIds: [home.id, blog.id], names: [home.name, blog.name] };
 ```
 
-- [ ] **Step 3: Clone into the remaining six frames and pin one mode pair each**
+- [x] **Step 3: Clone into the remaining six frames and pin one mode pair each**
 
 ```js
 const page = await figma.getNodeByIdAsync("2558:18264");
@@ -481,7 +481,7 @@ for (const pageName of ["Home","Blog"]) {
 return { createdNodeIds: created.map(c => c.id), created };
 ```
 
-- [ ] **Step 4: Lay the eight frames out in a readable grid**
+- [x] **Step 4: Lay the eight frames out in a readable grid**
 
 Recruiters read left-to-right. Put Desktop left, Mobile right; Light row above Dark row; Home block above Blog block.
 
@@ -507,7 +507,7 @@ for (const p of ["Home", "Blog"]) {
 return { rows: ROW_Y, placed: page.children.map(n => ({ name: n.name, x: n.x, y: n.y })) };
 ```
 
-- [ ] **Step 5: Verify all eight and screenshot the mobile pair**
+- [x] **Step 5: Verify all eight and screenshot the mobile pair**
 
 ```js
 const page = await figma.getNodeByIdAsync("2558:18264");
@@ -526,7 +526,7 @@ return { count: page.children.length, rows };
 
 Expected: eight rows, no `MISSING`; every Desktop frame `w: 1280`, every Mobile frame `w: 390`; each `explicitVariableModes` names both collection ids. Inspect the screenshot for horizontal overflow, clipped text, and overlapping instances — if any appear, return to Step 1 with the specific master named, and fix it at the master.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add .specs/01_active/design-system-docs/plan.md
