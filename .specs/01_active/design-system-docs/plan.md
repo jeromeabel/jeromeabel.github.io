@@ -23,6 +23,8 @@ status: plan — ready to execute
 - **Radius vocabulary is exactly three:** `full` (pressable), `lg`/8px (holds media), `0` (reading surface). No `sm`/`md`/`xl`.
 - **Hover is one verb per surface, ≤150ms.** A hover variant identical to its default is a bug; so is a hover changing two things.
 - **Figma's own chrome is excluded from every audit.** `COMPONENT_SET` frames render `cornerRadius: 5` and a dashed purple boundary; `SECTION` frames carry `cornerRadius: 2`. Skip node types `COMPONENT_SET` and `SECTION` in every radius/dashed/binding sweep or false positives return.
+- **Decision copy is verbatim.** `decisions.md` in this folder holds every validated caption harvested from the live Docs sheet (which carried them from the old `SPEC / Specimen` page). Rebuilding re-homes those strings; it does not reword them. Paraphrasing a validated decision is a defect.
+- **The sheet must read as one visual identity, not three.** The thesis is the three-layer model from `artistic-direction`: **Chrome** (nav, header, footer, buttons, toggles, icons — precise and quiet, for the engineer register), **Content** (cards, rows, prose, metadata — hierarchy and scanability), **Hand** (the five author-drawn SVGs — the single controlled escape valve for the artist register). The rule that binds them: only one layer is expressive at a time; Chrome and Content stay precise so the Hand layer reads as deliberate. Every decision card carries a layer tag, and chapter `00` states the thesis outright. A reader scanning only the tags should come away with it.
 - **Copy tone:** conversational, concrete, no marketing abstractions, numbers carry context, no overclaims. See the `copy-tone-no-marketing` memory and `design-expert/references/copywriting.md`.
 - **Both themes ship together.** Every Docs chapter exists in a Light frame and a Dark frame; the Dark frame is a clone with the `2 Theme` mode reapplied, never hand-recoloured.
 
@@ -34,10 +36,10 @@ status: plan — ready to execute
 |---|---|
 | `📖 Cover` | `0:1` |
 | `📚 Docs` | `2545:671` |
-| `🎨 Foundations` | `5:14` |
-| `🧩 Components` | `461:759` |
+| `🎨 Foundations` | `5:14` — 3 frames: `Foundations · Colors` `6:2`, `Foundations · Typography` `8:2`, `Tailwind Font Sizes` `365:55`. `Foundations · Scale` is gone. |
+| `🧩 Components` | `461:759` — 8 SECTIONs, 33 masters |
 | `Pages` | `2558:18264` |
-| `🗄️ Archive & XP` | `442:5352` |
+| `🗄️ Archive & XP` | `442:5352` — **still 57 top-level children.** The move to the backup file `Wf4iomVMYUXlFIBV3Z8bx4` is partial, not finished. Notably it still holds a live COMPONENT master `illustration/performance` `398:8921` and an INSTANCE `illustration/screen` `2558:9395`, plus 11 old `SECTION /` boards, three `V3/1 - Home — 1536 — Dark` copies, and ~20 stray `Frame NN` / loose TEXT nodes. |
 
 **Docs frames:** Light `2545:672`, Dark `2547:7597` (1600 × 4707 each).
 
@@ -684,6 +686,157 @@ git commit -m "docs(specs): design-system-docs — task 5 master descriptions ca
 
 ---
 
+### Task 5b: Build the `Docs/` kit — four components the sheet is assembled from
+
+**Do the docs need their own components? Yes — four of them.** The rebuilt sheet contains roughly 63 specimen cells, 17 decision cards, 5 chapter headers and ~20 token rows *per frame*. Without components, changing a caption size is 63 edits; with them it is one. More importantly, the layer tag (Chrome / Content / Hand) is the mechanism that makes the identity read as cohesive — a variant property enforces it, hand-typed text drifts. Four is the right number: a fifth would be a component with one use.
+
+The objection is real and is mitigated, not ignored: doc components show up in the assets panel beside product components. Every master is name-prefixed `Docs/` and lives in one `SECTION / Docs kit` on the Docs page, so a reader browsing the library sees a labelled toolbox, not clutter.
+
+**Files:**
+- Modify: `📚 Docs` `2545:671` — new `SECTION / Docs kit`
+
+**Interfaces:**
+- Consumes: `2 Theme` variables; the layer taxonomy from `decisions.md`
+- Produces: `Docs/ChapterHeader`, `Docs/SpecimenCell`, `Docs/DecisionCard` (variant `layer` = Chrome | Content | Hand | All), `Docs/TokenRow`. Tasks 6–10 instantiate these instead of building text stacks by hand.
+
+- [ ] **Step 1: Create the kit section and the two simple components**
+
+```js
+const page = await figma.getNodeByIdAsync("2545:671");
+await figma.setCurrentPageAsync(page);
+await figma.loadFontAsync({ family: "IBM Plex Sans", style: "Regular" });
+await figma.loadFontAsync({ family: "IBM Plex Sans", style: "SemiBold" });
+await figma.loadFontAsync({ family: "Fira Code", style: "Regular" });
+const theme = await figma.variables.getVariableCollectionByIdAsync("VariableCollectionId:3:2");
+const V = {};
+for (const id of theme.variableIds) { const v = await figma.variables.getVariableByIdAsync(id); V[v.name] = v; }
+
+const txt = (name, chars, family, style, size, colour, w) => {
+  const t = figma.createText();
+  t.name = name;
+  t.fontName = { family, style };
+  t.characters = chars;
+  t.fontSize = size;
+  t.textAutoResize = "HEIGHT";
+  t.setBoundVariable("fills", V[colour]);
+  if (w) t.resize(w, t.height);
+  return t;
+};
+
+const kit = figma.createSection();
+kit.name = "SECTION / Docs kit";
+page.appendChild(kit);
+kit.x = 3600; kit.y = 0; kit.resizeWithoutConstraints(1400, 1200);
+
+// Docs/ChapterHeader — number, title, one-line summary
+const chHead = figma.createAutoLayout("VERTICAL", { name: "Docs/ChapterHeader", itemSpacing: 12 });
+chHead.appendChild(txt("number", "01", "Fira Code", "Regular", 12, "color/foreground-muted"));
+chHead.appendChild(txt("title", "Tokens", "Bubbler One", "Regular", 40, "color/foreground"));
+chHead.appendChild(txt("summary", "One line saying what this chapter covers.", "IBM Plex Sans", "Regular", 18, "color/foreground-muted", 720));
+kit.appendChild(chHead);
+const chHeadC = figma.createComponentFromNode(chHead);
+chHeadC.description = "Docs kit · chapter heading. Number, title, one-line summary. Used once per chapter on both the Light and Dark sheets.";
+
+// Docs/SpecimenCell — mono label, empty slot for a live instance, caption
+const cell = figma.createAutoLayout("VERTICAL", { name: "Docs/SpecimenCell", itemSpacing: 12 });
+cell.appendChild(txt("label", "Link/CTA", "Fira Code", "Regular", 12, "color/foreground-muted"));
+const slot = figma.createAutoLayout("HORIZONTAL", { name: "slot", itemSpacing: 16 });
+slot.paddingTop = 8; slot.paddingBottom = 8;
+cell.appendChild(slot);
+cell.appendChild(txt("caption", "The validated decision, verbatim.", "IBM Plex Sans", "Regular", 14, "color/foreground-muted", 640));
+kit.appendChild(cell);
+const cellC = figma.createComponentFromNode(cell);
+cellC.description = "Docs kit · one specimen. Drop a live component instance into the `slot` child; never rebuild the component by hand. Caption text is copied verbatim from decisions.md.";
+
+return { createdNodeIds: [kit.id, chHeadC.id, cellC.id] };
+```
+
+`createComponentFromNode` must run *after* the node is parented and its text filled — converting first then editing children risks the font-load error on a node that is now a component.
+
+- [ ] **Step 2: Build `Docs/DecisionCard` as a variant set keyed on layer**
+
+The layer tag is the identity mechanism, so it is a variant property, not free text.
+
+```js
+const page = await figma.getNodeByIdAsync("2545:671");
+await figma.setCurrentPageAsync(page);
+const kit = page.children.find(n => n.name === "SECTION / Docs kit");
+await figma.loadFontAsync({ family: "IBM Plex Sans", style: "Regular" });
+await figma.loadFontAsync({ family: "IBM Plex Sans", style: "SemiBold" });
+await figma.loadFontAsync({ family: "Fira Code", style: "Regular" });
+const theme = await figma.variables.getVariableCollectionByIdAsync("VariableCollectionId:3:2");
+const V = {};
+for (const id of theme.variableIds) { const v = await figma.variables.getVariableByIdAsync(id); V[v.name] = v; }
+
+const txt = (name, chars, family, style, size, colour, w) => {
+  const t = figma.createText();
+  t.name = name; t.fontName = { family, style }; t.characters = chars; t.fontSize = size;
+  t.textAutoResize = "HEIGHT"; t.setBoundVariable("fills", V[colour]);
+  if (w) t.resize(w, t.height);
+  return t;
+};
+
+const variants = [];
+for (const layer of ["Chrome", "Content", "Hand", "All"]) {
+  const card = figma.createAutoLayout("VERTICAL", { name: `layer=${layer}`, itemSpacing: 12 });
+  card.paddingTop = 24; card.paddingBottom = 24; card.paddingLeft = 24; card.paddingRight = 24;
+  card.strokeWeight = 1;
+  card.strokes = [{ type: "SOLID", color: { r: 0, g: 0, b: 0 } }];
+  card.setBoundVariable("strokes", V["color/border"]);
+
+  // The tag is a chip: full radius, because a chip is the pressable vocabulary shape even
+  // when it is not pressable here — consistency of shape language beats literal affordance.
+  const chip = figma.createAutoLayout("HORIZONTAL", { name: "layer tag", itemSpacing: 8 });
+  chip.paddingTop = 4; chip.paddingBottom = 4; chip.paddingLeft = 12; chip.paddingRight = 12;
+  chip.cornerRadius = 9999;
+  chip.fills = [{ type: "SOLID", color: { r: 0, g: 0, b: 0 } }];
+  chip.setBoundVariable("fills", V[layer === "Hand" ? "color/accent-subtle" : "color/surface"]);
+  chip.appendChild(txt("layer", layer.toUpperCase(), "Fira Code", "Regular", 12,
+    layer === "Hand" ? "color/accent-strong" : "color/foreground-muted"));
+  card.appendChild(chip);
+
+  card.appendChild(txt("rule", "The rule, stated as a rule.", "IBM Plex Sans", "SemiBold", 20, "color/foreground", 760));
+  card.appendChild(txt("body", "Why it was decided this way.", "IBM Plex Sans", "Regular", 16, "color/foreground-muted", 760));
+  card.appendChild(txt("finding", "", "Fira Code", "Regular", 12, "color/foreground-muted", 760));
+  kit.appendChild(card);
+  variants.push(figma.createComponentFromNode(card));
+}
+const set = figma.combineAsVariants(variants, kit);
+set.name = "Docs/DecisionCard";
+set.description = "Docs kit · one design decision. The `layer` variant tags it Chrome, Content, Hand, or All — the tag is what makes the three-layer identity legible when scanning. Rule text is verbatim from decisions.md. Leave `finding` empty unless the decision has a recorded gap.";
+return { createdNodeIds: [set.id], variants: variants.map(v => v.id) };
+```
+
+`combineAsVariants` needs every variant named `property=value` before the call and takes the parent as its second argument. Hand gets the accent-subtle chip because it is the one expressive layer — the tag itself demonstrates the accent budget rule.
+
+- [ ] **Step 3: Build `Docs/TokenRow`**
+
+Four columns: token name (mono), and one value column per mode. Same construction pattern as Step 1's `Docs/SpecimenCell`; name the three value children `mode1` / `mode2` / `mode3` so chapter 01 can address them, and set the name column to a fixed 280 so rows align down the sheet.
+
+- [ ] **Step 4: Verify the kit**
+
+```js
+const page = await figma.getNodeByIdAsync("2545:671");
+await figma.setCurrentPageAsync(page);
+const kit = page.children.find(n => n.name === "SECTION / Docs kit");
+const masters = kit.findAllWithCriteria({ types: ['COMPONENT','COMPONENT_SET'] })
+  .filter(n => n.parent.type !== 'COMPONENT_SET');
+await kit.screenshot({ scale: 1 });
+return masters.map(m => ({ id: m.id, name: m.name, type: m.type, hasDesc: !!m.description,
+  variants: m.type === 'COMPONENT_SET' ? m.children.map(c => c.name) : null }));
+```
+
+Expected: exactly four masters, all named `Docs/…`, all with descriptions, `Docs/DecisionCard` a `COMPONENT_SET` with `layer=Chrome|Content|Hand|All`.
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add .specs/01_active/design-system-docs/
+git commit -m "docs(specs): design-system-docs — task 5b docs kit components"
+```
+
+---
+
 ### Task 6: Build the `00 Read me` chapter
 
 The current Docs sheet opens cold on the word "BORDER". A recruiter needs to know in ten seconds what they are looking at.
@@ -760,7 +913,62 @@ return { createdNodeIds: [head.id, intro.id] };
 
 `textAutoResize = "HEIGHT"` plus an explicit `resize` width is required for wrapping text — `FILL` alone leaves the default `WIDTH_AND_HEIGHT` mode in charge and collapses the node to a thread.
 
-- [ ] **Step 3: Add the how-this-maps-to-code table**
+- [ ] **Step 3: State the three-layer identity — the thesis panel**
+
+This is the panel that answers "is this a coherent visual identity or a pile of preferences". It goes directly under the intro, before anything else.
+
+```js
+const page = await figma.getNodeByIdAsync("2545:671");
+await figma.setCurrentPageAsync(page);
+const head = (await figma.getNodeByIdAsync("2545:672")).findOne(n => n.name === "CHAPTER / 00 Read me");
+const kit = page.children.find(n => n.name === "SECTION / Docs kit");
+const cardSet = kit.findOne(n => n.name === "Docs/DecisionCard");
+await figma.loadFontAsync({ family: "IBM Plex Sans", style: "Regular" });
+await figma.loadFontAsync({ family: "IBM Plex Sans", style: "SemiBold" });
+await figma.loadFontAsync({ family: "Fira Code", style: "Regular" });
+
+const LAYERS = [
+  ["Chrome", "Nav, header, footer, buttons, toggles, icons.",
+   "The operating surface. Precise and quiet — flat backgrounds, no gradients, one hover verb per surface at 150ms. This layer is where the engineer register lives; it should be unremarkable to use and hard to fault."],
+  ["Content", "Cards, rows, prose, metadata.",
+   "The reading surface. Three type families doing three jobs, a three-value radius vocabulary, borders reserved for aggregate entities, and metadata as a deliberate third reading layer in mono at 12px."],
+  ["Hand", "Five author-drawn SVGs: hero, quality, 404, arrow-curve, footer.",
+   "The one expressive layer. Black stroke on transparent, inverted in dark mode. Everything else stays precise so these read as deliberate rather than decorative — the signature is drawn, not applied as a filter."],
+];
+
+const panel = figma.createAutoLayout("VERTICAL", { name: "three-layer identity", itemSpacing: 16 });
+const kicker = figma.createText();
+kicker.fontName = { family: "Fira Code", style: "Regular" };
+kicker.characters = "ONE IDENTITY, THREE LAYERS";
+kicker.fontSize = 12; kicker.textAutoResize = "HEIGHT";
+panel.appendChild(kicker);
+
+const created = [];
+for (const [layer, what, why] of LAYERS) {
+  const inst = cardSet.defaultVariant.createInstance();
+  inst.setProperties({ layer });
+  inst.findOne(n => n.name === "rule").characters = what;
+  inst.findOne(n => n.name === "body").characters = why;
+  panel.appendChild(inst);
+  inst.layoutSizingHorizontal = "FILL";
+  created.push(inst.id);
+}
+
+const thesis = figma.createText();
+thesis.fontName = { family: "IBM Plex Sans", style: "Regular" };
+thesis.characters = "The rule that binds them: only one layer is expressive at a time. Chrome and Content stay precise, which is what lets the Hand layer read as intent rather than noise. Every decision in this document is tagged with the layer it governs.";
+thesis.fontSize = 18; thesis.textAutoResize = "HEIGHT";
+thesis.resize(760, thesis.height);
+panel.appendChild(thesis);
+
+head.appendChild(panel);
+panel.layoutSizingHorizontal = "FILL";
+return { createdNodeIds: [panel.id, ...created] };
+```
+
+`setProperties({ layer })` is how a variant is selected on an instance — setting the instance `name` does nothing. Bind the two loose text fills to `color/foreground-muted` and `color/foreground` in the same call; they are omitted above only to keep the snippet readable, and leaving them unbound would break the Dark clone in Task 11.
+
+- [ ] **Step 4: Add the how-this-maps-to-code table**
 
 Three rows, mono, muted. Keep it factual — no claims about impact.
 
@@ -796,7 +1004,7 @@ head.appendChild(table);
 return { createdNodeIds: [table.id] };
 ```
 
-- [ ] **Step 4: Screenshot and read it as a stranger**
+- [ ] **Step 5: Screenshot and read it as a stranger**
 
 ```js
 const page = await figma.getNodeByIdAsync("2545:671");
@@ -806,9 +1014,9 @@ await head.screenshot({ scale: 1 });
 return { id: head.id, h: Math.round(head.height) };
 ```
 
-Check: no clipped text, the intro wraps at 720 rather than running the full 1600, mono rows align, muted text is legible against the background.
+Check: no clipped text, the intro wraps at 720 rather than running the full 1600, mono rows align, muted text is legible against the background, and the three layer cards read as one argument rather than three unrelated boxes.
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 6: Commit**
 
 ```bash
 git add .specs/01_active/design-system-docs/plan.md
@@ -965,7 +1173,51 @@ git commit -m "docs(specs): design-system-docs — task 7 tokens chapter"
 
 - [ ] **Step 1: Create the chapter and re-home the four atom-level property sections**
 
-Same move pattern as Task 7 Step 1, with `ORDER = ["SECTION / Buttons", "SECTION / Icons", "SECTION / Numbers", "SECTION / Border"]` and `f.insertChild(2, chapter)`.
+Same move pattern as Task 7 Step 1, with `ORDER = ["SECTION / Buttons", "SECTION / Icons", "SECTION / Numbers"]` and `f.insertChild(2, chapter)`. `SECTION / Border` is **not** here — border governs cards and rows, which are molecules, so `decisions.md` homes it in chapter 03.
+
+- [ ] **Step 1b: Convert each re-homed section into a `Docs/DecisionCard` + specimen row**
+
+The moved sections are frames with a bare uppercase title and loose captions. Give each one a decision card carrying the layer tag and the verbatim rule, with the existing live specimens kept beneath it.
+
+```js
+const page = await figma.getNodeByIdAsync("2545:671");
+await figma.setCurrentPageAsync(page);
+const chapter = (await figma.getNodeByIdAsync("2545:672")).findOne(n => n.name === "CHAPTER / 02 Atoms");
+const kit = page.children.find(n => n.name === "SECTION / Docs kit");
+const cardSet = kit.findOne(n => n.name === "Docs/DecisionCard");
+await figma.loadFontAsync({ family: "IBM Plex Sans", style: "Regular" });
+await figma.loadFontAsync({ family: "IBM Plex Sans", style: "SemiBold" });
+
+// Verbatim from decisions.md. Do not reword.
+const DECISIONS = {
+  "SECTION / Buttons": ["Chrome",
+    "Three button styles, four components.",
+    "Link/CTA · Primary, ≤1 per viewport. Link/Secondary · unlimited. Link/SecondarySm · small secondary. Link/TextCTA · Text CTA, one per section header. Link/Icon is a chrome control, not a button style, and sits outside the count.", ""],
+  "SECTION / Icons": ["Chrome",
+    "Three icon sizes, each with a job.",
+    "16 · inline with metadata. 20 · buttons and nav. 24 · standalone.", ""],
+  "SECTION / Numbers": ["Content",
+    "Numbers are mono and tabular.",
+    "SerieMeta · '6 PARTS' counter, muted. PostMetadataTime (day) and (no-date) · mono tabular. Numbers sit in the metadata reading layer, never in the accent budget.", ""],
+};
+
+const mutated = [];
+for (const [secName, [layer, rule, body, finding]] of Object.entries(DECISIONS)) {
+  const sec = chapter.findOne(n => n.name === secName);
+  if (!sec) continue;
+  const inst = cardSet.defaultVariant.createInstance();
+  inst.setProperties({ layer });
+  inst.findOne(n => n.name === "rule").characters = rule;
+  inst.findOne(n => n.name === "body").characters = body;
+  inst.findOne(n => n.name === "finding").characters = finding;
+  sec.insertChild(1, inst);   // index 0 is the section's own uppercase title
+  inst.layoutSizingHorizontal = "FILL";
+  mutated.push(inst.id);
+}
+return { createdNodeIds: mutated };
+```
+
+Apply the same shape in Task 7 (Radius `Chrome + Content` → use `layer=All`; Type `Content`; Spacing `All`; Colour `Content`; Motion `Chrome`) and Task 9 (Border `Content`; Hover `All`; Backgrounds `Chrome`; Illustration `Hand`), pulling every string verbatim from `decisions.md`. The two recorded FINDING lines — the spacing-ladder one and the focus-ring/section-CTA one — go in the `finding` slot rather than being dropped; an honest recorded gap is worth more to this audience than a tidy sheet.
 
 - [ ] **Step 2: Instantiate every atom that is not already shown, with its name and description beside it**
 
@@ -1059,15 +1311,21 @@ git commit -m "docs(specs): design-system-docs — task 8 atoms chapter"
 
 **Files:**
 - Modify: `📚 Docs` light frame `2545:672`
-- Move into this chapter: `SECTION / Hover` `2545:7268`, `SECTION / Backgrounds` `2545:7516`, `SECTION / Illustration` `2546:282`
+- Move into this chapter: `SECTION / Border` `2545:674`, `SECTION / Hover` `2545:7268`, `SECTION / Backgrounds` `2545:7516`, `SECTION / Illustration` `2546:282`
 
 **Interfaces:**
 - Consumes: the 8 molecule + 8 organism masters and their Task 5 descriptions
 - Produces: a `CHAPTER / 03 Molecules & Organisms` frame with two labelled sub-groups
 
-- [ ] **Step 1: Create the chapter, insert at index 3, and re-home Hover / Backgrounds / Illustration**
+- [ ] **Step 1: Create the chapter, insert at index 3, and re-home Border / Hover / Backgrounds / Illustration**
 
-Same move pattern as Task 7 Step 1. Order within the chapter: molecule grid → organism grid → `SECTION / Hover` → `SECTION / Backgrounds` → `SECTION / Illustration`. Hover belongs here because a hover verb is a property of a *surface*, and surfaces are molecules and organisms — an atom like `H2` has no hover.
+Same move pattern as Task 7 Step 1. Order within the chapter: molecule grid → organism grid → `SECTION / Border` → `SECTION / Hover` → `SECTION / Backgrounds` → `SECTION / Illustration`. Hover and Border belong here because both are properties of a *surface*, and surfaces are molecules and organisms — an atom like `H2` has neither a hover verb nor an aggregate boundary.
+
+Then apply the Task 8 Step 1b decision-card pattern with these four, verbatim from `decisions.md`: Border `layer=Content` ("Border marks an aggregate entity" — PostRow hairline, SerieCard full border, PostCardPreviewSmall borderless); Hover `layer=All` (the nine-row verb table, one verb per surface, ≤150ms); Backgrounds `layer=Chrome` (Header flat `--color-background`, Footer flat `--color-surface`, no gradients); Illustration `layer=Hand` (the signature-layer paragraph and the five per-asset captions).
+
+- [ ] **Step 1c: Add the decisions that have no specimen**
+
+Five settled rules have no demonstrable Figma specimen and are currently invisible on the sheet. A recruiter cannot see an absence, so state them as specimen-free `Docs/DecisionCard` instances at the end of this chapter: one chip per card/row (serie wins over topic); display font is page-level only, so card titles use sans bold; metadata is the third reading layer, mono uppercase ~12px muted but ≥4.5:1; the folder icon means serie and nothing else; and dashed is removed from the library entirely, surviving only in the hero self-draw start state as an animating `stroke-dasharray`, not a CSS border. The last one matters most — it is the decision that killed the round-1 identity hypothesis, and it reads as a considered rejection rather than an oversight only if it is written down.
 
 - [ ] **Step 2: Constrain the Illustration section**
 
@@ -1276,40 +1534,57 @@ Then set the title to `Design system`, the kicker to `JEROMEABEL.NET · v1.0 · 
 
 - [ ] **Step 3: Decide the fate of `🎨 Foundations`**
 
-It holds four frames; `Tailwind Font Sizes` (`365:55`, 2776 × 2542) is a primitive dump that duplicates the `Tailwind/text-*` styles and adds nothing a reader needs. `Foundations · Colors` / `Typography` / `Scale` overlap chapter 01.
+It now holds **three** frames — `Foundations · Colors` `6:2`, `Foundations · Typography` `8:2`, `Tailwind Font Sizes` `365:55` (`Foundations · Scale` `8:34` is already gone). `Tailwind Font Sizes` (2776 × 2542) is a primitive dump that duplicates the eleven `Tailwind/text-*` styles and adds nothing a reader needs; Colors and Typography overlap chapter 01 but are a legitimate deep-dive.
 
-Move `Tailwind Font Sizes` to `🗄️ Archive & XP`, keep the other three as the deep-dive reference, and rename the page `🎨 Foundations (reference)` so a reader knows chapter 01 is the front door and this is the appendix.
+Delete the dump rather than re-archiving it — it is a regenerable mirror of the installed Tailwind (`pnpm figma:primitives`), not a record of anything. Then rename the page so a reader knows chapter 01 is the front door and this is the appendix.
 
 ```js
 const src = await figma.getNodeByIdAsync("5:14");
 await figma.setCurrentPageAsync(src);
 const dump = src.children.find(n => n.name === "Tailwind Font Sizes");
-const archive = await figma.getNodeByIdAsync("442:5352");
-if (dump) archive.appendChild(dump);
+const removedId = dump ? dump.id : null;
+if (dump) dump.remove();
 src.name = "🎨 Foundations (reference)";
-return { movedNodeIds: dump ? [dump.id] : [], pageName: src.name };
+return { removedNodeIds: removedId ? [removedId] : [], pageName: src.name, remaining: src.children.map(c => c.name) };
 ```
 
-- [ ] **Step 4: Corral the loose nodes on `🗄️ Archive & XP`**
+Expected: `remaining` is `["Foundations · Colors", "Foundations · Typography"]`. If deleting feels too strong at execution time, `appendChild` it into the backup file's archive instead — but do not leave it in this file.
 
-Around 110 top-level nodes sit loose there — screenshots, stray text, orphan frames. Anyone opening the file sees it. Wrap everything in one collapsed section so the page reads as an archive rather than a mess.
+- [ ] **Step 4: Finish the Archive move that is still half-done**
+
+The intent was to move `🗄️ Archive & XP` wholesale into the backup file `Wf4iomVMYUXlFIBV3Z8bx4`. As of the 2026-08-06 re-scan the page still has **57 top-level children**: eleven old `SECTION /` boards (FOOTER, TYPOGRAPHY, ICONS, VALUE-CARD, LINK, TOGGLE, TOPIC-CHIP, BLOG, WORK, ABOUT, HOME/WRITING - Experiments, PAGE/ABOUT, PAGE/HOME), three `V3/1 - Home — 1536 — Dark` copies, a `Blog — 1280 — Dark`, and roughly twenty stray `Frame NN` / loose TEXT nodes.
+
+**Two nodes need care before anything is bulk-moved.** `illustration/performance` `398:8921` is a live `COMPONENT` **master** sitting on the archive page, and `illustration/screen` `2558:9395` is an `INSTANCE`. Deleting or exporting the master breaks the instance and any other reference to it. Resolve those two first:
 
 ```js
 const page = await figma.getNodeByIdAsync("442:5352");
 await figma.setCurrentPageAsync(page);
-const loose = page.children.filter(n => n.type !== "SECTION");
-const box = figma.createSection();
-box.name = "ARCHIVE — pre-v3 material, kept as negative reference";
-page.appendChild(box);
-let x = 0;
-for (const n of loose) { box.appendChild(n); n.x = x; n.y = 0; x += n.width + 80; }
-return { movedNodeIds: loose.map(n => n.id), count: loose.length };
+const masters = page.findAllWithCriteria({ types: ['COMPONENT','COMPONENT_SET'] });
+const out = [];
+for (const m of masters) {
+  const insts = await m.getInstancesAsync();
+  out.push({ id: m.id, name: m.name, instanceCount: insts.length,
+    instancePages: [...new Set(insts.map(i => { let p = i; while (p && p.type !== 'PAGE') p = p.parent; return p && p.name; }))] });
+}
+return out;
 ```
+
+If an archive master has instances on a live page, promote it to `🧩 Components` and classify it (it is a real component that was misfiled). If its only instances are also on the archive page, it is dead and goes to the backup file with everything else.
+
+Figma's Plugin API cannot copy nodes between files, so the actual transfer is manual: select all on `🗄️ Archive & XP`, copy, paste into the backup file, verify the paste landed, then delete the page here with `page.remove()`. Script the verification, not the transfer:
+
+```js
+const page = figma.root.children.find(p => p.name === "🗄️ Archive & XP");
+return page ? { stillPresent: true, children: page.children.length } : { stillPresent: false };
+```
+
+Expected after the manual move: `{ stillPresent: false }`. If the page must stay for now, wrap the loose nodes in one `SECTION` named `ARCHIVE — pre-v3 material, kept as negative reference` so a shared link does not open onto scattered debris — but that is the fallback, not the goal.
 
 - [ ] **Step 5: Order the page list so it reads top-down**
 
 ```js
-const want = ["📖 Cover", "📚 Docs", "🧩 Components", "🎨 Foundations (reference)", "Pages", "🗄️ Archive & XP"];
+// If Step 4 finished, "🗄️ Archive & XP" is gone and simply won't be found — the loop skips it.
+const want = ["📖 Cover", "📚 Docs", "🧩 Components", "📄 Pages", "🎨 Foundations (reference)", "🗄️ Archive & XP"];
 const byName = Object.fromEntries(figma.root.children.map(p => [p.name, p]));
 const moved = [];
 want.forEach((n, i) => { if (byName[n]) { figma.root.insertChild(i, byName[n]); moved.push(n); } });
@@ -1420,7 +1695,7 @@ git add .specs && git commit -m "docs(specs): archive design-system-docs"
 
 ## Self-review notes
 
-**Spec coverage.** "Improve, clean, update the documentation" → Tasks 6–11. "Shareable for senior frontend recruiters" → Task 6 (read-me), Task 11 (cover, page order, archive tidy). "Design decisions clearly documented" → the 12 property sections are re-homed inline in Tasks 7–9 rather than deleted, plus per-master descriptions in Task 5. "Atoms / molecules / organisms / tokens clearly documented" → Task 5 classification, Tasks 7–9 chapters. "Token usage must be verified" → Task 4 audit and fixes, Task 7 verification panel. "How to show desktop and mobile" → Tasks 1–3 and the Task 10 chapter.
+**Spec coverage.** "Carry the validated decision for each UI property of the old SPECIMEN page" → `decisions.md` harvests all twelve verbatim, and Tasks 7/8/9 Step 1b re-home them as `Docs/DecisionCard` instances; Task 9 Step 1c adds the five settled rules that have no specimen. "Cohesive identity serving chrome + engineer + artistic" → the three-layer thesis panel in Task 6 Step 3, plus a layer tag on every decision card via the `Docs/DecisionCard` variant. "Do we need doc components" → answered yes in Task 5b, with the count (four) and the reasoning. "Improve, clean, update the documentation" → Tasks 6–11. "Shareable for senior frontend recruiters" → Task 6 (read-me), Task 11 (cover, page order, archive tidy). "Design decisions clearly documented" → the 12 property sections are re-homed inline in Tasks 7–9 rather than deleted, plus per-master descriptions in Task 5. "Atoms / molecules / organisms / tokens clearly documented" → Task 5 classification, Tasks 7–9 chapters. "Token usage must be verified" → Task 4 audit and fixes, Task 7 verification panel. "How to show desktop and mobile" → Tasks 1–3 and the Task 10 chapter.
 
 **Known soft spots, stated rather than hidden.**
 
