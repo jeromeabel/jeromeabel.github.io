@@ -1419,17 +1419,17 @@ git commit -m "docs(specs): design-system-docs — task 8 elements chapter"
 - Consumes: the 8 component + 8 section masters and their Task 5 descriptions
 - Produces: a `CHAPTER / 03 Components` frame with two labelled sub-groups (components, then page sections)
 
-- [ ] **Step 1: Create the chapter, insert at index 3, and re-home Border / Hover / Backgrounds / Illustration**
+- [x] **Step 1: Create the chapter, insert at index 3, and re-home Border / Hover / Backgrounds / Illustration**
 
 Same move pattern as Task 7 Step 1. Order within the chapter: component grid → section grid → `SECTION / Border` → `SECTION / Hover` → `SECTION / Backgrounds` → `SECTION / Illustration`. Hover and Border belong here because both are properties of a *surface*, and surfaces are components and sections — an element like `H2` has neither a hover verb nor an aggregate boundary.
 
 Then apply the Task 8 Step 1b decision-card pattern with these four, verbatim from `decisions.md`: Border `layer=Content` ("Border marks an aggregate entity" — PostRow hairline, SerieCard full border, PostCardPreviewSmall borderless); Hover `layer=All` (the nine-row verb table, one verb per surface, ≤150ms); Backgrounds `layer=Chrome` (Header flat `--color-background`, Footer flat `--color-surface`, no gradients); Illustration `layer=Hand` (the signature-layer paragraph and the five per-asset captions).
 
-- [ ] **Step 1c: Add the decisions that have no specimen**
+- [x] **Step 1c: Add the decisions that have no specimen**
 
 Five settled rules have no demonstrable Figma specimen and are currently invisible on the sheet. A recruiter cannot see an absence, so state them as specimen-free `Docs/DecisionCard` instances at the end of this chapter: one chip per card/row (serie wins over topic); display font is page-level only, so card titles use sans bold; metadata is the third reading layer, mono uppercase ~12px muted but ≥4.5:1; the folder icon means serie and nothing else; and dashed is removed from the library entirely, surviving only in the hero self-draw start state as an animating `stroke-dasharray`, not a CSS border. The last one matters most — it is the decision that killed the round-1 identity hypothesis, and it reads as a considered rejection rather than an oversight only if it is written down.
 
-- [ ] **Step 1d: Do/don't pairs for the three contested calls**
+- [x] **Step 1d: Do/don't pairs for the three contested calls**
 
 Three `Docs/DoDont` instances, one per decision that was actually contested during the benchmark rounds — a do/don't pair earns its space only where the wrong answer is tempting:
 
@@ -1439,11 +1439,11 @@ Three `Docs/DoDont` instances, one per decision that was actually contested duri
 
 The DO slot holds a live instance (`PostRow` covers 1 and 2); the DON'T slot holds a **detached, deliberately wrong copy** — the one sanctioned exception to the live-instance rule, because the whole point is showing what the library forbids. Name each detached copy `dont-mock — <rule>` so the Task 11 audits can allowlist them.
 
-- [ ] **Step 1e: PostRow deep dive — one component treated as a case study**
+- [x] **Step 1e: PostRow deep dive — one component treated as a case study**
 
 Hiring research (2026-08-06): one component documented deep beats all documented shallow. PostRow carries the most decisions per square pixel — chip logic, hover verb, border idiom, metadata layer — so it gets an extended cell after the component grid: problem (a row must expose serie membership, topic, date, read time without competing with the title) → the 8-blog benchmark that settled chip and hover behaviour (`references/benchmarks.md`) → the decisions, verbatim from `decisions.md` → `Code: src/components/blog/PostRow.astro`. Four short blocks, built from `Docs/SpecimenCell` + `Docs/DecisionCard`, ~600px total. No new copy — everything is harvested from existing validated sources.
 
-- [ ] **Step 2: Constrain the Illustration section**
+- [x] **Step 2: Constrain the Illustration section**
 
 At 1336px tall it is the single biggest section on the sheet and visually dominates a page about components. Cap each illustration cell.
 
@@ -1464,15 +1464,15 @@ return { mutatedNodeIds: resized, before, after: Math.round(sec.height) };
 
 The 200px minimum-render rule is a floor, not a target — 240px keeps the line weight legible while letting five illustrations sit in one band. Expected: `after` well under 600.
 
-- [ ] **Step 3: Build the component and section grids**
+- [x] **Step 3: Build the component and section grids**
 
 Reuse the Task 8 Step 3 script with `CELLS` replaced by the component list, then again for the section list, appending each grid into the chapter. Sections are wide — set each section cell's instance `layoutSizingHorizontal = "FILL"` after appending so `Header` and `Footer` span the sheet rather than sitting at their authored width.
 
-- [ ] **Step 4: Verify and screenshot**
+- [x] **Step 4: Verify and screenshot**
 
 Same verification as Task 8 Step 4 against the `03` chapter. Expected: `broken` empty, `instances` at least 16 plus whatever the moved sections contain.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add .specs/01_active/design-system-docs/plan.md
@@ -1585,7 +1585,7 @@ git commit -m "docs(specs): design-system-docs — task 10 pages chapter"
 - Consumes: the finished light frame from Tasks 6–10
 - Produces: a Dark frame that is a clone with the mode reapplied, a real cover, and a file whose page list reads as intentional
 
-- [ ] **Step 1: Rebuild the Dark sheet as a clone, never by hand-recolouring**
+- [x] **Step 1: Rebuild the Dark sheet as a clone, never by hand-recolouring**
 
 ```js
 const page = await figma.getNodeByIdAsync("2545:671");
@@ -1631,7 +1631,7 @@ return { mutatedNodeIds: [...new Set(flipped)] };
 
 This is what `dark:invert` does in CSS, reproduced in Figma. It is a known, documented compromise — say so in the section caption rather than leaving it to be discovered.
 
-- [ ] **Step 2: Rebuild the cover**
+- [x] **Step 2: Rebuild the cover**
 
 The cover is the thumbnail in Figma's file browser and the first thing a shared link shows. Title, subtitle, one line of context.
 
@@ -1647,7 +1647,7 @@ return { coverId: cover.id, existing: texts.map(t => ({ id: t.id, chars: t.chara
 
 Then set the title to `Design system`, the kicker to `JEROMEABEL.NET · V1.0 · IN PROGRESS · 2026`, and the standfirst to: `Tokens, components and page templates for a personal site and technical blog. Astro 5, Tailwind v4. Every specimen is a live component instance.` Below the standfirst, four mono muted lines (Fira Code 12 — the cover-content set every practitioner source converges on): `STATUS   v1.0 — in progress · Home & Blog shipped, stable when all pages land` · `OWNER    Jérôme Abel · dev@jeromeabel.net` · `UPDATED  <date of execution>` · `LINKS    dev.jeromeabel.net · github.com/jeromeabel/jeromeabel.github.io`. No changelog on the cover. Load each node's *current* font via `getStyledTextSegments(['fontName'])` before writing characters.
 
-- [ ] **Step 3: Decide the fate of `🎨 Foundations`**
+- [x] **Step 3: Decide the fate of `🎨 Foundations`**
 
 It now holds **three** frames — `Foundations · Colors` `6:2`, `Foundations · Typography` `8:2`, `Tailwind Font Sizes` `365:55` (`Foundations · Scale` `8:34` is already gone). `Tailwind Font Sizes` (2776 × 2542) is a primitive dump that duplicates the eleven `Tailwind/text-*` styles and adds nothing a reader needs; Colors and Typography overlap chapter 01 but are a legitimate deep-dive.
 
@@ -1665,7 +1665,7 @@ return { removedNodeIds: removedId ? [removedId] : [], pageName: src.name, remai
 
 Expected: `remaining` is `["Foundations · Colors", "Foundations · Typography"]`. If deleting feels too strong at execution time, `appendChild` it into the backup file's archive instead — but do not leave it in this file.
 
-- [ ] **Step 4: Confirm the Archive removal left nothing dangling**
+- [x] **Step 4: Confirm the Archive removal left nothing dangling**
 
 `🗄️ Archive & XP` was deleted from this file on 2026-08-06; its content lives in the backup `Wf4iomVMYUXlFIBV3Z8bx4`. Nothing to move — but a page deletion silently takes any component masters that lived on it, which is exactly what happened to the `Icon` set `52:136` (Task 2b). Re-assert that no master anywhere is unreachable:
 
@@ -1685,7 +1685,7 @@ Expected: five pages, no `duplicateNames`. A duplicate set name is how the orpha
 
 Also delete the old archive's leftovers from `scripts/figma/named-debt.json` in Task 12 if any logged node ids belonged to that page — a debt entry pointing at a deleted node is noise.
 
-- [ ] **Step 5: Rename `📚 Docs` and order the page list so it reads top-down**
+- [x] **Step 5: Rename `📚 Docs` and order the page list so it reads top-down**
 
 "Docs" carries no scent — no major system has a section by that name, because the whole artifact is docs. Name the shareable page what it is:
 
@@ -1701,7 +1701,7 @@ return { order: figma.root.children.map(p => p.name), moved };
 
 `Pages` was already renamed `📄 Pages` on 2026-08-06, so every page now carries an emoji and the sidebar scans. Emoji verdict from the research review: keep — Figma's own best-practices guide sanctions static wayfinding emojis; the only documented hazard is *status* emojis in published libraries, which this file has none of.
 
-- [ ] **Step 6: Final whole-file verification**
+- [x] **Step 6: Final whole-file verification**
 
 ```js
 const pages = figma.root.children.map(p => p.name);
@@ -1720,7 +1720,7 @@ return { pages, docs: out };
 
 Expected: two frames, each with chapters `CHAPTER / 00 Read me` → `01 Tokens` → `02 Elements` → `03 Components` → `04 Pages`, `broken: 0` on both, and matching instance counts between Light and Dark — the `dont-mock — *` detached copies from Task 9 Step 1d are the only allowlisted non-instances.
 
-- [ ] **Step 7: Screenshot both full sheets and read them end to end**
+- [x] **Step 7: Screenshot both full sheets and read them end to end**
 
 Ask of the result: can a stranger name the three token layers, the three button styles, the hover verb for a row, and the difference between an element and a section, without opening anything else? If not, the gap is a copy gap — fix the caption, not the layout.
 
