@@ -7,9 +7,9 @@ status: plan — ready to execute
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Turn the Figma file `Blog Design System v1.0` into a single shareable URL that a senior-frontend recruiter can read top-to-bottom and come away knowing what was decided, why, and how it maps to shipped code — with atoms/molecules/organisms/tokens named as such, token binding verified, and every page shown in both desktop and mobile.
+**Goal:** Turn the Figma file `Blog Design System v1.0` into a single shareable URL that a senior-frontend recruiter can read top-to-bottom and come away knowing what was decided, why, and how it maps to shipped code — with tokens, elements and components named in current industry vocabulary, token binding verified, and every page shown in both desktop and mobile.
 
-**Architecture:** The `📚 Docs` page is rebuilt around an atomic spine — `00 Read me` → `01 Tokens` → `02 Atoms` → `03 Molecules & Organisms` → `04 Pages` — replacing the current 12 property-named sections. The 12 property decisions are not deleted; each is re-homed inline next to the thing it governs. Every specimen stays a live `createInstance()` of a real library component, so fixing a component fixes the docs. Responsive views are produced by Figma **variable modes**, not by hand-resized duplicates: the existing `3 Responsive` collection (Desktop/Tablet/Mobile) is finished so that `container/gutter` and `section/rhythm-y` actually differ per mode, page containers get `maxWidth` bound to `container/max-width`, and each page frame pins one `(Theme, Responsive)` mode pair.
+**Architecture:** The `📚 Docs` page is rebuilt around a smallest-to-largest spine — `00 Read me` → `01 Tokens` → `02 Elements` → `03 Components` → `04 Pages` — replacing the current 12 property-named sections. The 12 property decisions are not deleted; each is re-homed inline next to the thing it governs. Every specimen stays a live `createInstance()` of a real library component, so fixing a component fixes the docs. Responsive views are produced by Figma **variable modes**, not by hand-resized duplicates: the existing `3 Responsive` collection (Desktop/Tablet/Mobile) is finished so that `container/gutter` and `section/rhythm-y` actually differ per mode, page containers get `maxWidth` bound to `container/max-width`, and each page frame pins one `(Theme, Responsive)` mode pair.
 
 **Tech Stack:** Figma Plugin API via the `use_figma` MCP tool (file key `ihWIWmvtQPTWgUxlrVjC2c`). No repo code changes except documentation sync in Task 12. Verification is `use_figma` read-back assertions plus `get_screenshot`; there is no test runner for Figma work.
 
@@ -27,6 +27,8 @@ status: plan — ready to execute
 - **The sheet must read as one visual identity, not three.** The thesis is the three-layer model from `artistic-direction`: **Chrome** (nav, header, footer, buttons, toggles, icons — precise and quiet, for the engineer register), **Content** (cards, rows, prose, metadata — hierarchy and scanability), **Hand** (the five author-drawn SVGs — the single controlled escape valve for the artist register). The rule that binds them: only one layer is expressive at a time; Chrome and Content stay precise so the Hand layer reads as deliberate. Every decision card carries a layer tag, and chapter `00` states the thesis outright. A reader scanning only the tags should come away with it.
 - **Copy tone:** conversational, concrete, no marketing abstractions, numbers carry context, no overclaims. See the `copy-tone-no-marketing` memory and `design-expert/references/copywriting.md`.
 - **Both themes ship together.** Every Docs chapter exists in a Light frame and a Dark frame; the Dark frame is a clone with the `2 Theme` mode reapplied, never hand-recoloured.
+- **Atomic-design jargon is dropped (research review 2026-08-06).** No major system (Material, Carbon, Polaris, Atlassian, GOV.UK, Primer) organizes docs by atoms/molecules/organisms, and Brad Frost himself no longer uses the labels. Chapters are `02 Elements` and `03 Components`; description prefixes are `Element ·`, `Component ·`, `Section ·`. The composition order (small → large) is kept; the labels are not.
+- **The file is not stable yet.** Only Home and Blog page templates exist. Cover status is `v1.0 — in progress`, never `stable`, until all pages land.
 
 ## Reference data captured 2026-08-06
 
@@ -70,13 +72,13 @@ status: plan — ready to execute
 
 **`3 Responsive` current state (the bug this plan fixes):** `container/max-width` and `container/gutter` alias the *same* primitive in all three modes (`breakpoint/xl` = 1280, `spacing/4` = 16), so switching mode changes nothing except `section/rhythm-y`. `viewport/width` is already correct: 1280 / 768 / 390.
 
-**Component master inventory (`🧩 Components`, 33 masters) and its atomic classification**
+**Component master inventory (`🧩 Components`, 33 masters) and its level classification**
 
-| Atomic level | Masters (name — id) |
+| Level | Masters (name — id) |
 |---|---|
-| **Atoms** (17) | `Icon` `461:6204` · `NavLink` `2001:1309` · `NavLinkHome` `2001:1312` · `Link/CTA` `2012:6179` · `Link/Secondary` `2041:275` · `Link/SecondarySm` `2350:737` · `Link/TextCTA` `2041:313` · `Link/Icon` `2093:6332` · `ThemeToggle` `16:11` · `MotionToggle` `16:12` · `H1` `2119:7406` · `H2` `2034:213` · `PreviewTitle` `2041:465` · `PageDescription` `2119:7440` · `PostMetadataTime` `2040:482` · `PostMetadataTopic` `2371:10414` · `SerieMeta` `2375:10662` |
-| **Molecules** (8) | `PostRow` `2124:7937` · `SerieCard` `2367:7205` · `PostCardPreviewBig` `2385:7139` · `PostCardPreviewSmall` `2385:7149` · `WorkCardPreviewSmall` `2045:378` · `HeroText` `2012:6142` · `HeroAnimation` `2012:315` · `ContactContent` `131:101` |
-| **Organisms** (8) | `Header` `2001:1669` · `Footer` `2099:2560` · `Hero` `2012:6305` · `BlogPreviewSection` `2041:560` · `ArchiveTable` `2124:8011` · `SerieCardList` `2119:7557` · `WorkPreviewSection` `2045:428` · `ContactPreviewSection` `2114:7281` |
+| **Elements** (17) | `Icon` `461:6204` · `NavLink` `2001:1309` · `NavLinkHome` `2001:1312` · `Link/CTA` `2012:6179` · `Link/Secondary` `2041:275` · `Link/SecondarySm` `2350:737` · `Link/TextCTA` `2041:313` · `Link/Icon` `2093:6332` · `ThemeToggle` `16:11` · `MotionToggle` `16:12` · `H1` `2119:7406` · `H2` `2034:213` · `PreviewTitle` `2041:465` · `PageDescription` `2119:7440` · `PostMetadataTime` `2040:482` · `PostMetadataTopic` `2371:10414` · `SerieMeta` `2375:10662` |
+| **Components** (8) | `PostRow` `2124:7937` · `SerieCard` `2367:7205` · `PostCardPreviewBig` `2385:7139` · `PostCardPreviewSmall` `2385:7149` · `WorkCardPreviewSmall` `2045:378` · `HeroText` `2012:6142` · `HeroAnimation` `2012:315` · `ContactContent` `131:101` |
+| **Sections** (8) | `Header` `2001:1669` · `Footer` `2099:2560` · `Hero` `2012:6305` · `BlogPreviewSection` `2041:560` · `ArchiveTable` `2124:8011` · `SerieCardList` `2119:7557` · `WorkPreviewSection` `2045:428` · `ContactPreviewSection` `2114:7281` |
 
 **Text styles (30):** `Hero/Title` 48 Bubbler One · `Heading/H1` 60 Bubbler One · `Heading/H2` 30 IBM Plex Sans SemiBold · `Heading/H3` 22 SemiBold · `Body/3xl` 30 Regular · `Body/xl` 20 · `Body/l` 18 · `Body/base` 16 · `Body/s` 14 · `Body/xs` 12 · `Body/xs/medium` 12 Medium · `Body/xl/medium` 20 Medium · `Body/base/medium` 16 Medium · `Body/4xl/semibold` 36 SemiBold · `Label/Meta` 14 Medium · `Chip/Mono` 12 Fira Code · `Code/Base` 14 Fira Code · plus 11 `Tailwind/text-*` mirror styles.
 
@@ -709,8 +711,8 @@ Most masters already carry a `description`. Fill the empty ones and make the exi
 - Modify: masters on `🧩 Components` `461:759`
 
 **Interfaces:**
-- Consumes: the atomic classification table in the reference section
-- Produces: every master has a non-empty description in the form `<Level> · <what it is>. <the decision it encodes>. Code: <path>`. Task 8 and Task 9 read these back into the Docs sheet rather than retyping them.
+- Consumes: the level classification table in the reference section
+- Produces: every master has a non-empty description in the form `<Level> · <what it is>. <the decision it encodes>. Code: <path>` where Level is `Element`, `Component`, or `Section`. Task 8 and Task 9 read these back into the Docs sheet rather than retyping them.
 
 - [ ] **Step 1: List masters with empty or thin descriptions**
 
@@ -726,18 +728,18 @@ return masters
 
 Known-empty on 2026-08-06: `PreviewTitle` `2041:465`, `PageDescription` `2119:7440`, `WorkCardPreviewSmall` `2045:378`.
 
-- [ ] **Step 2: Prefix every description with its atomic level**
+- [ ] **Step 2: Prefix every description with its level**
 
 ```js
 const page = await figma.getNodeByIdAsync("461:759");
 await figma.setCurrentPageAsync(page);
 const LEVEL = {
-  Atom: ["Icon","NavLink","NavLinkHome","Link/CTA","Link/Secondary","Link/SecondarySm","Link/TextCTA","Link/Icon",
+  Element: ["Icon","NavLink","NavLinkHome","Link/CTA","Link/Secondary","Link/SecondarySm","Link/TextCTA","Link/Icon",
          "ThemeToggle","MotionToggle","H1","H2","PreviewTitle","PageDescription","PostMetadataTime",
          "PostMetadataTopic","SerieMeta"],
-  Molecule: ["PostRow","SerieCard","PostCardPreviewBig","PostCardPreviewSmall","WorkCardPreviewSmall",
+  Component: ["PostRow","SerieCard","PostCardPreviewBig","PostCardPreviewSmall","WorkCardPreviewSmall",
              "HeroText","HeroAnimation","ContactContent"],
-  Organism: ["Header","Footer","Hero","BlogPreviewSection","ArchiveTable","SerieCardList",
+  Section: ["Header","Footer","Hero","BlogPreviewSection","ArchiveTable","SerieCardList",
              "WorkPreviewSection","ContactPreviewSection"],
 };
 const FILL_IN = {
@@ -763,20 +765,20 @@ Expected: `count` is 33 and `unclassified` is empty. A name in `unclassified` me
 
 - [ ] **Step 3: Verify**
 
-Re-run Step 1. Expected: zero masters with `len` of 0, and every description starting `Atom · `, `Molecule · `, or `Organism · `.
+Re-run Step 1. Expected: zero masters with `len` of 0, and every description starting `Element · `, `Component · `, or `Section · `.
 
 - [ ] **Step 4: Commit**
 
 ```bash
 git add .specs/01_active/design-system-docs/plan.md
-git commit -m "docs(specs): design-system-docs — task 5 master descriptions carry atomic level"
+git commit -m "docs(specs): design-system-docs — task 5 master descriptions carry level prefix"
 ```
 
 ---
 
-### Task 5b: Build the `Docs/` kit — four components the sheet is assembled from
+### Task 5b: Build the `Docs/` kit — five components the sheet is assembled from
 
-**Do the docs need their own components? Yes — four of them.** The rebuilt sheet contains roughly 63 specimen cells, 17 decision cards, 5 chapter headers and ~20 token rows *per frame*. Without components, changing a caption size is 63 edits; with them it is one. More importantly, the layer tag (Chrome / Content / Hand) is the mechanism that makes the identity read as cohesive — a variant property enforces it, hand-typed text drifts. Four is the right number: a fifth would be a component with one use.
+**Do the docs need their own components? Yes — five of them.** The rebuilt sheet contains roughly 63 specimen cells, 17 decision cards, 3 do/don't pairs, 5 chapter headers and ~20 token rows *per frame*. Without components, changing a caption size is 63 edits; with them it is one. More importantly, the layer tag (Chrome / Content / Hand) is the mechanism that makes the identity read as cohesive — a variant property enforces it, hand-typed text drifts. `Docs/DoDont` earns its slot with three uses (research review 2026-08-06: side-by-side do/don't pairs are the most-copied rationale device across Carbon, GOV.UK and Primer).
 
 The objection is real and is mitigated, not ignored: doc components show up in the assets panel beside product components. Every master is name-prefixed `Docs/` and lives in one `SECTION / Docs kit` on the Docs page, so a reader browsing the library sees a labelled toolbox, not clutter.
 
@@ -785,7 +787,7 @@ The objection is real and is mitigated, not ignored: doc components show up in t
 
 **Interfaces:**
 - Consumes: `2 Theme` variables; the layer taxonomy from `decisions.md`
-- Produces: `Docs/ChapterHeader`, `Docs/SpecimenCell`, `Docs/DecisionCard` (variant `layer` = Chrome | Content | Hand | All), `Docs/TokenRow`. Tasks 6–10 instantiate these instead of building text stacks by hand.
+- Produces: `Docs/ChapterHeader`, `Docs/SpecimenCell`, `Docs/DecisionCard` (variant `layer` = Chrome | Content | Hand | All), `Docs/TokenRow`, `Docs/DoDont`. Tasks 6–10 instantiate these instead of building text stacks by hand.
 
 - [ ] **Step 1: Create the kit section and the two simple components**
 
@@ -899,7 +901,11 @@ return { createdNodeIds: [set.id], variants: variants.map(v => v.id) };
 
 - [ ] **Step 3: Build `Docs/TokenRow`**
 
-Four columns: token name (mono), and one value column per mode. Same construction pattern as Step 1's `Docs/SpecimenCell`; name the three value children `mode1` / `mode2` / `mode3` so chapter 01 can address them, and set the name column to a fixed 280 so rows align down the sheet.
+Five columns: token name (mono), **role** (the token's one job, IBM Plex Sans 14 muted — the Radix model: a token is never a bare number, it's a role), and one value column per mode. Same construction pattern as Step 1's `Docs/SpecimenCell`; name the role child `role` and the three value children `mode1` / `mode2` / `mode3` so chapter 01 can address them, and set the name column to a fixed 280 and the role column to a fixed 320 so rows align down the sheet.
+
+- [ ] **Step 3b: Build `Docs/DoDont`**
+
+A horizontal pair of slots: `do` and `dont`, each a vertical auto-layout with a slot child (for a live instance or small mock), a 4px top bar, and a one-line caption. The bars are the only place semantic green/red appear on the sheet — bind `do` to a green primitive and `dont` to a red primitive from `1 Primitives` (they are judgement colours about the docs, not part of the site palette, so they bind to primitives deliberately — note this in the component description). Captions are Fira Code 12 muted, prefixed `DO ·` / `DON'T ·`. Same `createComponentFromNode` pattern as Step 1.
 
 - [ ] **Step 4: Verify the kit**
 
@@ -914,7 +920,7 @@ return masters.map(m => ({ id: m.id, name: m.name, type: m.type, hasDesc: !!m.de
   variants: m.type === 'COMPONENT_SET' ? m.children.map(c => c.name) : null }));
 ```
 
-Expected: exactly four masters, all named `Docs/…`, all with descriptions, `Docs/DecisionCard` a `COMPONENT_SET` with `layer=Chrome|Content|Hand|All`.
+Expected: exactly five masters, all named `Docs/…`, all with descriptions, `Docs/DecisionCard` a `COMPONENT_SET` with `layer=Chrome|Content|Hand|All`.
 
 - [ ] **Step 5: Commit**
 
@@ -988,7 +994,7 @@ const intro = txt(
   "The design system behind jeromeabel.net — a personal site and technical blog built with Astro 5 and Tailwind v4. " +
   "Every specimen on this page is a live instance of the component it documents, so the sheet cannot drift from the library. " +
   "Tokens flow in three layers: Primitives mirror Tailwind, Theme adds semantic names with Light and Dark modes, " +
-  "Responsive carries what changes between breakpoints. Read top to bottom: tokens, then atoms, then molecules and organisms, then whole pages.",
+  "Responsive carries what changes between breakpoints. Read top to bottom, smallest to largest: tokens, then elements, then components, then whole pages.",
   "IBM Plex Sans", "Regular", 18, "color/foreground");
 head.appendChild(intro);
 
@@ -1236,9 +1242,17 @@ panel.layoutSizingHorizontal = "FILL";
 return { createdNodeIds: [panel.id] };
 ```
 
+- [ ] **Step 3b: Give every Theme token a job, cross-reference the scales, and state accessibility**
+
+Three additions from the research review (2026-08-06):
+
+1. **Token jobs (Radix model).** Under the three-layer diagram, one `Docs/TokenRow` instance per `2 Theme` variable — all 15 — with the `role` column filled: the token's single designated use, one phrase, forbidding included where it earns it (e.g. `color/surface-hover` — "row hover tint, nothing else"; `color/accent-strong` — "the four accent slots from the budget; never passive meta"). Read the variable list live from the collection; roles come from `decisions.md` and the accent-budget rule — do not invent new roles.
+2. **Cross-references (Carbon model).** One sentence appended to each re-homed section caption linking it to a sibling scale — spacing ↔ type rhythm, radius ↔ the pressable/media/reading trio, motion ↔ the hover verb table. Cross-references are what make five scales read as one decision.
+3. **Accessibility card.** One `Docs/DecisionCard` (`layer=All`) at the end of the chapter: metadata contrast floor ≥ 4.5:1 AA, `prefers-reduced-motion` drops scale and keeps colour changes, focus outlines are part of the accent budget. All three are already settled rules — this card only makes them visible in one place, because accessibility is a named hiring criterion and every major system surfaces it in foundations.
+
 - [ ] **Step 4: Screenshot and verify**
 
-Expected: the chapter opens with the three-layer diagram, then Colour → Type → Spacing → Radius → Motion, then the verification panel. Each layer card has a visible 1px border in both themes. No clipped body text.
+Expected: the chapter opens with the three-layer diagram, then the 15 token-job rows, then Colour → Type → Spacing → Radius → Motion each with a cross-reference sentence, then the accessibility card, then the verification panel. Each layer card has a visible 1px border in both themes. No clipped body text.
 
 - [ ] **Step 5: Commit**
 
@@ -1249,19 +1263,19 @@ git commit -m "docs(specs): design-system-docs — task 7 tokens chapter"
 
 ---
 
-### Task 8: Build the `02 Atoms` chapter
+### Task 8: Build the `02 Elements` chapter
 
 **Files:**
 - Modify: `📚 Docs` light frame `2545:672`
 - Move into this chapter: `SECTION / Border` `2545:674`, `SECTION / Buttons` `2545:7234`, `SECTION / Icons` `2545:7216`, `SECTION / Numbers` `2545:7479`
 
 **Interfaces:**
-- Consumes: the 17 atom masters and their Task 5 descriptions
-- Produces: a `CHAPTER / 02 Atoms` frame with one labelled cell per atom, every cell a live instance
+- Consumes: the 17 element masters and their Task 5 descriptions
+- Produces: a `CHAPTER / 02 Elements` frame with one labelled cell per element, every cell a live instance
 
-- [ ] **Step 1: Create the chapter and re-home the four atom-level property sections**
+- [ ] **Step 1: Create the chapter and re-home the element-level property sections**
 
-Same move pattern as Task 7 Step 1, with `ORDER = ["SECTION / Buttons", "SECTION / Icons", "SECTION / Numbers"]` and `f.insertChild(2, chapter)`. `SECTION / Border` is **not** here — border governs cards and rows, which are molecules, so `decisions.md` homes it in chapter 03.
+Same move pattern as Task 7 Step 1, with `ORDER = ["SECTION / Buttons", "SECTION / Icons", "SECTION / Numbers"]` and `f.insertChild(2, chapter)`. `SECTION / Border` is **not** here — border governs cards and rows, which live in chapter 03, so `decisions.md` homes it there.
 
 - [ ] **Step 1b: Convert each re-homed section into a `Docs/DecisionCard` + specimen row**
 
@@ -1270,7 +1284,7 @@ The moved sections are frames with a bare uppercase title and loose captions. Gi
 ```js
 const page = await figma.getNodeByIdAsync("2545:671");
 await figma.setCurrentPageAsync(page);
-const chapter = (await figma.getNodeByIdAsync("2545:672")).findOne(n => n.name === "CHAPTER / 02 Atoms");
+const chapter = (await figma.getNodeByIdAsync("2545:672")).findOne(n => n.name === "CHAPTER / 02 Elements");
 const kit = page.children.find(n => n.name === "SECTION / Docs kit");
 const cardSet = kit.findOne(n => n.name === "Docs/DecisionCard");
 await figma.loadFontAsync({ family: "IBM Plex Sans", style: "Regular" });
@@ -1307,16 +1321,16 @@ return { createdNodeIds: mutated };
 
 Apply the same shape in Task 7 (Radius `Chrome + Content` → use `layer=All`; Type `Content`; Spacing `All`; Colour `Content`; Motion `Chrome`) and Task 9 (Border `Content`; Hover `All`; Backgrounds `Chrome`; Illustration `Hand`), pulling every string verbatim from `decisions.md`. The two recorded FINDING lines — the spacing-ladder one and the focus-ring/section-CTA one — go in the `finding` slot rather than being dropped; an honest recorded gap is worth more to this audience than a tidy sheet.
 
-- [ ] **Step 2: Instantiate every atom that is not already shown, with its name and description beside it**
+- [ ] **Step 2: Instantiate every element that is not already shown, with its name and description beside it**
 
 ```js
 const comps = await figma.getNodeByIdAsync("461:759");
 await figma.setCurrentPageAsync(comps);
-const ATOMS = ["Icon","NavLink","NavLinkHome","Link/CTA","Link/Secondary","Link/SecondarySm","Link/TextCTA",
+const ELEMENTS = ["Icon","NavLink","NavLinkHome","Link/CTA","Link/Secondary","Link/SecondarySm","Link/TextCTA",
   "Link/Icon","ThemeToggle","MotionToggle","H1","H2","PreviewTitle","PageDescription",
   "PostMetadataTime","PostMetadataTopic","SerieMeta"];
 const found = {};
-for (const name of ATOMS) {
+for (const name of ELEMENTS) {
   const m = comps.findOne(n => (n.type === "COMPONENT" || n.type === "COMPONENT_SET") && n.name === name);
   found[name] = m ? { id: m.id, type: m.type, desc: m.description,
     defaultVariant: m.type === "COMPONENT_SET" ? m.defaultVariant.id : m.id } : null;
@@ -1326,12 +1340,12 @@ return found;
 
 A `COMPONENT_SET` cannot be instantiated directly — instantiate `set.defaultVariant`. Carry the returned `defaultVariant` ids into the next call as string literals.
 
-- [ ] **Step 3: Build the atom grid on the Docs page**
+- [ ] **Step 3: Build the element grid on the Docs page**
 
 ```js
 const page = await figma.getNodeByIdAsync("2545:671");
 await figma.setCurrentPageAsync(page);
-const chapter = (await figma.getNodeByIdAsync("2545:672")).findOne(n => n.name === "CHAPTER / 02 Atoms");
+const chapter = (await figma.getNodeByIdAsync("2545:672")).findOne(n => n.name === "CHAPTER / 02 Elements");
 await figma.loadFontAsync({ family: "IBM Plex Sans", style: "Regular" });
 await figma.loadFontAsync({ family: "Fira Code", style: "Regular" });
 const theme = await figma.variables.getVariableCollectionByIdAsync("VariableCollectionId:3:2");
@@ -1341,7 +1355,7 @@ for (const id of theme.variableIds) { const v = await figma.variables.getVariabl
 // REPLACE with the {name: defaultVariant id} pairs returned by Step 2.
 const CELLS = [["Link/CTA", "2012:6180"], ["Link/Secondary", "2041:276"]];
 
-const grid = figma.createAutoLayout("VERTICAL", { name: "atom specimens", itemSpacing: 32 });
+const grid = figma.createAutoLayout("VERTICAL", { name: "element specimens", itemSpacing: 32 });
 const created = [], failed = [];
 for (const [name, compId] of CELLS) {
   const master = await figma.getNodeByIdAsync(compId);
@@ -1376,7 +1390,7 @@ The description is read from the master, not retyped — so Task 5's description
 ```js
 const page = await figma.getNodeByIdAsync("2545:671");
 await figma.setCurrentPageAsync(page);
-const chapter = (await figma.getNodeByIdAsync("2545:672")).findOne(n => n.name === "CHAPTER / 02 Atoms");
+const chapter = (await figma.getNodeByIdAsync("2545:672")).findOne(n => n.name === "CHAPTER / 02 Elements");
 const insts = chapter.findAllWithCriteria({ types: ['INSTANCE'] });
 const broken = [];
 for (const i of insts) { const mc = await i.getMainComponentAsync(); if (!mc) broken.push(i.id); }
@@ -1390,30 +1404,44 @@ Expected: `broken` is empty and `instances` is at least 17.
 
 ```bash
 git add .specs/01_active/design-system-docs/plan.md
-git commit -m "docs(specs): design-system-docs — task 8 atoms chapter"
+git commit -m "docs(specs): design-system-docs — task 8 elements chapter"
 ```
 
 ---
 
-### Task 9: Build the `03 Molecules & Organisms` chapter
+### Task 9: Build the `03 Components` chapter
 
 **Files:**
 - Modify: `📚 Docs` light frame `2545:672`
 - Move into this chapter: `SECTION / Border` `2545:674`, `SECTION / Hover` `2545:7268`, `SECTION / Backgrounds` `2545:7516`, `SECTION / Illustration` `2546:282`
 
 **Interfaces:**
-- Consumes: the 8 molecule + 8 organism masters and their Task 5 descriptions
-- Produces: a `CHAPTER / 03 Molecules & Organisms` frame with two labelled sub-groups
+- Consumes: the 8 component + 8 section masters and their Task 5 descriptions
+- Produces: a `CHAPTER / 03 Components` frame with two labelled sub-groups (components, then page sections)
 
 - [ ] **Step 1: Create the chapter, insert at index 3, and re-home Border / Hover / Backgrounds / Illustration**
 
-Same move pattern as Task 7 Step 1. Order within the chapter: molecule grid → organism grid → `SECTION / Border` → `SECTION / Hover` → `SECTION / Backgrounds` → `SECTION / Illustration`. Hover and Border belong here because both are properties of a *surface*, and surfaces are molecules and organisms — an atom like `H2` has neither a hover verb nor an aggregate boundary.
+Same move pattern as Task 7 Step 1. Order within the chapter: component grid → section grid → `SECTION / Border` → `SECTION / Hover` → `SECTION / Backgrounds` → `SECTION / Illustration`. Hover and Border belong here because both are properties of a *surface*, and surfaces are components and sections — an element like `H2` has neither a hover verb nor an aggregate boundary.
 
 Then apply the Task 8 Step 1b decision-card pattern with these four, verbatim from `decisions.md`: Border `layer=Content` ("Border marks an aggregate entity" — PostRow hairline, SerieCard full border, PostCardPreviewSmall borderless); Hover `layer=All` (the nine-row verb table, one verb per surface, ≤150ms); Backgrounds `layer=Chrome` (Header flat `--color-background`, Footer flat `--color-surface`, no gradients); Illustration `layer=Hand` (the signature-layer paragraph and the five per-asset captions).
 
 - [ ] **Step 1c: Add the decisions that have no specimen**
 
 Five settled rules have no demonstrable Figma specimen and are currently invisible on the sheet. A recruiter cannot see an absence, so state them as specimen-free `Docs/DecisionCard` instances at the end of this chapter: one chip per card/row (serie wins over topic); display font is page-level only, so card titles use sans bold; metadata is the third reading layer, mono uppercase ~12px muted but ≥4.5:1; the folder icon means serie and nothing else; and dashed is removed from the library entirely, surviving only in the hero self-draw start state as an animating `stroke-dasharray`, not a CSS border. The last one matters most — it is the decision that killed the round-1 identity hypothesis, and it reads as a considered rejection rather than an oversight only if it is written down.
+
+- [ ] **Step 1d: Do/don't pairs for the three contested calls**
+
+Three `Docs/DoDont` instances, one per decision that was actually contested during the benchmark rounds — a do/don't pair earns its space only where the wrong answer is tempting:
+
+1. **Title hover** — DO: underline decoration appears, text colour unchanged. DON'T: title repaints teal (collides with the adjacent teal serie chip).
+2. **Chips** — DO: one chip, serie chip wins. DON'T: serie chip + topic chip on the same row.
+3. **Accent budget** — DO: teal on the serie chip and section CTA only. DON'T: teal on dates, read time, `6 parts` meta (accent falsely promises a click target).
+
+The DO slot holds a live instance (`PostRow` covers 1 and 2); the DON'T slot holds a **detached, deliberately wrong copy** — the one sanctioned exception to the live-instance rule, because the whole point is showing what the library forbids. Name each detached copy `dont-mock — <rule>` so the Task 11 audits can allowlist them.
+
+- [ ] **Step 1e: PostRow deep dive — one component treated as a case study**
+
+Hiring research (2026-08-06): one component documented deep beats all documented shallow. PostRow carries the most decisions per square pixel — chip logic, hover verb, border idiom, metadata layer — so it gets an extended cell after the component grid: problem (a row must expose serie membership, topic, date, read time without competing with the title) → the 8-blog benchmark that settled chip and hover behaviour (`references/benchmarks.md`) → the decisions, verbatim from `decisions.md` → `Code: src/components/blog/PostRow.astro`. Four short blocks, built from `Docs/SpecimenCell` + `Docs/DecisionCard`, ~600px total. No new copy — everything is harvested from existing validated sources.
 
 - [ ] **Step 2: Constrain the Illustration section**
 
@@ -1436,9 +1464,9 @@ return { mutatedNodeIds: resized, before, after: Math.round(sec.height) };
 
 The 200px minimum-render rule is a floor, not a target — 240px keeps the line weight legible while letting five illustrations sit in one band. Expected: `after` well under 600.
 
-- [ ] **Step 3: Build the molecule and organism grids**
+- [ ] **Step 3: Build the component and section grids**
 
-Reuse the Task 8 Step 3 script with `CELLS` replaced by the molecule list, then again for the organism list, appending each grid into the chapter. Organisms are wide — set each organism cell's instance `layoutSizingHorizontal = "FILL"` after appending so `Header` and `Footer` span the sheet rather than sitting at their authored width.
+Reuse the Task 8 Step 3 script with `CELLS` replaced by the component list, then again for the section list, appending each grid into the chapter. Sections are wide — set each section cell's instance `layoutSizingHorizontal = "FILL"` after appending so `Header` and `Footer` span the sheet rather than sitting at their authored width.
 
 - [ ] **Step 4: Verify and screenshot**
 
@@ -1448,7 +1476,7 @@ Same verification as Task 8 Step 4 against the `03` chapter. Expected: `broken` 
 
 ```bash
 git add .specs/01_active/design-system-docs/plan.md
-git commit -m "docs(specs): design-system-docs — task 9 molecules and organisms chapter"
+git commit -m "docs(specs): design-system-docs — task 9 components chapter"
 ```
 
 ---
@@ -1617,13 +1645,13 @@ const texts = cover.findAllWithCriteria({ types: ['TEXT'] });
 return { coverId: cover.id, existing: texts.map(t => ({ id: t.id, chars: t.characters, size: t.fontSize })) };
 ```
 
-Then set the title to `Design system`, the kicker to `JEROMEABEL.NET · v1.0 · 2026`, and the standfirst to: `Tokens, components and page templates for a personal site and technical blog. Astro 5, Tailwind v4. Every specimen is a live component instance.` Load each node's *current* font via `getStyledTextSegments(['fontName'])` before writing characters.
+Then set the title to `Design system`, the kicker to `JEROMEABEL.NET · V1.0 · IN PROGRESS · 2026`, and the standfirst to: `Tokens, components and page templates for a personal site and technical blog. Astro 5, Tailwind v4. Every specimen is a live component instance.` Below the standfirst, four mono muted lines (Fira Code 12 — the cover-content set every practitioner source converges on): `STATUS   v1.0 — in progress · Home & Blog shipped, stable when all pages land` · `OWNER    Jérôme Abel · dev@jeromeabel.net` · `UPDATED  <date of execution>` · `LINKS    dev.jeromeabel.net · github.com/jeromeabel/jeromeabel.github.io`. No changelog on the cover. Load each node's *current* font via `getStyledTextSegments(['fontName'])` before writing characters.
 
 - [ ] **Step 3: Decide the fate of `🎨 Foundations`**
 
 It now holds **three** frames — `Foundations · Colors` `6:2`, `Foundations · Typography` `8:2`, `Tailwind Font Sizes` `365:55` (`Foundations · Scale` `8:34` is already gone). `Tailwind Font Sizes` (2776 × 2542) is a primitive dump that duplicates the eleven `Tailwind/text-*` styles and adds nothing a reader needs; Colors and Typography overlap chapter 01 but are a legitimate deep-dive.
 
-Delete the dump rather than re-archiving it — it is a regenerable mirror of the installed Tailwind (`pnpm figma:primitives`), not a record of anything. Then rename the page so a reader knows chapter 01 is the front door and this is the appendix.
+Delete the dump rather than re-archiving it — it is a regenerable mirror of the installed Tailwind (`pnpm figma:primitives`), not a record of anything. Then rename the page **away from the word "Foundations"** — canonically, Foundations *is* the token story, which now lives in chapter 01; a reader who knows the vocabulary would look here first and find an appendix. Name it what it holds:
 
 ```js
 const src = await figma.getNodeByIdAsync("5:14");
@@ -1631,7 +1659,7 @@ await figma.setCurrentPageAsync(src);
 const dump = src.children.find(n => n.name === "Tailwind Font Sizes");
 const removedId = dump ? dump.id : null;
 if (dump) dump.remove();
-src.name = "🎨 Foundations (reference)";
+src.name = "🎨 Color & Type (deep dive)";
 return { removedNodeIds: removedId ? [removedId] : [], pageName: src.name, remaining: src.children.map(c => c.name) };
 ```
 
@@ -1657,17 +1685,21 @@ Expected: five pages, no `duplicateNames`. A duplicate set name is how the orpha
 
 Also delete the old archive's leftovers from `scripts/figma/named-debt.json` in Task 12 if any logged node ids belonged to that page — a debt entry pointing at a deleted node is noise.
 
-- [ ] **Step 5: Order the page list so it reads top-down**
+- [ ] **Step 5: Rename `📚 Docs` and order the page list so it reads top-down**
+
+"Docs" carries no scent — no major system has a section by that name, because the whole artifact is docs. Name the shareable page what it is:
 
 ```js
-const want = ["📖 Cover", "📚 Docs", "🧩 Components", "📄 Pages", "🎨 Foundations (reference)"];
+const docs = figma.root.children.find(p => p.name === "📚 Docs");
+if (docs) docs.name = "📚 Design system";
+const want = ["📖 Cover", "📚 Design system", "🧩 Components", "📄 Pages", "🎨 Color & Type (deep dive)"];
 const byName = Object.fromEntries(figma.root.children.map(p => [p.name, p]));
 const moved = [];
 want.forEach((n, i) => { if (byName[n]) { figma.root.insertChild(i, byName[n]); moved.push(n); } });
 return { order: figma.root.children.map(p => p.name), moved };
 ```
 
-`Pages` was already renamed `📄 Pages` on 2026-08-06, so every page now carries an emoji and the sidebar scans — this step only fixes the order.
+`Pages` was already renamed `📄 Pages` on 2026-08-06, so every page now carries an emoji and the sidebar scans. Emoji verdict from the research review: keep — Figma's own best-practices guide sanctions static wayfinding emojis; the only documented hazard is *status* emojis in published libraries, which this file has none of.
 
 - [ ] **Step 6: Final whole-file verification**
 
@@ -1686,11 +1718,11 @@ for (const frame of docs.children) {
 return { pages, docs: out };
 ```
 
-Expected: two frames, each with chapters `CHAPTER / 00 Read me` → `01 Tokens` → `02 Atoms` → `03 Molecules & Organisms` → `04 Pages`, `broken: 0` on both, and matching instance counts between Light and Dark.
+Expected: two frames, each with chapters `CHAPTER / 00 Read me` → `01 Tokens` → `02 Elements` → `03 Components` → `04 Pages`, `broken: 0` on both, and matching instance counts between Light and Dark — the `dont-mock — *` detached copies from Task 9 Step 1d are the only allowlisted non-instances.
 
 - [ ] **Step 7: Screenshot both full sheets and read them end to end**
 
-Ask of the result: can a stranger name the three token layers, the three button styles, the hover verb for a row, and the difference between an atom and an organism, without opening anything else? If not, the gap is a copy gap — fix the caption, not the layout.
+Ask of the result: can a stranger name the three token layers, the three button styles, the hover verb for a row, and the difference between an element and a section, without opening anything else? If not, the gap is a copy gap — fix the caption, not the layout.
 
 - [ ] **Step 8: Commit**
 
@@ -1717,11 +1749,11 @@ The repo's Figma knowledge file still describes the pre-cleanup structure — fi
 
 - [ ] **Step 1: Rewrite the Pages table in `figma-ds-file.md`**
 
-Replace the five-row table (which still lists `🗄️ Legacy` `78:2` and `📄 Pages` `44:328`) with the six live pages and their real ids from Task 11 Step 6. Keep the "Node IDs are volatile" warning and the `get_metadata` page-list gotcha — both are still true and both were load-bearing during this work.
+Replace the five-row table (which still lists `🗄️ Legacy` `78:2` and `📄 Pages` `44:328`) with the five live pages — `📖 Cover`, `📚 Design system`, `🧩 Components`, `📄 Pages`, `🎨 Color & Type (deep dive)` — and their real ids from Task 11 Step 6. Keep the "Node IDs are volatile" warning and the `get_metadata` page-list gotcha — both are still true and both were load-bearing during this work.
 
-- [ ] **Step 2: Replace the component-master table with the atomic classification**
+- [ ] **Step 2: Replace the component-master table with the level classification**
 
-The current table groups by SECTION. Regroup by Atom / Molecule / Organism, using the 33-master table from this plan's reference section, and note that each master's `description` now carries its level as a prefix.
+The current table groups by SECTION. Regroup by Element / Component / Section, using the 33-master table from this plan's reference section, and note that each master's `description` now carries its level as a prefix.
 
 - [ ] **Step 3: Add a Responsive section to the Tokens block**
 
@@ -1730,20 +1762,22 @@ Document the three collections with their mode counts and the per-mode resolved 
 - [ ] **Step 4: Add a change-log entry**
 
 ```markdown
-- **2026-08-06** — Docs page restructured onto an atomic spine (`00 Read me` → `01 Tokens` →
-  `02 Atoms` → `03 Molecules & Organisms` → `04 Pages`); the 12 property sections were re-homed,
-  not deleted. Wired `3 Responsive` so `container/gutter` (32/24/16) and `section/rhythm-y`
-  (96/64/48) differ per mode — they previously aliased one primitive in all three modes, making
-  "Mobile" a Desktop frame at a narrower width. Home and Blog each ship 4 frames
-  (Desktop 1280 / Mobile 390 × Light / Dark) driven by pinned mode pairs. Token audit on
-  697 Components-page nodes: bound off-ladder itemSpacing and unbound radii, assigned text styles
-  where an exact match existed, logged the rest as named debt. `🎨 Foundations` renamed
-  `(reference)`; the `Tailwind Font Sizes` dump moved to Archive.
+- **2026-08-06** — Docs page renamed `📚 Design system` and restructured onto a
+  smallest-to-largest spine (`00 Read me` → `01 Tokens` → `02 Elements` → `03 Components` →
+  `04 Pages`); the 12 property sections were re-homed, not deleted. Atomic-design labels
+  dropped after a web-research review (no major system uses them). Wired `3 Responsive` so
+  `container/gutter` (32/24/16) and `section/rhythm-y` (96/64/48) differ per mode — they
+  previously aliased one primitive in all three modes, making "Mobile" a Desktop frame at a
+  narrower width. Home and Blog each ship 4 frames (Desktop 1280 / Mobile 390 × Light / Dark)
+  driven by pinned mode pairs. Token audit on 697 Components-page nodes: bound off-ladder
+  itemSpacing and unbound radii, assigned text styles where an exact match existed, logged the
+  rest as named debt. `🎨 Foundations` renamed `🎨 Color & Type (deep dive)`; the
+  `Tailwind Font Sizes` dump deleted (regenerable via `pnpm figma:primitives`).
 ```
 
 - [ ] **Step 5: Update `CLAUDE.md`**
 
-The "Figma Design Tokens" section describes the drift-check tooling but not the file's documentation structure. Add two sentences naming the `📚 Docs` page as the shareable entry point and the three token collections.
+The "Figma Design Tokens" section describes the drift-check tooling but not the file's documentation structure. Add two sentences naming the `📚 Design system` page as the shareable entry point and the three token collections.
 
 - [ ] **Step 6: Fill in the spec stub**
 
@@ -1771,7 +1805,7 @@ git add .specs && git commit -m "docs(specs): archive design-system-docs"
 
 ## Self-review notes
 
-**Spec coverage.** "Carry the validated decision for each UI property of the old SPECIMEN page" → `decisions.md` harvests all twelve verbatim, and Tasks 7/8/9 Step 1b re-home them as `Docs/DecisionCard` instances; Task 9 Step 1c adds the five settled rules that have no specimen. "Cohesive identity serving chrome + engineer + artistic" → the three-layer thesis panel in Task 6 Step 3, plus a layer tag on every decision card via the `Docs/DecisionCard` variant. "Do we need doc components" → answered yes in Task 5b, with the count (four) and the reasoning. "Improve, clean, update the documentation" → Tasks 6–11. "Shareable for senior frontend recruiters" → Task 6 (read-me), Task 11 (cover, page order, archive tidy). "Design decisions clearly documented" → the 12 property sections are re-homed inline in Tasks 7–9 rather than deleted, plus per-master descriptions in Task 5. "Atoms / molecules / organisms / tokens clearly documented" → Task 5 classification, Tasks 7–9 chapters. "Token usage must be verified" → Task 4 audit and fixes, Task 7 verification panel. "How to show desktop and mobile" → Tasks 1–3 and the Task 10 chapter.
+**Spec coverage.** "Carry the validated decision for each UI property of the old SPECIMEN page" → `decisions.md` harvests all twelve verbatim, and Tasks 7/8/9 Step 1b re-home them as `Docs/DecisionCard` instances; Task 9 Step 1c adds the five settled rules that have no specimen. "Cohesive identity serving chrome + engineer + artistic" → the three-layer thesis panel in Task 6 Step 3, plus a layer tag on every decision card via the `Docs/DecisionCard` variant. "Do we need doc components" → answered yes in Task 5b, with the count (five) and the reasoning. "Improve, clean, update the documentation" → Tasks 6–11. "Shareable for senior frontend recruiters" → Task 6 (read-me), Task 11 (cover, page order, archive tidy). "Design decisions clearly documented" → the 12 property sections are re-homed inline in Tasks 7–9 rather than deleted, plus per-master descriptions in Task 5. "Atoms / molecules / organisms / tokens clearly documented" → the spec asked for atomic naming, but the 2026-08-06 research review (user-approved) replaced the labels with Element / Component / Section — same classification, same small-to-large order, current vocabulary; Task 5 classification, Tasks 7–9 chapters. "Token usage must be verified" → Task 4 audit and fixes, Task 7 verification panel. "How to show desktop and mobile" → Tasks 1–3 and the Task 10 chapter.
 
 **Known soft spots, stated rather than hidden.**
 
@@ -1780,3 +1814,16 @@ git add .specs && git commit -m "docs(specs): archive design-system-docs"
 2. Task 4 Step 4 (font load per text node across 697 nodes) may exceed a single call's budget. Splitting it across calls is expected, not a failure.
 3. Task 8 Step 3 and Task 10 Step 2 carry literal `CELLS` / `PAGE_COMPONENTS` placeholders that are filled from the immediately preceding discovery step's return value. They are deliberate — component ids cannot be known before Task 3 and Task 5 run — but they must be substituted, not left as-is.
 4. The Task 7 verification panel hardcodes the 2026-08-06 baseline. Replace the `ROWS` array with Task 4's real after-numbers before shipping; a stale panel is worse than no panel.
+
+## Research review amendments (2026-08-06, user-approved)
+
+Three parallel web-research passes (90+ sources: design-system doc IA, Figma file conventions, decision-exposure survey of Carbon/Polaris/Atlassian/GOV.UK/Material/Primer/Radix) produced these changes, each confirmed by the user:
+
+1. **Atomic labels dropped.** Chapters `02 Elements` / `03 Components`; description prefixes `Element ·` / `Component ·` / `Section ·`. No major system uses atoms/molecules/organisms in docs; Brad Frost himself dropped the labels. Composition order kept.
+2. **`📚 Docs` → `📚 Design system`** (Task 11 Step 5) — "Docs" as a section name exists in no major system.
+3. **`🎨 Foundations (reference)` → `🎨 Color & Type (deep dive)`** (Task 11 Step 3) — canonically "Foundations" *is* the token story, which lives in chapter 01; the word must not point at the appendix.
+4. **Cover carries status/owner/date/links** (Task 11 Step 2); status is `v1.0 — in progress`, not stable, until all pages exist (user's call).
+5. **Emojis kept** — static wayfinding only, sanctioned by Figma's own guidance; never status emojis.
+6. **Four additive panels:** Theme token jobs + scale cross-references + accessibility card (Task 7 Step 3b), do/don't pairs for the three contested calls (Task 9 Step 1d), PostRow deep-dive case study (Task 9 Step 1e), `Docs/DoDont` as the fifth kit component (Task 5b Step 3b).
+
+Validated as-is by the same research: three-layer identity thesis (closest precedent: Carbon's productive/expressive duality), rationale inline GOV.UK-style, token story leading for the hiring audience, descriptions on masters, variable modes for responsive/theme, cover page existence, unhedged absolute phrasing.
