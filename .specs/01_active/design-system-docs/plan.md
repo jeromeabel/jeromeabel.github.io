@@ -714,7 +714,7 @@ Most masters already carry a `description`. Fill the empty ones and make the exi
 - Consumes: the level classification table in the reference section
 - Produces: every master has a non-empty description in the form `<Level> · <what it is>. <the decision it encodes>. Code: <path>` where Level is `Element`, `Component`, or `Section`. Task 8 and Task 9 read these back into the Docs sheet rather than retyping them.
 
-- [ ] **Step 1: List masters with empty or thin descriptions**
+- [x] **Step 1: List masters with empty or thin descriptions**
 
 ```js
 const page = await figma.getNodeByIdAsync("461:759");
@@ -728,7 +728,7 @@ return masters
 
 Known-empty on 2026-08-06: `PreviewTitle` `2041:465`, `PageDescription` `2119:7440`, `WorkCardPreviewSmall` `2045:378`.
 
-- [ ] **Step 2: Prefix every description with its level**
+- [x] **Step 2: Prefix every description with its level**
 
 ```js
 const page = await figma.getNodeByIdAsync("461:759");
@@ -763,11 +763,11 @@ return { mutatedNodeIds: mutated, count: mutated.length, unclassified };
 
 Expected: `count` is 33 and `unclassified` is empty. A name in `unclassified` means a master was added or renamed since 2026-08-06 — classify it before continuing rather than skipping it.
 
-- [ ] **Step 3: Verify**
+- [x] **Step 3: Verify**
 
 Re-run Step 1. Expected: zero masters with `len` of 0, and every description starting `Element · `, `Component · `, or `Section · `.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add .specs/01_active/design-system-docs/plan.md
@@ -789,7 +789,7 @@ The objection is real and is mitigated, not ignored: doc components show up in t
 - Consumes: `2 Theme` variables; the layer taxonomy from `decisions.md`
 - Produces: `Docs/ChapterHeader`, `Docs/SpecimenCell`, `Docs/DecisionCard` (variant `layer` = Chrome | Content | Hand | All), `Docs/TokenRow`, `Docs/DoDont`. Tasks 6–10 instantiate these instead of building text stacks by hand.
 
-- [ ] **Step 1: Create the kit section and the two simple components**
+- [x] **Step 1: Create the kit section and the two simple components**
 
 ```js
 const page = await figma.getNodeByIdAsync("2545:671");
@@ -843,7 +843,7 @@ return { createdNodeIds: [kit.id, chHeadC.id, cellC.id] };
 
 `createComponentFromNode` must run *after* the node is parented and its text filled — converting first then editing children risks the font-load error on a node that is now a component.
 
-- [ ] **Step 2: Build `Docs/DecisionCard` as a variant set keyed on layer**
+- [x] **Step 2: Build `Docs/DecisionCard` as a variant set keyed on layer**
 
 The layer tag is the identity mechanism, so it is a variant property, not free text.
 
@@ -899,15 +899,15 @@ return { createdNodeIds: [set.id], variants: variants.map(v => v.id) };
 
 `combineAsVariants` needs every variant named `property=value` before the call and takes the parent as its second argument. Hand gets the accent-subtle chip because it is the one expressive layer — the tag itself demonstrates the accent budget rule.
 
-- [ ] **Step 3: Build `Docs/TokenRow`**
+- [x] **Step 3: Build `Docs/TokenRow`**
 
 Five columns: token name (mono), **role** (the token's one job, IBM Plex Sans 14 muted — the Radix model: a token is never a bare number, it's a role), and one value column per mode. Same construction pattern as Step 1's `Docs/SpecimenCell`; name the role child `role` and the three value children `mode1` / `mode2` / `mode3` so chapter 01 can address them, and set the name column to a fixed 280 and the role column to a fixed 320 so rows align down the sheet.
 
-- [ ] **Step 3b: Build `Docs/DoDont`**
+- [x] **Step 3b: Build `Docs/DoDont`**
 
 A horizontal pair of slots: `do` and `dont`, each a vertical auto-layout with a slot child (for a live instance or small mock), a 4px top bar, and a one-line caption. The bars are the only place semantic green/red appear on the sheet — bind `do` to a green primitive and `dont` to a red primitive from `1 Primitives` (they are judgement colours about the docs, not part of the site palette, so they bind to primitives deliberately — note this in the component description). Captions are Fira Code 12 muted, prefixed `DO ·` / `DON'T ·`. Same `createComponentFromNode` pattern as Step 1.
 
-- [ ] **Step 4: Verify the kit**
+- [x] **Step 4: Verify the kit**
 
 ```js
 const page = await figma.getNodeByIdAsync("2545:671");
@@ -942,7 +942,7 @@ The current Docs sheet opens cold on the word "BORDER". A recruiter needs to kno
 - Consumes: nothing
 - Produces: a `CHAPTER / 00 Read me` frame as the first child of the Docs light frame, and a `chapterHeader(title, kicker)` construction pattern reused by Tasks 7–10
 
-- [ ] **Step 1: Give the Docs frame a real vertical auto-layout with token-bound rhythm**
+- [x] **Step 1: Give the Docs frame a real vertical auto-layout with token-bound rhythm**
 
 The current 4707px-tall frame has a large dead band after the Hover section, which is what an absolute-positioned or mis-gapped stack looks like.
 
@@ -962,7 +962,7 @@ return { mutatedNodeIds: [f.id], before, after: { h: Math.round(f.height) } };
 
 Expected: `after.h` is meaningfully smaller than `before.h` of 4707 — the dead band collapses because auto-layout removes the gap that absolute positioning left behind.
 
-- [ ] **Step 2: Build the masthead and prepend it**
+- [x] **Step 2: Build the masthead and prepend it**
 
 ```js
 const page = await figma.getNodeByIdAsync("2545:671");
@@ -1007,7 +1007,7 @@ return { createdNodeIds: [head.id, intro.id] };
 
 `textAutoResize = "HEIGHT"` plus an explicit `resize` width is required for wrapping text — `FILL` alone leaves the default `WIDTH_AND_HEIGHT` mode in charge and collapses the node to a thread.
 
-- [ ] **Step 3: State the three-layer identity — the thesis panel**
+- [x] **Step 3: State the three-layer identity — the thesis panel**
 
 This is the panel that answers "is this a coherent visual identity or a pile of preferences". It goes directly under the intro, before anything else.
 
@@ -1062,7 +1062,7 @@ return { createdNodeIds: [panel.id, ...created] };
 
 `setProperties({ layer })` is how a variant is selected on an instance — setting the instance `name` does nothing. Bind the two loose text fills to `color/foreground-muted` and `color/foreground` in the same call; they are omitted above only to keep the snippet readable, and leaving them unbound would break the Dark clone in Task 11.
 
-- [ ] **Step 4: Add the how-this-maps-to-code table**
+- [x] **Step 4: Add the how-this-maps-to-code table**
 
 Three rows, mono, muted. Keep it factual — no claims about impact.
 
@@ -1098,7 +1098,7 @@ head.appendChild(table);
 return { createdNodeIds: [table.id] };
 ```
 
-- [ ] **Step 5: Screenshot and read it as a stranger**
+- [x] **Step 5: Screenshot and read it as a stranger**
 
 ```js
 const page = await figma.getNodeByIdAsync("2545:671");
@@ -1129,7 +1129,7 @@ git commit -m "docs(specs): design-system-docs — task 6 read-me chapter"
 - Consumes: the three collections from Task 1; the audit result from Task 4 Step 6
 - Produces: a `CHAPTER / 01 Tokens` frame containing the three-layer diagram, the Theme mode table, the Responsive mode table, the re-homed property sections, and the verification panel
 
-- [ ] **Step 1: Create the chapter frame and re-home the five property sections into it**
+- [x] **Step 1: Create the chapter frame and re-home the five property sections into it**
 
 `appendChild` moves a node; it does not copy. The existing sections and their live instances survive the move intact.
 
@@ -1151,7 +1151,7 @@ for (const name of ORDER) {
 return { createdNodeIds: [chapter.id], movedNodeIds: moved, missing };
 ```
 
-- [ ] **Step 2: Draw the three-layer token diagram at the top of the chapter**
+- [x] **Step 2: Draw the three-layer token diagram at the top of the chapter**
 
 This is the single most important panel for the recruiter audience — it is the thing that distinguishes a token system from a colour list.
 
@@ -1202,7 +1202,7 @@ return { createdNodeIds: [diagram.id] };
 
 Note the border: a full 1px border marks an **aggregate entity** — a container of parts — which is exactly what each layer card is. That is the settled border rule applied, not an arbitrary style choice.
 
-- [ ] **Step 3: Add the verification panel using Task 4's real numbers**
+- [x] **Step 3: Add the verification panel using Task 4's real numbers**
 
 Substitute the actual before/after counts from Task 4 Step 6. Do not round them and do not omit the residual debt — an honest number is the point.
 
@@ -1222,7 +1222,7 @@ const ROWS = [
   ["cornerRadius unbound", "31", "0"],
   ["strokes unbound (chrome)", "32", "0"],
   ["fills unbound (chrome)", "11", "0"],
-  ["TEXT without a text style", "82", "TBD — logged as named debt"],
+  ["TEXT without a text style", "82", "49 — logged as named debt"],
 ];
 const panel = figma.createAutoLayout("VERTICAL", { name: "token verification", itemSpacing: 8 });
 const mk = (s, colour, w) => { const t = figma.createText();
@@ -1242,7 +1242,7 @@ panel.layoutSizingHorizontal = "FILL";
 return { createdNodeIds: [panel.id] };
 ```
 
-- [ ] **Step 3b: Give every Theme token a job, cross-reference the scales, and state accessibility**
+- [x] **Step 3b: Give every Theme token a job, cross-reference the scales, and state accessibility**
 
 Three additions from the research review (2026-08-06):
 
@@ -1250,7 +1250,7 @@ Three additions from the research review (2026-08-06):
 2. **Cross-references (Carbon model).** One sentence appended to each re-homed section caption linking it to a sibling scale — spacing ↔ type rhythm, radius ↔ the pressable/media/reading trio, motion ↔ the hover verb table. Cross-references are what make five scales read as one decision.
 3. **Accessibility card.** One `Docs/DecisionCard` (`layer=All`) at the end of the chapter: metadata contrast floor ≥ 4.5:1 AA, `prefers-reduced-motion` drops scale and keeps colour changes, focus outlines are part of the accent budget. All three are already settled rules — this card only makes them visible in one place, because accessibility is a named hiring criterion and every major system surfaces it in foundations.
 
-- [ ] **Step 4: Screenshot and verify**
+- [x] **Step 4: Screenshot and verify**
 
 Expected: the chapter opens with the three-layer diagram, then the 15 token-job rows, then Colour → Type → Spacing → Radius → Motion each with a cross-reference sentence, then the accessibility card, then the verification panel. Each layer card has a visible 1px border in both themes. No clipped body text.
 
@@ -1273,11 +1273,11 @@ git commit -m "docs(specs): design-system-docs — task 7 tokens chapter"
 - Consumes: the 17 element masters and their Task 5 descriptions
 - Produces: a `CHAPTER / 02 Elements` frame with one labelled cell per element, every cell a live instance
 
-- [ ] **Step 1: Create the chapter and re-home the element-level property sections**
+- [x] **Step 1: Create the chapter and re-home the element-level property sections**
 
 Same move pattern as Task 7 Step 1, with `ORDER = ["SECTION / Buttons", "SECTION / Icons", "SECTION / Numbers"]` and `f.insertChild(2, chapter)`. `SECTION / Border` is **not** here — border governs cards and rows, which live in chapter 03, so `decisions.md` homes it there.
 
-- [ ] **Step 1b: Convert each re-homed section into a `Docs/DecisionCard` + specimen row**
+- [x] **Step 1b: Convert each re-homed section into a `Docs/DecisionCard` + specimen row**
 
 The moved sections are frames with a bare uppercase title and loose captions. Give each one a decision card carrying the layer tag and the verbatim rule, with the existing live specimens kept beneath it.
 
@@ -1321,7 +1321,7 @@ return { createdNodeIds: mutated };
 
 Apply the same shape in Task 7 (Radius `Chrome + Content` → use `layer=All`; Type `Content`; Spacing `All`; Colour `Content`; Motion `Chrome`) and Task 9 (Border `Content`; Hover `All`; Backgrounds `Chrome`; Illustration `Hand`), pulling every string verbatim from `decisions.md`. The two recorded FINDING lines — the spacing-ladder one and the focus-ring/section-CTA one — go in the `finding` slot rather than being dropped; an honest recorded gap is worth more to this audience than a tidy sheet.
 
-- [ ] **Step 2: Instantiate every element that is not already shown, with its name and description beside it**
+- [x] **Step 2: Instantiate every element that is not already shown, with its name and description beside it**
 
 ```js
 const comps = await figma.getNodeByIdAsync("461:759");
@@ -1340,7 +1340,7 @@ return found;
 
 A `COMPONENT_SET` cannot be instantiated directly — instantiate `set.defaultVariant`. Carry the returned `defaultVariant` ids into the next call as string literals.
 
-- [ ] **Step 3: Build the element grid on the Docs page**
+- [x] **Step 3: Build the element grid on the Docs page**
 
 ```js
 const page = await figma.getNodeByIdAsync("2545:671");
@@ -1385,7 +1385,7 @@ return { createdNodeIds: created, failed };
 
 The description is read from the master, not retyped — so Task 5's descriptions and this sheet can never disagree.
 
-- [ ] **Step 4: Verify every cell resolves to a real component**
+- [x] **Step 4: Verify every cell resolves to a real component**
 
 ```js
 const page = await figma.getNodeByIdAsync("2545:671");
