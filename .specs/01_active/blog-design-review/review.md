@@ -33,19 +33,20 @@ with zero Astro content. Series have no topic field. Figma already ships a
 
 **Options considered:**
 
-| Option | Pros | Cons |
-|---|---|---|
-| A. Multi-topic per post (tags) | Captures overlap (posts genuinely span 2–4 themes) | Chip stacks on cards, meaningless filters at 21 posts, endless tagging debates |
-| B. **One topic enum + separate `stack` array** ✅ | Clean chips, honest subjects, framework filtering stays possible, matches `work.stack` convention | Forces one editorial choice per post (feature, not bug) |
-| C. Topic derived from serie only | Zero redundancy | Standalone posts left untyped; serie ≠ subject conceptually |
+| Option                                            | Pros                                                                                              | Cons                                                                           |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| A. Multi-topic per post (tags)                    | Captures overlap (posts genuinely span 2–4 themes)                                                | Chip stacks on cards, meaningless filters at 21 posts, endless tagging debates |
+| B. **One topic enum + separate `stack` array** ✅ | Clean chips, honest subjects, framework filtering stays possible, matches `work.stack` convention | Forces one editorial choice per post (feature, not bug)                        |
+| C. Topic derived from serie only                  | Zero redundancy                                                                                   | Standalone posts left untyped; serie ≠ subject conceptually                    |
 
 **Recommendation (B):**
+
 - `topic: z.enum(['performance','testing','architecture','full-stack','ai','ui'])`
   — exactly one per post. Distribution check against real content: testing ≈11,
   performance ≈6, architecture ≈4, full-stack ≈4, ai ≈2, ui ≈0 (planned).
 - `stack: z.array(z.string()).optional()` — `astro`, `vue`, `nuxt`… Not shown on
   cards/rows; shown on post page. This answers "is knowledge framework-bound?"
-  — yes, and that's a *stack* facet, not a topic.
+  — yes, and that's a _stack_ facet, not a topic.
 - **Serie gets `topic`** (schema addition); serie posts inherit it. This fixes
   the astro mislabels structurally.
 - **Filter UI: not yet.** At 21 posts a scroll beats a filter. Chips stay
@@ -56,12 +57,12 @@ with zero Astro content. Series have no topic field. Figma already ships a
 
 v3 Home already does the right thing silently: featured card shows the serie
 chip (`📁 WEB PERFORMANCE · PART 2 OF 5`), small standalone cards show
-`FULL-STACK`. XP-1 blog rows show serie chip *above* the title **plus** a boxed
-topic on the right — that's the redundancy you sensed. 
+`FULL-STACK`. XP-1 blog rows show serie chip _above_ the title **plus** a boxed
+topic on the right — that's the redundancy you sensed.
 
 **Rule: one chip per card/row; serie wins.** Serie membership implies the topic
 (serie carries it), and the folder icon makes the semantic difference readable.
-Consistency concern ("one chip might break scanning") is resolved by the *slot*:
+Consistency concern ("one chip might break scanning") is resolved by the _slot_:
 both chip types occupy the same position, same size, same case. Scanning
 consistency comes from position + typography, not identical semantics.
 Consequence: XP-1's two-line rows (chip above title) go away — v3 single-line
@@ -89,7 +90,7 @@ brightness/scale (pick one, site-wide); row gets full-width bg tint.
 
 ## 5. Accent colors — teal vs violet
 
-**Single accent: teal.** Accent marks *interactivity/navigation*: links, serie
+**Single accent: teal.** Accent marks _interactivity/navigation_: links, serie
 chips, CTAs, hovers, serie-card titles. Topics/dates/read-time stay muted —
 they're labels. XP-1's violet chips create a second accent competing on
 same-role elements; with two accents neither means anything. Violet: drop from
@@ -125,6 +126,7 @@ display for page H1 (`BLOG`) only. Card/row titles: sans bold. v3 correct.
 Only 1920/1536 frames exist. Needed: 1024/768/390 variants of Home-blog and
 Blog page. Rules to design against (full table in
 `design-expert/references/ui-system.md`):
+
 - Home 1+3: featured goes full-width image-top; smalls become image-left rows
   (~96px thumb), description hidden under 768.
 - Series grid 3→2→1.
@@ -164,12 +166,12 @@ shadcn, Carbon).
 Benchmark: title→accent on hover is minority (2/8); GitHub can color titles
 because its cards have no chips. 0/8 sites stack two hover signals.
 
-| Option | Pros | Cons |
-|---|---|---|
-| A. Title → teal | Strong affordance | Collides with adjacent teal serie chip (user's instinct — confirmed); repaints text |
-| B. **Underline decoration appears** (teal decoration, text unchanged — Josh Comeau) ✅ | GitHub-blog-familiar idiom; spends almost no accent budget; typography-native; dark/light safe | Subtler; multi-line underline slightly busy |
-| C. Container-only (bg tint / scale — Vercel/Astro) | Quietest; matches whole-surface link | Weak affordance on borderless image cards |
-| D. Underline + accent color | — | Double signal, 0/8 precedent |
+| Option                                                                                 | Pros                                                                                           | Cons                                                                                |
+| -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| A. Title → teal                                                                        | Strong affordance                                                                              | Collides with adjacent teal serie chip (user's instinct — confirmed); repaints text |
+| B. **Underline decoration appears** (teal decoration, text unchanged — Josh Comeau) ✅ | GitHub-blog-familiar idiom; spends almost no accent budget; typography-native; dark/light safe | Subtler; multi-line underline slightly busy                                         |
+| C. Container-only (bg tint / scale — Vercel/Astro)                                     | Quietest; matches whole-surface link                                                           | Weak affordance on borderless image cards                                           |
+| D. Underline + accent color                                                            | —                                                                                              | Double signal, 0/8 precedent                                                        |
 
 **Rec: B for cards, C (bg tint) for rows** — one gesture per surface:
 rows = bg tint alone; borderless cards = underline + coupled slow image
@@ -195,11 +197,11 @@ first-class (Carbon read-only Tag, Primer Label, Atlassian static Tag —
 "subtle"). What's off-spec: border + hover + pointer on a dead label.
 Study A adds: 0/8 blogs box categories; 6/8 show no topic on cards at all.
 
-| Option | Pros | Cons |
-|---|---|---|
-| A. Muted plain text | Dev-blog convention (Vercel); quietest | User's worry confirmed risk: reads as one more metadata token next to date · min |
-| B. **Muted bg-only box** (no border, no hover, no pointer) ✅ | Visually separates topic from date metadata; design-system-clean; documented upgrade path to filter (Carbon read-only→selectable, Primer Label→Token) | Zero dev-blog precedent; slight weight added to rows |
-| C. No topic on cards/rows at all | Majority blog pattern (6/8); kills the debate | Loses scanning info; empty chip slot on standalone rows breaks slot symmetry with serie chip |
+| Option                                                        | Pros                                                                                                                                                  | Cons                                                                                         |
+| ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| A. Muted plain text                                           | Dev-blog convention (Vercel); quietest                                                                                                                | User's worry confirmed risk: reads as one more metadata token next to date · min             |
+| B. **Muted bg-only box** (no border, no hover, no pointer) ✅ | Visually separates topic from date metadata; design-system-clean; documented upgrade path to filter (Carbon read-only→selectable, Primer Label→Token) | Zero dev-blog precedent; slight weight added to rows                                         |
+| C. No topic on cards/rows at all                              | Majority blog pattern (6/8); kills the debate                                                                                                         | Loses scanning info; empty chip slot on standalone rows breaks slot symmetry with serie chip |
 
 **Rec: B.** Addresses "too close to metadata" directly; defers nothing —
 filtering upgrade is additive. C stays credible if rows feel heavy in practice.
@@ -210,12 +212,12 @@ Rest state: **full brightness always** — 3/3 benchmark sites; no dim, no
 opacity, no tint at rest (user's "well-enlightened image on first view"
 confirmed as the industry norm). LQIP fade ends at 100%.
 
-| Hover option | Pros | Cons |
-|---|---|---|
+| Hover option                       | Pros                                                                               | Cons                                                   |
+| ---------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------ |
 | **Scale 1.02, ~500ms ease-out** ✅ | Only benchmarked image hover (GitHub); depth without color distortion; slow = calm | Needs `overflow:hidden`; disabled under reduced-motion |
-| Brighten | No motion | 0/8 precedent; light-mint gradient covers wash out |
-| Teal tint overlay | Brand-y | Covers already teal duotone → muddy; 0/8 |
-| None (Stripe) | Simplest | Card hover rests entirely on underline |
+| Brighten                           | No motion                                                                          | 0/8 precedent; light-mint gradient covers wash out     |
+| Teal tint overlay                  | Brand-y                                                                            | Covers already teal duotone → muddy; 0/8               |
+| None (Stripe)                      | Simplest                                                                           | Card hover rests entirely on underline                 |
 
 **Rec: scale**, coupled with title underline as one gesture; reduced-motion
 falls back to underline only.

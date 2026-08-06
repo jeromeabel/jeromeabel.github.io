@@ -82,7 +82,7 @@ the decisions; this holds the _why_ in reusable form.
   (`spacing/*` → auto layout, `radius/*` → corner radius, `border-width/*` →
   stroke) filter the property pickers the same way color scopes do.
 - **Array-shaped text fields are silently skipped by naive `setBoundVariable`
-  calls.** `VariableBindableTextField` entries that are *arrays* (mixed-value
+  calls.** `VariableBindableTextField` entries that are _arrays_ (mixed-value
   ranges — `fontWeight`, `letterSpacing`, `fontSize`, `lineHeight`, `tracking`
   on TEXT nodes with non-uniform styling) need an explicit branch; a script
   with no array-shape handling raises zero exceptions and logs zero failures
@@ -105,8 +105,8 @@ the decisions; this holds the _why_ in reusable form.
   (rather than rebound) sidesteps the bug without any visual change — but
   this only works when the values happen to match; it is not a general fix.
 - **Never trust an apply script's own self-reported success counters.** Every
-  one of the above three modes was caught only by an *independent,
-  from-scratch* rescan afterward — not by re-running the apply script's own
+  one of the above three modes was caught only by an _independent,
+  from-scratch_ rescan afterward — not by re-running the apply script's own
   counting logic, which reported "complete" or "success" in all three cases
   despite the actual gap. Always verify with a rescan that doesn't share code
   with the thing being verified.
@@ -196,12 +196,12 @@ now a **read-only backup** for the duration of the migration.
   `VariableCollectionId:3:2`, page `44:328`, frame `156:1348` all resolve
   identically in both files. So retargeting was a one-token change — the
   `fileKey` argument — and every hardcoded id in the plans stayed valid. Confirm
-  this rather than assume it: a file *rebuilt* by hand would have invalidated
+  this rather than assume it: a file _rebuilt_ by hand would have invalidated
   every id in every plan, script and skill doc.
 - **A fork still drifts.** v1.0 has no `🗄️ Legacy` page, renamed `🧩 Components`
   → `🧩 Components (back)`, and added `Components (new)`, `Pages Experiment`, and
   an empty collection literally named `Primitives`
-  (`VariableCollectionId:453:2`) — which is *not* the `1 Primitives` that plan 2
+  (`VariableCollectionId:453:2`) — which is _not_ the `1 Primitives` that plan 2
   builds. Ids surviving does not mean the tree survived.
 - **Retarget the live references, not the archives.** Updated: the three plans,
   `design.md`, `scripts/figma/dump-tokens.md`, and the `figma-verify` /
@@ -282,15 +282,15 @@ scratch): `home-light.png`, `home-dark.png`, `link-component.png`.
 Per-page `byCol` dumps (script per Task 2 brief / future
 `scripts/figma/dump-bindings.md`), run read-only, `rows` discarded:
 
-| Page | id | 2 Theme (Color) | Scale | Radius | Typography | Container | Breakpoint | Color Tokens |
-|---|---|---|---|---|---|---|---|---|
-| 📖 Cover | `0:1` | 1 | – | – | – | – | – | – |
-| 🎨 Foundations | `5:14` | 16 | – | – | – | – | – | – |
-| 🧩 Components (back) | `52:2` | 578 | 566 | 24 | 4 | 2 | – | 6 |
-| 🗄️ Legacy | `78:2` | *page does not exist in this fork* — skipped | | | | | | |
-| 📄 Pages | `44:328` | 4297 | 3961 | 124 | 27 | 4 | 4 | 20 |
-| Pages Experiment | `442:5352` | 174 | 216 | 16 | 5 | 3 | 3 | 3 |
-| **Merged total** | | **5066** | **4743** | **164** | **36** | **9** | **7** | **29** |
+| Page                 | id         | 2 Theme (Color)                              | Scale    | Radius  | Typography | Container | Breakpoint | Color Tokens |
+| -------------------- | ---------- | -------------------------------------------- | -------- | ------- | ---------- | --------- | ---------- | ------------ |
+| 📖 Cover             | `0:1`      | 1                                            | –        | –       | –          | –         | –          | –            |
+| 🎨 Foundations       | `5:14`     | 16                                           | –        | –       | –          | –         | –          | –            |
+| 🧩 Components (back) | `52:2`     | 578                                          | 566      | 24      | 4          | 2         | –          | 6            |
+| 🗄️ Legacy            | `78:2`     | _page does not exist in this fork_ — skipped |          |         |            |           |            |              |
+| 📄 Pages             | `44:328`   | 4297                                         | 3961     | 124     | 27         | 4         | 4          | 20           |
+| Pages Experiment     | `442:5352` | 174                                          | 216      | 16      | 5          | 3         | 3          | 3            |
+| **Merged total**     |            | **5066**                                     | **4743** | **164** | **36**     | **9**     | **7**      | **29**       |
 
 (Collection is literally named `2 Theme` in this file, not `Color` — kept
 both labels since the plan's earlier audit used `Color`.)
@@ -299,15 +299,15 @@ both labels since the plan's earlier audit used `Color`.)
 ~164, `Typography` ~33, `Container` ~9, `Breakpoint` ~9, `Color Tokens`
 ~29):
 
-| Collection | Expected | Actual | Delta |
-|---|---|---|---|
-| Color / 2 Theme | ~5225 | 5066 | −159 (−3.0%) |
-| Scale | ~4834 | 4743 | −91 (−1.9%) |
-| Radius | ~164 | 164 | 0 |
-| Typography | ~33 | 36 | +3 |
-| Container | ~9 | 9 | 0 |
-| Breakpoint | ~9 | 7 | −2 |
-| Color Tokens | ~29 | 29 | 0 |
+| Collection      | Expected | Actual | Delta        |
+| --------------- | -------- | ------ | ------------ |
+| Color / 2 Theme | ~5225    | 5066   | −159 (−3.0%) |
+| Scale           | ~4834    | 4743   | −91 (−1.9%)  |
+| Radius          | ~164     | 164    | 0            |
+| Typography      | ~33      | 36     | +3           |
+| Container       | ~9       | 9      | 0            |
+| Breakpoint      | ~9       | 7      | −2           |
+| Color Tokens    | ~29      | 29     | 0            |
 
 All within a few percent — no alarming discrepancy. The small shortfalls in
 Color/Scale/Breakpoint are consistent with the already-documented fact that
@@ -339,30 +339,30 @@ Loaded in 4 batches of ~111 via `use_figma` (batch running totals: 111, 222,
 
 **Final `byFolder` breakdown (443 total):**
 
-| Folder | Count | | Folder | Count |
-|---|---|---|---|---|
-| color | 299 | | leading | 5 |
-| spacing | 36 | | perspective | 5 |
-| container | 13 | | breakpoint | 5 |
-| text | 13 | | text-shadow | 5 |
-| radius | 9 | | tracking | 6 |
-| shadow | 9 | | ease | 3 |
-| font-weight | 9 | | font | 3 |
-| blur | 8 | | inset-shadow | 3 |
-| drop-shadow | 7 | | aspect | 1 |
-| animate | 4 | | | |
+| Folder      | Count |     | Folder       | Count |
+| ----------- | ----- | --- | ------------ | ----- |
+| color       | 299   |     | leading      | 5     |
+| spacing     | 36    |     | perspective  | 5     |
+| container   | 13    |     | breakpoint   | 5     |
+| text        | 13    |     | text-shadow  | 5     |
+| radius      | 9     |     | tracking     | 6     |
+| shadow      | 9     |     | ease         | 3     |
+| font-weight | 9     |     | font         | 3     |
+| blur        | 8     |     | inset-shadow | 3     |
+| drop-shadow | 7     |     | aspect       | 1     |
+| animate     | 4     |     |              |       |
 
 All folder names are Tailwind/Figma namespace segments (no raw CSS property
 name like `bg`/`p` leaked through).
 
 **Spot-checks (Step 5) — all pass:**
 
-| Variable | Expected | Actual |
-|---|---|---|
-| `color/blue/500` | Tailwind blue-500, `#2b7fff` | r/g/b → `#2b7fff` exact |
-| `spacing/4` | `16` (px) | `16` |
-| `radius/2xl` | `16` (px) | `16` |
-| `color/brand/lime-100` | pale lime, `#f5ffe1` | r/g/b → `#f5ffe1` exact |
+| Variable               | Expected                     | Actual                  |
+| ---------------------- | ---------------------------- | ----------------------- |
+| `color/blue/500`       | Tailwind blue-500, `#2b7fff` | r/g/b → `#2b7fff` exact |
+| `spacing/4`            | `16` (px)                    | `16`                    |
+| `radius/2xl`           | `16` (px)                    | `16`                    |
+| `color/brand/lime-100` | pale lime, `#f5ffe1`         | r/g/b → `#f5ffe1` exact |
 
 Confirmed via `getVariableByIdAsync(...).valuesByMode`, not a UI screenshot —
 exact hex/px match is stronger evidence than eyeballing a swatch.
@@ -392,28 +392,28 @@ back to 333 post-cleanup, then to 443 after the corrected batch 4.
 Step 2 — differs from the brief's static list in two names, same ids where
 still present:
 
-| Page | id |
-|---|---|
-| 📖 Cover | `0:1` |
-| 🎨 Foundations | `5:14` |
-| 🧩 Components (back) | `52:2` (renamed from "🧩 Components" — same id) |
-| 📄 Pages | `44:328` |
-| Pages Experiment | `442:5352` |
-| Components (new) | `461:759` (not `52:2` as briefly guessed — confirmed live) |
+| Page                 | id                                                         |
+| -------------------- | ---------------------------------------------------------- |
+| 📖 Cover             | `0:1`                                                      |
+| 🎨 Foundations       | `5:14`                                                     |
+| 🧩 Components (back) | `52:2` (renamed from "🧩 Components" — same id)            |
+| 📄 Pages             | `44:328`                                                   |
+| Pages Experiment     | `442:5352`                                                 |
+| Components (new)     | `461:759` (not `52:2` as briefly guessed — confirmed live) |
 
 `🗄️ Legacy` confirmed absent (no such page in `figma.root.children`).
 
 ### Binding counts per page
 
-| Page | `Color Tokens` bindings | Mode overrides on `Color Tokens` |
-|---|---|---|
-| 📖 Cover | 0 | 0 |
-| 🎨 Foundations | 0 | 0 |
-| 🧩 Components (back) | 6 | 0 |
-| 📄 Pages | 20 | 0 |
-| Pages Experiment | 3 | 0 |
-| Components (new) | 93 | **1** |
-| **Total** | **122** | **1** |
+| Page                 | `Color Tokens` bindings | Mode overrides on `Color Tokens` |
+| -------------------- | ----------------------- | -------------------------------- |
+| 📖 Cover             | 0                       | 0                                |
+| 🎨 Foundations       | 0                       | 0                                |
+| 🧩 Components (back) | 6                       | 0                                |
+| 📄 Pages             | 20                      | 0                                |
+| Pages Experiment     | 3                       | 0                                |
+| Components (new)     | 93                      | **1**                            |
+| **Total**            | **122**                 | **1**                            |
 
 `6 + 20 + 3 = 29` — exactly Plan 2 Task 5/6's file-wide figure. That count
 never included `Components (new)`, which wasn't in the original page
@@ -458,7 +458,7 @@ Theme` hit competing with the `1 Primitives` one).
 
 **Resolve-chain gotcha:** every `Color Tokens` variable aliases one hop into
 a variable in a collection called `Color Primitives`
-(`VariableCollectionId:368:22`) — a *legacy* primitives collection distinct
+(`VariableCollectionId:368:22`) — a _legacy_ primitives collection distinct
 from the new `1 Primitives` (`VariableCollectionId:2013:2`). `Color
 Primitives` is **not** returned by `getLocalVariableCollectionsAsync()`
 (its own `variableIds` array reports empty, though the variables that
@@ -472,16 +472,16 @@ Noting this for whoever reuses this script pattern later — `Color
 Primitives` is presumably next in line for its own retirement (out of
 scope for this plan).
 
-| Source var (`Color Tokens`) | Hex | Target var | Rationale |
-|---|---|---|---|
-| `Utility/Violet/violet-400` (`VariableID:368:543`) | `#a684ff` | `1 Primitives/color/violet/400` (`VariableID:2016:66`) | Exact hex match, no `2 Theme` competitor |
-| `Utility/Teal/teal-500` (`VariableID:368:577`) | `#00bba7` | `1 Primitives/color/teal/500` (`VariableID:2016:57`) | Exact hex match, no `2 Theme` competitor |
-| `Utility/Teal/teal-400` (`VariableID:368:576`) | `#00d5be` | `1 Primitives/color/teal/400` (`VariableID:2016:55`) | Exact hex match, no `2 Theme` competitor |
-| `Utility/Teal/teal-50` (`VariableID:368:572`) | `#f0fdfa` | `1 Primitives/color/teal/50` (`VariableID:2016:56`) | Exact hex match, no `2 Theme` competitor |
-| `Text/white` (`VariableID:368:374`) | `#ffffff` | `1 Primitives/color/white` (`VariableID:2016:74`) | Exact hex match, no `2 Theme` competitor |
+| Source var (`Color Tokens`)                          | Hex       | Target var                                              | Rationale                                |
+| ---------------------------------------------------- | --------- | ------------------------------------------------------- | ---------------------------------------- |
+| `Utility/Violet/violet-400` (`VariableID:368:543`)   | `#a684ff` | `1 Primitives/color/violet/400` (`VariableID:2016:66`)  | Exact hex match, no `2 Theme` competitor |
+| `Utility/Teal/teal-500` (`VariableID:368:577`)       | `#00bba7` | `1 Primitives/color/teal/500` (`VariableID:2016:57`)    | Exact hex match, no `2 Theme` competitor |
+| `Utility/Teal/teal-400` (`VariableID:368:576`)       | `#00d5be` | `1 Primitives/color/teal/400` (`VariableID:2016:55`)    | Exact hex match, no `2 Theme` competitor |
+| `Utility/Teal/teal-50` (`VariableID:368:572`)        | `#f0fdfa` | `1 Primitives/color/teal/50` (`VariableID:2016:56`)     | Exact hex match, no `2 Theme` competitor |
+| `Text/white` (`VariableID:368:374`)                  | `#ffffff` | `1 Primitives/color/white` (`VariableID:2016:74`)       | Exact hex match, no `2 Theme` competitor |
 | `Utility/Fuchsia/fuchsia-800` (`VariableID:368:514`) | `#8a0194` | `1 Primitives/color/fuchsia/800` (`VariableID:2014:84`) | Exact hex match, no `2 Theme` competitor |
-| `Utility/Teal/teal-600` (`VariableID:368:578`) | `#009689` | `1 Primitives/color/teal/600` (`VariableID:2016:58`) | Exact hex match, no `2 Theme` competitor |
-| `Utility/Teal/teal-800` (`VariableID:368:580`) | `#005f5a` | `1 Primitives/color/teal/800` (`VariableID:2016:60`) | Exact hex match, no `2 Theme` competitor |
+| `Utility/Teal/teal-600` (`VariableID:368:578`)       | `#009689` | `1 Primitives/color/teal/600` (`VariableID:2016:58`)    | Exact hex match, no `2 Theme` competitor |
+| `Utility/Teal/teal-800` (`VariableID:368:580`)       | `#005f5a` | `1 Primitives/color/teal/800` (`VariableID:2016:60`)    | Exact hex match, no `2 Theme` competitor |
 
 All 8 source variables are decorative "utility" accent colours (violet,
 teal, fuchsia badges/underlines on post cards) — none are part of the
@@ -515,10 +515,10 @@ against node `2134:697` only, page `Components (new)` (`461:759`):
 **Verification** — re-read `node.explicitVariableModes` in the same script,
 before and after:
 
-| | `Color Tokens` (`368:322`) | `2 Theme` (`3:2`) |
-|---|---|---|
-| Before | `368:5` (Dark) | *(absent)* |
-| After | *(absent)* | `3:1` (Dark) |
+|        | `Color Tokens` (`368:322`) | `2 Theme` (`3:2`) |
+| ------ | -------------------------- | ----------------- |
+| Before | `368:5` (Dark)             | _(absent)_        |
+| After  | _(absent)_                 | `3:1` (Dark)      |
 
 Exactly the expected shape — `Color Tokens` entry gone, `2 Theme` entry
 present and pointing at Dark. Screenshotted the node post-change: renders
@@ -551,15 +551,15 @@ the file** (verified by an independent rescan — see below).
 
 **Per-page results:**
 
-| Page | id | Rebound | Notes |
-|---|---|---|---|
-| 📖 Cover | `0:1` | 0 | no pre-existing bindings, skipped |
-| 🎨 Foundations | `5:14` | 0 | no pre-existing bindings, skipped |
-| 🧩 Components (back) | `52:2` | 6 | matched Task 1's audit exactly |
-| 📄 Pages | `44:328` | 20 | matched Task 1's audit exactly |
-| Pages Experiment | `442:5352` | 3 | matched Task 1's audit exactly |
-| Components (new) | `461:759` | 93 | self-reported counter said 65 — see below |
-| **Total** | | **122** | |
+| Page                 | id         | Rebound | Notes                                     |
+| -------------------- | ---------- | ------- | ----------------------------------------- |
+| 📖 Cover             | `0:1`      | 0       | no pre-existing bindings, skipped         |
+| 🎨 Foundations       | `5:14`     | 0       | no pre-existing bindings, skipped         |
+| 🧩 Components (back) | `52:2`     | 6       | matched Task 1's audit exactly            |
+| 📄 Pages             | `44:328`   | 20      | matched Task 1's audit exactly            |
+| Pages Experiment     | `442:5352` | 3       | matched Task 1's audit exactly            |
+| Components (new)     | `461:759`  | 93      | self-reported counter said 65 — see below |
+| **Total**            |            | **122** |                                           |
 
 ### Bug found in the brief's rebind script — `entry[i].color` is wrong
 
@@ -604,14 +604,14 @@ Re-ran Task 1's exact `bindingCount` method (collection membership via
 `variable.variableCollectionId`, not ID matching) on all 6 pages after the
 rebind:
 
-| Page | `Color Tokens` bindingCount (after) |
-|---|---|
-| 📖 Cover | 0 |
-| 🎨 Foundations | 0 |
-| 🧩 Components (back) | 0 |
-| 📄 Pages | 0 |
-| Pages Experiment | 0 |
-| Components (new) | 0 |
+| Page                 | `Color Tokens` bindingCount (after) |
+| -------------------- | ----------------------------------- |
+| 📖 Cover             | 0                                   |
+| 🎨 Foundations       | 0                                   |
+| 🧩 Components (back) | 0                                   |
+| 📄 Pages             | 0                                   |
+| Pages Experiment     | 0                                   |
+| Components (new)     | 0                                   |
 
 Zero everywhere — `Color Tokens` is now free of live consumers file-wide,
 clearing the way for Task 3 to delete the collection.
@@ -651,11 +651,11 @@ name → `remove()` → re-read collections).
 
 **Before/after (from the delete script's own return value):**
 
-| | Name | Vars | Hidden |
-|---|---|---|---|
-| Before (removed) | `Color Tokens` | 392 | — |
-| After | `2 Theme` | 10 | `false` |
-| After | `1 Primitives` | 446 | `true` |
+|                  | Name           | Vars | Hidden  |
+| ---------------- | -------------- | ---- | ------- |
+| Before (removed) | `Color Tokens` | 392  | —       |
+| After            | `2 Theme`      | 10   | `false` |
+| After            | `1 Primitives` | 446  | `true`  |
 
 Exactly the expected post-delete shape from the brief: two collections,
 `1 Primitives` hidden and `2 Theme` visible. (`1 Primitives` is 446, not
@@ -733,20 +733,20 @@ tokens added to `global.css`, code-only, no Figma change).
 
 No mode-limit error (file's plan tier supports 3 modes on this collection).
 
-| Mode | modeId |
-|---|---|
+| Mode    | modeId   |
+| ------- | -------- |
 | Desktop | `2245:0` |
-| Tablet | `2245:1` |
-| Mobile | `2245:2` |
+| Tablet  | `2245:1` |
+| Mobile  | `2245:2` |
 
 ### Step 2 — 4 variables created
 
-| Variable | id | Scopes |
-|---|---|---|
-| `container/max-width` | `VariableID:2245:43` | `WIDTH_HEIGHT` |
-| `container/gutter` | `VariableID:2245:44` | `GAP`, `WIDTH_HEIGHT` |
-| `section/rhythm-y` | `VariableID:2245:45` | `GAP`, `WIDTH_HEIGHT` |
-| `viewport/width` | `VariableID:2245:46` | `WIDTH_HEIGHT` |
+| Variable              | id                   | Scopes                |
+| --------------------- | -------------------- | --------------------- |
+| `container/max-width` | `VariableID:2245:43` | `WIDTH_HEIGHT`        |
+| `container/gutter`    | `VariableID:2245:44` | `GAP`, `WIDTH_HEIGHT` |
+| `section/rhythm-y`    | `VariableID:2245:45` | `GAP`, `WIDTH_HEIGHT` |
+| `viewport/width`      | `VariableID:2245:46` | `WIDTH_HEIGHT`        |
 
 `container/max-width`, `container/gutter`, `section/rhythm-y` alias into
 `1 Primitives` per-mode (`breakpoint/xl`, `spacing/4`,
@@ -763,12 +763,12 @@ Independent alias-resolution script (walks `VARIABLE_ALIAS` chains up to 5
 hops, reading each mode's first-mode value in the target collection) —
 matches Task 1/3's resolution pattern.
 
-| Variable | Desktop | Tablet | Mobile |
-|---|---|---|---|
-| `container/max-width` | 1280 | 1280 | 1280 |
-| `container/gutter` | 16 | 16 | 16 |
-| `section/rhythm-y` | 96 | **32** | 32 |
-| `viewport/width` | 1280 | 768 | 390 |
+| Variable              | Desktop | Tablet | Mobile |
+| --------------------- | ------- | ------ | ------ |
+| `container/max-width` | 1280    | 1280   | 1280   |
+| `container/gutter`    | 16      | 16     | 16     |
+| `section/rhythm-y`    | 96      | **32** | 32     |
+| `viewport/width`      | 1280    | 768    | 390    |
 
 Exact match to the brief's expected table, including the flagged gotcha:
 `section/rhythm-y` Tablet resolves to **32** (`spacing/8`), not 96 — the

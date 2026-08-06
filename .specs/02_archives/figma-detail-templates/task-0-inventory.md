@@ -6,21 +6,21 @@ Read-only. No Figma writes performed. All IDs resolved live via Pass-0 (never `g
 
 All hint IDs in plan.md matched the live IDs exactly — zero drift.
 
-| Master | Hint ID | Live ID | Status |
-| --- | --- | --- | --- |
-| Header | `41:3` | `41:3` | ✓ match |
-| Footer | `42:3` | `42:3` | ✓ match |
-| TopicChip | `15:9` | `15:9` | ✓ match |
-| TableOfContents | `36:3` | `36:3` | ✓ match |
-| LinkNavPost (SET) | `34:17` | `34:17` | ✓ match |
-| RelatedWork | `117:77` | `117:77` | ✓ match |
-| WorkMiniCard | `32:9` | `32:9` | ✓ match |
-| SeriePostListItem | `119:83` | `119:83` | ✓ match |
-| SerieContents | `118:83` | `118:83` | ✓ match |
-| WorkHeader | `127:95` | `127:95` | ✓ match |
-| RelatedWriting | `125:83` | `125:83` | ✓ match |
-| Link (SET) | `13:13` | `13:13` | ✓ match |
-| **PostRowCalm** | (unresolved) | **absent** | ⚠️ confirmed missing — Task 2 must build it, sibling to `PostRow` (`31:13`) in the `POST-ROW` section |
+| Master            | Hint ID      | Live ID    | Status                                                                                                |
+| ----------------- | ------------ | ---------- | ----------------------------------------------------------------------------------------------------- |
+| Header            | `41:3`       | `41:3`     | ✓ match                                                                                               |
+| Footer            | `42:3`       | `42:3`     | ✓ match                                                                                               |
+| TopicChip         | `15:9`       | `15:9`     | ✓ match                                                                                               |
+| TableOfContents   | `36:3`       | `36:3`     | ✓ match                                                                                               |
+| LinkNavPost (SET) | `34:17`      | `34:17`    | ✓ match                                                                                               |
+| RelatedWork       | `117:77`     | `117:77`   | ✓ match                                                                                               |
+| WorkMiniCard      | `32:9`       | `32:9`     | ✓ match                                                                                               |
+| SeriePostListItem | `119:83`     | `119:83`   | ✓ match                                                                                               |
+| SerieContents     | `118:83`     | `118:83`   | ✓ match                                                                                               |
+| WorkHeader        | `127:95`     | `127:95`   | ✓ match                                                                                               |
+| RelatedWriting    | `125:83`     | `125:83`   | ✓ match                                                                                               |
+| Link (SET)        | `13:13`      | `13:13`    | ✓ match                                                                                               |
+| **PostRowCalm**   | (unresolved) | **absent** | ⚠️ confirmed missing — Task 2 must build it, sibling to `PostRow` (`31:13`) in the `POST-ROW` section |
 
 **Orphan check:** cross-referenced every INSTANCE's `mainComponent` name on 📄 Pages against the Components walk — no orphans (`parent === null`). All resolved names (Header, Footer, AboutFacts, AboutText, ArchiveTable, ContactText, HeroText, PostRow, SerieCard, WorkGalleryCard, WorkOverlayCard, Icon/CrossBig + Link/ThemeToggle/Icon variant children) map cleanly to live masters.
 
@@ -39,22 +39,26 @@ Read via `use_figma` inspection + `get_screenshot` on `Home — 1280 — Light` 
 ## Step 5: Content facts (verbatim from repo)
 
 **blog-post — `api-endpoints-with-astro`**
+
 - Title: "Adding API Endpoints to an Astro Project" · Date: 2026-05-11
 - Abstract: "A walkthrough of building server-side routes in Astro: GET endpoints, dynamic [id] routes, two manual POST patterns (redirect and JSON), and Astro Actions — the modern default."
 - Topic: `astro` · `related_work: [medito-fundraising, leconceptdelapreuve]` → RelatedWork renders 2 cards
 - Heading count: **10** `##` headings → TOC renders (≥4 threshold)
 
 **serie-landing — `web-performance`**
+
 - Title: "Web Performance" · Date: 2026-07-08 · `featured: 1`
 - Abstract: "A practical journey through web performance optimization, from core concepts and cheatsheets to real-world improvements in a production app."
 - 5 parts (in order): 01-tactics-cheatsheet (2026-03-27), 02-data-driven (2026-04-16), 03-benchmark-tables (2026-06-17), 04-images-part-1 (2026-07-08), 05-images-part-2 (2026-07-14)
 
 **serie-post — `web-performance/02-data-driven`**
+
 - Title: "Exploring a Data-Driven Approach to Web Performance" · Date: 2026-04-16
 - Abstract: "A practical account of using field data, lab measurements, and behavioral analytics to drive and evaluate performance improvements on a real B2B tool."
 - Heading count: **19** (≥4, TOC renders) · Part 2 of 5 · prev = `01-tactics-cheatsheet` ("Web Performance Tactics Cheatsheet"), next = `03-benchmark-tables` ("Benchmarking a 10,000-Row Table: v-for, PrimeVue, and TanStack") — both confirmed present
 
 **work-detail — `leconceptdelapreuve`**
+
 - Title: "Le concept de la preuve" · Date: 2026-02-20 · `featured: 2`
 - Abstract: "Building a minimal comic blog with Astro that stays almost entirely static — except for one serverless endpoint that handles votes"
 - Stack: Astro, Tailwind CSS, Astro DB, Turso, Netlify, Sharp

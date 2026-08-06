@@ -38,18 +38,16 @@ mandatory, not an escape hatch for exceptionally large pages.
 
 ## Pages
 
-Six pages are listed in the original plan brief; only **five exist** in the
-current v1.0 fork (verified by Task 2, re-confirmed here via
-`getNodeByIdAsync` returning `null`):
+Use the current five live pages (re-derive by Pass 0 before any writes; ids can
+change without warning):
 
-| Page | id | Status |
-|---|---|---|
-| 📖 Cover | `0:1` | real |
-| 🎨 Foundations | `5:14` | real |
-| 🧩 Components | `52:2` | real (named `🧩 Components (back)` in this fork) |
-| 🗄️ Legacy | `78:2` | **does not exist — `getNodeByIdAsync` returns `null`. Skip.** |
-| 📄 Pages | `44:328` | real |
-| Pages Experiment | `442:5352` | real |
+| Page                        | id           | Status |
+| --------------------------- | ------------ | ------ |
+| 📖 Cover                    | `0:1`        | real   |
+| 📚 Design system            | `2545:671`   | real   |
+| 🧩 Components               | `461:759`    | real   |
+| 📄 Pages                    | `2558:18264` | real   |
+| 🎨 Color & Type (deep dive) | `5:14`       | real   |
 
 ## Per-chunk script
 
@@ -121,7 +119,9 @@ for (const chunk of allChunkResults) {
 for (const [page, m] of Object.entries(merged)) {
   const sum = Object.values(m.byCol).reduce((a, b) => a + b, 0);
   if (sum !== m.rows.length)
-    throw new Error(`${page}: byCol sum ${sum} !== rows.length ${m.rows.length}`);
+    throw new Error(
+      `${page}: byCol sum ${sum} !== rows.length ${m.rows.length}`,
+    );
 }
 ```
 
@@ -140,16 +140,16 @@ Merged `byCol` across the 5 real pages (see
 > as a record of the pre-migration audit — do not use it as the expected
 > totals for a fresh `pnpm run figma:dump-bindings` run.
 
-| Collection | Expected total |
-|---|---|
-| `2 Theme` (Color) | 5066 |
-| `Scale` | 4743 |
-| `Radius` | 164 |
-| `Typography` | 36 |
-| `Container` | 9 |
-| `Breakpoint` | 7 |
-| `Color Tokens` | 29 |
+| Collection        | Expected total |
+| ----------------- | -------------- |
+| `2 Theme` (Color) | 5066           |
+| `Scale`           | 4743           |
+| `Radius`          | 164            |
+| `Typography`      | 36             |
+| `Container`       | 9              |
+| `Breakpoint`      | 7              |
+| `Color Tokens`    | 29             |
 
 This supersedes the plan brief's original table (`Color` ~5225, `Scale`
-~4834, `Breakpoint` ~9), which predates the `🗄️ Legacy` page's removal from
-this file and the `Color` → `2 Theme` collection rename.
+~4834, `Breakpoint` ~9), which predates the current page layout and the
+`Color` → `2 Theme` collection rename.

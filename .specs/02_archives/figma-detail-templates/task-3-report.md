@@ -83,6 +83,7 @@ two-column split, related-work card count, prev-only nav card, and the "All
 blog" link all line up structurally and visually. Two content bugs were
 caught and fixed mid-build by diffing against the live render before calling
 it done:
+
 - Reading time was wrongly sourced as "22 min" (a stale value from
   `PostListItem`'s example content) — corrected to the real computed value,
   **"20 min read"**, matching the live page exactly.
@@ -100,7 +101,7 @@ it done:
    30px Regular at `xl:` — no existing style matches (`Heading/H2` is 30px
    but SemiBold). Set fontSize=30 / IBM Plex Sans Regular manually, unbound
    to a style. Recommend adding a `Body/XL` (30 Regular) style.
-2b. **Minor line-wrap divergence.** The H1 and abstract paragraph wrap onto
+   2b. **Minor line-wrap divergence.** The H1 and abstract paragraph wrap onto
    a different line-break point than the live render (mine fits slightly
    more per line). Root width (832px, derived from `lg:w-2/3` of the 1248px
    container) matches the CSS class math; the residual gap is most likely
@@ -110,7 +111,7 @@ it done:
 3. **Structural instance-mutation limitation.** The Plugin API refuses
    `appendChild`/`remove` on children of a live instance
    (`Error: ... Cannot move node. New parent is an instance or is inside of
-   an instance`). Both the **TableOfContents** override (3-item nested
+an instance`). Both the **TableOfContents** override (3-item nested
    example → flat 10-item real list) and the **RelatedWork** override
    (3-card example → 2 real cards) required `instance.detachInstance()`
    first. The detached frames retain the master's visual structure/styling
@@ -208,7 +209,7 @@ A follow-up review of the RelatedWork section (`226:2747`, grid `226:2749`)
 found two more content bugs, both fixed and re-verified live:
 
 1. **Card order reversed.** The live route (`related_work:
-   [medito-fundraising, leconceptdelapreuve]` in
+[medito-fundraising, leconceptdelapreuve]` in
    `src/content/post/api-endpoints-with-astro/index.md`) renders "Medito
    Fundraising" first, "Le concept de la preuve" second. The grid's
    auto-layout (`HORIZONTAL`) determines card position by child order, not
@@ -240,14 +241,14 @@ same layout convention as `PAGE/HOME`, `PAGE/BLOG`, `PAGE/WORK`,
 `PAGE/ABOUT`. Section resized from `1400×3200` to `2798×6854` to fit all six
 frames.
 
-| Frame | Node ID | Size | Position (section-local) |
-|---|---|---|---|
-| POST — 1280 — Light | `220:2670` (pre-existing, unchanged) | 1280×3111 | 20, 20 |
-| POST — 1280 — Dark | `241:2801` | 1280×3111 | 20, 3531 |
-| POST — 768 — Light | `245:2813` | 768×2951 | 1450, 20 |
-| POST — 768 — Dark | `246:2883` | 768×2951 | 1450, 3371 |
-| POST — 390 — Light | `247:2953` | 390×3443 | 2368, 20 |
-| POST — 390 — Dark | `248:3084` | 390×3443 | 2368, 3371 |
+| Frame               | Node ID                              | Size      | Position (section-local) |
+| ------------------- | ------------------------------------ | --------- | ------------------------ |
+| POST — 1280 — Light | `220:2670` (pre-existing, unchanged) | 1280×3111 | 20, 20                   |
+| POST — 1280 — Dark  | `241:2801`                           | 1280×3111 | 20, 3531                 |
+| POST — 768 — Light  | `245:2813`                           | 768×2951  | 1450, 20                 |
+| POST — 768 — Dark   | `246:2883`                           | 768×2951  | 1450, 3371               |
+| POST — 390 — Light  | `247:2953`                           | 390×3443  | 2368, 20                 |
+| POST — 390 — Dark   | `248:3084`                           | 390×3443  | 2368, 3371               |
 
 ### Fix round 3 (pre-duplication cleanup on the source frame)
 
@@ -439,8 +440,7 @@ established 3-column × 2-row convention.
 
 **Steps 3-5 status: DONE.** All 4 new frames built, gated, and documented.
 One pre-existing live-site bug found and logged as out-of-scope named debt
-(not fixed, per task scope). One additional source-frame cleanup (Fix round
-3) completed and propagated to all clones.
+(not fixed, per task scope). One additional source-frame cleanup (Fix round 3) completed and propagated to all clones.
 
 ## Fix round 4 (post-review)
 
@@ -454,12 +454,12 @@ master's default `width: 1280`, unresized to their parent frame's actual
 width — full desktop nav/footer layout overflowing/clipping inside 768px and
 390px frames:
 
-| Frame | Width | Header | Footer |
-|---|---|---|---|
-| POST — 768 — Light (`245:2813`) | 768 | `245:2814` | `245:2887` |
-| POST — 768 — Dark (`246:2883`) | 768 | `246:2884` | `246:2957` |
-| POST — 390 — Light (`247:2953`) | 390 | `247:2954` | `247:3027` |
-| POST — 390 — Dark (`248:3084`) | 390 | `248:3085` | `248:3138` |
+| Frame                           | Width | Header     | Footer     |
+| ------------------------------- | ----- | ---------- | ---------- |
+| POST — 768 — Light (`245:2813`) | 768   | `245:2814` | `245:2887` |
+| POST — 768 — Dark (`246:2883`)  | 768   | `246:2884` | `246:2957` |
+| POST — 390 — Light (`247:2953`) | 390   | `247:2954` | `247:3027` |
+| POST — 390 — Dark (`248:3084`)  | 390   | `248:3085` | `248:3138` |
 
 **Fix mechanism.** Compared against `PAGE/HOME`'s `Home — 768 — Light` /
 `Home — 390 — Light` frames, which use the identical `mainComponent`s
@@ -528,10 +528,10 @@ documented for Home itself).
 `WorkMiniCard` instances in the same grid row differed by 28px, producing an
 uneven card-row bottom:
 
-| Frame | Card A (Medito) | Card B (Le concept) |
-|---|---|---|
+| Frame              | Card A (Medito)               | Card B (Le concept)        |
+| ------------------ | ----------------------------- | -------------------------- |
 | POST — 390 — Light | `247:3020` (256px, unchanged) | `247:3021` (284px → 256px) |
-| POST — 390 — Dark | `248:3131` (256px, unchanged) | `248:3132` (284px → 256px) |
+| POST — 390 — Dark  | `248:3131` (256px, unchanged) | `248:3132` (284px → 256px) |
 
 **Fix mechanism.** `node.resize(node.width, 256)` on `247:3021` and
 `248:3132` — the taller card had `layoutSizingVertical: "HUG"`, letting its

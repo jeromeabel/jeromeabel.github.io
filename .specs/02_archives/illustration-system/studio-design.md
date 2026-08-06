@@ -22,7 +22,7 @@ Contact-sheet review round 1 (design.md §"Step 1 — review round 1") judged 8 
 27 entries and produced one verdict per image type. It also exposed the loop's
 cost: every judgement means editing the `SETTINGS` block, regenerating all 27
 entries × 9 styles × 4 sizes, and reloading an HTML grid. That is a fine loop for
-tuning *global* numbers and a terrible one for deciding what a *single* image
+tuning _global_ numbers and a terrible one for deciding what a _single_ image
 should look like.
 
 The studio inverts it: pick an image, see it change as you drag.
@@ -56,12 +56,12 @@ Settled during brainstorming (2026-07-27):
 The measured constraint (2026-07-27, `chimeres-orchestra` 1200×630 → 400px
 preview):
 
-| Operation                          |   Time |
-| ---------------------------------- | -----: |
-| duotone pipeline                   |  43 ms |
-| dither pipeline                    |  31 ms |
-| mesh SVG rasterize (blur 100)      | 295 ms |
-| mesh + grain + multiply composite  | 275 ms |
+| Operation                         |   Time |
+| --------------------------------- | -----: |
+| duotone pipeline                  |  43 ms |
+| dither pipeline                   |  31 ms |
+| mesh SVG rasterize (blur 100)     | 295 ms |
+| mesh + grain + multiply composite | 275 ms |
 
 Raster effects round-trip comfortably. The mesh does not — and the mesh is
 exactly what the position/randomness controls manipulate. So the preview splits
@@ -153,7 +153,15 @@ reserved keys; every other key is a `SETTINGS` group override.
     "seed": "chimeres-2",
     "mesh": {
       "blobs": [
-        { "cx": 300, "cy": 420, "rx": 350, "ry": 300, "rot": -12, "op": 0.1, "fill": "tint" }
+        {
+          "cx": 300,
+          "cy": 420,
+          "rx": 350,
+          "ry": 300,
+          "rot": -12,
+          "op": 0.1,
+          "fill": "tint"
+        }
       ]
     },
 
@@ -163,14 +171,14 @@ reserved keys; every other key is a `SETTINGS` group override.
 }
 ```
 
-| Key      | Meaning                                                                  |
-| -------- | ------------------------------------------------------------------------ |
-| `style`  | pins the chosen style; absent = render every style in `SETTINGS.styles`   |
-| `mix`    | subject `opacity` + `blend` mode for the `*-mesh` composites              |
-| `accent` | `teal` \| `coral`; absent = slug-hash default                             |
-| `seed`   | mesh RNG seed; absent = slug                                             |
-| `mesh`   | materialized blob array (see §6)                                         |
-| _other_  | deep-merged over the matching `SETTINGS` group                            |
+| Key      | Meaning                                                                 |
+| -------- | ----------------------------------------------------------------------- |
+| `style`  | pins the chosen style; absent = render every style in `SETTINGS.styles` |
+| `mix`    | subject `opacity` + `blend` mode for the `*-mesh` composites            |
+| `accent` | `teal` \| `coral`; absent = slug-hash default                           |
+| `seed`   | mesh RNG seed; absent = slug                                            |
+| `mesh`   | materialized blob array (see §6)                                        |
+| _other_  | deep-merged over the matching `SETTINGS` group                          |
 
 `style` doubles as the review verdict. Absent, the entry behaves exactly as today
 — all nine styles rendered for the contact sheet. Set, the lab emits only that
@@ -211,7 +219,7 @@ hand-placed.
 | Route              | Purpose                                              |    Cost |
 | ------------------ | ---------------------------------------------------- | ------: |
 | `GET /`            | page shell                                           |       — |
-| `GET /lib/*.mjs`   | `geometry.mjs`, `mesh.mjs`, `util.mjs` as ES modules  |       — |
+| `GET /lib/*.mjs`   | `geometry.mjs`, `mesh.mjs`, `util.mjs` as ES modules |       — |
 | `GET /api/data`    | slugs, crops, illustration, `SETTINGS`, sizes        |       — |
 | `GET /img/<slug>`  | original image                                       |       — |
 | `POST /api/layer`  | subject layer only, transparent PNG                  |  ~40 ms |

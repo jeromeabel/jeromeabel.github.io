@@ -319,22 +319,22 @@ collection. **Answer: bound — but narrowly.** This is the verified inventory
 that step 3 was priced and gated on (see
 `plan-2-primitives-merge.md`'s "Verified binding inventory" section):
 
-| Collection               | Vars | Bindings (whole file)     | Verdict                                                                                                |
-| ------------------------ | ---- | -------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `Color` → now `2 Theme`  | 8    | **5,225**                 | renamed in place (Plan 1) — untouched here                                                              |
-| `Scale`                  | 21   | **4,834**                 | `spacing/1…36` + `radius/*`, raw numbers. The scale the file actually uses.                             |
-| `Radius`                 | 10   | **164**                   | aliases into `Number Primitives`                                                                        |
-| `Typography`             | 52   | **33** (all `fontWeight`) | font families bound **nowhere**                                                                         |
-| `Container`              | 13   | **9**                     |                                                                                                          |
-| `Breakpoint`             | 5    | **9**                     |                                                                                                          |
-| `Color Tokens`           | 392  | **29**                    | Plan 3 handles these (corrected to 122 — see the audit above)                                             |
-| `Color Primitives`       | 299  | **0**                     | free to delete                                                                                            |
-| `Spacing`                | 35   | **0**                     | dead duplicate of `Scale`                                                                                 |
-| `Opacity`                | 21   | **0**                     | free                                                                                                      |
-| `Blur`                   | 7    | **0**                     | free                                                                                                      |
-| `Border Width`           | 5    | **0**                     | free                                                                                                      |
-| `Number Primitives`      | 60   | **0 direct**              | but `Spacing`/`Radius`/`Container`/`Breakpoint`/`Blur`/`Border Width`/`Typography` all alias _into_ it   |
-| `Primitives`             | 0    | 0                          | empty stray collection, not in this inventory — deleted alongside the others                             |
+| Collection              | Vars | Bindings (whole file)     | Verdict                                                                                                |
+| ----------------------- | ---- | ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `Color` → now `2 Theme` | 8    | **5,225**                 | renamed in place (Plan 1) — untouched here                                                             |
+| `Scale`                 | 21   | **4,834**                 | `spacing/1…36` + `radius/*`, raw numbers. The scale the file actually uses.                            |
+| `Radius`                | 10   | **164**                   | aliases into `Number Primitives`                                                                       |
+| `Typography`            | 52   | **33** (all `fontWeight`) | font families bound **nowhere**                                                                        |
+| `Container`             | 13   | **9**                     |                                                                                                        |
+| `Breakpoint`            | 5    | **9**                     |                                                                                                        |
+| `Color Tokens`          | 392  | **29**                    | Plan 3 handles these (corrected to 122 — see the audit above)                                          |
+| `Color Primitives`      | 299  | **0**                     | free to delete                                                                                         |
+| `Spacing`               | 35   | **0**                     | dead duplicate of `Scale`                                                                              |
+| `Opacity`               | 21   | **0**                     | free                                                                                                   |
+| `Blur`                  | 7    | **0**                     | free                                                                                                   |
+| `Border Width`          | 5    | **0**                     | free                                                                                                   |
+| `Number Primitives`     | 60   | **0 direct**              | but `Spacing`/`Radius`/`Container`/`Breakpoint`/`Blur`/`Border Width`/`Typography` all alias _into_ it |
+| `Primitives`            | 0    | 0                         | empty stray collection, not in this inventory — deleted alongside the others                           |
 
 Distribution by page: `📄 Pages` 5,219 bound nodes / 7,774 total; `🧩 Components`
 757 / 1,542; `Pages Experiment` 418; `🗄️ Legacy` 128; `🎨 Foundations` 16;

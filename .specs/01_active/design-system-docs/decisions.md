@@ -14,11 +14,11 @@ Do not paraphrase these strings when rebuilding — copy them.
 The identity thesis from `.specs/02_archives/artistic-direction/design.md` and
 `.claude/skills/design-expert/references/artistic-direction.md`:
 
-| Layer | What it is | Register it serves |
-|---|---|---|
-| **Chrome** | Nav, header, footer, buttons, toggles, icons — the operating surface | frontend/engineer: precise, quiet, predictable |
-| **Content** | Cards, rows, prose, metadata — the reading surface | editorial: hierarchy and scanability |
-| **Hand** | The five author-drawn SVGs — black stroke on transparent, `dark:invert` | artistic: one controlled escape valve |
+| Layer       | What it is                                                              | Register it serves                             |
+| ----------- | ----------------------------------------------------------------------- | ---------------------------------------------- |
+| **Chrome**  | Nav, header, footer, buttons, toggles, icons — the operating surface    | frontend/engineer: precise, quiet, predictable |
+| **Content** | Cards, rows, prose, metadata — the reading surface                      | editorial: hierarchy and scanability           |
+| **Hand**    | The five author-drawn SVGs — black stroke on transparent, `dark:invert` | artistic: one controlled escape valve          |
 
 The rule that makes it cohesive rather than three styles bolted together: **only one layer is
 allowed to be expressive at a time.** Chrome and Content are precise so the Hand layer reads as
@@ -150,7 +150,7 @@ These are settled in `design-expert/SKILL.md` and `artistic-direction/design.md`
 specimen on the Docs sheet. They belong in the rebuilt doc as decision cards without specimens:
 
 - **One chip per card/row.** Serie chip wins over topic chip — serie membership implies topic.
-- **Display font is page-level only.** Already stated under Type; the *consequence* (card
+- **Display font is page-level only.** Already stated under Type; the _consequence_ (card
   titles use sans bold) has no specimen pairing it against a display-font counter-example.
 - **Metadata is the third reading layer** — mono, uppercase, ~12px, muted, but ≥4.5:1.
 - **Folder icon = serie and nothing else.** Topics get no icon.

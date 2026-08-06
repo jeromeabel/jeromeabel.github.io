@@ -34,13 +34,13 @@ status: plan — ready to execute
 
 **Pages**
 
-| Page | ID |
-|---|---|
-| `📖 Cover` | `0:1` |
-| `📚 Docs` | `2545:671` |
+| Page             | ID                                                                                                                                                |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `📖 Cover`       | `0:1`                                                                                                                                             |
+| `📚 Docs`        | `2545:671`                                                                                                                                        |
 | `🎨 Foundations` | `5:14` — 3 frames: `Foundations · Colors` `6:2`, `Foundations · Typography` `8:2`, `Tailwind Font Sizes` `365:55`. `Foundations · Scale` is gone. |
-| `🧩 Components` | `461:759` — 8 SECTIONs, 33 masters |
-| `📄 Pages` | `2558:18264` |
+| `🧩 Components`  | `461:759` — 8 SECTIONs, 33 masters                                                                                                                |
+| `📄 Pages`       | `2558:18264`                                                                                                                                      |
 
 **`🗄️ Archive & XP` was deleted from this file on 2026-08-06** — its content lives in the backup `Wf4iomVMYUXlFIBV3Z8bx4`. Five pages remain. The removal left one defect that Task 2b fixes: three instances on the live page frames still reference an **orphaned local `Icon` component set `52:136`** whose parent chain no longer reaches a page. The live set is `Icon` `461:6204`.
 
@@ -52,45 +52,45 @@ status: plan — ready to execute
 
 **Variable collections**
 
-| Collection | ID | Modes (id) | Count |
-|---|---|---|---|
-| `1 Primitives` | `VariableCollectionId:2013:2` | `Mode 1` (`2013:0`) | 451 |
-| `2 Theme` | `VariableCollectionId:3:2` | `Light`, `Dark` (`3:1`) | 15 |
-| `3 Responsive` | `VariableCollectionId:2245:42` | `Desktop` (`2245:0`), `Tablet` (`2245:1`), `Mobile` (`2245:2`) | 4 |
+| Collection     | ID                             | Modes (id)                                                     | Count |
+| -------------- | ------------------------------ | -------------------------------------------------------------- | ----- |
+| `1 Primitives` | `VariableCollectionId:2013:2`  | `Mode 1` (`2013:0`)                                            | 451   |
+| `2 Theme`      | `VariableCollectionId:3:2`     | `Light`, `Dark` (`3:1`)                                        | 15    |
+| `3 Responsive` | `VariableCollectionId:2245:42` | `Desktop` (`2245:0`), `Tablet` (`2245:1`), `Mobile` (`2245:2`) | 4     |
 
 **Primitive variable IDs needed by this plan**
 
-| Name | ID | Value |
-|---|---|---|
-| `spacing/4` | `VariableID:2020:70` | 16 |
-| `spacing/6` | `VariableID:2020:77` | 24 |
-| `spacing/8` | `VariableID:2020:82` | 32 |
-| `spacing/12` | `VariableID:2020:58` | 48 |
-| `spacing/16` | `VariableID:2020:60` | 64 |
-| `spacing/24` | `VariableID:2020:64` | 96 |
-| `container/7xl` | `VariableID:2016:104` | 1280 |
+| Name            | ID                    | Value |
+| --------------- | --------------------- | ----- |
+| `spacing/4`     | `VariableID:2020:70`  | 16    |
+| `spacing/6`     | `VariableID:2020:77`  | 24    |
+| `spacing/8`     | `VariableID:2020:82`  | 32    |
+| `spacing/12`    | `VariableID:2020:58`  | 48    |
+| `spacing/16`    | `VariableID:2020:60`  | 64    |
+| `spacing/24`    | `VariableID:2020:64`  | 96    |
+| `container/7xl` | `VariableID:2016:104` | 1280  |
 
-**`3 Responsive` current state (the bug this plan fixes):** `container/max-width` and `container/gutter` alias the *same* primitive in all three modes (`breakpoint/xl` = 1280, `spacing/4` = 16), so switching mode changes nothing except `section/rhythm-y`. `viewport/width` is already correct: 1280 / 768 / 390.
+**`3 Responsive` current state (the bug this plan fixes):** `container/max-width` and `container/gutter` alias the _same_ primitive in all three modes (`breakpoint/xl` = 1280, `spacing/4` = 16), so switching mode changes nothing except `section/rhythm-y`. `viewport/width` is already correct: 1280 / 768 / 390.
 
 **Component master inventory (`🧩 Components`, 33 masters) and its level classification**
 
-| Level | Masters (name — id) |
-|---|---|
-| **Elements** (17) | `Icon` `461:6204` · `NavLink` `2001:1309` · `NavLinkHome` `2001:1312` · `Link/CTA` `2012:6179` · `Link/Secondary` `2041:275` · `Link/SecondarySm` `2350:737` · `Link/TextCTA` `2041:313` · `Link/Icon` `2093:6332` · `ThemeToggle` `16:11` · `MotionToggle` `16:12` · `H1` `2119:7406` · `H2` `2034:213` · `PreviewTitle` `2041:465` · `PageDescription` `2119:7440` · `PostMetadataTime` `2040:482` · `PostMetadataTopic` `2371:10414` · `SerieMeta` `2375:10662` |
-| **Components** (8) | `PostRow` `2124:7937` · `SerieCard` `2367:7205` · `PostCardPreviewBig` `2385:7139` · `PostCardPreviewSmall` `2385:7149` · `WorkCardPreviewSmall` `2045:378` · `HeroText` `2012:6142` · `HeroAnimation` `2012:315` · `ContactContent` `131:101` |
-| **Sections** (8) | `Header` `2001:1669` · `Footer` `2099:2560` · `Hero` `2012:6305` · `BlogPreviewSection` `2041:560` · `ArchiveTable` `2124:8011` · `SerieCardList` `2119:7557` · `WorkPreviewSection` `2045:428` · `ContactPreviewSection` `2114:7281` |
+| Level              | Masters (name — id)                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Elements** (17)  | `Icon` `461:6204` · `NavLink` `2001:1309` · `NavLinkHome` `2001:1312` · `Link/CTA` `2012:6179` · `Link/Secondary` `2041:275` · `Link/SecondarySm` `2350:737` · `Link/TextCTA` `2041:313` · `Link/Icon` `2093:6332` · `ThemeToggle` `16:11` · `MotionToggle` `16:12` · `H1` `2119:7406` · `H2` `2034:213` · `PreviewTitle` `2041:465` · `PageDescription` `2119:7440` · `PostMetadataTime` `2040:482` · `PostMetadataTopic` `2371:10414` · `SerieMeta` `2375:10662` |
+| **Components** (8) | `PostRow` `2124:7937` · `SerieCard` `2367:7205` · `PostCardPreviewBig` `2385:7139` · `PostCardPreviewSmall` `2385:7149` · `WorkCardPreviewSmall` `2045:378` · `HeroText` `2012:6142` · `HeroAnimation` `2012:315` · `ContactContent` `131:101`                                                                                                                                                                                                                     |
+| **Sections** (8)   | `Header` `2001:1669` · `Footer` `2099:2560` · `Hero` `2012:6305` · `BlogPreviewSection` `2041:560` · `ArchiveTable` `2124:8011` · `SerieCardList` `2119:7557` · `WorkPreviewSection` `2045:428` · `ContactPreviewSection` `2114:7281`                                                                                                                                                                                                                              |
 
 **Text styles (30):** `Hero/Title` 48 Bubbler One · `Heading/H1` 60 Bubbler One · `Heading/H2` 30 IBM Plex Sans SemiBold · `Heading/H3` 22 SemiBold · `Body/3xl` 30 Regular · `Body/xl` 20 · `Body/l` 18 · `Body/base` 16 · `Body/s` 14 · `Body/xs` 12 · `Body/xs/medium` 12 Medium · `Body/xl/medium` 20 Medium · `Body/base/medium` 16 Medium · `Body/4xl/semibold` 36 SemiBold · `Label/Meta` 14 Medium · `Chip/Mono` 12 Fira Code · `Code/Base` 14 Fira Code · plus 11 `Tailwind/text-*` mirror styles.
 
 **Token-binding audit baseline (697 nodes scanned on `🧩 Components`, 2026-08-06)**
 
-| Gap class | Count |
-|---|---|
-| unbound `itemSpacing` | 99 |
-| TEXT with no text style | 82 |
-| unbound strokes | 32 |
-| unbound `cornerRadius` | 31 |
-| unbound fills | 11 |
+| Gap class               | Count |
+| ----------------------- | ----- |
+| unbound `itemSpacing`   | 99    |
+| TEXT with no text style | 82    |
+| unbound strokes         | 32    |
+| unbound `cornerRadius`  | 31    |
+| unbound fills           | 11    |
 
 ---
 
@@ -99,21 +99,27 @@ status: plan — ready to execute
 Right now every mode resolves to the same gutter, so a "Mobile" frame is a Desktop frame at a narrower width. Give each mode its own gutter and a sane rhythm ladder.
 
 **Files:**
+
 - Modify: Figma variable collection `3 Responsive` (`VariableCollectionId:2245:42`) — variables `container/gutter`, `section/rhythm-y`, `container/max-width`
 - Test: read-back assertion in the same `use_figma` call
 
 **Interfaces:**
+
 - Consumes: primitive variable IDs from the reference table above
 - Produces: `container/gutter` = 32 / 24 / 16 and `section/rhythm-y` = 96 / 64 / 48 across Desktop / Tablet / Mobile. Task 2 binds page nodes to these. Task 3 pins frames to these modes. Task 7 documents them.
 
 - [ ] **Step 1: Read the current per-mode values so the change is provable**
 
 ```js
-const col = await figma.variables.getVariableCollectionByIdAsync("VariableCollectionId:2245:42");
+const col = await figma.variables.getVariableCollectionByIdAsync(
+  "VariableCollectionId:2245:42",
+);
 const before = {};
 for (const id of col.variableIds) {
   const v = await figma.variables.getVariableByIdAsync(id);
-  before[v.name] = Object.fromEntries(col.modes.map(m => [m.name, JSON.stringify(v.valuesByMode[m.modeId])]));
+  before[v.name] = Object.fromEntries(
+    col.modes.map((m) => [m.name, JSON.stringify(v.valuesByMode[m.modeId])]),
+  );
 }
 return { modes: col.modes, before };
 ```
@@ -125,43 +131,54 @@ Expected: `container/gutter` shows the identical alias string in all three modes
 `setValueForMode` takes an alias object, not a raw number, so the responsive layer keeps referencing the primitive layer rather than hardcoding pixels.
 
 ```js
-const col = await figma.variables.getVariableCollectionByIdAsync("VariableCollectionId:2245:42");
-const mode = Object.fromEntries(col.modes.map(m => [m.name, m.modeId]));
+const col = await figma.variables.getVariableCollectionByIdAsync(
+  "VariableCollectionId:2245:42",
+);
+const mode = Object.fromEntries(col.modes.map((m) => [m.name, m.modeId]));
 const byName = {};
 for (const id of col.variableIds) {
   const v = await figma.variables.getVariableByIdAsync(id);
   byName[v.name] = v;
 }
-const alias = id => ({ type: "VARIABLE_ALIAS", id });
+const alias = (id) => ({ type: "VARIABLE_ALIAS", id });
 const PRIM = {
-  s4:  "VariableID:2020:70",  // 16
-  s6:  "VariableID:2020:77",  // 24
-  s8:  "VariableID:2020:82",  // 32
-  s12: "VariableID:2020:58",  // 48
-  s16: "VariableID:2020:60",  // 64
-  s24: "VariableID:2020:64",  // 96
-  c7xl:"VariableID:2016:104", // 1280
+  s4: "VariableID:2020:70", // 16
+  s6: "VariableID:2020:77", // 24
+  s8: "VariableID:2020:82", // 32
+  s12: "VariableID:2020:58", // 48
+  s16: "VariableID:2020:60", // 64
+  s24: "VariableID:2020:64", // 96
+  c7xl: "VariableID:2016:104", // 1280
 };
 
 byName["container/gutter"].setValueForMode(mode.Desktop, alias(PRIM.s8));
-byName["container/gutter"].setValueForMode(mode.Tablet,  alias(PRIM.s6));
-byName["container/gutter"].setValueForMode(mode.Mobile,  alias(PRIM.s4));
+byName["container/gutter"].setValueForMode(mode.Tablet, alias(PRIM.s6));
+byName["container/gutter"].setValueForMode(mode.Mobile, alias(PRIM.s4));
 
 byName["section/rhythm-y"].setValueForMode(mode.Desktop, alias(PRIM.s24));
-byName["section/rhythm-y"].setValueForMode(mode.Tablet,  alias(PRIM.s16));
-byName["section/rhythm-y"].setValueForMode(mode.Mobile,  alias(PRIM.s12));
+byName["section/rhythm-y"].setValueForMode(mode.Tablet, alias(PRIM.s16));
+byName["section/rhythm-y"].setValueForMode(mode.Mobile, alias(PRIM.s12));
 
 // max-width is a cap, not a width: same on every mode is correct, but point it at
 // container/7xl rather than breakpoint/xl so the semantic layer reads as a container.
-for (const m of ["Desktop","Tablet","Mobile"]) byName["container/max-width"].setValueForMode(mode[m], alias(PRIM.c7xl));
+for (const m of ["Desktop", "Tablet", "Mobile"])
+  byName["container/max-width"].setValueForMode(mode[m], alias(PRIM.c7xl));
 
-return { mutatedVariableIds: ["container/gutter","section/rhythm-y","container/max-width"].map(n => byName[n].id) };
+return {
+  mutatedVariableIds: [
+    "container/gutter",
+    "section/rhythm-y",
+    "container/max-width",
+  ].map((n) => byName[n].id),
+};
 ```
 
 - [ ] **Step 3: Verify resolved numbers differ per mode**
 
 ```js
-const col = await figma.variables.getVariableCollectionByIdAsync("VariableCollectionId:2245:42");
+const col = await figma.variables.getVariableCollectionByIdAsync(
+  "VariableCollectionId:2245:42",
+);
 const prim = "2013:0";
 const out = {};
 for (const id of col.variableIds) {
@@ -196,14 +213,28 @@ If `container/gutter` still shows one value across modes, Step 2 did not apply �
 `container/gutter` must be selectable as padding, not only as gap/width.
 
 ```js
-const col = await figma.variables.getVariableCollectionByIdAsync("VariableCollectionId:2245:42");
+const col = await figma.variables.getVariableCollectionByIdAsync(
+  "VariableCollectionId:2245:42",
+);
 const ids = [];
 for (const id of col.variableIds) {
   const v = await figma.variables.getVariableByIdAsync(id);
-  if (v.name === "container/gutter")    { v.scopes = ["GAP","WIDTH_HEIGHT"]; ids.push(v.id); }
-  if (v.name === "section/rhythm-y")    { v.scopes = ["GAP","WIDTH_HEIGHT"]; ids.push(v.id); }
-  if (v.name === "container/max-width") { v.scopes = ["WIDTH_HEIGHT"];       ids.push(v.id); }
-  if (v.name === "viewport/width")      { v.scopes = ["WIDTH_HEIGHT"];       ids.push(v.id); }
+  if (v.name === "container/gutter") {
+    v.scopes = ["GAP", "WIDTH_HEIGHT"];
+    ids.push(v.id);
+  }
+  if (v.name === "section/rhythm-y") {
+    v.scopes = ["GAP", "WIDTH_HEIGHT"];
+    ids.push(v.id);
+  }
+  if (v.name === "container/max-width") {
+    v.scopes = ["WIDTH_HEIGHT"];
+    ids.push(v.id);
+  }
+  if (v.name === "viewport/width") {
+    v.scopes = ["WIDTH_HEIGHT"];
+    ids.push(v.id);
+  }
 }
 return { mutatedVariableIds: ids };
 ```
@@ -224,10 +255,12 @@ git commit -m "docs(specs): design-system-docs plan — task 1 responsive modes 
 The two existing v3 frames have only 12 responsive bindings and are otherwise fixed-width. Rebind so a mode switch reflows them.
 
 **Files:**
+
 - Modify: `Pages` page `2558:18264` — frames `v3/Home — 1920 — Dark` `2558:18265`, `v3/Blog — 1920 — Dark` `2558:18273`
 - Test: read-back assertion in the same call
 
 **Interfaces:**
+
 - Consumes: `container/gutter`, `container/max-width`, `viewport/width`, `section/rhythm-y` from Task 1
 - Produces: for each page frame — frame `width` ← `viewport/width`; `PageContent (slot)` horizontal padding ← `container/gutter`; `PageContentContainer` `layoutSizingHorizontal = 'FILL'` with `maxWidth` ← `container/max-width`; vertical section gap ← `section/rhythm-y`. Task 3 clones these frames per mode.
 
@@ -242,14 +275,19 @@ for (const f of page.children) {
   const walk = (n, d) => {
     if (d > 3) return;
     rows.push({
-      d, id: n.id, name: n.name, type: n.type,
+      d,
+      id: n.id,
+      name: n.name,
+      type: n.type,
       w: Math.round(n.width),
       sizingH: n.layoutSizingHorizontal,
-      padL: n.paddingLeft, padR: n.paddingRight, gap: n.itemSpacing,
+      padL: n.paddingLeft,
+      padR: n.paddingRight,
+      gap: n.itemSpacing,
       maxW: n.maxWidth,
       bound: Object.keys(n.boundVariables || {}),
     });
-    (n.children || []).forEach(c => walk(c, d + 1));
+    (n.children || []).forEach((c) => walk(c, d + 1));
   };
   walk(f, 0);
   report.push({ frame: f.name, rows });
@@ -264,23 +302,35 @@ Record which node is the outer `PageContent (slot)` and which is the inner `Page
 ```js
 const page = await figma.getNodeByIdAsync("2558:18264");
 await figma.setCurrentPageAsync(page);
-const col = await figma.variables.getVariableCollectionByIdAsync("VariableCollectionId:2245:42");
+const col = await figma.variables.getVariableCollectionByIdAsync(
+  "VariableCollectionId:2245:42",
+);
 const V = {};
-for (const id of col.variableIds) { const v = await figma.variables.getVariableByIdAsync(id); V[v.name] = v; }
+for (const id of col.variableIds) {
+  const v = await figma.variables.getVariableByIdAsync(id);
+  V[v.name] = v;
+}
 
-const mutated = [], missing = [];
+const mutated = [],
+  missing = [];
 for (const frame of page.children) {
   frame.setBoundVariable("width", V["viewport/width"]);
   mutated.push(frame.id);
 
-  const slot = frame.findOne(n => n.name === "PageContent (slot)");
-  if (!slot) { missing.push(`${frame.name}: PageContent (slot)`); continue; }
-  slot.setBoundVariable("paddingLeft",  V["container/gutter"]);
+  const slot = frame.findOne((n) => n.name === "PageContent (slot)");
+  if (!slot) {
+    missing.push(`${frame.name}: PageContent (slot)`);
+    continue;
+  }
+  slot.setBoundVariable("paddingLeft", V["container/gutter"]);
   slot.setBoundVariable("paddingRight", V["container/gutter"]);
   mutated.push(slot.id);
 
-  const inner = slot.findOne(n => n.name === "PageContentContainer");
-  if (!inner) { missing.push(`${frame.name}: PageContentContainer`); continue; }
+  const inner = slot.findOne((n) => n.name === "PageContentContainer");
+  if (!inner) {
+    missing.push(`${frame.name}: PageContentContainer`);
+    continue;
+  }
   inner.layoutSizingHorizontal = "FILL";
   inner.setBoundVariable("maxWidth", V["container/max-width"]);
   inner.setBoundVariable("itemSpacing", V["section/rhythm-y"]);
@@ -299,13 +349,18 @@ Flip the Home frame to Mobile, screenshot, flip it back. This is the cheap proof
 const page = await figma.getNodeByIdAsync("2558:18264");
 await figma.setCurrentPageAsync(page);
 const frame = await figma.getNodeByIdAsync("2558:18265");
-const col = await figma.variables.getVariableCollectionByIdAsync("VariableCollectionId:2245:42");
-const mode = Object.fromEntries(col.modes.map(m => [m.name, m.modeId]));
+const col = await figma.variables.getVariableCollectionByIdAsync(
+  "VariableCollectionId:2245:42",
+);
+const mode = Object.fromEntries(col.modes.map((m) => [m.name, m.modeId]));
 
 frame.setExplicitVariableModeForCollection(col, mode.Mobile);
 const shotMobile = await frame.screenshot({ scale: 1 });
 frame.setExplicitVariableModeForCollection(col, mode.Desktop);
-return { width: Math.round(frame.width), explicit: frame.explicitVariableModes };
+return {
+  width: Math.round(frame.width),
+  explicit: frame.explicitVariableModes,
+};
 ```
 
 Expected: during the Mobile pass the frame is 390 wide, not 1920. After the reset, `width` is 1280 and `explicitVariableModes` lists the Desktop mode for `VariableCollectionId:2245:42`.
@@ -328,9 +383,11 @@ Deleting `🗄️ Archive & XP` took a second `Icon` component set (`52:136`) wi
 **This must run before Task 3.** Task 3 clones each page frame three times; fixing three orphans now avoids fixing twelve later.
 
 **Files:**
+
 - Modify: `📄 Pages` `2558:18264` — frames `2558:18265` (Home), `2558:18273` (Blog)
 
 **Interfaces:**
+
 - Consumes: the live `Icon` set `461:6204` on `🧩 Components`
 - Produces: zero instances whose main component's ancestry fails to reach a page. Task 3 Step 5 and Task 11 Step 6 both re-assert this.
 
@@ -339,10 +396,14 @@ Deleting `🗄️ Archive & XP` took a second `Icon` component set (`52:136`) wi
 ```js
 const comps = await figma.getNodeByIdAsync("461:759");
 await figma.setCurrentPageAsync(comps);
-const liveSet = comps.findOne(n => n.type === 'COMPONENT_SET' && n.name === 'Icon');
+const liveSet = comps.findOne(
+  (n) => n.type === "COMPONENT_SET" && n.name === "Icon",
+);
 return {
   liveSetId: liveSet && liveSet.id,
-  variants: liveSet ? liveSet.children.map(c => ({ id: c.id, name: c.name })) : [],
+  variants: liveSet
+    ? liveSet.children.map((c) => ({ id: c.id, name: c.name }))
+    : [],
   props: liveSet ? liveSet.componentPropertyDefinitions : null,
 };
 ```
@@ -358,19 +419,27 @@ await figma.setCurrentPageAsync(page);
 // REPLACE with the variant ids returned by Step 1.
 const LIVE = { "icon=arrow-down": "461:6205", "icon=arrow-right": "461:6211" };
 
-const swapped = [], unresolved = [];
-for (const inst of page.findAllWithCriteria({ types: ['INSTANCE'] })) {
+const swapped = [],
+  unresolved = [];
+for (const inst of page.findAllWithCriteria({ types: ["INSTANCE"] })) {
   const mc = await inst.getMainComponentAsync();
-  if (!mc) { unresolved.push({ id: inst.id, why: "no main component" }); continue; }
-  let root = mc; while (root && root.type !== 'PAGE') root = root.parent;
-  if (root && root.type === 'PAGE') continue;          // healthy
+  if (!mc) {
+    unresolved.push({ id: inst.id, why: "no main component" });
+    continue;
+  }
+  let root = mc;
+  while (root && root.type !== "PAGE") root = root.parent;
+  if (root && root.type === "PAGE") continue; // healthy
   const target = LIVE[mc.name];
-  if (!target) { unresolved.push({ id: inst.id, master: mc.name }); continue; }
+  if (!target) {
+    unresolved.push({ id: inst.id, master: mc.name });
+    continue;
+  }
   const live = await figma.getNodeByIdAsync(target);
   inst.swapComponent(live);
   swapped.push({ id: inst.id, to: mc.name });
 }
-return { mutatedNodeIds: swapped.map(s => s.id), swapped, unresolved };
+return { mutatedNodeIds: swapped.map((s) => s.id), swapped, unresolved };
 ```
 
 `swapComponent` preserves overrides where the two components share layer names — these are icon instances with no text overrides, so nothing is at risk. If `unresolved` is non-empty, an orphan exists that is not an Icon; do not guess a replacement, report it.
@@ -380,13 +449,18 @@ return { mutatedNodeIds: swapped.map(s => s.id), swapped, unresolved };
 ```js
 const page = await figma.getNodeByIdAsync("2558:18264");
 await figma.setCurrentPageAsync(page);
-const insts = page.findAllWithCriteria({ types: ['INSTANCE'] });
+const insts = page.findAllWithCriteria({ types: ["INSTANCE"] });
 const orphans = [];
 for (const i of insts) {
   const mc = await i.getMainComponentAsync();
-  if (!mc) { orphans.push({ id: i.id, why: "null master" }); continue; }
-  let root = mc; while (root && root.type !== 'PAGE') root = root.parent;
-  if (!root || root.type !== 'PAGE') orphans.push({ id: i.id, master: mc.name });
+  if (!mc) {
+    orphans.push({ id: i.id, why: "null master" });
+    continue;
+  }
+  let root = mc;
+  while (root && root.type !== "PAGE") root = root.parent;
+  if (!root || root.type !== "PAGE")
+    orphans.push({ id: i.id, master: mc.name });
 }
 const home = await figma.getNodeByIdAsync("2558:18265");
 await home.screenshot({ scale: 0.5 });
@@ -411,10 +485,12 @@ git commit -m "docs(specs): design-system-docs — task 2b reconnect orphaned Ic
 ### Task 3: Build the eight page frames (Home/Blog × Desktop/Mobile × Light/Dark)
 
 **Files:**
+
 - Modify: `Pages` page `2558:18264`
 - Modify: whichever component masters Task 2 Step 3 flagged as fixed-width
 
 **Interfaces:**
+
 - Consumes: bound frames from Task 2, mode ids from Task 1
 - Produces: eight frames named exactly `Home — Desktop — Light`, `Home — Desktop — Dark`, `Home — Mobile — Light`, `Home — Mobile — Dark`, and the same four for `Blog`. Task 10 references these by name.
 
@@ -426,12 +502,27 @@ For each master name flagged, set the offending container to `FILL` at the sourc
 const page = await figma.getNodeByIdAsync("461:759");
 await figma.setCurrentPageAsync(page);
 const TARGETS = ["Header", "Footer", "BlogPreviewSection", "ArchiveTable"]; // replace with Task 2's actual list
-const mutated = [], skipped = [];
+const mutated = [],
+  skipped = [];
 for (const name of TARGETS) {
-  const master = page.findOne(n => (n.type === "COMPONENT" || n.type === "COMPONENT_SET") && n.name === name);
-  if (!master) { skipped.push(name); continue; }
-  const inner = master.findOne(n => n.layoutMode && n.layoutMode !== "NONE" && n.layoutSizingHorizontal === "FIXED");
-  if (!inner) { skipped.push(`${name}: no fixed child`); continue; }
+  const master = page.findOne(
+    (n) =>
+      (n.type === "COMPONENT" || n.type === "COMPONENT_SET") && n.name === name,
+  );
+  if (!master) {
+    skipped.push(name);
+    continue;
+  }
+  const inner = master.findOne(
+    (n) =>
+      n.layoutMode &&
+      n.layoutMode !== "NONE" &&
+      n.layoutSizingHorizontal === "FIXED",
+  );
+  if (!inner) {
+    skipped.push(`${name}: no fixed child`);
+    continue;
+  }
   inner.layoutSizingHorizontal = "FILL";
   mutated.push(inner.id);
 }
@@ -457,28 +548,39 @@ return { mutatedNodeIds: [home.id, blog.id], names: [home.name, blog.name] };
 ```js
 const page = await figma.getNodeByIdAsync("2558:18264");
 await figma.setCurrentPageAsync(page);
-const theme = await figma.variables.getVariableCollectionByIdAsync("VariableCollectionId:3:2");
-const resp  = await figma.variables.getVariableCollectionByIdAsync("VariableCollectionId:2245:42");
-const T = Object.fromEntries(theme.modes.map(m => [m.name, m.modeId]));
-const R = Object.fromEntries(resp.modes.map(m => [m.name, m.modeId]));
+const theme = await figma.variables.getVariableCollectionByIdAsync(
+  "VariableCollectionId:3:2",
+);
+const resp = await figma.variables.getVariableCollectionByIdAsync(
+  "VariableCollectionId:2245:42",
+);
+const T = Object.fromEntries(theme.modes.map((m) => [m.name, m.modeId]));
+const R = Object.fromEntries(resp.modes.map((m) => [m.name, m.modeId]));
 
-const base = { Home: await figma.getNodeByIdAsync("2558:18265"), Blog: await figma.getNodeByIdAsync("2558:18273") };
-const COMBOS = [["Desktop","Light"],["Mobile","Light"],["Mobile","Dark"]];
+const base = {
+  Home: await figma.getNodeByIdAsync("2558:18265"),
+  Blog: await figma.getNodeByIdAsync("2558:18273"),
+};
+const COMBOS = [
+  ["Desktop", "Light"],
+  ["Mobile", "Light"],
+  ["Mobile", "Dark"],
+];
 const created = [];
 let x = 0;
-for (const pageName of ["Home","Blog"]) {
+for (const pageName of ["Home", "Blog"]) {
   base[pageName].setExplicitVariableModeForCollection(theme, T.Dark);
-  base[pageName].setExplicitVariableModeForCollection(resp,  R.Desktop);
+  base[pageName].setExplicitVariableModeForCollection(resp, R.Desktop);
   for (const [bp, th] of COMBOS) {
     const clone = base[pageName].clone();
     clone.name = `${pageName} — ${bp} — ${th}`;
     clone.setExplicitVariableModeForCollection(theme, T[th]);
-    clone.setExplicitVariableModeForCollection(resp,  R[bp]);
+    clone.setExplicitVariableModeForCollection(resp, R[bp]);
     page.appendChild(clone);
     created.push({ id: clone.id, name: clone.name });
   }
 }
-return { createdNodeIds: created.map(c => c.id), created };
+return { createdNodeIds: created.map((c) => c.id), created };
 ```
 
 - [x] **Step 4: Lay the eight frames out in a readable grid**
@@ -488,23 +590,28 @@ Recruiters read left-to-right. Put Desktop left, Mobile right; Light row above D
 ```js
 const page = await figma.getNodeByIdAsync("2558:18264");
 await figma.setCurrentPageAsync(page);
-const GAP = 160, COL_X = { Desktop: 0, Mobile: 1600 };
+const GAP = 160,
+  COL_X = { Desktop: 0, Mobile: 1600 };
 const ROW_Y = {};
 let y = 0;
 for (const p of ["Home", "Blog"]) {
   for (const th of ["Light", "Dark"]) {
     let rowH = 0;
     for (const bp of ["Desktop", "Mobile"]) {
-      const f = page.children.find(n => n.name === `${p} — ${bp} — ${th}`);
+      const f = page.children.find((n) => n.name === `${p} — ${bp} — ${th}`);
       if (!f) continue;
-      f.x = COL_X[bp]; f.y = y;
+      f.x = COL_X[bp];
+      f.y = y;
       rowH = Math.max(rowH, f.height);
     }
     ROW_Y[`${p}-${th}`] = y;
     y += rowH + GAP;
   }
 }
-return { rows: ROW_Y, placed: page.children.map(n => ({ name: n.name, x: n.x, y: n.y })) };
+return {
+  rows: ROW_Y,
+  placed: page.children.map((n) => ({ name: n.name, x: n.x, y: n.y })),
+};
 ```
 
 - [x] **Step 5: Verify all eight and screenshot the mobile pair**
@@ -513,13 +620,16 @@ return { rows: ROW_Y, placed: page.children.map(n => ({ name: n.name, x: n.x, y:
 const page = await figma.getNodeByIdAsync("2558:18264");
 await figma.setCurrentPageAsync(page);
 const expected = [];
-for (const p of ["Home","Blog"]) for (const bp of ["Desktop","Mobile"]) for (const th of ["Light","Dark"])
-  expected.push(`${p} — ${bp} — ${th}`);
-const rows = expected.map(name => {
-  const f = page.children.find(n => n.name === name);
-  return f ? { name, w: Math.round(f.width), modes: f.explicitVariableModes } : { name, MISSING: true };
+for (const p of ["Home", "Blog"])
+  for (const bp of ["Desktop", "Mobile"])
+    for (const th of ["Light", "Dark"]) expected.push(`${p} — ${bp} — ${th}`);
+const rows = expected.map((name) => {
+  const f = page.children.find((n) => n.name === name);
+  return f
+    ? { name, w: Math.round(f.width), modes: f.explicitVariableModes }
+    : { name, MISSING: true };
 });
-const mob = page.children.find(n => n.name === "Home — Mobile — Light");
+const mob = page.children.find((n) => n.name === "Home — Mobile — Light");
 if (mob) await mob.screenshot();
 return { count: page.children.length, rows };
 ```
@@ -540,11 +650,13 @@ git commit -m "docs(specs): design-system-docs — task 3 eight responsive page 
 Baseline from 2026-08-06: 99 unbound `itemSpacing`, 82 unstyled TEXT, 32 unbound strokes, 31 unbound radii, 11 unbound fills across 697 nodes on `🧩 Components`. Not all are defects — illustration vector paths are meant to be unbound. Fix the real ones, allowlist the rest.
 
 **Files:**
+
 - Modify: masters on `🧩 Components` `461:759`
 - Modify: `scripts/figma/named-debt.json`
 - Test: re-run the same audit script and diff against baseline
 
 **Interfaces:**
+
 - Consumes: the audit script below (reuse it verbatim in Task 5 and Task 11 so the numbers are comparable)
 - Produces: a `RESULT` object `{ scanned, fill, stroke, radius, gap, textStyle }` that Task 7 renders into the Docs "Verification" panel
 
@@ -558,25 +670,51 @@ let scanned = 0;
 const walk = (n) => {
   scanned++;
   const bv = n.boundVariables || {};
-  const isChrome = n.type === 'COMPONENT_SET' || n.type === 'SECTION';
+  const isChrome = n.type === "COMPONENT_SET" || n.type === "SECTION";
   // A vector path inside an illustration is authored art, not a token target.
-  const isArt = /^(path|g|rect|svg)[0-9-]*$/i.test(n.name) || n.type === 'VECTOR';
+  const isArt =
+    /^(path|g|rect|svg)[0-9-]*$/i.test(n.name) || n.type === "VECTOR";
   if (!isChrome && !isArt) {
-    if (Array.isArray(n.fills) && n.fills.some(f => f.visible !== false && f.type === 'SOLID') && !(bv.fills && bv.fills.length))
+    if (
+      Array.isArray(n.fills) &&
+      n.fills.some((f) => f.visible !== false && f.type === "SOLID") &&
+      !(bv.fills && bv.fills.length)
+    )
       gaps.fill.push(`${n.id} ${n.name}`);
-    if (Array.isArray(n.strokes) && n.strokes.length && !(bv.strokes && bv.strokes.length))
+    if (
+      Array.isArray(n.strokes) &&
+      n.strokes.length &&
+      !(bv.strokes && bv.strokes.length)
+    )
       gaps.stroke.push(`${n.id} ${n.name}`);
-    if (typeof n.cornerRadius === 'number' && n.cornerRadius > 0 && !bv.topLeftRadius)
+    if (
+      typeof n.cornerRadius === "number" &&
+      n.cornerRadius > 0 &&
+      !bv.topLeftRadius
+    )
       gaps.radius.push(`${n.id} ${n.name} r=${n.cornerRadius}`);
-    if (n.layoutMode && n.layoutMode !== 'NONE' && n.itemSpacing > 0 && !bv.itemSpacing)
+    if (
+      n.layoutMode &&
+      n.layoutMode !== "NONE" &&
+      n.itemSpacing > 0 &&
+      !bv.itemSpacing
+    )
       gaps.gap.push(`${n.id} ${n.name} g=${n.itemSpacing}`);
   }
-  if (n.type === 'TEXT' && (!n.textStyleId || n.textStyleId === figma.mixed))
-    gaps.textStyle.push(`${n.id} ${n.name.slice(0,40)} ${n.fontSize}/${n.fontName && n.fontName.style}`);
+  if (n.type === "TEXT" && (!n.textStyleId || n.textStyleId === figma.mixed))
+    gaps.textStyle.push(
+      `${n.id} ${n.name.slice(0, 40)} ${n.fontSize}/${n.fontName && n.fontName.style}`,
+    );
   (n.children || []).forEach(walk);
 };
 page.children.forEach(walk);
-return { scanned, counts: Object.fromEntries(Object.entries(gaps).map(([k,v]) => [k, v.length])), gaps };
+return {
+  scanned,
+  counts: Object.fromEntries(
+    Object.entries(gaps).map(([k, v]) => [k, v.length]),
+  ),
+  gaps,
+};
 ```
 
 Excluding art nodes should drop `fill` and `stroke` sharply from the 11/32 baseline. Whatever remains in `fill`/`stroke` is chrome and is a real defect.
@@ -588,7 +726,9 @@ Excluding art nodes should drop `fill` and `stroke` sharply from the 11/32 basel
 ```js
 const page = await figma.getNodeByIdAsync("461:759");
 await figma.setCurrentPageAsync(page);
-const prim = await figma.variables.getVariableCollectionByIdAsync("VariableCollectionId:2013:2");
+const prim = await figma.variables.getVariableCollectionByIdAsync(
+  "VariableCollectionId:2013:2",
+);
 const M = prim.modes[0].modeId;
 const scale = [];
 for (const id of prim.variableIds) {
@@ -597,16 +737,29 @@ for (const id of prim.variableIds) {
 }
 scale.sort((a, b) => a.px - b.px);
 
-const bound = [], offLadder = [];
+const bound = [],
+  offLadder = [];
 const walk = (n) => {
   const bv = n.boundVariables || {};
-  if (n.type !== 'COMPONENT_SET' && n.type !== 'SECTION'
-      && n.layoutMode && n.layoutMode !== 'NONE' && n.itemSpacing > 0 && !bv.itemSpacing) {
-    const exact = scale.find(s => s.px === n.itemSpacing);
-    if (exact) { n.setBoundVariable('itemSpacing', exact.v); bound.push(`${n.id} ${n.name} ${n.itemSpacing}`); }
-    else {
-      const near = scale.reduce((a, b) => Math.abs(b.px - n.itemSpacing) < Math.abs(a.px - n.itemSpacing) ? b : a);
-      offLadder.push(`${n.id} ${n.name} g=${n.itemSpacing} → nearest ${near.v.name}=${near.px}`);
+  if (
+    n.type !== "COMPONENT_SET" &&
+    n.type !== "SECTION" &&
+    n.layoutMode &&
+    n.layoutMode !== "NONE" &&
+    n.itemSpacing > 0 &&
+    !bv.itemSpacing
+  ) {
+    const exact = scale.find((s) => s.px === n.itemSpacing);
+    if (exact) {
+      n.setBoundVariable("itemSpacing", exact.v);
+      bound.push(`${n.id} ${n.name} ${n.itemSpacing}`);
+    } else {
+      const near = scale.reduce((a, b) =>
+        Math.abs(b.px - n.itemSpacing) < Math.abs(a.px - n.itemSpacing) ? b : a,
+      );
+      offLadder.push(
+        `${n.id} ${n.name} g=${n.itemSpacing} → nearest ${near.v.name}=${near.px}`,
+      );
     }
   }
   (n.children || []).forEach(walk);
@@ -624,22 +777,37 @@ Radius is `full`, `lg`, or `0`. Anything else is a defect, not a value to preser
 ```js
 const page = await figma.getNodeByIdAsync("461:759");
 await figma.setCurrentPageAsync(page);
-const prim = await figma.variables.getVariableCollectionByIdAsync("VariableCollectionId:2013:2");
+const prim = await figma.variables.getVariableCollectionByIdAsync(
+  "VariableCollectionId:2013:2",
+);
 const M = prim.modes[0].modeId;
-let full = null, lg = null;
+let full = null,
+  lg = null;
 for (const id of prim.variableIds) {
   const v = await figma.variables.getVariableByIdAsync(id);
-  if (v.name === 'radius/full') full = v;
-  if (v.name === 'radius/lg')   lg = v;
+  if (v.name === "radius/full") full = v;
+  if (v.name === "radius/lg") lg = v;
 }
-const bound = [], odd = [];
+const bound = [],
+  odd = [];
 const walk = (n) => {
   const bv = n.boundVariables || {};
-  if (n.type !== 'COMPONENT_SET' && n.type !== 'SECTION'
-      && typeof n.cornerRadius === 'number' && n.cornerRadius > 0 && !bv.topLeftRadius) {
-    const target = n.cornerRadius >= 999 ? full : (n.cornerRadius === 8 ? lg : null);
+  if (
+    n.type !== "COMPONENT_SET" &&
+    n.type !== "SECTION" &&
+    typeof n.cornerRadius === "number" &&
+    n.cornerRadius > 0 &&
+    !bv.topLeftRadius
+  ) {
+    const target =
+      n.cornerRadius >= 999 ? full : n.cornerRadius === 8 ? lg : null;
     if (target) {
-      for (const c of ['topLeftRadius','topRightRadius','bottomLeftRadius','bottomRightRadius'])
+      for (const c of [
+        "topLeftRadius",
+        "topRightRadius",
+        "bottomLeftRadius",
+        "bottomRightRadius",
+      ])
         n.setBoundVariable(c, target);
       bound.push(`${n.id} ${n.name} r=${n.cornerRadius}`);
     } else odd.push(`${n.id} ${n.name} r=${n.cornerRadius}`);
@@ -658,22 +826,37 @@ Expected: `offVocabulary` is empty. If it is not, those nodes violate the settle
 const page = await figma.getNodeByIdAsync("461:759");
 await figma.setCurrentPageAsync(page);
 const styles = await figma.getLocalTextStylesAsync();
-const key = s => `${s.fontName.family}|${s.fontName.style}|${s.fontSize}`;
+const key = (s) => `${s.fontName.family}|${s.fontName.style}|${s.fontSize}`;
 // Tailwind/* are a primitive mirror, not semantic styles — never auto-assign them.
-const semantic = styles.filter(s => !s.name.startsWith('Tailwind/'));
-const byKey = new Map(semantic.map(s => [key(s), s]));
+const semantic = styles.filter((s) => !s.name.startsWith("Tailwind/"));
+const byKey = new Map(semantic.map((s) => [key(s), s]));
 
-const applied = [], noMatch = [];
-const texts = page.findAllWithCriteria({ types: ['TEXT'] })
-  .filter(t => !t.textStyleId || t.textStyleId === figma.mixed);
+const applied = [],
+  noMatch = [];
+const texts = page
+  .findAllWithCriteria({ types: ["TEXT"] })
+  .filter((t) => !t.textStyleId || t.textStyleId === figma.mixed);
 for (const t of texts) {
-  if (t.fontName === figma.mixed || t.fontSize === figma.mixed) { noMatch.push(`${t.id} MIXED`); continue; }
+  if (t.fontName === figma.mixed || t.fontSize === figma.mixed) {
+    noMatch.push(`${t.id} MIXED`);
+    continue;
+  }
   await figma.loadFontAsync(t.fontName);
   const m = byKey.get(key({ fontName: t.fontName, fontSize: t.fontSize }));
-  if (m) { await t.setTextStyleIdAsync(m.id); applied.push(`${t.id} → ${m.name}`); }
-  else noMatch.push(`${t.id} ${t.name.slice(0,30)} ${t.fontName.family} ${t.fontName.style} ${t.fontSize}`);
+  if (m) {
+    await t.setTextStyleIdAsync(m.id);
+    applied.push(`${t.id} → ${m.name}`);
+  } else
+    noMatch.push(
+      `${t.id} ${t.name.slice(0, 30)} ${t.fontName.family} ${t.fontName.style} ${t.fontSize}`,
+    );
 }
-return { mutatedNodeIds: applied.map(a => a.split(' ')[0]), appliedCount: applied.length, applied, noMatch };
+return {
+  mutatedNodeIds: applied.map((a) => a.split(" ")[0]),
+  appliedCount: applied.length,
+  applied,
+  noMatch,
+};
 ```
 
 The font load before mutation is mandatory — skipping it throws `Cannot write to node with unloaded font`. Split this across two or three calls if it times out; `findAllWithCriteria` over 697 nodes plus a font load per node is the heaviest step in the plan.
@@ -708,9 +891,11 @@ git commit -m "chore(figma): bind off-ladder spacing and radii, assign text styl
 Most masters already carry a `description`. Fill the empty ones and make the existing ones consistent, because Figma surfaces `description` in the inspect panel and in the assets sidebar — it is documentation that travels with the component.
 
 **Files:**
+
 - Modify: masters on `🧩 Components` `461:759`
 
 **Interfaces:**
+
 - Consumes: the level classification table in the reference section
 - Produces: every master has a non-empty description in the form `<Level> · <what it is>. <the decision it encodes>. Code: <path>` where Level is `Element`, `Component`, or `Section`. Task 8 and Task 9 read these back into the Docs sheet rather than retyping them.
 
@@ -719,10 +904,16 @@ Most masters already carry a `description`. Fill the empty ones and make the exi
 ```js
 const page = await figma.getNodeByIdAsync("461:759");
 await figma.setCurrentPageAsync(page);
-const masters = page.findAllWithCriteria({ types: ['COMPONENT','COMPONENT_SET'] })
-  .filter(n => n.parent.type !== 'COMPONENT_SET');
+const masters = page
+  .findAllWithCriteria({ types: ["COMPONENT", "COMPONENT_SET"] })
+  .filter((n) => n.parent.type !== "COMPONENT_SET");
 return masters
-  .map(n => ({ id: n.id, name: n.name, len: (n.description || '').length, desc: n.description || '' }))
+  .map((n) => ({
+    id: n.id,
+    name: n.name,
+    len: (n.description || "").length,
+    desc: n.description || "",
+  }))
   .sort((a, b) => a.len - b.len);
 ```
 
@@ -734,27 +925,70 @@ Known-empty on 2026-08-06: `PreviewTitle` `2041:465`, `PageDescription` `2119:74
 const page = await figma.getNodeByIdAsync("461:759");
 await figma.setCurrentPageAsync(page);
 const LEVEL = {
-  Element: ["Icon","NavLink","NavLinkHome","Link/CTA","Link/Secondary","Link/SecondarySm","Link/TextCTA","Link/Icon",
-         "ThemeToggle","MotionToggle","H1","H2","PreviewTitle","PageDescription","PostMetadataTime",
-         "PostMetadataTopic","SerieMeta"],
-  Component: ["PostRow","SerieCard","PostCardPreviewBig","PostCardPreviewSmall","WorkCardPreviewSmall",
-             "HeroText","HeroAnimation","ContactContent"],
-  Section: ["Header","Footer","Hero","BlogPreviewSection","ArchiveTable","SerieCardList",
-             "WorkPreviewSection","ContactPreviewSection"],
+  Element: [
+    "Icon",
+    "NavLink",
+    "NavLinkHome",
+    "Link/CTA",
+    "Link/Secondary",
+    "Link/SecondarySm",
+    "Link/TextCTA",
+    "Link/Icon",
+    "ThemeToggle",
+    "MotionToggle",
+    "H1",
+    "H2",
+    "PreviewTitle",
+    "PageDescription",
+    "PostMetadataTime",
+    "PostMetadataTopic",
+    "SerieMeta",
+  ],
+  Component: [
+    "PostRow",
+    "SerieCard",
+    "PostCardPreviewBig",
+    "PostCardPreviewSmall",
+    "WorkCardPreviewSmall",
+    "HeroText",
+    "HeroAnimation",
+    "ContactContent",
+  ],
+  Section: [
+    "Header",
+    "Footer",
+    "Hero",
+    "BlogPreviewSection",
+    "ArchiveTable",
+    "SerieCardList",
+    "WorkPreviewSection",
+    "ContactPreviewSection",
+  ],
 };
 const FILL_IN = {
-  "PreviewTitle": "Card and row title. IBM Plex Sans 600 — never the display font, which kills scanning at card size. Hover verb is an underline, never an accent repaint (accent would collide with the serie chip). Code: src/components/blog/PostRow.astro",
-  "PageDescription": "Standfirst under a page H1. IBM Plex Sans 400 in color/foreground-muted, one or two lines. Not a component slot for marketing copy — it says what the page holds.",
-  "WorkCardPreviewSmall": "Work preview card, image left. Borderless — the image is the frame — matching PostCardPreviewSmall so blog and work share one card grammar. Code: src/components/work/WorksPreview.astro",
+  PreviewTitle:
+    "Card and row title. IBM Plex Sans 600 — never the display font, which kills scanning at card size. Hover verb is an underline, never an accent repaint (accent would collide with the serie chip). Code: src/components/blog/PostRow.astro",
+  PageDescription:
+    "Standfirst under a page H1. IBM Plex Sans 400 in color/foreground-muted, one or two lines. Not a component slot for marketing copy — it says what the page holds.",
+  WorkCardPreviewSmall:
+    "Work preview card, image left. Borderless — the image is the frame — matching PostCardPreviewSmall so blog and work share one card grammar. Code: src/components/work/WorksPreview.astro",
 };
-const mutated = [], unclassified = [];
-const masters = page.findAllWithCriteria({ types: ['COMPONENT','COMPONENT_SET'] })
-  .filter(n => n.parent.type !== 'COMPONENT_SET');
+const mutated = [],
+  unclassified = [];
+const masters = page
+  .findAllWithCriteria({ types: ["COMPONENT", "COMPONENT_SET"] })
+  .filter((n) => n.parent.type !== "COMPONENT_SET");
 for (const m of masters) {
-  const level = Object.keys(LEVEL).find(k => LEVEL[k].includes(m.name));
-  if (!level) { unclassified.push(m.name); continue; }
-  const body = FILL_IN[m.name] || m.description || '';
-  if (!body) { unclassified.push(`${m.name}: still empty`); continue; }
+  const level = Object.keys(LEVEL).find((k) => LEVEL[k].includes(m.name));
+  if (!level) {
+    unclassified.push(m.name);
+    continue;
+  }
+  const body = FILL_IN[m.name] || m.description || "";
+  if (!body) {
+    unclassified.push(`${m.name}: still empty`);
+    continue;
+  }
   m.description = body.startsWith(`${level} · `) ? body : `${level} · ${body}`;
   mutated.push(m.id);
 }
@@ -778,14 +1012,16 @@ git commit -m "docs(specs): design-system-docs — task 5 master descriptions ca
 
 ### Task 5b: Build the `Docs/` kit — five components the sheet is assembled from
 
-**Do the docs need their own components? Yes — five of them.** The rebuilt sheet contains roughly 63 specimen cells, 17 decision cards, 3 do/don't pairs, 5 chapter headers and ~20 token rows *per frame*. Without components, changing a caption size is 63 edits; with them it is one. More importantly, the layer tag (Chrome / Content / Hand) is the mechanism that makes the identity read as cohesive — a variant property enforces it, hand-typed text drifts. `Docs/DoDont` earns its slot with three uses (research review 2026-08-06: side-by-side do/don't pairs are the most-copied rationale device across Carbon, GOV.UK and Primer).
+**Do the docs need their own components? Yes — five of them.** The rebuilt sheet contains roughly 63 specimen cells, 17 decision cards, 3 do/don't pairs, 5 chapter headers and ~20 token rows _per frame_. Without components, changing a caption size is 63 edits; with them it is one. More importantly, the layer tag (Chrome / Content / Hand) is the mechanism that makes the identity read as cohesive — a variant property enforces it, hand-typed text drifts. `Docs/DoDont` earns its slot with three uses (research review 2026-08-06: side-by-side do/don't pairs are the most-copied rationale device across Carbon, GOV.UK and Primer).
 
 The objection is real and is mitigated, not ignored: doc components show up in the assets panel beside product components. Every master is name-prefixed `Docs/` and lives in one `SECTION / Docs kit` on the Docs page, so a reader browsing the library sees a labelled toolbox, not clutter.
 
 **Files:**
+
 - Modify: `📚 Docs` `2545:671` — new `SECTION / Docs kit`
 
 **Interfaces:**
+
 - Consumes: `2 Theme` variables; the layer taxonomy from `decisions.md`
 - Produces: `Docs/ChapterHeader`, `Docs/SpecimenCell`, `Docs/DecisionCard` (variant `layer` = Chrome | Content | Hand | All), `Docs/TokenRow`, `Docs/DoDont`. Tasks 6–10 instantiate these instead of building text stacks by hand.
 
@@ -797,9 +1033,14 @@ await figma.setCurrentPageAsync(page);
 await figma.loadFontAsync({ family: "IBM Plex Sans", style: "Regular" });
 await figma.loadFontAsync({ family: "IBM Plex Sans", style: "SemiBold" });
 await figma.loadFontAsync({ family: "Fira Code", style: "Regular" });
-const theme = await figma.variables.getVariableCollectionByIdAsync("VariableCollectionId:3:2");
+const theme = await figma.variables.getVariableCollectionByIdAsync(
+  "VariableCollectionId:3:2",
+);
 const V = {};
-for (const id of theme.variableIds) { const v = await figma.variables.getVariableByIdAsync(id); V[v.name] = v; }
+for (const id of theme.variableIds) {
+  const v = await figma.variables.getVariableByIdAsync(id);
+  V[v.name] = v;
+}
 
 const txt = (name, chars, family, style, size, colour, w) => {
   const t = figma.createText();
@@ -816,32 +1057,79 @@ const txt = (name, chars, family, style, size, colour, w) => {
 const kit = figma.createSection();
 kit.name = "SECTION / Docs kit";
 page.appendChild(kit);
-kit.x = 3600; kit.y = 0; kit.resizeWithoutConstraints(1400, 1200);
+kit.x = 3600;
+kit.y = 0;
+kit.resizeWithoutConstraints(1400, 1200);
 
 // Docs/ChapterHeader — number, title, one-line summary
-const chHead = figma.createAutoLayout("VERTICAL", { name: "Docs/ChapterHeader", itemSpacing: 12 });
-chHead.appendChild(txt("number", "01", "Fira Code", "Regular", 12, "color/foreground-muted"));
-chHead.appendChild(txt("title", "Tokens", "Bubbler One", "Regular", 40, "color/foreground"));
-chHead.appendChild(txt("summary", "One line saying what this chapter covers.", "IBM Plex Sans", "Regular", 18, "color/foreground-muted", 720));
+const chHead = figma.createAutoLayout("VERTICAL", {
+  name: "Docs/ChapterHeader",
+  itemSpacing: 12,
+});
+chHead.appendChild(
+  txt("number", "01", "Fira Code", "Regular", 12, "color/foreground-muted"),
+);
+chHead.appendChild(
+  txt("title", "Tokens", "Bubbler One", "Regular", 40, "color/foreground"),
+);
+chHead.appendChild(
+  txt(
+    "summary",
+    "One line saying what this chapter covers.",
+    "IBM Plex Sans",
+    "Regular",
+    18,
+    "color/foreground-muted",
+    720,
+  ),
+);
 kit.appendChild(chHead);
 const chHeadC = figma.createComponentFromNode(chHead);
-chHeadC.description = "Docs kit · chapter heading. Number, title, one-line summary. Used once per chapter on both the Light and Dark sheets.";
+chHeadC.description =
+  "Docs kit · chapter heading. Number, title, one-line summary. Used once per chapter on both the Light and Dark sheets.";
 
 // Docs/SpecimenCell — mono label, empty slot for a live instance, caption
-const cell = figma.createAutoLayout("VERTICAL", { name: "Docs/SpecimenCell", itemSpacing: 12 });
-cell.appendChild(txt("label", "Link/CTA", "Fira Code", "Regular", 12, "color/foreground-muted"));
-const slot = figma.createAutoLayout("HORIZONTAL", { name: "slot", itemSpacing: 16 });
-slot.paddingTop = 8; slot.paddingBottom = 8;
+const cell = figma.createAutoLayout("VERTICAL", {
+  name: "Docs/SpecimenCell",
+  itemSpacing: 12,
+});
+cell.appendChild(
+  txt(
+    "label",
+    "Link/CTA",
+    "Fira Code",
+    "Regular",
+    12,
+    "color/foreground-muted",
+  ),
+);
+const slot = figma.createAutoLayout("HORIZONTAL", {
+  name: "slot",
+  itemSpacing: 16,
+});
+slot.paddingTop = 8;
+slot.paddingBottom = 8;
 cell.appendChild(slot);
-cell.appendChild(txt("caption", "The validated decision, verbatim.", "IBM Plex Sans", "Regular", 14, "color/foreground-muted", 640));
+cell.appendChild(
+  txt(
+    "caption",
+    "The validated decision, verbatim.",
+    "IBM Plex Sans",
+    "Regular",
+    14,
+    "color/foreground-muted",
+    640,
+  ),
+);
 kit.appendChild(cell);
 const cellC = figma.createComponentFromNode(cell);
-cellC.description = "Docs kit · one specimen. Drop a live component instance into the `slot` child; never rebuild the component by hand. Caption text is copied verbatim from decisions.md.";
+cellC.description =
+  "Docs kit · one specimen. Drop a live component instance into the `slot` child; never rebuild the component by hand. Caption text is copied verbatim from decisions.md.";
 
 return { createdNodeIds: [kit.id, chHeadC.id, cellC.id] };
 ```
 
-`createComponentFromNode` must run *after* the node is parented and its text filled — converting first then editing children risks the font-load error on a node that is now a component.
+`createComponentFromNode` must run _after_ the node is parented and its text filled — converting first then editing children risks the font-load error on a node that is now a component.
 
 - [x] **Step 2: Build `Docs/DecisionCard` as a variant set keyed on layer**
 
@@ -850,51 +1138,114 @@ The layer tag is the identity mechanism, so it is a variant property, not free t
 ```js
 const page = await figma.getNodeByIdAsync("2545:671");
 await figma.setCurrentPageAsync(page);
-const kit = page.children.find(n => n.name === "SECTION / Docs kit");
+const kit = page.children.find((n) => n.name === "SECTION / Docs kit");
 await figma.loadFontAsync({ family: "IBM Plex Sans", style: "Regular" });
 await figma.loadFontAsync({ family: "IBM Plex Sans", style: "SemiBold" });
 await figma.loadFontAsync({ family: "Fira Code", style: "Regular" });
-const theme = await figma.variables.getVariableCollectionByIdAsync("VariableCollectionId:3:2");
+const theme = await figma.variables.getVariableCollectionByIdAsync(
+  "VariableCollectionId:3:2",
+);
 const V = {};
-for (const id of theme.variableIds) { const v = await figma.variables.getVariableByIdAsync(id); V[v.name] = v; }
+for (const id of theme.variableIds) {
+  const v = await figma.variables.getVariableByIdAsync(id);
+  V[v.name] = v;
+}
 
 const txt = (name, chars, family, style, size, colour, w) => {
   const t = figma.createText();
-  t.name = name; t.fontName = { family, style }; t.characters = chars; t.fontSize = size;
-  t.textAutoResize = "HEIGHT"; t.setBoundVariable("fills", V[colour]);
+  t.name = name;
+  t.fontName = { family, style };
+  t.characters = chars;
+  t.fontSize = size;
+  t.textAutoResize = "HEIGHT";
+  t.setBoundVariable("fills", V[colour]);
   if (w) t.resize(w, t.height);
   return t;
 };
 
 const variants = [];
 for (const layer of ["Chrome", "Content", "Hand", "All"]) {
-  const card = figma.createAutoLayout("VERTICAL", { name: `layer=${layer}`, itemSpacing: 12 });
-  card.paddingTop = 24; card.paddingBottom = 24; card.paddingLeft = 24; card.paddingRight = 24;
+  const card = figma.createAutoLayout("VERTICAL", {
+    name: `layer=${layer}`,
+    itemSpacing: 12,
+  });
+  card.paddingTop = 24;
+  card.paddingBottom = 24;
+  card.paddingLeft = 24;
+  card.paddingRight = 24;
   card.strokeWeight = 1;
   card.strokes = [{ type: "SOLID", color: { r: 0, g: 0, b: 0 } }];
   card.setBoundVariable("strokes", V["color/border"]);
 
   // The tag is a chip: full radius, because a chip is the pressable vocabulary shape even
   // when it is not pressable here — consistency of shape language beats literal affordance.
-  const chip = figma.createAutoLayout("HORIZONTAL", { name: "layer tag", itemSpacing: 8 });
-  chip.paddingTop = 4; chip.paddingBottom = 4; chip.paddingLeft = 12; chip.paddingRight = 12;
+  const chip = figma.createAutoLayout("HORIZONTAL", {
+    name: "layer tag",
+    itemSpacing: 8,
+  });
+  chip.paddingTop = 4;
+  chip.paddingBottom = 4;
+  chip.paddingLeft = 12;
+  chip.paddingRight = 12;
   chip.cornerRadius = 9999;
   chip.fills = [{ type: "SOLID", color: { r: 0, g: 0, b: 0 } }];
-  chip.setBoundVariable("fills", V[layer === "Hand" ? "color/accent-subtle" : "color/surface"]);
-  chip.appendChild(txt("layer", layer.toUpperCase(), "Fira Code", "Regular", 12,
-    layer === "Hand" ? "color/accent-strong" : "color/foreground-muted"));
+  chip.setBoundVariable(
+    "fills",
+    V[layer === "Hand" ? "color/accent-subtle" : "color/surface"],
+  );
+  chip.appendChild(
+    txt(
+      "layer",
+      layer.toUpperCase(),
+      "Fira Code",
+      "Regular",
+      12,
+      layer === "Hand" ? "color/accent-strong" : "color/foreground-muted",
+    ),
+  );
   card.appendChild(chip);
 
-  card.appendChild(txt("rule", "The rule, stated as a rule.", "IBM Plex Sans", "SemiBold", 20, "color/foreground", 760));
-  card.appendChild(txt("body", "Why it was decided this way.", "IBM Plex Sans", "Regular", 16, "color/foreground-muted", 760));
-  card.appendChild(txt("finding", "", "Fira Code", "Regular", 12, "color/foreground-muted", 760));
+  card.appendChild(
+    txt(
+      "rule",
+      "The rule, stated as a rule.",
+      "IBM Plex Sans",
+      "SemiBold",
+      20,
+      "color/foreground",
+      760,
+    ),
+  );
+  card.appendChild(
+    txt(
+      "body",
+      "Why it was decided this way.",
+      "IBM Plex Sans",
+      "Regular",
+      16,
+      "color/foreground-muted",
+      760,
+    ),
+  );
+  card.appendChild(
+    txt(
+      "finding",
+      "",
+      "Fira Code",
+      "Regular",
+      12,
+      "color/foreground-muted",
+      760,
+    ),
+  );
   kit.appendChild(card);
   variants.push(figma.createComponentFromNode(card));
 }
 const set = figma.combineAsVariants(variants, kit);
 set.name = "Docs/DecisionCard";
-set.description = "Docs kit · one design decision. The `layer` variant tags it Chrome, Content, Hand, or All — the tag is what makes the three-layer identity legible when scanning. Rule text is verbatim from decisions.md. Leave `finding` empty unless the decision has a recorded gap.";
-return { createdNodeIds: [set.id], variants: variants.map(v => v.id) };
+set.description =
+  "Docs kit · one design decision. The `layer` variant tags it Chrome, Content, Hand, or All — the tag is what makes the three-layer identity legible when scanning. Rule text is verbatim from decisions.md. Leave `finding` empty unless the decision has a recorded gap.";
+return { createdNodeIds: [set.id], variants: variants.map((v) => v.id) };
 ```
 
 `combineAsVariants` needs every variant named `property=value` before the call and takes the parent as its second argument. Hand gets the accent-subtle chip because it is the one expressive layer — the tag itself demonstrates the accent budget rule.
@@ -912,12 +1263,18 @@ A horizontal pair of slots: `do` and `dont`, each a vertical auto-layout with a 
 ```js
 const page = await figma.getNodeByIdAsync("2545:671");
 await figma.setCurrentPageAsync(page);
-const kit = page.children.find(n => n.name === "SECTION / Docs kit");
-const masters = kit.findAllWithCriteria({ types: ['COMPONENT','COMPONENT_SET'] })
-  .filter(n => n.parent.type !== 'COMPONENT_SET');
+const kit = page.children.find((n) => n.name === "SECTION / Docs kit");
+const masters = kit
+  .findAllWithCriteria({ types: ["COMPONENT", "COMPONENT_SET"] })
+  .filter((n) => n.parent.type !== "COMPONENT_SET");
 await kit.screenshot({ scale: 1 });
-return masters.map(m => ({ id: m.id, name: m.name, type: m.type, hasDesc: !!m.description,
-  variants: m.type === 'COMPONENT_SET' ? m.children.map(c => c.name) : null }));
+return masters.map((m) => ({
+  id: m.id,
+  name: m.name,
+  type: m.type,
+  hasDesc: !!m.description,
+  variants: m.type === "COMPONENT_SET" ? m.children.map((c) => c.name) : null,
+}));
 ```
 
 Expected: exactly five masters, all named `Docs/…`, all with descriptions, `Docs/DecisionCard` a `COMPONENT_SET` with `layer=Chrome|Content|Hand|All`.
@@ -936,9 +1293,11 @@ git commit -m "docs(specs): design-system-docs — task 5b docs kit components"
 The current Docs sheet opens cold on the word "BORDER". A recruiter needs to know in ten seconds what they are looking at.
 
 **Files:**
+
 - Modify: `📚 Docs` `2545:671` — frames `2545:672` (Light), `2547:7597` (Dark)
 
 **Interfaces:**
+
 - Consumes: nothing
 - Produces: a `CHAPTER / 00 Read me` frame as the first child of the Docs light frame, and a `chapterHeader(title, kicker)` construction pattern reused by Tasks 7–10
 
@@ -950,13 +1309,24 @@ The current 4707px-tall frame has a large dead band after the Hover section, whi
 const page = await figma.getNodeByIdAsync("2545:671");
 await figma.setCurrentPageAsync(page);
 const f = await figma.getNodeByIdAsync("2545:672");
-const before = { layoutMode: f.layoutMode, gap: f.itemSpacing, h: Math.round(f.height),
-  children: f.children.map(c => ({ name: c.name, y: Math.round(c.y), h: Math.round(c.height) })) };
+const before = {
+  layoutMode: f.layoutMode,
+  gap: f.itemSpacing,
+  h: Math.round(f.height),
+  children: f.children.map((c) => ({
+    name: c.name,
+    y: Math.round(c.y),
+    h: Math.round(c.height),
+  })),
+};
 f.layoutMode = "VERTICAL";
 f.primaryAxisSizingMode = "AUTO";
 f.counterAxisSizingMode = "FIXED";
 f.itemSpacing = 96;
-f.paddingTop = 96; f.paddingBottom = 96; f.paddingLeft = 96; f.paddingRight = 96;
+f.paddingTop = 96;
+f.paddingBottom = 96;
+f.paddingLeft = 96;
+f.paddingRight = 96;
 return { mutatedNodeIds: [f.id], before, after: { h: Math.round(f.height) } };
 ```
 
@@ -972,9 +1342,14 @@ await figma.loadFontAsync({ family: "Bubbler One", style: "Regular" });
 await figma.loadFontAsync({ family: "IBM Plex Sans", style: "Regular" });
 await figma.loadFontAsync({ family: "Fira Code", style: "Regular" });
 
-const theme = await figma.variables.getVariableCollectionByIdAsync("VariableCollectionId:3:2");
+const theme = await figma.variables.getVariableCollectionByIdAsync(
+  "VariableCollectionId:3:2",
+);
 const V = {};
-for (const id of theme.variableIds) { const v = await figma.variables.getVariableByIdAsync(id); V[v.name] = v; }
+for (const id of theme.variableIds) {
+  const v = await figma.variables.getVariableByIdAsync(id);
+  V[v.name] = v;
+}
 
 const txt = (chars, family, style, size, colourVar) => {
   const t = figma.createText();
@@ -986,16 +1361,33 @@ const txt = (chars, family, style, size, colourVar) => {
   return t;
 };
 
-const head = figma.createAutoLayout("VERTICAL", { name: "CHAPTER / 00 Read me", itemSpacing: 24 });
-head.appendChild(txt("BLOG DESIGN SYSTEM v1.0", "Fira Code", "Regular", 12, "color/foreground-muted"));
-head.appendChild(txt("Design system", "Bubbler One", "Regular", 60, "color/foreground"));
+const head = figma.createAutoLayout("VERTICAL", {
+  name: "CHAPTER / 00 Read me",
+  itemSpacing: 24,
+});
+head.appendChild(
+  txt(
+    "BLOG DESIGN SYSTEM v1.0",
+    "Fira Code",
+    "Regular",
+    12,
+    "color/foreground-muted",
+  ),
+);
+head.appendChild(
+  txt("Design system", "Bubbler One", "Regular", 60, "color/foreground"),
+);
 
 const intro = txt(
   "The design system behind jeromeabel.net — a personal site and technical blog built with Astro 5 and Tailwind v4. " +
-  "Every specimen on this page is a live instance of the component it documents, so the sheet cannot drift from the library. " +
-  "Tokens flow in three layers: Primitives mirror Tailwind, Theme adds semantic names with Light and Dark modes, " +
-  "Responsive carries what changes between breakpoints. Read top to bottom, smallest to largest: tokens, then elements, then components, then whole pages.",
-  "IBM Plex Sans", "Regular", 18, "color/foreground");
+    "Every specimen on this page is a live instance of the component it documents, so the sheet cannot drift from the library. " +
+    "Tokens flow in three layers: Primitives mirror Tailwind, Theme adds semantic names with Light and Dark modes, " +
+    "Responsive carries what changes between breakpoints. Read top to bottom, smallest to largest: tokens, then elements, then components, then whole pages.",
+  "IBM Plex Sans",
+  "Regular",
+  18,
+  "color/foreground",
+);
 head.appendChild(intro);
 
 f.insertChild(0, head);
@@ -1014,35 +1406,50 @@ This is the panel that answers "is this a coherent visual identity or a pile of 
 ```js
 const page = await figma.getNodeByIdAsync("2545:671");
 await figma.setCurrentPageAsync(page);
-const head = (await figma.getNodeByIdAsync("2545:672")).findOne(n => n.name === "CHAPTER / 00 Read me");
-const kit = page.children.find(n => n.name === "SECTION / Docs kit");
-const cardSet = kit.findOne(n => n.name === "Docs/DecisionCard");
+const head = (await figma.getNodeByIdAsync("2545:672")).findOne(
+  (n) => n.name === "CHAPTER / 00 Read me",
+);
+const kit = page.children.find((n) => n.name === "SECTION / Docs kit");
+const cardSet = kit.findOne((n) => n.name === "Docs/DecisionCard");
 await figma.loadFontAsync({ family: "IBM Plex Sans", style: "Regular" });
 await figma.loadFontAsync({ family: "IBM Plex Sans", style: "SemiBold" });
 await figma.loadFontAsync({ family: "Fira Code", style: "Regular" });
 
 const LAYERS = [
-  ["Chrome", "Nav, header, footer, buttons, toggles, icons.",
-   "The operating surface. Precise and quiet — flat backgrounds, no gradients, one hover verb per surface at 150ms. This layer is where the engineer register lives; it should be unremarkable to use and hard to fault."],
-  ["Content", "Cards, rows, prose, metadata.",
-   "The reading surface. Three type families doing three jobs, a three-value radius vocabulary, borders reserved for aggregate entities, and metadata as a deliberate third reading layer in mono at 12px."],
-  ["Hand", "Five author-drawn SVGs: hero, quality, 404, arrow-curve, footer.",
-   "The one expressive layer. Black stroke on transparent, inverted in dark mode. Everything else stays precise so these read as deliberate rather than decorative — the signature is drawn, not applied as a filter."],
+  [
+    "Chrome",
+    "Nav, header, footer, buttons, toggles, icons.",
+    "The operating surface. Precise and quiet — flat backgrounds, no gradients, one hover verb per surface at 150ms. This layer is where the engineer register lives; it should be unremarkable to use and hard to fault.",
+  ],
+  [
+    "Content",
+    "Cards, rows, prose, metadata.",
+    "The reading surface. Three type families doing three jobs, a three-value radius vocabulary, borders reserved for aggregate entities, and metadata as a deliberate third reading layer in mono at 12px.",
+  ],
+  [
+    "Hand",
+    "Five author-drawn SVGs: hero, quality, 404, arrow-curve, footer.",
+    "The one expressive layer. Black stroke on transparent, inverted in dark mode. Everything else stays precise so these read as deliberate rather than decorative — the signature is drawn, not applied as a filter.",
+  ],
 ];
 
-const panel = figma.createAutoLayout("VERTICAL", { name: "three-layer identity", itemSpacing: 16 });
+const panel = figma.createAutoLayout("VERTICAL", {
+  name: "three-layer identity",
+  itemSpacing: 16,
+});
 const kicker = figma.createText();
 kicker.fontName = { family: "Fira Code", style: "Regular" };
 kicker.characters = "ONE IDENTITY, THREE LAYERS";
-kicker.fontSize = 12; kicker.textAutoResize = "HEIGHT";
+kicker.fontSize = 12;
+kicker.textAutoResize = "HEIGHT";
 panel.appendChild(kicker);
 
 const created = [];
 for (const [layer, what, why] of LAYERS) {
   const inst = cardSet.defaultVariant.createInstance();
   inst.setProperties({ layer });
-  inst.findOne(n => n.name === "rule").characters = what;
-  inst.findOne(n => n.name === "body").characters = why;
+  inst.findOne((n) => n.name === "rule").characters = what;
+  inst.findOne((n) => n.name === "body").characters = why;
   panel.appendChild(inst);
   inst.layoutSizingHorizontal = "FILL";
   created.push(inst.id);
@@ -1050,8 +1457,10 @@ for (const [layer, what, why] of LAYERS) {
 
 const thesis = figma.createText();
 thesis.fontName = { family: "IBM Plex Sans", style: "Regular" };
-thesis.characters = "The rule that binds them: only one layer is expressive at a time. Chrome and Content stay precise, which is what lets the Hand layer read as intent rather than noise. Every decision in this document is tagged with the layer it governs.";
-thesis.fontSize = 18; thesis.textAutoResize = "HEIGHT";
+thesis.characters =
+  "The rule that binds them: only one layer is expressive at a time. Chrome and Content stay precise, which is what lets the Hand layer read as intent rather than noise. Every decision in this document is tagged with the layer it governs.";
+thesis.fontSize = 18;
+thesis.textAutoResize = "HEIGHT";
 thesis.resize(760, thesis.height);
 panel.appendChild(thesis);
 
@@ -1069,25 +1478,43 @@ Three rows, mono, muted. Keep it factual — no claims about impact.
 ```js
 const page = await figma.getNodeByIdAsync("2545:671");
 await figma.setCurrentPageAsync(page);
-const head = (await figma.getNodeByIdAsync("2545:672")).findOne(n => n.name === "CHAPTER / 00 Read me");
+const head = (await figma.getNodeByIdAsync("2545:672")).findOne(
+  (n) => n.name === "CHAPTER / 00 Read me",
+);
 await figma.loadFontAsync({ family: "Fira Code", style: "Regular" });
-const theme = await figma.variables.getVariableCollectionByIdAsync("VariableCollectionId:3:2");
+const theme = await figma.variables.getVariableCollectionByIdAsync(
+  "VariableCollectionId:3:2",
+);
 const V = {};
-for (const id of theme.variableIds) { const v = await figma.variables.getVariableByIdAsync(id); V[v.name] = v; }
+for (const id of theme.variableIds) {
+  const v = await figma.variables.getVariableByIdAsync(id);
+  V[v.name] = v;
+}
 
 const ROWS = [
-  ["Tokens",     "src/styles/global.css  @theme {}"],
+  ["Tokens", "src/styles/global.css  @theme {}"],
   ["Components", "src/components/{app,ui,blog,work,hero,about,contact}/"],
-  ["Pages",      "src/pages/  — Astro file-based routing"],
-  ["Drift check","pnpm figma:verify  ·  scripts/figma/"],
+  ["Pages", "src/pages/  — Astro file-based routing"],
+  ["Drift check", "pnpm figma:verify  ·  scripts/figma/"],
 ];
-const table = figma.createAutoLayout("VERTICAL", { name: "code map", itemSpacing: 8 });
+const table = figma.createAutoLayout("VERTICAL", {
+  name: "code map",
+  itemSpacing: 8,
+});
 for (const [k, v] of ROWS) {
-  const row = figma.createAutoLayout("HORIZONTAL", { name: k, itemSpacing: 24 });
-  for (const [s, colour] of [[k, "color/foreground"], [v, "color/foreground-muted"]]) {
+  const row = figma.createAutoLayout("HORIZONTAL", {
+    name: k,
+    itemSpacing: 24,
+  });
+  for (const [s, colour] of [
+    [k, "color/foreground"],
+    [v, "color/foreground-muted"],
+  ]) {
     const t = figma.createText();
     t.fontName = { family: "Fira Code", style: "Regular" };
-    t.characters = s; t.fontSize = 12; t.textAutoResize = "WIDTH_AND_HEIGHT";
+    t.characters = s;
+    t.fontSize = 12;
+    t.textAutoResize = "WIDTH_AND_HEIGHT";
     t.setBoundVariable("fills", V[colour]);
     row.appendChild(t);
   }
@@ -1103,7 +1530,9 @@ return { createdNodeIds: [table.id] };
 ```js
 const page = await figma.getNodeByIdAsync("2545:671");
 await figma.setCurrentPageAsync(page);
-const head = (await figma.getNodeByIdAsync("2545:672")).findOne(n => n.name === "CHAPTER / 00 Read me");
+const head = (await figma.getNodeByIdAsync("2545:672")).findOne(
+  (n) => n.name === "CHAPTER / 00 Read me",
+);
 await head.screenshot({ scale: 1 });
 return { id: head.id, h: Math.round(head.height) };
 ```
@@ -1122,10 +1551,12 @@ git commit -m "docs(specs): design-system-docs — task 6 read-me chapter"
 ### Task 7: Build the `01 Tokens` chapter
 
 **Files:**
+
 - Modify: `📚 Docs` light frame `2545:672`
 - Move into this chapter: `SECTION / Colour` `2545:7501`, `SECTION / Type` `2545:7464`, `SECTION / Spacing` `2545:7497`, `SECTION / Radius` `2545:7178`, `SECTION / Motion` `2546:297`
 
 **Interfaces:**
+
 - Consumes: the three collections from Task 1; the audit result from Task 4 Step 6
 - Produces: a `CHAPTER / 01 Tokens` frame containing the three-layer diagram, the Theme mode table, the Responsive mode table, the re-homed property sections, and the verification panel
 
@@ -1137,14 +1568,27 @@ git commit -m "docs(specs): design-system-docs — task 6 read-me chapter"
 const page = await figma.getNodeByIdAsync("2545:671");
 await figma.setCurrentPageAsync(page);
 const f = await figma.getNodeByIdAsync("2545:672");
-const chapter = figma.createAutoLayout("VERTICAL", { name: "CHAPTER / 01 Tokens", itemSpacing: 64 });
+const chapter = figma.createAutoLayout("VERTICAL", {
+  name: "CHAPTER / 01 Tokens",
+  itemSpacing: 64,
+});
 f.insertChild(1, chapter);
 chapter.layoutSizingHorizontal = "FILL";
-const ORDER = ["SECTION / Colour", "SECTION / Type", "SECTION / Spacing", "SECTION / Radius", "SECTION / Motion"];
-const moved = [], missing = [];
+const ORDER = [
+  "SECTION / Colour",
+  "SECTION / Type",
+  "SECTION / Spacing",
+  "SECTION / Radius",
+  "SECTION / Motion",
+];
+const moved = [],
+  missing = [];
 for (const name of ORDER) {
-  const sec = f.children.find(c => c.name === name);
-  if (!sec) { missing.push(name); continue; }
+  const sec = f.children.find((c) => c.name === name);
+  if (!sec) {
+    missing.push(name);
+    continue;
+  }
   chapter.appendChild(sec);
   moved.push(sec.id);
 }
@@ -1158,40 +1602,79 @@ This is the single most important panel for the recruiter audience — it is the
 ```js
 const page = await figma.getNodeByIdAsync("2545:671");
 await figma.setCurrentPageAsync(page);
-const chapter = (await figma.getNodeByIdAsync("2545:672")).findOne(n => n.name === "CHAPTER / 01 Tokens");
+const chapter = (await figma.getNodeByIdAsync("2545:672")).findOne(
+  (n) => n.name === "CHAPTER / 01 Tokens",
+);
 await figma.loadFontAsync({ family: "IBM Plex Sans", style: "Regular" });
 await figma.loadFontAsync({ family: "IBM Plex Sans", style: "SemiBold" });
 await figma.loadFontAsync({ family: "Fira Code", style: "Regular" });
-const theme = await figma.variables.getVariableCollectionByIdAsync("VariableCollectionId:3:2");
+const theme = await figma.variables.getVariableCollectionByIdAsync(
+  "VariableCollectionId:3:2",
+);
 const V = {};
-for (const id of theme.variableIds) { const v = await figma.variables.getVariableByIdAsync(id); V[v.name] = v; }
+for (const id of theme.variableIds) {
+  const v = await figma.variables.getVariableByIdAsync(id);
+  V[v.name] = v;
+}
 const mk = (chars, family, style, size, colour, w) => {
   const t = figma.createText();
-  t.fontName = { family, style }; t.characters = chars; t.fontSize = size;
-  t.textAutoResize = "HEIGHT"; t.setBoundVariable("fills", V[colour]);
+  t.fontName = { family, style };
+  t.characters = chars;
+  t.fontSize = size;
+  t.textAutoResize = "HEIGHT";
+  t.setBoundVariable("fills", V[colour]);
   if (w) t.resize(w, t.height);
   return t;
 };
 
 const LAYERS = [
-  ["1 Primitives", "451 variables · 1 mode",
-   "A mirror of the Tailwind v4 scale — every colour ramp, spacing step, radius, font size. Regenerated from the installed Tailwind with pnpm figma:primitives, so it is never hand-maintained. Nothing in a component binds to this layer directly."],
-  ["2 Theme", "15 variables · Light / Dark",
-   "The semantic layer, and the only one components are allowed to bind to. color/background, color/foreground, color/foreground-muted, color/border, color/surface, color/surface-hover, color/surface-raised, the four accent steps, and the three font families. Each aliases a primitive, per mode — which is why the Dark sheet is a clone with a mode switch, not a hand-recolour."],
-  ["3 Responsive", "4 variables · Desktop / Tablet / Mobile",
-   "What changes between breakpoints and nothing else: viewport/width 1280/768/390, container/gutter 32/24/16, section/rhythm-y 96/64/48, container/max-width 1280 as a cap. Page frames pin a mode from this collection and reflow — the mobile frames in chapter 04 are not resized duplicates."],
+  [
+    "1 Primitives",
+    "451 variables · 1 mode",
+    "A mirror of the Tailwind v4 scale — every colour ramp, spacing step, radius, font size. Regenerated from the installed Tailwind with pnpm figma:primitives, so it is never hand-maintained. Nothing in a component binds to this layer directly.",
+  ],
+  [
+    "2 Theme",
+    "15 variables · Light / Dark",
+    "The semantic layer, and the only one components are allowed to bind to. color/background, color/foreground, color/foreground-muted, color/border, color/surface, color/surface-hover, color/surface-raised, the four accent steps, and the three font families. Each aliases a primitive, per mode — which is why the Dark sheet is a clone with a mode switch, not a hand-recolour.",
+  ],
+  [
+    "3 Responsive",
+    "4 variables · Desktop / Tablet / Mobile",
+    "What changes between breakpoints and nothing else: viewport/width 1280/768/390, container/gutter 32/24/16, section/rhythm-y 96/64/48, container/max-width 1280 as a cap. Page frames pin a mode from this collection and reflow — the mobile frames in chapter 04 are not resized duplicates.",
+  ],
 ];
-const diagram = figma.createAutoLayout("VERTICAL", { name: "token layers", itemSpacing: 24 });
-diagram.appendChild(mk("THREE TOKEN LAYERS", "Fira Code", "Regular", 12, "color/foreground-muted"));
+const diagram = figma.createAutoLayout("VERTICAL", {
+  name: "token layers",
+  itemSpacing: 24,
+});
+diagram.appendChild(
+  mk(
+    "THREE TOKEN LAYERS",
+    "Fira Code",
+    "Regular",
+    12,
+    "color/foreground-muted",
+  ),
+);
 for (const [name, meta, body] of LAYERS) {
   const card = figma.createAutoLayout("VERTICAL", { name, itemSpacing: 8 });
-  card.paddingTop = 24; card.paddingBottom = 24; card.paddingLeft = 24; card.paddingRight = 24;
+  card.paddingTop = 24;
+  card.paddingBottom = 24;
+  card.paddingLeft = 24;
+  card.paddingRight = 24;
   card.strokeWeight = 1;
   card.strokes = [{ type: "SOLID", color: { r: 0, g: 0, b: 0 } }];
   card.setBoundVariable("strokes", V["color/border"]);
-  card.appendChild(mk(name, "IBM Plex Sans", "SemiBold", 20, "color/foreground"));
-  card.appendChild(mk(meta, "Fira Code", "Regular", 12, "color/foreground-muted"));
-  card.appendChild(mk(body, "IBM Plex Sans", "Regular", 16, "color/foreground", 900));
+  card.appendChild(
+    mk(name, "IBM Plex Sans", "SemiBold", 20, "color/foreground"),
+  );
+  card.appendChild(
+    mk(meta, "Fira Code", "Regular", 12, "color/foreground-muted"),
+  );
+  card.appendChild(
+    mk(body, "IBM Plex Sans", "Regular", 16, "color/foreground", 900),
+  );
   diagram.appendChild(card);
   card.layoutSizingHorizontal = "FILL";
 }
@@ -1209,12 +1692,19 @@ Substitute the actual before/after counts from Task 4 Step 6. Do not round them 
 ```js
 const page = await figma.getNodeByIdAsync("2545:671");
 await figma.setCurrentPageAsync(page);
-const chapter = (await figma.getNodeByIdAsync("2545:672")).findOne(n => n.name === "CHAPTER / 01 Tokens");
+const chapter = (await figma.getNodeByIdAsync("2545:672")).findOne(
+  (n) => n.name === "CHAPTER / 01 Tokens",
+);
 await figma.loadFontAsync({ family: "Fira Code", style: "Regular" });
 await figma.loadFontAsync({ family: "IBM Plex Sans", style: "Regular" });
-const theme = await figma.variables.getVariableCollectionByIdAsync("VariableCollectionId:3:2");
+const theme = await figma.variables.getVariableCollectionByIdAsync(
+  "VariableCollectionId:3:2",
+);
 const V = {};
-for (const id of theme.variableIds) { const v = await figma.variables.getVariableByIdAsync(id); V[v.name] = v; }
+for (const id of theme.variableIds) {
+  const v = await figma.variables.getVariableByIdAsync(id);
+  V[v.name] = v;
+}
 
 // REPLACE with the real before/after pair returned by Task 4 Step 6.
 const ROWS = [
@@ -1224,13 +1714,31 @@ const ROWS = [
   ["fills unbound (chrome)", "11", "0"],
   ["TEXT without a text style", "82", "49 — logged as named debt"],
 ];
-const panel = figma.createAutoLayout("VERTICAL", { name: "token verification", itemSpacing: 8 });
-const mk = (s, colour, w) => { const t = figma.createText();
-  t.fontName = { family: "Fira Code", style: "Regular" }; t.characters = s; t.fontSize = 12;
-  t.textAutoResize = "HEIGHT"; t.setBoundVariable("fills", V[colour]); if (w) t.resize(w, t.height); return t; };
-panel.appendChild(mk("TOKEN COVERAGE — 697 nodes scanned on the Components page, 2026-08-06", "color/foreground-muted"));
+const panel = figma.createAutoLayout("VERTICAL", {
+  name: "token verification",
+  itemSpacing: 8,
+});
+const mk = (s, colour, w) => {
+  const t = figma.createText();
+  t.fontName = { family: "Fira Code", style: "Regular" };
+  t.characters = s;
+  t.fontSize = 12;
+  t.textAutoResize = "HEIGHT";
+  t.setBoundVariable("fills", V[colour]);
+  if (w) t.resize(w, t.height);
+  return t;
+};
+panel.appendChild(
+  mk(
+    "TOKEN COVERAGE — 697 nodes scanned on the Components page, 2026-08-06",
+    "color/foreground-muted",
+  ),
+);
 for (const [k, before, after] of ROWS) {
-  const row = figma.createAutoLayout("HORIZONTAL", { name: k, itemSpacing: 16 });
+  const row = figma.createAutoLayout("HORIZONTAL", {
+    name: k,
+    itemSpacing: 16,
+  });
   row.appendChild(mk(k, "color/foreground", 320));
   row.appendChild(mk(before, "color/foreground-muted", 60));
   row.appendChild(mk("→", "color/foreground-muted", 24));
@@ -1266,10 +1774,12 @@ git commit -m "docs(specs): design-system-docs — task 7 tokens chapter"
 ### Task 8: Build the `02 Elements` chapter
 
 **Files:**
+
 - Modify: `📚 Docs` light frame `2545:672`
 - Move into this chapter: `SECTION / Border` `2545:674`, `SECTION / Buttons` `2545:7234`, `SECTION / Icons` `2545:7216`, `SECTION / Numbers` `2545:7479`
 
 **Interfaces:**
+
 - Consumes: the 17 element masters and their Task 5 descriptions
 - Produces: a `CHAPTER / 02 Elements` frame with one labelled cell per element, every cell a live instance
 
@@ -1284,35 +1794,48 @@ The moved sections are frames with a bare uppercase title and loose captions. Gi
 ```js
 const page = await figma.getNodeByIdAsync("2545:671");
 await figma.setCurrentPageAsync(page);
-const chapter = (await figma.getNodeByIdAsync("2545:672")).findOne(n => n.name === "CHAPTER / 02 Elements");
-const kit = page.children.find(n => n.name === "SECTION / Docs kit");
-const cardSet = kit.findOne(n => n.name === "Docs/DecisionCard");
+const chapter = (await figma.getNodeByIdAsync("2545:672")).findOne(
+  (n) => n.name === "CHAPTER / 02 Elements",
+);
+const kit = page.children.find((n) => n.name === "SECTION / Docs kit");
+const cardSet = kit.findOne((n) => n.name === "Docs/DecisionCard");
 await figma.loadFontAsync({ family: "IBM Plex Sans", style: "Regular" });
 await figma.loadFontAsync({ family: "IBM Plex Sans", style: "SemiBold" });
 
 // Verbatim from decisions.md. Do not reword.
 const DECISIONS = {
-  "SECTION / Buttons": ["Chrome",
+  "SECTION / Buttons": [
+    "Chrome",
     "Three button styles, four components.",
-    "Link/CTA · Primary, ≤1 per viewport. Link/Secondary · unlimited. Link/SecondarySm · small secondary. Link/TextCTA · Text CTA, one per section header. Link/Icon is a chrome control, not a button style, and sits outside the count.", ""],
-  "SECTION / Icons": ["Chrome",
+    "Link/CTA · Primary, ≤1 per viewport. Link/Secondary · unlimited. Link/SecondarySm · small secondary. Link/TextCTA · Text CTA, one per section header. Link/Icon is a chrome control, not a button style, and sits outside the count.",
+    "",
+  ],
+  "SECTION / Icons": [
+    "Chrome",
     "Three icon sizes, each with a job.",
-    "16 · inline with metadata. 20 · buttons and nav. 24 · standalone.", ""],
-  "SECTION / Numbers": ["Content",
+    "16 · inline with metadata. 20 · buttons and nav. 24 · standalone.",
+    "",
+  ],
+  "SECTION / Numbers": [
+    "Content",
     "Numbers are mono and tabular.",
-    "SerieMeta · '6 PARTS' counter, muted. PostMetadataTime (day) and (no-date) · mono tabular. Numbers sit in the metadata reading layer, never in the accent budget.", ""],
+    "SerieMeta · '6 PARTS' counter, muted. PostMetadataTime (day) and (no-date) · mono tabular. Numbers sit in the metadata reading layer, never in the accent budget.",
+    "",
+  ],
 };
 
 const mutated = [];
-for (const [secName, [layer, rule, body, finding]] of Object.entries(DECISIONS)) {
-  const sec = chapter.findOne(n => n.name === secName);
+for (const [secName, [layer, rule, body, finding]] of Object.entries(
+  DECISIONS,
+)) {
+  const sec = chapter.findOne((n) => n.name === secName);
   if (!sec) continue;
   const inst = cardSet.defaultVariant.createInstance();
   inst.setProperties({ layer });
-  inst.findOne(n => n.name === "rule").characters = rule;
-  inst.findOne(n => n.name === "body").characters = body;
-  inst.findOne(n => n.name === "finding").characters = finding;
-  sec.insertChild(1, inst);   // index 0 is the section's own uppercase title
+  inst.findOne((n) => n.name === "rule").characters = rule;
+  inst.findOne((n) => n.name === "body").characters = body;
+  inst.findOne((n) => n.name === "finding").characters = finding;
+  sec.insertChild(1, inst); // index 0 is the section's own uppercase title
   inst.layoutSizingHorizontal = "FILL";
   mutated.push(inst.id);
 }
@@ -1326,14 +1849,39 @@ Apply the same shape in Task 7 (Radius `Chrome + Content` → use `layer=All`; T
 ```js
 const comps = await figma.getNodeByIdAsync("461:759");
 await figma.setCurrentPageAsync(comps);
-const ELEMENTS = ["Icon","NavLink","NavLinkHome","Link/CTA","Link/Secondary","Link/SecondarySm","Link/TextCTA",
-  "Link/Icon","ThemeToggle","MotionToggle","H1","H2","PreviewTitle","PageDescription",
-  "PostMetadataTime","PostMetadataTopic","SerieMeta"];
+const ELEMENTS = [
+  "Icon",
+  "NavLink",
+  "NavLinkHome",
+  "Link/CTA",
+  "Link/Secondary",
+  "Link/SecondarySm",
+  "Link/TextCTA",
+  "Link/Icon",
+  "ThemeToggle",
+  "MotionToggle",
+  "H1",
+  "H2",
+  "PreviewTitle",
+  "PageDescription",
+  "PostMetadataTime",
+  "PostMetadataTopic",
+  "SerieMeta",
+];
 const found = {};
 for (const name of ELEMENTS) {
-  const m = comps.findOne(n => (n.type === "COMPONENT" || n.type === "COMPONENT_SET") && n.name === name);
-  found[name] = m ? { id: m.id, type: m.type, desc: m.description,
-    defaultVariant: m.type === "COMPONENT_SET" ? m.defaultVariant.id : m.id } : null;
+  const m = comps.findOne(
+    (n) =>
+      (n.type === "COMPONENT" || n.type === "COMPONENT_SET") && n.name === name,
+  );
+  found[name] = m
+    ? {
+        id: m.id,
+        type: m.type,
+        desc: m.description,
+        defaultVariant: m.type === "COMPONENT_SET" ? m.defaultVariant.id : m.id,
+      }
+    : null;
 }
 return found;
 ```
@@ -1345,32 +1893,58 @@ A `COMPONENT_SET` cannot be instantiated directly — instantiate `set.defaultVa
 ```js
 const page = await figma.getNodeByIdAsync("2545:671");
 await figma.setCurrentPageAsync(page);
-const chapter = (await figma.getNodeByIdAsync("2545:672")).findOne(n => n.name === "CHAPTER / 02 Elements");
+const chapter = (await figma.getNodeByIdAsync("2545:672")).findOne(
+  (n) => n.name === "CHAPTER / 02 Elements",
+);
 await figma.loadFontAsync({ family: "IBM Plex Sans", style: "Regular" });
 await figma.loadFontAsync({ family: "Fira Code", style: "Regular" });
-const theme = await figma.variables.getVariableCollectionByIdAsync("VariableCollectionId:3:2");
+const theme = await figma.variables.getVariableCollectionByIdAsync(
+  "VariableCollectionId:3:2",
+);
 const V = {};
-for (const id of theme.variableIds) { const v = await figma.variables.getVariableByIdAsync(id); V[v.name] = v; }
+for (const id of theme.variableIds) {
+  const v = await figma.variables.getVariableByIdAsync(id);
+  V[v.name] = v;
+}
 
 // REPLACE with the {name: defaultVariant id} pairs returned by Step 2.
-const CELLS = [["Link/CTA", "2012:6180"], ["Link/Secondary", "2041:276"]];
+const CELLS = [
+  ["Link/CTA", "2012:6180"],
+  ["Link/Secondary", "2041:276"],
+];
 
-const grid = figma.createAutoLayout("VERTICAL", { name: "element specimens", itemSpacing: 32 });
-const created = [], failed = [];
+const grid = figma.createAutoLayout("VERTICAL", {
+  name: "element specimens",
+  itemSpacing: 32,
+});
+const created = [],
+  failed = [];
 for (const [name, compId] of CELLS) {
   const master = await figma.getNodeByIdAsync(compId);
-  if (!master || master.type !== "COMPONENT") { failed.push(name); continue; }
-  const cell = figma.createAutoLayout("VERTICAL", { name: `${name} cell`, itemSpacing: 12 });
+  if (!master || master.type !== "COMPONENT") {
+    failed.push(name);
+    continue;
+  }
+  const cell = figma.createAutoLayout("VERTICAL", {
+    name: `${name} cell`,
+    itemSpacing: 12,
+  });
   const label = figma.createText();
   label.fontName = { family: "Fira Code", style: "Regular" };
-  label.characters = name; label.fontSize = 12; label.textAutoResize = "HEIGHT";
+  label.characters = name;
+  label.fontSize = 12;
+  label.textAutoResize = "HEIGHT";
   label.setBoundVariable("fills", V["color/foreground-muted"]);
   cell.appendChild(label);
   cell.appendChild(master.createInstance());
   const desc = figma.createText();
   desc.fontName = { family: "IBM Plex Sans", style: "Regular" };
-  desc.characters = (master.parent.type === "COMPONENT_SET" ? master.parent.description : master.description) || "";
-  desc.fontSize = 14; desc.textAutoResize = "HEIGHT";
+  desc.characters =
+    (master.parent.type === "COMPONENT_SET"
+      ? master.parent.description
+      : master.description) || "";
+  desc.fontSize = 14;
+  desc.textAutoResize = "HEIGHT";
   desc.setBoundVariable("fills", V["color/foreground-muted"]);
   cell.appendChild(desc);
   desc.layoutSizingHorizontal = "FIXED";
@@ -1390,10 +1964,15 @@ The description is read from the master, not retyped — so Task 5's description
 ```js
 const page = await figma.getNodeByIdAsync("2545:671");
 await figma.setCurrentPageAsync(page);
-const chapter = (await figma.getNodeByIdAsync("2545:672")).findOne(n => n.name === "CHAPTER / 02 Elements");
-const insts = chapter.findAllWithCriteria({ types: ['INSTANCE'] });
+const chapter = (await figma.getNodeByIdAsync("2545:672")).findOne(
+  (n) => n.name === "CHAPTER / 02 Elements",
+);
+const insts = chapter.findAllWithCriteria({ types: ["INSTANCE"] });
 const broken = [];
-for (const i of insts) { const mc = await i.getMainComponentAsync(); if (!mc) broken.push(i.id); }
+for (const i of insts) {
+  const mc = await i.getMainComponentAsync();
+  if (!mc) broken.push(i.id);
+}
 await chapter.screenshot({ scale: 1 });
 return { instances: insts.length, broken };
 ```
@@ -1412,16 +1991,18 @@ git commit -m "docs(specs): design-system-docs — task 8 elements chapter"
 ### Task 9: Build the `03 Components` chapter
 
 **Files:**
+
 - Modify: `📚 Docs` light frame `2545:672`
 - Move into this chapter: `SECTION / Border` `2545:674`, `SECTION / Hover` `2545:7268`, `SECTION / Backgrounds` `2545:7516`, `SECTION / Illustration` `2546:282`
 
 **Interfaces:**
+
 - Consumes: the 8 component + 8 section masters and their Task 5 descriptions
 - Produces: a `CHAPTER / 03 Components` frame with two labelled sub-groups (components, then page sections)
 
 - [x] **Step 1: Create the chapter, insert at index 3, and re-home Border / Hover / Backgrounds / Illustration**
 
-Same move pattern as Task 7 Step 1. Order within the chapter: component grid → section grid → `SECTION / Border` → `SECTION / Hover` → `SECTION / Backgrounds` → `SECTION / Illustration`. Hover and Border belong here because both are properties of a *surface*, and surfaces are components and sections — an element like `H2` has neither a hover verb nor an aggregate boundary.
+Same move pattern as Task 7 Step 1. Order within the chapter: component grid → section grid → `SECTION / Border` → `SECTION / Hover` → `SECTION / Backgrounds` → `SECTION / Illustration`. Hover and Border belong here because both are properties of a _surface_, and surfaces are components and sections — an element like `H2` has neither a hover verb nor an aggregate boundary.
 
 Then apply the Task 8 Step 1b decision-card pattern with these four, verbatim from `decisions.md`: Border `layer=Content` ("Border marks an aggregate entity" — PostRow hairline, SerieCard full border, PostCardPreviewSmall borderless); Hover `layer=All` (the nine-row verb table, one verb per surface, ≤150ms); Backgrounds `layer=Chrome` (Header flat `--color-background`, Footer flat `--color-surface`, no gradients); Illustration `layer=Hand` (the signature-layer paragraph and the five per-asset captions).
 
@@ -1450,14 +2031,19 @@ At 1336px tall it is the single biggest section on the sheet and visually domina
 ```js
 const page = await figma.getNodeByIdAsync("2545:671");
 await figma.setCurrentPageAsync(page);
-const sec = (await figma.getNodeByIdAsync("2545:672")).findOne(n => n.name === "SECTION / Illustration");
+const sec = (await figma.getNodeByIdAsync("2545:672")).findOne(
+  (n) => n.name === "SECTION / Illustration",
+);
 const before = Math.round(sec.height);
 const resized = [];
-for (const cell of sec.findAll(n => n.name === "Frame cell")) {
-  const art = cell.children.find(c => c.type !== "TEXT");
+for (const cell of sec.findAll((n) => n.name === "Frame cell")) {
+  const art = cell.children.find((c) => c.type !== "TEXT");
   if (!art) continue;
   const scale = 240 / Math.max(art.width, art.height);
-  if (scale < 1) { art.rescale(scale); resized.push(art.id); }
+  if (scale < 1) {
+    art.rescale(scale);
+    resized.push(art.id);
+  }
 }
 return { mutatedNodeIds: resized, before, after: Math.round(sec.height) };
 ```
@@ -1484,10 +2070,12 @@ git commit -m "docs(specs): design-system-docs — task 9 components chapter"
 ### Task 10: Build the `04 Pages` chapter
 
 **Files:**
+
 - Modify: `📚 Docs` light frame `2545:672`
 - Reference: the eight frames on `Pages` `2558:18264` from Task 3
 
 **Interfaces:**
+
 - Consumes: the eight named frames from Task 3
 - Produces: a `CHAPTER / 04 Pages` frame showing desktop and mobile side by side, at a scale that fits the 1600px sheet
 
@@ -1505,7 +2093,7 @@ for (const f of [...page.children]) {
   c.description = `Page template · ${c.name}. Theme and Responsive modes are pinned on this frame; the content is instances of the same components documented in chapters 02 and 03.`;
   made.push({ id: c.id, name: c.name });
 }
-return { createdNodeIds: made.map(m => m.id), made };
+return { createdNodeIds: made.map((m) => m.id), made };
 ```
 
 - [x] **Step 2: Build the chapter — one row per page, desktop left, mobile right, light row then dark row**
@@ -1514,35 +2102,54 @@ return { createdNodeIds: made.map(m => m.id), made };
 const page = await figma.getNodeByIdAsync("2545:671");
 await figma.setCurrentPageAsync(page);
 const f = await figma.getNodeByIdAsync("2545:672");
-const chapter = figma.createAutoLayout("VERTICAL", { name: "CHAPTER / 04 Pages", itemSpacing: 64 });
+const chapter = figma.createAutoLayout("VERTICAL", {
+  name: "CHAPTER / 04 Pages",
+  itemSpacing: 64,
+});
 f.appendChild(chapter);
 chapter.layoutSizingHorizontal = "FILL";
 await figma.loadFontAsync({ family: "Fira Code", style: "Regular" });
-const theme = await figma.variables.getVariableCollectionByIdAsync("VariableCollectionId:3:2");
+const theme = await figma.variables.getVariableCollectionByIdAsync(
+  "VariableCollectionId:3:2",
+);
 const V = {};
-for (const id of theme.variableIds) { const v = await figma.variables.getVariableByIdAsync(id); V[v.name] = v; }
+for (const id of theme.variableIds) {
+  const v = await figma.variables.getVariableByIdAsync(id);
+  V[v.name] = v;
+}
 
 // REPLACE with the {name: component id} pairs returned by Step 1.
 const PAGE_COMPONENTS = {};
 
-const created = [], missing = [];
+const created = [],
+  missing = [];
 for (const p of ["Home", "Blog"]) {
   for (const th of ["Light", "Dark"]) {
-    const row = figma.createAutoLayout("HORIZONTAL", { name: `${p} — ${th}`, itemSpacing: 48 });
+    const row = figma.createAutoLayout("HORIZONTAL", {
+      name: `${p} — ${th}`,
+      itemSpacing: 48,
+    });
     row.counterAxisAlignItems = "MIN";
     const label = figma.createText();
     label.fontName = { family: "Fira Code", style: "Regular" };
     label.characters = `${p.toUpperCase()} — ${th.toUpperCase()} — 1280 / 390`;
-    label.fontSize = 12; label.textAutoResize = "HEIGHT";
+    label.fontSize = 12;
+    label.textAutoResize = "HEIGHT";
     label.setBoundVariable("fills", V["color/foreground-muted"]);
-    const wrap = figma.createAutoLayout("VERTICAL", { name: `${p} ${th} cell`, itemSpacing: 16 });
+    const wrap = figma.createAutoLayout("VERTICAL", {
+      name: `${p} ${th} cell`,
+      itemSpacing: 16,
+    });
     wrap.appendChild(label);
     for (const bp of ["Desktop", "Mobile"]) {
       const id = PAGE_COMPONENTS[`${p} — ${bp} — ${th}`];
-      if (!id) { missing.push(`${p} — ${bp} — ${th}`); continue; }
+      if (!id) {
+        missing.push(`${p} — ${bp} — ${th}`);
+        continue;
+      }
       const master = await figma.getNodeByIdAsync(id);
       const inst = master.createInstance();
-      inst.rescale(0.5);   // 1280 → 640, 390 → 195; the pair fits the 1600 sheet with room to label
+      inst.rescale(0.5); // 1280 → 640, 390 → 195; the pair fits the 1600 sheet with room to label
       row.appendChild(inst);
     }
     wrap.appendChild(row);
@@ -1577,11 +2184,13 @@ git commit -m "docs(specs): design-system-docs — task 10 pages chapter"
 ### Task 11: Regenerate the Dark sheet, tidy the file, prepare it to share
 
 **Files:**
+
 - Modify: `📚 Docs` `2545:671` — replace the Dark frame `2547:7597`
 - Modify: `📖 Cover` `0:1`
 - Modify: `🎨 Foundations` `5:14`
 
 **Interfaces:**
+
 - Consumes: the finished light frame from Tasks 6–10
 - Produces: a Dark frame that is a clone with the mode reapplied, a real cover, and a file whose page list reads as intentional
 
@@ -1591,9 +2200,11 @@ git commit -m "docs(specs): design-system-docs — task 10 pages chapter"
 const page = await figma.getNodeByIdAsync("2545:671");
 await figma.setCurrentPageAsync(page);
 const light = await figma.getNodeByIdAsync("2545:672");
-const oldDark = page.children.find(n => n.name.includes("Dark"));
-const theme = await figma.variables.getVariableCollectionByIdAsync("VariableCollectionId:3:2");
-const T = Object.fromEntries(theme.modes.map(m => [m.name, m.modeId]));
+const oldDark = page.children.find((n) => n.name.includes("Dark"));
+const theme = await figma.variables.getVariableCollectionByIdAsync(
+  "VariableCollectionId:3:2",
+);
+const T = Object.fromEntries(theme.modes.map((m) => [m.name, m.modeId]));
 
 light.name = "DOCS / Design System — Light";
 light.setExplicitVariableModeForCollection(theme, T.Light);
@@ -1604,7 +2215,11 @@ dark.x = light.x + light.width + 200;
 dark.y = light.y;
 const removedId = oldDark ? oldDark.id : null;
 if (oldDark) oldDark.remove();
-return { createdNodeIds: [dark.id], removedNodeIds: removedId ? [removedId] : [], counts: { light: light.children.length, dark: dark.children.length } };
+return {
+  createdNodeIds: [dark.id],
+  removedNodeIds: removedId ? [removedId] : [],
+  counts: { light: light.children.length, dark: dark.children.length },
+};
 ```
 
 Expected: `light` and `dark` child counts are identical. Screenshot the dark frame and confirm it repainted itself — any element still showing light-mode colour has an unbound fill and is a Task 4 miss, so fix it at the source rather than recolouring the clone.
@@ -1612,18 +2227,46 @@ Expected: `light` and `dark` child counts are identical. Screenshot the dark fra
 **Illustration caveat:** the five illustration vectors are intentionally unbound and were previously handled by cloning with every channel flipped. After this clone they will render black-on-dark. Re-apply the channel flip to the dark copies only:
 
 ```js
-const dark = (await figma.getNodeByIdAsync("2545:671")).children.find(n => n.name.includes("Dark"));
-const sec = dark.findOne(n => n.name === "SECTION / Illustration");
+const dark = (await figma.getNodeByIdAsync("2545:671")).children.find((n) =>
+  n.name.includes("Dark"),
+);
+const sec = dark.findOne((n) => n.name === "SECTION / Illustration");
 const flipped = [];
-for (const n of sec.findAll(v => Array.isArray(v.fills) && v.fills.length)) {
-  n.fills = n.fills.map(p => p.type === "SOLID"
-    ? { ...p, color: { r: 1 - p.color.r, g: 1 - p.color.g, b: 1 - p.color.b } }
-    : (p.gradientStops ? { ...p, gradientStops: p.gradientStops.map(s => ({ ...s, color: { ...s.color, r: 1 - s.color.r, g: 1 - s.color.g, b: 1 - s.color.b } })) } : p));
+for (const n of sec.findAll((v) => Array.isArray(v.fills) && v.fills.length)) {
+  n.fills = n.fills.map((p) =>
+    p.type === "SOLID"
+      ? {
+          ...p,
+          color: { r: 1 - p.color.r, g: 1 - p.color.g, b: 1 - p.color.b },
+        }
+      : p.gradientStops
+        ? {
+            ...p,
+            gradientStops: p.gradientStops.map((s) => ({
+              ...s,
+              color: {
+                ...s.color,
+                r: 1 - s.color.r,
+                g: 1 - s.color.g,
+                b: 1 - s.color.b,
+              },
+            })),
+          }
+        : p,
+  );
   flipped.push(n.id);
 }
-for (const n of sec.findAll(v => Array.isArray(v.strokes) && v.strokes.length)) {
-  n.strokes = n.strokes.map(p => p.type === "SOLID"
-    ? { ...p, color: { r: 1 - p.color.r, g: 1 - p.color.g, b: 1 - p.color.b } } : p);
+for (const n of sec.findAll(
+  (v) => Array.isArray(v.strokes) && v.strokes.length,
+)) {
+  n.strokes = n.strokes.map((p) =>
+    p.type === "SOLID"
+      ? {
+          ...p,
+          color: { r: 1 - p.color.r, g: 1 - p.color.g, b: 1 - p.color.b },
+        }
+      : p,
+  );
   flipped.push(n.id);
 }
 return { mutatedNodeIds: [...new Set(flipped)] };
@@ -1641,26 +2284,37 @@ await figma.setCurrentPageAsync(page);
 const cover = page.children[0];
 await figma.loadFontAsync({ family: "Bubbler One", style: "Regular" });
 await figma.loadFontAsync({ family: "Fira Code", style: "Regular" });
-const texts = cover.findAllWithCriteria({ types: ['TEXT'] });
-return { coverId: cover.id, existing: texts.map(t => ({ id: t.id, chars: t.characters, size: t.fontSize })) };
+const texts = cover.findAllWithCriteria({ types: ["TEXT"] });
+return {
+  coverId: cover.id,
+  existing: texts.map((t) => ({
+    id: t.id,
+    chars: t.characters,
+    size: t.fontSize,
+  })),
+};
 ```
 
-Then set the title to `Design system`, the kicker to `JEROMEABEL.NET · V1.0 · IN PROGRESS · 2026`, and the standfirst to: `Tokens, components and page templates for a personal site and technical blog. Astro 5, Tailwind v4. Every specimen is a live component instance.` Below the standfirst, four mono muted lines (Fira Code 12 — the cover-content set every practitioner source converges on): `STATUS   v1.0 — in progress · Home & Blog shipped, stable when all pages land` · `OWNER    Jérôme Abel · dev@jeromeabel.net` · `UPDATED  <date of execution>` · `LINKS    dev.jeromeabel.net · github.com/jeromeabel/jeromeabel.github.io`. No changelog on the cover. Load each node's *current* font via `getStyledTextSegments(['fontName'])` before writing characters.
+Then set the title to `Design system`, the kicker to `JEROMEABEL.NET · V1.0 · IN PROGRESS · 2026`, and the standfirst to: `Tokens, components and page templates for a personal site and technical blog. Astro 5, Tailwind v4. Every specimen is a live component instance.` Below the standfirst, four mono muted lines (Fira Code 12 — the cover-content set every practitioner source converges on): `STATUS   v1.0 — in progress · Home & Blog shipped, stable when all pages land` · `OWNER    Jérôme Abel · dev@jeromeabel.net` · `UPDATED  <date of execution>` · `LINKS    dev.jeromeabel.net · github.com/jeromeabel/jeromeabel.github.io`. No changelog on the cover. Load each node's _current_ font via `getStyledTextSegments(['fontName'])` before writing characters.
 
 - [x] **Step 3: Decide the fate of `🎨 Foundations`**
 
 It now holds **three** frames — `Foundations · Colors` `6:2`, `Foundations · Typography` `8:2`, `Tailwind Font Sizes` `365:55` (`Foundations · Scale` `8:34` is already gone). `Tailwind Font Sizes` (2776 × 2542) is a primitive dump that duplicates the eleven `Tailwind/text-*` styles and adds nothing a reader needs; Colors and Typography overlap chapter 01 but are a legitimate deep-dive.
 
-Delete the dump rather than re-archiving it — it is a regenerable mirror of the installed Tailwind (`pnpm figma:primitives`), not a record of anything. Then rename the page **away from the word "Foundations"** — canonically, Foundations *is* the token story, which now lives in chapter 01; a reader who knows the vocabulary would look here first and find an appendix. Name it what it holds:
+Delete the dump rather than re-archiving it — it is a regenerable mirror of the installed Tailwind (`pnpm figma:primitives`), not a record of anything. Then rename the page **away from the word "Foundations"** — canonically, Foundations _is_ the token story, which now lives in chapter 01; a reader who knows the vocabulary would look here first and find an appendix. Name it what it holds:
 
 ```js
 const src = await figma.getNodeByIdAsync("5:14");
 await figma.setCurrentPageAsync(src);
-const dump = src.children.find(n => n.name === "Tailwind Font Sizes");
+const dump = src.children.find((n) => n.name === "Tailwind Font Sizes");
 const removedId = dump ? dump.id : null;
 if (dump) dump.remove();
 src.name = "🎨 Color & Type (deep dive)";
-return { removedNodeIds: removedId ? [removedId] : [], pageName: src.name, remaining: src.children.map(c => c.name) };
+return {
+  removedNodeIds: removedId ? [removedId] : [],
+  pageName: src.name,
+  remaining: src.children.map((c) => c.name),
+};
 ```
 
 Expected: `remaining` is `["Foundations · Colors", "Foundations · Typography"]`. If deleting feels too strong at execution time, `appendChild` it into the backup file's archive instead — but do not leave it in this file.
@@ -1674,11 +2328,16 @@ const missing = [];
 for (const p of figma.root.children) missing.push({ page: p.name, id: p.id });
 const comps = await figma.getNodeByIdAsync("461:759");
 await figma.setCurrentPageAsync(comps);
-const sets = comps.findAllWithCriteria({ types: ['COMPONENT_SET'] });
+const sets = comps.findAllWithCriteria({ types: ["COMPONENT_SET"] });
 const dupes = {};
-for (const s of sets) { dupes[s.name] = (dupes[s.name] || 0) + 1; }
-return { pages: missing, componentSets: sets.map(s => ({ id: s.id, name: s.name })),
-  duplicateNames: Object.entries(dupes).filter(([, n]) => n > 1) };
+for (const s of sets) {
+  dupes[s.name] = (dupes[s.name] || 0) + 1;
+}
+return {
+  pages: missing,
+  componentSets: sets.map((s) => ({ id: s.id, name: s.name })),
+  duplicateNames: Object.entries(dupes).filter(([, n]) => n > 1),
+};
 ```
 
 Expected: five pages, no `duplicateNames`. A duplicate set name is how the orphaned `Icon` situation arose in the first place — two sets called `Icon`, one of them on a page that later got deleted.
@@ -1690,30 +2349,49 @@ Also delete the old archive's leftovers from `scripts/figma/named-debt.json` in 
 "Docs" carries no scent — no major system has a section by that name, because the whole artifact is docs. Name the shareable page what it is:
 
 ```js
-const docs = figma.root.children.find(p => p.name === "📚 Docs");
+const docs = figma.root.children.find((p) => p.name === "📚 Docs");
 if (docs) docs.name = "📚 Design system";
-const want = ["📖 Cover", "📚 Design system", "🧩 Components", "📄 Pages", "🎨 Color & Type (deep dive)"];
-const byName = Object.fromEntries(figma.root.children.map(p => [p.name, p]));
+const want = [
+  "📖 Cover",
+  "📚 Design system",
+  "🧩 Components",
+  "📄 Pages",
+  "🎨 Color & Type (deep dive)",
+];
+const byName = Object.fromEntries(figma.root.children.map((p) => [p.name, p]));
 const moved = [];
-want.forEach((n, i) => { if (byName[n]) { figma.root.insertChild(i, byName[n]); moved.push(n); } });
-return { order: figma.root.children.map(p => p.name), moved };
+want.forEach((n, i) => {
+  if (byName[n]) {
+    figma.root.insertChild(i, byName[n]);
+    moved.push(n);
+  }
+});
+return { order: figma.root.children.map((p) => p.name), moved };
 ```
 
-`Pages` was already renamed `📄 Pages` on 2026-08-06, so every page now carries an emoji and the sidebar scans. Emoji verdict from the research review: keep — Figma's own best-practices guide sanctions static wayfinding emojis; the only documented hazard is *status* emojis in published libraries, which this file has none of.
+`Pages` was already renamed `📄 Pages` on 2026-08-06, so every page now carries an emoji and the sidebar scans. Emoji verdict from the research review: keep — Figma's own best-practices guide sanctions static wayfinding emojis; the only documented hazard is _status_ emojis in published libraries, which this file has none of.
 
 - [x] **Step 6: Final whole-file verification**
 
 ```js
-const pages = figma.root.children.map(p => p.name);
+const pages = figma.root.children.map((p) => p.name);
 const docs = await figma.getNodeByIdAsync("2545:671");
 await figma.setCurrentPageAsync(docs);
 const out = [];
 for (const frame of docs.children) {
-  const insts = frame.findAllWithCriteria({ types: ['INSTANCE'] });
+  const insts = frame.findAllWithCriteria({ types: ["INSTANCE"] });
   const broken = [];
-  for (const i of insts) { const mc = await i.getMainComponentAsync(); if (!mc) broken.push(i.id); }
-  out.push({ frame: frame.name, h: Math.round(frame.height), chapters: frame.children.map(c => c.name),
-    instances: insts.length, broken: broken.length });
+  for (const i of insts) {
+    const mc = await i.getMainComponentAsync();
+    if (!mc) broken.push(i.id);
+  }
+  out.push({
+    frame: frame.name,
+    h: Math.round(frame.height),
+    chapters: frame.children.map((c) => c.name),
+    instances: insts.length,
+    broken: broken.length,
+  });
 }
 return { pages, docs: out };
 ```
@@ -1738,12 +2416,14 @@ git commit -m "docs(specs): design-system-docs — task 11 dark sheet, cover, fi
 The repo's Figma knowledge file still describes the pre-cleanup structure — five pages, a `🗄️ Legacy` page that no longer exists, a `📄 Pages` node map from the old file. Anyone (human or agent) trusting it will write to the wrong nodes.
 
 **Files:**
+
 - Modify: `.claude/skills/figma-verify/knowledge/figma-ds-file.md`
 - Modify: `.claude/skills/design-expert/references/artistic-direction.md`
 - Modify: `CLAUDE.md`
 - Modify: `.specs/01_active/design-system-docs/spec.md`
 
 **Interfaces:**
+
 - Consumes: the final page list and node ids from Task 11 Step 6
 - Produces: a knowledge file that matches the live file, so the next Pass-0 inventory confirms rather than contradicts it
 
@@ -1821,7 +2501,7 @@ Three parallel web-research passes (90+ sources: design-system doc IA, Figma fil
 
 1. **Atomic labels dropped.** Chapters `02 Elements` / `03 Components`; description prefixes `Element ·` / `Component ·` / `Section ·`. No major system uses atoms/molecules/organisms in docs; Brad Frost himself dropped the labels. Composition order kept.
 2. **`📚 Docs` → `📚 Design system`** (Task 11 Step 5) — "Docs" as a section name exists in no major system.
-3. **`🎨 Foundations (reference)` → `🎨 Color & Type (deep dive)`** (Task 11 Step 3) — canonically "Foundations" *is* the token story, which lives in chapter 01; the word must not point at the appendix.
+3. **`🎨 Foundations (reference)` → `🎨 Color & Type (deep dive)`** (Task 11 Step 3) — canonically "Foundations" _is_ the token story, which lives in chapter 01; the word must not point at the appendix.
 4. **Cover carries status/owner/date/links** (Task 11 Step 2); status is `v1.0 — in progress`, not stable, until all pages exist (user's call).
 5. **Emojis kept** — static wayfinding only, sanctioned by Figma's own guidance; never status emojis.
 6. **Four additive panels:** Theme token jobs + scale cross-references + accessibility card (Task 7 Step 3b), do/don't pairs for the three contested calls (Task 9 Step 1d), PostRow deep-dive case study (Task 9 Step 1e), `Docs/DoDont` as the fifth kit component (Task 5b Step 3b).

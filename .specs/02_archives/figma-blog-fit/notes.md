@@ -382,23 +382,23 @@ only — Stage 4's responsive/dark frames not built yet, expected).
 SERIE-CARD, TOGGLE, TOPIC-CHIP) contain masters for only **15 of the 40** manifest components with
 web geometry (Task 8). Matched:
 
-| manifest id | figma node | id |
-|---|---|---|
-| app-header--default | Header | 41:3 |
-| app-footer--default | Footer | 42:3 |
-| ui-linknavpost--previous | Type=Previous | 34:3 |
-| ui-linknavpost--next | Type=Next | 34:10 |
-| ui-link--default | Variant=default | 12:7 |
-| ui-link--iconbutton | Variant=icon | 13:9 |
-| ui-link--secondary | Variant=secondary | 13:4 |
-| ui-link--external | Variant=external | 13:6 |
-| work-workoverlaycard--overlaycard | WorkOverlayCard | 32:3 |
-| work-workminicard--minicard | WorkMiniCard | 32:9 |
-| blog-postrowcalm--calmrow | PostRow | 31:13 |
-| app-themetoggle--default | State=Light | 16:3 |
-| app-motiontoggle--default | State=Off | 16:9 |
-| blog-topicchips--default | TopicChip | 15:9 |
-| blog-seriecard--default | SerieCard (INSTANCE, not a master — no SerieCard component exists yet) | 52:314 |
+| manifest id                       | figma node                                                             | id     |
+| --------------------------------- | ---------------------------------------------------------------------- | ------ |
+| app-header--default               | Header                                                                 | 41:3   |
+| app-footer--default               | Footer                                                                 | 42:3   |
+| ui-linknavpost--previous          | Type=Previous                                                          | 34:3   |
+| ui-linknavpost--next              | Type=Next                                                              | 34:10  |
+| ui-link--default                  | Variant=default                                                        | 12:7   |
+| ui-link--iconbutton               | Variant=icon                                                           | 13:9   |
+| ui-link--secondary                | Variant=secondary                                                      | 13:4   |
+| ui-link--external                 | Variant=external                                                       | 13:6   |
+| work-workoverlaycard--overlaycard | WorkOverlayCard                                                        | 32:3   |
+| work-workminicard--minicard       | WorkMiniCard                                                           | 32:9   |
+| blog-postrowcalm--calmrow         | PostRow                                                                | 31:13  |
+| app-themetoggle--default          | State=Light                                                            | 16:3   |
+| app-motiontoggle--default         | State=Off                                                              | 16:9   |
+| blog-topicchips--default          | TopicChip                                                              | 15:9   |
+| blog-seriecard--default           | SerieCard (INSTANCE, not a master — no SerieCard component exists yet) | 52:314 |
 
 **No Figma master exists** for the other 25: `about-aboutfacts`, `about-aboutstrip`,
 `about-abouttext`, `blog-postlistitem`, `blog-relatedwork`, `blog-selectedwriting`,
@@ -494,6 +494,7 @@ Commit: `feat(geometry): web↔figma geometry diff with repair worklist`.
 ## Task 11 — master repairs + screenshot gate (partial, first pass)
 
 **Strictness audit** (`fe-figma-verify` Pass 1/Pass 2, run over `🧩 Components`, 52:2):
+
 - Pass 2 (detached instances): **0 found**, clean.
 - Pass 1 (unbound fills/strokes): 41 raw flags. Triaged by node type/parent — most are not real
   debt:
@@ -513,9 +514,10 @@ Commit: `feat(geometry): web↔figma geometry diff with repair worklist`.
 
 **Geometry repairs (chrome, sweep-order step 1 of "chrome → cards → templates → ui atoms")**:
 Investigated the two real category-4 deltas from Task 10 before touching anything:
+
 - `blog-topicchips--default` `borderTopColor` mismatch: **not a Figma bug** — traced to
   `scripts/pixel-manifest.mjs:244`, selector `div[class="flex flex-wrap gap-2"]` targets the
-  *wrapper* of all chips, not the individual `<span class="border-muted-border ...">` chip
+  _wrapper_ of all chips, not the individual `<span class="border-muted-border ...">` chip
   (`TopicChips.astro:18`). The web geometry read is comparing the wrong DOM level to the
   single-chip Figma master — explains both the border-color "mismatch" and most of the width
   delta. **Fix belongs in Task 8's manifest** (selector needs a `:first-child`/descendant scope),
@@ -561,9 +563,10 @@ majority-pass precedent.
 Commit: `fix(geometry): restructure Header/Footer masters — move container inset off root`.
 
 **Geometry repairs (cards, sweep-order step 2)**:
+
 - `blog-postrowcalm--calmrow`: **real bug, repaired.** Web root (`PostRowCalm.astro:` root `<a>`,
   `px-1 py-4`) has 4px horizontal padding; Figma master (`31:13` PostRow) had `paddingLeft/Right:
-  0`. Rebound both to the existing `spacing/1` variable (`VariableID:4:3`, 4px) — already used for
+0`. Rebound both to the existing `spacing/1` variable (`VariableID:4:3`, 4px) — already used for
   `itemSpacing` on the same node, so this reuses rather than introduces a token. Screenshot
   verified (no reflow/regression); re-diff confirms padding delta gone.
 - `work-workoverlaycard--overlaycard`, `work-workminicard--minicard`: no new actionable deltas —
@@ -575,6 +578,7 @@ Commit: `fix(geometry): restructure Header/Footer masters — move container ins
 
 **Geometry repairs (ui atoms, sweep-order step 4 — "templates" step skipped, out of scope for
 this component-level pass)**:
+
 - `ui-link--default`: **real bug, repaired.** Web has no `py-*`/`pb-*` class on the `default`
   variant (`Link.astro:12`, just `border-dashed border-current border-b`), so computed
   `paddingBottom` is `0`. Figma master (`12:7`) had a raw (unbound) `paddingBottom: 2`. Set to `0`
@@ -584,7 +588,7 @@ this component-level pass)**:
     relies on `border-current` inheriting the ambient text color, which `Layout.astro` sets at the
     `<body>` level; the isolated Astrobook story has no such ancestor, so `currentColor` resolves
     to the browser's initial black instead of `--color-foreground` (#1e1e1e = `rgb(30,30,30)`).
-    Figma's master is bound to the real foreground token and is therefore *correct* — it's the web
+    Figma's master is bound to the real foreground token and is therefore _correct_ — it's the web
     geometry read that's context-starved. Left as-is (repairing Figma to match would make it
     wrong).
 - `ui-link--secondary`: **real bug, repaired.** Web variant is `py-4` (16px); Figma master
@@ -593,20 +597,21 @@ this component-level pass)**:
   no regression, height 42→58px as expected); re-diff clean.
 - `ui-link--iconbutton`: width delta (web `56px` desktop capture vs figma `40px` master) is
   **named debt, not repaired** — `Link.astro`'s `icon` variant is responsive (`h-10 w-10 lg:h-14
-  lg:w-14`, i.e. 40px base / 56px at `lg:`). `geometry.web.json` only captures the desktop/1280
+lg:w-14`, i.e. 40px base / 56px at `lg:`). `geometry.web.json` only captures the desktop/1280
   viewport, so it necessarily sees the `lg:` size; the Figma master represents the single
   canonical size and would need a second variant/frame to represent the breakpoint split. That's
   exactly what Task 14 (Stage 4 — responsive/dark template frames) owns; resizing the master here
   would just swap which breakpoint it silently misrepresents. Flagged, deferred to Task 14.
 - `app-themetoggle--default`, `app-motiontoggle--default`, `ui-linknavpost--previous/next`: no new
   actionable deltas — remaining worklist lines are font/color "(absent)" artifacts, the `gap:
-  "normal"` string quirk, or (LinkNavPost) content-width variance (web captures live prev/next
+"normal"` string quirk, or (LinkNavPost) content-width variance (web captures live prev/next
   post titles at container width; Figma master is intrinsic-width). Nothing to fix.
 
 **Script fixes**:
+
 - `scripts/pixel-manifest.mjs` (`blog-topicchips--default`): selector changed from
   `div[class="flex flex-wrap gap-2"]` (the multi-chip wrapper) to `div[class="flex flex-wrap
-  gap-2"] > span` (one chip, matching the Figma master). `pixel-check.mjs` already calls
+gap-2"] > span` (one chip, matching the Figma master). `pixel-check.mjs` already calls
   `.first()` on every selector, so this scopes both the pixel-check and the geometry-extract
   pipelines (both consume the same manifest) to the correct DOM level. Re-ran
   `extract-web-geometry.mjs` to regenerate `geometry.web.json`; re-diffed — the `borderTopColor`
@@ -636,22 +641,23 @@ selector + borderRadius diff tolerance`.
 component, S0 variables/text styles bound throughout, real collection content (not placeholder
 lorem). 9 masters:
 
-| Section | Root | Content source |
-|---|---|---|
-| PostCard | `78:3` | real post (title/description/date/minutesRead) |
-| SeriePostCard | `79:2` | real serie post + badge (`serie title 🞄 index`) |
-| SerieListItem | `79:12` | WEB PERFORMANCE serie, 2/5 posts shown |
-| WorkCard | `90:77` | real work |
-| WorkCardImage | `90:86` | real work image card |
-| WorksPreview | `92:2` | live works grid |
-| BlogPreview | `94:6` | live 2×2 post/seriePost grid, 4/4 posts (no truncation needed) |
-| PostList | `97:6` | 8/21 posts shown, 13 older rows omitted (documented in-frame) |
-| SerieList | `100:6` | WEB PERFORMANCE 2/5, MY AI JOURNEY 2/2, NUXT FEATURE 3/9 — drops documented in-frame |
+| Section       | Root    | Content source                                                                       |
+| ------------- | ------- | ------------------------------------------------------------------------------------ |
+| PostCard      | `78:3`  | real post (title/description/date/minutesRead)                                       |
+| SeriePostCard | `79:2`  | real serie post + badge (`serie title 🞄 index`)                                      |
+| SerieListItem | `79:12` | WEB PERFORMANCE serie, 2/5 posts shown                                               |
+| WorkCard      | `90:77` | real work                                                                            |
+| WorkCardImage | `90:86` | real work image card                                                                 |
+| WorksPreview  | `92:2`  | live works grid                                                                      |
+| BlogPreview   | `94:6`  | live 2×2 post/seriePost grid, 4/4 posts (no truncation needed)                       |
+| PostList      | `97:6`  | 8/21 posts shown, 13 older rows omitted (documented in-frame)                        |
+| SerieList     | `100:6` | WEB PERFORMANCE 2/5, MY AI JOURNEY 2/2, NUXT FEATURE 3/9 — drops documented in-frame |
 
 Content pulled from a prior segment's Playwright capture (`legacy-content-2.json`), not
 re-extracted.
 
 **Bugs found + fixed during build:**
+
 1. **WorksPreview heading wrong style** — "Latest Works" used `Heading/H3` (22px, normal-case)
    instead of `Heading/H2` (30px, uppercase). Root cause: style picked without checking
    `H2.astro`'s actual classes (`uppercase text-3xl tracking-widest`). Generalizes the earlier
@@ -659,7 +665,7 @@ re-extracted.
    `92:3` before building BlogPreview, so BlogPreview/PostList/SerieList headings were correct
    from the start.
 2. **BlogPreview grid collapsed to one column** — `card.counterAxisSizingMode = "AUTO"` was set
-   *after* `card.resize(464, h)` + `layoutSizingHorizontal = "FIXED"`, overriding the fixed width
+   _after_ `card.resize(464, h)` + `layoutSizingHorizontal = "FIXED"`, overriding the fixed width
    back to content-hug; the long unwrapped description ballooned the card and pushed the second
    column off-canvas. Fix: re-query `FRAME[name=SeriePostCard], FRAME[name=PostCard]`, force
    `counterAxisSizingMode = "FIXED"` + re-`resize(464, h)` on each. Verified via before/after
@@ -689,7 +695,7 @@ geometry.figma.json`, filtered to the 9 legacy ids. Categorized (same buckets as
    non-actionable.
 3. **`paddingRight`/`paddingLeft` 16px web vs 0px figma** on `blog-blogpreview--default` and
    `work-workspreview--default` — inverse of the Task 11 header/footer case (there it was figma-
-   has-padding-web-doesn't; here web's selector *is* the `.container` element itself, so its own
+   has-padding-web-doesn't; here web's selector _is_ the `.container` element itself, so its own
    16px inset reads directly, while the Figma master represents the 960px content column without
    an outer page-container inset). Consistent with the container-owns-padding convention
    (CLAUDE.md); these are legacy/unwired masters (`PostList.astro`/`SerieList.astro` are
@@ -722,6 +728,7 @@ Commit: `docs(legacy): 🗄️ Legacy Figma page build + geometry/screenshot log
 covered). Triage of the 25:
 
 **4 = text styles, not masters (covered by S0):**
+
 - `ui-h1` → `Title/H1` text style
 - `ui-h2` → `Heading/H2` text style
 - `ui-p` → `Body/Base` text style
@@ -729,6 +736,7 @@ covered). Triage of the 25:
   text styles above applied per-element inside prose content
 
 **4 = utility/image plumbing, out of DS scope:**
+
 - `ui-customimage` — Astro `<Picture>` + LQIP/fade wrapper, a build-time image pipeline, not a
   visual component
 - `contact-contactimage` — thin wrapper around `CustomImage`, same reason
@@ -738,6 +746,7 @@ covered). Triage of the 25:
 
 **5 = page-section compositions, built as Task 14 template-frame sections (not standalone
 masters):**
+
 - `hero-hero`, `about-aboutstrip`, `blog-selectedwriting`, `work-worksstrip`, `contact-contact`
 
 **12 = genuine missing masters, built in Batches A/B/C below.**
@@ -753,12 +762,12 @@ inside `PostList`/`PostPage`/`SeriePost` composites), so content was sourced dir
 `src/content/post/api-endpoints-with-astro`, `src/content/work/{medito-fundraising,
 leconceptdelapreuve,argentbank}`, and `src/content/serie/web-performance/*`.
 
-| id | Figma master (node) | Content source |
-|---|---|---|
-| `blog-postlistitem--default` | PostListItem (`116:80`) | post "Adding API Endpoints to an Astro Project", 22 min (computed 2657 words ÷ 120wpm), 11 May 2026 |
-| `blog-relatedwork--default` | RelatedWork (`117:77`) | 3× `WorkMiniCard` **instances** of the existing master `32:9` (F2: instances-only, reused not rebuilt) — Medito Fundraising, Le concept de la preuve, ArgentBank |
-| `blog-seriecontents--default` | SerieContents (`118:83`) | serie "Web Performance", all 5 real post titles, item 1 (Tactics Cheatsheet) marked current/accent |
-| `blog-seriepostlistitem--default` | SeriePostListItem (`119:83`) | serie post "Web Performance Tactics Cheatsheet", index 1, 15 min (computed 1746 words ÷ 120wpm), 27 Mar 2026 |
+| id                                | Figma master (node)          | Content source                                                                                                                                                   |
+| --------------------------------- | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `blog-postlistitem--default`      | PostListItem (`116:80`)      | post "Adding API Endpoints to an Astro Project", 22 min (computed 2657 words ÷ 120wpm), 11 May 2026                                                              |
+| `blog-relatedwork--default`       | RelatedWork (`117:77`)       | 3× `WorkMiniCard` **instances** of the existing master `32:9` (F2: instances-only, reused not rebuilt) — Medito Fundraising, Le concept de la preuve, ArgentBank |
+| `blog-seriecontents--default`     | SerieContents (`118:83`)     | serie "Web Performance", all 5 real post titles, item 1 (Tactics Cheatsheet) marked current/accent                                                               |
+| `blog-seriepostlistitem--default` | SeriePostListItem (`119:83`) | serie post "Web Performance Tactics Cheatsheet", index 1, 15 min (computed 1746 words ÷ 120wpm), 27 Mar 2026                                                     |
 
 **Token bindings**: title/body text → `Heading/H3`(N/A here)/`Body/Base`/`Body/Small` text
 styles per component's actual Tailwind text size (PostListItem/RelatedWork/SerieContents body =
@@ -778,6 +787,7 @@ doesn't line up 1:1 with Tailwind's `rounded-lg` name).
 gap when `layoutMode !== NONE`, `cornerRadius`, first solid fill/stroke as rgb, font props only
 when root is `TEXT`) and ran `diff-geometry.mjs` against `geometry.web.json`. Results, same
 categorization as Task 10/11:
+
 - **Real bug found + fixed**: `blog-seriecontents--default` `borderRadius` 16px vs web 8px —
   wrong variable bound (`radius/lg` instead of `radius/md`), corrected node `118:83`.
 - **Width deltas** (700px figma vs 1248px web container) — expected, same Task-10 category-3
@@ -797,7 +807,7 @@ categorization as Task 10/11:
   match their `.astro` source structure/spacing/hierarchy (label casing, current-item accent,
   row dividers, meta alignment). No Astrobook story preview exists for these 4 ids to diff
   against pixel-for-pixel (see content-source note above); gate here is source-structure fidelity
-  + real-content fidelity, not a pixel-manifest screenshot comparison.
+  - real-content fidelity, not a pixel-manifest screenshot comparison.
 
 **Pilot scope** (per user decision): build Home's 5 missing frames first (768-light,
 390-light, 1280-dark, 768-dark, 390-dark), screenshot-gate, get sign-off, then replicate to
@@ -830,6 +840,7 @@ too.
 
 **Named debt carried into this task (not fixed, out of scope for an additive template
 task)**:
+
 - WorksStrip desktop master is 4-column; live `WorksStrip.astro`/`work.astro` grid is
   3-column at desktop. Pre-existing master debt (Task 10/11 scope), not touched — Task 14 is
   additive (new responsive frames), not corrective for the existing desktop-1280 master.
@@ -852,12 +863,12 @@ the content collections. Unlike Batch A, all 4 ids have real Astrobook story pre
 (`.../work/<kebab>/...`), so the screenshot gate below is a true structure/content comparison
 against each story's actual fixture, not just source-structure fidelity.
 
-| id | Figma master (node) | Content source |
-|---|---|---|
-| `work-archivetable--default` | ArchiveTable (`124:83`) | 6 of 16 archive works (truncated, most-recent-first, same truncation precedent as Task 13's PostList 8/21): Portfolio, Kung Fu School, Medito Fundraising, Neptune Beer Club, HRnet, ArgentBank — real year/type/stack from `src/content/work/*/index.md` |
-| `work-relatedwriting--default` | RelatedWriting (`125:83`) | 3× `PostRow` **instances** of the existing master `31:13` (F2: instances-only) — "Adding API Endpoints to an Astro Project" (22 min, May 2026), "Clickable Images in Astro Markdown..." (12 min, April 2026), "Adding Likes to a Static Astro Site" (13 min, February 2026); minutes computed body-word-count ÷ 120wpm, `Math.ceil` |
-| `work-workgallerycard--square` | WorkGalleryCard (`126:95`) | featured work "Le concept de la preuve" (kicker "Web · 2026", real description) — `getFeaturedWorks()[0]` |
-| `work-workheader--default` | WorkHeader (`127:95`) | same work, real abstract/type/stack; only Demo(`live`)+Code(`git`) links rendered — `website`/`video` fields absent on this entry |
+| id                             | Figma master (node)        | Content source                                                                                                                                                                                                                                                                                                                      |
+| ------------------------------ | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `work-archivetable--default`   | ArchiveTable (`124:83`)    | 6 of 16 archive works (truncated, most-recent-first, same truncation precedent as Task 13's PostList 8/21): Portfolio, Kung Fu School, Medito Fundraising, Neptune Beer Club, HRnet, ArgentBank — real year/type/stack from `src/content/work/*/index.md`                                                                           |
+| `work-relatedwriting--default` | RelatedWriting (`125:83`)  | 3× `PostRow` **instances** of the existing master `31:13` (F2: instances-only) — "Adding API Endpoints to an Astro Project" (22 min, May 2026), "Clickable Images in Astro Markdown..." (12 min, April 2026), "Adding Likes to a Static Astro Site" (13 min, February 2026); minutes computed body-word-count ÷ 120wpm, `Math.ceil` |
+| `work-workgallerycard--square` | WorkGalleryCard (`126:95`) | featured work "Le concept de la preuve" (kicker "Web · 2026", real description) — `getFeaturedWorks()[0]`                                                                                                                                                                                                                           |
+| `work-workheader--default`     | WorkHeader (`127:95`)      | same work, real abstract/type/stack; only Demo(`live`)+Code(`git`) links rendered — `website`/`video` fields absent on this entry                                                                                                                                                                                                   |
 
 **Token bindings**: `Chip/Mono` (12px Fira Code) for table header cells and mono metadata
 (year, built-with, related-post minutes/date via reused `PostRow`); `Body/Small` for table body
@@ -879,7 +890,7 @@ WorkHeader nav internal gap).
 **Live-content bug found + fixed during build**: first-pass `RelatedWriting` instances had
 title/meta text swapped in 2 of 3 rows (bold title text landed in the mono-meta slot and vice
 versa). Root cause: initial node-selection used a width-based heuristic (`reduce` to widest
-text node) computed from each instance's *pre-edit* state, which turned out unreliable across
+text node) computed from each instance's _pre-edit_ state, which turned out unreliable across
 clones. Fixed by re-selecting via structural `x` position within the `line` frame instead
 (title consistently `x:0`, meta consistently `x>0` regardless of content) — deterministic,
 matches the master's actual layout. Re-screenshotted, confirmed correct on all 3 rows.
@@ -896,6 +907,7 @@ instance's `serie-meta` child (`visible = false`) since these are standalone pos
 compared against `geometry.web.json` (`work-archivetable--default`, `work-relatedwriting--default`,
 `work-workgallerycard--square`, `work-workheader--default`, desktop/light). No real bugs found;
 every delta falls into an already-established non-actionable category:
+
 - **Width deltas** — `archivetable`/`relatedwriting` 700px figma vs 1248px web `.container`;
   `workheader` 700px figma vs 832px web (`lg:w-2/3` of 1248); `workgallerycard` 260px figma vs
   394.656px web (live responsive grid cell). Same Task-10 category-3 precedent: masters
@@ -947,12 +959,12 @@ routes (`.../about/about-facts/grid`, `.../about/about-text/default`,
 `.../hero/hero-text/default`, `.../contact/contact-text/default`), so the screenshot gate below
 is a true structure/content comparison against each story's actual fixture.
 
-| id | Figma master (node) | Content source |
-|---|---|---|
-| `about-aboutfacts--grid` | AboutFacts (`131:98`) | real fact set from `AboutFacts.astro`: 2010 coding since, **21** articles published (`getAllBlogPosts()` — 5 `post` + 16 `seriePost`, no drafts), 5000+ Malinette downloads, 1000+ people trained |
-| `about-abouttext--default` | AboutText (`131:99`) | full `AboutText.astro` copy verbatim — lead line, 5 prose paragraphs, `AboutFacts` (grid variant per `VARIANTS.aboutFacts`), Download CV link, 2-link secondary row |
-| `hero-herotext--default` | HeroText (`131:100`) | `HeroText.astro`/`HeroSocials.astro` verbatim — "Hi, I'm Jérôme." + subhead + mail/GitHub/LinkedIn icon links |
-| `contact-contacttext--default` | ContactText (`131:101`) | `ContactText.astro` verbatim — "LET'S TALK" heading, real email `dev@jeromeabel.net`, Follow row (GitHub/Bluesky/LinkedIn) |
+| id                             | Figma master (node)     | Content source                                                                                                                                                                                    |
+| ------------------------------ | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `about-aboutfacts--grid`       | AboutFacts (`131:98`)   | real fact set from `AboutFacts.astro`: 2010 coding since, **21** articles published (`getAllBlogPosts()` — 5 `post` + 16 `seriePost`, no drafts), 5000+ Malinette downloads, 1000+ people trained |
+| `about-abouttext--default`     | AboutText (`131:99`)    | full `AboutText.astro` copy verbatim — lead line, 5 prose paragraphs, `AboutFacts` (grid variant per `VARIANTS.aboutFacts`), Download CV link, 2-link secondary row                               |
+| `hero-herotext--default`       | HeroText (`131:100`)    | `HeroText.astro`/`HeroSocials.astro` verbatim — "Hi, I'm Jérôme." + subhead + mail/GitHub/LinkedIn icon links                                                                                     |
+| `contact-contacttext--default` | ContactText (`131:101`) | `ContactText.astro` verbatim — "LET'S TALK" heading, real email `dev@jeromeabel.net`, Follow row (GitHub/Bluesky/LinkedIn)                                                                        |
 
 **Token bindings**: `Title/H1` (Bubbler One 44px) for AboutText's "About" H1 and — after a
 gate-time correction (see below) — HeroText's h1, matching AboutText's own H1 exactly (both are
@@ -993,6 +1005,7 @@ per link (mail/github/linkedin-in for Hero; github/bluesky/linkedin-in for Conta
 when root is `TEXT` — none of the 4 roots are `TEXT`, all are `COMPONENT`/frame) and ran
 `diff-geometry.mjs` against `geometry.web.json`. Every delta falls into an already-established
 non-actionable category:
+
 - **Width deltas** — `aboutfacts` 760px figma vs 1248px web `.container`; `herotext` 560px figma
   vs 1248px web (manifest selector is the live `h1` alone, which stretches with its flex-item
   parent at the real homepage — not comparable to the master's intrinsic component width);
@@ -1001,7 +1014,7 @@ non-actionable category:
   832px web (`lg:w-2/3` of 1248) — **exact match**, same precedent as Batch B's WorkHeader.
 - **Font props "(absent)" on figma side for all 4** — every root is a FRAME/COMPONENT, not
   TEXT, so the Task-9 reader has nothing to read at the root; same Task-10 category-2
-  methodology artifact. Notably `herotext`'s web-side comparison *does* carry real font props
+  methodology artifact. Notably `herotext`'s web-side comparison _does_ carry real font props
   (`fontSize: 48px`, Bubbler One) since its manifest selector is the live `h1` text node itself
   — the mismatch here is a manifest-selector/master-root granularity difference (selector picks
   the text node, master root is the wrapping component), not a token or build error. The h1
@@ -1032,8 +1045,9 @@ paragraph sequence, bold lead-ins, inline links, facts block, Download-CV button
 footer row all present and in the correct order.
 
 **Named debt (not fixed, F2/F4-consistent)**:
+
 - **Flattened prose runs**: each `AboutText` paragraph mixing bold lead-ins and inline `<Link>`s
-  (e.g. "**I build web applications** with Vue and TypeScript... work at *uhlive*, on the front
+  (e.g. "**I build web applications** with Vue and TypeScript... work at _uhlive_, on the front
   end...") was built as a single plain-text run per paragraph rather than mixed text segments.
   Link labels ("uhlive", "jeromeabel.net", "La Malinette", "Framagit", "GitHub") still render as
   literal visible words — only the bold/underline visual treatment is lost, not the reading
@@ -1075,7 +1089,7 @@ was deleted and re-cloned fresh; this happened twice for Blog and once for Work,
 ### Figma Plugin API discoveries (apply to any future template/instance work)
 
 - **Nested-instance resize silently fails; `detachInstance()` is the fix.** Resizing an
-  auto-layout child living *inside* a live component INSTANCE (e.g. the "Fact" cells inside an
+  auto-layout child living _inside_ a live component INSTANCE (e.g. the "Fact" cells inside an
   `AboutFacts` instance, or the instance itself when its own children need per-breakpoint
   reflow) via `.resize()` / `.set({width})` / direct property assignment silently no-ops — the
   value snaps back to the instance's baked default. Confirmed as a genuine API limitation across
@@ -1084,7 +1098,7 @@ was deleted and re-cloned fresh; this happened twice for Blog and once for Work,
   live link to its master for that one copy only) — after that, `.resize()` works immediately.
   Used for About's `AboutText` + nested `AboutFacts` at both 768 and 390 (light + dark), to get
   the 3-col → 2-col responsive fact-grid Astro's `AboutFacts.astro` (`grid-cols-2 sm:grid-cols-3
-  lg:grid-cols-4`) requires. **This is a sanctioned, scoped exception to F2** — detaching is a
+lg:grid-cols-4`) requires. **This is a sanctioned, scoped exception to F2** — detaching is a
   structural-override necessity for per-breakpoint reflow the master itself can't express as a
   single frame, not a way to dodge "repair masters at source." The Pass-2 audit below flags these
   8 detaches explicitly so the exception stays visible rather than silently passing.
@@ -1111,6 +1125,7 @@ was deleted and re-cloned fresh; this happened twice for Blog and once for Work,
   already-resolved ancestor instead of trusting a stored instance-scoped ID across calls.
 
 ### Systemic pre-existing bugs found in every template (About, Blog, Work — not yet checked for
+
 ### Home, which was built in an earlier pass this session)
 
 - **`main` frame `paddingTop`/`paddingBottom` asymmetry**: all three had `paddingTop: 32` while
@@ -1123,7 +1138,7 @@ was deleted and re-cloned fresh; this happened twice for Blog and once for Work,
   real `lg:w-2/3 lg:gap-8` — i.e. `FIXED` at 2/3 container width with `itemSpacing: 32`, only at
   1280 (`lg` active). Fixed in Blog (`832px`/32) and Work (`832px`/32) 1280-Light; correctly left
   `FILL`/16 at 768 and 390 for both (matches `lg` not being active there).
-- Given the same two bugs independently in About, Blog, *and* Work's 1280-Light frames, these read
+- Given the same two bugs independently in About, Blog, _and_ Work's 1280-Light frames, these read
   as a copy-paste artifact from whatever process first built the four "master" 1280-Light frames,
   predating this task. Home's 1280-Light frame was built/verified in an earlier pass this session
   (before this bug pattern was identified) — **not re-checked against these two specific defects**;
@@ -1163,19 +1178,20 @@ was deleted and re-cloned fresh; this happened twice for Blog and once for Work,
   within F2's bounds): set `visible = false` on the `Type` and `Built with` text cells across the
   header row and all 6 data rows (14 nodes) in the 390-Light `ArchiveTable` instance, then
   re-cloned 390-Dark from the fixed 390-Light. Confirmed via frame height dropping 2885→2709 and
-  screenshot. At 768, `md` (768px) *is* active, so all 5 columns correctly stay visible there —
+  screenshot. At 768, `md` (768px) _is_ active, so all 5 columns correctly stay visible there —
   no fix needed at that width.
 - 1280-Dark was stale after the padding/header/copy fixes (predated them) — deleted (`154:1468`)
   and re-cloned fresh from the corrected 1280-Light.
 
 ### Strictness audit (Pass 0 inventory / Pass 1 unbound fills / Pass 2 detached instances), run
+
 ### over all 24 template frames on `📄 Pages`
 
 - **Pass 0 (live inventory)**: confirmed 24/24 canonical frame names present, no duplicates, no
   orphaned pre-fix clones left over from the delete+re-clone cycles above.
 - **Pass 1 (unbound fills/strokes)**: initial scan found 60 flags. Triaged:
   - **48 were real F4 violations, fixed**: every page-level H1/H2/lead-text node (`Selected
-    writing`, `Selected work`, `Blog`, `Work`, `Series`, `More projects`, the About hero line)
+writing`, `Selected work`, `Blog`, `Work`, `Series`, `More projects`, the About hero line)
     across all 24 frames carried a literal black (`{r:0,g:0,b:0}`) fill instead of being bound to
     the `color/foreground` variable (which already exists in the DS's color collection). Bound all
     48 via `setBoundVariableForPaint` (loading each node's current font first, per the canonical
@@ -1183,7 +1199,7 @@ was deleted and re-cloned fresh; this happened twice for Blog and once for Work,
     the raw black and the bound `color/foreground` value are the same color (no regression, pure
     tokenization).
   - **12 remain, accepted as out-of-scope decorative debt** — the `⟦ HeroAnimation —decorative,
-    not replicated ⟧` and `⟦ ContactImage — decorative, not replicated ⟧` placeholder frames (2
+not replicated ⟧` and `⟦ ContactImage — decorative, not replicated ⟧` placeholder frames (2
     each on Home, ×2 themes = 4+4) and their caption text (2+2), which stand in for CSS-animated
     web-only decorations with no static Figma equivalent. Same class as Task 11's "annotation
     caption" exclusions — not shipped design content, not tokenizable by nature.

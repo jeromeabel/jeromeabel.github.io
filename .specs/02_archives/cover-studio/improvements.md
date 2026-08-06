@@ -26,7 +26,7 @@ escaped into `startJob`'s crash guard (a), the job returned `{running: false, er
 `api.test.mjs`'s job-lock test failed on an assertion that had nothing to do with the
 filesystem.
 
-**Fixed:** `countEntries` is a progress *denominator*, not a precondition — wrapped in
+**Fixed:** `countEntries` is a progress _denominator_, not a precondition — wrapped in
 try/catch, degrades to `total: 0` (indeterminate progress). `render.mjs` re-scans content
 itself and reports the real failure on stderr, so nothing is actually hidden. Verified by
 pointing `blogRoot` at `/nonexistent/blog`: `api.test.mjs` 3/3 pass.
@@ -74,7 +74,7 @@ once-at-start scan as the likely cause.
 
 Crop edits were deliberately not snapshotted (matching the blog's `crop.mjs`), but the undo
 stack was live for illustration edits. So Ctrl+Z after a crop drag popped a checkpoint from
-*before* some unrelated earlier knob edit and reverted that instead — the crop stayed. Silent
+_before_ some unrelated earlier knob edit and reverted that instead — the crop stayed. Silent
 wrong-state, worst kind of undo bug.
 
 **Fixed:** `studio.ts`'s `snapshot()`/`undo()` now cover `{illustration, crops}` as one stack,
@@ -178,7 +178,7 @@ The blog repo has Prettier. Adding Prettier + `eslint-plugin-vue` here would hav
 ### 20. Preview is locked to `thumb`
 
 `PreviewStage.vue`'s `PREVIEW_SIZE` is a hardcoded constant. The blog's `fx.mjs` had a size
-selector. You tune at 575×300 with no way to see `cover` or `square` short of *Render exact*
+selector. You tune at 575×300 with no way to see `cover` or `square` short of _Render exact_
 or the Crop tab's preview boxes. Biggest functional regression from the port.
 
 ### 21. No way to cancel a batch render
@@ -275,7 +275,7 @@ dirty slug), and ideally a dirty dot per rail entry.
 ### [FIXED 2026-07-29] 30. `save()` baselines in-flight edits without persisting them
 
 `studio.ts:288-292` — the POST serializes call-time state, but after the `await`,
-`savedIllustration.value = toPlain(illustration.value)` captures the *current* working copy.
+`savedIllustration.value = toPlain(illustration.value)` captures the _current_ working copy.
 An edit made during the request (knobs stay enabled while saving) becomes "saved" without ever
 reaching disk — permanently unsaveable, silently lost on reload. Fix: build the payload first,
 await, assign the payload as the baseline.
@@ -287,11 +287,11 @@ The bug class fix #6 closed for crops recurs on ~9 write paths: `KnobRow` revert
 preset apply/save (`PresetsMenu.vue:35-50`), MeshPanel seed/reroll, **Materialize**
 (`MeshPanel.vue:108`) and **Back to seed** (`MeshPanel.vue:70-73`). None push a checkpoint, so
 Ctrl+Z pops an older gesture and reverts that instead. Worst: "Back to seed" shows a confirm
-dialog ("Discards N manual blobs"), then destroys the hand-tuned blob array *unrecoverably* —
+dialog ("Discards N manual blobs"), then destroys the hand-tuned blob array _unrecoverably_ —
 its state was never snapshotted. Related: keyboard-driven slider changes (arrow keys on reka-ui
 thumbs) never hit `@pointerdown`, so they coalesce into the previous gesture
 (`KnobRow.vue:195,269`, `CropTab.vue:303`, `MeshPanel.vue:159-201`). Structural fix: move
-`snapshot()` *into* the store's one-shot actions (`setStyle`, `setSeed`, `setAccent`,
+`snapshot()` _into_ the store's one-shot actions (`setStyle`, `setSeed`, `setAccent`,
 `applyPreset`, `revertKnob`, `materializeBlobs`, `clearBlobs`); keep the UI-driven pattern only
 for drag gestures.
 
@@ -299,7 +299,7 @@ for drag gestures.
 
 `PreviewStage.vue:117-134` — the debounce serializes timer starts, not loads. Each preload's
 `onload` unconditionally writes `subjectDisplaySrc`; a slow cache-miss render started earlier
-can land *after* a fast later one and replace the newer image — the preview then silently
+can land _after_ a fast later one and replace the newer image — the preview then silently
 disagrees with the store (also wrong-entry flashes across entry switches). No `onerror`: a
 failed `/api/layer` leaves the stale image up forever, indistinguishable from "my knob does
 nothing". Same feedback hole for **Render exact** (`:153-165`): no busy state; pending, slow,
@@ -312,7 +312,7 @@ visible pending/error state (dim + spinner, inline error strip, button busy).
 and CropTab's `writeTarget`/`onZoomChange` write exactly those: zoom slider only →
 `{zoom:1.3}`; zoom-only on a size tab → `{sizes:{thumb:{zoom:1.2}}}`. Both fail **both** union
 branches (each requires `focus`). Verified empirically: `validateCrops` rejects them. Result:
-`POST /api/save` 400s with a raw zod union error, blocking *all* pending edits until the user
+`POST /api/save` 400s with a raw zod union error, blocking _all_ pending edits until the user
 also drags a focal point; the same record hand-written into `data/crops.json` refuses boot and
 crashes `pnpm render`. Also `{focus, sizes:{thumb:{zoom}}}` only passes via `directCropRecord`'s
 passthrough, leaving size overrides unvalidated. Fix: make `focus` optional in both branches
@@ -321,7 +321,7 @@ passthrough, leaving size overrides unvalidated. Fix: make `focus` optional in b
 ### 34. Empty Run-drawer selections invert to "render everything"
 
 `RunDrawer.vue:147-151` + `jobs.ts:95-97` — unchecking all styles sends `styles: []`;
-`if (body.styles?.length)` treats `[]` as *no filter*, so every style renders. Same for sizes.
+`if (body.styles?.length)` treats `[]` as _no filter_, so every style renders. Same for sizes.
 Worst: "Never-rendered entries only (0)" sends `slugs: []` → **all** entries render. With no
 job cancel (#21), the expected no-op is a full batch. Fix: disable Run with a "nothing
 selected" hint when any selection set is empty, and show a "will render ~N entries × M styles"
@@ -344,7 +344,7 @@ arrays, or freeze-what-you-preview.
 
 `jobs.ts:125-167` — child handlers close over the module-level `job` binding. Between a spawn
 failure's `error` and `close` events (separate loop turns — verified), a retry POST replaces
-`job`; the old child's pending `close` then sets `job.running = false` on the *new* job,
+`job`; the old child's pending `close` then sets `job.running = false` on the _new_ job,
 releasing the single-job lock while its child still runs. Fix: capture `const state = job` at
 spawn, guard handlers with `if (job !== state) return`.
 
@@ -405,7 +405,7 @@ poll's `!running` as terminal, and render `done === 0` states.
 ### [FIXED 2026-07-29] 44. Ctrl+Shift+Z performs a second destructive undo
 
 `TopBar.vue:56-62` — no `e.shiftKey` guard (verified): the reflexive redo keystroke pops
-*another* checkpoint, compounding the loss (no redo stack, #16). Also no `e.repeat` guard —
+_another_ checkpoint, compounding the loss (no redo stack, #16). Also no `e.repeat` guard —
 holding Ctrl+Z past an empty stack stacks "Nothing to undo" toasts per key-repeat. Guard both;
 fold into the #16 redo work.
 
@@ -417,10 +417,10 @@ fold into the #16 redo work.
 - Undo doesn't restore `activeSlug`: undoing while viewing another entry reverts off-screen
   state with zero feedback (`studio.ts:332-340`) — mostly masked once #29 lands rail dirty
   markers.
-- `blobsMaterialized` reads the *effective* tier but MeshPanel edits only the image tier: a
+- `blobsMaterialized` reads the _effective_ tier but MeshPanel edits only the image tier: a
   type-tier blob array shows "materialized" with zero editable rows, and preview drags no-op
   while still pushing undo snapshots (`MeshPanel.vue:35-37`, `studio.ts:363-368`).
-- CropTab's rAF throttle processes the *first* event per frame and drops the rest — committed
+- CropTab's rAF throttle processes the _first_ event per frame and drops the rest — committed
   focus lands short of where the pointer stopped (`CropTab.vue:192-200`); store latest event,
   process in frame.
 - `NumberInput` commits any finite typed value — `min`/`max` are advisory HTML attributes, so
@@ -449,7 +449,7 @@ stay live: rerolling visibly does nothing to the mesh yet dirties the doc with a
 ### 48. Feedback and copy nits
 
 - SaveBar's "Show changes" renders the `types` row as `types: [object Object] →
-  [object Object]` (`SaveBar.vue:20-22` + `studio.ts:206-212`) — summarize ("preset 'docs'
+[object Object]` (`SaveBar.vue:20-22` + `studio.ts:206-212`) — summarize ("preset 'docs'
   edited") instead.
 - Tier badges (`inherited`/`type`/`image`) and rail badges (`tuned`/`never rendered`) have no
   tooltip or legend anywhere — the three-tier model, the app's core concept, must be inferred
@@ -487,7 +487,7 @@ dead weight. One-word fix.
 All store-level, none blocked by the known "no component tests" debt (#18): unified undo
 cross-domain semantics (knob → crop → undo reverts the crop), `undo()`'s boolean contract,
 `countEntries` degrade-to-0 (needs the scan injectable or a bad-config fixture — currently
-only exercised *incidentally* on machines without the blog checkout), NumberInput's draft
+only exercised _incidentally_ on machines without the blog checkout), NumberInput's draft
 state machine (the original `0.` bug class), App boot-state branches + `fetchData`'s
 throws-on-non-2xx contract.
 

@@ -4,7 +4,7 @@ Deterministic det→LLM→det shape, same as `dump-tokens.md`: dump (Figma) →
 diff (script, warn-only) → judge only what the script flags as new.
 
 1. Read the `/figma-use` skill (required before any `use_figma` call this session).
-2. Pick scope: usually `🧩 Components` (`52:2`) + `📄 Pages` (`44:328`) — pass
+2. Pick scope: usually `🧩 Components` (`461:759`) + `📄 Pages` (`2558:18264`) — pass
    both page IDs to `pageIds` below, or scope to one page for a narrow re-check.
 3. Run ONE `use_figma` call with the script below (per page in `pageIds` — still
    one call, the script loops pages internally, never call `setCurrentPageAsync`
@@ -16,7 +16,7 @@ diff (script, warn-only) → judge only what the script flags as new.
 
 ```js
 figma.skipInvisibleInstanceChildren = true;
-const pageIds = ["52:2", "44:328"]; // adjust per scope — re-derive from Pass 0, IDs are volatile
+const pageIds = ["461:759", "2558:18264"]; // adjust per scope — re-derive from Pass 0, IDs are volatile
 const out = [];
 for (const pid of pageIds) {
   const page = await figma.getNodeByIdAsync(pid);
@@ -26,12 +26,20 @@ for (const pid of pageIds) {
     const bv = n.boundVariables || {};
     if (Array.isArray(n.fills))
       n.fills.forEach((f, i) => {
-        if (f.type === "SOLID" && f.visible !== false && !(bv.fills && bv.fills[i]))
+        if (
+          f.type === "SOLID" &&
+          f.visible !== false &&
+          !(bv.fills && bv.fills[i])
+        )
           out.push({ id: n.id, name: n.name, page: page.name, kind: "fill" });
       });
     if (Array.isArray(n.strokes))
       n.strokes.forEach((s, i) => {
-        if (s.type === "SOLID" && s.visible !== false && !(bv.strokes && bv.strokes[i]))
+        if (
+          s.type === "SOLID" &&
+          s.visible !== false &&
+          !(bv.strokes && bv.strokes[i])
+        )
           out.push({ id: n.id, name: n.name, page: page.name, kind: "stroke" });
       });
     if (

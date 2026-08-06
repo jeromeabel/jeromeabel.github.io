@@ -61,8 +61,8 @@ Two deltas were missed on the initial 768 clones and only surfaced once the
 390 H1 visibly clipped ("WEB PERFOR..." cut off at the frame edge):
 
 - **H1/abstract font size** — `H1.astro` is `text-4xl sm:text-5xl
-  lg:text-6xl` (36/48/60px) and `P.astro` is `text-xl md:text-2xl
-  xl:text-3xl` (20/24/30px). The 768/390 clones had carried over the 1280
+lg:text-6xl` (36/48/60px) and `P.astro` is `text-xl md:text-2xl
+xl:text-3xl` (20/24/30px). The 768/390 clones had carried over the 1280
   values unchanged (60px H1 / 30px abstract). The SERIE H1 sits in a `HUG`-
   sized icon+H1 row (unlike POST's H1, which is FILL-width and wraps instead
   of clipping), so at 390 the oversized 60px text ran off the frame edge
@@ -93,14 +93,14 @@ children either.
 All 6 frames screenshotted and compared against Playwright captures of
 `/blog/web-performance` at matching viewport/theme:
 
-| Frame | ID | Result |
-|---|---|---|
-| SERIE — 1280 — Light | `257:3098` | Matches (approved prior session) |
-| SERIE — 1280 — Dark | `263:3170` | Matches |
-| SERIE — 768 — Light | `265:3243` | Matches after Header/Footer FILL fix, nav-align fix, header-gap fix, H1/P font-size fix |
-| SERIE — 768 — Dark | `265:3341` | Matches (same fixes) |
-| SERIE — 390 — Light | `270:3389` | Matches after header-gap + H1/P font-size fix (resolved H1 clipping) |
-| SERIE — 390 — Dark | `270:3545` | Matches (same fixes) |
+| Frame                | ID         | Result                                                                                  |
+| -------------------- | ---------- | --------------------------------------------------------------------------------------- |
+| SERIE — 1280 — Light | `257:3098` | Matches (approved prior session)                                                        |
+| SERIE — 1280 — Dark  | `263:3170` | Matches                                                                                 |
+| SERIE — 768 — Light  | `265:3243` | Matches after Header/Footer FILL fix, nav-align fix, header-gap fix, H1/P font-size fix |
+| SERIE — 768 — Dark   | `265:3341` | Matches (same fixes)                                                                    |
+| SERIE — 390 — Light  | `270:3389` | Matches after header-gap + H1/P font-size fix (resolved H1 clipping)                    |
+| SERIE — 390 — Dark   | `270:3545` | Matches (same fixes)                                                                    |
 
 ## Named debt (inherited, not introduced by this task, not fixed)
 

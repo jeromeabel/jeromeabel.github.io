@@ -27,12 +27,12 @@
 
 ## Real content (use verbatim)
 
-| Template | Route | Content entry | Why this entry |
-| --- | --- | --- | --- |
-| blog-post | `/blog/[id]` | `api-endpoints-with-astro` | has `related_work` (→ RelatedWork renders) + 10 h2/h3 (→ TOC, threshold ≥4) |
-| serie-landing | `/blog/[serie]` | `web-performance` (5 parts) | documented serie; 5 SeriePostListItem rows |
-| serie-post | `/blog/[serie]/[post]` | `web-performance/02-data-driven` | mid-serie (has prev **and** next); confirm ≥4 headings for TOC in Task 0 |
-| work-detail | `/work/[id]` | `leconceptdelapreuve` | has `related_posts` (→ RelatedWriting renders) |
+| Template      | Route                  | Content entry                    | Why this entry                                                              |
+| ------------- | ---------------------- | -------------------------------- | --------------------------------------------------------------------------- |
+| blog-post     | `/blog/[id]`           | `api-endpoints-with-astro`       | has `related_work` (→ RelatedWork renders) + 10 h2/h3 (→ TOC, threshold ≥4) |
+| serie-landing | `/blog/[serie]`        | `web-performance` (5 parts)      | documented serie; 5 SeriePostListItem rows                                  |
+| serie-post    | `/blog/[serie]/[post]` | `web-performance/02-data-driven` | mid-serie (has prev **and** next); confirm ≥4 headings for TOC in Task 0    |
+| work-detail   | `/work/[id]`           | `leconceptdelapreuve`            | has `related_posts` (→ RelatedWriting renders)                              |
 
 Pull the actual title / abstract / date / heading strings from each `index.md` frontmatter and body at build time — do not paraphrase.
 
@@ -40,21 +40,21 @@ Pull the actual title / abstract / date / heading strings from each `index.md` f
 
 ## Master → template map (what each template instances)
 
-| Master (🧩 Components) | Hint ID | blog-post | serie-landing | serie-post | work-detail |
-| --- | --- | :-: | :-: | :-: | :-: |
-| Header (`HEADER`) | `41:3` | ✓ | ✓ | ✓ | ✓ |
-| Footer (`FOOTER`) | `42:3` | ✓ | ✓ | ✓ | ✓ |
-| TopicChip (`TOPIC-CHIP`) | `15:9` | ✓ | | ✓ | |
-| TableOfContents (`TOC`) | `36:3` | ✓ | | ✓ | |
-| LinkNavPost (`LINK-NAV-POST` SET) | `34:17` | ✓ | | ✓ | |
-| RelatedWork (`BLOG`) | `117:77` | ✓ | | | |
-| WorkMiniCard (`WORK-CARDS`) | `32:9` | ✓ (in RelatedWork) | | | |
-| SeriePostListItem (`BLOG`) | `119:83` | | ✓ | | |
-| SerieContents (`BLOG`) | `118:83` | | | ✓ | |
-| WorkHeader (`WORK`) | `127:95` | | | | ✓ |
-| RelatedWriting (`WORK`) | `125:83` | | | | ✓ |
-| PostRowCalm | **verify in Task 0** | | | | ✓ (in RelatedWriting) |
-| Link (`LINK` SET) | `13:13` | ✓ | ✓ | ✓ | ✓ |
+| Master (🧩 Components)            | Hint ID              |     blog-post      | serie-landing | serie-post |      work-detail      |
+| --------------------------------- | -------------------- | :----------------: | :-----------: | :--------: | :-------------------: |
+| Header (`HEADER`)                 | `41:3`               |         ✓          |       ✓       |     ✓      |           ✓           |
+| Footer (`FOOTER`)                 | `42:3`               |         ✓          |       ✓       |     ✓      |           ✓           |
+| TopicChip (`TOPIC-CHIP`)          | `15:9`               |         ✓          |               |     ✓      |                       |
+| TableOfContents (`TOC`)           | `36:3`               |         ✓          |               |     ✓      |                       |
+| LinkNavPost (`LINK-NAV-POST` SET) | `34:17`              |         ✓          |               |     ✓      |                       |
+| RelatedWork (`BLOG`)              | `117:77`             |         ✓          |               |            |                       |
+| WorkMiniCard (`WORK-CARDS`)       | `32:9`               | ✓ (in RelatedWork) |               |            |                       |
+| SeriePostListItem (`BLOG`)        | `119:83`             |                    |       ✓       |            |                       |
+| SerieContents (`BLOG`)            | `118:83`             |                    |               |     ✓      |                       |
+| WorkHeader (`WORK`)               | `127:95`             |                    |               |            |           ✓           |
+| RelatedWriting (`WORK`)           | `125:83`             |                    |               |            |           ✓           |
+| PostRowCalm                       | **verify in Task 0** |                    |               |            | ✓ (in RelatedWriting) |
+| Link (`LINK` SET)                 | `13:13`              |         ✓          |       ✓       |     ✓      |           ✓           |
 
 **Out of scope** (not on any detail route): PostListItem (blog index), ValueCard (about), 3 Legacy masters.
 
@@ -88,6 +88,7 @@ Shared responsive rules (apply wherever the element appears):
 **Files:** (Figma, read-only) — no `.astro` edits.
 
 **Interfaces:**
+
 - Produces: a resolved-by-name ID table for every master + page in the Master→template map; confirmed frame-background fills; confirmed PostRowCalm master status; confirmed content entry facts.
 
 - [ ] **Step 1: Preflight** — run `/figma-use`. Confirm the plugin API rules loaded.
@@ -109,9 +110,11 @@ Shared responsive rules (apply wherever the element appears):
 **Goal:** Verify (repair only if the screenshot diff fails) the masters the blog templates instance: TopicChip, TableOfContents, LinkNavPost, SeriePostListItem, SerieContents, RelatedWork (+ WorkMiniCard child).
 
 **Files:** 🧩 Components masters (resolved in Task 0). Sources to diff against:
+
 - `src/components/blog/TopicChips.astro`, `TableOfContents.astro`, `SeriePostListItem.astro`, `SerieContents.astro`, `RelatedWork.astro`, `src/components/ui/LinkNavPost.astro`, `src/components/work/WorkMiniCard.astro` + their `.stories.ts`.
 
 **Interfaces:**
+
 - Consumes: resolved master IDs from Task 0.
 - Produces: each master confirmed instance-ready (auto-layout, tokens bound, real content), or repaired to be so.
 
@@ -132,6 +135,7 @@ Shared responsive rules (apply wherever the element appears):
 **Files:** 🧩 Components. Sources: `src/components/work/WorkHeader.astro`, `RelatedWriting.astro`, `src/components/blog/PostRowCalm.astro` + stories.
 
 **Interfaces:**
+
 - Consumes: resolved IDs + PostRowCalm status from Task 0.
 - Produces: WorkHeader, RelatedWriting, PostRowCalm all instance-ready.
 
@@ -152,10 +156,12 @@ Shared responsive rules (apply wherever the element appears):
 **Files:** 📄 Pages → new `PAGE/POST` section. Source of truth: `src/pages/blog/[id].astro`.
 
 **Interfaces:**
+
 - Consumes: masters from Tasks 1–2; Home reference from Task 0.
 - Produces: 6 verified frames `POST — {1280,768,390} — {Light,Dark}`.
 
 **Layout tree (inside `main` container, top→bottom):**
+
 1. `header` block (`border-b`, `pb-6/lg:pb-12`, width 2/3 at 1280): breadcrumb nav (`Link "BLOG" menuInactive` + chevron-right icon) → H1 (real title) → P (real abstract) → meta row: [calendar icon + date + clock icon + read-time] · **TopicChip** instance(s) for the post's topic · SocialShare (share icons).
 2. Hero **CustomImage** (the post's `img`) — placeholder image node bound to the real asset name.
 3. Content + TOC row: **Prose** block (real rendered markdown — use representative heading/paragraph text from the post) on the left; **TableOfContents** instance in a `w-56` sticky sidebar on the right (1280/768 only).
@@ -179,10 +185,12 @@ Shared responsive rules (apply wherever the element appears):
 **Files:** 📄 Pages → new `PAGE/SERIE` section. Source: `src/pages/blog/[serie]/index.astro`.
 
 **Interfaces:**
+
 - Consumes: SeriePostListItem master (Task 1).
 - Produces: 6 verified frames `SERIE — {1280,768,390} — {Light,Dark}`.
 
 **Layout tree:**
+
 1. `header` block (width 2/3 at 1280, **no** bottom border here): breadcrumb nav (`Link "BLOG"` + chevron) → row [folder icon (`lucide:folder`, `text-2xl`, muted) + H1 real serie title] → P (real serie abstract) → stats row: [layers icon + "N parts"] + [clock icon + read label, e.g. "~1h 20m read" — compute from real serie].
 2. A `border-t` divider, then the list: **5 SeriePostListItem** instances (the real `web-performance` part titles/dates/read-times, numbered 1–5).
 
@@ -202,10 +210,12 @@ Shared responsive rules (apply wherever the element appears):
 **Files:** 📄 Pages → new `PAGE/SERIE-POST` section. Source: `src/pages/blog/[serie]/[post].astro`.
 
 **Interfaces:**
+
 - Consumes: TopicChip, TableOfContents, LinkNavPost, SerieContents masters.
 - Produces: 6 verified frames `SERIE-POST — {1280,768,390} — {Light,Dark}`.
 
 **Layout tree (deltas vs blog-post called out):**
+
 1. `header` (`border-b`, width 2/3 at 1280): **two-segment breadcrumb** — segment A [`Link "Blog"` + chevron], segment B [`Link` real serie title + chevron + "Part 2 of 5" text]; the nav is `flex-col md:flex-row` (stacked at 390, row at ≥768) → H1 (real post title) → P (abstract) → meta row (date/read-time · TopicChip · SocialShare) — identical to blog-post.
 2. Hero CustomImage (post `img`).
 3. Content + TOC row — same as blog-post (Prose + sticky TableOfContents sidebar 1280/768; mobile `<details>` at 390).
@@ -228,10 +238,12 @@ Shared responsive rules (apply wherever the element appears):
 **Files:** 📄 Pages → new `PAGE/WORK-DETAIL` section. Source: `src/pages/work/[id].astro`.
 
 **Interfaces:**
+
 - Consumes: WorkHeader, RelatedWriting (+ PostRowCalm) masters (Task 2).
 - Produces: 6 verified frames `WORK-DETAIL — {1280,768,390} — {Light,Dark}`.
 
 **Layout tree** (note: no container on the outer `main`; inner blocks each use `container`):
+
 1. `container` block: **WorkHeader** instance (real `leconceptdelapreuve` title/meta) → hero **CustomImage** (work `img`).
 2. **Prose** block (`md:mx-auto`) — representative rendered markdown of the work.
 3. `container` block (`mt-12/lg:mt-16`): **RelatedWriting** instance (real `related_posts` titles as PostRowCalm rows).
@@ -251,6 +263,7 @@ Shared responsive rules (apply wherever the element appears):
 **Goal:** Final cross-template audit and documentation.
 
 **Files:**
+
 - `.claude/skills/figma-verify/knowledge/figma-ds-file.md` (update Page-templates table, gap note, change log)
 - `.specs/INDEX.md` (via `./.specs/specs.sh archive figma-detail-templates` when shipped)
 

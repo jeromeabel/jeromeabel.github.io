@@ -17,18 +17,18 @@ dump is billed as tokens, twice (tool result + any reasoning over it).
 
 Evidence from `figma-variables` Plan 2:
 
-| Symptom | Where |
-|---|---|
-| `bindings.figma.json` is 212 KB (~53k tokens of raw JSON) | repo root |
-| A "row-shrinking fallback" had to be documented — drop `name` from each row so a page's response fits | `scripts/figma/dump-bindings.md:85-94` |
-| Task 5 stalled twice without advancing the dump | `.superpowers/sdd/plan-2-primitives-merge/progress.md` |
-| The audit ran across ~8,400 bindings over many turns, split page-by-page | session log 2026-08-03 |
-| MCP `get_metadata` page list is stale — pages had to be re-verified with `getNodeByIdAsync` | `scripts/figma/dump-bindings.md:20-33`, memory `project_figma-design-system` |
+| Symptom                                                                                               | Where                                                                        |
+| ----------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `bindings.figma.json` is 212 KB (~53k tokens of raw JSON)                                             | repo root                                                                    |
+| A "row-shrinking fallback" had to be documented — drop `name` from each row so a page's response fits | `scripts/figma/dump-bindings.md:85-94`                                       |
+| Task 5 stalled twice without advancing the dump                                                       | `.superpowers/sdd/plan-2-primitives-merge/progress.md`                       |
+| The audit ran across ~8,400 bindings over many turns, split page-by-page                              | session log 2026-08-03                                                       |
+| MCP `get_metadata` page list is stale — pages had to be re-verified with `getNodeByIdAsync`           | `scripts/figma/dump-bindings.md:20-33`, memory `project_figma-design-system` |
 
 So the requirements for any alternative:
 
 - **R1** — run arbitrary Plugin API JS (nothing else can read `boundVariables` with
-  variable *names* + collection on our plan).
+  variable _names_ + collection on our plan).
 - **R2** — land the result on **disk**, not in context. Non-negotiable; this is the
   whole point.
 - **R3** — read the **live** document, not a cached/CDN snapshot (fixes the stale
@@ -64,7 +64,7 @@ So the requirements for any alternative:
   `tokens tailwind`, `lint --fix`) is irrelevant to us and could do damage if
   invoked by accident. Read-only scripts first; the read-only backup
   `Wf4iomVMYUXlFIBV3Z8bx4` must never be the open file when writing.
-- **Verdict**: best candidate. Use it as a *script runner*, ignore its feature surface.
+- **Verdict**: best candidate. Use it as a _script runner_, ignore its feature surface.
 
 ### C. silships/figma-cli — Yolo Mode (default)
 
@@ -102,9 +102,9 @@ tiny local WebSocket server, invoked from a Node script.
 ### G. Figma REST API — file/nodes endpoints
 
 `GET /v1/files/:key` returns node JSON that includes a `boundVariables` field with
-variable *IDs*.
+variable _IDs_.
 
-- **Unverified**: whether variable *names* and collection membership resolve without
+- **Unverified**: whether variable _names_ and collection membership resolve without
   the Enterprise Variables API — probably not, which is exactly what our dump rows
   need (`varName`, `col`).
 - **Also**: REST serves a published/snapshot view, so R3 (live doc) is doubtful.
@@ -122,7 +122,7 @@ trigger a browser download, move the file into the repo.
 
 ### I. Adjacent, different problem — noted so it isn't re-litigated
 
-- **Tokens Studio / Style Dictionary** — sync a token *source of truth* between git
+- **Tokens Studio / Style Dictionary** — sync a token _source of truth_ between git
   and Figma. Our tokens already live in Figma (443 primitives) and in
   `src/styles/global.css` `@theme`. Could matter for a future one-way
   Figma→CSS generator; solves nothing about binding inventory.
@@ -133,16 +133,16 @@ trigger a browser download, move the file into the repo.
 
 ## 3. Matrix
 
-| | Arbitrary JS | Output to disk | Live doc | Write | Plan req. | Trust | Effort |
-|---|---|---|---|---|---|---|---|
-| A. MCP `use_figma` | ✅ | ❌ | ✅ | ✅ | any | first-party | none (in place) |
-| B. figma-cli Safe | ✅ | ✅ | ✅ | ✅ | any | 3rd-party, 839★ | ~1h |
-| C. figma-cli Yolo | ✅ | ✅ | ✅ | ✅ | any | **patches app** | ~1h |
-| D. figma-agent-cli | ✅ | ✅ | ✅ | ✅ | any | 3rd-party, 0★ | ~1h |
-| E. own bridge | ✅ | ✅ | ✅ | ✅ | any | ours | ~4h |
-| F. REST variables | n/a | ✅ | ✅ | ✅ | **Enterprise** | first-party | — |
-| G. REST files | ❌ | ✅ | ⚠️ | ❌ | any | first-party | ~10min to test |
-| H. manual plugin | ✅ | ✅ | ✅ | ✅ | any | ours | ~30min, manual |
+|                    | Arbitrary JS | Output to disk | Live doc | Write | Plan req.      | Trust           | Effort          |
+| ------------------ | ------------ | -------------- | -------- | ----- | -------------- | --------------- | --------------- |
+| A. MCP `use_figma` | ✅           | ❌             | ✅       | ✅    | any            | first-party     | none (in place) |
+| B. figma-cli Safe  | ✅           | ✅             | ✅       | ✅    | any            | 3rd-party, 839★ | ~1h             |
+| C. figma-cli Yolo  | ✅           | ✅             | ✅       | ✅    | any            | **patches app** | ~1h             |
+| D. figma-agent-cli | ✅           | ✅             | ✅       | ✅    | any            | 3rd-party, 0★   | ~1h             |
+| E. own bridge      | ✅           | ✅             | ✅       | ✅    | any            | ours            | ~4h             |
+| F. REST variables  | n/a          | ✅             | ✅       | ✅    | **Enterprise** | first-party     | —               |
+| G. REST files      | ❌           | ✅             | ⚠️       | ❌    | any            | first-party     | ~10min to test  |
+| H. manual plugin   | ✅           | ✅             | ✅       | ✅    | any            | ours            | ~30min, manual  |
 
 ## 4. Recommended path
 

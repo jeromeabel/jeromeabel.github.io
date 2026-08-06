@@ -89,13 +89,13 @@ First full contact-sheet judgement. **Incomplete** — covered slugs 1–8 alpha
 
 **Emerging style ↔ image-type map** (the round's main output; feeds `resolveStyle()` in §2):
 
-| Image type            | Verdict                                   | Entries judged                     |
-| --------------------- | ----------------------------------------- | ---------------------------------- |
-| Hand drawing          | **dither** (winner)                       | adding-likes, api-endpoints        |
-| Hand drawing (accent) | dither + accent — combo added as `dither-<accent>` | api-endpoints             |
-| UI screenshot         | **framed**                                | argentbank; dirpictures unjudged   |
-| Photo                 | undecided — dither / framed / duotone / duotone-accent all plausible; needs more contrast to separate | chimeres, commitcraty, craslab |
-| Digital drawing       | duotone or duotone-accent                 | fable                              |
+| Image type            | Verdict                                                                                               | Entries judged                   |
+| --------------------- | ----------------------------------------------------------------------------------------------------- | -------------------------------- |
+| Hand drawing          | **dither** (winner)                                                                                   | adding-likes, api-endpoints      |
+| Hand drawing (accent) | dither + accent — combo added as `dither-<accent>`                                                    | api-endpoints                    |
+| UI screenshot         | **framed**                                                                                            | argentbank; dirpictures unjudged |
+| Photo                 | undecided — dither / framed / duotone / duotone-accent all plausible; needs more contrast to separate | chimeres, commitcraty, craslab   |
+| Digital drawing       | duotone or duotone-accent                                                                             | fable                            |
 
 **Tuning applied to `SETTINGS`** (round-1 feedback → `illustrate.mjs`):
 

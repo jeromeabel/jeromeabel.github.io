@@ -10,7 +10,7 @@ The oklch to hex conversion uses Björn Ottosson's reference constants and produ
 These are not conversion errors — they are **expected Tailwind v3→v4 palette
 differences**. Tailwind v4 genuinely redefined its color palette using
 different oklch values than what v3 published as hex; the generator is
-correctly reproducing the *installed v4* palette, not drifting from it. (See
+correctly reproducing the _installed v4_ palette, not drifting from it. (See
 `build-primitives.test.mjs`'s `oklch converts to sRGB hexes (Tailwind v4
 values)` test, which asserts the v4-correct hexes directly and documents the
 same v3-vs-v4 framing.)
