@@ -7,6 +7,7 @@
     "light/color-border": "2 Theme/Light/color/border",
     "light/color-surface": "2 Theme/Light/color/surface",
     "light/color-surface-hover": "2 Theme/Light/color/surface-hover",
+    "light/color-surface-raised": "2 Theme/Light/color/surface-raised",
     "light/color-accent": "2 Theme/Light/color/accent",
     "light/color-accent-hover": "2 Theme/Light/color/accent-hover",
     "light/color-accent-strong": "2 Theme/Light/color/accent-strong",
@@ -18,6 +19,7 @@
     "dark/color-border": "2 Theme/Dark/color/border",
     "dark/color-surface": "2 Theme/Dark/color/surface",
     "dark/color-surface-hover": "2 Theme/Dark/color/surface-hover",
+    "dark/color-surface-raised": "2 Theme/Dark/color/surface-raised",
     "dark/color-accent": "2 Theme/Dark/color/accent",
     "dark/color-accent-hover": "2 Theme/Dark/color/accent-hover",
     "dark/color-accent-strong": "2 Theme/Dark/color/accent-strong",
@@ -30,9 +32,5 @@
     "spacing-section": "3 Responsive/Mobile/section/rhythm-y",
     "spacing-section-lg": "3 Responsive/Desktop/section/rhythm-y"
   },
-  "ignore": [
-    "font-sans",
-    "font-title",
-    "font-mono"
-  ]
+  "ignore": ["font-sans", "font-title", "font-mono"]
 }

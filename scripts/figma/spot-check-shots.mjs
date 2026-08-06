@@ -7,13 +7,25 @@ import { chromium } from "playwright";
 const outDir = process.argv[2] || ".";
 
 const TARGETS = [
-  { url: "http://localhost:4321/blog/api-endpoints-with-astro", width: 1280, theme: "light", name: "post-1280-light" },
-  { url: "http://localhost:4321/blog/api-endpoints-with-astro", width: 390, theme: "dark", name: "post-390-dark" },
+  {
+    url: "http://localhost:4321/blog/api-endpoints-with-astro",
+    width: 1280,
+    theme: "light",
+    name: "post-1280-light",
+  },
+  {
+    url: "http://localhost:4321/blog/api-endpoints-with-astro",
+    width: 390,
+    theme: "dark",
+    name: "post-390-dark",
+  },
 ];
 
 const browser = await chromium.launch();
 for (const t of TARGETS) {
-  const page = await browser.newPage({ viewport: { width: t.width, height: 1000 } });
+  const page = await browser.newPage({
+    viewport: { width: t.width, height: 1000 },
+  });
   await page.goto(t.url, { waitUntil: "domcontentloaded" });
   if (t.theme === "dark") {
     await page.evaluate(() => {

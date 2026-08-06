@@ -9,7 +9,9 @@ import { readFileSync } from "node:fs";
 
 const [rawPath, debtPath] = process.argv.slice(2);
 if (!debtPath) {
-  console.error("usage: diff-raw-values.mjs <raw-values.figma.json> <named-debt.json>");
+  console.error(
+    "usage: diff-raw-values.mjs <raw-values.figma.json> <named-debt.json>",
+  );
   process.exit(0);
 }
 
@@ -67,6 +69,8 @@ try {
     ].join("\n"),
   );
 } catch (err) {
-  console.error(`warn: diff computation failed on malformed input: ${err.message}`);
+  console.error(
+    `warn: diff computation failed on malformed input: ${err.message}`,
+  );
   process.exit(0);
 }

@@ -82,14 +82,19 @@ test("spacing scale synthesized from base unit (36 total: DEFAULT + 35 canonical
   assert.equal(byName["spacing/8"].value, 32); // 8 * 4px
   assert.equal(byName["spacing/96"].value, 384); // 96 * 4px
   const spacingVars = variables.filter((v) => v.name.startsWith("spacing/"));
-  assert.equal(spacingVars.length, 36, "DEFAULT (parsed) + 35 synthesized keys");
+  assert.equal(
+    spacingVars.length,
+    36,
+    "DEFAULT (parsed) + 35 synthesized keys",
+  );
 });
 
 test("achromatic colors (zero-chroma oklch) convert to hex not string", () => {
   // Tailwind v4 writes zero-chroma colors as oklch(L% 0 none) where 'none' replaces hue.
   // These should convert to COLOR type (hex), not fall through to STRING.
   const achromatic = variables.filter(
-    (v) => v.name.startsWith("color/neutral/") || v.name.startsWith("color/zinc/"),
+    (v) =>
+      v.name.startsWith("color/neutral/") || v.name.startsWith("color/zinc/"),
   );
   assert.ok(achromatic.length > 0, "neutral and zinc colors exist");
   assert.ok(

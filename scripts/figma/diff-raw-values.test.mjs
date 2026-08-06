@@ -29,7 +29,12 @@ function runDiff(raw, debt) {
 
 const debt = {
   accepted: [
-    { id: "32:5", name: "plus", kind: "fill", reason: "overlay bg, dark in both themes" },
+    {
+      id: "32:5",
+      name: "plus",
+      kind: "fill",
+      reason: "overlay bg, dark in both themes",
+    },
   ],
 };
 

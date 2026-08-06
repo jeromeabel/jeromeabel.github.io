@@ -17,17 +17,25 @@ try {
   process.exit(0);
 }
 
-const px = (v) => (typeof v === "string" && v.endsWith("px") ? parseFloat(v) : NaN);
+const px = (v) =>
+  typeof v === "string" && v.endsWith("px") ? parseFloat(v) : NaN;
 const rows = [];
 for (const [id, viewports] of Object.entries(web)) {
   const webRoot = viewports?.desktop?.light?.root;
   if (!webRoot) continue;
   const figRoot = fig[id]?.root;
-  if (!figRoot) { rows.push(`- \`${id}\`: **missing in Figma** (no master matched)`); continue; }
+  if (!figRoot) {
+    rows.push(`- \`${id}\`: **missing in Figma** (no master matched)`);
+    continue;
+  }
   for (const [prop, wVal] of Object.entries(webRoot)) {
     const fVal = figRoot[prop];
-    if (fVal == null) { rows.push(`- \`${id}\`.${prop}: web **${wVal}** vs figma **(absent)**`); continue; }
-    const wPx = px(wVal), fPx = px(fVal);
+    if (fVal == null) {
+      rows.push(`- \`${id}\`.${prop}: web **${wVal}** vs figma **(absent)**`);
+      continue;
+    }
+    const wPx = px(wVal),
+      fPx = px(fVal);
     // rounded-full renders as an enormous px value in getComputedStyle
     // (browsers cap border-radius at half the box size); Figma expresses the
     // same "fully round" intent as 9999px. Both are "very round" - treat as
@@ -38,8 +46,12 @@ for (const [id, viewports] of Object.entries(web)) {
       ? true
       : !Number.isNaN(wPx) && !Number.isNaN(fPx)
         ? Math.abs(wPx - fPx) <= 0.5
-        : String(wVal).replace(/\s+/g, "").toLowerCase() === String(fVal).replace(/\s+/g, "").toLowerCase();
-    if (!ok) rows.push(`- \`${id}\`.${prop}: web **${wVal}** vs figma **${fVal}**`);
+        : String(wVal).replace(/\s+/g, "").toLowerCase() ===
+          String(fVal).replace(/\s+/g, "").toLowerCase();
+    if (!ok)
+      rows.push(`- \`${id}\`.${prop}: web **${wVal}** vs figma **${fVal}**`);
   }
 }
-console.log(`## Geometry worklist\n\n${rows.length ? rows.join("\n") : "_clean_"}\n`);
+console.log(
+  `## Geometry worklist\n\n${rows.length ? rows.join("\n") : "_clean_"}\n`,
+);

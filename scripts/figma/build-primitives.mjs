@@ -146,8 +146,7 @@ for (const m of css.matchAll(/^\s*--([\w-]+):\s*([^;]+);/gm)) {
       type: "COLOR",
       value: oklchToHex(Number(okl[1]) / 100, Number(okl[2]), hue),
     };
-  }
-  else if (hex) {
+  } else if (hex) {
     // Normalize short hex codes to 6-digit format
     let hexVal = hex[1].toLowerCase();
     if (hexVal.length === 3) {
@@ -157,8 +156,7 @@ for (const m of css.matchAll(/^\s*--([\w-]+):\s*([^;]+);/gm)) {
         .join("");
     }
     entry = { type: "COLOR", value: "#" + hexVal };
-  }
-  else if (rem) {
+  } else if (rem) {
     const remValue = Number(rem[1]);
     const pxValue = Math.round(remValue * ROOT_PX * 1000) / 1000;
     entry = { type: "FLOAT", value: pxValue };
@@ -199,9 +197,41 @@ if (spacingBasePx === null) {
 // Synthesize Tailwind's canonical spacing scale from the base unit.
 // These keys match Tailwind's default config; values are multiples of spacingBasePx.
 const SPACING_KEYS = [
-  "0", "px", "0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "5", "6", "7",
-  "8", "9", "10", "11", "12", "14", "16", "20", "24", "28", "32", "36", "40",
-  "44", "48", "52", "56", "60", "64", "72", "80", "96",
+  "0",
+  "px",
+  "0.5",
+  "1",
+  "1.5",
+  "2",
+  "2.5",
+  "3",
+  "3.5",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "10",
+  "11",
+  "12",
+  "14",
+  "16",
+  "20",
+  "24",
+  "28",
+  "32",
+  "36",
+  "40",
+  "44",
+  "48",
+  "52",
+  "56",
+  "60",
+  "64",
+  "72",
+  "80",
+  "96",
 ];
 for (const key of SPACING_KEYS) {
   const name = `spacing/${key}`;

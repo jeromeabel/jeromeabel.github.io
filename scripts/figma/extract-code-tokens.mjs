@@ -17,25 +17,41 @@ const ROOT_PX = 16;
 const BREAKPOINTS = { sm: 640, md: 768, lg: 1024, xl: 1280, "2xl": 1536 };
 
 function read(p) {
-  try { return readFileSync(p, "utf8"); }
-  catch { console.error(`MISSING SOURCE: ${p}`); process.exit(2); }
+  try {
+    return readFileSync(p, "utf8");
+  } catch {
+    console.error(`MISSING SOURCE: ${p}`);
+    process.exit(2);
+  }
 }
 const round = (n) => Math.round(n * 1000) / 1000;
 const tokens = [];
-const push = (name, raw, px, cls, source) => tokens.push({ name, raw, px, class: cls, source });
+const push = (name, raw, px, cls, source) =>
+  tokens.push({ name, raw, px, class: cls, source });
 
 // Brace-matched block body extractor (handles nested {} inside a block).
 function block(css, header) {
   const start = css.indexOf(header);
-  if (start === -1) { console.error(`MISSING BLOCK: ${header} in global.css`); process.exit(2); }
-  let depth = 0, body = "";
+  if (start === -1) {
+    console.error(`MISSING BLOCK: ${header} in global.css`);
+    process.exit(2);
+  }
+  let depth = 0,
+    body = "";
   for (let i = css.indexOf("{", start); i < css.length; i++) {
     const ch = css[i];
-    if (ch === "{") { depth++; if (depth === 1) continue; }
-    if (ch === "}") { depth--; if (depth === 0) return body; }
+    if (ch === "{") {
+      depth++;
+      if (depth === 1) continue;
+    }
+    if (ch === "}") {
+      depth--;
+      if (depth === 0) return body;
+    }
     if (depth >= 1) body += ch;
   }
-  console.error(`UNCLOSED BLOCK: ${header}`); process.exit(2);
+  console.error(`UNCLOSED BLOCK: ${header}`);
+  process.exit(2);
 }
 
 const css = read(CSS);
@@ -77,16 +93,33 @@ const css = read(CSS);
 {
   const theme = block(css, "@theme");
   for (const m of theme.matchAll(/--(font-[\w-]+):\s*([\s\S]*?);/g))
-    push(m[1], m[2].replace(/\s+/g, " ").trim(), null, "font", "global.css @theme");
+    push(
+      m[1],
+      m[2].replace(/\s+/g, " ").trim(),
+      null,
+      "font",
+      "global.css @theme",
+    );
   for (const m of theme.matchAll(/--(font-[\w-]+):\s*([\s\S]*?);/g)) {
     const stack = m[2].replace(/\s+/g, " ").trim();
     // First family only — Figma FONT_FAMILY variables hold one family, not a
     // fallback stack, so this is the value the diff can actually compare.
-    const first = stack.split(",")[0].trim().replace(/^["']|["']$/g, "");
+    const first = stack
+      .split(",")[0]
+      .trim()
+      .replace(/^["']|["']$/g, "");
     push(`${m[1]}-primary`, first, null, "font", "global.css @theme");
   }
-  for (const m of theme.matchAll(/--(color-[\w-]+):\s*(#[0-9a-fA-F]{3,8})\s*;/g))
-    push(`light/${m[1]}`, m[2].toLowerCase(), null, "color", "global.css @theme");
+  for (const m of theme.matchAll(
+    /--(color-[\w-]+):\s*(#[0-9a-fA-F]{3,8})\s*;/g,
+  ))
+    push(
+      `light/${m[1]}`,
+      m[2].toLowerCase(),
+      null,
+      "color",
+      "global.css @theme",
+    );
   for (const m of theme.matchAll(
     /--(spacing-section(?:-lg)?):\s*([\d.]+)(rem|px)\s*;/g,
   )) {
@@ -99,7 +132,13 @@ const css = read(CSS);
 {
   const dark = block(css, "@variant dark");
   for (const m of dark.matchAll(/--(color-[\w-]+):\s*(#[0-9a-fA-F]{3,8})\s*;/g))
-    push(`dark/${m[1]}`, m[2].toLowerCase(), null, "color", "global.css @variant dark");
+    push(
+      `dark/${m[1]}`,
+      m[2].toLowerCase(),
+      null,
+      "color",
+      "global.css @variant dark",
+    );
 }
 
 // 4. @utility container — max-width (breakpoint var → px) + inline padding
@@ -109,21 +148,51 @@ const css = read(CSS);
   const litMatch = c.match(/max-width:\s*([\d.]+)(rem|px)/);
   if (varMatch) {
     const px = BREAKPOINTS[varMatch[1]];
-    if (px == null) { console.error(`UNKNOWN BREAKPOINT: --breakpoint-${varMatch[1]}`); process.exit(3); }
-    push("container-max-width", `var(--breakpoint-${varMatch[1]})`, px, "px-css", "global.css @utility container");
+    if (px == null) {
+      console.error(`UNKNOWN BREAKPOINT: --breakpoint-${varMatch[1]}`);
+      process.exit(3);
+    }
+    push(
+      "container-max-width",
+      `var(--breakpoint-${varMatch[1]})`,
+      px,
+      "px-css",
+      "global.css @utility container",
+    );
   } else if (litMatch) {
-    const px = litMatch[2] === "rem" ? round(Number(litMatch[1]) * ROOT_PX) : Number(litMatch[1]);
-    push("container-max-width", `${litMatch[1]}${litMatch[2]}`, px, "px-css", "global.css @utility container");
-  } else { console.error("UNPARSEABLE container max-width"); process.exit(3); }
+    const px =
+      litMatch[2] === "rem"
+        ? round(Number(litMatch[1]) * ROOT_PX)
+        : Number(litMatch[1]);
+    push(
+      "container-max-width",
+      `${litMatch[1]}${litMatch[2]}`,
+      px,
+      "px-css",
+      "global.css @utility container",
+    );
+  } else {
+    console.error("UNPARSEABLE container max-width");
+    process.exit(3);
+  }
 
   const pad = c.match(/padding-inline:\s*([\d.]+)(rem|px)/);
   if (pad) {
-    const px = pad[2] === "rem" ? round(Number(pad[1]) * ROOT_PX) : Number(pad[1]);
-    push("container-padding-inline", `${pad[1]}${pad[2]}`, px, "px-css", "global.css @utility container");
+    const px =
+      pad[2] === "rem" ? round(Number(pad[1]) * ROOT_PX) : Number(pad[1]);
+    push(
+      "container-padding-inline",
+      `${pad[1]}${pad[2]}`,
+      px,
+      "px-css",
+      "global.css @utility container",
+    );
   }
 }
 
-tokens.sort((a, b) => a.class.localeCompare(b.class) || a.name.localeCompare(b.name));
+tokens.sort(
+  (a, b) => a.class.localeCompare(b.class) || a.name.localeCompare(b.name),
+);
 const out = process.argv[2] ?? "tokens.code.json";
 writeFileSync(out, JSON.stringify({ rootPx: ROOT_PX, tokens }, null, 2) + "\n");
 console.log(`${tokens.length} tokens -> ${out}`);

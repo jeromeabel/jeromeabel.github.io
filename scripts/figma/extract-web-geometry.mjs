@@ -13,16 +13,29 @@ const VIEWPORTS = [
 ];
 const THEMES = ["light", "dark"];
 const PROPS = [
-  "fontSize", "fontFamily", "fontWeight",
-  "paddingTop", "paddingRight", "paddingBottom", "paddingLeft",
-  "gap", "color", "backgroundColor", "borderRadius", "borderTopColor", "width",
+  "fontSize",
+  "fontFamily",
+  "fontWeight",
+  "paddingTop",
+  "paddingRight",
+  "paddingBottom",
+  "paddingLeft",
+  "gap",
+  "color",
+  "backgroundColor",
+  "borderRadius",
+  "borderTopColor",
+  "width",
 ];
 
 const browser = await chromium.launch();
 const result = {};
 for (const c of MANIFEST) {
   if (c.skip) continue;
-  const previewPath = c.storyPath.replace("/styleguide/dashboard/", "/styleguide/stories/");
+  const previewPath = c.storyPath.replace(
+    "/styleguide/dashboard/",
+    "/styleguide/stories/",
+  );
   result[c.id] = {};
   for (const vp of VIEWPORTS) {
     result[c.id][vp.name] = {};
@@ -30,8 +43,14 @@ for (const c of MANIFEST) {
       const page = await browser.newPage();
       await page.setViewportSize({ width: vp.w, height: 1200 });
       await page.emulateMedia({ reducedMotion: "reduce", colorScheme: theme });
-      if (theme === "dark") await page.addInitScript(() => document.documentElement.classList.add("dark"));
-      await page.goto(`http://localhost:4321${previewPath}`, { waitUntil: "load", timeout: 30000 });
+      if (theme === "dark")
+        await page.addInitScript(() =>
+          document.documentElement.classList.add("dark"),
+        );
+      await page.goto(`http://localhost:4321${previewPath}`, {
+        waitUntil: "load",
+        timeout: 30000,
+      });
       const root = await page.$(c.selector);
       const props = root
         ? await root.evaluate((el, keys) => {

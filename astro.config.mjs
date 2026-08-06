@@ -57,8 +57,8 @@ export default defineConfig({
 
     sitemap(),
 
-    process.env.NODE_ENV === 'development'
-      ? astrobook({ subpath: '/styleguide', css: ['./src/styles/global.css'] })
+    process.env.NODE_ENV === "development"
+      ? astrobook({ subpath: "/styleguide", css: ["./src/styles/global.css"] })
       : null,
   ].filter(Boolean),
 
