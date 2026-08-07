@@ -341,7 +341,7 @@ Rule §1 R2: no Elements/Primitives tier — one flat Components list, grouped m
 - Consumes: the re-home mapping table from the reference section (verbatim); `Docs/ChapterHeader` master
 - Produces: chapters named `CHAPTER / 00 Read me`, `CHAPTER / 01 Foundations`, `CHAPTER / 02 Components`, `CHAPTER / 03 Sections`, `CHAPTER / 04 Pages`; inside 02, group frames `GROUP / Buttons`, `GROUP / Navigation`, `GROUP / Metadata & Text`, `GROUP / Cards`, `GROUP / Hero & Contact`. Tasks 4–7 operate on these names.
 
-- [ ] **Step 1: Inventory current chapters and index every movable block**
+- [x] **Step 1: Inventory current chapters and index every movable block**
 
 ```js
 const page = figma.root.children.find((p) => p.name === "📚 Docs");
@@ -373,7 +373,7 @@ return index;
 
 Diff the returned cell labels against the mapping table. Any label in the mapping with no live cell, or any cell with no mapping row, stops the task — resolve the discrepancy (renamed master, missed specimen) before moving anything. Note especially whether an `Icon` cell exists; if the icon *asset set* was never given a cell, add one in Step 3.
 
-- [ ] **Step 2: Rename chapters and create the new containers**
+- [x] **Step 2: Rename chapters and create the new containers**
 
 ```js
 const page = figma.root.children.find((p) => p.name === "📚 Docs");
@@ -444,7 +444,7 @@ if (head01) { await setTxt(head01, "number", "01"); await setTxt(head01, "title"
 return { createdNodeIds: created };
 ```
 
-- [ ] **Step 3: Move every cell and card to its mapped home**
+- [x] **Step 3: Move every cell and card to its mapped home**
 
 One call. The `MOVES` constant is the mapping table flattened; IDs come from Step 1's index.
 
@@ -506,7 +506,7 @@ return { mutatedNodeIds: moved, movedCount: moved.length, unmoved };
 
 Expected: `unmoved` empty. If the `Icon` asset-set cell did not exist (Step 1 finding), create one now: `Docs/SpecimenCell` instance in `GROUP / Buttons`, label `Icon`, a live `Icon` instance (variant `icon=arrow-right`) in its `slot`, caption verbatim-new: `The flat asset set. Sizing rules live in 01 Foundations — 16 inline, 20 buttons and nav, 24 standalone.`
 
-- [ ] **Step 4: Delete the emptied Elements chapter**
+- [x] **Step 4: Delete the emptied Elements chapter**
 
 ```js
 const page = figma.root.children.find((p) => p.name === "📚 Docs");
@@ -525,7 +525,7 @@ return {
 
 Guard: refuses to delete while any instance is still inside. Expected spine, in order: `00 Read me`, `01 Foundations`, `02 Components`, `03 Sections`, `04 Pages`.
 
-- [ ] **Step 5: Update the Read-me intro's spine sentence**
+- [x] **Step 5: Update the Read-me intro's spine sentence**
 
 The `00 Read me` intro ends "…tokens, then elements, then components, then whole pages." That sentence is connective prose (not validated decision copy), so it may be rewritten:
 
@@ -544,7 +544,7 @@ intro.characters = intro.characters.replace(
 return { mutatedNodeIds: [intro.id] };
 ```
 
-- [ ] **Step 6: Screenshot the whole Light frame and commit**
+- [x] **Step 6: Screenshot the whole Light frame and commit**
 
 `get_screenshot` on `DOCS / Design System — Light`, scale 0.25. Check: five chapters in order, five visible group headings inside 02, no orphaned cells floating outside a chapter, no collapsed (zero-height) frames.
 
