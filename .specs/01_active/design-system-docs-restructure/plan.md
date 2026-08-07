@@ -192,7 +192,7 @@ Rule §3 R3: one row per token, Light and Dark inline — never a table per them
 - Consumes: `2 Theme` color variables
 - Produces: a `ColorTokenTable` frame — one row per color token: name (mono) · role sentence · Light swatch+hex · Dark swatch+hex. Swatches stay **variable-bound** inside per-mode wrappers, so a token edit updates the docs. Task 4 links to this frame.
 
-- [ ] **Step 1: Read the theme's color tokens and resolve both mode values to hex**
+- [x] **Step 1: Read the theme's color tokens and resolve both mode values to hex**
 
 ```js
 const page = figma.root.children.find((p) => p.name === "🎨 Foundations");
@@ -224,7 +224,7 @@ return { count: out.length, tokens: out };
 
 Expected: 12 color tokens. Record the list — Step 2 bakes the hex strings into text labels. If a token's `description` is empty, Step 2's ROLE map must cover it; anything uncovered goes in the returned `noRole` list for a manual caption before Step 3.
 
-- [ ] **Step 2: Build the single table**
+- [x] **Step 2: Build the single table**
 
 ```js
 const page = figma.root.children.find((p) => p.name === "🎨 Foundations");
@@ -300,7 +300,7 @@ return { createdNodeIds: [table.id], rows: TOKENS.length, noRole };
 
 Expected: `rows: 12`, `noRole` empty (fill any listed role by hand in a follow-up call before continuing).
 
-- [ ] **Step 3: Delete the two old grids, verify, screenshot**
+- [x] **Step 3: Delete the two old grids, verify, screenshot**
 
 ```js
 const page = figma.root.children.find((p) => p.name === "🎨 Foundations");
@@ -319,7 +319,7 @@ return { removed, remaining: frame.children.map((n) => n.name) };
 
 Guard: the delete only runs after the table exists with 12 rows. Check the screenshot: one table, both hex columns legible, no leftover grid, no white unbound background (frame fill must be bound or empty).
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add .specs/01_active/design-system-docs-restructure/plan.md
