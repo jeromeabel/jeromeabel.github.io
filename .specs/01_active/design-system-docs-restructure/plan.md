@@ -699,7 +699,7 @@ git commit -m "docs(specs): ds-docs-restructure — task 4 foundations icons + f
 - Consumes: FINDING text-node IDs from Task 4 Step 1; `1 Primitives` and `3 Responsive` collections
 - Produces: a `SpacingLadder` table and a `MotionSpecs` table replacing the two FINDING sentences
 
-- [ ] **Step 1: Build the spacing ladder from resolved variable values**
+- [x] **Step 1: Build the spacing ladder from resolved variable values**
 
 Rows lead with **role** (§3 R1). Values are read live from the collections, never typed.
 
@@ -788,7 +788,7 @@ return { createdNodeIds: [table.id], rows: ROWS.map((r) => r.join(" | ")) };
 
 Verify the returned `rows` against expectations: spacing/2=8px, spacing/6=24px, rhythm 96/64/48, gutter 32/24/16. A different number means the collections drifted — investigate before committing.
 
-- [ ] **Step 2: Build the motion specs table with a named in-house philosophy**
+- [x] **Step 2: Build the motion specs table with a named in-house philosophy**
 
 Values are the validated caption's (`decisions.md` Motion): fast 150ms, base 250ms, slow 400ms, `--ease-out`, `--ease-in-out`. Philosophy name is new copy (allowed — it replaces the FINDING): **"Quiet motion"**.
 
@@ -850,7 +850,7 @@ if (finding) {
 return { createdNodeIds: [table.id] };
 ```
 
-- [ ] **Step 3: Verify no FINDING remains anywhere, screenshot, commit**
+- [x] **Step 3: Verify no FINDING remains anywhere, screenshot, commit**
 
 ```js
 const page = figma.root.children.find((p) => p.name === "📚 Docs");
