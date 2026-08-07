@@ -568,7 +568,7 @@ Closes FINDING 1 (focus-ring/CTA-accent) per §4 R5 and gives icon sizing its Fo
 - Consumes: chapter/group names from Task 3; `Docs/SpecimenCell` master; live `Icon` set on `🧩 Components`
 - Produces: sections inside 01 Foundations ordered `Colour`, `Type`, `Spacing`, `Radius`, `Motion`, `Icons`. Task 5 fills Spacing and Motion.
 
-- [ ] **Step 1: Verify the Colour section leads with role, and find the FINDING text**
+- [x] **Step 1: Verify the Colour section leads with role, and find the FINDING text**
 
 ```js
 const page = figma.root.children.find((p) => p.name === "📚 Docs");
@@ -587,7 +587,7 @@ return {
 
 Expected: one FINDING about focus-ring/CTA-accent in Colour, one each for Spacing and Motion (Task 5 takes those IDs). If Colour's token mentions lead with raw hex instead of `color/…` role names, that contradicts the design's no-change-needed claim — fix it here by reordering name-first, and note it in the task notes.
 
-- [ ] **Step 2: Replace the focus-ring FINDING with formula + hard rule**
+- [x] **Step 2: Replace the focus-ring FINDING with formula + hard rule**
 
 The accent-budget caption is validated copy — keep everything before `FINDING:` verbatim, replace only the FINDING sentence.
 
@@ -603,7 +603,7 @@ t.characters = t.characters.replace(
 return { mutatedNodeIds: [t.id], now: t.characters };
 ```
 
-- [ ] **Step 3: Add the Icons section (sizing rules only) with a cross-page link in Colour**
+- [x] **Step 3: Add the Icons section (sizing rules only) with a cross-page link in Colour**
 
 ```js
 const page = figma.root.children.find((p) => p.name === "📚 Docs");
@@ -675,7 +675,7 @@ return { createdNodeIds: [sec.id, link.id] };
 
 The three icon captions are verbatim decision copy from `decisions.md` — do not reword. If the old Icons cell moved into `Buttons` in Task 3 duplicates these three sizing rows, strip the sizing rows from the Buttons-side cell (keep only the asset-set specimen) so the rule lives once, here.
 
-- [ ] **Step 4: Screenshot the chapter, commit**
+- [x] **Step 4: Screenshot the chapter, commit**
 
 `get_screenshot` on `CHAPTER / 01 Foundations`. Check: section order `Colour, Type, Spacing, Radius, Motion, Icons` (reorder children by `insertChild` if not), focus-ring text present, no FINDING left in Colour.
 
