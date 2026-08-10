@@ -375,3 +375,85 @@ slightly to hit measure. Full char-count-per-line verification is in
 `.superpowers/sdd/magnet-ds-docs-v1/task-4-report.md` under "Fix pass". No
 frame-height change (still 1885px) — this was a wrap-quality fix only, not
 a content-length change.
+
+## Task 5 — Chapter 02 grouped per D5 taxonomy
+
+**Audit (Step 1).** `CHAPTER / 02 Components` (`2670:6860`) pre-task held
+seven top-level groups (`GROUP / Navigation`, `GROUP / Buttons`,
+`GROUP / Typography` — did not exist yet, headings were raw text —
+`GROUP / Metadata & Text`, `GROUP / Cards`, `GROUP / Hero & Contact`) plus
+two chapter-level orphan cards (not inside any group): DecisionCard
+`2670:7549` ("one verb per surface") and DoDont `2670:7550`
+("accent-budget"). DecisionCard/DoDont text content (not names) was read to
+map every card to one of the six fixed D5 names.
+
+**GroupHeader trigger (Step 2) — created, evidence recorded.**
+`_Docs/Headline` was checked against the D8 requirement for a visible size
+step between ChapterHeader and group level. Headline renders at 60px
+Bubbler One (display font) — **larger** than ChapterHeader's own 40px IBM
+Plex Sans SemiBold title, and DecisionCard `2670:6975` (this file's own
+rule, in the new Typography group) states "Display font is page-level
+only... card titles use sans bold, never display." Using Headline for
+group level would both invert the hierarchy (group heading bigger than
+chapter heading) and violate the file's own display-font rule. No existing
+component expressed a distinct second level, so `_Docs/GroupHeader` was
+created: id `2766:4212`, text child `2766:4213` bound to component
+property `Title` (default "Group"), 24px IBM Plex Sans SemiBold — exactly
+ChapterHeader's 40px × 0.6, same family/weight logic, number-less. Placed
+in the private `_Docs/*` masters block (x=3300, y=34740). This is the one
+`_Docs/*` addition this task is permitted to make (D7); `_Docs/PageTOC`
+remains the only other slot in the whole plan, not touched here.
+
+**Regrouping (Step 3) — final membership, D5 order:**
+
+| Group | ID | Header instance | Content | Height |
+| --- | --- | --- | --- | --- |
+| `GROUP / Chrome` | `2766:4214` (new frame) | `2766:4215` | NavLink, NavLinkHome, NavLink hover pair, Icon, Link/Icon (+hover), ThemeToggle, MotionToggle, DecisionCard "three icon sizes" (`2670:6897`) | 1254 |
+| `GROUP / Actions` | `2670:6862` (renamed from `GROUP / Buttons`) | `2766:5568` | Link/CTA, Link/Secondary, Link/SecondarySm, Link/TextCTA (each cell + hover pair), DecisionCard "three button styles" (`2670:6896`) | 1388 |
+| `GROUP / Typography` | `2766:5570` (new frame) | `2766:5571` | H1, H2, PreviewTitle, PageDescription, DecisionCard "display font page-level only" (`2670:6975`), DoDont title-hover (`2670:6978`) | 1183 |
+| `GROUP / Metadata` | `2670:6938` (renamed from `GROUP / Metadata & Text`) | `2766:5573` | PostMetadataTime, PostMetadataTopic, SerieMeta, type=day, type=no-date, DecisionCards `2670:6974`/`6976`/`6977`, DoDont chips (`2670:6995`), DoDont accent-budget (`2670:7550`, adopted from chapter-level orphan) | 1692 |
+| `GROUP / Cards` | `2670:7013` (unchanged) | pre-existing | PostRow/SerieCard/PostCardPreviewBig/PostCardPreviewSmall/WorkCardPreviewSmall (+ border cells, hover pairs), DecisionCards `2670:7044`–`7047`, "postrow deep dive" frame (`2670:7063`) | 4947 |
+| `GROUP / Sections` | `2670:7075` (renamed from `GROUP / Hero & Contact`) | `2766:5575` | HeroText, HeroAnimation, ContactContent, hero.svg, values/quality.svg, 404.svg, arrow-curve.svg, footer.svg, DecisionCards `2670:7547`/`7548`, DecisionCard "one verb per surface" (`2670:7549`, adopted from chapter-level orphan) | 3233.06 |
+
+`GROUP / Navigation` (`2670:6923`) was deleted after confirming empty
+(all content already reparented into Chrome) — non-destructive per D3
+since the replacement (Chrome) existed first. Top-level children were then
+reordered via sequential `insertChild` to the final D5 sequence; being
+real auto-layout frames (chapter itemSpacing 64, group itemSpacing 32),
+y-positions reflowed automatically — confirmed clean 64px gaps between all
+seven children (ChapterHeader + 6 groups).
+
+**Orphan placement — editorial calls, flagged.** Two chapter-level cards
+had no single-group home because their content is cross-cutting: DoDont
+`2670:7550` ("accent-budget", spans serie chip + section CTA + metadata
+color misuse) was placed at the end of Metadata since its DON'T clause
+centers on metadata elements; DecisionCard `2670:7549` ("one verb per
+surface, ≤150ms", a hover-behavior summary spanning NavLink/Link/PostRow/
+SerieCard/Preview) was placed as the closing card of Sections (last group,
+reads as a chapter-wide synthesis). Both satisfy the two-level cap (no
+chapter-level orphans left) but are interpretive placements, not a clean
+categorical fit — noted for reviewer attention.
+
+**1px cascade fix.** Chapter 02's total height shrank by ~1px during
+reflow (14272.06 → 14271.06), breaking the exact 160px gap to Chapter 03.
+Fixed by shifting `CHAPTER / 03 Sections` (`2670:7567`) y from 22458.06 →
+22457.06 and `CHAPTER / 04 Pages` (`2670:7608`) y from 27550.06 → 27549.06
+(both −1px) — both gaps verified back to exactly 160px.
+
+**Verification (Step 4).** `get_screenshot` of the full chapter and of each
+group individually confirms a clean layer-cake: ChapterHeader, then six
+visually distinct `GroupHeader` instances (24px, smaller than
+ChapterHeader's 40px, bigger than card titles), cards under each, in D5
+order (Chrome, Actions, Typography, Metadata, Cards, Sections). No
+clipping or overlap in any group screenshot, including the two groups that
+received adopted orphan cards.
+
+**Pre-existing issues found, not fixed (out of scope).**
+ChapterHeader's "Components" title wraps oddly ("Compo"/"nents" across two
+lines) — instance width unchanged, unrelated to this task's edits.
+Literal `&amp;quot;` HTML-entity artifacts appear in some cell description
+text (e.g. PostMetadataTime) — pre-existing content issue. `2670:7045` and
+`2670:7047` in `GROUP / Cards` carry identical DecisionCard text ("CONTENT
+- One chip per card/row...") — likely a pre-existing duplicate; left as-is
+since Cards was out of scope for content changes (already D5-compliant)
+and D3 forbids deleting without deciding which copy is canonical.
