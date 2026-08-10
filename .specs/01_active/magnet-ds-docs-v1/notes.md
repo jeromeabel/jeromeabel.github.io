@@ -92,3 +92,80 @@ All later tasks should read IDs from this table, not from the plan header.
   `6:2`/`8:2` Foundations frames, and the 3 stray-node IDs (`2708:21292`,
   `2709:21629`, `2670:6656`) match the design.md audit exactly. No frame was
   renamed and no listed node was missing.
+
+## D4 salvage verdict
+
+Diff of the old 🎨 Foundations frames against `CHAPTER / 01 Foundations`
+(`2670:6678`), per D4.
+
+### Specimen lists
+
+**Old `Foundations · Typography` (`8:2`)** — 17 specimens: Hero/Title,
+Heading/H1, Heading/H2, Heading/H3, Body/4xl/semibold, Body/3xl, Body/xl,
+Body/xl/medium, Body/l, Body/base, Body/base/medium, Body/s, Body/xs,
+Body/xs/medium, Label/Meta, Chip/Mono, Code/Base.
+
+**New `SECTION / Type`** inside `CHAPTER / 01 Foundations` (frame
+`2670:6727`, specimens container `2670:6730`) — 3 specimens: H1 cell
+(`2670:6731`, Display · Bubbler One · page H1 only), H2 cell (`2670:6734`,
+Reading · IBM Plex Sans · prose and titles), type=default cell
+(`2670:6737`, Machine · Fira Code · dates, read time, counters).
+
+**Old `Foundations · Colors` (`6:2`)** — 12 semantic color tokens:
+color/background, color/foreground, color/foreground-strong,
+color/foreground-muted, color/border, color/surface, color/surface-hover,
+color/accent, color/accent-hover, color/accent-strong, color/accent-subtle,
+color/surface-raised. Each row = semantic name + role text + Light/Dark hex
+swatches.
+
+**New "theme token jobs" panel** inside `PANEL / 01 Tokens Intro`
+(`2670:6698`), rows `2670:6700`–`2670:6714` — the same 12 `color/*` tokens
+(plus 3 `font/*` tokens) as bound-variable `token row` instances, each with
+name + role + Light value + Dark value.
+
+### Diff result
+
+**Typography.** Literal name-match diff: 14 of 17 old specimens are absent
+from `SECTION / Type` (all `Body/*` sizes, Hero/Title, Heading/H3,
+Label/Meta, Chip/Mono, Code/Base). Checked whether this is genuine content
+loss before treating it as "unique":
+
+- All 17 old specimen names exist as **local Figma text styles**
+  (confirmed via `figma.getLocalTextStylesAsync()`) — Hero/Title,
+  Heading/H1–H3, Body/3xl through Body/xs (plus the /medium and /semibold
+  variants), Label/Meta, Chip/Mono, Code/Base are all present as reusable
+  styles, independent of this specimen frame. Deleting the frame does not
+  delete the styles (matches D4's own note: "Deleting frames removes no
+  local styles/variables").
+- Also checked the `❖ Components` page's `App/Typography` section
+  (`2041:485`) for a fuller body-scale showcase elsewhere: it documents
+  H1, H2, PreviewTitle, PageDescription only — no additional body-scale
+  coverage there, but it doesn't matter since the styles persist
+  independently of any specimen rendering.
+- `SECTION / Type`'s decision card is intentionally curated — "Three
+  families, three jobs" (Display/Bubbler One, Reading/IBM Plex Sans,
+  Machine/Fira Code), one representative specimen per job, not an
+  exhaustive ramp. This matches the docs page's minimalist chapter format
+  (D8 prose/specimen budget), not an oversight.
+
+**Colors.** All 12 `color/*` tokens in the old table are also present, by
+name, role, and Light/Dark value, in the new "theme token jobs" panel —
+full coverage, nothing unique. Presentation differs (swatch rectangle +
+hex text in the old frame vs. bound-variable name + resolved-color object
+in text form in the new panel) but no semantic content is missing.
+
+### Verdict: nothing unique — safe to delete
+
+No specimen content requires migration. Step 3 (move unique content) is a
+no-op: **no Figma edit was made.**
+
+### Flags for later tasks (non-blocking)
+
+- `SECTION / Colour`'s cross-reference text node (`2670:6726`, "Full token
+  table with Light and Dark values → Foundations · Colors") will point at
+  a deleted page once Task 8 removes 🎨 Foundations. Out of this task's
+  scope to fix; whoever executes Task 8 (or a cross-reference cleanup
+  pass) should update or remove that sentence.
+- Underlying token values (text styles, variables) are unaffected by frame
+  deletion either way — confirmed via `getLocalTextStylesAsync()` and
+  consistent with D4's own note.
