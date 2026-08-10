@@ -203,7 +203,7 @@ chapter-to-chapter gap they introduce (e.g. Chapter 00 → 01).
 | Frame | ID | x | y | width | height |
 | --- | --- | --- | --- | --- | --- |
 | Reserved space for Chapter 00 (Task 4) | — | 0 | 0–2000 | — | 2000 |
-| `CHAPTER / 01 Foundations` | `2670:6678` | 0 | 2000 | 1600 | 5821 |
+| `CHAPTER / 01 Foundations` | `2670:6678` | 0 | 2000 | 1408 (fixed post-review, see below) | 5821 |
 | `CHAPTER / 02 Components` | `2670:6860` | 0 | 7981 | 1408 | 14272.06 |
 | `CHAPTER / 03 Sections` | `2670:7567` | 0 | 22413.06 | 1408 | 4932 |
 | `CHAPTER / 04 Pages` | `2670:7608` | 0 | 27505.06 | 1408 | 5134 |
@@ -213,21 +213,40 @@ Reserved top space is 2000px (~2× `CHAPTER / 00 Read me`'s current height of
 one 160px gap on each side. Column bottom (bottom edge of `04 Pages`) is
 32639.06px.
 
-**Deviation — `01 Foundations` is 1600px wide, not 1408px.** The brief and
-design.md (`## Cleanup checklist`, "constant width (1408)") call for all
-chapter frames to be a uniform 1408px. Three of the four already are; `01
-Foundations` (`2670:6678`) is 1600px because its `PANEL / 01 Tokens Intro`
-and other direct children are auto-layout `FIXED`-width at 1600px (built
-during the D4 salvage pass — a legitimate 2-column token panel), and the
-frame itself is `clipsContent: true`. Force-resizing the frame to 1408
-without also narrowing/reflowing its children would silently clip ~192px off
-the right edge of that content — a destructive content edit, not a move.
-Task 3 is scoped to moving nodes, not redesigning chapter content, so the
-frame was left at its native 1600px width and only left-edge x-aligned (x=0,
-same as the other three) with the rest of the column. **Flagging for a
-follow-up task**: either narrow `PANEL / 01 Tokens Intro` (and siblings) to
-fit 1408 and then resize the frame, or accept `01 Foundations` as a
-documented width exception.
+**Resolved — `01 Foundations` is now 1408px wide, matching the other three
+chapters.** A code-review pass on commit `4287cd4` flagged the earlier
+1600px-wide deviation as insufficient to leave as a self-flagged aside (it
+was Task 3's own stated deliverable and would fail Task 9's D8 gate Check 1
+on first pass). Re-inspected the frame's full subtree via `use_figma`
+(walking every descendant of `2670:6678` for `width > 1408`) instead of
+re-guessing from the earlier read: the FIXED-1600 cascade ran through
+`PANEL / 01 Tokens Intro` (`2670:6679`) → `token layers` (`2670:6681`) →
+`layer card / 1 Primitives` / `2 Theme` / `3 Responsive` (`2670:6682`,
+`2670:6686`, `2670:6690`) → `mode tables` (`2670:6694`) → `theme token jobs`
+(`2670:6698`), plus a sibling `PANEL / Token Verification` (`2670:6833`) and
+its title text node (`2670:6834`, FIXED 1576px). Crucially, none of these
+frames' *actual leaf content* needed 1600px: every text node inside topped
+out at 900px, and all 15 `token row / *` instances inside `theme token jobs`
+were already FIXED at 1180px — well under 1408. The 1600px width was a
+container-level choice, not content-driven, so narrowing was non-destructive.
+
+**Fix applied:** resized all 9 FIXED-1600 frames (the chapter frame itself
+plus the 8 listed above) to 1408px via `node.resize(1408, node.height)`, and
+the `PANEL / Token Verification` title text from 1576px to 1384px (preserving
+its original ~24px inset). `SECTION / Icons` (`2670:6820`) needed no touch —
+it was already `layoutSizingHorizontal: FILL` and auto-tracked the parent's
+new width. Re-walked the full subtree afterward for anything still
+`width > 1408`: only one pre-existing, unrelated hit remained — `radius
+specimens` (`2670:6775`, HUG-sized to 1506px) inside `SECTION / Radius`,
+which is itself FIXED at 640px with `clipsContent: true`. That content was
+*already* being clipped at 640px before this fix (a pre-existing overflow
+inside the 640px-wide radius section, unrelated to the chapter's outer
+1600→1408 width and not something Task 3 introduced or this fix touches);
+flagging it here for a future cleanup pass, out of scope for this fix.
+Verified with a `screenshot()` of the full chapter frame post-resize: token
+tables, decision cards, layer cards, and the token-coverage line all render
+intact with no clipped text or overflowing content. All four chapter frames
+(`01`–`04 Pages`) now confirmed at `width: 1408, x: 0`.
 
 **`_Docs/*` masters — moved, not copied.** All 10 confirmed reparented from
 `📚 Introduction` to `📚 Docs` via `appendChild` (which preserves instance
