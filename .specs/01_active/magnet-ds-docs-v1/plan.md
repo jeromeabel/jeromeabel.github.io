@@ -245,23 +245,23 @@ D5 target (copy of design.md — the executor needs no other source):
 | Cards | PostRow, SerieCard, PostCardPreviewBig, PostCardPreviewSmall, WorkCardPreviewSmall |
 | Sections | Hero, HeroText, HeroAnimation, BlogPreviewSection, ArchiveTable, SerieCardList, WorkPreviewSection, ContactContent, ContactPreviewSection |
 
-- [ ] **Step 1: Map current 8 sections to target 6**
+- [x] **Step 1: Map current 8 sections to target 6**
 
 From the Task 1 inventory, list which existing section each component sits in and its target D5 section. Components in the file but absent from the D5 table: leave in place, add to `notes.md` `### Deviations` for a design.md follow-up. D5 names missing from the file: same — note, don't invent.
 
-- [ ] **Step 2: Rename / create / dissolve sections**
+- [x] **Step 2: Rename / create / dissolve sections**
 
 `use_figma`: rename matching sections to the six D5 names; create missing ones; move components per the map; delete now-empty old sections (a section container emptied by moves is not "content" — safe to delete without backup).
 
-- [ ] **Step 3: Verify no doc text on canvas**
+- [x] **Step 3: Verify no doc text on canvas**
 
 D5: no doc text on the Components page canvas. Any usage prose found next to components: delete it (its content belongs in chapter 02 cards — cross-check it's covered there first; if not, add to the matching chapter-02 group as a card, then delete from canvas).
 
-- [ ] **Step 4: Verify structure**
+- [x] **Step 4: Verify structure**
 
 `use_figma` listing of the Components page. Expected: exactly six sections, names matching D5 verbatim, every D5-listed component present in its assigned section.
 
-- [ ] **Step 5: Log and commit**
+- [x] **Step 5: Log and commit**
 
 ```bash
 git add .specs/01_active/magnet-ds-docs-v1/notes.md .specs/01_active/magnet-ds-docs-v1/plan.md

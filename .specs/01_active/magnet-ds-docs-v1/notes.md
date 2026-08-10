@@ -470,3 +470,65 @@ not just screenshot). New instance is 8px shorter than the old text node,
 so `CHAPTER / 02 Components` shrank 14271.06→14263.06px; shifted
 `CHAPTER / 03 Sections` and `CHAPTER / 04 Pages` y by −8px each to
 restore both 160px gaps exactly (verified via script return values).
+
+## Task 6 — ❖ Components page sections retitled per D5
+
+**Fresh inventory (Step 1).** Re-read the `❖ Components` page (`461:759`)
+live rather than trusting the Pass-0 table (flagged as possibly stale after
+Tasks 3–5's moves elsewhere in the file — in the event this page itself
+turned out untouched by those tasks, IDs matched Pass-0 exactly). Found the
+same 8 top-level sections Pass-0 recorded (`App/Header & Footer` `2041:481`,
+`App/Icons` `2041:482`, `App/Buttons` `2041:483`, `Hero` `2041:484`,
+`App/Typography` `2041:485`, `Blog` `2041:486`, `Work` `2045:429`, `Contact`
+`2047:428`), holding 33 components total. Mapped all 33 by name against the
+D5 matrix: **exact 1:1 correspondence** — every current component name
+matches a D5 entry, and every D5 entry has exactly one live component.
+`Link/TextCTA` and `Link/SecondarySm` were already the live names (no
+`LinkWithIcon`/`Link/External` legacy naming found, per the brief's
+call-out). **No deviations** — nothing to flag for a design.md follow-up.
+
+**Regrouping (Step 2) — final membership:**
+
+| Section | ID | Content | Notes |
+| --- | --- | --- | --- |
+| `Chrome` | `2041:481` (renamed from `App/Header & Footer`) | NavLink, NavLinkHome, Header, Footer (pre-existing) + ThemeToggle, MotionToggle (moved from `App/Buttons`), Icon (moved from `App/Icons`) | New row added below existing content; section grown 717→909px height |
+| `Actions` | `2041:483` (renamed from `App/Buttons`) | Link/CTA, Link/Secondary, Link/TextCTA, Link/Icon, Link/SecondarySm | ThemeToggle/MotionToggle moved out to Chrome; section shifted y −3717→−3517 (+200px) to clear Chrome's growth, no overlap |
+| `Typography` | `2041:485` (renamed from `App/Typography`) | H1, H2, PreviewTitle, PageDescription | Unchanged — already exact D5 match, no moves |
+| `Metadata` | `2778:303` (new section) | PostMetadataTime, PostMetadataTopic, SerieMeta | All 3 moved from `Blog` |
+| `Cards` | `2778:304` (new section) | PostRow, SerieCard, PostCardPreviewBig, PostCardPreviewSmall, WorkCardPreviewSmall | 4 moved from `Blog`, 1 (WorkCardPreviewSmall) from `Work` |
+| `Sections` | `2041:484` (renamed from `Hero`) | Hero, HeroText, HeroAnimation (pre-existing) + BlogPreviewSection, ArchiveTable, SerieCardList (from `Blog`), WorkPreviewSection (from `Work`), ContactContent, ContactPreviewSection (from `Contact`) | Grown from 1864×1716 to 3685×2897 to fit 2 new rows below existing Hero content |
+
+`App/Icons` (`2041:482`), `Blog` (`2041:486`), `Work` (`2045:429`), and
+`Contact` (`2047:428`) were deleted after confirming 0 remaining children
+(checked via script return values immediately before each `.remove()`) —
+safe per the brief's Step 2 note that an emptied section container isn't
+"content." No `_Docs/*` component was created (none needed — this task is
+pure section/component reorganization, not new documentation UI).
+
+**No doc text found (Step 3).** A full `findAllWithCriteria({types:
+['TEXT']})` sweep of the whole page returned 147 text nodes — every one
+inspected by name/characters is genuine component-internal content (nav
+labels, sample post/work titles, "hello@jeromeabel.net", icon captions,
+etc.), not usage prose. No DecisionCard/DoDont/paragraph-style documentation
+text exists anywhere on this page (that pattern lives only in the Docs
+page's chapter frames, per Task 5). Nothing to delete or cross-reference
+into chapter 02.
+
+**Verification (Step 4).** Fresh `use_figma` read confirms exactly 6
+top-level sections on `461:759`, named `Chrome`, `Actions`, `Sections`,
+`Typography`, `Metadata`, `Cards` (verbatim D5 names; top-level order is
+page-insertion order, not D5 order — the brief's Step 4 acceptance criteria
+for this page don't require D5 ordering, unlike chapter 02's Task 5, so left
+as-is). Every D5-listed component is present in its assigned section, counts
+match exactly (Chrome 7, Actions 5, Typography 4, Metadata 3, Cards 5,
+Sections 9 = 33 total, no orphans). `get_screenshot` of all 5 touched
+sections (Chrome, Actions, Metadata, Cards, Sections — Typography untouched,
+skipped) shows clean layouts: no clipped text, no overlapping components,
+each new/moved item fully inside its section's bounds.
+
+**Geometry approach.** Since this page uses absolute-positioned components
+inside SECTION nodes (not auto-layout, unlike the Docs page's chapter
+frames), all moves required manually computed relative x/y per child and
+manual section resizing — verified no 2D bounding-box overlaps between any
+two final (surviving) sections before executing (only transient overlaps
+with soon-to-be-deleted sections were tolerated, resolved by the deletions).
