@@ -633,3 +633,76 @@ bonus, not something this task added or needs to add.
 
 **No `use_figma` write calls were made in this task** — Steps 1 and 2 were
 both read/verify-only; Step 3 is this log entry plus the commit below.
+
+## Task 7 fix round 1 — thin descriptions filled, provenance corrected
+
+An independent review of the section above found two Important findings.
+Both are addressed here; nothing above is rewritten, only appended to.
+
+**Finding 1 — thin descriptions.** 13 of the 33 top-level components
+technically had a non-empty `description` (satisfying Step 2's literal
+"zero empty" bar) but the text was only the `<Level> · Code: <path>`
+template with no actual descriptive sentence — meaning their purpose was
+*not* readable without opening the code, which was Task 7's real intent.
+Affected: Header, Footer, ThemeToggle, MotionToggle, H2, HeroText,
+HeroAnimation, Hero, BlogPreviewSection, SerieCardList, WorkPreviewSection,
+ContactContent, ContactPreviewSection. Two more were checked as borderline
+per the reviewer's flag: `Icon` had only an implementation-source list
+("astro-icon (lucide, fa6-brands) + custom SVGs in
+src/assets/icons/") with no purpose sentence, judged thin and fixed;
+`ArchiveTable` already carried "— date-grouped post list" appended to its
+`Section · Code: …` prefix, judged sufficiently descriptive and left
+untouched.
+
+**Fix applied.** For the 13 plus `Icon` (14 components total), the
+brief's Step 1 table sentence (`task-7-brief.md` lines 22–54) was appended
+to the existing `<Level> · Code: <path>` description via `use_figma`,
+non-destructively (D3) — nothing removed, only appended — using a
+consistent `" — "` separator matching the pre-existing `ArchiveTable`
+convention. Example: `Header`'s description went from
+`"Section · Code: src/components/app/Header.astro"` to
+`"Section · Code: src/components/app/Header.astro — Top site chrome: logo,
+nav links, theme and motion toggles."`. Same pattern applied to all 14; full
+before/after pairs captured in `task-7-report.md`. The ~19 components that
+already carried a real descriptive sentence (the `Link/*` family,
+`PostCardPreview*`, `PostRow`, `SerieCard`, the metadata components, `H1`,
+`PageDescription`, `PreviewTitle`, `ArchiveTable`) were left untouched, per
+the instruction to preserve pre-existing good content.
+
+**Finding 2 — provenance mischaracterization, corrected.** The original
+section above (and `task-7-report.md`) called the pre-existing rich
+descriptions' "Task 7"/"Task 1" self-references an "undocumented channel"
+and flagged them for human investigation as a possible manual edit outside
+this plan's process. That framing was wrong and the real source is
+traceable to two other, already-completed plans on this same Figma file,
+both predating `magnet-ds-docs-v1` by days:
+
+- `.specs/02_archives/artistic-direction/plan.md` — its own **Task 1**
+  ("Kill dashed at the three source components, and give them a real hover
+  verb") is the source of `Link/Icon`'s "dashed ring removed in Task 1"
+  language; its own **Task 7** ("Document hover — the missing chapter")
+  wrote the hover-verb descriptions with exact colour-token transitions and
+  millisecond timings on `Link/Secondary`, `Link/SecondarySm`,
+  `Link/TextCTA`, and `SerieCard`.
+- `.specs/02_archives/design-system-docs/plan.md` — its **Task 5** ("Give
+  every master a description that a recruiter can read") is the source of
+  the `<Level> · <what it is>. <the decision it encodes>. Code: <path>`
+  template (the plan text: "every master has a non-empty description in
+  the form `<Level> · <what it is>. ... Code: <path>`") that all 33
+  components carry as a baseline.
+
+Both plans are archived (shipped), confirming these are prior, tracked
+work — not an undocumented or out-of-process channel. The "Task 7"/"Task 1"
+self-references in the live descriptions refer to *those* plans' own task
+numbering, which coincidentally overlaps with this plan's task numbering
+since both plans number tasks sequentially from 1. No mystery, no
+unaccounted-for edit; `task-7-report.md` carries a correction note pointing
+here.
+
+**Verification.** Fresh `use_figma` pull on all 14 touched components
+confirmed each now has both the `<Level> · Code: <path>` prefix and a real
+sentence. A full page-wide sweep of all 33 top-level published components
+(`Chrome` 7 + `Actions` 5 + `Typography` 4 + `Metadata` 3 + `Cards` 5 +
+`Sections` 9 = 33) confirmed zero empty descriptions, matching the
+pre-fix count (this fix only enriched existing non-empty text, it didn't
+change the empty/non-empty tally).
