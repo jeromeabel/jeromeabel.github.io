@@ -182,3 +182,79 @@ no-op: **no Figma edit was made.**
 - Underlying token values (text styles, variables) are unaffected by frame
   deletion either way — confirmed via `getLocalTextStylesAsync()` and
   consistent with D4's own note.
+
+## Docs page build log
+
+Task 3: created `📚 Docs` page, moved the 10 `_Docs/*` masters and the 4
+compliant chapter frames onto it. File `ihWIWmvtQPTWgUxlrVjC2c`.
+
+**New page.** `📚 Docs`, ID `2736:4`, inserted at page-list index 1 — directly
+after `📖 Cover` (`0:1`) and before `📚 Introduction` (`2545:671`). Verified
+via `figma.root.children` order after insert.
+
+**Chapter gap value: 160px.** Chosen because it is ≤200px (per brief), reads
+as a clean, visible break between chapter frames (each thousands of px tall)
+without being arbitrary, and is a round multiple of the file's 8px base grid.
+**Later tasks (4–6) must reuse this same 160px value** for any new
+chapter-to-chapter gap they introduce (e.g. Chapter 00 → 01).
+
+**Column layout (top to bottom, x=0 for all four, in `📚 Docs`):**
+
+| Frame | ID | x | y | width | height |
+| --- | --- | --- | --- | --- | --- |
+| Reserved space for Chapter 00 (Task 4) | — | 0 | 0–2000 | — | 2000 |
+| `CHAPTER / 01 Foundations` | `2670:6678` | 0 | 2000 | 1600 | 5821 |
+| `CHAPTER / 02 Components` | `2670:6860` | 0 | 7981 | 1408 | 14272.06 |
+| `CHAPTER / 03 Sections` | `2670:7567` | 0 | 22413.06 | 1408 | 4932 |
+| `CHAPTER / 04 Pages` | `2670:7608` | 0 | 27505.06 | 1408 | 5134 |
+
+Reserved top space is 2000px (~2× `CHAPTER / 00 Read me`'s current height of
+926px), leaving room for the future `CHAPTER / 00 About` frame (Task 4) plus
+one 160px gap on each side. Column bottom (bottom edge of `04 Pages`) is
+32639.06px.
+
+**Deviation — `01 Foundations` is 1600px wide, not 1408px.** The brief and
+design.md (`## Cleanup checklist`, "constant width (1408)") call for all
+chapter frames to be a uniform 1408px. Three of the four already are; `01
+Foundations` (`2670:6678`) is 1600px because its `PANEL / 01 Tokens Intro`
+and other direct children are auto-layout `FIXED`-width at 1600px (built
+during the D4 salvage pass — a legitimate 2-column token panel), and the
+frame itself is `clipsContent: true`. Force-resizing the frame to 1408
+without also narrowing/reflowing its children would silently clip ~192px off
+the right edge of that content — a destructive content edit, not a move.
+Task 3 is scoped to moving nodes, not redesigning chapter content, so the
+frame was left at its native 1600px width and only left-edge x-aligned (x=0,
+same as the other three) with the rest of the column. **Flagging for a
+follow-up task**: either narrow `PANEL / 01 Tokens Intro` (and siblings) to
+fit 1408 and then resize the frame, or accept `01 Foundations` as a
+documented width exception.
+
+**`_Docs/*` masters — moved, not copied.** All 10 confirmed reparented from
+`📚 Introduction` to `📚 Docs` via `appendChild` (which preserves instance
+links network-wide): `_Docs/ChapterHeader` (`2590:537`), `_Docs/SpecimenCell`
+(`2590:542`), `_Docs/DecisionCard` component set (`2590:571`, all variants),
+`_Docs/TokenRow` (`2590:578`), `_Docs/DoDont` (`2590:588`), `_Docs/Date`
+component set (`2693:9890`, all variants), `_Docs/Status` component set
+(`2693:9897`, all variants), `_Docs/Headline` (`2708:21413`),
+`_Docs/Paragraph` (`2709:21540`), `_Docs/Divider` (`2709:21527`). Placed as a
+block starting at y=34740 (column bottom + 2000 + 100px label clearance),
+under a plain text label `— _Docs components (private) —` (node `2738:12`,
+at x=100, y=34640). Relative x/y layout between the 10 masters was preserved
+from their original Introduction-page arrangement (only translated as one
+block, dy=+34640) — no re-layout needed since they didn't overlap before and
+don't overlap now.
+
+**Instance-link verification (Step 3).** Took `get_screenshot` of `CHAPTER /
+01 Foundations` (`2670:6678`) while it was still on `📚 Introduction`, *after*
+moving the masters but *before* moving the chapter frames themselves. All
+`_Docs/*` instances inside it (ChapterHeader, DecisionCard, TokenRow, DoDont,
+SpecimenCell, Date, Status, Headline, Paragraph, Divider) rendered
+identically — no detached/red/missing-component placeholders. Confirms
+`appendChild`-based page moves preserve instance links as expected.
+
+**Column-layout verification (Step 5).** Took `get_screenshot` of the whole
+`📚 Docs` page (node `2736:4`) after moving the 4 chapter frames. Result: a
+blank band at the top (reserved space), the four chapters stacked in reading
+order 01→04 with visible equal gaps between them, and the `_Docs` masters
+cluster clearly separated below chapter 04 by the same design. Structure
+matches the expected one-column layout.
