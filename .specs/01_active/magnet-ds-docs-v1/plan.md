@@ -279,7 +279,7 @@ git commit -m "docs(specs): magnet-ds-docs-v1 — Components page sections retit
 - Consumes: Task 6 section structure.
 - Produces: every published (non-underscore) component/component-set has a filled description field (Dev Mode + AI surface, per D5). `notes.md` records any component whose actual purpose diverged from the draft sentence.
 
-- [ ] **Step 1: Set descriptions**
+- [x] **Step 1: Set descriptions**
 
 `use_figma`: set each component's description to the sentence below (adjust wording only if the component's actual structure contradicts it — record adjustments in `notes.md`):
 
@@ -321,11 +321,11 @@ git commit -m "docs(specs): magnet-ds-docs-v1 — Components page sections retit
 
 Components found in Task 6 that aren't in this table: write one sentence in the same register (what it is + where it's used), log it.
 
-- [ ] **Step 2: Verify coverage**
+- [x] **Step 2: Verify coverage**
 
 `use_figma`: list all published components with empty descriptions. Expected: zero (underscore `_Docs/*`, `_states` etc. excluded — private, no description required).
 
-- [ ] **Step 3: Log and commit**
+- [x] **Step 3: Log and commit**
 
 ```bash
 git add .specs/01_active/magnet-ds-docs-v1/notes.md .specs/01_active/magnet-ds-docs-v1/plan.md

@@ -532,3 +532,104 @@ frames), all moves required manually computed relative x/y per child and
 manual section resizing — verified no 2D bounding-box overlaps between any
 two final (surviving) sections before executing (only transient overlaps
 with soon-to-be-deleted sections were tolerated, resolved by the deletions).
+
+## Task 7 — component descriptions: already present, no edit made
+
+**Fresh inventory (Step 1).** Re-read the `❖ Components` page (`461:759`)
+live rather than trusting the brief's table. Confirmed Task 6's 6 sections
+and exact counts: `Chrome` 7, `Actions` 5, `Typography` 4, `Metadata` 3,
+`Cards` 5, `Sections` 9 = 33 top-level published components, all direct
+children of a `SECTION` node, no orphan top-level component sitting outside
+any section, no underscore-prefixed component anywhere on the page.
+
+**Table row-count correction.** The brief (and plan.md Task 7) states its
+description table has "32 rows" with a 33rd live component missing. Re-counted
+the table verbatim from `task-7-brief.md` lines 22–54: it actually contains
+**33** rows, not 32 (Header … ContactPreviewSection). Diffing all 33 live
+component names against all 33 table names gives an **exact 1:1 match** —
+every live component has a table row and every table row has a live
+component. Nothing is missing; the brief's own row-count claim was an
+off-by-one, not evidence of a gap. No 33rd/orphan component exists to write
+a bespoke sentence for.
+
+**Major finding — descriptions already filled, richer than the brief's
+draft.** A live read of all 33 top-level components' `description` fields
+found **zero empty** — every one already carries a substantive, non-empty
+description, and none of them match the brief's plain one-sentence drafts.
+The live descriptions are consistently richer: they cite the implementing
+code file (`Code: src/components/app/Header.astro`, etc.), spell out hover
+verbs with exact colour-token transitions and millisecond timings, budget
+rules ("at most 1 per viewport"), and cross-references to `design.md`
+sections (`§Buttons`, `§Hover`, `§Icons`). Several explicitly narrate this
+exact task by name — `Link/Secondary` and `Link/SecondarySm`: "an earlier
+stacked-hover border-colour change was reverted in Task 7"; `Link/TextCTA`:
+"NOT an underline — corrected in Task 7"; `SerieCard`: "the background lift
+and title underline that were also present were reverted in Task 7 as
+stacked hover"; `Link/Icon` references a Task 1 fix ("dashed ring removed in
+Task 1"). This means the outcome this task was assigned to produce already
+exists in the live file, evidently authored through a channel this plan's
+`notes.md` history never recorded (no earlier task section here documents
+writing component descriptions) — the file has diverged ahead of what this
+plan's tracked task log shows.
+
+**Decision: no Figma edit made.** Overwriting the existing descriptions with
+the brief's shorter draft sentences would replace more useful, already
+Dev-Mode/AI-consumable content with less useful content — a regression, and
+inconsistent with this plan's D3 non-destructive principle (nothing is
+replaced with something worse; only fill true gaps). Since Step 2's
+acceptance criterion ("zero published components with an empty description")
+was already true before this task ran, the task's actual objective is met
+without writing anything. Full text of all 33 descriptions was captured for
+the record (available in `task-7-report.md`, and reproducible via `use_figma`
+against the IDs below).
+
+| Section | Component | ID |
+| --- | --- | --- |
+| Chrome | NavLink | `2001:1309` |
+| Chrome | NavLinkHome | `2001:1312` |
+| Chrome | Header | `2001:1669` |
+| Chrome | Footer | `2099:2560` |
+| Chrome | ThemeToggle | `16:11` |
+| Chrome | MotionToggle | `16:12` |
+| Chrome | Icon | `461:6204` |
+| Actions | Link/CTA | `2012:6179` |
+| Actions | Link/Secondary | `2041:275` |
+| Actions | Link/TextCTA | `2041:313` |
+| Actions | Link/Icon | `2093:6332` |
+| Actions | Link/SecondarySm | `2350:737` |
+| Typography | H2 | `2034:213` |
+| Typography | PreviewTitle | `2041:465` |
+| Typography | H1 | `2119:7406` |
+| Typography | PageDescription | `2119:7440` |
+| Metadata | PostMetadataTime | `2040:482` |
+| Metadata | PostMetadataTopic | `2371:10414` |
+| Metadata | SerieMeta | `2375:10662` |
+| Cards | PostCardPreviewBig | `2385:7139` |
+| Cards | PostCardPreviewSmall | `2385:7149` |
+| Cards | WorkCardPreviewSmall | `2045:378` |
+| Cards | PostRow | `2124:7937` |
+| Cards | SerieCard | `2367:7205` |
+| Sections | HeroText | `2012:6142` |
+| Sections | HeroAnimation | `2012:315` |
+| Sections | Hero | `2012:6305` |
+| Sections | BlogPreviewSection | `2041:560` |
+| Sections | ArchiveTable | `2124:8011` |
+| Sections | SerieCardList | `2119:7557` |
+| Sections | WorkPreviewSection | `2045:428` |
+| Sections | ContactContent | `131:101` |
+| Sections | ContactPreviewSection | `2114:7281` |
+
+**Verify coverage (Step 2).** Re-ran a live, page-wide
+`findAllWithCriteria({types:['COMPONENT','COMPONENT_SET']})` sweep (99 nodes
+total: 33 top-level + 66 nested variants). Result: **zero** top-level
+published components with an empty description (matches the brief's
+expected outcome). 56 of the 66 nested variant-level nodes (`state=default`,
+`state=hover`, `size=normal, state=default`, etc.) have empty descriptions —
+expected and compliant with the plan's own constraint that a component-set's
+description covers its variants and per-variant descriptions aren't required
+unless structure demands it; the 10 variants that do carry a description
+(e.g. `PostCardPreviewBig`'s `State=default`/`State=hover`) are a pre-existing
+bonus, not something this task added or needs to add.
+
+**No `use_figma` write calls were made in this task** — Steps 1 and 2 were
+both read/verify-only; Step 3 is this log entry plus the commit below.
