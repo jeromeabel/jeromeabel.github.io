@@ -295,28 +295,33 @@ height).
 
 1. `_Docs/ChapterHeader` (`2751:4198`) — number `00`, title `About`, summary
    `What this system is, who it serves, and the rules that govern it.`
-2. Mission — one `_Docs/Paragraph` (`2751:5579`), 3 lines, compressed
-   verbatim-first from `Intro/01`'s problem statement: "Front-end engineer
-   working in Vue, Astro, Figma & Claude Code — ex-artist (code,
-   electronics, mechanics), 10+ years. Only ~2.5 years of front-end
-   experience; internal work isn't public, outcomes are thin." (cut the
-   trailing "not enough seniority / full-stack is the new baseline" sentence
-   to hold the ≤3-line cap).
+2. Mission — one `_Docs/Paragraph` (`2751:5579`), 3 hand-broken lines (50–75
+   char measure, see Fix pass below), compressed verbatim-first from
+   `Intro/01`'s problem statement: "Front-end engineer in Vue, Astro, Figma &
+   Claude Code — ex-artist (code, electronics, mechanics), 10+ years. Only
+   ~2.5 years of front-end experience; internal work isn't public, outcomes
+   thin." (cut the trailing "not enough seniority / full-stack is the new
+   baseline" sentence to hold the ≤3-line cap).
 3. Three-layer identity (`2705:21257`) — kept untouched: Chrome / Content /
    Hand `_Docs/DecisionCard` instances + the closing "only one layer can be
    expressive at a time" line, all verbatim from the old Read-me frame.
-4. Core rules — one `_Docs/Paragraph` (`2754:4214`), 7 bullets. **Caveat:**
+4. Core rules — one `_Docs/Paragraph` (`2754:4214`), 7 hand-broken bullets
+   (50–75 char measure per rendered line, see Fix pass below). **Caveat:**
    no discrete "7 core rules" list exists anywhere in the source (`CHAPTER /
    00 Read me` only had the 3 DecisionCards + 1 closing line; `Intro/01`/`02`
    don't contain a rules list either) — "7 core rules" in the brief/D3/D8 is
    design.md's description of the *target* structure, not a pointer to
-   existing extractable content. Synthesized 7 atomic, verbatim-sourced
-   clauses by decomposing the existing layer text (Chrome scope + Chrome
-   operating-layer rule; Content scope + the type/radius/border rule;
-   metadata-as-third-layer rule; Hand definition; the one-expressive-layer
-   closing rule) — no new claims introduced, every clause traces to existing
-   Read-me/DecisionCard text. Flagging for review since this is an
-   interpretive call beyond the literal brief instruction ("keep verbatim").
+   existing extractable content. Synthesized 7 atomic clauses by decomposing
+   the existing layer text (Chrome scope + Chrome operating-layer rule;
+   Content scope + the type/radius/border rule; metadata-as-third-layer
+   rule; Hand definition; the one-expressive-layer closing rule) as a
+   **faithful paraphrase, not a verbatim quote** — every clause traces to
+   existing Read-me/DecisionCard text and introduces no new claims, but
+   several bullets reword rather than reproduce the source string exactly
+   (e.g. "Nav, header, footer, buttons, toggles, icons." →
+   "Chrome governs nav, header, footer, buttons, toggles, icons."). Flagging
+   for review since this is an interpretive call beyond the literal brief
+   instruction ("keep verbatim").
 5. Audience — one `_Docs/Paragraph` (`2755:4217`), 2-line bulleted list,
    exact brief wording: "Developers — scanning for useful content" /
    "Recruiters & clients — scanning for credibility in under 1 minute".
@@ -357,3 +362,16 @@ confirms: reads top-to-bottom in one pass, all 6 content blocks visible with
 no clipping/overlap, bullets render cleanly (no stray auto-width overflow),
 3-line Mission and 7-line Core-rules both wrap correctly within the 824px
 slot width.
+
+**Fix pass (post-review, same session).** Code review on commit `0e17cd0`
+flagged that Mission and Core-rules text relied on the slot's natural
+auto-wrap (824px / 20px) instead of deliberate line breaks — auto-wrap
+produced unbalanced lines (Mission: 80/90/32 chars; Core-rules "Hand"
+bullet: 86/14 chars) that blew past the 50–75 char D8 measure and left
+short orphans. Fixed by hand-breaking every rendered line with Figma's
+soft line-break character (U+2028 — same paragraph/bullet, no new list
+marker) instead of letting the slot auto-wrap, re-wording a few clauses
+slightly to hit measure. Full char-count-per-line verification is in
+`.superpowers/sdd/magnet-ds-docs-v1/task-4-report.md` under "Fix pass". No
+frame-height change (still 1885px) — this was a wrap-quality fix only, not
+a content-length change.
