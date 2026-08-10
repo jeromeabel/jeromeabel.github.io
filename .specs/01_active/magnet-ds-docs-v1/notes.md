@@ -105,6 +105,19 @@ Heading/H1, Heading/H2, Heading/H3, Body/4xl/semibold, Body/3xl, Body/xl,
 Body/xl/medium, Body/l, Body/base, Body/base/medium, Body/s, Body/xs,
 Body/xs/medium, Label/Meta, Chip/Mono, Code/Base.
 
+**Count reconciliation (18 vs 17).** Re-checked frame `8:2` directly via
+`use_figma`: it has 18 top-level children, not 17 — but one of them (`8:3`,
+name `TYPOGRAPHY`) is the frame's own section-title text node, not a
+specimen. Excluding it leaves exactly 17 specimens, matching the list above.
+The brief's "18" was counting the section title alongside the specimens; not
+a stale estimate of *content*, just an off-by-one over what counts as a
+specimen row. A subtree-wide name search for `2xl`
+(`frame.findAll(n => /2xl/i.test(n.name))`) returned **zero matches** —
+`Body/2xl` does not exist anywhere in this frame. The old ramp genuinely
+skips from `Body/3xl` straight to `Body/xl`; there is no gap in the
+extraction, and no additional diff/salvage check is needed since there is no
+`Body/2xl` specimen to check.
+
 **New `SECTION / Type`** inside `CHAPTER / 01 Foundations` (frame
 `2670:6727`, specimens container `2670:6730`) — 3 specimens: H1 cell
 (`2670:6731`, Display · Bubbler One · page H1 only), H2 cell (`2670:6734`,
