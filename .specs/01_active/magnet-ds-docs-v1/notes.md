@@ -457,3 +457,16 @@ text (e.g. PostMetadataTime) — pre-existing content issue. `2670:7045` and
 - One chip per card/row...") — likely a pre-existing duplicate; left as-is
 since Cards was out of scope for content changes (already D5-compliant)
 and D3 forbids deleting without deciding which copy is canonical.
+
+**Fix round 1 (post-review).** Review found `GROUP / Cards`'s heading
+(`2670:7014`, raw 30px text "Cards") was never swapped to
+`_Docs/GroupHeader` like the other five groups — Cards being
+grouping-compliant (Step 3) had been wrongly conflated with heading
+compliant (Step 2). Fixed: created `_Docs/GroupHeader` instance
+`2771:4217` (Title="Cards"), inserted at index 0 of `2670:7013`, removed
+old text node `2670:7014`. All six group headers now resolve to main
+component `2766:4212` at the same 24px/31px size (verified by ID lookup,
+not just screenshot). New instance is 8px shorter than the old text node,
+so `CHAPTER / 02 Components` shrank 14271.06→14263.06px; shifted
+`CHAPTER / 03 Sections` and `CHAPTER / 04 Pages` y by −8px each to
+restore both 160px gaps exactly (verified via script return values).
