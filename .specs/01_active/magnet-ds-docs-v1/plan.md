@@ -153,15 +153,15 @@ git commit -m "docs(specs): magnet-ds-docs-v1 — Docs page created, masters and
 - Consumes: Task 3 `📚 Docs` page; Task 1 IDs for `CHAPTER / 00 Read me`, `Intro/01`, `Intro/02`.
 - Produces: frame `CHAPTER / 00 About` at the top of the Docs column. Content contract (D3/D8): mission ≤ 3 lines, audience table, three-layer identity, 7 core rules, page-intent list — nothing else. Task 9 validates it against the ~2-frame-heights cap.
 
-- [ ] **Step 1: Extract source text**
+- [x] **Step 1: Extract source text**
 
 `get_design_context` on `CHAPTER / 00 Read me`, `Intro/01`, `Intro/02` (still on Introduction page). Capture verbatim: the 7 core rules, the three-layer identity text (Chrome / Content / Hand definitions + "only one layer can be expressive at a time"), audience statements (developers scanning for useful content; recruiters/clients scanning for credibility in under 1 minute), and page intents (Home = credibility, Blog = findability, Work = proof, About = trust).
 
-- [ ] **Step 2: Rename and move the chapter frame**
+- [x] **Step 2: Rename and move the chapter frame**
 
 Rename `CHAPTER / 00 Read me` → `CHAPTER / 00 About`, move it to `📚 Docs` at the top of the column (same width 1408, same gap above `01 Foundations`).
 
-- [ ] **Step 3: Compose the About content**
+- [x] **Step 3: Compose the About content**
 
 Inside `00 About`, using `_Docs/*` instances only, in order:
 
@@ -174,11 +174,11 @@ Inside `00 About`, using `_Docs/*` instances only, in order:
 
 Deep product strategy from Intro/01–02 (user flows, branding rationale) is **not** carried over — it lives in `.specs/` (D3).
 
-- [ ] **Step 4: Verify the size cap**
+- [x] **Step 4: Verify the size cap**
 
 `get_screenshot` of `00 About`. Expected: reads top-to-bottom in one pass; height ≤ ~2× the height of a typical chapter frame's first viewport (~2 frame-heights per D8). If over: cut prose, not structure.
 
-- [ ] **Step 5: Log and commit**
+- [x] **Step 5: Log and commit**
 
 Append to `## Docs page build log`: `00 About` composed, height, what was cut from Intro/01–02.
 

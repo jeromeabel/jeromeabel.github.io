@@ -277,3 +277,83 @@ blank band at the top (reserved space), the four chapters stacked in reading
 order 01→04 with visible equal gaps between them, and the `_Docs` masters
 cluster clearly separated below chapter 04 by the same design. Structure
 matches the expected one-column layout.
+
+### Task 4: `CHAPTER / 00 About` composed (fold Intro/01 + Intro/02, D8 cap)
+
+**Frame.** Renamed `CHAPTER / 00 Read me` (`2705:21254`) → `CHAPTER / 00
+About`, moved from `📚 Introduction` to `📚 Docs` via `appendChild`, positioned
+at x=0/y=0 (top of column). Frame is `VERTICAL` auto-layout (width 1408
+fixed, height hugs content, `itemSpacing: 24`, `padding: 24` all sides) — not
+plain absolute positioning as Task 3's notes assumed; ordering is controlled
+by child index (`insertChild`/`appendChild`), not manual `x`/`y`.
+
+**Final height: 1885px** — inside the 2000px budget Task 3 reserved, no
+prose cuts needed against the D8 cap (~2× a typical chapter's first-viewport
+height).
+
+**Content built, in order, using `_Docs/*` instances only:**
+
+1. `_Docs/ChapterHeader` (`2751:4198`) — number `00`, title `About`, summary
+   `What this system is, who it serves, and the rules that govern it.`
+2. Mission — one `_Docs/Paragraph` (`2751:5579`), 3 lines, compressed
+   verbatim-first from `Intro/01`'s problem statement: "Front-end engineer
+   working in Vue, Astro, Figma & Claude Code — ex-artist (code,
+   electronics, mechanics), 10+ years. Only ~2.5 years of front-end
+   experience; internal work isn't public, outcomes are thin." (cut the
+   trailing "not enough seniority / full-stack is the new baseline" sentence
+   to hold the ≤3-line cap).
+3. Three-layer identity (`2705:21257`) — kept untouched: Chrome / Content /
+   Hand `_Docs/DecisionCard` instances + the closing "only one layer can be
+   expressive at a time" line, all verbatim from the old Read-me frame.
+4. Core rules — one `_Docs/Paragraph` (`2754:4214`), 7 bullets. **Caveat:**
+   no discrete "7 core rules" list exists anywhere in the source (`CHAPTER /
+   00 Read me` only had the 3 DecisionCards + 1 closing line; `Intro/01`/`02`
+   don't contain a rules list either) — "7 core rules" in the brief/D3/D8 is
+   design.md's description of the *target* structure, not a pointer to
+   existing extractable content. Synthesized 7 atomic, verbatim-sourced
+   clauses by decomposing the existing layer text (Chrome scope + Chrome
+   operating-layer rule; Content scope + the type/radius/border rule;
+   metadata-as-third-layer rule; Hand definition; the one-expressive-layer
+   closing rule) — no new claims introduced, every clause traces to existing
+   Read-me/DecisionCard text. Flagging for review since this is an
+   interpretive call beyond the literal brief instruction ("keep verbatim").
+5. Audience — one `_Docs/Paragraph` (`2755:4217`), 2-line bulleted list,
+   exact brief wording: "Developers — scanning for useful content" /
+   "Recruiters & clients — scanning for credibility in under 1 minute".
+6. Page intents — one `_Docs/Paragraph` (`2755:4223`), 4-line bulleted list,
+   exact brief wording: Home (best-of + links, credibility), Blog
+   (findability, reading), Work (proof, case studies), About (trust, the
+   person).
+
+**What was cut from Intro/01–02 (per D3 — deep product strategy lives in
+`.specs/`, not Figma):** user-flow diagrams, branding rationale, the
+full/uncompressed problem-statement prose (only the mission's first 3
+sentences survived, verbatim-trimmed), and any narrative framing beyond the
+mission/audience/page-intent facts listed above. `Intro/01` and `Intro/02`
+themselves were left in place on `📚 Introduction` (not deleted) — deletion is
+Task 8's job, after the migration is validated (D3 non-destructive strategy).
+
+**Reused row idiom.** Audience/Page-intents/Core-rules all reuse the file's
+own pre-existing "label + multi-line bulleted `_Docs/Paragraph`" pattern
+(seen in the original "Target Audience" row) rather than one row per bullet —
+keeps instance count low and stays compliant with "instances only, no new
+`_Docs/*` masters" (D7).
+
+**Column repositioned to preserve the 160px gap.** Chapter 00's actual
+height (1885px) differs from the 2000px placeholder Task 3 reserved, so
+`01`–`04` were shifted down by their delta (+45px) to keep the chosen 160px
+chapter-to-chapter gap exact on both sides of Chapter 00:
+
+| Frame | ID | old y | new y | width | height |
+| --- | --- | --- | --- | --- | --- |
+| `CHAPTER / 00 About` | `2705:21254` | — (new) | 0 | 1408 | 1885 |
+| `CHAPTER / 01 Foundations` | `2670:6678` | 2000 | 2045 | 1408 | 5821 |
+| `CHAPTER / 02 Components` | `2670:6860` | 7981 | 8026 | 1408 | 14272.06 |
+| `CHAPTER / 03 Sections` | `2670:7567` | 22413.06 | 22458.06 | 1408 | 4932 |
+| `CHAPTER / 04 Pages` | `2670:7608` | 27505.06 | 27550.06 | 1408 | 5134 |
+
+**Verification.** `get_screenshot` of the full `CHAPTER / 00 About` frame
+confirms: reads top-to-bottom in one pass, all 6 content blocks visible with
+no clipping/overlap, bullets render cleanly (no stray auto-width overflow),
+3-line Mission and 7-line Core-rules both wrap correctly within the 824px
+slot width.
