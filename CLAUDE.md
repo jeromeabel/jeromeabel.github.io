@@ -99,8 +99,8 @@ parses that fig-kiwi binary into a node graph, which is how `figma:dump` works. 
 values still pair a deterministic diff with a manual `use_figma` MCP procedure doc
 (`dump-bindings.md`, `dump-raw-values.md`). Spec:
 `.specs/02_archives/figma-variables/design.md`.
-The shareable documentation entry point in Figma is the `📚 Design system` page
-in `Blog Design System v1.0` (file key `ihWIWmvtQPTWgUxlrVjC2c`). The token model is
+The shareable documentation entry point in Figma is the `📚 Docs` page
+in `Magnet-DS-v1.0` (file key `ihWIWmvtQPTWgUxlrVjC2c`). The token model is
 organized into three variable collections: `1 Primitives`, `2 Theme`, and `3 Responsive`.
 
 ## Specs & Planning

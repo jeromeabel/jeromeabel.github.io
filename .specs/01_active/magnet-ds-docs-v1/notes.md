@@ -706,3 +706,126 @@ sentence. A full page-wide sweep of all 33 top-level published components
 `Sections` 9 = 33) confirmed zero empty descriptions, matching the
 pre-fix count (this fix only enriched existing non-empty text, it didn't
 change the empty/non-empty tally).
+
+## Task 8 — pages demoted/renamed, cover date refreshed, CLAUDE.md updated;
+deletion scope reduced (⚠️ major finding)
+
+**Fresh page inventory (Step 0, live).** `figma.root.children` before any
+edit: 13 pages — `📖 Cover` (`0:1`), `📚 Docs` (`2736:4`), `📚 Introduction`
+(`2545:671`), `📐 Decisions` (`2716:4244`), `🎨 Foundations` (`5:14`),
+`❖ Components` (`461:759`), `📄 Pages` (`2558:18264`), `Page 6`
+(`2678:6692`), `Page 7` (`2678:10236`), `Page 8` (`2678:23308`), `Page 9`
+(`2678:32354`), `Page 10` (`2678:34067`), `Page 11` (`2678:34657`). IDs
+match Pass-0 exactly; only list position shifted (Docs was inserted at
+index 1 by Task 3).
+
+**Step 1 (pre-flight).** Loaded `📚 Introduction` live via
+`setCurrentPageAsync`: 6 top-level children — `_Docs/Components`
+(`2590:532`, SECTION, confirmed 0 children — the one "emptied shell" the
+brief anticipated), `BLOG DESIGN SYSTEM v1.0` stray text (`2670:6656`),
+`Frame 1` stray (`2708:21292`), `Intro/01` (`2708:21320`), `Intro/02`
+(`2709:21578`), `Section` stray (`2709:21629`). Exactly matches the
+brief's Step 1 checklist (Intro/01, Intro/02, 3 strays, emptied shells) —
+nothing extra to move before demoting.
+
+**Steps 2–3 (demote + rename backups).** Executed in one `use_figma` call
+(rename + reorder only, no page-content load needed for either):
+- `📚 Introduction` → `🗄 Backup — Introduction (pre-Docs)` (`2545:671`)
+- `Page 6` → `🗄 Backup — UI kit foundations & controls` (`2678:6692`) —
+  content inspected live: Grid and Indention, Typography, Colors, Icons,
+  Effects, Select controls, Dropdown, Calendar, Navigations, Buttons,
+  Fields (11 frames — a broad foundations + form-control kit).
+- `Page 7` → `🗄 Backup — Getting started & theme overview`
+  (`2678:10236`) — content: Getting Started, Theme, Components Overview
+  (3 sections).
+- `Page 10` → `🗄 Backup — Brand guidelines template` (`2678:34067`) —
+  content: Cover, Table of contents, Brand overview/Attributes/
+  Personality/Positioning, Logo conceptualization, Color Palette,
+  Typography, Mockups, Mission Statement, etc. (33 frames — a full brand
+  guidelines deck).
+
+All four appended to the end of `figma.root.children` in that order via
+`appendChild`. Verified post-move order via return value.
+
+**Step 4 (deletions) — major finding: brief's emptiness claims for 3 of 4
+targets are false.** Per the brief's own instruction ("verify child count
+is 0 ... immediately before each deletion, not from a cached earlier
+read"), each target was loaded live via `setCurrentPageAsync` (for
+`📐 Decisions`/`Page 8`/`Page 9`/`Page 11`) or re-read directly (for
+`🎨 Foundations`, whose D4 verdict is content-based, not count-based)
+immediately before any delete was attempted:
+
+| Target | Brief's claim | Live result |
+| --- | --- | --- |
+| `🎨 Foundations` (`5:14`) | superseded per D4 verdict | **Confirmed.** 2 children (`6:2`, `8:2`), matching Pass-0 exactly. D4 verdict (above) already established "nothing unique — safe to delete" via content diff, independent of any child-count claim. **Deleted.** |
+| `📐 Decisions` (`2716:4244`) | "empty since creation" | **False.** 1 child, `design-decisions` frame (`2729:4244`, 1440×4913px), which itself has **7 sub-frames** of real content. **NOT deleted.** |
+| `Page 8` (`2678:23308`) | "0 children" | **False.** 12 top-level frames — `Layout / Normal`, `Layout / Compact`, `Display`, `Mono Display`, `Heading`, `Mono Heading`, `Label`, `Mono Lable` [sic], `Mono Paragraph`, `Paragraph`, `Foundation`, `Light tokens` — a substantial old typography/token specimen set (9–19 sub-children each). **NOT deleted.** |
+| `Page 9` (`2678:32354`) | "0 children" | **False.** 5 top-level frames — `🟡 TEMPLATES`, `🟡 SECTIONS`, `🟡 COMPONENTS`, `🟡 FOUNDATIONS`, `🚀 Welcome` — naming strongly suggests commercial UI-kit onboarding/template scaffolding rather than the user's own design work, but this is inference, not confirmed. **NOT deleted.** |
+| `Page 11` (`2678:34657`) | "0 children" | **False.** 33 top-level nodes — `Plugin / Similayer`, `Plugin / Design System Organizer`, `Instructions / Component Architecture`, `Instructions / Naming Conventions`, `Typography / Medium\|Small\|Large Scale`, etc. — reads as generic plugin-recommendation/instructional boilerplate that ships with a purchased Figma UI kit, but again inference, not confirmed. **NOT deleted.** |
+
+**Root cause.** This is the same staleness bug already documented in
+Task 1's own Deviations note ("Introduction page child count is stale
+before load... un-loaded `figma.root.children` pass... reported 9
+children; after loading... actual is 11") — except for Decisions/Page 8/
+Page 9/Page 11, that under-count was never corrected before being written
+into Pass-0's node-ID map (`... (backup, empty)` labels) and copied
+forward verbatim into `plan.md` Task 8 Step 4 and `task-8-brief.md`. No
+task between 1 and 8 ever loaded these four pages live, so the false
+"empty" claim survived unchallenged for 8 tasks until this live check.
+
+**Decision: deletion scope reduced to Foundations only.** Deleting
+`📐 Decisions`, `Page 8`, `Page 9`, or `Page 11` now would delete real,
+unreviewed content with no backup and no D3/D4-style non-destructive
+gating — exactly what D3 ("nothing is deleted until its replacement
+exists / verdict recorded") forbids. Since the plan's own pre-approval
+for these four deletions rests entirely on a factually false emptiness
+premise, verification failed and the deletions did not proceed for the
+three affected pages. `🎨 Foundations` is unaffected by this bug (its
+deletion rests on the D4 content-diff verdict, confirmed independently
+above) and was deleted as planned.
+
+**These 4 pages were left completely untouched** (no rename, no reorder,
+no delete) — not folded into the new backup naming scheme, since that
+would presume a disposition decision (keep vs. discard) that isn't this
+task's call to make. They currently sit between `📚 Docs` and
+`❖ Components` in the page list, still under their original names
+(`📐 Decisions`, `Page 8`, `Page 9`, `Page 11`).
+
+**Follow-up needed (blocking Task 9's page-list check, non-blocking for
+everything else):** a human (or a dedicated follow-up task) needs to look
+at `📐 Decisions`, `Page 8`, `Page 9`, and `Page 11` and decide, per page:
+rename+keep as a `🗄 Backup — <source>` page (if it's real prior work
+worth keeping, as Page 8's typography/token specimens might be), or
+confirm it's disposable UI-kit boilerplate and delete it explicitly once
+that's been visually confirmed (not inferred from names alone).
+`design-decisions` (`2729:4244`) in particular warrants a closer read —
+it may contain real design-decision documentation that was never
+migrated anywhere.
+
+**Step 5 (cover date chip).** Cover frame `9:2` confirmed live. Date chip
+(`I2694:6660;2693:9892`) read "Aug 8, 2026" before edit — matches Pass-0.
+Updated to "Aug 11, 2026" via the canonical text-edit recipe (loaded the
+node's existing font via `getStyledTextSegments`, awaited, mutated
+`characters`). Version chip (`I2694:6673;2693:9909`) confirmed unchanged,
+still "v0.91" — not touched.
+
+**Step 6 (CLAUDE.md).** Root `CLAUDE.md`, "Figma Design Tokens" section:
+replaced `` the `📚 Design system` page in `Blog Design System v1.0` ``
+with `` the `📚 Docs` page in `Magnet-DS-v1.0` ``. File key
+`ihWIWmvtQPTWgUxlrVjC2c` unchanged.
+
+**Step 7 (final page-list verification).** Fresh `use_figma` read, 12
+pages (13 → 12 after the one Foundations deletion):
+
+`📖 Cover`, `📚 Docs`, `📐 Decisions`, `❖ Components`, `📄 Pages`, `Page 8`,
+`Page 9`, `Page 11`, `🗄 Backup — Introduction (pre-Docs)`, `🗄 Backup — UI
+kit foundations & controls`, `🗄 Backup — Getting started & theme
+overview`, `🗄 Backup — Brand guidelines template`.
+
+**Deviation from the brief's expected Step 7 outcome:** expected `Cover,
+Docs, Components, Pages, then 4 Backup — * pages, no Decisions, no
+Foundations, no bare Page N`. Actual list still contains `📐 Decisions`,
+`Page 8`, `Page 9`, `Page 11` (bare `Page N` names) — this is the direct,
+documented consequence of the Step 4 finding above, not an execution
+error. `🎨 Foundations` is correctly absent. The 4 backup pages are
+correctly named, ordered, and at the bottom of the list, per the brief.

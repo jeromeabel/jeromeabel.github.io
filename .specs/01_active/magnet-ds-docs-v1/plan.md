@@ -343,28 +343,44 @@ git commit -m "docs(specs): magnet-ds-docs-v1 — component descriptions filled"
 **Interfaces:**
 - Consumes: Task 2 D4 verdict (must exist before Foundations deletion); Tasks 3–7 complete (Introduction content fully superseded).
 - Produces: page list = `📖 Cover`, `📚 Docs`, `❖ Components`, `📄 Pages`, `🗄 Backup — Introduction (pre-Docs)`, `🗄 Backup — <source>` ×3. Task 9 validates; Task 10 deletes the Introduction backup.
+- ⚠️ **Actual outcome deviates from the Produces line above** — see `notes.md`
+  `## Task 8` for the full finding. Live verification found `📐 Decisions`,
+  `Page 8`, `Page 9`, `Page 11` are NOT empty (contrary to this plan's own
+  Step 4 claim, itself a stale-read artifact from Task 1). Only
+  `🎨 Foundations` was deleted (D4-verdict-backed, content-independent of
+  the count bug); the other 3 were left untouched pending a human
+  disposition call. Page list currently has 12 pages, not the expected 8.
 
-- [ ] **Step 1: Pre-flight — confirm Introduction is fully superseded**
+- [x] **Step 1: Pre-flight — confirm Introduction is fully superseded**
 
 Checklist against Tasks 3–7 output: chapters 00–04 on Docs page ✓, `_Docs` masters moved ✓ (Task 3 Step 3 verified). The only content remaining on Introduction should be: `Intro/01`, `Intro/02`, the 3 stray nodes, and the emptied shells. If anything else remains, move it before demoting.
 
-- [ ] **Step 2: Demote Introduction**
+- [x] **Step 2: Demote Introduction**
 
 Rename page `📚 Introduction` → `🗄 Backup — Introduction (pre-Docs)`. Move it to the bottom of the page list. Strays (`Frame 1`, `Section`, `BLOG DESIGN SYSTEM v1.0` label — D1) stay inside it; they die with the page in Task 10.
 
-- [ ] **Step 3: Rename kept backup pages**
+- [x] **Step 3: Rename kept backup pages**
 
 Rename Pages 6, 7, 10 → `🗄 Backup — <source>`, where `<source>` names what they hold (inspect each via the Task 1 inventory; e.g. `🗄 Backup — Home templates`). Move to the bottom of the page list.
 
-- [ ] **Step 4: Delete pages with nothing to back up**
+- [x] **Step 4: Delete pages with nothing to back up — PARTIAL, see notes.md**
 
 Delete: 📐 Decisions (empty since creation), 🎨 Foundations (superseded — requires Task 2 verdict recorded), backup Pages 8, 9, 11 (0 children each). Verify child count is 0 (or salvage done) via `use_figma` immediately before each deletion.
 
-- [ ] **Step 5: Refresh cover date chip**
+Live verification found Decisions/Page 8/Page 9/Page 11 are NOT empty (12, 5,
+33, and 7-nested-under-1 real children respectively) — the "0 children"/
+"empty since creation" claims in this step were a stale unloaded-page read,
+the same bug Task 1 flagged for Introduction but never corrected here. Only
+`🎨 Foundations` was deleted (its D4 verdict is content-based and was
+independently reconfirmed live). The other 3 pages were left untouched,
+unrenamed. See `notes.md` `## Task 8` for full detail and the follow-up this
+leaves open.
+
+- [x] **Step 5: Refresh cover date chip**
 
 On cover frame (audit `9:2`): set the date chip text to today's date in its existing format. **Do not touch the v0.91 chip** (D2).
 
-- [ ] **Step 6: Update CLAUDE.md**
+- [x] **Step 6: Update CLAUDE.md**
 
 In root `CLAUDE.md`, "Figma Design Tokens" section, replace the docs-page reference:
 
@@ -373,11 +389,15 @@ In root `CLAUDE.md`, "Figma Design Tokens" section, replace the docs-page refere
 
 (Keep the file key `ihWIWmvtQPTWgUxlrVjC2c`, which is unchanged.)
 
-- [ ] **Step 7: Verify page list**
+- [x] **Step 7: Verify page list — deviates from expected, see notes.md**
 
 `use_figma` page inventory. Expected order: Cover, Docs, Components, Pages, then 4 `🗄 Backup — *` pages. No Decisions, no Foundations, no bare `Page N`.
 
-- [ ] **Step 8: Commit**
+Actual: `Cover, Docs, Decisions, Components, Pages, Page 8, Page 9, Page 11,`
+then the 4 `🗄 Backup — *` pages. `Foundations` correctly absent; `Decisions`
+and 3 bare `Page N` pages remain, per the Step 4 finding above.
+
+- [x] **Step 8: Commit**
 
 ```bash
 git add CLAUDE.md .specs/01_active/magnet-ds-docs-v1/notes.md .specs/01_active/magnet-ds-docs-v1/plan.md
