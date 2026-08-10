@@ -34,13 +34,14 @@ magnet.co agency, Magnetic UI (Framer), Magnet UI Kit (Spline). Personal,
 unpublished system → acceptable. Re-check npm if tokens ever publish as a
 package. Kill the stale `BLOG DESIGN SYSTEM v1.0` label.
 
-### D2 — Cover: keep as is
+### D2 — Cover: keep as is; no version bump from this restructure
 
 Figma file cover = browser thumbnail, not a docs-site nav hub, so the
 version + date chips do real identification work (the web-survey "no version
 on cover" rule does not transfer). Cover already specimens all three identity
-layers. Bump v0.91 → v1.0 when this restructure ships; no TOC on cover
-(pages panel is the nav).
+layers. **Version stays v0.91** — no intermediate bump; **v1.0 is reserved for
+the milestone "all components and pages designed"**. Refresh the date chip
+whenever the file materially changes. No TOC on cover (pages panel is the nav).
 
 ### D3 — Documentation: one page, `📚 Docs` (Approach A)
 
@@ -67,7 +68,14 @@ Chapter matrix, top-to-bottom reading order:
   three-layer identity, page-intent list. Deep product strategy lives in
   `.specs/`, not Figma.
 - `_Docs/*` private components: keep (underscore = unpublished). They are the
-  doc-maintenance mechanism.
+  doc-maintenance mechanism (extension policy: D7).
+
+**Migration strategy — non-destructive.** Build the new `📚 Docs` page fresh
+(instances of `_Docs/*` + moved chapter frames where they already comply);
+demote the old `📚 Introduction` page to `🗄 Backup — Introduction (pre-Docs)`.
+Delete backups only after the new page is validated against D8. Existing
+template-backup pages with content (6, 7, 10) stay as backups; only truly
+empty pages (8, 9, 11) are deleted — nothing to back up.
 
 ### D4 — Foundations page: delete after salvage check
 
@@ -99,19 +107,66 @@ styles/variables; `figma:verify` reads variables — safe.
 `Home — Desktop — Dark` matrix naming stays. No page-level variant sets
 (heavy, slow, slot pattern already works).
 
+### D7 — `_Docs/*` components: reuse the existing 10, extend only on proven need
+
+Base set stays as-is: ChapterHeader, SpecimenCell, DecisionCard (set),
+TokenRow, DoDont, Date (set), Status (set), Headline, Paragraph, Divider.
+No rebuild — the restructure composes instances of these.
+
+Additions allowed only when a chapter build hits a gap, capped at:
+
+- `_Docs/GroupHeader` — level-2 heading for the six D5 groups (number-less,
+  smaller than ChapterHeader), if plain Headline instances prove insufficient.
+- `_Docs/PageTOC` — one page-top orientation card listing the five chapters
+  with one-line purposes (spatial map, not links — Figma has no anchors).
+
+Anything else needs a note in this spec first (thesis §10: decision before
+component).
+
+### D8 — Readability spec (cognitive load, scannability, IA)
+
+The new Docs page must pass these checks (source: ds-documentation.md rules,
+Sync-deck presentation moves):
+
+- **Linear spatial IA.** Chapters stacked in one vertical column, reading
+  order 00 → 04, constant width (1408) and constant chapter gap. Scrolling
+  down = reading order; no side-quests on the canvas.
+- **Layer-cake scanning.** Every chapter: ChapterHeader (number + name +
+  one-line purpose) → GroupHeaders → cards. Any fact findable via
+  page → chapter → group → card in ≤10 s.
+- **Two-level disclosure cap.** Chapter → group. No third nesting level.
+- **One idea per frame; density lives in cards,** not in frame count.
+- **Heading hierarchy is visible.** 2–4 size steps between levels, top level
+  ≤2× body. If the current Headline component can't express two levels,
+  that's the D7 GroupHeader trigger.
+- **Prose budget.** Paragraph measure 50–75 chars; canvas text near a
+  specimen ≤1 sentence; rationale lives in a DecisionCard, not in captions.
+- **Tables lead with the semantic name,** resolved value in the same row,
+  light/dark inline — never per-theme duplicate tables.
+- **Do/Don't only where the wrong choice looks plausible;** max 2 pairs per
+  row, one-line captions.
+- **Chapter 00 About is one viewport-ish read:** mission ≤3 lines, audience
+  table, three-layer identity, 7 core rules, page-intent list. If it scrolls
+  past ~2 frame-heights, cut.
+
 ## Cleanup checklist (implementation scope)
 
-1. Delete: 📐 Decisions page; 🎨 Foundations page (after D4 salvage);
-   `Frame 1` (`2708:21292`); `Section` (`2709:21629`);
-   `BLOG DESIGN SYSTEM v1.0` label (`2670:6656`); empty backup Pages 8, 9, 11.
-2. Rename: `📚 Introduction` → `📚 Docs`; `CHAPTER / 00 Read me` → `00 About`;
-   remaining backups → `🗄 Backup — <source>`.
-3. Retitle ❖ Components page sections per D5; align Docs chapter-02 group
-   frames to the same six names.
-4. Fold `Intro/01` + `Intro/02` into Chapter 00 About; delete the source frames.
-5. Add one-sentence description-field text to each published component.
-6. Bump cover v0.91 → v1.0 + refresh date chip; update `CLAUDE.md` reference
-   to the docs page name (`📚 Design system` → `📚 Docs`).
+1. Create new `📚 Docs` page; compose chapters 00–04 there per D3/D7/D8
+   (move compliant chapter frames, rebuild the rest from `_Docs/*` instances).
+2. Demote old `📚 Introduction` → `🗄 Backup — Introduction (pre-Docs)`;
+   rename other kept backups → `🗄 Backup — <source>` (Pages 6, 7, 10).
+3. Delete: 📐 Decisions page; 🎨 Foundations page (after D4 salvage);
+   empty backup Pages 8, 9, 11. Stray nodes `Frame 1` (`2708:21292`),
+   `Section` (`2709:21629`), `BLOG DESIGN SYSTEM v1.0` label (`2670:6656`)
+   stay in the demoted backup page — deleted with it after validation.
+4. Retitle ❖ Components page sections per D5; Docs chapter-02 group frames
+   use the same six names. Chapter 00 titled `00 About`.
+5. Fold `Intro/01` + `Intro/02` essence into Chapter 00 About (D8 size cap).
+6. Add one-sentence description-field text to each published component.
+7. Refresh cover date chip (version stays v0.91 per D2); update `CLAUDE.md`
+   docs-page reference (`📚 Design system` → `📚 Docs`).
+8. Validation gate: D8 checklist pass on the new page → then delete
+   `🗄 Backup — Introduction (pre-Docs)`.
 
 ## Out of scope
 
