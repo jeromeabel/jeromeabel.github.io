@@ -819,38 +819,16 @@ not a per-component variant. `ThemeToggle`/`MotionToggle` use `mode`
 (value modes, not interaction states) — deliberately kept out of the `state`
 vocabulary. No deviations from the vocabulary were found or logged.
 
-## F6 — Mobile sections regrouped
-
-**Retry note (2026-08-12):** the prior Task 7 attempt failed mid-run before
-logging or committing. Re-verified from scratch rather than trusting its
-partial state.
-
-**Step 1 (confirm placement):** `use_figma` on `❖ Components` (`461:759`)
-found `WorkPreviewSection — Mobile` (`2829:5539`) and
-`ContactPreviewSection — Mobile` (`2829:5576`) **already parented inside**
-the `Sections` section (`2041:484`), alongside `BlogPreviewSection — Mobile`
-(`2826:5489`) — ordered Blog → Work → Contact, matching page reading order.
-Top-level children of `❖ Components` are exactly the six sections (`Chrome`,
-`Actions`, `Sections`, `Typography`, `Metadata`, `Cards`) — zero component
-orphans. The move itself must have completed during the failed prior
-attempt (the `use_figma` write is atomic — a script that touches the canvas
-either fully applies or not at all — so this is not a partial/corrupted
-state); only the logging and commit steps never ran.
-
-**Step 2 (move):** not needed — already done.
-
-**Step 3 (verify placement and instances):** `get_screenshot` of `Sections`
-(`2041:484`) — all three Mobile section previews render fully (Blog post
-grid, Work project cards, Contact block), no purple/detached-instance
-badges. `get_screenshot` of `Home — Mobile — Dark` (`2604:1743`, height
-3465) and `Home — Mobile — Light` (`2604:1742`, height 3436) — both render
-unchanged from Task 2's fixed state, heights within the 3120–3810 range
-Task 2 established. A section move does not alter instance rendering, and
-none did here.
-
-**Step 4:** logged above; commit follows.
-
 ## F6 — mobile sections regrouped (Task 7, 2026-08-12)
+
+**Retry note:** the prior Task 7 attempt (2026-08-11) failed mid-run before
+logging or committing. This is the re-run; independently re-verified the
+end state below (fresh `use_figma` read of `❖ Components` post-move: exactly
+6 top-level items, all `SECTION` type, zero component orphans; `Sections`
+children end `…, BlogPreviewSection — Mobile, WorkPreviewSection — Mobile,
+ContactPreviewSection — Mobile`; `get_screenshot` of `Sections`,
+`Home — Mobile — Dark` (3465px), and `Home — Mobile — Light` (3436px) all
+matched what Step 3 below records) before writing this log.
 
 **Step 1 — confirm current placement.** Live `use_figma` read of `❖ Components`
 (`461:759`) top-level children: 8 total — the expected 6 sections (Chrome
