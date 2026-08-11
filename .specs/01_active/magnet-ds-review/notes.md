@@ -509,3 +509,93 @@ never touched — different collection, untouched by this script.
 
 **Step 5 — commit.** See repo history for
 `docs(specs): magnet-ds-review — F3 Theme variable descriptions`.
+
+## F3 fix round 1 (Task 4, 2026-08-11)
+
+A task reviewer independently re-checked commit `3969e1c` and found the
+Step 1 process trusted the existing docs-table copy for all 10
+"already good" rows without running the same live-consumer sweep used
+for the 5 flagged tokens. One of those 10 (`color/surface`) turned out
+to be factually false. Verdict: **Critical — must fix** `color/surface`,
+**Important — should fix** run the same sweep against the other 9.
+
+**Method.** Re-ran the grouped `boundVariables` sweep (all 15 token IDs
+at once, grouped by `node.type + ':' + node.name`) across all 5 live
+pages — `📖 Cover`, `📚 Docs`, `📐 Decisions` (0 hits for any of the 15,
+confirmed in the original Step 1b pass, not re-swept), `❖ Components`,
+`📄 Pages` — cross-checked against `src/styles/global.css` and a fresh
+`grep` over `src/components/**/*.astro` for every token's Tailwind class
+(`bg-*`, `text-*`, `border-*`, `hover:*`).
+
+**`color/surface` — CRITICAL, corrected.** Old copy: "Raised neutral
+surface for chrome regions like footer blocks." Zero footer-related
+node anywhere in the file binds to this token, and
+`src/components/app/Footer.astro` has no `surface` reference of any
+kind (confirmed by both the reviewer and this re-sweep). Real
+consumers: `ThemeToggle`/`MotionToggle` (Chrome section, Components
+COMPONENT variants `state=light/dark/on/off`, 1/1/1/1 in Components +
+11/3 in Docs + 8/0 in Pages) and `PostMetadataTopic`'s `type=post`
+chip fill (10 Components + 40 Docs + 20 Pages) — Docs' own annotation
+text spells this out verbatim: *"type=post: muted bg-only box
+(color/surface), mono 12/16 UPPER..."*. Code confirms the toggle half:
+`ThemeToggle.astro` / `MotionToggle.astro` both carry a static (not
+hover) `bg-surface` class. New copy: **"Idle fill for toggle controls
+(ThemeToggle, MotionToggle) and topic chips; not footer."**
+
+**Other 9 rows — verification results.**
+
+| Token | Verdict | Evidence |
+|---|---|---|
+| `color/foreground` | Verified, unchanged | Widely bound to headline/body TEXT + VECTOR icon fills across all 4 non-empty pages; also the Link/CTA default fill/text colour. No contradicting evidence found. |
+| `color/foreground-muted` | Verified, unchanged | Dominant consumer across every page — dates, captions, standfirst copy, footer email link (`hello@jeromeabel.net`), passive metadata. Matches description exactly. |
+| `color/border` | Verified, unchanged | Binds to `Footer` instances (10 Docs + 1 Components + 8 Pages — this is the token Footer actually uses, not `surface`), `PostRow`, `SerieCard`, `PreviewTitle`, `BlogPostRows`, `ContactPreviewContent`. Matches "cards, rows, and table rails" plus footer as a further aggregate-boundary example. |
+| `color/surface-hover` | Verified, unchanged | Binds only to `state=hover` component variants, `Link/Icon`, `Link/Secondary*`, `PostRow` hover, chip `State=hover` variants — exclusively hover-labelled nodes across Components/Docs/Pages. No non-hover consumer found. |
+| `font/sans` / `font/title` / `font/mono` | Verified, unchanged | Re-confirmed the original Step 1b sweep's findings (660+/8/406 bound nodes respectively) — no new contradicting evidence in this pass. |
+| **`color/background`** | **Corrected** | Old copy claimed "never used for cards or hover states." False: `Link/CTA`'s `state=hover` COMPONENT (`2012:6180`, Components → Actions) binds `fills` to `color/background` (and `strokes` to `color/foreground`) — confirmed by direct node inspection. Code match: `Link.astro`'s `.hover-fx` reveals a `var(--color-background)` fill and flips text to `var(--color-foreground)` on `:hover`. New copy: **"Page base canvas and Link/CTA hover fill (foreground/background invert); not cards."** |
+| **`color/accent`** | **Corrected** | Old copy claimed "serie chips, active nav, and section CTAs." Only the serie-chip clause holds — real `PostMetadataTopic` `type=serie` instances bind to `color/accent` (10 Components + 28 Pages + Docs demo), matching Docs' own spec text. Nav-active and CTA claims are unsupported: `Header.astro`'s active nav link uses `text-foreground` (`menuActive` variant), and `Link.astro`'s `cta` variant uses `bg-foreground`/`text-background` — neither touches `accent` in code, and no `NavLink`/`Link/CTA` node binds to `color/accent` in Figma either. New copy: **"Accent for serie-chip icon+label only; nav/CTA use foreground, not accent."** |
+| **`color/accent-strong`** | **Corrected — flagged unverified→unused** | Reviewer's spot-check (zero Components/Pages consumers) confirmed. This sweep found the *only* Figma consumer is Docs' own self-referential "layer" annotation-tag UI (`TEXT:layer` ×4, the Chrome/Content/Hand category badges) — not a product surface. Code: `--color-accent-strong` is defined in `global.css` but no `accent-strong` Tailwind class exists anywhere in `src/`. Same status as `color/accent-hover` in the original pass: zero consumers in both Figma and code. New copy: **"Unused reserved slot: zero live consumers found; defined for future high-emphasis accent."** |
+| **`color/accent-subtle`** | **Corrected — flagged unverified→unused** | Same pattern as `color/accent-strong`. Only Figma consumer: Docs' self-referential "layer tag" FRAME (×4, category badges). No `accent-subtle` class anywhere in `src/`. New copy: **"Unused reserved slot: zero live consumers found; defined for future soft accent backdrop."** |
+| **`color/surface-raised`** | **Corrected** | Old copy claimed "behind grouped content blocks" — no grouped-content-block consumer found anywhere. Real consumers: `ThemeToggle`/`MotionToggle`'s `hover:bg-surface-raised` class (confirmed in both component files — the toggle's hover state steps up from `surface` to `surface-raised`) and a `PostMetadataTopic` instance (1 Docs + 1 Components) matching the `global.css` comment's "topic chip on a hovered row" elevation case. New copy: **"Toggle hover fill (ThemeToggle, MotionToggle) and topic-chip elevation on hovered rows."** |
+| `color/accent-hover` | No change (reviewer: minor, deferred) | Still zero consumers in Figma and code — description already states this honestly; reviewer confirmed no action required. |
+
+**Net result:** 6 of the 15 descriptions were corrected (`color/background`,
+`color/surface`, `color/accent`, `color/accent-strong`,
+`color/accent-subtle`, `color/surface-raised`); 9 held up unchanged
+(`color/foreground`, `color/foreground-strong`, `color/foreground-muted`,
+`color/border`, `color/surface-hover`, `font/sans`, `font/title`,
+`font/mono`, `color/accent-hover`). All 15 now have live-consumer or
+code-side evidence — no row is presented as vetted without it.
+
+### `## Theme token copy` — fix round 1 (final)
+
+| Token | Description | Status |
+|---|---|---|
+| `color/background` | Page base canvas and Link/CTA hover fill (foreground/background invert); not cards. | corrected |
+| `color/foreground` | Primary readable text and icon colour on standard surfaces. | verified |
+| `color/foreground-strong` | Active/current-item marker (TOC link, current serie post); not headings or body text. | verified |
+| `color/foreground-muted` | Passive metadata and helper text at AA contrast floor. | verified |
+| `color/border` | Default aggregate boundary for cards, rows, and table rails. | verified |
+| `color/surface` | Idle fill for toggle controls (ThemeToggle, MotionToggle) and topic chips; not footer. | corrected (critical) |
+| `color/surface-hover` | Single hover tint for row/card/button hover states only. | verified |
+| `font/sans` | Default body typeface for paragraphs, nav, and UI copy site-wide (IBM Plex Sans). | verified |
+| `font/title` | Display typeface for H1s, hero headings, and card titles (Bubbler One); not body text. | verified |
+| `font/mono` | Monospace for dates, topic chips, and metadata labels (Fira Code); not prose text. | verified |
+| `color/accent` | Accent for serie-chip icon+label only; nav/CTA use foreground, not accent. | corrected |
+| `color/accent-hover` | Unused reserved slot: hover states currently reuse surface-hover, not this token. | verified (unchanged) |
+| `color/accent-strong` | Unused reserved slot: zero live consumers found; defined for future high-emphasis accent. | corrected |
+| `color/accent-subtle` | Unused reserved slot: zero live consumers found; defined for future soft accent backdrop. | corrected |
+| `color/surface-raised` | Toggle hover fill (ThemeToggle, MotionToggle) and topic-chip elevation on hovered rows. | corrected |
+
+All 15 descriptions are one sentence, ≤ 90 chars (max observed: 89,
+`color/accent-strong` and `color/accent-subtle`). `ds/version`
+(`VariableID:2721:5`, `Design System` collection) was never touched.
+
+**Applied in Figma.** `use_figma` set `description` on the 6 corrected
+`VariableID`s only (`3:3`, `3:9`, `2328:2`, `2328:4`, `2328:5`,
+`2400:7`) — the other 9 were left untouched since they were already
+correct. Fresh `use_figma` read of `2 Theme`
+(`VariableCollectionId:3:2`) confirms: 15 variables, `emptyCount: 0`,
+every description byte-for-byte matches the table above.
+
+**Commit.** See repo history for
+`docs(specs): magnet-ds-review — F3 Theme variable descriptions fix round 1`.
