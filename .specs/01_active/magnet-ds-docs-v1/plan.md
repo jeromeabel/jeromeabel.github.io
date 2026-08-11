@@ -367,8 +367,7 @@ Rename Pages 6, 7, 10 → `🗄 Backup — <source>`, where `<source>` names wha
 
 Delete: 📐 Decisions (empty since creation), 🎨 Foundations (superseded — requires Task 2 verdict recorded), backup Pages 8, 9, 11 (0 children each). Verify child count is 0 (or salvage done) via `use_figma` immediately before each deletion.
 
-Live verification found Decisions/Page 8/Page 9/Page 11 are NOT empty (12, 5,
-33, and 7-nested-under-1 real children respectively) — the "0 children"/
+Live verification found Decisions/Page 8/Page 9/Page 11 are NOT empty (7-nested-under-1, 12, 5, and 33 real children respectively) — the "0 children"/
 "empty since creation" claims in this step were a stale unloaded-page read,
 the same bug Task 1 flagged for Introduction but never corrected here. Only
 `🎨 Foundations` was deleted (its D4 verdict is content-based and was
