@@ -330,3 +330,103 @@ Dark reference and is **not** a Light-only regression. Signed off as
 out-of-scope for F1 — a shared cross-variant defect this task did not
 introduce and is not scoped to fix. Not filed as a new backlog item at this
 time.
+
+## F2 — page disposition (Task 3, 2026-08-11)
+
+**Step 1 — screenshots.** All six pages screenshotted before any change.
+Real content confirmed on every page (none were empty) — matching the
+backlog stub's counts, not the plan's original "0 children" assumption:
+
+- `Page 8` (12 top-level frames): "Foundation" typography/color specimen —
+  `Display`/`Heading`/`Label`/`Paragraph` classes plus a parallel `Mono *`
+  set, a rainbow "01 Primitives" swatch grid, "02 Core"/"03 Semantic"/"03
+  Semantic Extensions"/"05 Programs" color groups, two `Layout grids`
+  frames. All copy is generic commercial-template filler ("We ignite
+  opportunity by setting the world in motion") — not Magnet-DS content.
+- `Page 9` (5 frames): "Welcome to Core Pro 👋" — a commercial DS-starter
+  template TOC (`🟡 TEMPLATES`/`SECTIONS`/`COMPONENTS`/`FOUNDATIONS`,
+  `🚀 Welcome`), explicitly branded "Core Pro", references "Core University"
+  and Brad Frost Atomic Design methodology.
+- `Page 11` (33 frames): "👇 Start Here" plugin/instructional boilerplate —
+  "1. Plugins", "2. Style The Styles", "3. Style The Components",
+  "Typography Options" (Small/Medium/Large scale swatches). Uniform generic
+  DS-starter onboarding, no Magnet-DS content.
+- `🗄 Backup — UI kit foundations & controls` (11 top-level frames): generic
+  blue-accent UI kit — Grid/Typography/Colors/Icons/Effects/Select
+  controls/Dropdown/Calendar/Navigations/Buttons/Fields. Blue palette does
+  not match Magnet-DS's accent.
+- `🗄 Backup — Getting started & theme overview` (3 top-level: Getting
+  Started frame + Theme/Components Overview sections): generic UI-kit
+  walkthrough — Inputs/Feedback/Surfaces/Data Display/Navigation/Layout
+  Overview panels, blue accent, unrelated to Magnet-DS.
+- `🗄 Backup — Brand guidelines template` (33 top-level frames): "Brand
+  Identity Design Presentation" for a fictional brand **"Sync"** ("Sync Your
+  Mind. Elevate Your Life.") — logo variants, brand attributes, mockups.
+  Entirely unrelated to Jerome Abel's portfolio/Magnet-DS.
+
+**Step 2 — component masters and live-instance check.** Per-page
+`findAllWithCriteria({types:['COMPONENT','COMPONENT_SET']})`:
+
+| Page | Local masters found | Live-instance references (Docs/Decisions/Components/Pages) |
+|---|---|---|
+| `Page 8` | 0 (593 instances, all `remote:true` — resolve to an external published library, e.g. `arrow_right`, `Typography` Class=Display/Heading/Label/Paragraph/Mono-*) | n/a — no local masters to check |
+| `Page 9` | 0 (138 instances) | n/a |
+| `Page 11` | 0 (706 instances) | n/a |
+| `🗄 Backup — UI kit foundations & controls` | **477** (full icon set — Arrows & Directions, User Interface — plus component sets Checkbox, Radiobutton, Toggle, Controls+Text, Dropdown select elements/list, Day, Week, Calendar, Breadcrumbs, Tab elements, Pagination, Button) | **0** — swept all 761+0+160+462 instances across Docs/Decisions/Components/Pages for any `mainComponent.id` in this set of 477: zero hits |
+| `🗄 Backup — Getting started & theme overview` | 0 (923 instances) | n/a |
+| `🗄 Backup — Brand guidelines template` | **6** (`Sync logo with tagline`, `sync blue logo`, `Sync green logo`, `Sync white and blue logo`, `Sync white logo`, `sync vertical logo`) | **0** — same sweep, zero hits |
+
+**Discrepancy vs. brief Step 2's assumption:** the brief frames "a master
+found here" as evidence the `magnet-ds-docs-v1` migration missed it, with
+the remedy "move it to 📚 Docs". That assumption doesn't hold for either
+page that actually has local masters: `🗄 Backup — UI kit foundations &
+controls`'s 477-component generic icon/form-control set (Checkbox,
+Radiobutton, Toggle, Dropdown, Calendar, Breadcrumbs, Tabs, Pagination,
+Button — a totally different vocabulary from Magnet-DS's actual 16
+component sets recorded in the Pass-0 map) and `🗄 Backup — Brand
+guidelines template`'s 6 "Sync" logo variants are both (a) visually and
+thematically unrelated to Magnet-DS/Jerome Abel's portfolio, and (b)
+confirmed to have **zero** live references anywhere in the file. These were
+never part of the design system to begin with — they're commercial
+template/UI-kit scaffolding that happens to define local components rather
+than use remote ones. Nothing was moved to Docs; moving unrelated generic
+UI-kit components into the "AI-library-ready" Docs page would work against
+the whole point of this review. Recorded here as the judgment call, per the
+task instructions, to override the brief's default remedy where the real
+content contradicts its assumption.
+
+**Step 3 — verdicts.**
+
+| Page | Verdict | Evidence |
+|---|---|---|
+| `Page 8` | **delete** | Typography/color specimens are generic commercial-template filler (not Magnet-DS content), fully superseded in kind by `CHAPTER / 01 Foundations` (2670:6678 — screenshotted: real `1 Primitives`/`2 Theme`/`3 Responsive` token tables, spacing/type specimens built from the actual site's own components). Zero local masters; 593 instances all resolve to a remote external library, not anything local this file would lose. No specimen here has "no equivalent in Docs" — the whole page is unrelated scaffolding, not prior Magnet-DS work. |
+| `Page 9` | **delete** | Commercial DS-starter ("Core Pro") template TOC/welcome — never authored here, per default verdict. |
+| `Page 11` | **delete** | Commercial DS-starter instructional/plugin boilerplate — never authored here, per default verdict. |
+| `🗄 Backup — UI kit foundations & controls` | **delete** | Pre-restructure backup; replacement (`📚 Docs`) shipped and passed the D8 gate. 477 local component masters found (see Step 2) but confirmed zero live references anywhere in the file — orphaned generic UI-kit residue, not missed Magnet-DS content. |
+| `🗄 Backup — Getting started & theme overview` | **delete** | Pre-restructure backup; replacement (`📚 Docs`) shipped and passed the D8 gate. Zero local masters. |
+| `🗄 Backup — Brand guidelines template` | **delete** | Pre-restructure backup; replacement (`📚 Docs`) shipped and passed the D8 gate. 6 local masters found (unrelated "Sync" brand logo) confirmed zero live references. |
+| `📐 Decisions` | **keep** | Active page, out of F2's scope (per plan's overlap note) — not touched by this task. |
+
+No page qualified for the `🗄 Backup — typography explorations` rename
+exception — every page's content is confirmed-disposable template/backup
+residue with no unique Magnet-DS-authored specimen at risk.
+
+**Step 4 — deletions.** Deleted one at a time, re-inventoried after each
+(11 pages → 5 pages final). Deletion order: `Page 8`, `Page 9`, `Page 11`,
+`🗄 Backup — UI kit foundations & controls`, `🗄 Backup — Getting started &
+theme overview`, `🗄 Backup — Brand guidelines template`. Each `page.remove()`
+call re-ran `figma.root.children` afterward to confirm the count dropped by
+exactly one and no unrelated page was affected.
+
+**Step 5 — verify.** Final page list: `📖 Cover`, `📚 Docs`, `📐 Decisions`,
+`❖ Components`, `📄 Pages` — exactly the expected 5, no spared backup.
+`get_screenshot` of `📚 Docs` (2736:4) returned a 96×1024 thumbnail for a
+3369×36280 px page — too compressed to visually confirm detached/missing
+instances, so integrity was verified programmatically instead:
+`findAllWithCriteria({types:['INSTANCE']})` on both pages, checking every
+instance's `mainComponent` for null (detached) or `.remote` (resolves
+outside the file). Result: `📚 Docs` 761 instances (0 missing
+mainComponent, 0 remote) and `❖ Components` 160 instances (0 missing, 0
+remote) — identical counts to the pre-deletion baseline captured in Step 2.
+Deleting the six pages did not detach or orphan any live instance,
+confirming the Step 2 zero-reference finding held.

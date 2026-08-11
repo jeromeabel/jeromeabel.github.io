@@ -134,7 +134,7 @@ git commit -m "docs(specs): magnet-ds-review — F1 Home Mobile Light rebuilt"
 
 **Overlap note:** `.specs/00_backlog/figma-undecided-pages.md` covers `Page 8`, `Page 9`, `Page 11` **and** `📐 Decisions`. This task resolves all four — the three bare pages by the verdicts below, and `📐 Decisions` by the review's own inventory, which lists it as an active page (verdict: **keep**). The backlog stub is deleted at the end of this task so the two specs cannot drift.
 
-- [ ] **Step 1: Screenshot every page before touching it**
+- [x] **Step 1: Screenshot every page before touching it**
 
 `get_screenshot` of each of the six, one at a time. The backlog stub records real child counts — expect content, not empty pages:
 
@@ -147,11 +147,11 @@ git commit -m "docs(specs): magnet-ds-review — F1 Home Mobile Light rebuilt"
 | `🗄 Backup — Getting started & theme overview` | 2678:10236 | pre-restructure backup |
 | `🗄 Backup — Brand guidelines template` | 2678:34067 | pre-restructure backup |
 
-- [ ] **Step 2: Check for component masters and live instances**
+- [x] **Step 2: Check for component masters and live instances**
 
 For each page, `use_figma`: does it hold any **component master** (not instance), and is any node on it referenced by a live page? A master found here means it was missed by the `magnet-ds-docs-v1` migration — move it to `📚 Docs` (into the `— _Docs components (private) —` group) **before** deleting the page.
 
-- [ ] **Step 3: Record a verdict per page**
+- [x] **Step 3: Record a verdict per page**
 
 Write a `## F2 — page disposition` table in notes.md: `| Page | Verdict | Evidence |`. Default verdicts, to be overridden only by what Step 1's screenshots actually show:
 
@@ -160,15 +160,15 @@ Write a `## F2 — page disposition` table in notes.md: `| Page | Verdict | Evid
 - The three `🗄 Backup — *` pages — **delete**. Their replacement (`📚 Docs`) shipped and passed the D8 gate.
 - `📐 Decisions` — **keep**. Active page, not in F2's scope.
 
-- [ ] **Step 4: Delete**
+- [x] **Step 4: Delete**
 
 Delete every page with a **delete** verdict. Do not batch blind — delete, then re-inventory pages after each one.
 
-- [ ] **Step 5: Verify the page list**
+- [x] **Step 5: Verify the page list**
 
 `use_figma` page inventory. Expected exactly: `📖 Cover`, `📚 Docs`, `📐 Decisions`, `❖ Components`, `📄 Pages` (plus at most one `🗄 Backup — typography explorations` if Step 3 spared `Page 8`). Then `get_screenshot` of `📚 Docs` and `❖ Components`: expected no detached or missing instances.
 
-- [ ] **Step 6: Close the backlog item and commit**
+- [x] **Step 6: Close the backlog item and commit**
 
 ```bash
 rm .specs/00_backlog/figma-undecided-pages.md
