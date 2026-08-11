@@ -664,3 +664,124 @@ the F3 table.
 
 `ds/version` (`VariableID:2721:5`, `Design System` collection) was not
 touched.
+
+## F5 — property audit (Task 6, 2026-08-11)
+
+**Method note:** the brief's Step 1 suggests `get_design_context` per set (15
+calls). Used a single read-only `use_figma` script instead —
+`node.componentPropertyDefinitions` on all 15 IDs from the Node-ID map in one
+round trip — since the goal is property names/values/types, not layout code
+or a screenshot per set. Cheaper, same ground truth.
+
+Live audit (before any rename), all 15 sets from the Node-ID map:
+
+| Set | Property (before) | Type | Values (before) |
+|---|---|---|---|
+| NavLink | `state` | VARIANT | `active`, `default`, `hover` |
+| NavLinkHome | `state` | VARIANT | `active`, `default`, `hover` |
+| ThemeToggle | `state` | VARIANT | `dark`, `light` |
+| MotionToggle | `state` | VARIANT | `off`, `on` |
+| Link/CTA | `state` | VARIANT | `default`, `hover` |
+| Link/Secondary | `state` | VARIANT | `default`, `hover` |
+| Link/TextCTA | `state` | VARIANT | `active`, `default`, `hover` |
+| Link/Icon | `state` | VARIANT | `default`, `hover` |
+| Link/SecondarySm | `state` | VARIANT | `active`, `default`, `hover` |
+| PostMetadataTime | `type` | VARIANT | `day`, `default`, `no-date` |
+| PostMetadataTopic | `type` | VARIANT | `post`, `serie` |
+| PostCardPreviewBig | `State` | VARIANT | `default`, `hover` |
+| PostCardPreviewSmall | `State` | VARIANT | `default`, `hover` |
+| PostRow | `State`, `Variant` | VARIANT, VARIANT | `default`/`hover`; `Post`/`Serie` |
+| SerieCard | `State` | VARIANT | `default`, `hover` |
+
+Matches review.md's expected table exactly — zero drift. `Link/TextCTA`,
+`Link/Icon`, `Link/SecondarySm` also carry non-variant properties
+(`TEXT`/`BOOLEAN`/`INSTANCE_SWAP`) not in scope for this task; unchanged.
+
+**Deviation check (Step 5):** every `state`/`type` value set above is a
+subset of `default | hover | active | focus` (interaction states) or an
+independent kind-discriminator (`type`, `mode`) — no `disabled`, `pressed`,
+or other out-of-vocabulary value found anywhere in the 15 sets. No
+deviations to log.
+
+### Renames applied
+
+1. **`State` → `state`** (property-name rename, via `editComponentProperty`,
+   non-destructive) on `PostCardPreviewBig` (`2385:7139`),
+   `PostCardPreviewSmall` (`2385:7149`), `PostRow` (`2124:7937`), `SerieCard`
+   (`2367:7205`). Child variant names auto-updated
+   (`State=Default` → `state=default` casing already matched
+   `default`/`hover`, only the property key changed).
+2. **`Variant` → `type`** (property-name rename) on `PostRow`.
+3. **`Post`/`Serie` → `post`/`serie`** (value rename) on `PostRow`'s `type`
+   property — done by editing each of the 4 child component names directly
+   (`type=Post, state=default` → `type=post, state=default`, etc.), since
+   `editComponentProperty` doesn't support renaming VARIANT option values.
+   **Verified before/after on live instances**, not just the master: read
+   all 32 `PostRow` instances on `📄 Pages` (`2558:18264`, the page holding
+   all 8 Home/Blog templates) before the rename (`type` values read
+   `Post`/`Serie`) and after (`type` values read `post`/`serie` on all 32,
+   `mainComponent.name` on each pointing at the matching new lowercase
+   variant — zero instances left pointing at a stale/missing variant).
+4. **F9 — `state` → `mode`** (property-name rename) on `ThemeToggle`
+   (`16:11`, values `dark`/`light` unchanged) and `MotionToggle` (`16:12`,
+   values `on`/`off` unchanged). Verified 8 live `ThemeToggle` instances on
+   `📄 Pages` all resolved to the new `mode` property with correct values
+   (`dark`/`light`) after the rename. `MotionToggle` has zero instances
+   placed in the 8 page templates (component exists, unused there) — its
+   rename was verified structurally only (child names read `mode=on` /
+   `mode=off`, screenshot of the master shows both variants rendering
+   correctly with no broken bindings).
+
+`ds/version` was not touched.
+
+### Verification (Step 6)
+
+- `get_screenshot` of `❖ Components` (`461:759`) — full-page overview
+  renders normally, no purple/detached-instance badges anywhere.
+- `get_screenshot` of `Home — Desktop — Light` (`2604:1741`) — `BLOG`
+  section's `PostCardPreviewBig`/`PostCardPreviewSmall` instances (renamed
+  `State`→`state`) render fully: images, titles, metadata all present, no
+  fallback rendering.
+- `get_screenshot` of `Blog — Desktop — Light` (`2604:1744`) — `POSTS`
+  section's `PostRow` instances (renamed `Variant`→`type`, values
+  `Post`/`Serie`→`post`/`serie`) render fully — topic pills
+  (`FULL-STACK`/`WEB PERFORMANCE`) and dates intact, confirming the
+  `PostMetadataTopic`/`PostMetadataTime` children nested inside each row
+  still resolve correctly through the parent rename.
+- Direct `get_screenshot` of `PostRow` (`2124:7937`, all 4 variants),
+  `ThemeToggle` (`16:11`), `MotionToggle` (`16:12`) masters — each variant
+  cell renders its labelled content (dark/light moon/sun icons,
+  play/pause icons, row content), confirming the rename didn't collapse or
+  blank any variant.
+
+No breakage found at any step — proceeded through all renames without
+stopping.
+
+### Final property table (set → property → values)
+
+Copy this table verbatim into Task 9's G2 `_Docs/DecisionCard`.
+
+| Set | Property | Values |
+|---|---|---|
+| NavLink | `state` | `default`, `hover`, `active` |
+| NavLinkHome | `state` | `default`, `hover`, `active` |
+| ThemeToggle | `mode` | `dark`, `light` |
+| MotionToggle | `mode` | `on`, `off` |
+| Link/CTA | `state` | `default`, `hover` |
+| Link/Secondary | `state` | `default`, `hover` |
+| Link/TextCTA | `state` | `default`, `hover`, `active` |
+| Link/Icon | `state` | `default`, `hover` |
+| Link/SecondarySm | `state` | `default`, `hover`, `active` |
+| PostMetadataTime | `type` | `default`, `day`, `no-date` |
+| PostMetadataTopic | `type` | `post`, `serie` |
+| PostCardPreviewBig | `state` | `default`, `hover` |
+| PostCardPreviewSmall | `state` | `default`, `hover` |
+| PostRow | `type`, `state` | `post`/`serie`; `default`/`hover` |
+| SerieCard | `state` | `default`, `hover` |
+
+**Vocabulary (G2):** interaction states are `default | hover | active | focus`,
+lowercase, on a property named `state`. `focus` is not present as a variant
+on any set — Task 9's G2 specimen documents it as a spec applied uniformly,
+not a per-component variant. `ThemeToggle`/`MotionToggle` use `mode`
+(value modes, not interaction states) — deliberately kept out of the `state`
+vocabulary. No deviations from the vocabulary were found or logged.

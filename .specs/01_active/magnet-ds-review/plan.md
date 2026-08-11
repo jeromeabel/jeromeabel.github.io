@@ -274,7 +274,7 @@ git commit -m "docs(specs): magnet-ds-review — F4 token table swatches"
 
 Property **renames** are non-destructive in Figma — instances keep their bindings. Renaming a *value* is riskier; check instances after any value rename.
 
-- [ ] **Step 1: Audit current property names**
+- [x] **Step 1: Audit current property names**
 
 `get_design_context` on all 15 sets. Record actual property names and values in a `## F5 — property audit` table in notes.md. Expected from review.md:
 
@@ -285,27 +285,27 @@ Property **renames** are non-destructive in Figma — instances keep their bindi
 | `type` (lowercase) — already correct | PostMetadataTime, PostMetadataTopic |
 | `Variant` (capital, values `Post`/`Serie`) — rename to `type` | PostRow |
 
-- [ ] **Step 2: Rename `State` → `state` on the four card sets**
+- [x] **Step 2: Rename `State` → `state` on the four card sets**
 
 PostCardPreviewBig, PostCardPreviewSmall, PostRow, SerieCard.
 
-- [ ] **Step 3: Rename PostRow's `Variant` → `type`**
+- [x] **Step 3: Rename PostRow's `Variant` → `type`**
 
 Values `Post` / `Serie` become lowercase `post` / `serie` to match the lowercase convention. This is a *value* rename — after it, screenshot one page template that uses PostRow and confirm the instances still resolve.
 
-- [ ] **Step 4: F9 — rename the toggles' property to `mode`**
+- [x] **Step 4: F9 — rename the toggles' property to `mode`**
 
 `ThemeToggle`: `state` → `mode`, values `dark` / `light`. `MotionToggle`: `state` → `mode`, values `on` / `off`. These are value modes, not interaction states — the rename is what keeps `state` reserved for the G2 vocabulary.
 
-- [ ] **Step 5: Check every `state` value against the vocabulary**
+- [x] **Step 5: Check every `state` value against the vocabulary**
 
 For each set that keeps a `state` property, confirm its values are a subset of `default | hover | active | focus`. Any value outside it (e.g. `disabled`, `pressed`) is either renamed into the vocabulary or recorded in notes.md as a deviation with a reason — G2 explicitly rejects the wider Base set.
 
-- [ ] **Step 6: Verify no instance broke**
+- [x] **Step 6: Verify no instance broke**
 
 `get_screenshot` of `❖ Components` and of one page template per changed set (Home, Blog). Expected: no purple/detached instance badges, no component rendering as a fallback, toggles still showing both modes.
 
-- [ ] **Step 7: Log and commit**
+- [x] **Step 7: Log and commit**
 
 Append the final property table (set → property → values) to notes.md — Task 9 copies it into the DecisionCard.
 
