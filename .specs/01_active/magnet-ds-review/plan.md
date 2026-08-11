@@ -190,13 +190,13 @@ git commit -m "docs(specs): magnet-ds-review — F2 dead pages disposed, figma-u
 
 This is the #1 blocker on the figma-ai-training readiness checklist: descriptions are what let an AI choose between tokens whose resolved colours are close or identical. Primitives at 445/451 without descriptions are fine — leave them.
 
-- [ ] **Step 1: Extract the existing copy verbatim**
+- [x] **Step 1: Extract the existing copy verbatim**
 
 `get_design_context` on `PANEL / 01 Tokens Intro` (2670:6679). Capture, per row, the token name and its usage sentence exactly as written. Known-good example:
 
 - `color/background` → `Page base canvas; never used for cards or hover states.`
 
-- [ ] **Step 2: Write the copy table in notes.md**
+- [x] **Step 2: Write the copy table in notes.md**
 
 Create `## Theme token copy` — `| Token | Description | Source |`, one row per Theme variable, `Source` = `docs table` or `new`. Rules for each description:
 
@@ -204,15 +204,15 @@ Create `## Theme token copy` — `| Token | Description | Source |`, one row per
 - Every token that F4 flags as falsely "Reserved semantic token" gets real usage copy: `font/sans`, `font/title`, `font/mono`, `color/accent-hover`, `color/foreground-strong`. To find real usage, `use_figma`-search the file for consumers of each, and cross-check `src/styles/global.css` in this repo for the code-side counterpart.
 - No description may be the string "Reserved semantic token in the Theme layer" unless a live search proves the token has zero consumers in both Figma and code.
 
-- [ ] **Step 3: Apply the descriptions in Figma**
+- [x] **Step 3: Apply the descriptions in Figma**
 
 Set `description` on all 15 variables in `2 Theme` from the notes.md table.
 
-- [ ] **Step 4: Verify**
+- [x] **Step 4: Verify**
 
 `get_variable_defs` (or a `use_figma` read) on collection `2 Theme`. Expected: 15 variables, zero empty `description` fields, each string matching notes.md.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add .specs/01_active/magnet-ds-review/notes.md .specs/01_active/magnet-ds-review/plan.md

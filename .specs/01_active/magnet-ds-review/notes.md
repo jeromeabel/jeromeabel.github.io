@@ -430,3 +430,82 @@ mainComponent, 0 remote) and `❖ Components` 160 instances (0 missing, 0
 remote) — identical counts to the pre-deletion baseline captured in Step 2.
 Deleting the six pages did not detach or orphan any live instance,
 confirming the Step 2 zero-reference finding held.
+
+## F3 — Theme variable descriptions (Task 4, 2026-08-11)
+
+**Step 1 — existing copy.** Read verbatim via `use_figma` against
+`PANEL / 01 Tokens Intro` (2670:6679), section "THEME TOKEN JOBS (one job
+per token)" — 15 `_Docs/TokenRow` instances, one per `2 Theme` variable.
+10/15 already carried real usage copy (kept verbatim below, `Source =
+docs table`). 5/15 read literally `"Reserved semantic token in the Theme
+layer."` — exactly F4's flagged list: `font/sans`, `font/title`,
+`font/mono`, `color/accent-hover`, `color/foreground-strong`.
+
+**Step 1b — live-consumer search (beyond the brief's minimum).** Rather
+than trust code-side evidence alone for the 5 flagged tokens, ran a
+`use_figma` sweep across every currently-live page in the file —
+`📖 Cover` (14 nodes), `📚 Docs` (3,429), `📐 Decisions` (198),
+`❖ Components` (845), `📄 Pages` (1,518) — 6,004 nodes total, checking
+every node's `boundVariables` (JSON-stringify + substring match) against
+all 15 `2 Theme` variable IDs. This is the complete live file: Task 3
+already deleted `Page 8`/`9`/`11` and the 3 backup pages earlier in this
+session, so nothing was skipped. Cross-checked against
+`src/styles/global.css` (`@theme` block + dark-mode `@variant` block) for
+the code-side counterpart of each token.
+
+| Token | Figma bound-node hits | Code-side evidence |
+|---|---|---|
+| `color/foreground-strong` | 11 (2 Docs + 9 Components) — bound to `state=active` NavLink instances and their text | `TableOfContents.astro` (`a[aria-current]` color+border), `SerieContents.astro` (`text-foreground-strong` on the current serie post) — both are "current/active item" markers only |
+| `font/sans` | 660+ (4 Cover + 333 Docs + 99 Components + 224 Pages) — body paragraphs, nav links, dates, footer email | No explicit `font-sans` class anywhere in `src/` — it's Tailwind v4's `--font-sans` default, applied site-wide to every element that doesn't opt into `font-title`/`font-mono` |
+| `font/title` | 8 (5 Docs + 3 Components) — bound to "Hi, I'm Jérôme!" hero heading | `font-title` class on `H1.astro`, `HeroText`, `AboutText`, `ValueCard`, `AboutFacts`, `AboutStrip`, `WorkCard*`, `ContactText` — display/heading typeface only |
+| `font/mono` | 406 (211 Docs + 63 Components + 132 Pages) — dates, topic labels ("Web Performance · 2/5"), numbering | `font-mono` class on `PostRow*`, `ArchiveTable`, `TopicChips`, `SeriePostListItem`, `AboutFactsStrip`, `blog.astro` — dates/metadata/topic-chip labels only |
+| `color/accent-hover` | **0** across all 6,004 nodes searched | **0** — no `accent-hover`/`hover:*-accent-hover` class or `var(--color-accent-hover)` reference anywhere in `src/`; `global.css` defines the value with a directional-behaviour comment ("darkens on hover" light / "brightens on hover" dark) but nothing binds to it — every hover state found in Figma (`state=hover` components, `Link/Icon`, `Link/Secondary*`) binds to `color/surface-hover` instead |
+
+**Judgment call:** `color/accent-hover` turned out to have genuinely zero
+consumers in both Figma and code — F4's "falsely Reserved" framing doesn't
+hold for this one token (the other 4 are confirmed real, non-reserved
+usage). Per the brief's own escape clause ("No description may be the
+string … unless a live search proves … zero consumers in both Figma and
+code"), the fired condition is met. Wrote a still-evidence-backed
+description rather than reusing the flat placeholder verbatim: it states
+the *why* (hover states already have a home — `surface-hover`) so an AI
+consumer doesn't mistake it for an untested/broken token.
+
+**Step 2 — `## Theme token copy` table.**
+
+| Token | Description | Source |
+|---|---|---|
+| `color/background` | Page base canvas; never used for cards or hover states. | docs table |
+| `color/foreground` | Primary readable text and icon colour on standard surfaces. | docs table |
+| `color/foreground-strong` | Active/current-item marker (TOC link, current serie post); not headings or body text. | new |
+| `color/foreground-muted` | Passive metadata and helper text at AA contrast floor. | docs table |
+| `color/border` | Default aggregate boundary for cards, rows, and table rails. | docs table |
+| `color/surface` | Raised neutral surface for chrome regions like footer blocks. | docs table |
+| `color/surface-hover` | Single hover tint for row/card/button hover states only. | docs table |
+| `font/sans` | Default body typeface for paragraphs, nav, and UI copy site-wide (IBM Plex Sans). | new |
+| `font/title` | Display typeface for H1s, hero headings, and card titles (Bubbler One); not body text. | new |
+| `font/mono` | Monospace for dates, topic chips, and metadata labels (Fira Code); not prose text. | new |
+| `color/accent` | Interactive accent for serie chips, active nav, and section CTAs. | docs table |
+| `color/accent-hover` | Unused reserved slot: hover states currently reuse surface-hover, not this token. | new |
+| `color/accent-strong` | Strong accent slot from the fixed budget; never passive metadata. | docs table |
+| `color/accent-subtle` | Soft accent backdrop when emphasis is needed without shouting. | docs table |
+| `color/surface-raised` | Higher-elevation surface behind grouped content blocks. | docs table |
+
+All 15 descriptions are one sentence, ≤ 90 chars (max observed: 86,
+`font/title`). Zero literal "Reserved semantic token in the Theme layer"
+strings remain, except in spirit for `color/accent-hover`'s wording, which
+is a rewritten, evidence-carrying sentence rather than the banned literal
+string.
+
+**Step 3 — applied in Figma.** `use_figma` set `description` on all 15
+`VariableID`s in `VariableCollectionId:3:2` (`2 Theme`) from the table
+above, keyed by ID (not by re-derived name) to avoid any name-matching
+error. `ds/version` (`VariableID:2721:5`, `Design System` collection) was
+never touched — different collection, untouched by this script.
+
+**Step 4 — verified.** Fresh `use_figma` read of `2 Theme`
+(`VariableCollectionId:3:2`): 15 variables, `emptyCount: 0`, every
+`description` string byte-for-byte matches the table above.
+
+**Step 5 — commit.** See repo history for
+`docs(specs): magnet-ds-review — F3 Theme variable descriptions`.
