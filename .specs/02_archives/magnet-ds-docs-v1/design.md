@@ -1,4 +1,5 @@
 ---
+shipped: 2026-08-11
 title: Magnet DS docs restructure (one Docs page)
 created: 2026-08-10
 ---
