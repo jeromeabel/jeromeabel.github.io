@@ -845,7 +845,7 @@ taken during this task, not from prior tasks' notes.
 | 2 | Layer-cake scanning | **PASS** | Every chapter has ChapterHeader → group headings → cards (see fix below — Chapter 01 was missing its ChapterHeader, now added). Chapter 02's `GROUP / Cards` confirmed structure: `_Docs/GroupHeader` ("Cards", 24px) → 3 `_Docs/DecisionCard` children. 3 arbitrary facts checked page→chapter→group→card in <10s each: (a) "One chip per card/row" rule (Chapter 02 → Cards group → DecisionCard), (b) `color/background` token light/dark values (Chapter 01 → token table row), (c) mission statement (Chapter 00 → Paragraph "Mission"). Chapters 03/04 have flat card lists without group-level headings, judged acceptable given their small size (11 and 6 children) — not a layer-cake violation since there's only one layer of content below the chapter header. PageTOC (Step 3) not added — bottleneck found was a missing ChapterHeader instance, not chapter orientation/navigation. |
 | 3 | Two-level cap | **PASS** | No nesting deeper than page → chapter → group → card anywhere; group headings exist only where multiple card categories are present (Chapter 02). No sub-group-of-a-group found in any chapter. |
 | 4 | One idea per frame | **PASS (fixed)** | Duplicate `_Docs/DecisionCard` resolved: `2670:7045` ("One chip per card/row" — serie-chip-wins rule) kept as canonical; `2670:7047` (byte-identical duplicate) deleted. Remaining 2 cards in the group (`2670:7044` border rule, `2670:7046` hover/verb rule) confirmed genuinely distinct topics, not duplicates. `GROUP / Cards` now has 3 DecisionCards, screenshot confirms no duplicate text visible. |
-| 5 | Visible heading hierarchy | **PASS** | Measured sizes: ChapterHeader title 40px → GroupHeader title 24px → card rule/body text ~14-16px. That's within the 2-4 step / ≤2× top-to-body guidance (40px chapter title vs ~16-18px body is close to but consistent with the intent — chapter titles are the top of the hierarchy, not compared 1:1 against card body). No competing/ambiguous heading sizes found. |
+| 5 | Visible heading hierarchy | **PASS (fixed — see Fix round 1)** | Original measurement: ChapterHeader title 40px vs `_Docs/DecisionCard`'s `body` field 16px (the dominant, most-frequent reading-prose size on the page, present in every chapter) = **2.5× — failed the literal ≤2× cap**, contra the round-1 PASS. Fixed by reducing ChapterHeader title 40px→32px (master + all 5 instances). New ratio: 32/16 = **2.0×, meets the cap**. Full ramp post-fix: ChapterHeader 32 → Paragraph section-label 28 (Ch00 only) → GroupHeader 24 → DecisionCard rule/Paragraph body 20 → DecisionCard body 16 → TokenRow role/SpecimenCell caption 14 → mono metadata 12 (this last tier is explicitly self-documented in Chapter 00's Core-rules text as its own "third layer, set in mono at 12px" — a deliberate exception, not part of "body"). Caveat: measured against the 14px caption/table-cell tier instead, ratio is 32/14≈2.29×, still over cap — judged acceptable since captions/table cells are a distinct, narrower type role than flowing body prose in this system (SpecimenCell's field is literally named `caption`) and are conventionally excluded from body-ratio checks. See `## Task 9 fix round 1` below for full before/after evidence. |
 | 6 | Prose budget | **PASS (with caveat)** | Only 2 genuine multi-line prose blocks exist site-wide: Mission and Core rules (both in Chapter 00, both within 50-75 chars/line after Task 4's fix-round rewording). Audience and Page-intents paragraphs are short bulleted/tabular lists, not flowing prose — the char-count heuristic doesn't strictly apply; forcing them to 50-75 chars/line would hurt scannability, not help it. Judged PASS given the intent of the check (avoid dense unreadable paragraphs) is met. Specimen captions (DecisionCard `rule` fields, DoDont captions) are all single-sentence. |
 | 7 | Token tables | **PASS** | `PANEL / 01 Tokens Intro` → `theme token jobs` panel: 15 `token row/*` instances, single unified table, semantic name first column, description second, Light value inline, Dark value inline, no per-theme duplicate tables anywhere on the page. |
 | 8 | Do/Don't discipline | **PASS** | 3 DoDont frames found (`Docs/DoDont — title-hover`, `— chips`, `— accent-budget`), each exactly 1 pair (2 children: do + don't), one-line captions, framed around plausible wrong choices (not strawmen). No row exceeds 2 pairs. |
@@ -863,6 +863,95 @@ taken during this task, not from prior tasks' notes.
 
 - `📐 Decisions`, `Page 8`, `Page 9`, `Page 11` pages: still undecided/unrenamed, sitting outside the `📚 Docs` page (Task 8 ledger item). Confirmed these did not interfere with any Docs-page-only check in this gate. Still needs a human disposition call before Task 10's cleanup can reach the plan's original 8-page target end-state — this is unrelated to and does not block Task 10 (which only deletes the Docs-page backup).
 - `PostMetadataTopic` — the brief listed this alongside Link/TextCTA, PostMetadataTime, SerieMeta as having entity artifacts, but no `&amp;quot;` occurrence was found on a `PostMetadataTopic` node during this task's fix pass; the 3 fixed above appear to be the complete set. Not re-flagged as still-open since no instance was found to fix.
+
+## Task 9 fix round 1 — Check 5 heading-hierarchy ratio resolved
+
+An independent review found Check 5's original PASS verdict a rubber-stamp:
+the report's own evidence (`_Docs/ChapterHeader` 40px vs body text ~14-16px)
+is a 2.5×-2.86× ratio, which fails the plan's literal "top ≤2× body" cap —
+the row's PASS rationale ("chapter titles ... not compared 1:1 against
+body") contradicted the check's own wording, which explicitly asks for
+exactly that comparison. Nothing above is rewritten except the Check 5 row
+and the Verdict line (per this task's explicit instructions); this section
+is the full audit trail.
+
+**Re-verification (live `use_figma` reads, fresh at fix-round start).**
+Confirmed `_Docs/ChapterHeader`'s `title` field at 40px on the master
+(`2590:537`/`2590:535`) and on all 5 chapter instances. Surveyed every
+`_Docs/*` component's text fields page-wide to establish what "body" means
+in context:
+
+| Text role | Size | Frequency / where |
+|---|---|---|
+| ChapterHeader `title` | 40px | 5 instances (one per chapter) |
+| Paragraph section-label (e.g. "Mission", "Core rules") | 28px | 4 instances, Chapter 00 only |
+| GroupHeader | 24px | Chapter 02's `GROUP / Cards` |
+| DecisionCard `rule` / Paragraph flowing body | 20px | `rule`: every DecisionCard (dozens, all chapters); Paragraph body: 4 instances, Chapter 00 only |
+| DecisionCard `body` | 16px | Every DecisionCard, all chapters — genuine multi-clause explanatory sentences (verified content, not labels), the single most common substantive reading-prose size on the page |
+| TokenRow `role` / SpecimenCell `caption` | 14px | Token table rows / specimen captions — compact table-cell and caption text, not flowing prose |
+| Metadata layer | 12px | Explicitly self-documented in Chapter 00's own Core-rules text as a deliberate separate "third layer, set in mono at 12px" |
+
+**Body reference chosen: DecisionCard's `body` field (16px).** It is
+literally named "body" in the component, carries genuine explanatory
+sentences (verified via live content reads, e.g. "16 · inline with
+metadata. 20 · buttons and nav. 24 · standalone."), and is by far the most
+frequent substantial prose on the page — present in every chapter, unlike
+the 20px Paragraph body which only occurs 4 times (Chapter 00 only). This
+also matches the original report's own framing of "body" (it cited
+"~14-16px"), so re-litigating from scratch and landing on the same
+reference confirms the original *measurement* was sound — only the PASS
+verdict against that measurement was wrong.
+
+**Fix applied (genuine fix, not a re-label).** Reduced `_Docs/ChapterHeader`
+`title` fontSize 40px→32px, on the master (`2590:537`) and all 5 chapter
+instances (`2803:4218` Foundations, `2670:6861` Components, `2670:7568`
+Sections, `2670:7609` Pages, `2751:4198` About). Chosen over bumping
+DecisionCard's `body` size instead, because that field appears in dozens of
+instances across every chapter — a much larger, riskier cascade — and
+raising it to 20px would collapse the internal `rule`(20)/`body`(16)
+contrast that gives each card its own headline/explanation hierarchy.
+Shrinking the chapter title, by contrast, touches only 5 shared instances
+(the exact pattern this task's own brief anticipated) and preserves every
+ordering relationship in the ramp (32 > 28 > 24 > 20 > 16 > 14 > 12, no
+collisions).
+
+**Bonus fix, discovered in the process.** While inspecting all 5
+ChapterHeader instances' title nodes, found Chapter 01 ("Foundations") and
+Chapter 03 ("Sections") titles were *already* wrapping to 2 lines
+(`titleHeight` 104px vs the correct 52/42px single-line height) —
+undiagnosed pre-existing instances of the exact same bug this task's first
+pass found and fixed only on Chapter 02 ("Compo/nents"). Root cause was
+identical: `layoutSizingHorizontal: FIXED` at 131px, too narrow for
+"Foundations"/"Sections" at 40px. Fixed by setting `layoutSizingHorizontal
+= 'HUG'` on all 5 title nodes (the master and every instance) as part of
+this same pass — the same proven-safe recipe from the earlier Chapter 02
+fix, applied consistently everywhere instead of instance-by-instance.
+
+**New ratio: 32/16 = 2.0× — meets the ≤2× cap.** Measured against the
+14px caption/table-cell tier instead, ratio is 32/14≈2.29× — still over
+cap under that stricter reading, judged acceptable (see Check 5 row above
+for reasoning: captions and table cells are a distinct, narrower type role
+than flowing body prose, not what a heading/body ratio check is aimed at).
+
+**Geometry cascade.** All 5 chapter frames use `VERTICAL` auto-layout with
+`HUG` height, so shrinking + de-wrapping the titles shrank every chapter's
+height: 00 1885→1875, 01 6075→6013, 02 14008.06→13998.06, 03 4932→4870, 04
+5134→5124 (all −10 to −254px). Recomputed y-positions for Chapters 01-04 to
+hold the constant 160px gap: 01 y=2035 (was 2045), 02 y=8208 (was 8280), 03
+y=22366.06 (was 22448.06), 04 y=27396.06 (was 27540.06). Live re-read after
+the shift confirms all 4 gaps = 160px exactly, matching Check 1.
+
+**Visual verification.** Screenshotted all 5 `_Docs/ChapterHeader`
+instances individually post-fix: all render as clean single-line titles at
+32px with no wrapping or clipping ("Foundations", "Components", "Sections",
+"Pages", "About" all confirmed one line). Full-column screenshot of the
+whole `📚 Docs` page (`2736:4`) confirms the 5-chapter reading order and
+visible gaps are intact, no regressions elsewhere.
+
+**Final call:** this is a genuine fix, not a re-label. Check 5 now PASSES
+against the correct, most-representative "body" measurement (2.0× exactly,
+at the boundary of "≤2×"), with the one remaining stricter-reading caveat
+(caption-tier text at 2.29×) documented and reasoned rather than hidden.
 
 ### Verdict
 
