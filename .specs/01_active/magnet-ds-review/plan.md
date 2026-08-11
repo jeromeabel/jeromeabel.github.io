@@ -80,11 +80,11 @@ git commit -m "docs(specs): magnet-ds-review — Pass-0 node-ID map"
 
 **Decision taken:** rebuild, not delete — Light/Dark parity on the Pages page is worth one task, and deleting only defers the gap.
 
-- [ ] **Step 1: Capture the before state**
+- [x] **Step 1: Capture the before state**
 
 `get_screenshot` of `Home — Mobile — Light` (2604:1742). Expected (the defect): rendered canvas ~1288 px wide against a 390 px frame; hero image overlapping the headline; "LET'S TALK", footer text and the hand-drawn SVGs sitting outside the frame bounds. Save the observation to notes.md.
 
-- [ ] **Step 2: Diff against the working Dark variant**
+- [x] **Step 2: Diff against the working Dark variant**
 
 `get_design_context` on both `Home — Mobile — Dark` (2604:1743) and `Home — Mobile — Light` (2604:1742). List, per child, which section instance each uses. The Dark variant is known-good and uses:
 
@@ -94,11 +94,11 @@ git commit -m "docs(specs): magnet-ds-review — Pass-0 node-ID map"
 
 Record in notes.md which sections the Light variant is still pointing at (expected: the Desktop masters).
 
-- [ ] **Step 3: Swap the three section instances**
+- [x] **Step 3: Swap the three section instances**
 
 In `Home — Mobile — Light`, swap each stale section instance to its Mobile counterpart from Step 2, keeping the frame's own auto-layout order. Do not detach; use instance swap so future master edits propagate.
 
-- [ ] **Step 4: Fix the sizing cascade**
+- [x] **Step 4: Fix the sizing cascade**
 
 Apply the two rules learned during the 2026-08-11 Dark rework:
 
@@ -107,11 +107,11 @@ Apply the two rules learned during the 2026-08-11 Dark rework:
 
 Walk the frame top-down and confirm every direct child is either FILL (spans 390) or HUG (content-sized) — never a FIXED width inherited from the 1288 px desktop layout.
 
-- [ ] **Step 5: Verify the frame**
+- [x] **Step 5: Verify the frame**
 
 `get_screenshot` of `Home — Mobile — Light`. Expected: rendered width 390 px; nothing outside the frame bounds; hero image below (not overlapping) the headline; "LET'S TALK" and the footer inside the frame. Read the frame height via `use_figma` — expected within 3120–3810 (±10% of the Dark variant's 3465). A height far outside that range means a section is still desktop-sized — return to Step 4.
 
-- [ ] **Step 6: Log and commit**
+- [x] **Step 6: Log and commit**
 
 Append `## F1 — Home Mobile Light rebuild` to notes.md: instances swapped, sizing fixes applied, final height, before/after description.
 

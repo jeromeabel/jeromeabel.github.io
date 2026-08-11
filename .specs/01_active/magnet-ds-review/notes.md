@@ -199,3 +199,98 @@ only for the 13 `Tailwind/*` + 4 outliers.
 
 No `❌` rows in this map — every ID quoted by review.md/plan.md was found
 live and unchanged. No follow-up-line exceptions needed.
+
+## F1 — Home Mobile Light rebuild (Task 2, 2026-08-11)
+
+**Before (Step 1):** `get_screenshot` of `Home — Mobile — Light` (2604:1742)
+rendered at ~1288×2533 against a 390 px frame — matches the defect exactly.
+Hero image overlapped the headline; "LET'S TALK", the footer, and the
+hand-drawn SVGs sat outside the 390 px frame bounds on both edges.
+
+**Diff against Dark (Step 2):** re-confirmed live (frame IDs, section IDs
+all matched notes.md's Pass-0 map, zero drift). Direct children of the
+`PageContent (slot)` frame in each variant:
+
+| Section | Light (before) | Dark (known-good) |
+|---|---|---|
+| Blog | `BlogPreviewSection` → master `2041:560` (Desktop) | `BlogPreviewSection — Mobile` → master `2826:5489` |
+| Work | `WorkPreviewSection` → master `2045:428` (Desktop) | `WorkPreviewSection — Mobile` → master `2829:5539` |
+| Contact | `ContactPreviewSection` → master `2114:7281` (Desktop) | `ContactPreviewSection — Mobile` → master `2829:5576` |
+
+Confirmed: Light was pointing at the three Desktop masters, exactly as
+predicted.
+
+**Instances swapped (Step 3):** used `InstanceNode.swapComponent()` (not
+detach) on all three, so future master edits keep propagating:
+
+- `2586:1149` `BlogPreviewSection` → `BlogPreviewSection — Mobile` (`2826:5489`)
+- `2586:1150` `WorkPreviewSection` → `WorkPreviewSection — Mobile` (`2829:5539`)
+- `2586:1151` `ContactPreviewSection` → `ContactPreviewSection — Mobile` (`2829:5576`)
+
+Instance names updated automatically to match the new masters.
+
+**Sizing cascade fixes (Step 4):** swapping alone left two overrides
+carried over from the old Desktop instances, both diagnosed by diffing
+against the equivalent Dark node:
+
+1. **Hero illustration bleeding outside the mobile frame.** The `Hero`
+   instance (`2586:1148`, shared master `2012:6305`, not swapped — it was
+   never wrong at the instance-reference level) still had its
+   `HeroAnimation` child (`I2586:1148;2012:6162`, the hand-drawn SVG
+   illustration, fixed 608×500) visible. Dark's equivalent instance
+   (`2586:1156`) carries an override hiding that child. Applied the same
+   override: `visible = false` on the Light `HeroAnimation` child. This
+   dropped `Hero`'s height from 580 → 273 px (matches Dark's `Hero` exactly)
+   and stopped the illustration overlapping the headline.
+2. **`WorkPreviewSection — Mobile` still FIXED-height (rule 1: FILL-inside-HUG-parent deadlock).**
+   Post-swap the instance (`2586:1150`) still carried `primaryAxisSizingMode:
+   FIXED`, `layoutSizingVertical: FIXED`, height 470 — a leftover override
+   from the old Desktop instance. Its internal `WorkPreviewSmallList` child
+   (`I2586:1150;2829:5541`) was `layoutSizingVertical: FILL`, which deadlocks
+   inside a FIXED-height parent. Fixed in two steps (order matters — content
+   must be freed to grow before the instance re-measures against it):
+   - `workSection.primaryAxisSizingMode = 'AUTO'` (auto-cascaded
+     `layoutSizingVertical` to `HUG` and left `counterAxisSizingMode` at the
+     already-correct `FIXED`).
+   - `workList.layoutSizingVertical = 'HUG'` on `WorkPreviewSmallList`.
+   Result: `WorkPreviewSection — Mobile` height 470 → 1234 px, exactly
+   matching Dark's `2586:1158` (1234 px).
+   - Rule 2 (`ContactContainer` must be FILL, not FIXED) was checked and
+     found already correct on the swapped `ContactPreviewSection — Mobile`
+     instance — no fix needed there.
+   - `use_figma` mutations are atomic per script; a first combined attempt
+     (Hero visibility + both Work fixes in one call) threw `Error: in
+     get_name: The node with id "2842:14" does not exist` and rolled back
+     with zero changes. Splitting into three separate calls (Hero alone,
+     then `primaryAxisSizingMode`, then the child's `layoutSizingVertical`)
+     succeeded — no root cause found for the combined-call error, noted here
+     in case it recurs on a future multi-mutation script.
+
+**Verify (Step 5):** `get_screenshot` after fixes: frame renders with the
+Blog/Work/Contact sections vertically stacked in the mobile layout, Hero
+image below (not overlapping) the headline, "LET'S TALK" and the footer
+fully inside the frame. Read the frame height via `use_figma`:
+**3548 px** — inside the required 3120–3810 px band (±10% of Dark's 3465).
+A `findAll` sweep of the whole frame for any descendant wider than 391 px
+found exactly **2** remaining nodes, both inside the `HeroText` instance
+(`I2586:1148;2012:6158`, FIXED width 576, and its child text node) —
+**this exact same override, at the same width, exists on the Dark
+reference's equivalent `HeroText` instance** (confirmed by re-screenshotting
+Dark: `2604:1743` also renders at a 592 px canvas, not 390, with the same
+faint text-ghosting past the right edge). Left unchanged: it is a
+pre-existing artifact shared identically by both variants, not part of the
+Desktop-section-instance defect this task targets, and "fixing" only Light
+would break Light/Dark parity rather than preserve it. Recommended as a
+follow-up finding for a future task (Hero's `HeroText` child should be FILL
+or HUG rather than a hardcoded 576 px width) — not filed as a new backlog
+item here since Task 2's scope is F1 only.
+
+**Before/after summary:**
+
+| | Before | After |
+|---|---|---|
+| Rendered canvas width | ~1288 px | 390 px (excluding the pre-existing shared Hero-text artifact noted above) |
+| Frame height | 2533 px | 3548 px (target 3120–3810) |
+| Section masters | 3× Desktop | 3× Mobile (via `swapComponent`, not detach) |
+| Hero illustration | overlapping headline | hidden (matches Dark) |
+| Footer / LET'S TALK | outside frame bounds | inside frame |
