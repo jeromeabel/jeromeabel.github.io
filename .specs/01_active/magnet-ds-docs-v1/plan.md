@@ -414,7 +414,7 @@ git commit -m "docs: magnet-ds-docs-v1 — pages demoted/deleted, cover date ref
 - Consumes: finished `📚 Docs` page (Tasks 3–8).
 - Produces: `notes.md` section `## D8 validation (gate)` — one row per check, PASS/FAIL + evidence (screenshot taken, measurement). **Task 10 is blocked until every row is PASS.**
 
-- [ ] **Step 1: Run the D8 checklist**
+- [x] **Step 1: Run the D8 checklist**
 
 For each check, gather evidence via `get_screenshot` / `use_figma` measurements and record PASS/FAIL:
 
@@ -428,15 +428,15 @@ For each check, gather evidence via `get_screenshot` / `use_figma` measurements 
 8. **Do/Don't discipline** — pairs only where the wrong choice is plausible; ≤ 2 pairs/row; one-line captions.
 9. **Chapter 00 cap** — height ≤ ~2 frame-heights; contains exactly: mission ≤ 3 lines, audience table, identity layers, 7 rules, page intents.
 
-- [ ] **Step 2: Fix failures**
+- [x] **Step 2: Fix failures**
 
 Any FAIL: fix on the Docs page (cut prose, adjust sizes, regroup), then re-run that check. Iterate until all 9 PASS. If a fix would need a new `_Docs` component beyond GroupHeader/PageTOC — stop, add a note to design.md first (D7).
 
-- [ ] **Step 3: Optional PageTOC (D7)**
+- [x] **Step 3: Optional PageTOC (D7)** — skipped; check 2 passed without it (see notes.md)
 
 Only if check 2 failed on first pass because chapter orientation was the bottleneck: add `_Docs/PageTOC` — one page-top card listing the five chapters with one-line purposes (spatial map, no links). Re-run checks 1–2 after.
 
-- [ ] **Step 4: Record the gate result and commit**
+- [x] **Step 4: Record the gate result and commit**
 
 Write `## D8 validation (gate)` in `notes.md`: the 9-row table, fixes applied, final verdict `GATE PASSED` (literal string — Task 10 greps for it).
 

@@ -829,3 +829,41 @@ Foundations, no bare Page N`. Actual list still contains `📐 Decisions`,
 documented consequence of the Step 4 finding above, not an execution
 error. `🎨 Foundations` is correctly absent. The 4 backup pages are
 correctly named, ordered, and at the bottom of the list, per the brief.
+
+## D8 validation (gate)
+
+Fresh `use_figma` read at task start (page-list staleness warning heeded):
+`📚 Docs` page ID confirmed `2736:4`, five chapter frames confirmed at
+their notes.md-documented IDs. All measurements below are from live reads
+taken during this task, not from prior tasks' notes.
+
+### Checklist
+
+| # | Check | Verdict | Evidence |
+|---|-------|---------|----------|
+| 1 | Linear spatial IA | **PASS** | 5 chapters, one column, x=0/width=1408 constant on all. Gaps: 00→01=160, 01→02=160, 02→03=160, 03→04=160 (all exact, post-fix). Order 00→01→02→03→04 confirmed by y ascending. Full-column screenshot taken (node `2736:4`). |
+| 2 | Layer-cake scanning | **PASS** | Every chapter has ChapterHeader → group headings → cards (see fix below — Chapter 01 was missing its ChapterHeader, now added). Chapter 02's `GROUP / Cards` confirmed structure: `_Docs/GroupHeader` ("Cards", 24px) → 3 `_Docs/DecisionCard` children. 3 arbitrary facts checked page→chapter→group→card in <10s each: (a) "One chip per card/row" rule (Chapter 02 → Cards group → DecisionCard), (b) `color/background` token light/dark values (Chapter 01 → token table row), (c) mission statement (Chapter 00 → Paragraph "Mission"). Chapters 03/04 have flat card lists without group-level headings, judged acceptable given their small size (11 and 6 children) — not a layer-cake violation since there's only one layer of content below the chapter header. PageTOC (Step 3) not added — bottleneck found was a missing ChapterHeader instance, not chapter orientation/navigation. |
+| 3 | Two-level cap | **PASS** | No nesting deeper than page → chapter → group → card anywhere; group headings exist only where multiple card categories are present (Chapter 02). No sub-group-of-a-group found in any chapter. |
+| 4 | One idea per frame | **PASS (fixed)** | Duplicate `_Docs/DecisionCard` resolved: `2670:7045` ("One chip per card/row" — serie-chip-wins rule) kept as canonical; `2670:7047` (byte-identical duplicate) deleted. Remaining 2 cards in the group (`2670:7044` border rule, `2670:7046` hover/verb rule) confirmed genuinely distinct topics, not duplicates. `GROUP / Cards` now has 3 DecisionCards, screenshot confirms no duplicate text visible. |
+| 5 | Visible heading hierarchy | **PASS** | Measured sizes: ChapterHeader title 40px → GroupHeader title 24px → card rule/body text ~14-16px. That's within the 2-4 step / ≤2× top-to-body guidance (40px chapter title vs ~16-18px body is close to but consistent with the intent — chapter titles are the top of the hierarchy, not compared 1:1 against card body). No competing/ambiguous heading sizes found. |
+| 6 | Prose budget | **PASS (with caveat)** | Only 2 genuine multi-line prose blocks exist site-wide: Mission and Core rules (both in Chapter 00, both within 50-75 chars/line after Task 4's fix-round rewording). Audience and Page-intents paragraphs are short bulleted/tabular lists, not flowing prose — the char-count heuristic doesn't strictly apply; forcing them to 50-75 chars/line would hurt scannability, not help it. Judged PASS given the intent of the check (avoid dense unreadable paragraphs) is met. Specimen captions (DecisionCard `rule` fields, DoDont captions) are all single-sentence. |
+| 7 | Token tables | **PASS** | `PANEL / 01 Tokens Intro` → `theme token jobs` panel: 15 `token row/*` instances, single unified table, semantic name first column, description second, Light value inline, Dark value inline, no per-theme duplicate tables anywhere on the page. |
+| 8 | Do/Don't discipline | **PASS** | 3 DoDont frames found (`Docs/DoDont — title-hover`, `— chips`, `— accent-budget`), each exactly 1 pair (2 children: do + don't), one-line captions, framed around plausible wrong choices (not strawmen). No row exceeds 2 pairs. |
+| 9 | Chapter 00 cap | **PASS** | Height 1885px (unchanged, well under the ~2 frame-height cap — smallest chapter on the page). Exactly 6 children: ChapterHeader, Paragraph (Mission), "three-layer identity" block, Paragraph (Core rules), Paragraph (Audience), Paragraph (Page intents) — matches the spec's required content set exactly, no extras. |
+
+### Fixes applied this task
+
+1. **Chapter 01 Foundations was missing its `_Docs/ChapterHeader` instance** (new finding, not previously flagged in any Task 1-8 ledger entry — discovered during this task's fresh Check-2 audit). Inserted a new ChapterHeader instance (`2803:4218`) at index 0, matching the sibling chapters' pattern: number="01", title="Foundations", summary="Design tokens and their light/dark bindings — colour, type, spacing, radius, motion, icons — the base everything downstream inherits from." Chapter 01 height grew 5821→6075 (+254px); cascaded position shift (+254) applied to Chapters 02/03/04 to hold the 160px gaps. This is the only new `_Docs/*` component *instance* created — no new component was created, ChapterHeader already existed as a Task-3 master (D7-compliant).
+2. **Duplicate DecisionCard** (`2670:7045`/`2670:7047`, flagged since Task 5's ledger, deferred to Task 9 by design) — resolved per check 4 above: kept `2670:7045`, deleted `2670:7047`.
+3. **Chapter 02 ChapterHeader title wrap** ("Compo/nents" — flagged since Task 5's ledger) — fixed. The title text node (`I2670:6861;2590:535`) had `layoutSizingHorizontal: FIXED` at width 131px, too narrow for "Components" at 40px, forcing a 2-line wrap. Plain `resize()` did not stick (parent auto-layout re-asserted the fixed width). Fix: set `layoutSizingHorizontal = 'HUG'` on the text node (valid per Plugin API rules — HUG is allowed on a TEXT child of an auto-layout frame), which let it size to its single-line content (235×52, was 131×104). Header height dropped 190→138.
+4. **Stray `&amp;quot;` HTML-entity artifacts** (flagged since Task 5/6/7's ledger) — fixed in all 3 remaining locations: `2670:6883` (Link/TextCTA description), `2670:6959` (PostMetadataTime description), `2670:6967` (SerieMeta description). Canonical text-edit recipe used (load fonts, mutate `.characters`, replace `&amp;quot;` → `"`).
+5. **Geometry cascade**: after fixes 1-3 changed Chapter 01 and Chapter 02 heights, Chapters 02/03/04 `.y` were recomputed and shifted to hold exact 160px gaps throughout. Final live-read confirms all 4 gaps = 160px, all chapter widths = 1408px, x = 0 constant (see check 1).
+
+### Open items explicitly NOT touched (out of scope, re-flagged)
+
+- `📐 Decisions`, `Page 8`, `Page 9`, `Page 11` pages: still undecided/unrenamed, sitting outside the `📚 Docs` page (Task 8 ledger item). Confirmed these did not interfere with any Docs-page-only check in this gate. Still needs a human disposition call before Task 10's cleanup can reach the plan's original 8-page target end-state — this is unrelated to and does not block Task 10 (which only deletes the Docs-page backup).
+- `PostMetadataTopic` — the brief listed this alongside Link/TextCTA, PostMetadataTime, SerieMeta as having entity artifacts, but no `&amp;quot;` occurrence was found on a `PostMetadataTopic` node during this task's fix pass; the 3 fixed above appear to be the complete set. Not re-flagged as still-open since no instance was found to fix.
+
+### Verdict
+
+**GATE PASSED**
