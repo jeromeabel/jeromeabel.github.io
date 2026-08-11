@@ -599,3 +599,68 @@ every description byte-for-byte matches the table above.
 
 **Commit.** See repo history for
 `docs(specs): magnet-ds-review — F3 Theme variable descriptions fix round 1`.
+
+## F4 — token table rebuild
+
+**Before state.** `get_screenshot` of `PANEL / 01 Tokens Intro` (`2670:6679`)
+confirmed the defect: Light/Dark cells for the 12 color rows showed raw
+`{"r":0.9607843…}` JSON dumps instead of colour.
+
+**Cells rebuilt (swatch-as-spec-card).** The `_Docs/TokenRow` master
+(`2590:578`) drives all 15 rows in the panel — confirmed zero other live
+consumers of this master anywhere in the file before editing it, so the
+structural change is safe. For each of the 12 color rows, the master's
+`mode1`/`mode2` cells were rebuilt as a swatch FRAME (fill bound directly to
+the Theme variable via `setBoundVariableForPaint`, not pasted hex) containing
+a nested `label` TEXT child showing `<primitive alias>` + hex
+(e.g. `brand/lime-100 #F5FFE1`). Each swatch's variable-mode context was
+pinned with `setExplicitVariableModeForCollection(themeCollection, modeId)`
+so the Light column always resolves Light and the Dark column always
+resolves Dark regardless of the panel's ambient mode — this is what makes the
+swatches re-render correctly on a page-level mode flip.
+
+The 3 font rows (`font/sans`, `font/title`, `font/mono`) have no colour to
+swatch. Their swatch frames were kept but set to `fills = []` (transparent),
+and the label text restored to plain `Light <family>` / `Dark <family>`
+(e.g. `Light IBM Plex Sans`, `Dark Bubbler One`) rather than an alias+hex
+pair.
+
+No raw `{"r":…}` JSON remains anywhere in the panel.
+
+**Label-token choice.** For each of the 12 color rows × 2 modes, WCAG
+contrast (gamma-corrected relative luminance) was computed against both
+`color/foreground` and `color/background` bound as the label fill; the
+higher-contrast candidate was bound. All 24 pairings clear 4.5:1 (min
+observed ≈5.18:1) — no legibility failures found, so no label-token fix was
+required.
+
+**Rows re-copied (Step 3, expanded scope).** The brief names 5 rows to
+re-copy (`font/sans`, `font/title`, `font/mono`, `color/accent-hover`,
+`color/foreground-strong`). Diffing the live docs-table usage text against
+the F3 "fix round 1 (final)" table (this file, above) showed 6 more rows had
+been corrected at the `variable.description` level in Task 4 but never
+synced to the visible docs table: `color/background`, `color/surface`,
+`color/accent`, `color/accent-strong`, `color/accent-subtle`,
+`color/surface-raised`. All 11 divergent rows were updated so the docs table
+and `variable.description` say the same thing, per the brief's stated goal —
+not just the 5 literally named. `color/accent-hover` and
+`color/foreground-strong` were the two rows previously mislabelled as
+"Reserved semantic token"; both now read as real usage/status text matching
+the F3 table.
+
+**Verification.**
+- Light mode: full-panel screenshot confirmed all 12 color rows show colour
+  with legible alias+hex on-swatch text, the 3 font rows show plain
+  readable text, all 11 updated role/usage texts render, zero JSON.
+- Dark mode: panel temporarily pinned to Dark
+  (`setExplicitVariableModeForCollection(themeCollection, '3:1')`) for a
+  verification screenshot — confirmed identical: every swatch cell coloured,
+  alias+hex legible on all 12 color rows, font rows read correctly, all 11
+  role texts intact, zero JSON. Override reverted immediately after
+  (`clearExplicitVariableModeForCollection`) so the panel's ambient mode is
+  back to unset, matching its state before this task.
+- No legibility failures found in either mode — no label-token fix was
+  needed.
+
+`ds/version` (`VariableID:2721:5`, `Design System` collection) was not
+touched.

@@ -230,11 +230,11 @@ git commit -m "docs(specs): magnet-ds-review — F3 Theme variable descriptions"
 - Consumes: Task 4's `## Theme token copy` table; `PANEL / 01 Tokens Intro` (2670:6679); the `_Docs/TokenRow` master.
 - Produces: a token table whose Light/Dark cells are swatch-as-spec-cards. Task 7's pairings block reuses the same `_Docs/TokenRow` layout.
 
-- [ ] **Step 1: Capture the before state**
+- [x] **Step 1: Capture the before state**
 
 `get_screenshot` of `PANEL / 01 Tokens Intro`. Expected (the defect): Light/Dark columns showing `{"r":0.9607843…}` JSON dumps instead of colour.
 
-- [ ] **Step 2: Rebuild each Light/Dark cell as a swatch-as-spec-card**
+- [x] **Step 2: Rebuild each Light/Dark cell as a swatch-as-spec-card**
 
 Industry-canon §5: the swatch carries its own spec, and its text sits *on* the swatch colour so the card demonstrates its own contrast. Per cell:
 
@@ -244,15 +244,15 @@ Industry-canon §5: the swatch carries its own spec, and its text sits *on* the 
 
 Where the swatch is too small for legible text, put alias + hex in an adjacent cell and keep the swatch as pure colour — but never leave a JSON dump.
 
-- [ ] **Step 3: Replace the false "Reserved semantic token" rows**
+- [x] **Step 3: Replace the false "Reserved semantic token" rows**
 
 Paste the descriptions Task 4 wrote for `font/sans`, `font/title`, `font/mono`, `color/accent-hover`, `color/foreground-strong` into their usage cells. The docs table and `variable.description` must now say the same thing.
 
-- [ ] **Step 4: Verify in both modes**
+- [x] **Step 4: Verify in both modes**
 
 `get_screenshot` of the panel in Light mode, then Dark mode. Expected: every cell shows colour; alias + hex legible on every swatch in both modes; no JSON; the five ex-"Reserved" rows read as real usage. Any swatch where the label is unreadable in one mode is a fail — fix the label token, not the swatch.
 
-- [ ] **Step 5: Log and commit**
+- [x] **Step 5: Log and commit**
 
 Append `## F4 — token table rebuild` to notes.md: cells rebuilt, rows re-copied, any legibility fix.
 
