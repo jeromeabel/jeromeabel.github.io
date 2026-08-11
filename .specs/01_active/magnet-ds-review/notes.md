@@ -14,9 +14,6 @@ node ID that review.md/plan.md quoted matched the live file exactly. Zero
 drift found.** The one real "staleness" trap encountered is not an ID
 mismatch but a **read-timing** issue — see the note under Pages.
 
-| Item | Node ID | Page | Confirmed? |
-|---|---|---|---|
-
 ### Pages (11)
 
 | Item | Node ID | Page | Confirmed? |
@@ -70,23 +67,23 @@ empty — load it first.
 (2041:483), Sections (2041:484), Typography (2041:485), Metadata (2778:303),
 Cards (2778:304) — 6 sections, matching review.md's inventory snapshot.
 
-| Item | Node ID | Section | Confirmed? |
+| Item | Node ID | Page | Confirmed? |
 |---|---|---|---|
-| NavLink | `2001:1309` | Chrome | ✅ (new) |
-| NavLinkHome | `2001:1312` | Chrome | ✅ (new) |
-| ThemeToggle | `16:11` | Chrome | ✅ (new) |
-| MotionToggle | `16:12` | Chrome | ✅ (new) |
-| Link/CTA | `2012:6179` | Actions | ✅ (new) |
-| Link/Secondary | `2041:275` | Actions | ✅ (new) |
-| Link/TextCTA | `2041:313` | Actions | ✅ (new) |
-| Link/Icon | `2093:6332` | Actions | ✅ (new) |
-| Link/SecondarySm | `2350:737` | Actions | ✅ (new) |
-| PostMetadataTime | `2040:482` | Metadata | ✅ (new) |
-| PostMetadataTopic | `2371:10414` | Metadata | ✅ (new) |
-| PostCardPreviewBig | `2385:7139` | Cards | ✅ (new) |
-| PostCardPreviewSmall | `2385:7149` | Cards | ✅ (new) |
-| PostRow | `2124:7937` | Cards | ✅ (new) |
-| SerieCard | `2367:7205` | Cards | ✅ (new) |
+| NavLink | `2001:1309` | ❖ Components → Chrome | ✅ (new) |
+| NavLinkHome | `2001:1312` | ❖ Components → Chrome | ✅ (new) |
+| ThemeToggle | `16:11` | ❖ Components → Chrome | ✅ (new) |
+| MotionToggle | `16:12` | ❖ Components → Chrome | ✅ (new) |
+| Link/CTA | `2012:6179` | ❖ Components → Actions | ✅ (new) |
+| Link/Secondary | `2041:275` | ❖ Components → Actions | ✅ (new) |
+| Link/TextCTA | `2041:313` | ❖ Components → Actions | ✅ (new) |
+| Link/Icon | `2093:6332` | ❖ Components → Actions | ✅ (new) |
+| Link/SecondarySm | `2350:737` | ❖ Components → Actions | ✅ (new) |
+| PostMetadataTime | `2040:482` | ❖ Components → Metadata | ✅ (new) |
+| PostMetadataTopic | `2371:10414` | ❖ Components → Metadata | ✅ (new) |
+| PostCardPreviewBig | `2385:7139` | ❖ Components → Cards | ✅ (new) |
+| PostCardPreviewSmall | `2385:7149` | ❖ Components → Cards | ✅ (new) |
+| PostRow | `2124:7937` | ❖ Components → Cards | ✅ (new) |
+| SerieCard | `2367:7205` | ❖ Components → Cards | ✅ (new) |
 
 **Extra, not in F5's scope:** `Icon` component set, `461:6204`, in Chrome.
 Distinct from `Link/Icon` — not a target of Task 6, recorded here only so a
@@ -99,7 +96,10 @@ later `❖ Components` sweep isn't surprised by 16 sets instead of 15.
 | PANEL / 01 Tokens Intro | `2670:6679` | 📚 Docs → CHAPTER / 01 Foundations | ✅ |
 | CHAPTER / 01 Foundations | `2670:6678` | 📚 Docs | ✅ (new) |
 | CHAPTER / 02 Components | `2670:6860` | 📚 Docs | ✅ (new) |
-| `_Docs/*` masters — `TokenRow` `2590:578`, `DecisionCard` `2590:571` (COMPONENT_SET), `SpecimenCell` `2590:542`, `GroupHeader` `2766:4212` | 📚 Docs | ✅ (new) |
+| `_Docs/TokenRow` | `2590:578` | 📚 Docs | ✅ (new) |
+| `_Docs/DecisionCard` (COMPONENT_SET) | `2590:571` | 📚 Docs | ✅ (new) |
+| `_Docs/SpecimenCell` | `2590:542` | 📚 Docs | ✅ (new) |
+| `_Docs/GroupHeader` | `2766:4212` | 📚 Docs | ✅ (new) |
 
 Other `_Docs/*` masters seen but outside the "especially" list (kept for
 reference, not part of the required 4): `ChapterHeader` (2590:537), `DoDont`
