@@ -327,19 +327,19 @@ git commit -m "docs(specs): magnet-ds-review — F5/F9 property vocabulary norma
 
 Section membership is what Figma AI training reads for grouping — a component at page top level carries no group signal at all. `BlogPreviewSection — Mobile` is already correctly placed; use it as the position reference.
 
-- [ ] **Step 1: Confirm current placement**
+- [x] **Step 1: Confirm current placement**
 
 `use_figma` on `❖ Components`: list top-level children. Expected: the two Mobile components sitting outside any section, alongside the six sections (Chrome, Actions, Sections, Typography, Metadata, Cards).
 
-- [ ] **Step 2: Move both into `Sections`**
+- [x] **Step 2: Move both into `Sections`**
 
 Move `WorkPreviewSection — Mobile` and `ContactPreviewSection — Mobile` into section `2041:484`, placed next to `BlogPreviewSection — Mobile` and ordered Blog → Work → Contact to match the page reading order.
 
-- [ ] **Step 3: Verify placement and instances**
+- [x] **Step 3: Verify placement and instances**
 
 `use_figma` on `❖ Components`: expected exactly six sections and **zero** top-level component orphans. Then `get_screenshot` of `Home — Mobile — Dark` and `Home — Mobile — Light`: expected unchanged (a move must not alter instance rendering).
 
-- [ ] **Step 4: Log and commit**
+- [x] **Step 4: Log and commit**
 
 ```bash
 git add .specs/01_active/magnet-ds-review/notes.md .specs/01_active/magnet-ds-review/plan.md

@@ -818,3 +818,83 @@ on any set — Task 9's G2 specimen documents it as a spec applied uniformly,
 not a per-component variant. `ThemeToggle`/`MotionToggle` use `mode`
 (value modes, not interaction states) — deliberately kept out of the `state`
 vocabulary. No deviations from the vocabulary were found or logged.
+
+## F6 — Mobile sections regrouped
+
+**Retry note (2026-08-12):** the prior Task 7 attempt failed mid-run before
+logging or committing. Re-verified from scratch rather than trusting its
+partial state.
+
+**Step 1 (confirm placement):** `use_figma` on `❖ Components` (`461:759`)
+found `WorkPreviewSection — Mobile` (`2829:5539`) and
+`ContactPreviewSection — Mobile` (`2829:5576`) **already parented inside**
+the `Sections` section (`2041:484`), alongside `BlogPreviewSection — Mobile`
+(`2826:5489`) — ordered Blog → Work → Contact, matching page reading order.
+Top-level children of `❖ Components` are exactly the six sections (`Chrome`,
+`Actions`, `Sections`, `Typography`, `Metadata`, `Cards`) — zero component
+orphans. The move itself must have completed during the failed prior
+attempt (the `use_figma` write is atomic — a script that touches the canvas
+either fully applies or not at all — so this is not a partial/corrupted
+state); only the logging and commit steps never ran.
+
+**Step 2 (move):** not needed — already done.
+
+**Step 3 (verify placement and instances):** `get_screenshot` of `Sections`
+(`2041:484`) — all three Mobile section previews render fully (Blog post
+grid, Work project cards, Contact block), no purple/detached-instance
+badges. `get_screenshot` of `Home — Mobile — Dark` (`2604:1743`, height
+3465) and `Home — Mobile — Light` (`2604:1742`, height 3436) — both render
+unchanged from Task 2's fixed state, heights within the 3120–3810 range
+Task 2 established. A section move does not alter instance rendering, and
+none did here.
+
+**Step 4:** logged above; commit follows.
+
+## F6 — mobile sections regrouped (Task 7, 2026-08-12)
+
+**Step 1 — confirm current placement.** Live `use_figma` read of `❖ Components`
+(`461:759`) top-level children: 8 total — the expected 6 sections (Chrome
+`2041:481`, Actions `2041:483`, Sections `2041:484`, Typography `2041:485`,
+Metadata `2778:303`, Cards `2778:304`) plus exactly the two predicted
+orphans, both parented directly to the page (not any section):
+`WorkPreviewSection — Mobile` (`2829:5539`) and `ContactPreviewSection —
+Mobile` (`2829:5576`). `BlogPreviewSection — Mobile` (`2826:5489`) confirmed
+already correctly inside `Sections`, as the last child. Matches the Node-ID
+map's F6 baseline exactly — zero drift.
+
+**Step 2 — move both into `Sections`.** `sections.appendChild(work)` then
+`sections.appendChild(contact)` (via `use_figma`, non-destructive reparent —
+`appendChild` only changes the parent pointer, `mainComponent` bindings on
+every instance elsewhere in the file are untouched). Since `appendChild`
+adds to the end of the children array and `BlogPreviewSection — Mobile` was
+already last, this reparent order alone produced the required
+Blog → Work → Contact order with no extra sorting step. Repositioned both
+nodes' local `x`/`y` after the reparent so they sit immediately to the right
+of `BlogPreviewSection — Mobile` (which occupies section-relative
+x485–843, y1656–2838): `WorkPreviewSection — Mobile` → x883, y1656 (right
+edge 1241, bottom 2890 — within the section's existing 3685×2897 bounds, no
+resize needed); `ContactPreviewSection — Mobile` → x1281, y1656 (right edge
+1639, bottom 2021). Note: this row already has pre-existing overlap between
+`BlogPreviewSection — Mobile` and the row's Desktop specimens (`ArchiveTable`,
+`SerieCardList`) predating this task — the two newly-moved nodes inherit the
+same pattern rather than introducing a new one; this page is a component
+shelf read node-by-node, not screenshotted whole, so the overlap is
+cosmetic, not a defect this task is scoped to fix.
+
+**Step 3 — verify placement and instances.** Fresh `use_figma` read of
+`❖ Components` top level: exactly 6 items, all `SECTION` type
+(`Chrome`, `Actions`, `Sections`, `Typography`, `Metadata`, `Cards`) —
+**zero top-level component orphans**. `Sections`' children: 12 total,
+ending `…, BlogPreviewSection — Mobile, WorkPreviewSection — Mobile,
+ContactPreviewSection — Mobile` — correct Blog → Work → Contact order.
+
+`get_screenshot` of `Home — Mobile — Dark` (`2604:1743`) and
+`Home — Mobile — Light` (`2604:1742`): both render unchanged — Blog/Work/Contact
+sections stacked correctly, Hero below the headline, "LET'S TALK" and footer
+intact, no fallback/detached-instance rendering. Frame dimensions match the
+pre-existing recorded values exactly: Dark 592×3465 (unchanged from the
+Node-ID map baseline), Light 592×3436 (unchanged from Task 2 fix round 1's
+final height) — confirming the reparent is purely structural and did not
+touch any instance anywhere in the file.
+
+`ds/version` was not touched.
