@@ -956,3 +956,65 @@ at the boundary of "≤2×"), with the one remaining stricter-reading caveat
 ### Verdict
 
 **GATE PASSED**
+
+## Final state
+
+**Task 10 — backup deletion.** Gate re-verified at Step 1 (`grep "GATE
+PASSED"` matched at `notes.md:958`). Fresh `use_figma` live read (not
+cached) confirmed 12 pages before deletion, including
+`🗄 Backup — Introduction (pre-Docs)` (`2545:671`).
+
+**Safety sweep (Step 2):** live full-tree walk of `2545:671` found 6
+top-level nodes (`_Docs/Components` SECTION, `BLOG DESIGN SYSTEM v1.0`
+TEXT, `Frame 1`, `Intro/01`, `Intro/02`, `Section`) — matches Task 8's
+predicted residual content exactly. `findAllWithCriteria({types:
+['COMPONENT','COMPONENT_SET']})` on the page returned an empty array:
+**zero component masters**. Safe to delete, no migration needed.
+
+**Deletion (Step 3):** first attempt via `page.remove()` while current
+page context was still the backup page threw `Removing this node is not
+allowed`. Fix: `setCurrentPageAsync` to `📚 Docs` *before* calling
+`remove()` on the backup page — succeeded. Page count dropped from 12 to
+11 immediately, confirmed via fresh `figma.root.children` read in the
+same script.
+
+**Screenshot verdicts (Step 3):**
+- `📚 Docs` (`2736:4`): full-page screenshot rendered cleanly (thin/tall
+  aspect, 3369×36280 native — expected for a long single-column page).
+  Programmatic check of all 762 instances on the page via
+  `getMainComponentAsync()` found **0 broken/detached instances**.
+  Verdict: **PASS**, no visual regression.
+- `❖ Components` (`461:759`): screenshot shows all specimen frames
+  populated and rendering normally, no missing-image placeholders, no
+  visibly detached instances. Programmatic check of all 127 instances on
+  the page found **0 broken/detached instances**. Verdict: **PASS**, no
+  visual regression.
+
+**Final page list (fresh live inventory, 11 pages):**
+
+1. `📖 Cover` (`0:1`)
+2. `📚 Docs` (`2736:4`)
+3. `📐 Decisions` (`2716:4244`) — out of scope, untouched, still open per
+   Task 8/9 finding
+4. `❖ Components` (`461:759`)
+5. `📄 Pages` (`2558:18264`)
+6. `Page 8` (`2678:23308`) — out of scope, untouched, still open
+7. `Page 9` (`2678:32354`) — out of scope, untouched, still open
+8. `Page 11` (`2678:34657`) — out of scope, untouched, still open
+9. `🗄 Backup — UI kit foundations & controls` (`2678:6692`) — kept,
+   not this task's target
+10. `🗄 Backup — Getting started & theme overview` (`2678:10236`) —
+    kept, not this task's target
+11. `🗄 Backup — Brand guidelines template` (`2678:34067`) — kept, not
+    this task's target
+
+`🗄 Backup — Introduction (pre-Docs)` (`2545:671`) confirmed **deleted**
+— absent from the fresh list above. `📐 Decisions`, `Page 8`, `Page 9`,
+`Page 11` remain, unchanged, per the brief's explicit out-of-scope
+instruction — noted here, not acted on.
+
+### Task 10 verdict
+
+**DONE.** Gate honored, live-verified before delete (no stale-cache
+mistake repeated), single deletion target removed cleanly, both
+post-delete pages screenshot- and instance-verified clean.

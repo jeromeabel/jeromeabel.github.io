@@ -456,20 +456,20 @@ git commit -m "docs(specs): magnet-ds-docs-v1 — D8 validation gate passed"
 - Consumes: `notes.md` containing `GATE PASSED` (Task 9). **Hard precondition — do not proceed without it.**
 - Produces: final file state; spec archived to `.specs/02_archives/`.
 
-- [ ] **Step 1: Verify the gate**
+- [x] **Step 1: Verify the gate**
 
 Run: `grep "GATE PASSED" .specs/01_active/magnet-ds-docs-v1/notes.md`
 Expected: match found. No match → stop, return to Task 9.
 
-- [ ] **Step 2: Final safety sweep of the backup page**
+- [x] **Step 2: Final safety sweep of the backup page**
 
 Before deleting `🗄 Backup — Introduction (pre-Docs)`: `use_figma` — confirm it contains **no component masters** (only frames, instances, strays). A master found here means Task 3 Step 2 missed it — move it to `📚 Docs` first.
 
-- [ ] **Step 3: Delete the backup page**
+- [x] **Step 3: Delete the backup page**
 
 Delete `🗄 Backup — Introduction (pre-Docs)` (takes the 3 stray nodes with it, completing D1's stale-label kill). Then `get_screenshot` of `📚 Docs` and of ❖ Components: expected no detached instances, no visual regressions.
 
-- [ ] **Step 4: Record completion and commit**
+- [x] **Step 4: Record completion and commit**
 
 Append `## Final state` to `notes.md`: final page list, deletion confirmed, screenshot verdicts.
 
@@ -478,7 +478,7 @@ git add .specs/01_active/magnet-ds-docs-v1/notes.md .specs/01_active/magnet-ds-d
 git commit -m "docs(specs): magnet-ds-docs-v1 — backup deleted after gate, restructure complete"
 ```
 
-- [ ] **Step 5: Archive the spec**
+- [x] **Step 5: Archive the spec**
 
 ```bash
 ./.specs/specs.sh archive magnet-ds-docs-v1
