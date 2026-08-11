@@ -724,18 +724,51 @@ deviations to log.
    variant — zero instances left pointing at a stale/missing variant).
 4. **F9 — `state` → `mode`** (property-name rename) on `ThemeToggle`
    (`16:11`, values `dark`/`light` unchanged) and `MotionToggle` (`16:12`,
-   values `on`/`off` unchanged). Verified 8 live `ThemeToggle` instances on
-   `📄 Pages` all resolved to the new `mode` property with correct values
-   (`dark`/`light`) after the rename. `MotionToggle` has zero instances
-   placed in the 8 page templates (component exists, unused there) — its
-   rename was verified structurally only (child names read `mode=on` /
-   `mode=off`, screenshot of the master shows both variants rendering
-   correctly with no broken bindings).
+   values `on`/`off` unchanged).
 
 `ds/version` was not touched.
 
 ### Verification (Step 6)
 
+**Fix round 1 (2026-08-11, post-review):** the original version of this
+section scoped instance verification to `📄 Pages` only and then claimed
+"`MotionToggle` has zero instances placed in the 8 page templates …
+verified structurally only" — worded as if that meant zero instances
+existed *anywhere*. That was wrong methodology, not just wrong wording: a
+task reviewer swept the other 4 pages and found 3 live `MotionToggle`
+instances plus 1 `ThemeToggle` specimen instance on `📚 Docs`. Re-swept the
+whole file properly below; the renames themselves were never broken, but
+the original check's scope was too narrow to support the claim it made.
+
+**Full-file instance sweep**, all 6 renamed sets
+(`PostCardPreviewBig`/`PostCardPreviewSmall`/`PostRow`/`SerieCard`/
+`ThemeToggle`/`MotionToggle`), across every page in the file (confirmed via
+`figma.root.children`: `📖 Cover`, `📚 Docs`, `📐 Decisions`,
+`❖ Components`, `📄 Pages` — 5 pages total; the Node-ID map's Page 8/9/11
+and backup pages are no longer top-level children as of Task 3's F2
+disposition work):
+
+| Page | Total instances (all types) | Matching instances (6 sets) |
+|---|---|---|
+| 📖 Cover | 2 | 0 |
+| 📚 Docs | 761 | 104 (`SerieCard` 20, `PostRow` 45, `MotionToggle` 3, `ThemeToggle` 11, `PostCardPreviewBig` 6, `PostCardPreviewSmall` 19) |
+| 📐 Decisions | 0 | 0 |
+| ❖ Components | 160 | 16 (nested instances inside `Sections` mockups) |
+| 📄 Pages | 462 | 68 (`ThemeToggle` 8, `PostCardPreviewBig` 4, `PostCardPreviewSmall` 12, `SerieCard` 12, `PostRow` 32) |
+
+**188 live instances total** across the 6 renamed sets. Each was read for
+its current property value(s) and `mainComponent.id`/name; a filter flagged
+any instance still carrying a pre-rename key (`State`/`Variant`) or a value
+outside the renamed vocabulary — **0 flagged**. On `📚 Docs` specifically,
+the 3 `MotionToggle` instances the reviewer found are specimen cells in
+`CHAPTER / 01 Foundations → SECTION / Motion → "motion control specimens"`
+(`2670:6791`, `mode=on`, mainComponent `16:7`; `2670:6794`, `mode=off`,
+mainComponent `16:9`) and `CHAPTER / 02 Components → GROUP / Chrome →
+"MotionToggle cell"` (`2670:6894`, `mode=on`, mainComponent `16:7`); the
+co-located `ThemeToggle` specimen is `2670:6890` (`mode=light`, mainComponent
+`16:3`). All four confirmed resolving correctly post-rename.
+
+Screenshots taken and inspected in addition to the property-level sweep:
 - `get_screenshot` of `❖ Components` (`461:759`) — full-page overview
   renders normally, no purple/detached-instance badges anywhere.
 - `get_screenshot` of `Home — Desktop — Light` (`2604:1741`) — `BLOG`
@@ -754,8 +787,8 @@ deviations to log.
   play/pause icons, row content), confirming the rename didn't collapse or
   blank any variant.
 
-No breakage found at any step — proceeded through all renames without
-stopping.
+No breakage found anywhere in the file — proceeded through all renames
+without stopping.
 
 ### Final property table (set → property → values)
 
