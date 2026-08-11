@@ -379,9 +379,9 @@ a content-length change.
 ## Task 5 — Chapter 02 grouped per D5 taxonomy
 
 **Audit (Step 1).** `CHAPTER / 02 Components` (`2670:6860`) pre-task held
-seven top-level groups (`GROUP / Navigation`, `GROUP / Buttons`,
-`GROUP / Typography` — did not exist yet, headings were raw text —
-`GROUP / Metadata & Text`, `GROUP / Cards`, `GROUP / Hero & Contact`) plus
+five pre-existing top-level groups (`GROUP / Navigation`, `GROUP / Buttons`,
+`GROUP / Metadata & Text`, `GROUP / Cards`, `GROUP / Hero & Contact` —
+`GROUP / Typography` did not exist yet; headings there were raw text) plus
 two chapter-level orphan cards (not inside any group): DecisionCard
 `2670:7549` ("one verb per surface") and DoDont `2670:7550`
 ("accent-budget"). DecisionCard/DoDont text content (not names) was read to
@@ -533,7 +533,7 @@ manual section resizing — verified no 2D bounding-box overlaps between any
 two final (surviving) sections before executing (only transient overlaps
 with soon-to-be-deleted sections were tolerated, resolved by the deletions).
 
-## Task 7 — component descriptions: already present, no edit made
+## Task 7 — component descriptions: mostly pre-existing, fix round 1 filled 14 thin entries
 
 **Fresh inventory (Step 1).** Re-read the `❖ Components` page (`461:759`)
 live rather than trusting the brief's table. Confirmed Task 6's 6 sections
@@ -1018,3 +1018,36 @@ instruction — noted here, not acted on.
 **DONE.** Gate honored, live-verified before delete (no stale-cache
 mistake repeated), single deletion target removed cleanly, both
 post-delete pages screenshot- and instance-verified clean.
+
+## Final review fix round 1
+
+Fixes from the final whole-branch review, one pass, no round 2.
+
+1. **plan.md checkboxes.** Tasks 1, 2, 3, 5 had unticked `[ ]` steps despite
+   being complete and reviewed (an implementation-time omission, not
+   unfinished work — cross-checked against this file and `progress.md`).
+   Ticked all 21 to `[x]`.
+2. **Dangling cross-reference (`2670:6726`).** Live-read confirmed text was
+   still `"Full token table with Light and Dark values → Foundations ·
+   Colors"`, pointing at the `🎨 Foundations` page Task 8 deleted. Since
+   `SECTION / Colour` already carries the full token table itself (D4
+   verdict), dropped the dangling clause. Before/after: as above → `"Full
+   token table with Light and Dark values"`. `get_screenshot` of `CHAPTER /
+   01 Foundations` (`2670:6678`) and of `SECTION / Colour` (`2670:6715`)
+   post-edit: clean single-line text, no clipping, no layout regression.
+3. **design.md false-empty premise.** Added two correction notes (near the
+   audit table and near D3's migration-strategy paragraph) pointing at
+   Task 8's live finding that 📐 Decisions/Page 8/9/11 are not empty, and at
+   the new `figma-undecided-pages` backlog stub. D3's actual shipped
+   conclusion (leave as backups/undecided) is unchanged.
+4. **notes.md text fixes.** Task 7 heading reworded from "already present,
+   no edit made" to "mostly pre-existing, fix round 1 filled 14 thin
+   entries" (accurate after fix round 1 appended real sentences to 14
+   entries). Task 5's audit sentence "pre-task held seven top-level groups"
+   corrected to "five pre-existing top-level groups" to match its own
+   parenthetical list (`GROUP / Typography` didn't exist yet, so isn't
+   pre-existing).
+5. **Backlog stub.** Created `.specs/00_backlog/figma-undecided-pages.md`
+   (`./.specs/specs.sh new figma-undecided-pages "Figma: dispose of 4
+   undecided Magnet-DS pages"`) so the open 📐 Decisions/Page 8/9/11
+   disposition call survives this workspace's deletion.

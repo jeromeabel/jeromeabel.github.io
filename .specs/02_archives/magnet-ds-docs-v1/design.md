@@ -26,6 +26,17 @@ Stray junk: `Frame 1` (`2708:21292`, levels diagram), `Section` (`2709:21629`,
 copied-template residue about `_states` variables), text label
 `BLOG DESIGN SYSTEM v1.0` (`2670:6656`, stale name).
 
+> **Correction (post-Task 8, 2026-08-11):** the "empty (0 children) since
+> creation" claim above for 📐 Decisions, and the "Pages 8, 9, 11 empty"
+> claim in the table row above, were stale/unverified and are false — a
+> live Task 8 check found real, non-empty content on all four (📐 Decisions
+> has a 1440×4913 `design-decisions` frame with 7 sub-frames; Page 8 has 12
+> frames; Page 9 has 5; Page 11 has 33). See `notes.md`'s `## Task 8`
+> section for the live check and `.specs/00_backlog/figma-undecided-pages.md`
+> for the follow-up. D3's conclusion below to leave these pages as backups/
+> undecided rather than delete them still holds; the empty-page premise it
+> was partly reasoned from does not.
+
 ## Decisions
 
 ### D1 — Name: keep "Magnet DS"
@@ -77,6 +88,17 @@ demote the old `📚 Introduction` page to `🗄 Backup — Introduction (pre-Do
 Delete backups only after the new page is validated against D8. Existing
 template-backup pages with content (6, 7, 10) stay as backups; only truly
 empty pages (8, 9, 11) are deleted — nothing to back up.
+
+> **Correction (post-Task 8, 2026-08-11):** "only truly empty pages (8, 9,
+> 11) are deleted" above rested on a false premise — Task 8's live check
+> found all three (plus 📐 Decisions) hold real, unreviewed content, so
+> deletion did not proceed for them; only 🎨 Foundations was deleted, on its
+> independent D4 content-diff verdict. See the correction note in the
+> audit-findings table above and `notes.md`'s `## Task 8` section for detail,
+> and `.specs/00_backlog/figma-undecided-pages.md` for the follow-up. The
+> shipped outcome (leave as backups/undecided, don't delete) matches what
+> D3's own non-destructive principle would have required anyway, so the
+> plan's actual behavior held even though its stated premise didn't.
 
 ### D4 — Foundations page: delete after salvage check
 

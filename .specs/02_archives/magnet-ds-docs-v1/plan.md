@@ -37,11 +37,11 @@ created: 2026-08-10
 - Consumes: nothing (first task).
 - Produces: `notes.md` with a `## Node-ID map (Pass 0, <date>)` section — a table `| Item | Node ID | Page |` covering every item listed in Step 2. All later tasks read IDs from this map, not from the plan header.
 
-- [ ] **Step 1: Invoke the figma-use skill, then open the file**
+- [x] **Step 1: Invoke the figma-use skill, then open the file**
 
 Invoke `figma:figma-use`. Then run a `use_figma` inventory of file `ihWIWmvtQPTWgUxlrVjC2c`: list all pages with IDs and child counts.
 
-- [ ] **Step 2: Capture node IDs for every object the plan touches**
+- [x] **Step 2: Capture node IDs for every object the plan touches**
 
 Drill into pages as needed and record IDs for:
 
@@ -51,15 +51,15 @@ Drill into pages as needed and record IDs for:
 4. On ❖ Components: the 8 section nodes and their names.
 5. On 📖 Cover: the cover frame and its date chip text node.
 
-- [ ] **Step 3: Write the map to notes.md**
+- [x] **Step 3: Write the map to notes.md**
 
 Create `notes.md` with frontmatter (`title`, `created: 2026-08-10`) and the `## Node-ID map (Pass 0, <date>)` table. Flag any mismatch with the design.md audit (missing node, renamed frame) in a `### Deviations` subsection.
 
-- [ ] **Step 4: Verify completeness**
+- [x] **Step 4: Verify completeness**
 
 Check the map has: 12 pages, 10 `_Docs` masters, 5 chapter frames, `Intro/01` + `Intro/02`, 3 strays, 2 Foundations frames, 8 Components sections, cover frame + date chip. Expected: every row filled; no "not found" without a Deviations note.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add .specs/01_active/magnet-ds-docs-v1/notes.md .specs/01_active/magnet-ds-docs-v1/plan.md
@@ -77,23 +77,23 @@ git commit -m "docs(specs): magnet-ds-docs-v1 — Pass-0 node-ID inventory"
 - Consumes: Task 1 node-ID map (`Foundations · Typography` frame, `CHAPTER / 01 Foundations` frame).
 - Produces: `notes.md` section `## D4 salvage verdict` — either "nothing unique, safe to delete" or a list of specimens moved. Task 8 (deletions) depends on this verdict existing.
 
-- [ ] **Step 1: Extract both specimen lists**
+- [x] **Step 1: Extract both specimen lists**
 
 Use `get_design_context` (or `use_figma` text extraction) on the old `Foundations · Typography` frame (audit ID `8:2`) and on the `SECTION / Type` area inside `CHAPTER / 01 Foundations`. List every type specimen present in each (the old frame had 18: Hero/Title, H1–H3, Body/xs–4xl, Label/Meta, Chip/Mono, Code/Base).
 
-- [ ] **Step 2: Diff the lists**
+- [x] **Step 2: Diff the lists**
 
 Any specimen present in the old frame but absent from `SECTION / Type` is "unique". Also check the old `Foundations · Colors` frame (`6:2`) the same way against the colour section of `CHAPTER / 01 Foundations`.
 
-- [ ] **Step 3: Move unique content (if any)**
+- [x] **Step 3: Move unique content (if any)**
 
 If unique specimens exist, copy them into the matching section of `CHAPTER / 01 Foundations` via `use_figma`, restyling to match the chapter's existing specimen cells (`_Docs/SpecimenCell` instances). If nothing unique: no Figma edit.
 
-- [ ] **Step 4: Record the verdict**
+- [x] **Step 4: Record the verdict**
 
 Append `## D4 salvage verdict` to `notes.md`: the diff result and what (if anything) moved, with node IDs.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add .specs/01_active/magnet-ds-docs-v1/notes.md .specs/01_active/magnet-ds-docs-v1/plan.md
@@ -113,27 +113,27 @@ git commit -m "docs(specs): magnet-ds-docs-v1 — D4 salvage verdict recorded"
 
 ⚠️ **Why masters move first:** the 10 `_Docs/*` masters currently live on 📚 Introduction. That page gets demoted (Task 8) and deleted (Task 10). Moving a master between pages preserves all instance links; deleting its page does not. Masters must be off the Introduction page before any demotion.
 
-- [ ] **Step 1: Create the page**
+- [x] **Step 1: Create the page**
 
 `use_figma`: create a new page named `📚 Docs`. Position it in the page list directly after 📖 Cover. Record its ID.
 
-- [ ] **Step 2: Move the 10 `_Docs/*` masters**
+- [x] **Step 2: Move the 10 `_Docs/*` masters**
 
 Move all 10 masters (and full variant sets for DecisionCard, Date, Status) from 📚 Introduction to `📚 Docs`. Place them below where chapter 04 will sit — y-offset well clear of the reading column (e.g. column bottom + 2000 px), grouped under a plain text label `— _Docs components (private) —`.
 
-- [ ] **Step 3: Verify instance links survived**
+- [x] **Step 3: Verify instance links survived**
 
 Take `get_screenshot` of one chapter frame still on Introduction (e.g. `CHAPTER / 01 Foundations`). Expected: instances render identically (no detached/red components).
 
-- [ ] **Step 4: Move the four compliant chapter frames**
+- [x] **Step 4: Move the four compliant chapter frames**
 
 Move `CHAPTER / 01 Foundations`, `02 Components`, `03 Sections`, `04 Pages` from Introduction to `📚 Docs`. Stack them in order in one vertical column, x aligned, width 1408, constant gap. Leave vertical space above `01 Foundations` for Chapter 00 (Task 4) — reserve ~2 frame-heights.
 
-- [ ] **Step 5: Verify column layout**
+- [x] **Step 5: Verify column layout**
 
 `get_screenshot` of the `📚 Docs` page zoomed out. Expected: one column, chapters in reading order 01→04, equal gaps, `_Docs` masters visibly separated below.
 
-- [ ] **Step 6: Log and commit**
+- [x] **Step 6: Log and commit**
 
 Append `## Docs page build log` to `notes.md`: new page ID, chapter-gap value chosen, master-move confirmation.
 
@@ -198,23 +198,23 @@ git commit -m "docs(specs): magnet-ds-docs-v1 — Chapter 00 About composed"
 - Consumes: Task 3 Docs page; `CHAPTER / 02 Components` frame.
 - Produces: chapter 02 internally grouped under exactly six headings — `Chrome`, `Actions`, `Typography`, `Metadata`, `Cards`, `Sections` — matching D5. If `_Docs/GroupHeader` is created, it is documented in `notes.md` (D7 requires the trigger recorded). Task 6 uses the same six names on the Components page.
 
-- [ ] **Step 1: Audit current chapter 02 structure**
+- [x] **Step 1: Audit current chapter 02 structure**
 
 `get_design_context` on `CHAPTER / 02 Components`. List its current groups/cards and map each existing DecisionCard/DoDont/rule to one of the six D5 groups.
 
-- [ ] **Step 2: Decide the GroupHeader trigger**
+- [x] **Step 2: Decide the GroupHeader trigger**
 
 Try expressing the six group headings with existing `_Docs/Headline` instances first. D8 requires a visible size step between ChapterHeader and group level (2–4 steps, top ≤ 2× body). If Headline cannot express a second level distinct from both ChapterHeader and card titles → create `_Docs/GroupHeader`: number-less, smaller than ChapterHeader (e.g. ChapterHeader's type size × 0.6, same family/weight logic), no other new components.
 
-- [ ] **Step 3: Regroup chapter 02 content**
+- [x] **Step 3: Regroup chapter 02 content**
 
 Reorder cards under the six headings in D5 order (Chrome, Actions, Typography, Metadata, Cards, Sections). Two-level cap: chapter → group → cards, no third heading level. Group frames named exactly like the D5 sections.
 
-- [ ] **Step 4: Verify scanning path**
+- [x] **Step 4: Verify scanning path**
 
 `get_screenshot` of chapter 02. Expected: layer-cake — ChapterHeader, then six visually distinct group headings, cards under each; any fact reachable page → chapter → group → card.
 
-- [ ] **Step 5: Log and commit**
+- [x] **Step 5: Log and commit**
 
 Append to `notes.md`: GroupHeader created yes/no (+ trigger evidence), regrouping summary.
 
