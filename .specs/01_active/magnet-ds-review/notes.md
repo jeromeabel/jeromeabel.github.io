@@ -294,3 +294,39 @@ item here since Task 2's scope is F1 only.
 | Section masters | 3× Desktop | 3× Mobile (via `swapComponent`, not detach) |
 | Hero illustration | overlapping headline | hidden (matches Dark) |
 | Footer / LET'S TALK | outside frame bounds | inside frame |
+
+## F1 fix round 1 — Contact section padding parity (Task 2 review finding, 2026-08-11)
+
+**Finding (Important, from task review):** the Step 4 top-down walk checked
+`ContactContainer` (correctly FILL, no issue) but stopped one level too
+early — it did not walk up to `ContactPreviewContent`
+(`I2586:1151;2829:5577`), which carried a leftover Desktop-inherited
+`paddingTop`/`paddingBottom` of **80/80**. Dark's equivalent
+(`I2586:1159;2829:5577`) has **24/24**. This inflated Light's Contact
+section to 429 px vs Dark's 317 px (112 px of extra whitespace, visible as
+an oversized gap around "LET'S TALK").
+
+**Fix:** reset `ContactPreviewContent`'s `paddingTop`/`paddingBottom` to
+`24`/`24` in `Home — Mobile — Light`. `ContactPreviewContent` height
+381 → 269 px; `ContactPreviewSection — Mobile` height 429 → **317 px** —
+now an exact match to Dark's `2586:1159` (317 px).
+
+**Re-verification:**
+
+- Frame height: 3548 → **3436 px** (was already inside the 3120–3810 band;
+  now measurably closer to Dark's 3465 px — 29 px off instead of 83 px).
+- Re-ran the whole-frame width-overflow sweep (`width > 391`): still exactly
+  the same 2 pre-existing `HeroText` nodes flagged before the fix, nothing
+  new — confirms the padding fix didn't shift or break anything else in the
+  frame.
+- Re-screenshotted `Home — Mobile — Light`: Blog/Work sections unchanged,
+  Hero unchanged, "LET'S TALK" section now has tight, correct spacing
+  matching the Mobile design intent — no more 112 px gap.
+
+**Controller sign-off (recorded per reviewer request, no action taken):**
+the pre-existing `HeroText` 576 px FIXED-width overflow (2 nodes, ~592 px
+rendered canvas instead of 390) is confirmed present identically on the
+Dark reference and is **not** a Light-only regression. Signed off as
+out-of-scope for F1 — a shared cross-variant defect this task did not
+introduce and is not scoped to fix. Not filed as a new backlog item at this
+time.
