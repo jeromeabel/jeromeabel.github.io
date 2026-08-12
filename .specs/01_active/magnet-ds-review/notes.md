@@ -1051,6 +1051,12 @@ link back to the `_Docs/SpecimenCell` master (an acceptable, one-off
 trade-off for a slot the master ships empty specifically to be filled
 per-usage; no new eleventh `_Docs` master was created).
 
+**Forward-looking flag:** this G2 focus specimen (`2900:4303`) is now a
+detached instance of `_Docs/SpecimenCell` — it will NOT pick up any future
+edits made to that master (color, layout, or structural changes). Anyone
+editing `_Docs/SpecimenCell` going forward must manually re-apply the
+equivalent change to this specimen too.
+
 Built inside `slot`: a Link/CTA `state=default` instance (`2900:4307`)
 wrapped in a new auto-layout frame (`2900:4312`, `focus ring`) with 2px
 padding on all sides (= offset), `strokeWeight: 2` (= ring width),
@@ -1116,7 +1122,7 @@ id `2900:4330`.
 **Correction applied vs. the brief's text.** The brief's own Step 3 body
 draft names `color/foreground-muted` as "the existing AA floor... now
 measured in the G1 table" — this is factually wrong per Task 8's actual
-measurements (see `## G1 — contrast measurements` and task-8-report.md
+measurements (see `## G1 — always-valid pairings block` and task-8-report.md
 Concerns §2): the tightest of the 16 measured pairings is `color/background`
 / `color/accent` in **Light mode at 5.18:1**, not `foreground-muted`. G3's
 `body` text above cites the corrected pairing and ratio, not the brief's
