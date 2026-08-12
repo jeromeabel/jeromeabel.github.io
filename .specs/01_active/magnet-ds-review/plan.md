@@ -360,11 +360,11 @@ git commit -m "docs(specs): magnet-ds-review — F6 mobile sections regrouped"
 
 **Decision:** ADOPT, docs-only. Cheap (one block), gates future token additions, and two modes double the contrast-regression surface. Later machine-checkable by the `figma:verify` tooling.
 
-- [ ] **Step 1: Pull resolved values for both modes**
+- [x] **Step 1: Pull resolved values for both modes**
 
 `get_variable_defs` on `2 Theme`: capture each variable's resolved RGB in Light **and** Dark. Figma returns channels in 0–1 — keep them that way, no /255.
 
-- [ ] **Step 2: Write the contrast script**
+- [x] **Step 2: Write the contrast script**
 
 Create `contrast.mjs` in the scratchpad:
 
@@ -385,7 +385,7 @@ for (const p of PAIRS) {
 }
 ```
 
-- [ ] **Step 3: Run it over the eight candidate pairs**
+- [x] **Step 3: Run it over the eight candidate pairs**
 
 Run: `node contrast.mjs`
 
@@ -404,19 +404,19 @@ Pairs (both modes each — 16 measurements):
 
 Record every ratio in a `## G1 — contrast measurements` table in notes.md.
 
-- [ ] **Step 4: Handle failures before publishing**
+- [x] **Step 4: Handle failures before publishing**
 
 Any pair below 4.5 (or below 3.0 where it is large text only) is **not** published as "AA". Either mark the row with its real verdict and a one-line caveat ("large text only", "decorative — not for body copy"), or — if the pair is claimed as a body-text pairing anywhere in the file — record it in notes.md as a follow-up defect. Do not silently round up. `color/foreground-muted` is documented as sitting at the AA floor; expect it to be the tightest row.
 
-- [ ] **Step 5: Build the block in Figma**
+- [x] **Step 5: Build the block in Figma**
 
 In `CHAPTER / 01 Foundations`, below the existing token content: a `_Docs/GroupHeader` reading `Always-valid pairings`, one `_Docs/Paragraph` (≤ 2 lines) saying these eight pairs are safe without further checking and that new pairings must be measured before use, then 8 `_Docs/TokenRow` instances — background swatch, content swatch, pair name, Light verdict, Dark verdict — using the Task 5 swatch treatment so each row demonstrates its own contrast.
 
-- [ ] **Step 6: Verify**
+- [x] **Step 6: Verify**
 
 `get_screenshot` of the block in both modes. Expected: 8 rows; every verdict matches the notes.md measurements; each row visually demonstrates the pairing it describes.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add .specs/01_active/magnet-ds-review/notes.md .specs/01_active/magnet-ds-review/plan.md

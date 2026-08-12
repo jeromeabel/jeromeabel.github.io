@@ -876,3 +876,130 @@ final height) — confirming the reparent is purely structural and did not
 touch any instance anywhere in the file.
 
 `ds/version` was not touched.
+
+## G1 — always-valid pairings block (Task 8, 2026-08-12)
+
+**Step 1 — resolve Theme values.** Live `use_figma` read of `2 Theme`
+(`VariableCollectionId:3:2`, modes Light `3:0` / Dark `3:1`) for the 8
+tokens needed: `color/background`, `color/foreground`,
+`color/foreground-strong`, `color/foreground-muted`, `color/surface`,
+`color/accent`, `color/accent-subtle`, `color/accent-strong`. Each Theme
+variable's `valuesByMode` entry is a `VARIABLE_ALIAS` into `1 Primitives`,
+not a raw color — resolved each alias chain via
+`figma.variables.getVariableByIdAsync` to the underlying RGB (kept 0–1,
+no /255) and captured the primitive's display name for the swatch labels.
+Cross-checked the resolution method against a literal value already present
+in an existing `_Docs/TokenRow` instance (`color/background` Light →
+`#F5FFE1`, alias `brand/lime-100`) — exact match.
+
+**Step 2 — contrast script.** Wrote `contrast.mjs` in the scratchpad
+(never committed) using the brief's exact WCAG 2.x luminance/ratio
+functions, with the 8 resolved token values and the 8 required pairs
+wired in as data.
+
+**Step 3 — 16 measurements.** Ran `node contrast.mjs` over all 8 pairs ×
+2 modes:
+
+| Pair | Mode | Ratio | Verdict |
+|---|---|---|---|
+| background / foreground | Light | 15.10:1 | AA |
+| background / foreground | Dark | 12.63:1 | AA |
+| background / foreground-strong | Light | 17.87:1 | AA |
+| background / foreground-strong | Dark | 13.71:1 | AA |
+| background / foreground-muted | Light | 6.56:1 | AA |
+| background / foreground-muted | Dark | 6.29:1 | AA |
+| background / accent | Light | 5.18:1 | AA |
+| background / accent | Dark | 8.05:1 | AA |
+| surface / foreground | Light | 12.84:1 | AA |
+| surface / foreground | Dark | 10.87:1 | AA |
+| surface / foreground-muted | Light | 5.56:1 | AA |
+| surface / foreground-muted | Dark | 5.42:1 | AA |
+| accent-subtle / accent-strong | Light | 8.66:1 | AA |
+| accent-subtle / accent-strong | Dark | 9.24:1 | AA |
+| foreground (CTA fill) / background (CTA text) | Light | 15.10:1 | AA |
+| foreground (CTA fill) / background (CTA text) | Dark | 12.63:1 | AA |
+
+All 16 measurements pass AA (≥4.5:1); zero failures. **Finding contradicting
+the brief's prediction:** the brief expected `foreground-muted` pairs to be
+the tightest (documented as "sitting at the AA floor"). The actual tightest
+row is `background / accent` at Light 5.18:1 — tighter than both
+`surface / foreground-muted` (Light 5.56:1) and `background /
+foreground-muted` (Light 6.56:1). All three still comfortably clear 4.5:1,
+so this is a finding to note for future token changes, not a defect: any
+future adjustment to `color/accent` or `color/background` in Light should
+re-run this pair first, since it now has the smallest margin in the table.
+
+**Step 4 — no failures to handle.** All pairs clear AA; Step 4's
+caveat/follow-up-defect branch was not triggered.
+
+**Step 5 — block built in Figma.** In `CHAPTER / 01 Foundations`
+(`2670:6678`), appended as an 11th/last child (after `PANEL / Token
+Verification`, all 10 original children unchanged and in original order):
+
+- `2893:4234` — `G1 / Always-valid pairings` wrapper FRAME (VERTICAL
+  auto-layout, itemSpacing 24, `fills: []`, width FIXED 1408 matching the
+  sibling `PANEL` frames' convention, HUG height).
+- `2893:4235` — `_Docs/GroupHeader` instance, text "Always-valid pairings".
+- `2893:4237` / `2893:4240` — `_Docs/Paragraph` instance (`Title#2709:2`
+  = "Note", pattern copied from the live `_Docs/Paragraph` usage on
+  `CHAPTER / 00 About`'s `2751:5579`: the `Slot#2709:3` SLOT property is
+  filled by directly appending a child TEXT node, not via `setProperties`)
+  reading: "These eight pairs are safe without further checking. New
+  pairings must be measured before use."
+- `2893:4243` — `G1 rows` rows-container FRAME (VERTICAL auto-layout,
+  itemSpacing 4, `fills: []`, width FIXED 1408).
+- 8 `_Docs/TokenRow` instances (`2893:4260`, `4268`, `4276`, `4284`,
+  `4292`, `4300`, `4308`, `4316`), one per pair in table order above.
+
+**Row-field design decision.** The brief's 5-field list ("background
+swatch, content swatch, pair name, Light verdict, Dark verdict") does not
+map 1:1 onto `_Docs/TokenRow`'s fixed slots (`name`, `role`, `mode1`,
+`mode2`, `mode3` — only 2 of which are swatch-capable). Resolved by reusing
+the master's existing Light/Dark column semantic exactly as Task 5 did for
+the main token table, but making each swatch show the **full pairing** for
+that mode: `mode1`/`mode2` frames are filled by the pair's background
+token, each pinned to its mode via
+`setExplicitVariableModeForCollection('VariableCollectionId:3:2', <modeId>)`;
+the nested `label` text inside each swatch is bound to the pair's
+foreground/content token (inheriting the same pin via cascade — confirmed
+descendant bound-variables resolve against an ancestor's pinned mode unless
+they set their own override) and shows `<primitive alias>\n<hex>` for that
+token in that mode. `name` = pair display name; `role` = "Light X.XX:1 —
+AA"; `mode3` = "Dark X.XX:1 — AA". This is Task 5's swatch treatment
+(frame filled by the bound variable directly, primitive alias + hex as a
+legible text label on top) reused verbatim, except the label color is now
+literally the tested foreground token rather than an auto-picked legible
+color — appropriate here since the label color *is* the thing under test,
+and it makes each row visually self-demonstrating as the brief requires.
+
+**Step 6 — verification.** `get_screenshot` of the block in ambient
+(Light) mode: 8 rows render correctly, each swatch pair showing its bound
+colors, all verdict text matching the table above. Temporarily pinned the
+wrapper's `2 Theme` mode to Dark (`setExplicitVariableModeForCollection`)
+and re-screenshotted to confirm each row's `mode1`/`mode2` swatches stay
+independent of ambient context (i.e. always show their own Light/Dark
+pairing regardless of what mode the surrounding page is in) — confirmed.
+
+One artifact from that Dark-pin screenshot worth flagging: the
+"Always-valid pairings" header and "Note" paragraph rendered faint/low
+contrast in that specific screenshot. This is a side effect of the
+verification method, not a real defect — the wrapper frame has `fills: []`
+(transparent), so with only the wrapper pinned to Dark (not the whole
+page), the area outside the individually-filled pairing rows exposed
+Figma's raw light-gray canvas rather than a themed dark surface, and text
+bound to `color/foreground` resolving to its Dark value (~0.925, near-white)
+is close to invisible against that unrelated light-gray canvas. This is an
+artifact of isolating one block's variable mode from its page context for
+a verification screenshot, not something the shipped design can control —
+it would affect any existing header the same way if pinned the same
+isolated way, and does not occur when the page is viewed in its normal,
+uniformly-themed context. No fix applied; noted here for downstream
+awareness. Cleared the temporary override immediately after screenshotting
+(`wrapper.clearExplicitVariableModeForCollection('VariableCollectionId:3:2')`,
+confirmed `explicitModesAfterClear: {}`).
+
+Final structural check on `CHAPTER / 01 Foundations`: 11 children total
+(10 original + 1 new), correct order (new block last), height grew to
+7132 (width unchanged at 1408) — purely additive. `ds/version` was not
+touched; no scripts read or wrote the `Design System` collection
+(`VariableCollectionId:2721:4`) in this task.
