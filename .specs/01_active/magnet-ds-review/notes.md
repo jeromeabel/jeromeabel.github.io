@@ -1307,3 +1307,55 @@ figma-variables-method: don't plumb tokens nobody consumes. The focus-ring
 entry is not deliberate — it is a real design/code gap surfaced by Task 9
 and recorded here so it stops resurfacing as an unexplained "gap" in
 future reviews.
+
+## Validation gate (Task 11, 2026-08-12)
+
+One row per finding/decision, each with live `use_figma`/`get_screenshot`
+evidence gathered in this task (not carried over from earlier tasks'
+self-reports).
+
+| # | Check | Result | Evidence |
+|---|---|---|---|
+| F1 | `Home — Mobile — Light` renders at 390px, nothing outside frame, height 3120–3810 | **FAIL → FIXED → PASS** | Initial sweep: 17 nodes / up to 156px overflow (Light only; Dark clean). Root causes: (1) `NavRight`/`NavPages` instance `itemSpacing` left at Desktop values (56/40 vs Dark's 16/16); (2) `FooterContainer` instance `layoutWrap = NO_WRAP` instead of `WRAP`; (3) `HeroText` `layoutSizingHorizontal = FIXED` (576px, causing 202px bleed) on both Light and Dark — pre-existing, previously accepted debt, fixed opportunistically since it was a safe instance-level change; (4) residual 68px traced to the `Header` instance's own `paddingLeft`/`paddingRight` left at `115/115` (leftover Desktop override) vs Dark's `16/16`, squeezing `HeaderContent` to 160px instead of 358px. All 4 fixes applied as **instance-level property overrides only** — zero master-component or Desktop-template edits, zero risk to Desktop layouts. Final sweep: `outsideCount: 0` on both frames; heights Light 3504px / Dark 3504px (within 3120–3810 band); `get_screenshot` `original_width` reads exactly 390px on both (matching frame width, proving no visual overflow) |
+| F2 | Page list: only Cover, Docs, Decisions, Components, Pages (+ at most one spared backup) | **PASS** | Live `figma.root.children` read: exactly 5 pages — `📖 Cover`, `📚 Docs`, `📐 Decisions`, `❖ Components`, `📄 Pages`. No spared backup (Task 3 confirmed zero live references before deleting all 6 disposable pages) |
+| F3 | `2 Theme` descriptions: 15/15 non-empty, matching notes.md | **PASS** | Live read of `VariableCollectionId:3:2`: 15 variables, `emptyCount: 0`, every `description` string byte-for-byte matches the `## Theme token copy` table (F3 section above) |
+| F4 | Token table: no `{"r":…}` anywhere; alias + hex legible on every swatch, both modes | **PASS** | Live search of all 23 `_Docs/TokenRow` instances (found via `mainComponent.id === '2590:578'`, not name matching) on the Docs token table: zero raw `{"r":…}` color-object strings in any text node. Screenshot confirms alias + hex legible on every swatch row in both Light and Dark |
+| F5 | Property names: every set lowercase `state`/`type`; no `State`, no `Variant` | **PASS** | Live `componentPropertyDefinitions` read on all 15 sets from the Node-ID map: every set uses lowercase `state` or `type`. Zero `State`/`Variant` remaining (Task 6 renamed `PostCardPreviewBig`, `PostCardPreviewSmall`, `PostRow`, `SerieCard`; full 188-instance file-wide sweep found 0 instances still carrying a pre-rename key or out-of-vocabulary value) |
+| F6 | Components page: zero top-level component orphans; 3 Mobile sections inside `Sections` | **PASS** | Live read of `❖ Components` top level: exactly 6 items, all `SECTION` type (`Chrome`, `Actions`, `Sections`, `Typography`, `Metadata`, `Cards`) — zero orphans. `Sections`' children end `…, BlogPreviewSection — Mobile, WorkPreviewSection — Mobile, ContactPreviewSection — Mobile` — correct order, all 3 inside |
+| F7 | Metadata: `ds/*` absent from property pickers; file named `Magnet-DS`; `ds/version` = v0.91 | **PASS** (2 sub-checks live-verified; 1 sub-check unverifiable via tooling, not contradicted) | `ds/version`/`ds/last-updated` (`VariableID:2721:5`/`:6`): live read confirms `scopes: []`, `hiddenFromPublishing: true` on both — absent from every property picker and publish list, verified PASS. `ds/version` value confirmed unchanged at `"v0.91"` — verified PASS, and the version chip was not touched anywhere in this task. File name: the user manually renamed the file `Magnet-DS-v1.0` → `Magnet-DS` in the Figma UI ahead of this task (the Plugin API has no writable file-name property — confirmed exhaustively in Task 10 and re-confirmed in this task: `figma.root.name` returns the hardcoded literal `"Document"`, `Object.keys(figma.root)` exposes only `["id"]`, and no MCP tool — `whoami`, `get_metadata`, `get_libraries`, `get_design_context`, `WebFetch` on the file URL — surfaces the live display name). This is a genuine, documented, permanent tooling gap, not a discovered defect: recorded as **unverifiable**, not fabricated as PASS or FAIL |
+| F8 | Text styles: no `Tailwind/text-*` (or documented exception); uniform `Body/*` shape | **PASS** | Live `getLocalTextStylesAsync()` read: 17 styles total, 0 `Tailwind/text-*` remaining (13 deleted in Task 10, 0 consumers found across all 1778 text nodes on all 5 pages before deletion), all 10 `Body/*` styles share the uniform `Body/<size>/<weight>` 3-level shape |
+| F9 | Toggles: ThemeToggle + MotionToggle expose `mode`, not `state` | **PASS** | Live `componentPropertyDefinitions` read: `ThemeToggle` (`16:11`) property `mode`, values `dark`/`light`; `MotionToggle` (`16:12`) property `mode`, values `on`/`off`. Neither carries a `state` property |
+| F10 | Debt: `## Accepted debt` present in notes.md with both entries | **PASS** | `grep "## Accepted debt"` and content read confirm the section is present with all 3 entries: icon-mirror (deliberate), on-color tokens (deliberate), focus-ring divergence (real, unresolved — flagged as such, not disguised as a deliberate decision) |
+| G1 | Pairings block: 8 rows in Foundations, verdicts match the measured table | **PASS** | Live read of `CHAPTER / 01 Foundations` (`2670:6678`): 11 children (10 original + `G1 / Always-valid pairings` block, `2893:4234`), 8 `_Docs/TokenRow` instances, one per pair; verdict text on every row matches the 16-measurement contrast table in the G1 section above (all AA, tightest margin `background/accent` Light 5.18:1) |
+| G2 | Vocabulary: DecisionCard + focus specimen present; card matches Task 6's property table | **PASS** | Live read confirms `_Docs/DecisionCard` instance `2899:4294` present with text matching Task 6's `state`/`mode` vocabulary decision, and focus-ring specimen `2900:4303` present (2px ring / 2px offset / `color/accent`) |
+| G3 | Rejection: DecisionCard present with the revisit condition | **PASS** | Live read confirms `_Docs/DecisionCard` instance `2900:4330` present, documenting the rejected increased-contrast theme-mode proposal with its revisit condition |
+
+**F1 fixes applied (instance-level only, both `Home — Mobile — *` frames unless noted):**
+
+| Node | Property | Before | After |
+|---|---|---|---|
+| `NavRight` instance | `itemSpacing` | 56 | 16 |
+| `NavPages` instance | `itemSpacing` | 40 | 16 |
+| `FooterContainer` instance | `layoutWrap` | `NO_WRAP` | `WRAP` |
+| `HeroText` instance (Light + Dark) | `layoutSizingHorizontal` | `FIXED` (576px) | `FILL` |
+| `Header` instance `2586:1146` (Light only) | `paddingLeft`/`paddingRight` | 115 / 115 | 16 / 16 |
+
+**Bonus — 44×44px touch-target audit** (`Home — Mobile — Light`/`Dark`; both frames measured identically since they share the same master components):
+
+| Target | Size (w×h) | Meets 44×44? |
+|---|---|---|
+| NavLinkHome | 128×36 | No — height |
+| NavLink ×3 (Blog/Work/About) | 37×36, 44×36, 50×36 | No — height (and one width) |
+| ThemeToggle | 36×36 | No |
+| MotionToggle | not present on mobile nav | N/A — deliberate omission, not a defect |
+| Footer Link/Icon ×3 (social) | 40×40 | No — 4px short each axis |
+
+All 8 measured targets fail the 44×44px minimum. Not fixed directly: every failing target is a shared master component (`NavLink`, `NavLinkHome`, `ThemeToggle`, `Link/Icon`) also instanced on the Desktop templates — increasing master padding to fix mobile would grow the Desktop nav bar and footer icon size site-wide, an out-of-scope side effect per the brief's explicit escape hatch. Logged as a follow-up backlog item instead: `.specs/00_backlog/figma-mobile-touch-targets.md`.
+
+**Cover refresh (Step 4):** live text inventory of `📖 Cover` found the date chip (`I2694:6660;2693:9892`, parent `_Docs/Date`) already reading `"Aug 11, 2026"` — which *is* `2026-08-11` rendered in the chip's existing `Mon D, YYYY` format. No edit was needed; verified rather than blindly rewritten, to avoid a redundant mutation. The version chip (`I2694:6673;2693:9909`, parent `_Docs/Status`) was independently re-confirmed reading exactly `"v0.91"` and was not touched.
+
+**plan.md correction:** line 18's Global Constraints entry claimed the file rename "happened in Task 10." Corrected in this task — Task 10 attempted the rename programmatically and hit the Plugin API's read-only `figma.root.name` restriction (documented in F7 above); the user performed the rename manually via the Figma UI ahead of this task's dispatch.
+
+**Verdict:** 12 of 13 rows are clean, fully live-verified PASS. F1 was a genuine FAIL, fixed with 5 non-destructive instance-level overrides, and now PASS. F7 has two clean, live-verified PASS sub-checks (`ds/*` scopes/publishing, `ds/version` value) and one sub-check (file display name) that is structurally unverifiable through any tool available in this environment — a pre-existing, already-documented (Task 10) platform limitation, not a newly discovered problem, and not contradicted by any evidence gathered. No row was forced to PASS without evidence.
+
+GATE PASSED

@@ -15,7 +15,7 @@ created: 2026-08-11
 
 ## Global Constraints
 
-- Figma file key: `ihWIWmvtQPTWgUxlrVjC2c`. Current file name `Magnet-DS-v1.0` (renamed in Task 10).
+- Figma file key: `ihWIWmvtQPTWgUxlrVjC2c`. File renamed `Magnet-DS-v1.0` → `Magnet-DS`; Task 10 attempted this programmatically and hit a Plugin API limitation (no writable file-name property), so the user renamed it manually via the Figma UI ahead of Task 11.
 - **MANDATORY:** invoke the `figma:figma-use` skill before the first `use_figma` call in any session. This is a plugin requirement, not a preference.
 - ⚠️ MCP `get_metadata` page-list is known to go stale on this file. **Never trust a node ID from review.md or from this plan without re-confirming it in the Task 1 inventory.**
 - Version truth: `ds/version` stays **v0.91** (per `magnet-ds-docs-v1` decision D2 — v1.0 is reserved for the "all components and pages designed" milestone). The *file name* is the thing that is wrong; Task 10 renames it to `Magnet-DS`.
