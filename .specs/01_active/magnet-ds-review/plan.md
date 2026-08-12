@@ -434,7 +434,7 @@ git commit -m "docs(specs): magnet-ds-review — G1 pairings block with measured
 - Consumes: Task 6's final property table; the `_Docs/DecisionCard` and `_Docs/SpecimenCell` masters; `📐 Decisions` page.
 - Produces: two DecisionCards in `📚 Docs` and one focus-ring specimen frame. Nothing here adds a `focus` variant to any component set.
 
-- [ ] **Step 1: G2 DecisionCard — state vocabulary**
+- [x] **Step 1: G2 DecisionCard — state vocabulary**
 
 In `CHAPTER / 02 Components` (Chrome/Actions group area), one `_Docs/DecisionCard`:
 
@@ -442,13 +442,13 @@ In `CHAPTER / 02 Components` (Chrome/Actions group area), one `_Docs/DecisionCar
 - **Excluded and why:** preloading, enabled, disabled, pressed, warning, error, loading — a static portfolio has no async states, no form submission, and no disabled affordances. Adopting the full 9-state Base vocabulary would mean 5 variants nobody can reach.
 - **Also:** `ThemeToggle` and `MotionToggle` use `mode` (`dark`/`light`, `on`/`off`), not `state` — those are value modes, not interaction states.
 
-- [ ] **Step 2: G2 focus specimen — spec, not variants**
+- [x] **Step 2: G2 focus specimen — spec, not variants**
 
 One `_Docs/SpecimenCell` next to the card showing the accent focus ring on a single representative control (Link/CTA is the best carrier): ring colour bound to `color/accent`, plus the offset and width values as text. Add a one-sentence caption: focus is specified once here and inherited by every interactive component — it is **not** a variant on each set.
 
 Focus currently appears nowhere in the file, and accent budget rule 2 already reserves accent for exactly this. If the ring's offset/width has no existing value anywhere in the file or in `src/styles/global.css`, pick `2px` ring / `2px` offset and record it in notes.md as newly specified by this task.
 
-- [ ] **Step 3: G3 DecisionCard — increased-contrast rejected**
+- [x] **Step 3: G3 DecisionCard — increased-contrast rejected**
 
 One `_Docs/DecisionCard`, adjacent to the G1 pairings block in `CHAPTER / 01 Foundations`:
 
@@ -456,11 +456,11 @@ One `_Docs/DecisionCard`, adjacent to the G1 pairings block in `CHAPTER / 01 Fou
 - **Rejected because:** it doubles Theme-token maintenance from 2 modes to 4, with zero consumers — the code has no `prefers-contrast: more` support. The existing AA floor (`color/foreground-muted` documented at the AA contrast floor, now measured in the G1 table) covers the real accessibility obligation.
 - **Revisit when:** the code implements `prefers-contrast`.
 
-- [ ] **Step 4: Verify**
+- [x] **Step 4: Verify**
 
 `get_screenshot` of both cards and the specimen. Expected: each card states decision + rationale + what was excluded; the specimen's ring is visible in both modes; the G2 card's vocabulary matches Task 6's property table exactly (compare the two, token by token — a mismatch here is a documentation bug that ages badly).
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add .specs/01_active/magnet-ds-review/notes.md .specs/01_active/magnet-ds-review/plan.md

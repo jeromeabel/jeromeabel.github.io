@@ -1003,3 +1003,148 @@ Final structural check on `CHAPTER / 01 Foundations`: 11 children total
 7132 (width unchanged at 1408) — purely additive. `ds/version` was not
 touched; no scripts read or wrote the `Design System` collection
 (`VariableCollectionId:2721:4`) in this task.
+
+## G2/G3 — state-vocabulary card, focus specimen, contrast-mode rejection card (Task 9, 2026-08-12)
+
+**Step 1 — G2 `_Docs/DecisionCard` (state vocabulary).** Appended as the
+new last child of `GROUP / Actions` (`2670:6862`, `CHAPTER / 02
+Components`), non-destructive (group height grew 1388 → 1680 via
+auto-layout cascade, no sibling repositioned). Instance of the `layer=All`
+DecisionCard variant (`2590:570`), id `2899:4294`.
+
+The master's actual slots are `rule` / `body` / `finding` (plus a `layer`
+tag), not the brief's "Decision / Excluded-and-why / Also" three-field
+prose — mapped Decision → `rule`, Excluded-and-why + Also (folded together)
+→ `body`, and used `finding` as a cross-reference pointing at the G2
+specimen:
+
+- `rule`: "Interaction states are default | hover | active | focus,
+  lowercase, on a property named state."
+- `body`: "Excluded: preloading, enabled, disabled, pressed, warning,
+  error, loading — a static portfolio has no async states, no form
+  submission, no disabled affordances; the full 9-state Base vocabulary
+  would add 5 variants nobody can reach. Also: ThemeToggle and MotionToggle
+  use mode (dark/light, on/off), not state — those are value modes, not
+  interaction states."
+- `finding`: "Focus is specified once, in the specimen alongside — it is
+  not a variant on any component set."
+
+Checked token-by-token against Task 6's final property table vocabulary
+sentence (notes.md `### Final property table`, "Vocabulary (G2)" note):
+`default | hover | active | focus`, lowercase, property `state`;
+`ThemeToggle`/`MotionToggle` → `mode` with values `dark`/`light` and
+`on`/`off` respectively. Exact match, no drift.
+
+**Step 2 — G2 focus specimen.** Appended immediately after the DecisionCard
+in `GROUP / Actions`, id `2900:4303` (group height 1680 → 1904).
+
+Blocked once: `_Docs/SpecimenCell`'s `slot` (`2590:542`) is an empty,
+content-agnostic FIXED 640×100 frame with no instance-swap component
+property — appending arbitrary new children into it while still an
+`INSTANCE` throws `Cannot move node. New parent is an instance or is
+inside of an instance` (Figma forbids structural edits inside instance
+subtrees; only property overrides on pre-existing children are allowed).
+Resolved by creating the instance then immediately calling
+`detachInstance()` on it before touching `slot` — this converts it to a
+plain frame tree with the same visuals, at the cost of losing the live
+link back to the `_Docs/SpecimenCell` master (an acceptable, one-off
+trade-off for a slot the master ships empty specifically to be filled
+per-usage; no new eleventh `_Docs` master was created).
+
+Built inside `slot`: a Link/CTA `state=default` instance (`2900:4307`)
+wrapped in a new auto-layout frame (`2900:4312`, `focus ring`) with 2px
+padding on all sides (= offset), `strokeWeight: 2` (= ring width),
+`cornerRadius: 10001`, `fills: []`, stroke bound to `color/accent`
+(`VariableID:2328:2`) via `setBoundVariableForPaint`. A second text node
+(`2900:4313`, Fira Code 12pt, bound to `color/foreground-muted`) states
+"ring 2px / offset 2px" as plain text alongside the swatch. `label`
+(`2900:4304`) reads "Link/CTA — focus"; `caption` (`2900:4306`) reads
+"Focus is specified once here and inherited by every interactive
+component — it is not a variant on each set."
+
+Accent-budget rule 2 explicitly reserves `color/accent` for focus
+outlines — this is that reserved use, not a new decorative accent
+consumer.
+
+**Offset/width value provenance — correction to the brief's premise.**
+The brief states "focus currently appears nowhere in the file" and
+instructs picking `2px`/`2px` and recording it as newly specified only if
+no existing value is found anywhere in the file or `src/styles/global.css`.
+Full-text search of the Docs page found this premise only partially true:
+an existing DecisionCard instance elsewhere (`2670:6717`, `SECTION /
+Colour`, `layer=Content`) already carries a non-empty `finding` field:
+*"Focus ring: outline in accent color. Radius is element radius + 2px
+with 2px offset."* — i.e. a 2px offset value was already recorded in
+Figma, just not built as a specimen. Separately, `src/styles/global.css`
+has no ring/outline CSS at all (only a budget-comment mentioning focus
+rings in prose); the actual code implementation lives in the Work-card
+components (`WorkOverlayCard.astro`, `WorkMiniCard.astro`, `WorkCard.astro`,
+`WorkGalleryCard.astro`, `WorkCardImage.astro`), all using Tailwind
+`outline-offset-4 outline-black focus:outline-2 dark:outline-white` — 4px
+offset, 2px width, black/white (not accent), and scoped only to Work
+cards, not site-wide.
+
+Resolved by using **2px offset** (matches the pre-existing Figma
+`finding` value — not newly specified, contra the brief's fallback
+clause), **2px width** (the only concrete width evidence anywhere, from
+the code's `outline-2`), **accent color** (per the brief's explicit
+instruction and the accent-budget reservation, overriding the code's
+actual black/white). This specimen therefore documents the *intended*
+site-wide spec, not a transcription of the Work-cards' current
+implementation — the Work cards' 4px-offset/black-white treatment is a
+pre-existing deviation from this spec, not a second valid pattern. Not
+fixed here (out of scope for Task 9, which is docs-only); flagged below
+for Task 10/11.
+
+**Step 3 — G3 `_Docs/DecisionCard` (increased-contrast rejected).**
+Appended as the new last (12th) child of `CHAPTER / 01 Foundations`
+(`2670:6678`), directly after the G1 pairings block (`2893:4234`),
+non-destructive (chapter height 7132 → 7456, all 11 prior children
+unchanged and in order). Instance of the `layer=All` DecisionCard variant,
+id `2900:4330`.
+
+- `rule`: "Increased-contrast Theme modes (light-hc / dark-hc) were
+  considered and rejected."
+- `body`: "Doubling Theme-token maintenance from 2 modes to 4 has zero
+  consumers: the code has no prefers-contrast: more support anywhere. The
+  real accessibility obligation is already covered — the G1 table above
+  measures all 16 background/foreground pairings (8 pairs × Light/Dark) at
+  AA or better, with the tightest margin at background / accent in Light
+  mode (5.18:1), still a clear AA pass."
+- `finding`: "Revisit when the code implements prefers-contrast."
+
+**Correction applied vs. the brief's text.** The brief's own Step 3 body
+draft names `color/foreground-muted` as "the existing AA floor... now
+measured in the G1 table" — this is factually wrong per Task 8's actual
+measurements (see `## G1 — contrast measurements` and task-8-report.md
+Concerns §2): the tightest of the 16 measured pairings is `color/background`
+/ `color/accent` in **Light mode at 5.18:1**, not `foreground-muted`. G3's
+`body` text above cites the corrected pairing and ratio, not the brief's
+stale prediction.
+
+**Step 4 — verification.** `screenshot()` of all three nodes in ambient
+(Light) mode: G2 card text renders correctly and matches Task 6's
+vocabulary token-by-token (checked above); the focus specimen shows a
+visible teal ring around the "Start reading" CTA with "ring 2px / offset
+2px" as text; G3 card renders correctly with the corrected 5.18:1 citation.
+Re-screenshotted all three with `2 Theme` explicitly pinned to Dark
+(`setExplicitVariableModeForCollection('VariableCollectionId:3:2',
+'3:1')`, cleared immediately after): the specimen (which has its own
+opaque background, unlike the G1 wrapper) renders correctly in Dark with
+the accent ring still clearly visible; the two DecisionCards show the
+same faint-header-on-raw-canvas artifact already documented in Task 8's
+report (isolated single-node mode-pinning exposes Figma's raw canvas
+behind `fills:[]` wrapper content instead of a themed surface — a
+verification-method artifact, not a defect, and not present when the page
+is viewed in its normal uniformly-themed context).
+
+**For Task 10/11:** the Work-card focus-ring implementation
+(`outline-offset-4 outline-black focus:outline-2 dark:outline-white`,
+Work cards only) does not match this specimen's now-documented spec
+(2px offset, 2px width, `color/accent`, implied site-wide). This is a
+pre-existing code/design gap this task surfaced, not one it closes —
+worth a line in Task 11's validation/debt record if that task inventories
+code-vs-Figma mismatches.
+
+`ds/version` was not touched by this task; no scripts read or wrote the
+`Design System` collection (`VariableCollectionId:2721:4`).
