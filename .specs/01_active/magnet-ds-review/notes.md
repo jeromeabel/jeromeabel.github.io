@@ -1154,3 +1154,156 @@ code-vs-Figma mismatches.
 
 `ds/version` was not touched by this task; no scripts read or wrote the
 `Design System` collection (`VariableCollectionId:2721:4`).
+
+## F7 — Design System metadata scopes and file rename (Task 10, 2026-08-12)
+
+**Step 1 — narrow scopes.** Live-read confirmed both `ds/version`
+(`VariableID:2721:5`) and `ds/last-updated` (`VariableID:2721:6`) carried
+`scopes: ["ALL_SCOPES"]`, `hiddenFromPublishing: false`. Set
+`scopes = []` on both (accepted without error — no "narrowest available
+scope" fallback needed) and `hiddenFromPublishing = true` on both.
+Verified read-back: both now `scopes: []`, `hiddenFromPublishing: true`.
+Neither variable can now be offered in any property picker or publish
+list.
+
+**Step 2 — version contradiction.** `ds/version` value confirmed
+unchanged at `v0.91` (`valuesByMode: {"2721:0": "v0.91"}`) — never
+written by this task. `ds/last-updated` set from `"Aug 8, 2026"` to the
+literal string `"2026-08-11"` per the brief's exact instruction (a
+deliberate format change from the prior human-readable string to an ISO
+date — not a typo).
+
+**File rename — BLOCKED, platform limitation, not a judgment call.**
+Attempted the rename via the Plugin API. `figma.root.name` read back as
+the literal string `"Document"` (not `"Magnet-DS-v1.0"`), and an explicit
+write probe (`figma.root.name = figma.root.name`, a no-op value, run only
+to test writability) threw: `"in set_name: Setting the document name is
+currently not supported"`. This is a documented Plugin API restriction —
+`plugin-api-standalone.d.ts` states `figma.root.name` returns the file
+name "read-only" — there is no `use_figma`/Plugin-API path to rename a
+Figma file, and no other tool in this session's toolset exposes file
+rename (checked: no such capability in `whoami`, `get_libraries`,
+`create_new_file`, or any other available Figma MCP tool). Renaming
+`Magnet-DS-v1.0` → `Magnet-DS` requires a human action in the Figma UI
+(the file browser or the in-editor file-name field) — flagged for the
+user/Task 11 as an outstanding manual step. The **decision** (`ds/version`
+stays v0.91, the file name loses its version suffix) is still recorded as
+this task's ruling; only the mechanical act of applying it inside Figma
+itself is blocked.
+
+**Step 3 — repo reference.** `CLAUDE.md` line 103's `` in
+`Magnet-DS-v1.0` (file key `ihWIWmvtQPTWgUxlrVjC2c`) `` →
+`` in `Magnet-DS` (file key `ihWIWmvtQPTWgUxlrVjC2c`) ``. Verified zero
+remaining `Magnet-DS-v1.0` matches in `CLAUDE.md`.
+
+Ran the brief's grep: `grep -rn "Magnet-DS-v1.0" --include="*.md" . | grep
+-v node_modules | grep -v 02_archives`. Result differs from the brief's
+prediction ("expected: only … review.md") — six matches across five files,
+not one:
+
+| File | Nature |
+|---|---|
+| `.specs/01_active/magnet-ds-review/review.md` | dated review — the brief's named exception, left as written |
+| `.specs/01_active/magnet-ds-review/plan.md` | this task's own spec text (Global Constraints line + Task 10 Step 2's instruction, both describing the rename itself) |
+| `.specs/01_active/magnet-ds-review/notes.md` | this file's own Pass-0 capture note ("name at capture time: `Magnet-DS-v1.0`") — a timestamped historical record |
+| `.superpowers/sdd/magnet-ds-review/task-10-brief.md` | this task's own input brief, quoting the old name as part of describing the decision |
+| `.superpowers/sdd/magnet-ds-review/task-3-report.md` | a prior task's completed, dated report |
+
+None of these are live/current documentation the way `CLAUDE.md` is — all
+five are dated planning/reporting artifacts (task briefs, task reports,
+the review, and this notes file's own historical capture line) that
+correctly preserve the pre-rename name as a record of what was true when
+written, exactly the same rationale the brief itself applied to
+`review.md`. `CLAUDE.md`, the one file that asserts the *current* file
+name to a future reader, is now correct and verified clean. No further
+edits made to these five files — editing them would falsify history, not
+fix a stray reference.
+
+## F8 — text-style cleanup (Task 10, 2026-08-12)
+
+**Step 4 — delete unbound `Tailwind/text-*` styles.** Live-swept all 13
+style IDs from the Task 1 inventory against every `TEXT` node on all 5
+live pages (`📖 Cover` 5 nodes, `📚 Docs` 1091, `📐 Decisions` 102,
+`❖ Components` 180, `📄 Pages` 400 — **1778 text nodes total**, checking
+both single `textStyleId` and, for mixed-style nodes, every
+`getStyledTextSegments(['textStyleId'])` segment). **Zero consumers found
+for all 13 styles.** No rebind was needed for any of them — every style
+qualified for straight deletion under the brief's rule. Deleted all 13:
+
+| Style | Consumers found | Action |
+|---|---|---|
+| Tailwind/text-9xl … text-xs (13 styles) | 0 (each) | deleted |
+
+**Count: 13 deleted, 0 rebound.**
+
+**Step 5 — normalize the four `Body/*` naming outliers.** Inspected the
+full `Body/*` ramp's resolved properties (font family/style/size) before
+choosing a direction. Result: `Body/xs`, `Body/xl`, and `Body/base` each
+have a same-size sibling at `Medium` weight (`Body/xs/medium`,
+`Body/xl/medium`, `Body/base/medium` — identical `fontSize`, different
+`fontStyle`: `Regular` vs `Medium`). `Body/4xl/semibold` has no
+same-size `Regular` sibling (`Body/4xl` doesn't exist in the ramp).
+
+**Decision: apply the 3-level `Body/<size>/<weight>` shape uniformly to
+all 10 `Body/*` styles**, not drop the weight segment from the four
+outliers. Rationale: the brief's "drop the weight" default only holds if
+the weight token is redundant. It isn't — three of the four outliers
+prove a *materially different, currently-in-use* style exists at the same
+size (same size, different real font weight). Renaming
+`Body/xs/medium` → `Body/xs` would silently collide with the existing,
+different `Body/xs` (Regular) style — an actual naming conflict, not
+just an inconsistency, and a worse outcome than the outlier problem this
+step exists to fix. The brief's own escape clause ("if a distinct weight
+is genuinely needed, keep it but apply the same 3-level shape to every
+`Body/*` style") fires here.
+
+Renamed the 6 two-level styles to add an explicit `/regular` weight
+segment, matching the existing outliers' lowercase weight-token
+convention (`semibold`, `medium`):
+
+| Before | After |
+|---|---|
+| `Body/3xl` | `Body/3xl/regular` |
+| `Body/base` | `Body/base/regular` |
+| `Body/l` | `Body/l/regular` |
+| `Body/s` | `Body/s/regular` |
+| `Body/xl` | `Body/xl/regular` |
+| `Body/xs` | `Body/xs/regular` |
+
+Renames are name-only (style IDs unchanged), so all existing instance
+bindings kept resolving through the same IDs — no rebind, no re-check
+needed for breakage. The 4 pre-existing 3-level styles
+(`Body/4xl/semibold`, `Body/base/medium`, `Body/xl/medium`,
+`Body/xs/medium`) were left unchanged — already correctly shaped.
+
+**Verify.** Fresh `getLocalTextStylesAsync()` read: **17 styles total**
+(30 − 13 deleted), **0** `Tailwind/text-*` remaining, all 10 `Body/*`
+styles now share one uniform `Body/<size>/<weight>` shape.
+
+## Accepted debt
+
+- **No `icon/*` mirror of `text/*`.** Correct at 15-token scale — icons
+  take the same foreground tokens as text. Revisit only when an icon
+  needs a colour no text token provides.
+- **No on-color tokens.** With one accent and one surface, `color/background`
+  on a CTA fill is unambiguous. Revisit when a second accent or a coloured
+  surface lands.
+- **Focus-ring spec (Figma) vs. code implementation diverge.** Figma's G2
+  specimen (Task 9, `2670:6717` region) documents 2px ring / 2px offset /
+  `color/accent` as the intended universal spec. The current codebase only
+  applies a focus ring to Work cards — `WorkCard.astro`,
+  `WorkCardImage.astro`, `WorkGalleryCard.astro`, `WorkMiniCard.astro`,
+  `WorkOverlayCard.astro` in `src/components/work/` — via Tailwind
+  `outline-offset-4 outline-black focus:outline-2 dark:outline-white`:
+  4px offset (not 2px), 2px width (matches), black/white (not accent),
+  and scoped to one component family (not site-wide). This is real,
+  unresolved debt, not a deliberate no-token decision like the two entries
+  above. Revisit when focus styling is implemented site-wide to match the
+  documented spec, or when the spec is revised to match the shipped
+  4px/black-white pattern.
+
+Both the icon-mirror and on-color entries are deliberate, per
+figma-variables-method: don't plumb tokens nobody consumes. The focus-ring
+entry is not deliberate — it is a real design/code gap surfaced by Task 9
+and recorded here so it stops resurfacing as an unexplained "gap" in
+future reviews.

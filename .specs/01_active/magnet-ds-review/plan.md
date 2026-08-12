@@ -479,21 +479,21 @@ git commit -m "docs(specs): magnet-ds-review — G2/G3 decision cards and focus 
 - Consumes: Task 1 variable IDs for `Design System`; the text-style inventory.
 - Produces: a clean property picker, a file name that matches `ds/version`, one type vocabulary, and a written accepted-debt list. Task 11 asserts all of it.
 
-- [ ] **Step 1: F7 — narrow the metadata collection's scopes**
+- [x] **Step 1: F7 — narrow the metadata collection's scopes**
 
 On `ds/version` and `ds/last-updated` in the `Design System` collection: set `scopes: []` (or the narrowest available scope if the API rejects empty), and `hiddenFromPublishing: true`. Both currently carry `ALL_SCOPES`, which puts them in every property picker in the file.
 
-- [ ] **Step 2: F7 — resolve the version contradiction**
+- [x] **Step 2: F7 — resolve the version contradiction** (variable-side resolved; the Figma file rename itself is BLOCKED — Plugin API has no file-rename capability, see notes.md)
 
 **Decision:** `ds/version` stays `v0.91`; the file name loses its version. Rename the Figma file `Magnet-DS-v1.0` → `Magnet-DS`. The file key `ihWIWmvtQPTWgUxlrVjC2c` is unchanged. Set `ds/last-updated` to `2026-08-11`.
 
 Rationale, for the record: D2 reserved v1.0 for the "all components and pages designed" milestone, which is not met — this keeps one source of truth (the variable) and stops the name needing an edit on every bump.
 
-- [ ] **Step 3: F7 — update the repo reference**
+- [x] **Step 3: F7 — update the repo reference**
 
 In `CLAUDE.md` line 103, replace `` in `Magnet-DS-v1.0` (file key `ihWIWmvtQPTWgUxlrVjC2c`) `` with `` in `Magnet-DS` (file key `ihWIWmvtQPTWgUxlrVjC2c`) ``. Then `grep -rn "Magnet-DS-v1.0" --include="*.md" . | grep -v node_modules | grep -v 02_archives` — expected: only `.specs/01_active/magnet-ds-review/review.md` (a dated review, left as written).
 
-- [ ] **Step 4: F8 — delete the unbound `Tailwind/text-*` styles**
+- [x] **Step 4: F8 — delete the unbound `Tailwind/text-*` styles**
 
 **Decision:** delete if unbound. For each of the 13 `Tailwind/text-*` styles, check consumers first (`use_figma`: any text node using this style?).
 
@@ -502,11 +502,11 @@ In `CLAUDE.md` line 103, replace `` in `Magnet-DS-v1.0` (file key `ihWIWmvtQPTWg
 
 Record the count deleted vs rebound in notes.md. These duplicate the role ramp — two ways to say the same thing is sampling noise for AI.
 
-- [ ] **Step 5: F8 — normalize the four naming outliers**
+- [x] **Step 5: F8 — normalize the four naming outliers**
 
 `Body/xs/medium`, `Body/xl/medium`, `Body/4xl/semibold`, `Body/base/medium` carry a third name level the rest of the ramp does not. Bring them onto the dominant pattern in Task 1's text-style inventory (if the ramp is `Body/<size>`, the weight moves out of the name; if a distinct weight is genuinely needed, keep it but apply the same 3-level shape to *every* `Body/*` style). One pattern, applied uniformly — record which direction was chosen and why.
 
-- [ ] **Step 6: F10 — record the accepted debt**
+- [x] **Step 6: F10 — record the accepted debt** (3 bullets recorded — 2 from brief + 1 extra: Task 9's focus-ring Figma/code divergence)
 
 Append `## Accepted debt` to notes.md (this feeds the future "Rules & Debt" Figma-AI skill):
 
@@ -515,11 +515,11 @@ Append `## Accepted debt` to notes.md (this feeds the future "Rules & Debt" Figm
 
 Both are deliberate, per figma-variables-method: don't plumb tokens nobody consumes. Recorded so they stop resurfacing as "gaps".
 
-- [ ] **Step 7: Verify**
+- [x] **Step 7: Verify** (all pass except file name — reads `Document`, not `Magnet-DS`; rename is BLOCKED, see notes.md/report)
 
 Open any component's property picker in Figma: expected no `ds/*` variables offered. `use_figma` text-style list: expected zero `Tailwind/text-*` (or a documented exception per Step 4), and one uniform `Body/*` naming shape. Read the file name: expected `Magnet-DS`. Read `ds/version`: expected `v0.91`.
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit**
 
 ```bash
 git add CLAUDE.md .specs/01_active/magnet-ds-review/notes.md .specs/01_active/magnet-ds-review/plan.md
