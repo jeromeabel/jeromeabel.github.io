@@ -538,7 +538,7 @@ git commit -m "docs: magnet-ds-review — F7/F8/F10 metadata scoped, file rename
 - Consumes: everything from Tasks 2–10.
 - Produces: `## Validation gate` in notes.md — one row per finding, PASS/FAIL + evidence — ending with the literal string `GATE PASSED`. Archive is blocked until every row passes.
 
-- [ ] **Step 1: Run the gate checklist**
+- [x] **Step 1: Run the gate checklist**
 
 One row per item, each with screenshot or metadata evidence:
 
@@ -558,21 +558,21 @@ One row per item, each with screenshot or metadata evidence:
 | G2 | Vocabulary | DecisionCard + focus specimen present; card matches Task 6's property table |
 | G3 | Rejection | DecisionCard present with the revisit condition |
 
-- [ ] **Step 2: Bonus — 44 px touch-target audit**
+- [x] **Step 2: Bonus — 44 px touch-target audit**
 
 Now that F1 is fixed, measure the tap targets on both `Home — Mobile — *` frames: nav links, `ThemeToggle`, `MotionToggle`, and any icon link in the footer. Expected ≥ 44×44 px each (padding counts; the visible glyph need not be 44 px).
 
 Record every measurement in notes.md. Anything under 44 px: increase its padding in the **master** component, then re-screenshot both mobile frames to confirm nothing reflowed. If a fix would change the desktop layout, do not force it — log it as a follow-up backlog item instead (`./.specs/specs.sh new figma-mobile-touch-targets`), which is a legitimate outcome for a bonus item.
 
-- [ ] **Step 3: Fix failures**
+- [x] **Step 3: Fix failures**
 
 Any FAIL: fix it, then re-run that row only. Iterate until every row is PASS. A fix needing a new `_Docs` master → stop and add a note to review.md first.
 
-- [ ] **Step 4: Refresh the cover**
+- [x] **Step 4: Refresh the cover**
 
 Set the cover frame's date chip to `2026-08-11` in its existing format. **Do not touch the version chip** — it reads v0.91 and that is now the single truth (Task 10).
 
-- [ ] **Step 5: Record the gate and commit**
+- [x] **Step 5: Record the gate and commit**
 
 Write `## Validation gate` in notes.md: the 13-row table, the touch-target measurements, fixes applied, and the final verdict `GATE PASSED` (literal string — Step 6 greps for it).
 
@@ -581,7 +581,7 @@ git add .specs/01_active/magnet-ds-review/notes.md .specs/01_active/magnet-ds-re
 git commit -m "docs(specs): magnet-ds-review — validation gate passed"
 ```
 
-- [ ] **Step 6: Verify the gate, then archive**
+- [x] **Step 6: Verify the gate, then archive**
 
 Run: `grep "GATE PASSED" .specs/01_active/magnet-ds-review/notes.md`
 Expected: match found. No match → stop, return to Step 3.

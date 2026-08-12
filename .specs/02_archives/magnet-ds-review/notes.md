@@ -329,7 +329,8 @@ rendered canvas instead of 390) is confirmed present identically on the
 Dark reference and is **not** a Light-only regression. Signed off as
 out-of-scope for F1 — a shared cross-variant defect this task did not
 introduce and is not scoped to fix. Not filed as a new backlog item at this
-time.
+time. Superseded by Task 11 — fixed at instance level on both variants
+(see `## Validation gate`, F1 row).
 
 ## F2 — page disposition (Task 3, 2026-08-11)
 
@@ -573,7 +574,7 @@ code-side evidence — no row is presented as vetted without it.
 | `color/background` | Page base canvas and Link/CTA hover fill (foreground/background invert); not cards. | corrected |
 | `color/foreground` | Primary readable text and icon colour on standard surfaces. | verified |
 | `color/foreground-strong` | Active/current-item marker (TOC link, current serie post); not headings or body text. | verified |
-| `color/foreground-muted` | Passive metadata and helper text at AA contrast floor. | verified |
+| `color/foreground-muted` | Passive metadata and helper text; 6.56:1 Light / 6.29:1 Dark on color/background. | corrected (fix round 2) |
 | `color/border` | Default aggregate boundary for cards, rows, and table rails. | verified |
 | `color/surface` | Idle fill for toggle controls (ThemeToggle, MotionToggle) and topic chips; not footer. | corrected (critical) |
 | `color/surface-hover` | Single hover tint for row/card/button hover states only. | verified |
@@ -599,6 +600,30 @@ every description byte-for-byte matches the table above.
 
 **Commit.** See repo history for
 `docs(specs): magnet-ds-review — F3 Theme variable descriptions fix round 1`.
+
+### `## Theme token copy` — fix round 2 (final whole-plan review finding 1)
+
+`color/foreground-muted`'s description was carried through fix round 1 as
+"verified, unchanged" without re-checking its own wording against Task 8's
+later G1 contrast measurements. It claimed the token sits "at AA contrast
+floor" — contradicted by Task 8's actual numbers (6.56:1 Light / 6.29:1
+Dark on `color/background`, 5.56:1 / 5.42:1 on `color/surface`, all well
+clear of the 4.5 AA floor) and by Task 8's own corrected finding that the
+tightest pairing in the file is `color/background`/`color/accent` at
+5.18:1 Light, not `foreground-muted`. Task 9 already caught and rewrote
+this exact stale claim when drafting a Figma DecisionCard (see `## G2/G3`
+below), but the variable's own `description` and the docs-table row were
+never corrected until now.
+
+**Corrected copy:** "Passive metadata and helper text; 6.56:1 Light /
+6.29:1 Dark on color/background." — states measured fact instead of a
+disproven floor claim.
+
+**Applied in Figma.** `use_figma` set `description` on `VariableID:3:7`
+(`color/foreground-muted`) and updated the matching `role` text node
+(`I2670:6703;2590:574`) in the `PANEL / 01 Tokens Intro` docs-table row.
+Live re-read confirms both strings byte-for-byte identical. `ds/version`
+(`VariableID:2721:5`) was not touched.
 
 ## F4 — token table rebuild
 
@@ -1289,7 +1314,7 @@ styles now share one uniform `Body/<size>/<weight>` shape.
   on a CTA fill is unambiguous. Revisit when a second accent or a coloured
   surface lands.
 - **Focus-ring spec (Figma) vs. code implementation diverge.** Figma's G2
-  specimen (Task 9, `2670:6717` region) documents 2px ring / 2px offset /
+  specimen (Task 9, `2900:4303` region) documents 2px ring / 2px offset /
   `color/accent` as the intended universal spec. The current codebase only
   applies a focus ring to Work cards — `WorkCard.astro`,
   `WorkCardImage.astro`, `WorkGalleryCard.astro`, `WorkMiniCard.astro`,
@@ -1301,12 +1326,26 @@ styles now share one uniform `Body/<size>/<weight>` shape.
   above. Revisit when focus styling is implemented site-wide to match the
   documented spec, or when the spec is revised to match the shipped
   4px/black-white pattern.
+- **MotionToggle (Figma) vs. code implementation diverge.** `src/components/app/Header.astro:40`
+  renders `<MotionToggle />` unconditionally — no responsive/mobile hiding —
+  so the live site shows `MotionToggle` on mobile nav. The Mobile Figma
+  templates (`Home — Mobile — Light`/`Dark`) do not include a `MotionToggle`
+  instance in their nav. This is real, unresolved debt, not a deliberate
+  omission — the same class of Figma/code divergence as the focus-ring entry
+  above. Revisit when the Mobile templates are next touched, by either adding
+  the control to the templates or confirming a deliberate mobile-hide should
+  ship in code.
+- **G2 focus specimen (`2900:4303`) is a detached `_Docs/SpecimenCell`
+  instance** — it will not inherit future edits to the SpecimenCell master.
+  Revisit if the master's layout changes; the detached copy must be updated
+  manually or reconnected.
 
 Both the icon-mirror and on-color entries are deliberate, per
-figma-variables-method: don't plumb tokens nobody consumes. The focus-ring
-entry is not deliberate — it is a real design/code gap surfaced by Task 9
-and recorded here so it stops resurfacing as an unexplained "gap" in
-future reviews.
+figma-variables-method: don't plumb tokens nobody consumes. The focus-ring,
+MotionToggle, and detached-specimen entries are not deliberate — they are
+real design/code gaps and maintenance hazards surfaced by Tasks 9 and 11,
+recorded here so they stop resurfacing as unexplained "gaps" in future
+reviews.
 
 ## Validation gate (Task 11, 2026-08-12)
 
@@ -1347,7 +1386,7 @@ self-reports).
 | NavLinkHome | 128×36 | No — height |
 | NavLink ×3 (Blog/Work/About) | 37×36, 44×36, 50×36 | No — height (and one width) |
 | ThemeToggle | 36×36 | No |
-| MotionToggle | not present on mobile nav | N/A — deliberate omission, not a defect |
+| MotionToggle | not present on mobile nav | Figma/code divergence — MotionToggle renders unconditionally in Header.astro (no mobile hiding) but is absent from the Mobile Figma templates. Not fixed here (out of Task 11's scope); recorded as debt. |
 | Footer Link/Icon ×3 (social) | 40×40 | No — 4px short each axis |
 
 All 8 measured targets fail the 44×44px minimum. Not fixed directly: every failing target is a shared master component (`NavLink`, `NavLinkHome`, `ThemeToggle`, `Link/Icon`) also instanced on the Desktop templates — increasing master padding to fix mobile would grow the Desktop nav bar and footer icon size site-wide, an out-of-scope side effect per the brief's explicit escape hatch. Logged as a follow-up backlog item instead: `.specs/00_backlog/figma-mobile-touch-targets.md`.
