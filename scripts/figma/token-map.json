@@ -32,5 +32,31 @@
     "spacing-section": "3 Responsive/Mobile/section/rhythm-y",
     "spacing-section-lg": "3 Responsive/Desktop/section/rhythm-y"
   },
+  "orphanIgnore": [
+    "3 Responsive/Desktop/text/",
+    "3 Responsive/Tablet/text/",
+    "3 Responsive/Mobile/text/",
+    "3 Responsive/Desktop/leading/",
+    "3 Responsive/Tablet/leading/",
+    "3 Responsive/Mobile/leading/",
+    "3 Responsive/Desktop/header/",
+    "3 Responsive/Tablet/header/",
+    "3 Responsive/Mobile/header/",
+    "3 Responsive/Desktop/footer/",
+    "3 Responsive/Tablet/footer/",
+    "3 Responsive/Mobile/footer/",
+    "3 Responsive/Desktop/hero/",
+    "3 Responsive/Tablet/hero/",
+    "3 Responsive/Mobile/hero/",
+    "3 Responsive/Desktop/serie-list/",
+    "3 Responsive/Tablet/serie-list/",
+    "3 Responsive/Mobile/serie-list/",
+    "3 Responsive/Tablet/container/",
+    "3 Responsive/Mobile/container/",
+    "3 Responsive/Tablet/section/",
+    "3 Responsive/Tablet/viewport/",
+    "3 Responsive/Desktop/viewport/",
+    "3 Responsive/Mobile/viewport/"
+  ],
   "ignore": ["font-sans", "font-title", "font-mono"]
 }

@@ -13,11 +13,15 @@ if (!mapPath) {
   process.exit(0);
 }
 
-let code, figma, map, ignore;
+let code, figma, map, ignore, orphanIgnore;
 try {
   code = JSON.parse(readFileSync(codePath, "utf8"));
   figma = JSON.parse(readFileSync(figmaPath, "utf8"));
-  ({ map, ignore = [] } = JSON.parse(readFileSync(mapPath, "utf8")));
+  ({
+    map,
+    ignore = [],
+    orphanIgnore = [],
+  } = JSON.parse(readFileSync(mapPath, "utf8")));
 } catch (err) {
   const path = err.path || "unknown";
   const reason = err.code === "ENOENT" ? "file not found" : err.message;
@@ -88,7 +92,10 @@ try {
     Object.values(map).map((p) => String(p).split("/")[0]),
   );
   const orphaned = [...figVars.keys()].filter(
-    (k) => mappedCollections.has(k.split("/")[0]) && !consumed.has(k),
+    (k) =>
+      mappedCollections.has(k.split("/")[0]) &&
+      !consumed.has(k) &&
+      !orphanIgnore.some((prefix) => k.startsWith(prefix)),
   );
 
   const section = (title, rows) =>

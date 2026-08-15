@@ -1,0 +1,24 @@
+{
+  "collection": "3 Responsive",
+  "modes": ["Desktop", "Tablet", "Mobile"],
+  "variables": {
+    "text/page-title": { "Desktop": 60, "Tablet": 48, "Mobile": 36 },
+    "text/section-title": { "Desktop": 30, "Tablet": 24, "Mobile": 20 },
+    "text/hero-title": { "Desktop": 48, "Tablet": 36, "Mobile": 24 },
+    "text/hero-body": { "Desktop": 24, "Tablet": 20, "Mobile": 18 },
+    "text/nav-link": { "Desktop": 20, "Tablet": 20, "Mobile": 16 },
+    "leading/hero-body": { "Desktop": 30, "Tablet": 28, "Mobile": 28 },
+    "header/padding-y": { "Desktop": 24, "Tablet": 16, "Mobile": 16 },
+    "header/nav-gap": { "Desktop": 40, "Tablet": 24, "Mobile": 16 },
+    "footer/padding-y": { "Desktop": 64, "Tablet": 64, "Mobile": 32 },
+    "footer/gap": { "Desktop": 32, "Tablet": 32, "Mobile": 24 },
+    "footer/link-gap": { "Desktop": 24, "Tablet": 24, "Mobile": 8 },
+    "footer/inner-gap": { "Desktop": 32, "Tablet": 32, "Mobile": 16 },
+    "hero/text-gap": { "Desktop": 16, "Tablet": 16, "Mobile": 8 },
+    "serie-list/gap": { "Desktop": 32, "Tablet": 16, "Mobile": 16 },
+    "container/gutter": { "Desktop": 16, "Tablet": 16, "Mobile": 16 },
+    "section/rhythm-y": { "Desktop": 96, "Tablet": 32, "Mobile": 32 },
+    "container/max-width": { "Desktop": 1280, "Tablet": 1280, "Mobile": 1280 },
+    "viewport/width": { "Desktop": 1280, "Tablet": 768, "Mobile": 390 }
+  }
+}

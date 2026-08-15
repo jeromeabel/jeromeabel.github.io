@@ -158,6 +158,58 @@ test("token-map value that isn't a string exits 0", () => {
   );
   assert.match(out, /## Orphaned in Figma[\s]*_none_/);
 });
+test("orphanIgnore suppresses listed prefixes from the orphan section", () => {
+  const code = {
+    tokens: [
+      {
+        name: "container-max-width",
+        class: "size",
+        px: 1280,
+        source: "global.css",
+      },
+    ],
+  };
+  const figma = {
+    collections: [
+      {
+        name: "3 Responsive",
+        variables: [
+          { name: "Desktop/container/max-width", value: 1280 },
+          { name: "Mobile/text/hero-title", value: 24 },
+        ],
+      },
+    ],
+  };
+  const map = {
+    map: { "container-max-width": "3 Responsive/Desktop/container/max-width" },
+    orphanIgnore: [
+      "3 Responsive/Mobile/text/",
+      "3 Responsive/Tablet/text/",
+      "3 Responsive/Desktop/text/",
+    ],
+  };
+  const out = runDiff(code, figma, map);
+  assert.match(out, /## Orphaned in Figma\n\n_none_/);
+});
+
+test("an orphan outside orphanIgnore is still reported", () => {
+  const code = { tokens: [] };
+  const figma = {
+    collections: [
+      {
+        name: "3 Responsive",
+        variables: [{ name: "Desktop/container/max-width", value: 1280 }],
+      },
+    ],
+  };
+  const map = {
+    map: { x: "3 Responsive/nothing" },
+    orphanIgnore: ["3 Responsive/Mobile/text/"],
+  };
+  const out = runDiff(code, figma, map);
+  assert.match(out, /Desktop\/container\/max-width/);
+});
+
 test("null top-level figma/code JSON and wrong-typed nested fields all exit 0", () => {
   assert.doesNotThrow(() =>
     runDiff(null, { collections: [] }, { map: {}, ignore: [] }),

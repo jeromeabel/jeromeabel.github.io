@@ -511,5 +511,13 @@
       "reason": "IBM Plex Sans SemiBold 18 — no matching semantic local text style",
       "loggedAt": "2026-08-06"
     }
+  ],
+  "variableDebt": [
+    {
+      "collection": "3 Responsive",
+      "name": "leading/hero-body",
+      "values": { "Desktop": 30, "Tablet": 28, "Mobile": 28 },
+      "reason": "Tailwind's size-paired default leadings (28px on text-lg and text-xl) are not on the leading/* ratio ladder, and Desktop's leading-tight resolves to 24 x 1.25 = 30. Forcing these onto a ratio primitive would change the rendering."
+    }
   ]
 }
