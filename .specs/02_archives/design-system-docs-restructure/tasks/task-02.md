@@ -16,14 +16,25 @@ Rule §3 R3: one row per token, Light and Dark inline — never a table per them
 ```js
 const page = figma.root.children.find((p) => p.name === "🎨 Foundations");
 await figma.setCurrentPageAsync(page);
-const theme = await figma.variables.getVariableCollectionByIdAsync("VariableCollectionId:3:2");
+const theme = await figma.variables.getVariableCollectionByIdAsync(
+  "VariableCollectionId:3:2",
+);
 const modes = Object.fromEntries(theme.modes.map((m) => [m.name, m.modeId]));
 const hex = (c) =>
-  "#" + [c.r, c.g, c.b].map((v) => Math.round(v * 255).toString(16).padStart(2, "0")).join("");
+  "#" +
+  [c.r, c.g, c.b]
+    .map((v) =>
+      Math.round(v * 255)
+        .toString(16)
+        .padStart(2, "0"),
+    )
+    .join("");
 const resolve = async (val) => {
   while (val && val.type === "VARIABLE_ALIAS") {
     const t = await figma.variables.getVariableByIdAsync(val.id);
-    const col = await figma.variables.getVariableCollectionByIdAsync(t.variableCollectionId);
+    const col = await figma.variables.getVariableCollectionByIdAsync(
+      t.variableCollectionId,
+    );
     val = t.valuesByMode[col.defaultModeId] ?? Object.values(t.valuesByMode)[0];
   }
   return val;
@@ -33,7 +44,9 @@ for (const id of theme.variableIds) {
   const v = await figma.variables.getVariableByIdAsync(id);
   if (v.resolvedType !== "COLOR") continue;
   out.push({
-    id: v.id, name: v.name, description: v.description || "",
+    id: v.id,
+    name: v.name,
+    description: v.description || "",
     light: hex(await resolve(v.valuesByMode[modes.Light])),
     dark: hex(await resolve(v.valuesByMode[modes.Dark])),
   });
@@ -53,7 +66,9 @@ await figma.loadFontAsync({ family: "IBM Plex Sans", style: "Regular" });
 await figma.loadFontAsync({ family: "IBM Plex Sans", style: "SemiBold" });
 const frame = page.findOne((n) => n.name === "Foundations · Colors");
 if (!frame) return { missing: ["Foundations · Colors"] };
-const theme = await figma.variables.getVariableCollectionByIdAsync("VariableCollectionId:3:2");
+const theme = await figma.variables.getVariableCollectionByIdAsync(
+  "VariableCollectionId:3:2",
+);
 const modes = Object.fromEntries(theme.modes.map((m) => [m.name, m.modeId]));
 const vars = {};
 for (const id of theme.variableIds) {
@@ -64,11 +79,14 @@ for (const id of theme.variableIds) {
 const ROLE = {
   "color/background": "Page background. The reading surface.",
   "color/foreground": "Primary text and icons.",
-  "color/foreground-muted": "Secondary text — metadata, captions, rest-state nav.",
+  "color/foreground-muted":
+    "Secondary text — metadata, captions, rest-state nav.",
   "color/surface": "Raised panels: footer, code blocks.",
-  "color/surface-hover": "Hover fill for rows, secondary buttons, icon buttons.",
+  "color/surface-hover":
+    "Hover fill for rows, secondary buttons, icon buttons.",
   "color/border": "Hairlines and card borders.",
-  "color/accent": "Single teal accent. Budget: serie chips, section CTAs, active nav, focus rings, hover underline decoration.",
+  "color/accent":
+    "Single teal accent. Budget: serie chips, section CTAs, active nav, focus rings, hover underline decoration.",
 };
 const TOKENS = []; // REPLACE with Step 1's token list [{name, light, dark, description}, ...]
 const txt = (chars, family, style, size, w) => {
@@ -78,12 +96,18 @@ const txt = (chars, family, style, size, w) => {
   t.fontSize = size;
   t.textAutoResize = "HEIGHT";
   t.setBoundVariable("fills", vars["color/foreground"]);
-  if (w) { t.layoutSizingHorizontal = "FIXED"; t.resize(w, t.height); }
+  if (w) {
+    t.layoutSizingHorizontal = "FIXED";
+    t.resize(w, t.height);
+  }
   return t;
 };
 const swatch = (tokenName, modeName, hexLabel) => {
   // Wrapper pins the mode so Light and Dark render side by side; the fill stays bound.
-  const wrap = figma.createAutoLayout("HORIZONTAL", { name: `swatch-${modeName}`, itemSpacing: 8 });
+  const wrap = figma.createAutoLayout("HORIZONTAL", {
+    name: `swatch-${modeName}`,
+    itemSpacing: 8,
+  });
   wrap.setExplicitVariableModeForCollection(theme, modes[modeName]);
   const r = figma.createRectangle();
   r.resize(40, 24);
@@ -94,15 +118,23 @@ const swatch = (tokenName, modeName, hexLabel) => {
   wrap.appendChild(txt(hexLabel, "Fira Code", "Regular", 12, 72));
   return wrap;
 };
-const table = figma.createAutoLayout("VERTICAL", { name: "ColorTokenTable", itemSpacing: 12 });
+const table = figma.createAutoLayout("VERTICAL", {
+  name: "ColorTokenTable",
+  itemSpacing: 12,
+});
 const noRole = [];
 for (const tk of TOKENS) {
   const role = tk.description || ROLE[tk.name];
   if (!role) noRole.push(tk.name);
-  const row = figma.createAutoLayout("HORIZONTAL", { name: `row-${tk.name}`, itemSpacing: 24 });
+  const row = figma.createAutoLayout("HORIZONTAL", {
+    name: `row-${tk.name}`,
+    itemSpacing: 24,
+  });
   row.counterAxisAlignItems = "CENTER";
   row.appendChild(txt(tk.name, "Fira Code", "Regular", 13, 220));
-  row.appendChild(txt(role || "TODO role", "IBM Plex Sans", "Regular", 13, 380));
+  row.appendChild(
+    txt(role || "TODO role", "IBM Plex Sans", "Regular", 13, 380),
+  );
   row.appendChild(swatch(tk.name, "Light", tk.light));
   row.appendChild(swatch(tk.name, "Dark", tk.dark));
   table.appendChild(row);
@@ -110,7 +142,10 @@ for (const tk of TOKENS) {
 // Chain note per §3 R2.
 const note = txt(
   "Primitives are reference-only — never use them directly. Chain: primitive → semantic (this table) → component.",
-  "IBM Plex Sans", "Regular", 13, 700,
+  "IBM Plex Sans",
+  "Regular",
+  13,
+  700,
 );
 table.appendChild(note);
 frame.appendChild(table);
@@ -126,11 +161,15 @@ const page = figma.root.children.find((p) => p.name === "🎨 Foundations");
 await figma.setCurrentPageAsync(page);
 const frame = page.findOne((n) => n.name === "Foundations · Colors");
 const table = frame.findOne((n) => n.name === "ColorTokenTable");
-if (!table || table.children.length < 12) return { missing: ["ColorTokenTable with 12 rows"] };
+if (!table || table.children.length < 12)
+  return { missing: ["ColorTokenTable with 12 rows"] };
 const removed = [];
 for (const name of ["Light", "Dark"]) {
   const grid = frame.children.find((n) => n.name === name && n.id !== table.id);
-  if (grid) { removed.push({ id: grid.id, name }); grid.remove(); }
+  if (grid) {
+    removed.push({ id: grid.id, name });
+    grid.remove();
+  }
 }
 await frame.screenshot({ scale: 1 });
 return { removed, remaining: frame.children.map((n) => n.name) };
@@ -146,4 +185,3 @@ git commit -m "docs(specs): ds-docs-restructure — task 2 colors page single-so
 ```
 
 ---
-

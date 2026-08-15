@@ -17,13 +17,13 @@ no code changes proposed here.
 
 ## Inventory snapshot
 
-| Thing | State |
-|---|---|
-| Pages | `📖 Cover`, `📚 Docs` (2736:4), `📐 Decisions` (2716:4244), `❖ Components` (461:759), `📄 Pages` (2558:18264) + 6 dead pages (see F2) |
-| Collections | `1 Primitives` (451 vars, 1 mode), `2 Theme` (15 vars, Light/Dark), `3 Responsive` (4 vars, Desktop/Tablet/Mobile), `Design System` (2 metadata vars) |
-| Components | 16 component sets + 20 solo, grouped in sections: Chrome, Actions, Sections, Typography, Metadata, Cards |
-| Docs chapters | 00 About, 01 Foundations, 02 Components (6 GROUPs matching Components-page sections), 03 Sections, 04 Pages |
-| Page templates | Home/Blog × Desktop/Mobile × Light/Dark (8 components on 📄 Pages) |
+| Thing          | State                                                                                                                                                 |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Pages          | `📖 Cover`, `📚 Docs` (2736:4), `📐 Decisions` (2716:4244), `❖ Components` (461:759), `📄 Pages` (2558:18264) + 6 dead pages (see F2)                 |
+| Collections    | `1 Primitives` (451 vars, 1 mode), `2 Theme` (15 vars, Light/Dark), `3 Responsive` (4 vars, Desktop/Tablet/Mobile), `Design System` (2 metadata vars) |
+| Components     | 16 component sets + 20 solo, grouped in sections: Chrome, Actions, Sections, Typography, Metadata, Cards                                              |
+| Docs chapters  | 00 About, 01 Foundations, 02 Components (6 GROUPs matching Components-page sections), 03 Sections, 04 Pages                                           |
+| Page templates | Home/Blog × Desktop/Mobile × Light/Dark (8 components on 📄 Pages)                                                                                    |
 
 ## 🔴 F1 — `Home — Mobile — Light` broken/stale
 
@@ -46,14 +46,14 @@ Height should land near the Dark variant's 3465px.
 
 - [ ] Delete (or collapse into one archive page)
 
-| Page | Id | Content |
-|---|---|---|
-| `Page 8` | 2678:23308 | Old typography-scale explorations, "Light tokens", "Foundation" |
-| `Page 9` | 2678:32354 | DS-starter template TOC (🟡 TEMPLATES/SECTIONS/COMPONENTS/FOUNDATIONS, 🚀 Welcome) |
-| `Page 11` | 2678:34657 | DS-starter template instructions (plugins, naming conventions, giant type scales) |
-| `🗄 Backup — UI kit foundations & controls` | 2678:6692 | pre-restructure backup |
-| `🗄 Backup — Getting started & theme overview` | 2678:10236 | pre-restructure backup |
-| `🗄 Backup — Brand guidelines template` | 2678:34067 | pre-restructure backup |
+| Page                                          | Id         | Content                                                                            |
+| --------------------------------------------- | ---------- | ---------------------------------------------------------------------------------- |
+| `Page 8`                                      | 2678:23308 | Old typography-scale explorations, "Light tokens", "Foundation"                    |
+| `Page 9`                                      | 2678:32354 | DS-starter template TOC (🟡 TEMPLATES/SECTIONS/COMPONENTS/FOUNDATIONS, 🚀 Welcome) |
+| `Page 11`                                     | 2678:34657 | DS-starter template instructions (plugins, naming conventions, giant type scales)  |
+| `🗄 Backup — UI kit foundations & controls`    | 2678:6692  | pre-restructure backup                                                             |
+| `🗄 Backup — Getting started & theme overview` | 2678:10236 | pre-restructure backup                                                             |
+| `🗄 Backup — Brand guidelines template`        | 2678:34067 | pre-restructure backup                                                             |
 
 magnet-ds-docs-v1 deleted only the Introduction backup. Dead pages pollute
 Figma AI library sampling and contradict the one-Docs-page restructure.
@@ -85,12 +85,12 @@ use: `font/sans`, `font/title`, `font/mono`, `color/accent-hover`,
 
 - [ ] Normalize to lowercase `state` / `type` everywhere
 
-| Convention | Sets |
-|---|---|
+| Convention          | Sets                                                                                                                 |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------- |
 | `state` (lowercase) | NavLink, NavLinkHome, ThemeToggle, MotionToggle, Link/CTA, Link/Secondary, Link/TextCTA, Link/Icon, Link/SecondarySm |
-| `State` (capital) | PostCardPreviewBig, PostCardPreviewSmall, PostRow, SerieCard |
-| `type` (lowercase) | PostMetadataTime, PostMetadataTopic |
-| `Variant` (capital) | PostRow (`Post`/`Serie`) — rename to `type` |
+| `State` (capital)   | PostCardPreviewBig, PostCardPreviewSmall, PostRow, SerieCard                                                         |
+| `type` (lowercase)  | PostMetadataTime, PostMetadataTopic                                                                                  |
+| `Variant` (capital) | PostRow (`Post`/`Serie`) — rename to `type`                                                                          |
 
 Property renames are central; instances survive.
 
@@ -142,16 +142,16 @@ Base-style always-valid pairings, scaled down: 15 Theme tokens → ~8 pairs with
 AA verdict per mode. One block in Foundations chapter (reuse `_Docs/TokenRow`
 layout). Candidate pairs:
 
-| Background | Content | Check |
-|---|---|---|
-| `color/background` | `color/foreground` | AA both modes |
-| `color/background` | `color/foreground-strong` | AA both modes |
-| `color/background` | `color/foreground-muted` | AA floor — verify |
-| `color/background` | `color/accent` | AA both modes (links/CTAs) |
-| `color/surface` | `color/foreground` | AA both modes |
-| `color/surface` | `color/foreground-muted` | verify |
-| `color/accent-subtle` | `color/accent-strong` | verify (chip pattern) |
-| `color/foreground` (CTA fill) | `color/background` (CTA text) | AA both modes |
+| Background                    | Content                       | Check                      |
+| ----------------------------- | ----------------------------- | -------------------------- |
+| `color/background`            | `color/foreground`            | AA both modes              |
+| `color/background`            | `color/foreground-strong`     | AA both modes              |
+| `color/background`            | `color/foreground-muted`      | AA floor — verify          |
+| `color/background`            | `color/accent`                | AA both modes (links/CTAs) |
+| `color/surface`               | `color/foreground`            | AA both modes              |
+| `color/surface`               | `color/foreground-muted`      | verify                     |
+| `color/accent-subtle`         | `color/accent-strong`         | verify (chip pattern)      |
+| `color/foreground` (CTA fill) | `color/background` (CTA text) | AA both modes              |
 
 Rationale: cheap (one docs block), gates future token additions, two modes
 double the contrast-regression surface. Later machine-checkable via
@@ -166,7 +166,7 @@ Canonical interaction vocabulary: `default | hover | active | focus`.
 Not adopted: preloading, enabled, disabled, pressed, warning, error, loading —
 a static portfolio has none of these.
 
-- [ ] Execute F5 + F9 (casing + `mode` rename) — that *is* the vocabulary enforcement
+- [ ] Execute F5 + F9 (casing + `mode` rename) — that _is_ the vocabulary enforcement
 - [ ] One `_Docs/DecisionCard` in Docs defining the vocabulary + what was excluded and why
 - [ ] Focus documented as **spec, not variants**: one specimen frame showing the
       accent focus ring (accent budget rule 2 reserves focus outlines — currently

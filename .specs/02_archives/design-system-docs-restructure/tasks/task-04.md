@@ -19,12 +19,22 @@ await figma.setCurrentPageAsync(page);
 const light = page.findOne((n) => n.name === "DOCS / Design System — Light");
 const ch = light.children.find((n) => n.name === "CHAPTER / 01 Foundations");
 if (!ch) return { missing: ["CHAPTER / 01 Foundations"] };
-const findings = ch.findAll((n) => n.type === "TEXT" && /FINDING:/.test(n.characters));
-const colour = ch.findAll((n) => n.type === "TEXT").filter((t) => /accent|colour|color\//i.test(t.characters));
+const findings = ch.findAll(
+  (n) => n.type === "TEXT" && /FINDING:/.test(n.characters),
+);
+const colour = ch
+  .findAll((n) => n.type === "TEXT")
+  .filter((t) => /accent|colour|color\//i.test(t.characters));
 return {
   sections: ch.children.map((n) => n.name),
-  findingTexts: findings.map((t) => ({ id: t.id, text: t.characters.slice(0, 120) })),
-  colourTexts: colour.map((t) => ({ id: t.id, text: t.characters.slice(0, 120) })),
+  findingTexts: findings.map((t) => ({
+    id: t.id,
+    text: t.characters.slice(0, 120),
+  })),
+  colourTexts: colour.map((t) => ({
+    id: t.id,
+    text: t.characters.slice(0, 120),
+  })),
 };
 ```
 
@@ -56,18 +66,25 @@ await figma.loadFontAsync({ family: "IBM Plex Sans", style: "Regular" });
 await figma.loadFontAsync({ family: "Fira Code", style: "Regular" });
 const light = page.findOne((n) => n.name === "DOCS / Design System — Light");
 const ch = light.children.find((n) => n.name === "CHAPTER / 01 Foundations");
-const theme = await figma.variables.getVariableCollectionByIdAsync("VariableCollectionId:3:2");
+const theme = await figma.variables.getVariableCollectionByIdAsync(
+  "VariableCollectionId:3:2",
+);
 const V = {};
 for (const id of theme.variableIds) {
   const v = await figma.variables.getVariableByIdAsync(id);
   V[v.name] = v;
 }
 const compsPage = figma.root.children.find((p) => p.name === "🧩 Components");
-const iconSet = compsPage.findOne((n) => n.type === "COMPONENT_SET" && n.name === "Icon");
+const iconSet = compsPage.findOne(
+  (n) => n.type === "COMPONENT_SET" && n.name === "Icon",
+);
 if (!iconSet) return { missing: ["Icon set"] };
 const arrow = iconSet.children.find((c) => c.name === "icon=arrow-right");
 
-const sec = figma.createAutoLayout("VERTICAL", { name: "SECTION / Icons", itemSpacing: 16 });
+const sec = figma.createAutoLayout("VERTICAL", {
+  name: "SECTION / Icons",
+  itemSpacing: 16,
+});
 const h = figma.createText();
 h.fontName = { family: "IBM Plex Sans", style: "SemiBold" };
 h.characters = "Icons";
@@ -80,7 +97,10 @@ const ROWS = [
   [24, "24 · standalone"],
 ];
 for (const [size, caption] of ROWS) {
-  const row = figma.createAutoLayout("HORIZONTAL", { name: `icon-${size}`, itemSpacing: 16 });
+  const row = figma.createAutoLayout("HORIZONTAL", {
+    name: `icon-${size}`,
+    itemSpacing: 16,
+  });
   row.counterAxisAlignItems = "CENTER";
   const inst = arrow.createInstance();
   inst.resize(size, size);
@@ -103,14 +123,22 @@ ch.appendChild(sec);
 sec.layoutSizingHorizontal = "FILL";
 
 // Cross-page link: Colour section → Foundations · Colors table (§1 R5).
-const foundations = figma.root.children.find((p) => p.name === "🎨 Foundations");
-const colorsFrame = foundations.findOne((n) => n.name === "Foundations · Colors");
+const foundations = figma.root.children.find(
+  (p) => p.name === "🎨 Foundations",
+);
+const colorsFrame = foundations.findOne(
+  (n) => n.name === "Foundations · Colors",
+);
 const link = figma.createText();
 link.fontName = { family: "IBM Plex Sans", style: "Regular" };
-link.characters = "Full token table with Light and Dark values → Foundations · Colors";
+link.characters =
+  "Full token table with Light and Dark values → Foundations · Colors";
 link.fontSize = 13;
 link.setBoundVariable("fills", V["color/foreground-muted"]);
-link.setRangeHyperlink(0, link.characters.length, { type: "NODE", value: colorsFrame.id });
+link.setRangeHyperlink(0, link.characters.length, {
+  type: "NODE",
+  value: colorsFrame.id,
+});
 const colourSec = ch.children.find((n) => /colour|color/i.test(n.name));
 (colourSec || ch).appendChild(link);
 return { createdNodeIds: [sec.id, link.id] };
@@ -128,4 +156,3 @@ git commit -m "docs(specs): ds-docs-restructure — task 4 foundations icons + f
 ```
 
 ---
-

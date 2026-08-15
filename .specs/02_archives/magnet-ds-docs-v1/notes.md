@@ -11,61 +11,61 @@ Fresh `use_figma` inventory of file `ihWIWmvtQPTWgUxlrVjC2c` ("Magnet-DS-v1.0"),
 taken directly (not from `get_metadata`, which is known to go stale on this file).
 All later tasks should read IDs from this table, not from the plan header.
 
-| Item | Node ID | Page |
-| --- | --- | --- |
-| **Pages (12)** | | |
-| 📖 Cover | `0:1` | — |
-| 📚 Introduction | `2545:671` | — |
-| 📐 Decisions | `2716:4244` | — |
-| 🎨 Foundations | `5:14` | — |
-| ❖ Components | `461:759` | — |
-| 📄 Pages | `2558:18264` | — |
-| Page 6 (backup) | `2678:6692` | — |
-| Page 7 (backup) | `2678:10236` | — |
-| Page 8 (backup, empty) | `2678:23308` | — |
-| Page 9 (backup, empty) | `2678:32354` | — |
-| Page 10 (backup) | `2678:34067` | — |
-| Page 11 (backup, empty) | `2678:34657` | — |
-| **`_Docs/*` component masters (10)** | | |
-| `_Docs/ChapterHeader` | `2590:537` | 📚 Introduction |
-| `_Docs/SpecimenCell` | `2590:542` | 📚 Introduction |
-| `_Docs/DecisionCard` (component set) | `2590:571` | 📚 Introduction |
-| `_Docs/TokenRow` | `2590:578` | 📚 Introduction |
-| `_Docs/DoDont` | `2590:588` | 📚 Introduction |
-| `_Docs/Date` (component set) | `2693:9890` | 📚 Introduction |
-| `_Docs/Status` (component set) | `2693:9897` | 📚 Introduction |
-| `_Docs/Headline` | `2708:21413` | 📚 Introduction |
-| `_Docs/Paragraph` | `2709:21540` | 📚 Introduction |
-| `_Docs/Divider` | `2709:21527` | 📚 Introduction |
-| **Chapter frames (5)** | | |
-| `CHAPTER / 00 Read me` | `2705:21254` | 📚 Introduction |
-| `CHAPTER / 01 Foundations` | `2670:6678` | 📚 Introduction |
-| `CHAPTER / 02 Components` | `2670:6860` | 📚 Introduction |
-| `CHAPTER / 03 Sections` | `2670:7567` | 📚 Introduction |
-| `CHAPTER / 04 Pages` | `2670:7608` | 📚 Introduction |
-| **Intro frames** | | |
-| `Intro/01` | `2708:21320` | 📚 Introduction |
-| `Intro/02` | `2709:21578` | 📚 Introduction |
-| **Stray nodes (3)** | | |
-| `Frame 1` (levels diagram) | `2708:21292` | 📚 Introduction |
-| `Section` (copied-template residue) | `2709:21629` | 📚 Introduction |
-| `BLOG DESIGN SYSTEM v1.0` (stale label, text) | `2670:6656` | 📚 Introduction |
-| **🎨 Foundations frames (2)** | | |
-| `Foundations · Colors` | `6:2` | 🎨 Foundations |
-| `Foundations · Typography` | `8:2` | 🎨 Foundations |
-| **❖ Components page sections (8)** | | |
-| `App/Header & Footer` | `2041:481` | ❖ Components |
-| `App/Icons` | `2041:482` | ❖ Components |
-| `App/Buttons` | `2041:483` | ❖ Components |
-| `Hero` | `2041:484` | ❖ Components |
-| `App/Typography` | `2041:485` | ❖ Components |
-| `Blog` | `2041:486` | ❖ Components |
-| `Work` | `2045:429` | ❖ Components |
-| `Contact` | `2047:428` | ❖ Components |
-| **📖 Cover** | | |
-| Cover frame | `9:2` | 📖 Cover |
-| Date chip text node (characters: "Aug 8, 2026") | `I2694:6660;2693:9892` | 📖 Cover |
-| Version chip text node — reference only, **do not touch** (D2), characters: "v0.91" | `I2694:6673;2693:9909` | 📖 Cover |
+| Item                                                                                | Node ID                | Page            |
+| ----------------------------------------------------------------------------------- | ---------------------- | --------------- |
+| **Pages (12)**                                                                      |                        |                 |
+| 📖 Cover                                                                            | `0:1`                  | —               |
+| 📚 Introduction                                                                     | `2545:671`             | —               |
+| 📐 Decisions                                                                        | `2716:4244`            | —               |
+| 🎨 Foundations                                                                      | `5:14`                 | —               |
+| ❖ Components                                                                        | `461:759`              | —               |
+| 📄 Pages                                                                            | `2558:18264`           | —               |
+| Page 6 (backup)                                                                     | `2678:6692`            | —               |
+| Page 7 (backup)                                                                     | `2678:10236`           | —               |
+| Page 8 (backup, empty)                                                              | `2678:23308`           | —               |
+| Page 9 (backup, empty)                                                              | `2678:32354`           | —               |
+| Page 10 (backup)                                                                    | `2678:34067`           | —               |
+| Page 11 (backup, empty)                                                             | `2678:34657`           | —               |
+| **`_Docs/*` component masters (10)**                                                |                        |                 |
+| `_Docs/ChapterHeader`                                                               | `2590:537`             | 📚 Introduction |
+| `_Docs/SpecimenCell`                                                                | `2590:542`             | 📚 Introduction |
+| `_Docs/DecisionCard` (component set)                                                | `2590:571`             | 📚 Introduction |
+| `_Docs/TokenRow`                                                                    | `2590:578`             | 📚 Introduction |
+| `_Docs/DoDont`                                                                      | `2590:588`             | 📚 Introduction |
+| `_Docs/Date` (component set)                                                        | `2693:9890`            | 📚 Introduction |
+| `_Docs/Status` (component set)                                                      | `2693:9897`            | 📚 Introduction |
+| `_Docs/Headline`                                                                    | `2708:21413`           | 📚 Introduction |
+| `_Docs/Paragraph`                                                                   | `2709:21540`           | 📚 Introduction |
+| `_Docs/Divider`                                                                     | `2709:21527`           | 📚 Introduction |
+| **Chapter frames (5)**                                                              |                        |                 |
+| `CHAPTER / 00 Read me`                                                              | `2705:21254`           | 📚 Introduction |
+| `CHAPTER / 01 Foundations`                                                          | `2670:6678`            | 📚 Introduction |
+| `CHAPTER / 02 Components`                                                           | `2670:6860`            | 📚 Introduction |
+| `CHAPTER / 03 Sections`                                                             | `2670:7567`            | 📚 Introduction |
+| `CHAPTER / 04 Pages`                                                                | `2670:7608`            | 📚 Introduction |
+| **Intro frames**                                                                    |                        |                 |
+| `Intro/01`                                                                          | `2708:21320`           | 📚 Introduction |
+| `Intro/02`                                                                          | `2709:21578`           | 📚 Introduction |
+| **Stray nodes (3)**                                                                 |                        |                 |
+| `Frame 1` (levels diagram)                                                          | `2708:21292`           | 📚 Introduction |
+| `Section` (copied-template residue)                                                 | `2709:21629`           | 📚 Introduction |
+| `BLOG DESIGN SYSTEM v1.0` (stale label, text)                                       | `2670:6656`            | 📚 Introduction |
+| **🎨 Foundations frames (2)**                                                       |                        |                 |
+| `Foundations · Colors`                                                              | `6:2`                  | 🎨 Foundations  |
+| `Foundations · Typography`                                                          | `8:2`                  | 🎨 Foundations  |
+| **❖ Components page sections (8)**                                                  |                        |                 |
+| `App/Header & Footer`                                                               | `2041:481`             | ❖ Components    |
+| `App/Icons`                                                                         | `2041:482`             | ❖ Components    |
+| `App/Buttons`                                                                       | `2041:483`             | ❖ Components    |
+| `Hero`                                                                              | `2041:484`             | ❖ Components    |
+| `App/Typography`                                                                    | `2041:485`             | ❖ Components    |
+| `Blog`                                                                              | `2041:486`             | ❖ Components    |
+| `Work`                                                                              | `2045:429`             | ❖ Components    |
+| `Contact`                                                                           | `2047:428`             | ❖ Components    |
+| **📖 Cover**                                                                        |                        |                 |
+| Cover frame                                                                         | `9:2`                  | 📖 Cover        |
+| Date chip text node (characters: "Aug 8, 2026")                                     | `I2694:6660;2693:9892` | 📖 Cover        |
+| Version chip text node — reference only, **do not touch** (D2), characters: "v0.91" | `I2694:6673;2693:9909` | 📖 Cover        |
 
 ### Deviations
 
@@ -110,7 +110,7 @@ Body/xs/medium, Label/Meta, Chip/Mono, Code/Base.
 name `TYPOGRAPHY`) is the frame's own section-title text node, not a
 specimen. Excluding it leaves exactly 17 specimens, matching the list above.
 The brief's "18" was counting the section title alongside the specimens; not
-a stale estimate of *content*, just an off-by-one over what counts as a
+a stale estimate of _content_, just an off-by-one over what counts as a
 specimen row. A subtree-wide name search for `2xl`
 (`frame.findAll(n => /2xl/i.test(n.name))`) returned **zero matches** —
 `Body/2xl` does not exist anywhere in this frame. The old ramp genuinely
@@ -200,13 +200,13 @@ chapter-to-chapter gap they introduce (e.g. Chapter 00 → 01).
 
 **Column layout (top to bottom, x=0 for all four, in `📚 Docs`):**
 
-| Frame | ID | x | y | width | height |
-| --- | --- | --- | --- | --- | --- |
-| Reserved space for Chapter 00 (Task 4) | — | 0 | 0–2000 | — | 2000 |
-| `CHAPTER / 01 Foundations` | `2670:6678` | 0 | 2000 | 1408 (fixed post-review, see below) | 5821 |
-| `CHAPTER / 02 Components` | `2670:6860` | 0 | 7981 | 1408 | 14272.06 |
-| `CHAPTER / 03 Sections` | `2670:7567` | 0 | 22413.06 | 1408 | 4932 |
-| `CHAPTER / 04 Pages` | `2670:7608` | 0 | 27505.06 | 1408 | 5134 |
+| Frame                                  | ID          | x   | y        | width                               | height   |
+| -------------------------------------- | ----------- | --- | -------- | ----------------------------------- | -------- |
+| Reserved space for Chapter 00 (Task 4) | —           | 0   | 0–2000   | —                                   | 2000     |
+| `CHAPTER / 01 Foundations`             | `2670:6678` | 0   | 2000     | 1408 (fixed post-review, see below) | 5821     |
+| `CHAPTER / 02 Components`              | `2670:6860` | 0   | 7981     | 1408                                | 14272.06 |
+| `CHAPTER / 03 Sections`                | `2670:7567` | 0   | 22413.06 | 1408                                | 4932     |
+| `CHAPTER / 04 Pages`                   | `2670:7608` | 0   | 27505.06 | 1408                                | 5134     |
 
 Reserved top space is 2000px (~2× `CHAPTER / 00 Read me`'s current height of
 926px), leaving room for the future `CHAPTER / 00 About` frame (Task 4) plus
@@ -225,7 +225,7 @@ re-guessing from the earlier read: the FIXED-1600 cascade ran through
 `2670:6686`, `2670:6690`) → `mode tables` (`2670:6694`) → `theme token jobs`
 (`2670:6698`), plus a sibling `PANEL / Token Verification` (`2670:6833`) and
 its title text node (`2670:6834`, FIXED 1576px). Crucially, none of these
-frames' *actual leaf content* needed 1600px: every text node inside topped
+frames' _actual leaf content_ needed 1600px: every text node inside topped
 out at 900px, and all 15 `token row / *` instances inside `theme token jobs`
 were already FIXED at 1180px — well under 1408. The 1600px width was a
 container-level choice, not content-driven, so narrowing was non-destructive.
@@ -239,7 +239,7 @@ new width. Re-walked the full subtree afterward for anything still
 `width > 1408`: only one pre-existing, unrelated hit remained — `radius
 specimens` (`2670:6775`, HUG-sized to 1506px) inside `SECTION / Radius`,
 which is itself FIXED at 640px with `clipsContent: true`. That content was
-*already* being clipped at 640px before this fix (a pre-existing overflow
+_already_ being clipped at 640px before this fix (a pre-existing overflow
 inside the 640px-wide radius section, unrelated to the chapter's outer
 1600→1408 width and not something Task 3 introduced or this fix touches);
 flagging it here for a future cleanup pass, out of scope for this fix.
@@ -264,8 +264,8 @@ block, dy=+34640) — no re-layout needed since they didn't overlap before and
 don't overlap now.
 
 **Instance-link verification (Step 3).** Took `get_screenshot` of `CHAPTER /
-01 Foundations` (`2670:6678`) while it was still on `📚 Introduction`, *after*
-moving the masters but *before* moving the chapter frames themselves. All
+01 Foundations` (`2670:6678`) while it was still on `📚 Introduction`, _after_
+moving the masters but _before_ moving the chapter frames themselves. All
 `_Docs/*` instances inside it (ChapterHeader, DecisionCard, TokenRow, DoDont,
 SpecimenCell, Date, Status, Headline, Paragraph, Divider) rendered
 identically — no detached/red/missing-component placeholders. Confirms
@@ -308,9 +308,9 @@ height).
 4. Core rules — one `_Docs/Paragraph` (`2754:4214`), 7 hand-broken bullets
    (50–75 char measure per rendered line, see Fix pass below). **Caveat:**
    no discrete "7 core rules" list exists anywhere in the source (`CHAPTER /
-   00 Read me` only had the 3 DecisionCards + 1 closing line; `Intro/01`/`02`
+00 Read me` only had the 3 DecisionCards + 1 closing line; `Intro/01`/`02`
    don't contain a rules list either) — "7 core rules" in the brief/D3/D8 is
-   design.md's description of the *target* structure, not a pointer to
+   design.md's description of the _target_ structure, not a pointer to
    existing extractable content. Synthesized 7 atomic clauses by decomposing
    the existing layer text (Chrome scope + Chrome operating-layer rule;
    Content scope + the type/radius/border rule; metadata-as-third-layer
@@ -349,13 +349,13 @@ height (1885px) differs from the 2000px placeholder Task 3 reserved, so
 `01`–`04` were shifted down by their delta (+45px) to keep the chosen 160px
 chapter-to-chapter gap exact on both sides of Chapter 00:
 
-| Frame | ID | old y | new y | width | height |
-| --- | --- | --- | --- | --- | --- |
-| `CHAPTER / 00 About` | `2705:21254` | — (new) | 0 | 1408 | 1885 |
-| `CHAPTER / 01 Foundations` | `2670:6678` | 2000 | 2045 | 1408 | 5821 |
-| `CHAPTER / 02 Components` | `2670:6860` | 7981 | 8026 | 1408 | 14272.06 |
-| `CHAPTER / 03 Sections` | `2670:7567` | 22413.06 | 22458.06 | 1408 | 4932 |
-| `CHAPTER / 04 Pages` | `2670:7608` | 27505.06 | 27550.06 | 1408 | 5134 |
+| Frame                      | ID           | old y    | new y    | width | height   |
+| -------------------------- | ------------ | -------- | -------- | ----- | -------- |
+| `CHAPTER / 00 About`       | `2705:21254` | — (new)  | 0        | 1408  | 1885     |
+| `CHAPTER / 01 Foundations` | `2670:6678`  | 2000     | 2045     | 1408  | 5821     |
+| `CHAPTER / 02 Components`  | `2670:6860`  | 7981     | 8026     | 1408  | 14272.06 |
+| `CHAPTER / 03 Sections`    | `2670:7567`  | 22413.06 | 22458.06 | 1408  | 4932     |
+| `CHAPTER / 04 Pages`       | `2670:7608`  | 27505.06 | 27550.06 | 1408  | 5134     |
 
 **Verification.** `get_screenshot` of the full `CHAPTER / 00 About` frame
 confirms: reads top-to-bottom in one pass, all 6 content blocks visible with
@@ -406,14 +406,14 @@ remains the only other slot in the whole plan, not touched here.
 
 **Regrouping (Step 3) — final membership, D5 order:**
 
-| Group | ID | Header instance | Content | Height |
-| --- | --- | --- | --- | --- |
-| `GROUP / Chrome` | `2766:4214` (new frame) | `2766:4215` | NavLink, NavLinkHome, NavLink hover pair, Icon, Link/Icon (+hover), ThemeToggle, MotionToggle, DecisionCard "three icon sizes" (`2670:6897`) | 1254 |
-| `GROUP / Actions` | `2670:6862` (renamed from `GROUP / Buttons`) | `2766:5568` | Link/CTA, Link/Secondary, Link/SecondarySm, Link/TextCTA (each cell + hover pair), DecisionCard "three button styles" (`2670:6896`) | 1388 |
-| `GROUP / Typography` | `2766:5570` (new frame) | `2766:5571` | H1, H2, PreviewTitle, PageDescription, DecisionCard "display font page-level only" (`2670:6975`), DoDont title-hover (`2670:6978`) | 1183 |
-| `GROUP / Metadata` | `2670:6938` (renamed from `GROUP / Metadata & Text`) | `2766:5573` | PostMetadataTime, PostMetadataTopic, SerieMeta, type=day, type=no-date, DecisionCards `2670:6974`/`6976`/`6977`, DoDont chips (`2670:6995`), DoDont accent-budget (`2670:7550`, adopted from chapter-level orphan) | 1692 |
-| `GROUP / Cards` | `2670:7013` (unchanged) | pre-existing | PostRow/SerieCard/PostCardPreviewBig/PostCardPreviewSmall/WorkCardPreviewSmall (+ border cells, hover pairs), DecisionCards `2670:7044`–`7047`, "postrow deep dive" frame (`2670:7063`) | 4947 |
-| `GROUP / Sections` | `2670:7075` (renamed from `GROUP / Hero & Contact`) | `2766:5575` | HeroText, HeroAnimation, ContactContent, hero.svg, values/quality.svg, 404.svg, arrow-curve.svg, footer.svg, DecisionCards `2670:7547`/`7548`, DecisionCard "one verb per surface" (`2670:7549`, adopted from chapter-level orphan) | 3233.06 |
+| Group                | ID                                                   | Header instance | Content                                                                                                                                                                                                                             | Height  |
+| -------------------- | ---------------------------------------------------- | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `GROUP / Chrome`     | `2766:4214` (new frame)                              | `2766:4215`     | NavLink, NavLinkHome, NavLink hover pair, Icon, Link/Icon (+hover), ThemeToggle, MotionToggle, DecisionCard "three icon sizes" (`2670:6897`)                                                                                        | 1254    |
+| `GROUP / Actions`    | `2670:6862` (renamed from `GROUP / Buttons`)         | `2766:5568`     | Link/CTA, Link/Secondary, Link/SecondarySm, Link/TextCTA (each cell + hover pair), DecisionCard "three button styles" (`2670:6896`)                                                                                                 | 1388    |
+| `GROUP / Typography` | `2766:5570` (new frame)                              | `2766:5571`     | H1, H2, PreviewTitle, PageDescription, DecisionCard "display font page-level only" (`2670:6975`), DoDont title-hover (`2670:6978`)                                                                                                  | 1183    |
+| `GROUP / Metadata`   | `2670:6938` (renamed from `GROUP / Metadata & Text`) | `2766:5573`     | PostMetadataTime, PostMetadataTopic, SerieMeta, type=day, type=no-date, DecisionCards `2670:6974`/`6976`/`6977`, DoDont chips (`2670:6995`), DoDont accent-budget (`2670:7550`, adopted from chapter-level orphan)                  | 1692    |
+| `GROUP / Cards`      | `2670:7013` (unchanged)                              | pre-existing    | PostRow/SerieCard/PostCardPreviewBig/PostCardPreviewSmall/WorkCardPreviewSmall (+ border cells, hover pairs), DecisionCards `2670:7044`–`7047`, "postrow deep dive" frame (`2670:7063`)                                             | 4947    |
+| `GROUP / Sections`   | `2670:7075` (renamed from `GROUP / Hero & Contact`)  | `2766:5575`     | HeroText, HeroAnimation, ContactContent, hero.svg, values/quality.svg, 404.svg, arrow-curve.svg, footer.svg, DecisionCards `2670:7547`/`7548`, DecisionCard "one verb per surface" (`2670:7549`, adopted from chapter-level orphan) | 3233.06 |
 
 `GROUP / Navigation` (`2670:6923`) was deleted after confirming empty
 (all content already reparented into Chrome) — non-destructive per D3
@@ -454,9 +454,10 @@ lines) — instance width unchanged, unrelated to this task's edits.
 Literal `&amp;quot;` HTML-entity artifacts appear in some cell description
 text (e.g. PostMetadataTime) — pre-existing content issue. `2670:7045` and
 `2670:7047` in `GROUP / Cards` carry identical DecisionCard text ("CONTENT
+
 - One chip per card/row...") — likely a pre-existing duplicate; left as-is
-since Cards was out of scope for content changes (already D5-compliant)
-and D3 forbids deleting without deciding which copy is canonical.
+  since Cards was out of scope for content changes (already D5-compliant)
+  and D3 forbids deleting without deciding which copy is canonical.
 
 **Fix round 1 (post-review).** Review found `GROUP / Cards`'s heading
 (`2670:7014`, raw 30px text "Cards") was never swapped to
@@ -489,14 +490,14 @@ call-out). **No deviations** — nothing to flag for a design.md follow-up.
 
 **Regrouping (Step 2) — final membership:**
 
-| Section | ID | Content | Notes |
-| --- | --- | --- | --- |
-| `Chrome` | `2041:481` (renamed from `App/Header & Footer`) | NavLink, NavLinkHome, Header, Footer (pre-existing) + ThemeToggle, MotionToggle (moved from `App/Buttons`), Icon (moved from `App/Icons`) | New row added below existing content; section grown 717→909px height |
-| `Actions` | `2041:483` (renamed from `App/Buttons`) | Link/CTA, Link/Secondary, Link/TextCTA, Link/Icon, Link/SecondarySm | ThemeToggle/MotionToggle moved out to Chrome; section shifted y −3717→−3517 (+200px) to clear Chrome's growth, no overlap |
-| `Typography` | `2041:485` (renamed from `App/Typography`) | H1, H2, PreviewTitle, PageDescription | Unchanged — already exact D5 match, no moves |
-| `Metadata` | `2778:303` (new section) | PostMetadataTime, PostMetadataTopic, SerieMeta | All 3 moved from `Blog` |
-| `Cards` | `2778:304` (new section) | PostRow, SerieCard, PostCardPreviewBig, PostCardPreviewSmall, WorkCardPreviewSmall | 4 moved from `Blog`, 1 (WorkCardPreviewSmall) from `Work` |
-| `Sections` | `2041:484` (renamed from `Hero`) | Hero, HeroText, HeroAnimation (pre-existing) + BlogPreviewSection, ArchiveTable, SerieCardList (from `Blog`), WorkPreviewSection (from `Work`), ContactContent, ContactPreviewSection (from `Contact`) | Grown from 1864×1716 to 3685×2897 to fit 2 new rows below existing Hero content |
+| Section      | ID                                              | Content                                                                                                                                                                                                | Notes                                                                                                                     |
+| ------------ | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| `Chrome`     | `2041:481` (renamed from `App/Header & Footer`) | NavLink, NavLinkHome, Header, Footer (pre-existing) + ThemeToggle, MotionToggle (moved from `App/Buttons`), Icon (moved from `App/Icons`)                                                              | New row added below existing content; section grown 717→909px height                                                      |
+| `Actions`    | `2041:483` (renamed from `App/Buttons`)         | Link/CTA, Link/Secondary, Link/TextCTA, Link/Icon, Link/SecondarySm                                                                                                                                    | ThemeToggle/MotionToggle moved out to Chrome; section shifted y −3717→−3517 (+200px) to clear Chrome's growth, no overlap |
+| `Typography` | `2041:485` (renamed from `App/Typography`)      | H1, H2, PreviewTitle, PageDescription                                                                                                                                                                  | Unchanged — already exact D5 match, no moves                                                                              |
+| `Metadata`   | `2778:303` (new section)                        | PostMetadataTime, PostMetadataTopic, SerieMeta                                                                                                                                                         | All 3 moved from `Blog`                                                                                                   |
+| `Cards`      | `2778:304` (new section)                        | PostRow, SerieCard, PostCardPreviewBig, PostCardPreviewSmall, WorkCardPreviewSmall                                                                                                                     | 4 moved from `Blog`, 1 (WorkCardPreviewSmall) from `Work`                                                                 |
+| `Sections`   | `2041:484` (renamed from `Hero`)                | Hero, HeroText, HeroAnimation (pre-existing) + BlogPreviewSection, ArchiveTable, SerieCardList (from `Blog`), WorkPreviewSection (from `Work`), ContactContent, ContactPreviewSection (from `Contact`) | Grown from 1864×1716 to 3685×2897 to fit 2 new rows below existing Hero content                                           |
 
 `App/Icons` (`2041:482`), `Blog` (`2041:486`), `Work` (`2045:429`), and
 `Contact` (`2047:428`) were deleted after confirming 0 remaining children
@@ -583,41 +584,41 @@ without writing anything. Full text of all 33 descriptions was captured for
 the record (available in `task-7-report.md`, and reproducible via `use_figma`
 against the IDs below).
 
-| Section | Component | ID |
-| --- | --- | --- |
-| Chrome | NavLink | `2001:1309` |
-| Chrome | NavLinkHome | `2001:1312` |
-| Chrome | Header | `2001:1669` |
-| Chrome | Footer | `2099:2560` |
-| Chrome | ThemeToggle | `16:11` |
-| Chrome | MotionToggle | `16:12` |
-| Chrome | Icon | `461:6204` |
-| Actions | Link/CTA | `2012:6179` |
-| Actions | Link/Secondary | `2041:275` |
-| Actions | Link/TextCTA | `2041:313` |
-| Actions | Link/Icon | `2093:6332` |
-| Actions | Link/SecondarySm | `2350:737` |
-| Typography | H2 | `2034:213` |
-| Typography | PreviewTitle | `2041:465` |
-| Typography | H1 | `2119:7406` |
-| Typography | PageDescription | `2119:7440` |
-| Metadata | PostMetadataTime | `2040:482` |
-| Metadata | PostMetadataTopic | `2371:10414` |
-| Metadata | SerieMeta | `2375:10662` |
-| Cards | PostCardPreviewBig | `2385:7139` |
-| Cards | PostCardPreviewSmall | `2385:7149` |
-| Cards | WorkCardPreviewSmall | `2045:378` |
-| Cards | PostRow | `2124:7937` |
-| Cards | SerieCard | `2367:7205` |
-| Sections | HeroText | `2012:6142` |
-| Sections | HeroAnimation | `2012:315` |
-| Sections | Hero | `2012:6305` |
-| Sections | BlogPreviewSection | `2041:560` |
-| Sections | ArchiveTable | `2124:8011` |
-| Sections | SerieCardList | `2119:7557` |
-| Sections | WorkPreviewSection | `2045:428` |
-| Sections | ContactContent | `131:101` |
-| Sections | ContactPreviewSection | `2114:7281` |
+| Section    | Component             | ID           |
+| ---------- | --------------------- | ------------ |
+| Chrome     | NavLink               | `2001:1309`  |
+| Chrome     | NavLinkHome           | `2001:1312`  |
+| Chrome     | Header                | `2001:1669`  |
+| Chrome     | Footer                | `2099:2560`  |
+| Chrome     | ThemeToggle           | `16:11`      |
+| Chrome     | MotionToggle          | `16:12`      |
+| Chrome     | Icon                  | `461:6204`   |
+| Actions    | Link/CTA              | `2012:6179`  |
+| Actions    | Link/Secondary        | `2041:275`   |
+| Actions    | Link/TextCTA          | `2041:313`   |
+| Actions    | Link/Icon             | `2093:6332`  |
+| Actions    | Link/SecondarySm      | `2350:737`   |
+| Typography | H2                    | `2034:213`   |
+| Typography | PreviewTitle          | `2041:465`   |
+| Typography | H1                    | `2119:7406`  |
+| Typography | PageDescription       | `2119:7440`  |
+| Metadata   | PostMetadataTime      | `2040:482`   |
+| Metadata   | PostMetadataTopic     | `2371:10414` |
+| Metadata   | SerieMeta             | `2375:10662` |
+| Cards      | PostCardPreviewBig    | `2385:7139`  |
+| Cards      | PostCardPreviewSmall  | `2385:7149`  |
+| Cards      | WorkCardPreviewSmall  | `2045:378`   |
+| Cards      | PostRow               | `2124:7937`  |
+| Cards      | SerieCard             | `2367:7205`  |
+| Sections   | HeroText              | `2012:6142`  |
+| Sections   | HeroAnimation         | `2012:315`   |
+| Sections   | Hero                  | `2012:6305`  |
+| Sections   | BlogPreviewSection    | `2041:560`   |
+| Sections   | ArchiveTable          | `2124:8011`  |
+| Sections   | SerieCardList         | `2119:7557`  |
+| Sections   | WorkPreviewSection    | `2045:428`   |
+| Sections   | ContactContent        | `131:101`    |
+| Sections   | ContactPreviewSection | `2114:7281`  |
 
 **Verify coverage (Step 2).** Re-ran a live, page-wide
 `findAllWithCriteria({types:['COMPONENT','COMPONENT_SET']})` sweep (99 nodes
@@ -643,7 +644,7 @@ Both are addressed here; nothing above is rewritten, only appended to.
 technically had a non-empty `description` (satisfying Step 2's literal
 "zero empty" bar) but the text was only the `<Level> · Code: <path>`
 template with no actual descriptive sentence — meaning their purpose was
-*not* readable without opening the code, which was Task 7's real intent.
+_not_ readable without opening the code, which was Task 7's real intent.
 Affected: Header, Footer, ThemeToggle, MotionToggle, H2, HeroText,
 HeroAnimation, Hero, BlogPreviewSection, SerieCardList, WorkPreviewSection,
 ContactContent, ContactPreviewSection. Two more were checked as borderline
@@ -693,7 +694,7 @@ both predating `magnet-ds-docs-v1` by days:
 
 Both plans are archived (shipped), confirming these are prior, tracked
 work — not an undocumented or out-of-process channel. The "Task 7"/"Task 1"
-self-references in the live descriptions refer to *those* plans' own task
+self-references in the live descriptions refer to _those_ plans' own task
 numbering, which coincidentally overlaps with this plan's task numbering
 since both plans number tasks sequentially from 1. No mystery, no
 unaccounted-for edit; `task-7-report.md` carries a correction note pointing
@@ -708,6 +709,7 @@ pre-fix count (this fix only enriched existing non-empty text, it didn't
 change the empty/non-empty tally).
 
 ## Task 8 — pages demoted/renamed, cover date refreshed, CLAUDE.md updated;
+
 deletion scope reduced (⚠️ major finding)
 
 **Fresh page inventory (Step 0, live).** `figma.root.children` before any
@@ -730,6 +732,7 @@ nothing extra to move before demoting.
 
 **Steps 2–3 (demote + rename backups).** Executed in one `use_figma` call
 (rename + reorder only, no page-content load needed for either):
+
 - `📚 Introduction` → `🗄 Backup — Introduction (pre-Docs)` (`2545:671`)
 - `Page 6` → `🗄 Backup — UI kit foundations & controls` (`2678:6692`) —
   content inspected live: Grid and Indention, Typography, Colors, Icons,
@@ -755,13 +758,13 @@ read"), each target was loaded live via `setCurrentPageAsync` (for
 `🎨 Foundations`, whose D4 verdict is content-based, not count-based)
 immediately before any delete was attempted:
 
-| Target | Brief's claim | Live result |
-| --- | --- | --- |
-| `🎨 Foundations` (`5:14`) | superseded per D4 verdict | **Confirmed.** 2 children (`6:2`, `8:2`), matching Pass-0 exactly. D4 verdict (above) already established "nothing unique — safe to delete" via content diff, independent of any child-count claim. **Deleted.** |
-| `📐 Decisions` (`2716:4244`) | "empty since creation" | **False.** 1 child, `design-decisions` frame (`2729:4244`, 1440×4913px), which itself has **7 sub-frames** of real content. **NOT deleted.** |
-| `Page 8` (`2678:23308`) | "0 children" | **False.** 12 top-level frames — `Layout / Normal`, `Layout / Compact`, `Display`, `Mono Display`, `Heading`, `Mono Heading`, `Label`, `Mono Lable` [sic], `Mono Paragraph`, `Paragraph`, `Foundation`, `Light tokens` — a substantial old typography/token specimen set (9–19 sub-children each). **NOT deleted.** |
-| `Page 9` (`2678:32354`) | "0 children" | **False.** 5 top-level frames — `🟡 TEMPLATES`, `🟡 SECTIONS`, `🟡 COMPONENTS`, `🟡 FOUNDATIONS`, `🚀 Welcome` — naming strongly suggests commercial UI-kit onboarding/template scaffolding rather than the user's own design work, but this is inference, not confirmed. **NOT deleted.** |
-| `Page 11` (`2678:34657`) | "0 children" | **False.** 33 top-level nodes — `Plugin / Similayer`, `Plugin / Design System Organizer`, `Instructions / Component Architecture`, `Instructions / Naming Conventions`, `Typography / Medium\|Small\|Large Scale`, etc. — reads as generic plugin-recommendation/instructional boilerplate that ships with a purchased Figma UI kit, but again inference, not confirmed. **NOT deleted.** |
+| Target                       | Brief's claim             | Live result                                                                                                                                                                                                                                                                                                                                                                               |
+| ---------------------------- | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `🎨 Foundations` (`5:14`)    | superseded per D4 verdict | **Confirmed.** 2 children (`6:2`, `8:2`), matching Pass-0 exactly. D4 verdict (above) already established "nothing unique — safe to delete" via content diff, independent of any child-count claim. **Deleted.**                                                                                                                                                                          |
+| `📐 Decisions` (`2716:4244`) | "empty since creation"    | **False.** 1 child, `design-decisions` frame (`2729:4244`, 1440×4913px), which itself has **7 sub-frames** of real content. **NOT deleted.**                                                                                                                                                                                                                                              |
+| `Page 8` (`2678:23308`)      | "0 children"              | **False.** 12 top-level frames — `Layout / Normal`, `Layout / Compact`, `Display`, `Mono Display`, `Heading`, `Mono Heading`, `Label`, `Mono Lable` [sic], `Mono Paragraph`, `Paragraph`, `Foundation`, `Light tokens` — a substantial old typography/token specimen set (9–19 sub-children each). **NOT deleted.**                                                                       |
+| `Page 9` (`2678:32354`)      | "0 children"              | **False.** 5 top-level frames — `🟡 TEMPLATES`, `🟡 SECTIONS`, `🟡 COMPONENTS`, `🟡 FOUNDATIONS`, `🚀 Welcome` — naming strongly suggests commercial UI-kit onboarding/template scaffolding rather than the user's own design work, but this is inference, not confirmed. **NOT deleted.**                                                                                                |
+| `Page 11` (`2678:34657`)     | "0 children"              | **False.** 33 top-level nodes — `Plugin / Similayer`, `Plugin / Design System Organizer`, `Instructions / Component Architecture`, `Instructions / Naming Conventions`, `Typography / Medium\|Small\|Large Scale`, etc. — reads as generic plugin-recommendation/instructional boilerplate that ships with a purchased Figma UI kit, but again inference, not confirmed. **NOT deleted.** |
 
 **Root cause.** This is the same staleness bug already documented in
 Task 1's own Deviations note ("Introduction page child count is stale
@@ -839,21 +842,21 @@ taken during this task, not from prior tasks' notes.
 
 ### Checklist
 
-| # | Check | Verdict | Evidence |
-|---|-------|---------|----------|
-| 1 | Linear spatial IA | **PASS** | 5 chapters, one column, x=0/width=1408 constant on all. Gaps: 00→01=160, 01→02=160, 02→03=160, 03→04=160 (all exact, post-fix). Order 00→01→02→03→04 confirmed by y ascending. Full-column screenshot taken (node `2736:4`). |
-| 2 | Layer-cake scanning | **PASS** | Every chapter has ChapterHeader → group headings → cards (see fix below — Chapter 01 was missing its ChapterHeader, now added). Chapter 02's `GROUP / Cards` confirmed structure: `_Docs/GroupHeader` ("Cards", 24px) → 3 `_Docs/DecisionCard` children. 3 arbitrary facts checked page→chapter→group→card in <10s each: (a) "One chip per card/row" rule (Chapter 02 → Cards group → DecisionCard), (b) `color/background` token light/dark values (Chapter 01 → token table row), (c) mission statement (Chapter 00 → Paragraph "Mission"). Chapters 03/04 have flat card lists without group-level headings, judged acceptable given their small size (11 and 6 children) — not a layer-cake violation since there's only one layer of content below the chapter header. PageTOC (Step 3) not added — bottleneck found was a missing ChapterHeader instance, not chapter orientation/navigation. |
-| 3 | Two-level cap | **PASS** | No nesting deeper than page → chapter → group → card anywhere; group headings exist only where multiple card categories are present (Chapter 02). No sub-group-of-a-group found in any chapter. |
-| 4 | One idea per frame | **PASS (fixed)** | Duplicate `_Docs/DecisionCard` resolved: `2670:7045` ("One chip per card/row" — serie-chip-wins rule) kept as canonical; `2670:7047` (byte-identical duplicate) deleted. Remaining 2 cards in the group (`2670:7044` border rule, `2670:7046` hover/verb rule) confirmed genuinely distinct topics, not duplicates. `GROUP / Cards` now has 3 DecisionCards, screenshot confirms no duplicate text visible. |
-| 5 | Visible heading hierarchy | **PASS (fixed — see Fix round 1)** | Original measurement: ChapterHeader title 40px vs `_Docs/DecisionCard`'s `body` field 16px (the dominant, most-frequent reading-prose size on the page, present in every chapter) = **2.5× — failed the literal ≤2× cap**, contra the round-1 PASS. Fixed by reducing ChapterHeader title 40px→32px (master + all 5 instances). New ratio: 32/16 = **2.0×, meets the cap**. Full ramp post-fix: ChapterHeader 32 → Paragraph section-label 28 (Ch00 only) → GroupHeader 24 → DecisionCard rule/Paragraph body 20 → DecisionCard body 16 → TokenRow role/SpecimenCell caption 14 → mono metadata 12 (this last tier is explicitly self-documented in Chapter 00's Core-rules text as its own "third layer, set in mono at 12px" — a deliberate exception, not part of "body"). Caveat: measured against the 14px caption/table-cell tier instead, ratio is 32/14≈2.29×, still over cap — judged acceptable since captions/table cells are a distinct, narrower type role than flowing body prose in this system (SpecimenCell's field is literally named `caption`) and are conventionally excluded from body-ratio checks. See `## Task 9 fix round 1` below for full before/after evidence. |
-| 6 | Prose budget | **PASS (with caveat)** | Only 2 genuine multi-line prose blocks exist site-wide: Mission and Core rules (both in Chapter 00, both within 50-75 chars/line after Task 4's fix-round rewording). Audience and Page-intents paragraphs are short bulleted/tabular lists, not flowing prose — the char-count heuristic doesn't strictly apply; forcing them to 50-75 chars/line would hurt scannability, not help it. Judged PASS given the intent of the check (avoid dense unreadable paragraphs) is met. Specimen captions (DecisionCard `rule` fields, DoDont captions) are all single-sentence. |
-| 7 | Token tables | **PASS** | `PANEL / 01 Tokens Intro` → `theme token jobs` panel: 15 `token row/*` instances, single unified table, semantic name first column, description second, Light value inline, Dark value inline, no per-theme duplicate tables anywhere on the page. |
-| 8 | Do/Don't discipline | **PASS** | 3 DoDont frames found (`Docs/DoDont — title-hover`, `— chips`, `— accent-budget`), each exactly 1 pair (2 children: do + don't), one-line captions, framed around plausible wrong choices (not strawmen). No row exceeds 2 pairs. |
-| 9 | Chapter 00 cap | **PASS** | Height 1885px (unchanged, well under the ~2 frame-height cap — smallest chapter on the page). Exactly 6 children: ChapterHeader, Paragraph (Mission), "three-layer identity" block, Paragraph (Core rules), Paragraph (Audience), Paragraph (Page intents) — matches the spec's required content set exactly, no extras. |
+| #   | Check                     | Verdict                            | Evidence                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| --- | ------------------------- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | Linear spatial IA         | **PASS**                           | 5 chapters, one column, x=0/width=1408 constant on all. Gaps: 00→01=160, 01→02=160, 02→03=160, 03→04=160 (all exact, post-fix). Order 00→01→02→03→04 confirmed by y ascending. Full-column screenshot taken (node `2736:4`).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| 2   | Layer-cake scanning       | **PASS**                           | Every chapter has ChapterHeader → group headings → cards (see fix below — Chapter 01 was missing its ChapterHeader, now added). Chapter 02's `GROUP / Cards` confirmed structure: `_Docs/GroupHeader` ("Cards", 24px) → 3 `_Docs/DecisionCard` children. 3 arbitrary facts checked page→chapter→group→card in <10s each: (a) "One chip per card/row" rule (Chapter 02 → Cards group → DecisionCard), (b) `color/background` token light/dark values (Chapter 01 → token table row), (c) mission statement (Chapter 00 → Paragraph "Mission"). Chapters 03/04 have flat card lists without group-level headings, judged acceptable given their small size (11 and 6 children) — not a layer-cake violation since there's only one layer of content below the chapter header. PageTOC (Step 3) not added — bottleneck found was a missing ChapterHeader instance, not chapter orientation/navigation.                                                                                                                                                                                                                                                                                          |
+| 3   | Two-level cap             | **PASS**                           | No nesting deeper than page → chapter → group → card anywhere; group headings exist only where multiple card categories are present (Chapter 02). No sub-group-of-a-group found in any chapter.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| 4   | One idea per frame        | **PASS (fixed)**                   | Duplicate `_Docs/DecisionCard` resolved: `2670:7045` ("One chip per card/row" — serie-chip-wins rule) kept as canonical; `2670:7047` (byte-identical duplicate) deleted. Remaining 2 cards in the group (`2670:7044` border rule, `2670:7046` hover/verb rule) confirmed genuinely distinct topics, not duplicates. `GROUP / Cards` now has 3 DecisionCards, screenshot confirms no duplicate text visible.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| 5   | Visible heading hierarchy | **PASS (fixed — see Fix round 1)** | Original measurement: ChapterHeader title 40px vs `_Docs/DecisionCard`'s `body` field 16px (the dominant, most-frequent reading-prose size on the page, present in every chapter) = **2.5× — failed the literal ≤2× cap**, contra the round-1 PASS. Fixed by reducing ChapterHeader title 40px→32px (master + all 5 instances). New ratio: 32/16 = **2.0×, meets the cap**. Full ramp post-fix: ChapterHeader 32 → Paragraph section-label 28 (Ch00 only) → GroupHeader 24 → DecisionCard rule/Paragraph body 20 → DecisionCard body 16 → TokenRow role/SpecimenCell caption 14 → mono metadata 12 (this last tier is explicitly self-documented in Chapter 00's Core-rules text as its own "third layer, set in mono at 12px" — a deliberate exception, not part of "body"). Caveat: measured against the 14px caption/table-cell tier instead, ratio is 32/14≈2.29×, still over cap — judged acceptable since captions/table cells are a distinct, narrower type role than flowing body prose in this system (SpecimenCell's field is literally named `caption`) and are conventionally excluded from body-ratio checks. See `## Task 9 fix round 1` below for full before/after evidence. |
+| 6   | Prose budget              | **PASS (with caveat)**             | Only 2 genuine multi-line prose blocks exist site-wide: Mission and Core rules (both in Chapter 00, both within 50-75 chars/line after Task 4's fix-round rewording). Audience and Page-intents paragraphs are short bulleted/tabular lists, not flowing prose — the char-count heuristic doesn't strictly apply; forcing them to 50-75 chars/line would hurt scannability, not help it. Judged PASS given the intent of the check (avoid dense unreadable paragraphs) is met. Specimen captions (DecisionCard `rule` fields, DoDont captions) are all single-sentence.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| 7   | Token tables              | **PASS**                           | `PANEL / 01 Tokens Intro` → `theme token jobs` panel: 15 `token row/*` instances, single unified table, semantic name first column, description second, Light value inline, Dark value inline, no per-theme duplicate tables anywhere on the page.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| 8   | Do/Don't discipline       | **PASS**                           | 3 DoDont frames found (`Docs/DoDont — title-hover`, `— chips`, `— accent-budget`), each exactly 1 pair (2 children: do + don't), one-line captions, framed around plausible wrong choices (not strawmen). No row exceeds 2 pairs.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| 9   | Chapter 00 cap            | **PASS**                           | Height 1885px (unchanged, well under the ~2 frame-height cap — smallest chapter on the page). Exactly 6 children: ChapterHeader, Paragraph (Mission), "three-layer identity" block, Paragraph (Core rules), Paragraph (Audience), Paragraph (Page intents) — matches the spec's required content set exactly, no extras.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 
 ### Fixes applied this task
 
-1. **Chapter 01 Foundations was missing its `_Docs/ChapterHeader` instance** (new finding, not previously flagged in any Task 1-8 ledger entry — discovered during this task's fresh Check-2 audit). Inserted a new ChapterHeader instance (`2803:4218`) at index 0, matching the sibling chapters' pattern: number="01", title="Foundations", summary="Design tokens and their light/dark bindings — colour, type, spacing, radius, motion, icons — the base everything downstream inherits from." Chapter 01 height grew 5821→6075 (+254px); cascaded position shift (+254) applied to Chapters 02/03/04 to hold the 160px gaps. This is the only new `_Docs/*` component *instance* created — no new component was created, ChapterHeader already existed as a Task-3 master (D7-compliant).
+1. **Chapter 01 Foundations was missing its `_Docs/ChapterHeader` instance** (new finding, not previously flagged in any Task 1-8 ledger entry — discovered during this task's fresh Check-2 audit). Inserted a new ChapterHeader instance (`2803:4218`) at index 0, matching the sibling chapters' pattern: number="01", title="Foundations", summary="Design tokens and their light/dark bindings — colour, type, spacing, radius, motion, icons — the base everything downstream inherits from." Chapter 01 height grew 5821→6075 (+254px); cascaded position shift (+254) applied to Chapters 02/03/04 to hold the 160px gaps. This is the only new `_Docs/*` component _instance_ created — no new component was created, ChapterHeader already existed as a Task-3 master (D7-compliant).
 2. **Duplicate DecisionCard** (`2670:7045`/`2670:7047`, flagged since Task 5's ledger, deferred to Task 9 by design) — resolved per check 4 above: kept `2670:7045`, deleted `2670:7047`.
 3. **Chapter 02 ChapterHeader title wrap** ("Compo/nents" — flagged since Task 5's ledger) — fixed. The title text node (`I2670:6861;2590:535`) had `layoutSizingHorizontal: FIXED` at width 131px, too narrow for "Components" at 40px, forcing a 2-line wrap. Plain `resize()` did not stick (parent auto-layout re-asserted the fixed width). Fix: set `layoutSizingHorizontal = 'HUG'` on the text node (valid per Plugin API rules — HUG is allowed on a TEXT child of an auto-layout frame), which let it size to its single-line content (235×52, was 131×104). Header height dropped 190→138.
 4. **Stray `&amp;quot;` HTML-entity artifacts** (flagged since Task 5/6/7's ledger) — fixed in all 3 remaining locations: `2670:6883` (Link/TextCTA description), `2670:6959` (PostMetadataTime description), `2670:6967` (SerieMeta description). Canonical text-edit recipe used (load fonts, mutate `.characters`, replace `&amp;quot;` → `"`).
@@ -881,15 +884,15 @@ Confirmed `_Docs/ChapterHeader`'s `title` field at 40px on the master
 `_Docs/*` component's text fields page-wide to establish what "body" means
 in context:
 
-| Text role | Size | Frequency / where |
-|---|---|---|
-| ChapterHeader `title` | 40px | 5 instances (one per chapter) |
-| Paragraph section-label (e.g. "Mission", "Core rules") | 28px | 4 instances, Chapter 00 only |
-| GroupHeader | 24px | Chapter 02's `GROUP / Cards` |
-| DecisionCard `rule` / Paragraph flowing body | 20px | `rule`: every DecisionCard (dozens, all chapters); Paragraph body: 4 instances, Chapter 00 only |
-| DecisionCard `body` | 16px | Every DecisionCard, all chapters — genuine multi-clause explanatory sentences (verified content, not labels), the single most common substantive reading-prose size on the page |
-| TokenRow `role` / SpecimenCell `caption` | 14px | Token table rows / specimen captions — compact table-cell and caption text, not flowing prose |
-| Metadata layer | 12px | Explicitly self-documented in Chapter 00's own Core-rules text as a deliberate separate "third layer, set in mono at 12px" |
+| Text role                                              | Size | Frequency / where                                                                                                                                                               |
+| ------------------------------------------------------ | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ChapterHeader `title`                                  | 40px | 5 instances (one per chapter)                                                                                                                                                   |
+| Paragraph section-label (e.g. "Mission", "Core rules") | 28px | 4 instances, Chapter 00 only                                                                                                                                                    |
+| GroupHeader                                            | 24px | Chapter 02's `GROUP / Cards`                                                                                                                                                    |
+| DecisionCard `rule` / Paragraph flowing body           | 20px | `rule`: every DecisionCard (dozens, all chapters); Paragraph body: 4 instances, Chapter 00 only                                                                                 |
+| DecisionCard `body`                                    | 16px | Every DecisionCard, all chapters — genuine multi-clause explanatory sentences (verified content, not labels), the single most common substantive reading-prose size on the page |
+| TokenRow `role` / SpecimenCell `caption`               | 14px | Token table rows / specimen captions — compact table-cell and caption text, not flowing prose                                                                                   |
+| Metadata layer                                         | 12px | Explicitly self-documented in Chapter 00's own Core-rules text as a deliberate separate "third layer, set in mono at 12px"                                                      |
 
 **Body reference chosen: DecisionCard's `body` field (16px).** It is
 literally named "body" in the component, carries genuine explanatory
@@ -899,7 +902,7 @@ frequent substantial prose on the page — present in every chapter, unlike
 the 20px Paragraph body which only occurs 4 times (Chapter 00 only). This
 also matches the original report's own framing of "body" (it cited
 "~14-16px"), so re-litigating from scratch and landing on the same
-reference confirms the original *measurement* was sound — only the PASS
+reference confirms the original _measurement_ was sound — only the PASS
 verdict against that measurement was wrong.
 
 **Fix applied (genuine fix, not a re-label).** Reduced `_Docs/ChapterHeader`
@@ -917,7 +920,7 @@ collisions).
 
 **Bonus fix, discovered in the process.** While inspecting all 5
 ChapterHeader instances' title nodes, found Chapter 01 ("Foundations") and
-Chapter 03 ("Sections") titles were *already* wrapping to 2 lines
+Chapter 03 ("Sections") titles were _already_ wrapping to 2 lines
 (`titleHeight` 104px vs the correct 52/42px single-line height) —
 undiagnosed pre-existing instances of the exact same bug this task's first
 pass found and fixed only on Chapter 02 ("Compo/nents"). Root cause was
@@ -973,12 +976,13 @@ predicted residual content exactly. `findAllWithCriteria({types:
 
 **Deletion (Step 3):** first attempt via `page.remove()` while current
 page context was still the backup page threw `Removing this node is not
-allowed`. Fix: `setCurrentPageAsync` to `📚 Docs` *before* calling
+allowed`. Fix: `setCurrentPageAsync` to `📚 Docs` _before_ calling
 `remove()` on the backup page — succeeded. Page count dropped from 12 to
 11 immediately, confirmed via fresh `figma.root.children` read in the
 same script.
 
 **Screenshot verdicts (Step 3):**
+
 - `📚 Docs` (`2736:4`): full-page screenshot rendered cleanly (thin/tall
   aspect, 3369×36280 native — expected for a long single-column page).
   Programmatic check of all 762 instances on the page via
@@ -1029,11 +1033,11 @@ Fixes from the final whole-branch review, one pass, no round 2.
    Ticked all 21 to `[x]`.
 2. **Dangling cross-reference (`2670:6726`).** Live-read confirmed text was
    still `"Full token table with Light and Dark values → Foundations ·
-   Colors"`, pointing at the `🎨 Foundations` page Task 8 deleted. Since
+Colors"`, pointing at the `🎨 Foundations` page Task 8 deleted. Since
    `SECTION / Colour` already carries the full token table itself (D4
    verdict), dropped the dangling clause. Before/after: as above → `"Full
-   token table with Light and Dark values"`. `get_screenshot` of `CHAPTER /
-   01 Foundations` (`2670:6678`) and of `SECTION / Colour` (`2670:6715`)
+token table with Light and Dark values"`. `get_screenshot` of `CHAPTER /
+01 Foundations` (`2670:6678`) and of `SECTION / Colour` (`2670:6715`)
    post-edit: clean single-line text, no clipping, no layout regression.
 3. **design.md false-empty premise.** Added two correction notes (near the
    audit table and near D3's migration-strategy paragraph) pointing at
@@ -1049,5 +1053,5 @@ Fixes from the final whole-branch review, one pass, no round 2.
    pre-existing).
 5. **Backlog stub.** Created `.specs/00_backlog/figma-undecided-pages.md`
    (`./.specs/specs.sh new figma-undecided-pages "Figma: dispose of 4
-   undecided Magnet-DS pages"`) so the open 📐 Decisions/Page 8/9/11
+undecided Magnet-DS pages"`) so the open 📐 Decisions/Page 8/9/11
    disposition call survives this workspace's deletion.

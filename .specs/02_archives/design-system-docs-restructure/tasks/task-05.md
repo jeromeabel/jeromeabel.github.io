@@ -22,28 +22,37 @@ await figma.loadFontAsync({ family: "Fira Code", style: "Regular" });
 await figma.loadFontAsync({ family: "IBM Plex Sans", style: "Regular" });
 const light = page.findOne((n) => n.name === "DOCS / Design System — Light");
 const ch = light.children.find((n) => n.name === "CHAPTER / 01 Foundations");
-const theme = await figma.variables.getVariableCollectionByIdAsync("VariableCollectionId:3:2");
+const theme = await figma.variables.getVariableCollectionByIdAsync(
+  "VariableCollectionId:3:2",
+);
 const V = {};
 for (const id of theme.variableIds) {
   const v = await figma.variables.getVariableByIdAsync(id);
   V[v.name] = v;
 }
-const prim = await figma.variables.getVariableCollectionByIdAsync("VariableCollectionId:2013:2");
+const prim = await figma.variables.getVariableCollectionByIdAsync(
+  "VariableCollectionId:2013:2",
+);
 const PM = prim.modes[0].modeId;
 const primByName = {};
 for (const id of prim.variableIds) {
   const v = await figma.variables.getVariableByIdAsync(id);
   primByName[v.name] = v.valuesByMode[PM];
 }
-const resp = await figma.variables.getVariableCollectionByIdAsync("VariableCollectionId:2245:42");
+const resp = await figma.variables.getVariableCollectionByIdAsync(
+  "VariableCollectionId:2245:42",
+);
 const respRow = async (name) => {
-  const v = await Promise.all(resp.variableIds.map((id) => figma.variables.getVariableByIdAsync(id)))
-    .then((vs) => vs.find((x) => x.name === name));
+  const v = await Promise.all(
+    resp.variableIds.map((id) => figma.variables.getVariableByIdAsync(id)),
+  ).then((vs) => vs.find((x) => x.name === name));
   const out = {};
   for (const m of resp.modes) {
     let val = v.valuesByMode[m.modeId];
     if (val && val.type === "VARIABLE_ALIAS")
-      val = (await figma.variables.getVariableByIdAsync(val.id)).valuesByMode[PM];
+      val = (await figma.variables.getVariableByIdAsync(val.id)).valuesByMode[
+        PM
+      ];
     out[m.name] = val;
   }
   return out;
@@ -52,12 +61,39 @@ const rhythm = await respRow("section/rhythm-y");
 const gutter = await respRow("container/gutter");
 const px = (name) => primByName[name]; // e.g. spacing/2 → 8
 const ROWS = [
-  ["inside a component", "spacing/2", `${px("spacing/2") / 16}rem`, `${px("spacing/2")}px`, px("spacing/2")],
-  ["between components", "spacing/6", `${px("spacing/6") / 16}rem`, `${px("spacing/6")}px`, px("spacing/6")],
-  ["between sections", "section/rhythm-y", "responsive", `${rhythm.Desktop} / ${rhythm.Tablet} / ${rhythm.Mobile}px`, rhythm.Desktop],
-  ["page gutter", "container/gutter", "responsive", `${gutter.Desktop} / ${gutter.Tablet} / ${gutter.Mobile}px`, gutter.Desktop],
+  [
+    "inside a component",
+    "spacing/2",
+    `${px("spacing/2") / 16}rem`,
+    `${px("spacing/2")}px`,
+    px("spacing/2"),
+  ],
+  [
+    "between components",
+    "spacing/6",
+    `${px("spacing/6") / 16}rem`,
+    `${px("spacing/6")}px`,
+    px("spacing/6"),
+  ],
+  [
+    "between sections",
+    "section/rhythm-y",
+    "responsive",
+    `${rhythm.Desktop} / ${rhythm.Tablet} / ${rhythm.Mobile}px`,
+    rhythm.Desktop,
+  ],
+  [
+    "page gutter",
+    "container/gutter",
+    "responsive",
+    `${gutter.Desktop} / ${gutter.Tablet} / ${gutter.Mobile}px`,
+    gutter.Desktop,
+  ],
 ];
-const table = figma.createAutoLayout("VERTICAL", { name: "SpacingLadder", itemSpacing: 10 });
+const table = figma.createAutoLayout("VERTICAL", {
+  name: "SpacingLadder",
+  itemSpacing: 10,
+});
 const txt = (chars, family, size, colour, w) => {
   const t = figma.createText();
   t.fontName = { family, style: "Regular" };
@@ -65,11 +101,17 @@ const txt = (chars, family, size, colour, w) => {
   t.fontSize = size;
   t.textAutoResize = "HEIGHT";
   t.setBoundVariable("fills", V[colour]);
-  if (w) { t.layoutSizingHorizontal = "FIXED"; t.resize(w, t.height); }
+  if (w) {
+    t.layoutSizingHorizontal = "FIXED";
+    t.resize(w, t.height);
+  }
   return t;
 };
 for (const [role, token, rem, pxs, barPx] of ROWS) {
-  const row = figma.createAutoLayout("HORIZONTAL", { name: `sp-${token}`, itemSpacing: 20 });
+  const row = figma.createAutoLayout("HORIZONTAL", {
+    name: `sp-${token}`,
+    itemSpacing: 20,
+  });
   row.counterAxisAlignItems = "CENTER";
   row.appendChild(txt(role, "IBM Plex Sans", 13, "color/foreground", 180));
   row.appendChild(txt(token, "Fira Code", 13, "color/foreground-muted", 170));
@@ -81,16 +123,23 @@ for (const [role, token, rem, pxs, barPx] of ROWS) {
   row.appendChild(bar);
   table.appendChild(row);
 }
-table.appendChild(txt(
-  "4px base, Tailwind multiples. Three roles, three steps — if a gap is not on the ladder, it is a defect.",
-  "IBM Plex Sans", 13, "color/foreground-muted", 640,
-));
+table.appendChild(
+  txt(
+    "4px base, Tailwind multiples. Three roles, three steps — if a gap is not on the ladder, it is a defect.",
+    "IBM Plex Sans",
+    13,
+    "color/foreground-muted",
+    640,
+  ),
+);
 const spacing = ch.children.find((n) => /spacing/i.test(n.name));
 if (!spacing) return { missing: ["Spacing section in 01 Foundations"] };
 spacing.appendChild(table);
 table.layoutSizingHorizontal = "FILL";
 // Remove the FINDING sentence, keep the validated ladder caption before it.
-const finding = spacing.findAll((n) => n.type === "TEXT" && /FINDING:/.test(n.characters))[0];
+const finding = spacing.findAll(
+  (n) => n.type === "TEXT" && /FINDING:/.test(n.characters),
+)[0];
 if (finding) {
   await figma.loadFontAsync(finding.fontName);
   finding.characters = finding.characters.replace(/\s*FINDING:.*$/s, "");
@@ -114,7 +163,9 @@ const light = page.findOne((n) => n.name === "DOCS / Design System — Light");
 const ch = light.children.find((n) => n.name === "CHAPTER / 01 Foundations");
 const motion = ch.children.find((n) => /motion/i.test(n.name));
 if (!motion) return { missing: ["Motion section in 01 Foundations"] };
-const theme = await figma.variables.getVariableCollectionByIdAsync("VariableCollectionId:3:2");
+const theme = await figma.variables.getVariableCollectionByIdAsync(
+  "VariableCollectionId:3:2",
+);
 const V = {};
 for (const id of theme.variableIds) {
   const v = await figma.variables.getVariableByIdAsync(id);
@@ -127,15 +178,29 @@ const txt = (chars, family, style, size, colour, w) => {
   t.fontSize = size;
   t.textAutoResize = "HEIGHT";
   t.setBoundVariable("fills", V[colour]);
-  if (w) { t.layoutSizingHorizontal = "FIXED"; t.resize(w, t.height); }
+  if (w) {
+    t.layoutSizingHorizontal = "FIXED";
+    t.resize(w, t.height);
+  }
   return t;
 };
-const table = figma.createAutoLayout("VERTICAL", { name: "MotionSpecs", itemSpacing: 10 });
-table.appendChild(txt("Quiet motion", "IBM Plex Sans", "SemiBold", 16, "color/foreground"));
-table.appendChild(txt(
-  "Quick for feedback, eased for travel, still by default. Zero infinite loops; MotionToggle and prefers-reduced-motion gate everything.",
-  "IBM Plex Sans", "Regular", 13, "color/foreground-muted", 640,
-));
+const table = figma.createAutoLayout("VERTICAL", {
+  name: "MotionSpecs",
+  itemSpacing: 10,
+});
+table.appendChild(
+  txt("Quiet motion", "IBM Plex Sans", "SemiBold", 16, "color/foreground"),
+);
+table.appendChild(
+  txt(
+    "Quick for feedback, eased for travel, still by default. Zero infinite loops; MotionToggle and prefers-reduced-motion gate everything.",
+    "IBM Plex Sans",
+    "Regular",
+    13,
+    "color/foreground-muted",
+    640,
+  ),
+);
 const ROWS = [
   ["--duration-fast", "150ms", "feedback — hover, focus, toggles"],
   ["--duration-base", "250ms", "movement — reveals, fades"],
@@ -144,15 +209,26 @@ const ROWS = [
   ["--ease-in-out", "cubic-bezier in-out", "elements that move and settle"],
 ];
 for (const [token, value, use] of ROWS) {
-  const row = figma.createAutoLayout("HORIZONTAL", { name: `mo-${token}`, itemSpacing: 20 });
-  row.appendChild(txt(token, "Fira Code", "Regular", 13, "color/foreground-muted", 170));
-  row.appendChild(txt(value, "Fira Code", "Regular", 13, "color/foreground", 150));
-  row.appendChild(txt(use, "IBM Plex Sans", "Regular", 13, "color/foreground-muted", 320));
+  const row = figma.createAutoLayout("HORIZONTAL", {
+    name: `mo-${token}`,
+    itemSpacing: 20,
+  });
+  row.appendChild(
+    txt(token, "Fira Code", "Regular", 13, "color/foreground-muted", 170),
+  );
+  row.appendChild(
+    txt(value, "Fira Code", "Regular", 13, "color/foreground", 150),
+  );
+  row.appendChild(
+    txt(use, "IBM Plex Sans", "Regular", 13, "color/foreground-muted", 320),
+  );
   table.appendChild(row);
 }
 motion.appendChild(table);
 table.layoutSizingHorizontal = "FILL";
-const finding = motion.findAll((n) => n.type === "TEXT" && /FINDING:/.test(n.characters))[0];
+const finding = motion.findAll(
+  (n) => n.type === "TEXT" && /FINDING:/.test(n.characters),
+)[0];
 if (finding) {
   await figma.loadFontAsync(finding.fontName);
   finding.characters = finding.characters
@@ -168,8 +244,15 @@ return { createdNodeIds: [table.id] };
 const page = figma.root.children.find((p) => p.name === "📚 Docs");
 await figma.setCurrentPageAsync(page);
 const light = page.findOne((n) => n.name === "DOCS / Design System — Light");
-const left = light.findAll((n) => n.type === "TEXT" && /FINDING:/.test(n.characters));
-return { findingsLeft: left.map((t) => ({ id: t.id, text: t.characters.slice(0, 100) })) };
+const left = light.findAll(
+  (n) => n.type === "TEXT" && /FINDING:/.test(n.characters),
+);
+return {
+  findingsLeft: left.map((t) => ({
+    id: t.id,
+    text: t.characters.slice(0, 100),
+  })),
+};
 ```
 
 Expected: `findingsLeft` empty. Screenshot the Spacing and Motion sections.
@@ -180,4 +263,3 @@ git commit -m "docs(specs): ds-docs-restructure — task 5 spacing ladder + quie
 ```
 
 ---
-

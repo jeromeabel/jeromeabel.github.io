@@ -35,13 +35,13 @@ Issues the research must address (from the 2026-08-06 issue list):
 
 Five parallel `general-purpose` agents (WebSearch + WebFetch), one per question cluster:
 
-| # | Cluster | Core question |
-|---|---------|---------------|
-| Q1 | IA / structure | How do real systems order and granulate docs (foundations → components → patterns)? Where does element-level info live — dedicated chapter or grouped sets? |
-| Q2 | Readability | Page length limits, chunking, scanning patterns, hierarchy, whitespace. What makes a docs page scannable (NN/g research)? |
-| Q3 | Token documentation | Usage-first vs value-first token presentation. How do systems document light/dark — duplicate everything, or single source with mode shown only where it differs? |
-| Q4 | Decision records | How do systems carry actionable design decisions (do/don't, rationale, cross-references)? How do they document non-instantiable concepts: spacing ladders, motion/duration tokens, focus rings? |
-| Q5 | Cover / status | Cover-page patterns: status badges, versioning, what a landing page of a DS doc shows. |
+| #   | Cluster             | Core question                                                                                                                                                                                   |
+| --- | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Q1  | IA / structure      | How do real systems order and granulate docs (foundations → components → patterns)? Where does element-level info live — dedicated chapter or grouped sets?                                     |
+| Q2  | Readability         | Page length limits, chunking, scanning patterns, hierarchy, whitespace. What makes a docs page scannable (NN/g research)?                                                                       |
+| Q3  | Token documentation | Usage-first vs value-first token presentation. How do systems document light/dark — duplicate everything, or single source with mode shown only where it differs?                               |
+| Q4  | Decision records    | How do systems carry actionable design decisions (do/don't, rationale, cross-references)? How do they document non-instantiable concepts: spacing ladders, motion/duration tokens, focus rings? |
+| Q5  | Cover / status      | Cover-page patterns: status badges, versioning, what a landing page of a DS doc shows.                                                                                                          |
 
 Each agent must:
 

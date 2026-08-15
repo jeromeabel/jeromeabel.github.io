@@ -17,7 +17,9 @@ Headings carry the scan; captions ≤ 2 sentences; body text 50–75 chars per l
 const page = figma.root.children.find((p) => p.name === "📚 Docs");
 await figma.setCurrentPageAsync(page);
 const light = page.findOne((n) => n.name === "DOCS / Design System — Light");
-const wide = [], longProse = [], flatHeadings = [];
+const wide = [],
+  longProse = [],
+  flatHeadings = [];
 for (const t of light.findAll((n) => n.type === "TEXT")) {
   const chars = t.characters;
   // ~75 chars/line: flag wrapping text wider than 720px at body sizes
@@ -25,12 +27,20 @@ for (const t of light.findAll((n) => n.type === "TEXT")) {
     wide.push({ id: t.id, w: Math.round(t.width), text: chars.slice(0, 60) });
   // connective prose over 2 sentences (skip verbatim decision captions — they carry " · ")
   const sentences = (chars.match(/[.!?](\s|$)/g) || []).length;
-  if (sentences > 2 && !chars.includes(" · ") && !/^The design system behind/.test(chars))
+  if (
+    sentences > 2 &&
+    !chars.includes(" · ") &&
+    !/^The design system behind/.test(chars)
+  )
     longProse.push({ id: t.id, sentences, text: chars.slice(0, 80) });
 }
 // Heading jump check: group headings must be ≥2 steps above body (30 vs 13/14 — pass by construction; verify none drifted)
 for (const t of light.findAll((n) => n.type === "TEXT"))
-  if (/^GROUP \//.test(t.parent.name) && t === t.parent.children[0] && t.fontSize < 22)
+  if (
+    /^GROUP \//.test(t.parent.name) &&
+    t === t.parent.children[0] &&
+    t.fontSize < 22
+  )
     flatHeadings.push({ id: t.id, size: t.fontSize });
 return { wide, longProse, flatHeadings };
 ```
@@ -49,4 +59,3 @@ git commit -m "docs(specs): ds-docs-restructure — task 6 readability pass (lin
 ```
 
 ---
-

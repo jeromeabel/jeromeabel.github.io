@@ -23,9 +23,11 @@
 ### Task 1: Dispatch 5 parallel research agents and persist raw reports
 
 **Files:**
+
 - Create: `.specs/01_active/ds-docs-research/notes.md`
 
 **Interfaces:**
+
 - Produces: `notes.md` with five `## Q1` … `## Q5` sections, each holding one agent's raw structured findings. Task 2 reads only this file.
 
 - [ ] **Step 1: Dispatch all 5 agents in one message (parallel), `subagent_type: general-purpose`**
@@ -136,18 +138,23 @@ Five parallel agents, dispatched <date>. Reports unedited (findings verbatim).
 Gaps: <none | list of clusters that failed the evidence bar after 1 retry>
 
 ## Q1 — IA / structure
+
 <agent 1 report verbatim>
 
 ## Q2 — Readability
+
 <agent 2 report verbatim>
 
 ## Q3 — Token documentation
+
 <agent 3 report verbatim>
 
 ## Q4 — Decision records
+
 <agent 4 report verbatim>
 
 ## Q5 — Cover / status
+
 <agent 5 report verbatim>
 ```
 
@@ -163,9 +170,11 @@ git commit -m "docs(specs): ds-docs-research — raw reports from 5 research age
 ### Task 2: Synthesize the reference file
 
 **Files:**
+
 - Create: `.claude/skills/design-expert/references/ds-documentation.md`
 
 **Interfaces:**
+
 - Consumes: `notes.md` sections `## Q1`–`## Q5` (finding format `### F<n>` with Why/Evidence/Confidence lines).
 - Produces: `references/ds-documentation.md` — the durable deliverable Task 3 wires up; sub-project 2 (ds-docs-v2) will consume it.
 
@@ -186,30 +195,38 @@ zeroheight). Raw reports: `.specs/02_archives/ds-docs-research/notes.md`.
 Evidence bar: every rule cites ≥2 sources unless marked `(weak)`.
 
 ## How to use this file
+
 Load when structuring, writing, or reviewing design-system documentation
 (Figma docs pages or web). Each rule: statement, why, evidence, and where it
 bites in our `📚 Design system` page.
 
 ## 1. Information architecture
+
 ### Rule: <statement>
+
 - **Why:** <reasoning>
 - **Evidence:** <System — URL>; <System — URL>
 - **Applies here:** <mapping to a concrete issue from design.md Goal list>
 <repeat per rule>
 
 ## 2. Readability & chunking
+
 <same rule format>
 
 ## 3. Token documentation
+
 <same rule format>
 
 ## 4. Decision records & non-instantiable concepts
+
 <same rule format>
 
 ## 5. Cover & status
+
 <same rule format>
 
 ## Quick audit checklist
+
 <one line per rule, phrased as a yes/no check — derived, not new content>
 ```
 
@@ -231,10 +248,12 @@ git commit -m "feat(design-expert): add ds-documentation reference — sourced D
 ### Task 3: Wire into SKILL.md, verify, archive
 
 **Files:**
+
 - Modify: `.claude/skills/design-expert/SKILL.md:30-37` (Reference Files table)
 - Modify: `.specs/01_active/ds-docs-research/` → archived via `specs.sh`
 
 **Interfaces:**
+
 - Consumes: `references/ds-documentation.md` from Task 2.
 - Produces: discoverable reference (SKILL.md table row); archived spec topic.
 

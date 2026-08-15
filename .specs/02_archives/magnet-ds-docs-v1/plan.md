@@ -31,9 +31,11 @@ created: 2026-08-10
 ### Task 1: Fresh inventory and node-ID map (Pass 0)
 
 **Files:**
+
 - Create: `.specs/01_active/magnet-ds-docs-v1/notes.md`
 
 **Interfaces:**
+
 - Consumes: nothing (first task).
 - Produces: `notes.md` with a `## Node-ID map (Pass 0, <date>)` section — a table `| Item | Node ID | Page |` covering every item listed in Step 2. All later tasks read IDs from this map, not from the plan header.
 
@@ -71,9 +73,11 @@ git commit -m "docs(specs): magnet-ds-docs-v1 — Pass-0 node-ID inventory"
 ### Task 2: D4 salvage check — old Typography specimen vs SECTION / Type
 
 **Files:**
+
 - Modify: `.specs/01_active/magnet-ds-docs-v1/notes.md`
 
 **Interfaces:**
+
 - Consumes: Task 1 node-ID map (`Foundations · Typography` frame, `CHAPTER / 01 Foundations` frame).
 - Produces: `notes.md` section `## D4 salvage verdict` — either "nothing unique, safe to delete" or a list of specimens moved. Task 8 (deletions) depends on this verdict existing.
 
@@ -105,9 +109,11 @@ git commit -m "docs(specs): magnet-ds-docs-v1 — D4 salvage verdict recorded"
 ### Task 3: Create `📚 Docs` page; move `_Docs` masters and compliant chapter frames
 
 **Files:**
+
 - Modify: `.specs/01_active/magnet-ds-docs-v1/notes.md`
 
 **Interfaces:**
+
 - Consumes: Task 1 node-ID map.
 - Produces: a `📚 Docs` page containing (top-to-bottom): the four chapter frames `01 Foundations` → `04 Pages` at width 1408 with the constant gap, and below them a clearly separated `_Docs components` area holding the 10 component masters. Records the new page ID and chosen chapter-gap value in `notes.md` under `## Docs page build log`. Tasks 4–6 build inside this page.
 
@@ -147,9 +153,11 @@ git commit -m "docs(specs): magnet-ds-docs-v1 — Docs page created, masters and
 ### Task 4: Build Chapter `00 About` (fold Intro/01 + Intro/02, D8 size cap)
 
 **Files:**
+
 - Modify: `.specs/01_active/magnet-ds-docs-v1/notes.md`
 
 **Interfaces:**
+
 - Consumes: Task 3 `📚 Docs` page; Task 1 IDs for `CHAPTER / 00 Read me`, `Intro/01`, `Intro/02`.
 - Produces: frame `CHAPTER / 00 About` at the top of the Docs column. Content contract (D3/D8): mission ≤ 3 lines, audience table, three-layer identity, 7 core rules, page-intent list — nothing else. Task 9 validates it against the ~2-frame-heights cap.
 
@@ -192,9 +200,11 @@ git commit -m "docs(specs): magnet-ds-docs-v1 — Chapter 00 About composed"
 ### Task 5: Chapter 02 groups per D5 taxonomy (+ GroupHeader if triggered)
 
 **Files:**
+
 - Modify: `.specs/01_active/magnet-ds-docs-v1/notes.md`
 
 **Interfaces:**
+
 - Consumes: Task 3 Docs page; `CHAPTER / 02 Components` frame.
 - Produces: chapter 02 internally grouped under exactly six headings — `Chrome`, `Actions`, `Typography`, `Metadata`, `Cards`, `Sections` — matching D5. If `_Docs/GroupHeader` is created, it is documented in `notes.md` (D7 requires the trigger recorded). Task 6 uses the same six names on the Components page.
 
@@ -228,22 +238,24 @@ git commit -m "docs(specs): magnet-ds-docs-v1 — chapter 02 grouped per D5 taxo
 ### Task 6: Retitle ❖ Components page sections per D5; move `Link/*` into Actions
 
 **Files:**
+
 - Modify: `.specs/01_active/magnet-ds-docs-v1/notes.md`
 
 **Interfaces:**
+
 - Consumes: Task 1 IDs for the 8 Components-page sections; D5 table below.
 - Produces: ❖ Components page reorganized into exactly six sections named `Chrome`, `Actions`, `Typography`, `Metadata`, `Cards`, `Sections`, contents per the D5 matrix. Task 7 iterates these components for descriptions.
 
 D5 target (copy of design.md — the executor needs no other source):
 
-| Section | Components |
-| --- | --- |
-| Chrome | Header, Footer, NavLink, NavLinkHome, ThemeToggle, MotionToggle, Icon |
-| Actions | Link/CTA, Link/Secondary, Link/SecondarySm, Link/TextCTA, Link/Icon |
-| Typography | H1, H2, PreviewTitle, PageDescription |
-| Metadata | PostMetadataTime, PostMetadataTopic, SerieMeta |
-| Cards | PostRow, SerieCard, PostCardPreviewBig, PostCardPreviewSmall, WorkCardPreviewSmall |
-| Sections | Hero, HeroText, HeroAnimation, BlogPreviewSection, ArchiveTable, SerieCardList, WorkPreviewSection, ContactContent, ContactPreviewSection |
+| Section    | Components                                                                                                                                |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| Chrome     | Header, Footer, NavLink, NavLinkHome, ThemeToggle, MotionToggle, Icon                                                                     |
+| Actions    | Link/CTA, Link/Secondary, Link/SecondarySm, Link/TextCTA, Link/Icon                                                                       |
+| Typography | H1, H2, PreviewTitle, PageDescription                                                                                                     |
+| Metadata   | PostMetadataTime, PostMetadataTopic, SerieMeta                                                                                            |
+| Cards      | PostRow, SerieCard, PostCardPreviewBig, PostCardPreviewSmall, WorkCardPreviewSmall                                                        |
+| Sections   | Hero, HeroText, HeroAnimation, BlogPreviewSection, ArchiveTable, SerieCardList, WorkPreviewSection, ContactContent, ContactPreviewSection |
 
 - [x] **Step 1: Map current 8 sections to target 6**
 
@@ -273,9 +285,11 @@ git commit -m "docs(specs): magnet-ds-docs-v1 — Components page sections retit
 ### Task 7: One-sentence description field per published component
 
 **Files:**
+
 - Modify: `.specs/01_active/magnet-ds-docs-v1/notes.md`
 
 **Interfaces:**
+
 - Consumes: Task 6 section structure.
 - Produces: every published (non-underscore) component/component-set has a filled description field (Dev Mode + AI surface, per D5). `notes.md` records any component whose actual purpose diverged from the draft sentence.
 
@@ -283,41 +297,41 @@ git commit -m "docs(specs): magnet-ds-docs-v1 — Components page sections retit
 
 `use_figma`: set each component's description to the sentence below (adjust wording only if the component's actual structure contradicts it — record adjustments in `notes.md`):
 
-| Component | Description |
-| --- | --- |
-| Header | Top site chrome: logo, nav links, theme and motion toggles. |
-| Footer | Bottom chrome: contact links, social icons, copyright. |
-| NavLink | Header navigation link with active-page state. |
-| NavLinkHome | Home/logo variant of the header nav link. |
-| ThemeToggle | Light/dark mode switch; choice persists. |
-| MotionToggle | Enables or disables scroll animations. |
-| Icon | Base icon wrapper sized by token. |
-| Link/CTA | Primary call-to-action link, accent-filled. |
-| Link/Secondary | Secondary bordered action link. |
-| Link/SecondarySm | Small secondary link for dense contexts. |
-| Link/TextCTA | Inline text link with arrow affordance. |
-| Link/Icon | Icon-only link for social and external targets. |
-| H1 | Page title; one per page. |
-| H2 | Section title within a page. |
-| PreviewTitle | Title style for cards and previews. |
-| PageDescription | Lead paragraph under the page title. |
-| PostMetadataTime | Publication date and reading time, mono 12px. |
-| PostMetadataTopic | Topic tag chip for posts. |
-| SerieMeta | Part count and progress for a serie. |
-| PostRow | Compact list row for the archive table. |
-| SerieCard | Serie summary card with metadata. |
-| PostCardPreviewBig | Large featured-post preview card. |
-| PostCardPreviewSmall | Small post preview card. |
-| WorkCardPreviewSmall | Small work/project preview card. |
-| Hero | Home hero assembly: text plus animation. |
-| HeroText | Hero copy block. |
-| HeroAnimation | Hand-drawn animated hero visual. |
-| BlogPreviewSection | Home section previewing latest posts. |
-| ArchiveTable | Full post list grouped by year. |
-| SerieCardList | Grid of serie cards. |
-| WorkPreviewSection | Home section previewing selected work. |
-| ContactContent | Contact block: links and invitation text. |
-| ContactPreviewSection | Home section wrapping the contact block. |
+| Component             | Description                                                 |
+| --------------------- | ----------------------------------------------------------- |
+| Header                | Top site chrome: logo, nav links, theme and motion toggles. |
+| Footer                | Bottom chrome: contact links, social icons, copyright.      |
+| NavLink               | Header navigation link with active-page state.              |
+| NavLinkHome           | Home/logo variant of the header nav link.                   |
+| ThemeToggle           | Light/dark mode switch; choice persists.                    |
+| MotionToggle          | Enables or disables scroll animations.                      |
+| Icon                  | Base icon wrapper sized by token.                           |
+| Link/CTA              | Primary call-to-action link, accent-filled.                 |
+| Link/Secondary        | Secondary bordered action link.                             |
+| Link/SecondarySm      | Small secondary link for dense contexts.                    |
+| Link/TextCTA          | Inline text link with arrow affordance.                     |
+| Link/Icon             | Icon-only link for social and external targets.             |
+| H1                    | Page title; one per page.                                   |
+| H2                    | Section title within a page.                                |
+| PreviewTitle          | Title style for cards and previews.                         |
+| PageDescription       | Lead paragraph under the page title.                        |
+| PostMetadataTime      | Publication date and reading time, mono 12px.               |
+| PostMetadataTopic     | Topic tag chip for posts.                                   |
+| SerieMeta             | Part count and progress for a serie.                        |
+| PostRow               | Compact list row for the archive table.                     |
+| SerieCard             | Serie summary card with metadata.                           |
+| PostCardPreviewBig    | Large featured-post preview card.                           |
+| PostCardPreviewSmall  | Small post preview card.                                    |
+| WorkCardPreviewSmall  | Small work/project preview card.                            |
+| Hero                  | Home hero assembly: text plus animation.                    |
+| HeroText              | Hero copy block.                                            |
+| HeroAnimation         | Hand-drawn animated hero visual.                            |
+| BlogPreviewSection    | Home section previewing latest posts.                       |
+| ArchiveTable          | Full post list grouped by year.                             |
+| SerieCardList         | Grid of serie cards.                                        |
+| WorkPreviewSection    | Home section previewing selected work.                      |
+| ContactContent        | Contact block: links and invitation text.                   |
+| ContactPreviewSection | Home section wrapping the contact block.                    |
 
 Components found in Task 6 that aren't in this table: write one sentence in the same register (what it is + where it's used), log it.
 
@@ -337,10 +351,12 @@ git commit -m "docs(specs): magnet-ds-docs-v1 — component descriptions filled"
 ### Task 8: Demote/rename pages, refresh cover date, delete empty + superseded pages
 
 **Files:**
+
 - Modify: `CLAUDE.md` (repo root, "Figma Design Tokens" section)
 - Modify: `.specs/01_active/magnet-ds-docs-v1/notes.md`
 
 **Interfaces:**
+
 - Consumes: Task 2 D4 verdict (must exist before Foundations deletion); Tasks 3–7 complete (Introduction content fully superseded).
 - Produces: page list = `📖 Cover`, `📚 Docs`, `❖ Components`, `📄 Pages`, `🗄 Backup — Introduction (pre-Docs)`, `🗄 Backup — <source>` ×3. Task 9 validates; Task 10 deletes the Introduction backup.
 - ⚠️ **Actual outcome deviates from the Produces line above** — see `notes.md`
@@ -408,9 +424,11 @@ git commit -m "docs: magnet-ds-docs-v1 — pages demoted/deleted, cover date ref
 ### Task 9: D8 validation gate
 
 **Files:**
+
 - Modify: `.specs/01_active/magnet-ds-docs-v1/notes.md`
 
 **Interfaces:**
+
 - Consumes: finished `📚 Docs` page (Tasks 3–8).
 - Produces: `notes.md` section `## D8 validation (gate)` — one row per check, PASS/FAIL + evidence (screenshot taken, measurement). **Task 10 is blocked until every row is PASS.**
 
@@ -450,9 +468,11 @@ git commit -m "docs(specs): magnet-ds-docs-v1 — D8 validation gate passed"
 ### Task 10: Delete the Introduction backup; archive the spec
 
 **Files:**
+
 - Modify: `.specs/01_active/magnet-ds-docs-v1/notes.md`
 
 **Interfaces:**
+
 - Consumes: `notes.md` containing `GATE PASSED` (Task 9). **Hard precondition — do not proceed without it.**
 - Produces: final file state; spec archived to `.specs/02_archives/`.
 

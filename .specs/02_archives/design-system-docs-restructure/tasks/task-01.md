@@ -21,7 +21,10 @@ const rows = [];
 const walk = (n, d) => {
   if (d > 3) return;
   rows.push({
-    d, id: n.id, name: n.name, type: n.type,
+    d,
+    id: n.id,
+    name: n.name,
+    type: n.type,
     text: n.type === "TEXT" ? n.characters.slice(0, 80) : undefined,
   });
   (n.children || []).forEach((c) => walk(c, d + 1));
@@ -30,7 +33,7 @@ page.children.forEach((c) => walk(c, 0));
 return rows;
 ```
 
-Classify every TEXT node: **keep** = system name, nav labels; **kill** = anything matching `/status|in progress|stable|changelog|last updated|v?\d+\.\d+/i` that is *not* part of the system name itself. Record the kill-list IDs for Step 2. If the cover already has none, mark Steps 2–3 done and go to Step 4.
+Classify every TEXT node: **keep** = system name, nav labels; **kill** = anything matching `/status|in progress|stable|changelog|last updated|v?\d+\.\d+/i` that is _not_ part of the system name itself. Record the kill-list IDs for Step 2. If the cover already has none, mark Steps 2–3 done and go to Step 4.
 
 - [x] **Step 2: Remove status chrome, fold version into the name**
 
@@ -42,7 +45,10 @@ const KILL = ["<id-from-step-1>", "<id-from-step-1>"]; // REPLACE with Step 1's 
 const removed = [];
 for (const id of KILL) {
   const n = await figma.getNodeByIdAsync(id);
-  if (n) { removed.push({ id, name: n.name }); n.remove(); }
+  if (n) {
+    removed.push({ id, name: n.name });
+    n.remove();
+  }
 }
 // Ensure the title carries the version (idempotent).
 const title = page.findOne(
@@ -52,7 +58,10 @@ if (title && !/v1\.0/i.test(title.characters)) {
   await figma.loadFontAsync(title.fontName);
   title.characters = "Blog Design System v1.0";
 }
-return { mutatedNodeIds: removed.map((r) => r.id).concat(title ? [title.id] : []), removed };
+return {
+  mutatedNodeIds: removed.map((r) => r.id).concat(title ? [title.id] : []),
+  removed,
+};
 ```
 
 - [x] **Step 3: Add or fix the nav entries**
@@ -63,7 +72,9 @@ Four rows, one per destination, each a text link with a node hyperlink to the ta
 const page = figma.root.children.find((p) => p.name === "📖 Cover");
 await figma.setCurrentPageAsync(page);
 await figma.loadFontAsync({ family: "IBM Plex Sans", style: "Regular" });
-const theme = await figma.variables.getVariableCollectionByIdAsync("VariableCollectionId:3:2");
+const theme = await figma.variables.getVariableCollectionByIdAsync(
+  "VariableCollectionId:3:2",
+);
 const V = {};
 for (const id of theme.variableIds) {
   const v = await figma.variables.getVariableByIdAsync(id);
@@ -78,7 +89,10 @@ const DEST = {
 let nav = page.findOne((n) => n.name === "CoverNav");
 const created = [];
 if (!nav) {
-  nav = figma.createAutoLayout("VERTICAL", { name: "CoverNav", itemSpacing: 16 });
+  nav = figma.createAutoLayout("VERTICAL", {
+    name: "CoverNav",
+    itemSpacing: 16,
+  });
   page.appendChild(nav);
   created.push(nav.id);
 }
@@ -95,7 +109,10 @@ for (const [label, target] of Object.entries(DEST)) {
     nav.appendChild(t);
     created.push(t.id);
   }
-  t.setRangeHyperlink(0, t.characters.length, { type: "NODE", value: dest.children[0].id });
+  t.setRangeHyperlink(0, t.characters.length, {
+    type: "NODE",
+    value: dest.children[0].id,
+  });
 }
 return { createdNodeIds: created };
 ```
@@ -112,4 +129,3 @@ git commit -m "docs(specs): ds-docs-restructure — task 1 cover stripped to nav
 ```
 
 ---
-

@@ -424,17 +424,17 @@ All seven applied to **masters only**, and every number was bound to a
 `1 Primitives` variable rather than typed raw, so the fixes add no named-debt.
 23 nodes mutated:
 
-| #   | Node(s)                                                  | Change                                              | Bound to                     |
-| --- | -------------------------------------------------------- | --------------------------------------------------- | ---------------------------- |
-| 1   | `SerieCard > Content` `2119:7598`, `2367:7195`            | padding 20→24, gap 20→8                             | `spacing/6`, `spacing/2`     |
-| 2   | `SerieCard` root `2119:7516`, `2367:7192`                 | cornerRadius 8→0                                    | `radius/none`                |
-| 3   | `PostRow` ×4 variants + their inner row frames            | root pad-x 4→0, root gap 4→32, row-frame gap 4→32   | `spacing/0`, `spacing/8`     |
-| 4   | `WorkCardPreviewSmall` `2045:378`                         | gap 16→8                                            | `spacing/2`                  |
-| 5   | `WorkPreviewSection` Desktop `2045:428` + list `2045:426` | gap 48→32, list 40→32                               | `spacing/8`                  |
-| 5b  | `WorkPreviewSection` Mobile `2970:4362` + list `2970:4364`| gap 48→16, list 40→16 (`gap-4` at mobile)           | `spacing/4`                  |
-| 6   | `BlogPreviewSection` `2041:560` + content `2041:498`      | gap 48→32, content 40→32                            | `spacing/8`                  |
-| 7   | `Link/Secondary` `2041:276`, `2041:279`                   | pad-x 20→24                                         | `spacing/6`                  |
-| 7b  | `Link/Icon size=normal` `2093:441`, `2095:445`            | 40×40→56×56                                         | `spacing/14`                 |
+| #   | Node(s)                                                    | Change                                            | Bound to                 |
+| --- | ---------------------------------------------------------- | ------------------------------------------------- | ------------------------ |
+| 1   | `SerieCard > Content` `2119:7598`, `2367:7195`             | padding 20→24, gap 20→8                           | `spacing/6`, `spacing/2` |
+| 2   | `SerieCard` root `2119:7516`, `2367:7192`                  | cornerRadius 8→0                                  | `radius/none`            |
+| 3   | `PostRow` ×4 variants + their inner row frames             | root pad-x 4→0, root gap 4→32, row-frame gap 4→32 | `spacing/0`, `spacing/8` |
+| 4   | `WorkCardPreviewSmall` `2045:378`                          | gap 16→8                                          | `spacing/2`              |
+| 5   | `WorkPreviewSection` Desktop `2045:428` + list `2045:426`  | gap 48→32, list 40→32                             | `spacing/8`              |
+| 5b  | `WorkPreviewSection` Mobile `2970:4362` + list `2970:4364` | gap 48→16, list 40→16 (`gap-4` at mobile)         | `spacing/4`              |
+| 6   | `BlogPreviewSection` `2041:560` + content `2041:498`       | gap 48→32, content 40→32                          | `spacing/8`              |
+| 7   | `Link/Secondary` `2041:276`, `2041:279`                    | pad-x 20→24                                       | `spacing/6`              |
+| 7b  | `Link/Icon size=normal` `2093:441`, `2095:445`             | 40×40→56×56                                       | `spacing/14`             |
 
 `radius/none` and the full `radius/*` scale already existed in `1 Primitives` —
 the SerieCard radius is now a token reference, not a hardcoded 0.
@@ -466,7 +466,7 @@ no `PostRow` instances, while code's `SelectedWriting` renders a 2-column grid o
 **Also deferred (design decision, out of Step 5's scope)**: `SerieCard` splits
 padding differently from code. Figma = root pad 0 / `Content` pad 24 (cover bleeds
 to the card edge); code = `p-4 lg:p-6` on the whole card with `gap-2` between
-cover and text. The numbers now match; the *structure* does not. Pick one
+cover and text. The numbers now match; the _structure_ does not. Pick one
 deliberately rather than letting the prover drive it.
 
 ### Verdict on the 21 unmapped manifest ids
@@ -483,3 +483,43 @@ The remaining ~16 (`about-*`, `Prose`, `CustomImage`, `LinkNavPost`,
 absent, and the reason is scope, not oversight: DS v3 covers Home + Blog index,
 and the detail templates that would have carried prose/TOC/nav-post were deleted
 in Task 11. Not drift — a documented coverage boundary.
+
+## Task 15 — Documentation, code-debt stubs, archive (2026-08-15)
+
+**Step 1 — Figma doc page.** `DOC / Foundations — Responsive Architecture`
+(`3016:4343`), built on the 📚 Docs page (`2736:4`, _not_ the `2545:671` the plan
+names — that id is stale) at x=-11968, following the existing `DOC /` template
+(status bar / divider / title block / `Section — *` frames). Four sections: the
+rule plus the seven `breakpoint`-axis masters and what flips on each; the 18-row
+`3 Responsive` table with all three modes; Task 4's style → variable mapping,
+with the "a text style cannot bind to a variable" reason stated; the three
+accepted exceptions (shadow images, `Triangle` halo, `HeroAnimation` visibility).
+`footer/link-gap` being defined-but-unbound is recorded in the token section's
+description rather than as a fourth exception — it is an absent target, not a
+declined binding.
+
+**Steps 2–3 — skill knowledge.** `figma-ds-file.md` refreshed against the live
+file: five pages, the 49-master roster grouped by page with ⬍ marking the seven
+variant sets, 4 → 18 responsive rows, and a change-log entry. `figma-variables-
+method.md:122-137` rewritten from "pattern 3" to Hybrid, plus the two gotchas
+that cost time here (`setTextStyleIdAsync("")` also wipes the range `fontSize`
+binding; a stale style override on a nested instance silently outranks a correct
+binding on its master).
+
+**Step 4 — code-debt stubs.** The plan asked for two (`header-mobile-drawer`,
+`blog-serie-grid-3col`). Task 14 had flagged more "for Task 15", so three others
+were filed rather than dropped: `figma-mobile-section-variants`,
+`figma-raw-value-triage`, `figma-ds-coverage-gaps`. Two Task 14 items needed no
+design judgment and were fixed directly instead of filed — `2 Theme/Dark/font/`
+added to `token-map.json`'s `orphanIgnore`, and the Pass-1 assembly script in
+`figma-verify/SKILL.md` taught to read the owning `COMPONENT_SET`'s name (a
+variant is named `breakpoint=Desktop`, so Header/Footer had stopped surfacing).
+`pnpm figma:verify` is `_none_` on all four sections.
+
+**Step 5 — `figma-blog-mobile-sections.md` deleted**, superseded by the
+`breakpoint` axis Tasks 8–9 put on `SerieCardList` and `PostArchiveList`. It was
+untracked, so `git rm` failed and a plain `rm` did it.
+
+**Not done, deliberately:** the `Section — Responsive` table on
+`DOC / Foundations — Spacing & Layout` still shows the pre-refactor gutter and
+rhythm. Out of this task's scope; it belongs with whoever next opens that page.

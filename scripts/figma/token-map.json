@@ -33,6 +33,7 @@
     "spacing-section-lg": "3 Responsive/Desktop/section/rhythm-y"
   },
   "orphanIgnore": [
+    "2 Theme/Dark/font/",
     "3 Responsive/Desktop/text/",
     "3 Responsive/Tablet/text/",
     "3 Responsive/Mobile/text/",

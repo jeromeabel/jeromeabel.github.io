@@ -88,6 +88,60 @@ Don't assume lightest-on-darkest passes AA — check, extend the ramp if not.
   audited real designs need, never the combinatorial matrix.
 - Backfill derived values into the primitive scale (source-of-truth loop).
 
+### Responsive type inside components — propagation models
+
+Three patterns for how a component's font-size/leading/gap actually changes
+across breakpoints, and what "editing the master" propagates in each:
+
+1. **Variable-bound properties (true cascade).** Bind the numeric property
+   itself — font-size, line-height, letter-spacing, gap, padding — to a
+   variable with Desktop/Tablet/Mobile modes (`textNode.setRangeBoundVariable`,
+   `setBoundVariable('itemSpacing', v)`). Switching the frame's mode updates
+   every nested instance referencing that variable at once — same mechanism
+   as the Light/Dark `explicitVariableModes` cascade. **Note: a text *style*
+   cannot bind to a variable** — only the raw numeric property can, so this
+   pattern means binding the property directly, not wrapping it in a style.
+2. **Breakpoint-keyed variants.** Component set with a `breakpoint=Desktop|
+   Tablet|Mobile` variant axis. Structural edits to the set (layer tree,
+   non-responsive props) propagate to all three variants via normal
+   component inheritance. Font-size/gap per variant is a manually-maintained
+   value, not derived from a sibling variant — editing Desktop's size does
+   NOT touch Mobile's. This is the dominant pattern in real component
+   libraries (shadcn-in-Figma, most SaaS DS files).
+3. **Flat manual override, no variant/mode structure.** One master, separate
+   breakpoint frames, text node's style hand-reassigned per frame. Nothing
+   cascades — not structure, not size. Only viable at small scale (one-off
+   hero/heading elements, not a multi-consumer library).
+
+**Master → instance inheritance only ever propagates what the instance
+hasn't overridden.** Font-size counts as an override the moment it differs
+per breakpoint — there is no Figma primitive for "same property, different
+value per breakpoint" except pattern 1 (bound variable) or pattern 2
+(variant axis, each variant independently maintained).
+
+**Current project uses the Hybrid — pattern 1 for numbers, pattern 2 for
+direction.** `3 Responsive` holds 18 variables: the four originals plus six
+type ramps (`text/page-title`, `text/section-title`, `text/hero-title`,
+`text/hero-body`, `text/nav-link`, `leading/hero-body`) and eight spacing
+values (`header/*`, `footer/*`, `hero/text-gap`, `serie-list/gap`). Font-size
+is bound directly on the text node via `setRangeBoundVariable` — the flat
+`Tailwind/text-*` style is detached first, because a text style cannot bind to
+a variable. Direction changes, which no variable type can express, ride a
+`breakpoint=Desktop|Mobile` variant axis on the seven masters whose
+`layoutMode` actually flips. Drift in the numbers is now structurally
+prevented rather than merely detected by `figma:verify`; the axis switch stays
+manual. Spec: `.specs/02_archives/figma-responsive-architecture/design.md`.
+
+This reverses the earlier ruling that type scale is a
+primitive/component-encapsulated concern, not a token
+(`.specs/02_archives/figma-variables/design.md:219-238`). Two gotchas that
+ruling did not anticipate, both paid for in Task 4/14: detaching a style with
+`setTextStyleIdAsync("")` **also wipes any range `fontSize` variable binding**
+on that node — detach and re-bind are two steps; and a stale style override on
+a *nested instance* silently outranks a correct binding on the master, so the
+node renders the style's hardcoded size while its `boundVariables` reads
+clean.
+
 ## 4. Gotchas
 - Font-weight strings must match font style names exactly.
 - Renaming variables breaks code sync.

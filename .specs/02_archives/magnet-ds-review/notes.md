@@ -16,19 +16,19 @@ mismatch but a **read-timing** issue — see the note under Pages.
 
 ### Pages (11)
 
-| Item | Node ID | Page | Confirmed? |
-|---|---|---|---|
-| 📖 Cover | `0:1` | — | ✅ (ID not given in review.md; captured fresh) |
-| 📚 Docs | `2736:4` | — | ✅ |
-| 📐 Decisions | `2716:4244` | — | ✅ |
-| ❖ Components | `461:759` | — | ✅ |
-| 📄 Pages | `2558:18264` | — | ✅ |
-| Page 8 | `2678:23308` | — | ✅ |
-| Page 9 | `2678:32354` | — | ✅ |
-| Page 11 | `2678:34657` | — | ✅ |
-| 🗄 Backup — UI kit foundations & controls | `2678:6692` | — | ✅ |
-| 🗄 Backup — Getting started & theme overview | `2678:10236` | — | ✅ |
-| 🗄 Backup — Brand guidelines template | `2678:34067` | — | ✅ |
+| Item                                        | Node ID      | Page | Confirmed?                                     |
+| ------------------------------------------- | ------------ | ---- | ---------------------------------------------- |
+| 📖 Cover                                    | `0:1`        | —    | ✅ (ID not given in review.md; captured fresh) |
+| 📚 Docs                                     | `2736:4`     | —    | ✅                                             |
+| 📐 Decisions                                | `2716:4244`  | —    | ✅                                             |
+| ❖ Components                                | `461:759`    | —    | ✅                                             |
+| 📄 Pages                                    | `2558:18264` | —    | ✅                                             |
+| Page 8                                      | `2678:23308` | —    | ✅                                             |
+| Page 9                                      | `2678:32354` | —    | ✅                                             |
+| Page 11                                     | `2678:34657` | —    | ✅                                             |
+| 🗄 Backup — UI kit foundations & controls    | `2678:6692`  | —    | ✅                                             |
+| 🗄 Backup — Getting started & theme overview | `2678:10236` | —    | ✅                                             |
+| 🗄 Backup — Brand guidelines template        | `2678:34067` | —    | ✅                                             |
 
 **Read-timing note:** the first `use_figma` call (page list without
 `setCurrentPageAsync`) reported `childCount: 0` for `📐 Decisions`, `Page 8`,
@@ -42,24 +42,24 @@ empty — load it first.
 
 ### Page templates (8) — on `📄 Pages` (2558:18264)
 
-| Item | Node ID | Page | Confirmed? |
-|---|---|---|---|
-| Home — Mobile — Light | `2604:1742` | 📄 Pages | ✅ |
-| Home — Mobile — Dark | `2604:1743` | 📄 Pages | ✅ |
+| Item                   | Node ID     | Page     | Confirmed?                     |
+| ---------------------- | ----------- | -------- | ------------------------------ |
+| Home — Mobile — Light  | `2604:1742` | 📄 Pages | ✅                             |
+| Home — Mobile — Dark   | `2604:1743` | 📄 Pages | ✅                             |
 | Home — Desktop — Light | `2604:1741` | 📄 Pages | ✅ (new — not previously IDed) |
-| Home — Desktop — Dark | `2604:1739` | 📄 Pages | ✅ (new) |
-| Blog — Desktop — Light | `2604:1744` | 📄 Pages | ✅ (new) |
-| Blog — Desktop — Dark | `2604:1740` | 📄 Pages | ✅ (new) |
-| Blog — Mobile — Light | `2604:1745` | 📄 Pages | ✅ (new) |
-| Blog — Mobile — Dark | `2604:1746` | 📄 Pages | ✅ (new) |
+| Home — Desktop — Dark  | `2604:1739` | 📄 Pages | ✅ (new)                       |
+| Blog — Desktop — Light | `2604:1744` | 📄 Pages | ✅ (new)                       |
+| Blog — Desktop — Dark  | `2604:1740` | 📄 Pages | ✅ (new)                       |
+| Blog — Mobile — Light  | `2604:1745` | 📄 Pages | ✅ (new)                       |
+| Blog — Mobile — Dark   | `2604:1746` | 📄 Pages | ✅ (new)                       |
 
 ### Mobile section components (3)
 
-| Item | Node ID | Page | Confirmed? |
-|---|---|---|---|
-| BlogPreviewSection — Mobile | `2826:5489` | ❖ Components → `Sections` (2041:484) | ✅ — already correctly grouped (F6 baseline) |
-| WorkPreviewSection — Mobile | `2829:5539` | ❖ Components → top-level (parent = page, not `Sections`) | ✅ — confirms F6 defect (misplaced) |
-| ContactPreviewSection — Mobile | `2829:5576` | ❖ Components → top-level (parent = page, not `Sections`) | ✅ — confirms F6 defect (misplaced) |
+| Item                           | Node ID     | Page                                                     | Confirmed?                                   |
+| ------------------------------ | ----------- | -------------------------------------------------------- | -------------------------------------------- |
+| BlogPreviewSection — Mobile    | `2826:5489` | ❖ Components → `Sections` (2041:484)                     | ✅ — already correctly grouped (F6 baseline) |
+| WorkPreviewSection — Mobile    | `2829:5539` | ❖ Components → top-level (parent = page, not `Sections`) | ✅ — confirms F6 defect (misplaced)          |
+| ContactPreviewSection — Mobile | `2829:5576` | ❖ Components → top-level (parent = page, not `Sections`) | ✅ — confirms F6 defect (misplaced)          |
 
 ### Component sets (15 named in F5, + 1 extra found)
 
@@ -67,23 +67,23 @@ empty — load it first.
 (2041:483), Sections (2041:484), Typography (2041:485), Metadata (2778:303),
 Cards (2778:304) — 6 sections, matching review.md's inventory snapshot.
 
-| Item | Node ID | Page | Confirmed? |
-|---|---|---|---|
-| NavLink | `2001:1309` | ❖ Components → Chrome | ✅ (new) |
-| NavLinkHome | `2001:1312` | ❖ Components → Chrome | ✅ (new) |
-| ThemeToggle | `16:11` | ❖ Components → Chrome | ✅ (new) |
-| MotionToggle | `16:12` | ❖ Components → Chrome | ✅ (new) |
-| Link/CTA | `2012:6179` | ❖ Components → Actions | ✅ (new) |
-| Link/Secondary | `2041:275` | ❖ Components → Actions | ✅ (new) |
-| Link/TextCTA | `2041:313` | ❖ Components → Actions | ✅ (new) |
-| Link/Icon | `2093:6332` | ❖ Components → Actions | ✅ (new) |
-| Link/SecondarySm | `2350:737` | ❖ Components → Actions | ✅ (new) |
-| PostMetadataTime | `2040:482` | ❖ Components → Metadata | ✅ (new) |
-| PostMetadataTopic | `2371:10414` | ❖ Components → Metadata | ✅ (new) |
-| PostCardPreviewBig | `2385:7139` | ❖ Components → Cards | ✅ (new) |
-| PostCardPreviewSmall | `2385:7149` | ❖ Components → Cards | ✅ (new) |
-| PostRow | `2124:7937` | ❖ Components → Cards | ✅ (new) |
-| SerieCard | `2367:7205` | ❖ Components → Cards | ✅ (new) |
+| Item                 | Node ID      | Page                    | Confirmed? |
+| -------------------- | ------------ | ----------------------- | ---------- |
+| NavLink              | `2001:1309`  | ❖ Components → Chrome   | ✅ (new)   |
+| NavLinkHome          | `2001:1312`  | ❖ Components → Chrome   | ✅ (new)   |
+| ThemeToggle          | `16:11`      | ❖ Components → Chrome   | ✅ (new)   |
+| MotionToggle         | `16:12`      | ❖ Components → Chrome   | ✅ (new)   |
+| Link/CTA             | `2012:6179`  | ❖ Components → Actions  | ✅ (new)   |
+| Link/Secondary       | `2041:275`   | ❖ Components → Actions  | ✅ (new)   |
+| Link/TextCTA         | `2041:313`   | ❖ Components → Actions  | ✅ (new)   |
+| Link/Icon            | `2093:6332`  | ❖ Components → Actions  | ✅ (new)   |
+| Link/SecondarySm     | `2350:737`   | ❖ Components → Actions  | ✅ (new)   |
+| PostMetadataTime     | `2040:482`   | ❖ Components → Metadata | ✅ (new)   |
+| PostMetadataTopic    | `2371:10414` | ❖ Components → Metadata | ✅ (new)   |
+| PostCardPreviewBig   | `2385:7139`  | ❖ Components → Cards    | ✅ (new)   |
+| PostCardPreviewSmall | `2385:7149`  | ❖ Components → Cards    | ✅ (new)   |
+| PostRow              | `2124:7937`  | ❖ Components → Cards    | ✅ (new)   |
+| SerieCard            | `2367:7205`  | ❖ Components → Cards    | ✅ (new)   |
 
 **Extra, not in F5's scope:** `Icon` component set, `461:6204`, in Chrome.
 Distinct from `Link/Icon` — not a target of Task 6, recorded here only so a
@@ -91,15 +91,15 @@ later `❖ Components` sweep isn't surprised by 16 sets instead of 15.
 
 ### Docs nodes (4)
 
-| Item | Node ID | Page | Confirmed? |
-|---|---|---|---|
-| PANEL / 01 Tokens Intro | `2670:6679` | 📚 Docs → CHAPTER / 01 Foundations | ✅ |
-| CHAPTER / 01 Foundations | `2670:6678` | 📚 Docs | ✅ (new) |
-| CHAPTER / 02 Components | `2670:6860` | 📚 Docs | ✅ (new) |
-| `_Docs/TokenRow` | `2590:578` | 📚 Docs | ✅ (new) |
-| `_Docs/DecisionCard` (COMPONENT_SET) | `2590:571` | 📚 Docs | ✅ (new) |
-| `_Docs/SpecimenCell` | `2590:542` | 📚 Docs | ✅ (new) |
-| `_Docs/GroupHeader` | `2766:4212` | 📚 Docs | ✅ (new) |
+| Item                                 | Node ID     | Page                               | Confirmed? |
+| ------------------------------------ | ----------- | ---------------------------------- | ---------- |
+| PANEL / 01 Tokens Intro              | `2670:6679` | 📚 Docs → CHAPTER / 01 Foundations | ✅         |
+| CHAPTER / 01 Foundations             | `2670:6678` | 📚 Docs                            | ✅ (new)   |
+| CHAPTER / 02 Components              | `2670:6860` | 📚 Docs                            | ✅ (new)   |
+| `_Docs/TokenRow`                     | `2590:578`  | 📚 Docs                            | ✅ (new)   |
+| `_Docs/DecisionCard` (COMPONENT_SET) | `2590:571`  | 📚 Docs                            | ✅ (new)   |
+| `_Docs/SpecimenCell`                 | `2590:542`  | 📚 Docs                            | ✅ (new)   |
+| `_Docs/GroupHeader`                  | `2766:4212` | 📚 Docs                            | ✅ (new)   |
 
 Other `_Docs/*` masters seen but outside the "especially" list (kept for
 reference, not part of the required 4): `ChapterHeader` (2590:537), `DoDont`
@@ -110,32 +110,32 @@ COMPONENT_SET), `Headline` (2708:21413), `Paragraph` (2709:21540), `Divider`
 
 ### Variable collections (4)
 
-| Item | Node ID | Page | Confirmed? |
-|---|---|---|---|
-| 1 Primitives | `VariableCollectionId:2013:2` | — | ✅ (451 vars, 1 mode "Mode 1" — matches review.md's 451 count) |
-| 2 Theme | `VariableCollectionId:3:2` | — | ✅ (15 vars, modes Light/Dark) |
-| 3 Responsive | `VariableCollectionId:2245:42` | — | ✅ (4 vars, modes Desktop/Tablet/Mobile) |
-| Design System | `VariableCollectionId:2721:4` | — | ✅ (2 vars, 1 mode "Mode 1") |
+| Item          | Node ID                        | Page | Confirmed?                                                     |
+| ------------- | ------------------------------ | ---- | -------------------------------------------------------------- |
+| 1 Primitives  | `VariableCollectionId:2013:2`  | —    | ✅ (451 vars, 1 mode "Mode 1" — matches review.md's 451 count) |
+| 2 Theme       | `VariableCollectionId:3:2`     | —    | ✅ (15 vars, modes Light/Dark)                                 |
+| 3 Responsive  | `VariableCollectionId:2245:42` | —    | ✅ (4 vars, modes Desktop/Tablet/Mobile)                       |
+| Design System | `VariableCollectionId:2721:4`  | —    | ✅ (2 vars, 1 mode "Mode 1")                                   |
 
 #### `2 Theme` variables (15/15)
 
-| Item | Node ID | Page | Confirmed? |
-|---|---|---|---|
-| color/background | `VariableID:3:3` | — | ✅ |
-| color/foreground | `VariableID:3:4` | — | ✅ |
-| color/foreground-strong | `VariableID:3:6` | — | ✅ (F4's "falsely Reserved" list) |
-| color/foreground-muted | `VariableID:3:7` | — | ✅ |
-| color/border | `VariableID:3:8` | — | ✅ |
-| color/surface | `VariableID:3:9` | — | ✅ |
-| color/surface-hover | `VariableID:3:10` | — | ✅ |
-| font/sans | `VariableID:2006:2` | — | ✅ (F4's "falsely Reserved" list) |
-| font/title | `VariableID:2006:3` | — | ✅ (F4's "falsely Reserved" list) |
-| font/mono | `VariableID:2006:4` | — | ✅ (F4's "falsely Reserved" list) |
-| color/accent | `VariableID:2328:2` | — | ✅ |
-| color/accent-hover | `VariableID:2328:3` | — | ✅ (F4's "falsely Reserved" list) |
-| color/accent-strong | `VariableID:2328:4` | — | ✅ |
-| color/accent-subtle | `VariableID:2328:5` | — | ✅ |
-| color/surface-raised | `VariableID:2400:7` | — | ✅ |
+| Item                    | Node ID             | Page | Confirmed?                        |
+| ----------------------- | ------------------- | ---- | --------------------------------- |
+| color/background        | `VariableID:3:3`    | —    | ✅                                |
+| color/foreground        | `VariableID:3:4`    | —    | ✅                                |
+| color/foreground-strong | `VariableID:3:6`    | —    | ✅ (F4's "falsely Reserved" list) |
+| color/foreground-muted  | `VariableID:3:7`    | —    | ✅                                |
+| color/border            | `VariableID:3:8`    | —    | ✅                                |
+| color/surface           | `VariableID:3:9`    | —    | ✅                                |
+| color/surface-hover     | `VariableID:3:10`   | —    | ✅                                |
+| font/sans               | `VariableID:2006:2` | —    | ✅ (F4's "falsely Reserved" list) |
+| font/title              | `VariableID:2006:3` | —    | ✅ (F4's "falsely Reserved" list) |
+| font/mono               | `VariableID:2006:4` | —    | ✅ (F4's "falsely Reserved" list) |
+| color/accent            | `VariableID:2328:2` | —    | ✅                                |
+| color/accent-hover      | `VariableID:2328:3` | —    | ✅ (F4's "falsely Reserved" list) |
+| color/accent-strong     | `VariableID:2328:4` | —    | ✅                                |
+| color/accent-subtle     | `VariableID:2328:5` | —    | ✅                                |
+| color/surface-raised    | `VariableID:2400:7` | —    | ✅                                |
 
 All five of F4's "falsely Reserved semantic token" candidates
 (`font/sans`, `font/title`, `font/mono`, `color/accent-hover`,
@@ -144,41 +144,41 @@ target them directly by these IDs.
 
 #### `3 Responsive` variables (4/4)
 
-| Item | Node ID | Page | Confirmed? |
-|---|---|---|---|
-| container/max-width | `VariableID:2245:43` | — | ✅ |
-| container/gutter | `VariableID:2245:44` | — | ✅ |
-| section/rhythm-y | `VariableID:2245:45` | — | ✅ |
-| viewport/width | `VariableID:2245:46` | — | ✅ |
+| Item                | Node ID              | Page | Confirmed? |
+| ------------------- | -------------------- | ---- | ---------- |
+| container/max-width | `VariableID:2245:43` | —    | ✅         |
+| container/gutter    | `VariableID:2245:44` | —    | ✅         |
+| section/rhythm-y    | `VariableID:2245:45` | —    | ✅         |
+| viewport/width      | `VariableID:2245:46` | —    | ✅         |
 
 #### `Design System` variables (2/2 — Task 10's F7 target)
 
-| Item | Node ID | Page | Confirmed? |
-|---|---|---|---|
-| ds/version | `VariableID:2721:5` | — | ✅ |
-| ds/last-updated | `VariableID:2721:6` | — | ✅ |
+| Item            | Node ID             | Page | Confirmed? |
+| --------------- | ------------------- | ---- | ---------- |
+| ds/version      | `VariableID:2721:5` | —    | ✅         |
+| ds/last-updated | `VariableID:2721:6` | —    | ✅         |
 
 ### Text styles (17: 13 `Tailwind/text-*` + 4 F8 outliers)
 
-| Item | Node ID | Page | Confirmed? |
-|---|---|---|---|
-| Tailwind/text-9xl | `S:856fe0b82647dd6f489cf42ca21eea0ada46f544,` | — | ✅ |
-| Tailwind/text-8xl | `S:d296c532b281c8b8317edc2019e6dbfff7552743,` | — | ✅ |
-| Tailwind/text-7xl | `S:de94e308ab03e0121debee283db72c2cb3bc152a,` | — | ✅ |
-| Tailwind/text-6xl | `S:9cc961c9643d7928db467bfde1f35b4a29161d3d,` | — | ✅ |
-| Tailwind/text-5xl | `S:f3bb8db84212940ec8a6e7fed6b5733a29761de9,` | — | ✅ |
-| Tailwind/text-4xl | `S:78c8d23fd76c456b7ebb37346db8622b606b98eb,` | — | ✅ |
-| Tailwind/text-3xl | `S:cf8df07ee126851de66cf255b57493a099f807ee,` | — | ✅ |
-| Tailwind/text-2xl | `S:e8363f640d9ee6d8a6fb4daa21c8b5327f8b243c,` | — | ✅ |
-| Tailwind/text-xl | `S:d51e3a4585ad449154f2bb4def640154ccf68efb,` | — | ✅ |
-| Tailwind/text-lg | `S:cfc74dba42187d5277383e1b2e2b71b7f0562c7d,` | — | ✅ |
-| Tailwind/text-base | `S:b8b5624c48ca6f2a4af5ec073b3ecdfd598c99e2,` | — | ✅ |
-| Tailwind/text-sm | `S:cd44c82232a9fd29ee8ef60c3c3368b8e3cec3fe,` | — | ✅ |
-| Tailwind/text-xs | `S:148c27a4101bac03dd0aecb0dd2798d2ee11375e,` | — | ✅ |
-| Body/xs/medium | `S:4929cc7e06a3a018b200e83354e9b01f1f52ca7f,` | — | ✅ (F8 outlier) |
-| Body/xl/medium | `S:54bfedd7bbe7989a3ee3cf89d2003c62db95a3fb,` | — | ✅ (F8 outlier) |
-| Body/4xl/semibold | `S:183278db48dcd3bba55b95b5d679adfaa095c223,` | — | ✅ (F8 outlier) |
-| Body/base/medium | `S:efea7acc186902fccab6af958a2a7cf1909b8766,` | — | ✅ (F8 outlier) |
+| Item               | Node ID                                       | Page | Confirmed?      |
+| ------------------ | --------------------------------------------- | ---- | --------------- |
+| Tailwind/text-9xl  | `S:856fe0b82647dd6f489cf42ca21eea0ada46f544,` | —    | ✅              |
+| Tailwind/text-8xl  | `S:d296c532b281c8b8317edc2019e6dbfff7552743,` | —    | ✅              |
+| Tailwind/text-7xl  | `S:de94e308ab03e0121debee283db72c2cb3bc152a,` | —    | ✅              |
+| Tailwind/text-6xl  | `S:9cc961c9643d7928db467bfde1f35b4a29161d3d,` | —    | ✅              |
+| Tailwind/text-5xl  | `S:f3bb8db84212940ec8a6e7fed6b5733a29761de9,` | —    | ✅              |
+| Tailwind/text-4xl  | `S:78c8d23fd76c456b7ebb37346db8622b606b98eb,` | —    | ✅              |
+| Tailwind/text-3xl  | `S:cf8df07ee126851de66cf255b57493a099f807ee,` | —    | ✅              |
+| Tailwind/text-2xl  | `S:e8363f640d9ee6d8a6fb4daa21c8b5327f8b243c,` | —    | ✅              |
+| Tailwind/text-xl   | `S:d51e3a4585ad449154f2bb4def640154ccf68efb,` | —    | ✅              |
+| Tailwind/text-lg   | `S:cfc74dba42187d5277383e1b2e2b71b7f0562c7d,` | —    | ✅              |
+| Tailwind/text-base | `S:b8b5624c48ca6f2a4af5ec073b3ecdfd598c99e2,` | —    | ✅              |
+| Tailwind/text-sm   | `S:cd44c82232a9fd29ee8ef60c3c3368b8e3cec3fe,` | —    | ✅              |
+| Tailwind/text-xs   | `S:148c27a4101bac03dd0aecb0dd2798d2ee11375e,` | —    | ✅              |
+| Body/xs/medium     | `S:4929cc7e06a3a018b200e83354e9b01f1f52ca7f,` | —    | ✅ (F8 outlier) |
+| Body/xl/medium     | `S:54bfedd7bbe7989a3ee3cf89d2003c62db95a3fb,` | —    | ✅ (F8 outlier) |
+| Body/4xl/semibold  | `S:183278db48dcd3bba55b95b5d679adfaa095c223,` | —    | ✅ (F8 outlier) |
+| Body/base/medium   | `S:efea7acc186902fccab6af958a2a7cf1909b8766,` | —    | ✅ (F8 outlier) |
 
 Other text styles exist (`Hero/Title`, `Heading/H1-H3`, `Body/3xl` `/xl`
 `/l` `/base` `/s` `/xs`, `Label/Meta`, `Chip/Mono`, `Code/Base` — 13 more,
@@ -187,15 +187,15 @@ only for the 13 `Tailwind/*` + 4 outliers.
 
 ## Completeness check (Step 4)
 
-| Expected | Found | Status |
-|---|---|---|
-| 11 pages | 11 | ✅ |
-| 8 page templates | 8 | ✅ |
-| 3 Mobile section components | 3 | ✅ |
-| 15 component sets (F5 scope) | 15 named + 1 extra (`Icon`, out of scope, noted) | ✅ |
-| 4 Docs nodes | 4 (PANEL/01 Tokens Intro, CHAPTER/01 Foundations, CHAPTER/02 Components, `_Docs/*` masters group) | ✅ |
-| 21 variables (15 Theme + 4 Responsive + 2 metadata) | 21 | ✅ |
-| 17 text styles (13 Tailwind + 4 outliers) | 17 | ✅ |
+| Expected                                            | Found                                                                                             | Status |
+| --------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------ |
+| 11 pages                                            | 11                                                                                                | ✅     |
+| 8 page templates                                    | 8                                                                                                 | ✅     |
+| 3 Mobile section components                         | 3                                                                                                 | ✅     |
+| 15 component sets (F5 scope)                        | 15 named + 1 extra (`Icon`, out of scope, noted)                                                  | ✅     |
+| 4 Docs nodes                                        | 4 (PANEL/01 Tokens Intro, CHAPTER/01 Foundations, CHAPTER/02 Components, `_Docs/*` masters group) | ✅     |
+| 21 variables (15 Theme + 4 Responsive + 2 metadata) | 21                                                                                                | ✅     |
+| 17 text styles (13 Tailwind + 4 outliers)           | 17                                                                                                | ✅     |
 
 No `❌` rows in this map — every ID quoted by review.md/plan.md was found
 live and unchanged. No follow-up-line exceptions needed.
@@ -211,10 +211,10 @@ hand-drawn SVGs sat outside the 390 px frame bounds on both edges.
 all matched notes.md's Pass-0 map, zero drift). Direct children of the
 `PageContent (slot)` frame in each variant:
 
-| Section | Light (before) | Dark (known-good) |
-|---|---|---|
-| Blog | `BlogPreviewSection` → master `2041:560` (Desktop) | `BlogPreviewSection — Mobile` → master `2826:5489` |
-| Work | `WorkPreviewSection` → master `2045:428` (Desktop) | `WorkPreviewSection — Mobile` → master `2829:5539` |
+| Section | Light (before)                                         | Dark (known-good)                                     |
+| ------- | ------------------------------------------------------ | ----------------------------------------------------- |
+| Blog    | `BlogPreviewSection` → master `2041:560` (Desktop)     | `BlogPreviewSection — Mobile` → master `2826:5489`    |
+| Work    | `WorkPreviewSection` → master `2045:428` (Desktop)     | `WorkPreviewSection — Mobile` → master `2829:5539`    |
 | Contact | `ContactPreviewSection` → master `2114:7281` (Desktop) | `ContactPreviewSection — Mobile` → master `2829:5576` |
 
 Confirmed: Light was pointing at the three Desktop masters, exactly as
@@ -244,7 +244,7 @@ against the equivalent Dark node:
    and stopped the illustration overlapping the headline.
 2. **`WorkPreviewSection — Mobile` still FIXED-height (rule 1: FILL-inside-HUG-parent deadlock).**
    Post-swap the instance (`2586:1150`) still carried `primaryAxisSizingMode:
-   FIXED`, `layoutSizingVertical: FIXED`, height 470 — a leftover override
+FIXED`, `layoutSizingVertical: FIXED`, height 470 — a leftover override
    from the old Desktop instance. Its internal `WorkPreviewSmallList` child
    (`I2586:1150;2829:5541`) was `layoutSizingVertical: FILL`, which deadlocks
    inside a FIXED-height parent. Fixed in two steps (order matters — content
@@ -253,14 +253,14 @@ against the equivalent Dark node:
      `layoutSizingVertical` to `HUG` and left `counterAxisSizingMode` at the
      already-correct `FIXED`).
    - `workList.layoutSizingVertical = 'HUG'` on `WorkPreviewSmallList`.
-   Result: `WorkPreviewSection — Mobile` height 470 → 1234 px, exactly
-   matching Dark's `2586:1158` (1234 px).
+     Result: `WorkPreviewSection — Mobile` height 470 → 1234 px, exactly
+     matching Dark's `2586:1158` (1234 px).
    - Rule 2 (`ContactContainer` must be FILL, not FIXED) was checked and
      found already correct on the swapped `ContactPreviewSection — Mobile`
      instance — no fix needed there.
    - `use_figma` mutations are atomic per script; a first combined attempt
      (Hero visibility + both Work fixes in one call) threw `Error: in
-     get_name: The node with id "2842:14" does not exist` and rolled back
+get_name: The node with id "2842:14" does not exist` and rolled back
      with zero changes. Splitting into three separate calls (Hero alone,
      then `primaryAxisSizingMode`, then the child's `layoutSizingVertical`)
      succeeded — no root cause found for the combined-call error, noted here
@@ -287,13 +287,13 @@ item here since Task 2's scope is F1 only.
 
 **Before/after summary:**
 
-| | Before | After |
-|---|---|---|
-| Rendered canvas width | ~1288 px | 390 px (excluding the pre-existing shared Hero-text artifact noted above) |
-| Frame height | 2533 px | 3548 px (target 3120–3810) |
-| Section masters | 3× Desktop | 3× Mobile (via `swapComponent`, not detach) |
-| Hero illustration | overlapping headline | hidden (matches Dark) |
-| Footer / LET'S TALK | outside frame bounds | inside frame |
+|                       | Before               | After                                                                     |
+| --------------------- | -------------------- | ------------------------------------------------------------------------- |
+| Rendered canvas width | ~1288 px             | 390 px (excluding the pre-existing shared Hero-text artifact noted above) |
+| Frame height          | 2533 px              | 3548 px (target 3120–3810)                                                |
+| Section masters       | 3× Desktop           | 3× Mobile (via `swapComponent`, not detach)                               |
+| Hero illustration     | overlapping headline | hidden (matches Dark)                                                     |
+| Footer / LET'S TALK   | outside frame bounds | inside frame                                                              |
 
 ## F1 fix round 1 — Contact section padding parity (Task 2 review finding, 2026-08-11)
 
@@ -368,14 +368,14 @@ backlog stub's counts, not the plan's original "0 children" assumption:
 **Step 2 — component masters and live-instance check.** Per-page
 `findAllWithCriteria({types:['COMPONENT','COMPONENT_SET']})`:
 
-| Page | Local masters found | Live-instance references (Docs/Decisions/Components/Pages) |
-|---|---|---|
-| `Page 8` | 0 (593 instances, all `remote:true` — resolve to an external published library, e.g. `arrow_right`, `Typography` Class=Display/Heading/Label/Paragraph/Mono-*) | n/a — no local masters to check |
-| `Page 9` | 0 (138 instances) | n/a |
-| `Page 11` | 0 (706 instances) | n/a |
-| `🗄 Backup — UI kit foundations & controls` | **477** (full icon set — Arrows & Directions, User Interface — plus component sets Checkbox, Radiobutton, Toggle, Controls+Text, Dropdown select elements/list, Day, Week, Calendar, Breadcrumbs, Tab elements, Pagination, Button) | **0** — swept all 761+0+160+462 instances across Docs/Decisions/Components/Pages for any `mainComponent.id` in this set of 477: zero hits |
-| `🗄 Backup — Getting started & theme overview` | 0 (923 instances) | n/a |
-| `🗄 Backup — Brand guidelines template` | **6** (`Sync logo with tagline`, `sync blue logo`, `Sync green logo`, `Sync white and blue logo`, `Sync white logo`, `sync vertical logo`) | **0** — same sweep, zero hits |
+| Page                                          | Local masters found                                                                                                                                                                                                                 | Live-instance references (Docs/Decisions/Components/Pages)                                                                                |
+| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `Page 8`                                      | 0 (593 instances, all `remote:true` — resolve to an external published library, e.g. `arrow_right`, `Typography` Class=Display/Heading/Label/Paragraph/Mono-*)                                                                      | n/a — no local masters to check                                                                                                           |
+| `Page 9`                                      | 0 (138 instances)                                                                                                                                                                                                                   | n/a                                                                                                                                       |
+| `Page 11`                                     | 0 (706 instances)                                                                                                                                                                                                                   | n/a                                                                                                                                       |
+| `🗄 Backup — UI kit foundations & controls`    | **477** (full icon set — Arrows & Directions, User Interface — plus component sets Checkbox, Radiobutton, Toggle, Controls+Text, Dropdown select elements/list, Day, Week, Calendar, Breadcrumbs, Tab elements, Pagination, Button) | **0** — swept all 761+0+160+462 instances across Docs/Decisions/Components/Pages for any `mainComponent.id` in this set of 477: zero hits |
+| `🗄 Backup — Getting started & theme overview` | 0 (923 instances)                                                                                                                                                                                                                   | n/a                                                                                                                                       |
+| `🗄 Backup — Brand guidelines template`        | **6** (`Sync logo with tagline`, `sync blue logo`, `Sync green logo`, `Sync white and blue logo`, `Sync white logo`, `sync vertical logo`)                                                                                          | **0** — same sweep, zero hits                                                                                                             |
 
 **Discrepancy vs. brief Step 2's assumption:** the brief frames "a master
 found here" as evidence the `magnet-ds-docs-v1` migration missed it, with
@@ -398,15 +398,15 @@ content contradicts its assumption.
 
 **Step 3 — verdicts.**
 
-| Page | Verdict | Evidence |
-|---|---|---|
-| `Page 8` | **delete** | Typography/color specimens are generic commercial-template filler (not Magnet-DS content), fully superseded in kind by `CHAPTER / 01 Foundations` (2670:6678 — screenshotted: real `1 Primitives`/`2 Theme`/`3 Responsive` token tables, spacing/type specimens built from the actual site's own components). Zero local masters; 593 instances all resolve to a remote external library, not anything local this file would lose. No specimen here has "no equivalent in Docs" — the whole page is unrelated scaffolding, not prior Magnet-DS work. |
-| `Page 9` | **delete** | Commercial DS-starter ("Core Pro") template TOC/welcome — never authored here, per default verdict. |
-| `Page 11` | **delete** | Commercial DS-starter instructional/plugin boilerplate — never authored here, per default verdict. |
-| `🗄 Backup — UI kit foundations & controls` | **delete** | Pre-restructure backup; replacement (`📚 Docs`) shipped and passed the D8 gate. 477 local component masters found (see Step 2) but confirmed zero live references anywhere in the file — orphaned generic UI-kit residue, not missed Magnet-DS content. |
-| `🗄 Backup — Getting started & theme overview` | **delete** | Pre-restructure backup; replacement (`📚 Docs`) shipped and passed the D8 gate. Zero local masters. |
-| `🗄 Backup — Brand guidelines template` | **delete** | Pre-restructure backup; replacement (`📚 Docs`) shipped and passed the D8 gate. 6 local masters found (unrelated "Sync" brand logo) confirmed zero live references. |
-| `📐 Decisions` | **keep** | Active page, out of F2's scope (per plan's overlap note) — not touched by this task. |
+| Page                                          | Verdict    | Evidence                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| --------------------------------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Page 8`                                      | **delete** | Typography/color specimens are generic commercial-template filler (not Magnet-DS content), fully superseded in kind by `CHAPTER / 01 Foundations` (2670:6678 — screenshotted: real `1 Primitives`/`2 Theme`/`3 Responsive` token tables, spacing/type specimens built from the actual site's own components). Zero local masters; 593 instances all resolve to a remote external library, not anything local this file would lose. No specimen here has "no equivalent in Docs" — the whole page is unrelated scaffolding, not prior Magnet-DS work. |
+| `Page 9`                                      | **delete** | Commercial DS-starter ("Core Pro") template TOC/welcome — never authored here, per default verdict.                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `Page 11`                                     | **delete** | Commercial DS-starter instructional/plugin boilerplate — never authored here, per default verdict.                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `🗄 Backup — UI kit foundations & controls`    | **delete** | Pre-restructure backup; replacement (`📚 Docs`) shipped and passed the D8 gate. 477 local component masters found (see Step 2) but confirmed zero live references anywhere in the file — orphaned generic UI-kit residue, not missed Magnet-DS content.                                                                                                                                                                                                                                                                                              |
+| `🗄 Backup — Getting started & theme overview` | **delete** | Pre-restructure backup; replacement (`📚 Docs`) shipped and passed the D8 gate. Zero local masters.                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `🗄 Backup — Brand guidelines template`        | **delete** | Pre-restructure backup; replacement (`📚 Docs`) shipped and passed the D8 gate. 6 local masters found (unrelated "Sync" brand logo) confirmed zero live references.                                                                                                                                                                                                                                                                                                                                                                                  |
+| `📐 Decisions`                                | **keep**   | Active page, out of F2's scope (per plan's overlap note) — not touched by this task.                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
 No page qualified for the `🗄 Backup — typography explorations` rename
 exception — every page's content is confirmed-disposable template/backup
@@ -454,13 +454,13 @@ session, so nothing was skipped. Cross-checked against
 `src/styles/global.css` (`@theme` block + dark-mode `@variant` block) for
 the code-side counterpart of each token.
 
-| Token | Figma bound-node hits | Code-side evidence |
-|---|---|---|
-| `color/foreground-strong` | 11 (2 Docs + 9 Components) — bound to `state=active` NavLink instances and their text | `TableOfContents.astro` (`a[aria-current]` color+border), `SerieContents.astro` (`text-foreground-strong` on the current serie post) — both are "current/active item" markers only |
-| `font/sans` | 660+ (4 Cover + 333 Docs + 99 Components + 224 Pages) — body paragraphs, nav links, dates, footer email | No explicit `font-sans` class anywhere in `src/` — it's Tailwind v4's `--font-sans` default, applied site-wide to every element that doesn't opt into `font-title`/`font-mono` |
-| `font/title` | 8 (5 Docs + 3 Components) — bound to "Hi, I'm Jérôme!" hero heading | `font-title` class on `H1.astro`, `HeroText`, `AboutText`, `ValueCard`, `AboutFacts`, `AboutStrip`, `WorkCard*`, `ContactText` — display/heading typeface only |
-| `font/mono` | 406 (211 Docs + 63 Components + 132 Pages) — dates, topic labels ("Web Performance · 2/5"), numbering | `font-mono` class on `PostRow*`, `ArchiveTable`, `TopicChips`, `SeriePostListItem`, `AboutFactsStrip`, `blog.astro` — dates/metadata/topic-chip labels only |
-| `color/accent-hover` | **0** across all 6,004 nodes searched | **0** — no `accent-hover`/`hover:*-accent-hover` class or `var(--color-accent-hover)` reference anywhere in `src/`; `global.css` defines the value with a directional-behaviour comment ("darkens on hover" light / "brightens on hover" dark) but nothing binds to it — every hover state found in Figma (`state=hover` components, `Link/Icon`, `Link/Secondary*`) binds to `color/surface-hover` instead |
+| Token                     | Figma bound-node hits                                                                                   | Code-side evidence                                                                                                                                                                                                                                                                                                                                                                                          |
+| ------------------------- | ------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `color/foreground-strong` | 11 (2 Docs + 9 Components) — bound to `state=active` NavLink instances and their text                   | `TableOfContents.astro` (`a[aria-current]` color+border), `SerieContents.astro` (`text-foreground-strong` on the current serie post) — both are "current/active item" markers only                                                                                                                                                                                                                          |
+| `font/sans`               | 660+ (4 Cover + 333 Docs + 99 Components + 224 Pages) — body paragraphs, nav links, dates, footer email | No explicit `font-sans` class anywhere in `src/` — it's Tailwind v4's `--font-sans` default, applied site-wide to every element that doesn't opt into `font-title`/`font-mono`                                                                                                                                                                                                                              |
+| `font/title`              | 8 (5 Docs + 3 Components) — bound to "Hi, I'm Jérôme!" hero heading                                     | `font-title` class on `H1.astro`, `HeroText`, `AboutText`, `ValueCard`, `AboutFacts`, `AboutStrip`, `WorkCard*`, `ContactText` — display/heading typeface only                                                                                                                                                                                                                                              |
+| `font/mono`               | 406 (211 Docs + 63 Components + 132 Pages) — dates, topic labels ("Web Performance · 2/5"), numbering   | `font-mono` class on `PostRow*`, `ArchiveTable`, `TopicChips`, `SeriePostListItem`, `AboutFactsStrip`, `blog.astro` — dates/metadata/topic-chip labels only                                                                                                                                                                                                                                                 |
+| `color/accent-hover`      | **0** across all 6,004 nodes searched                                                                   | **0** — no `accent-hover`/`hover:*-accent-hover` class or `var(--color-accent-hover)` reference anywhere in `src/`; `global.css` defines the value with a directional-behaviour comment ("darkens on hover" light / "brightens on hover" dark) but nothing binds to it — every hover state found in Figma (`state=hover` components, `Link/Icon`, `Link/Secondary*`) binds to `color/surface-hover` instead |
 
 **Judgment call:** `color/accent-hover` turned out to have genuinely zero
 consumers in both Figma and code — F4's "falsely Reserved" framing doesn't
@@ -469,28 +469,28 @@ usage). Per the brief's own escape clause ("No description may be the
 string … unless a live search proves … zero consumers in both Figma and
 code"), the fired condition is met. Wrote a still-evidence-backed
 description rather than reusing the flat placeholder verbatim: it states
-the *why* (hover states already have a home — `surface-hover`) so an AI
+the _why_ (hover states already have a home — `surface-hover`) so an AI
 consumer doesn't mistake it for an untested/broken token.
 
 **Step 2 — `## Theme token copy` table.**
 
-| Token | Description | Source |
-|---|---|---|
-| `color/background` | Page base canvas; never used for cards or hover states. | docs table |
-| `color/foreground` | Primary readable text and icon colour on standard surfaces. | docs table |
-| `color/foreground-strong` | Active/current-item marker (TOC link, current serie post); not headings or body text. | new |
-| `color/foreground-muted` | Passive metadata and helper text at AA contrast floor. | docs table |
-| `color/border` | Default aggregate boundary for cards, rows, and table rails. | docs table |
-| `color/surface` | Raised neutral surface for chrome regions like footer blocks. | docs table |
-| `color/surface-hover` | Single hover tint for row/card/button hover states only. | docs table |
-| `font/sans` | Default body typeface for paragraphs, nav, and UI copy site-wide (IBM Plex Sans). | new |
-| `font/title` | Display typeface for H1s, hero headings, and card titles (Bubbler One); not body text. | new |
-| `font/mono` | Monospace for dates, topic chips, and metadata labels (Fira Code); not prose text. | new |
-| `color/accent` | Interactive accent for serie chips, active nav, and section CTAs. | docs table |
-| `color/accent-hover` | Unused reserved slot: hover states currently reuse surface-hover, not this token. | new |
-| `color/accent-strong` | Strong accent slot from the fixed budget; never passive metadata. | docs table |
-| `color/accent-subtle` | Soft accent backdrop when emphasis is needed without shouting. | docs table |
-| `color/surface-raised` | Higher-elevation surface behind grouped content blocks. | docs table |
+| Token                     | Description                                                                            | Source     |
+| ------------------------- | -------------------------------------------------------------------------------------- | ---------- |
+| `color/background`        | Page base canvas; never used for cards or hover states.                                | docs table |
+| `color/foreground`        | Primary readable text and icon colour on standard surfaces.                            | docs table |
+| `color/foreground-strong` | Active/current-item marker (TOC link, current serie post); not headings or body text.  | new        |
+| `color/foreground-muted`  | Passive metadata and helper text at AA contrast floor.                                 | docs table |
+| `color/border`            | Default aggregate boundary for cards, rows, and table rails.                           | docs table |
+| `color/surface`           | Raised neutral surface for chrome regions like footer blocks.                          | docs table |
+| `color/surface-hover`     | Single hover tint for row/card/button hover states only.                               | docs table |
+| `font/sans`               | Default body typeface for paragraphs, nav, and UI copy site-wide (IBM Plex Sans).      | new        |
+| `font/title`              | Display typeface for H1s, hero headings, and card titles (Bubbler One); not body text. | new        |
+| `font/mono`               | Monospace for dates, topic chips, and metadata labels (Fira Code); not prose text.     | new        |
+| `color/accent`            | Interactive accent for serie chips, active nav, and section CTAs.                      | docs table |
+| `color/accent-hover`      | Unused reserved slot: hover states currently reuse surface-hover, not this token.      | new        |
+| `color/accent-strong`     | Strong accent slot from the fixed budget; never passive metadata.                      | docs table |
+| `color/accent-subtle`     | Soft accent backdrop when emphasis is needed without shouting.                         | docs table |
+| `color/surface-raised`    | Higher-elevation surface behind grouped content blocks.                                | docs table |
 
 All 15 descriptions are one sentence, ≤ 90 chars (max observed: 86,
 `font/title`). Zero literal "Reserved semantic token in the Theme layer"
@@ -537,27 +537,27 @@ consumers: `ThemeToggle`/`MotionToggle` (Chrome section, Components
 COMPONENT variants `state=light/dark/on/off`, 1/1/1/1 in Components +
 11/3 in Docs + 8/0 in Pages) and `PostMetadataTopic`'s `type=post`
 chip fill (10 Components + 40 Docs + 20 Pages) — Docs' own annotation
-text spells this out verbatim: *"type=post: muted bg-only box
-(color/surface), mono 12/16 UPPER..."*. Code confirms the toggle half:
+text spells this out verbatim: _"type=post: muted bg-only box
+(color/surface), mono 12/16 UPPER..."_. Code confirms the toggle half:
 `ThemeToggle.astro` / `MotionToggle.astro` both carry a static (not
 hover) `bg-surface` class. New copy: **"Idle fill for toggle controls
 (ThemeToggle, MotionToggle) and topic chips; not footer."**
 
 **Other 9 rows — verification results.**
 
-| Token | Verdict | Evidence |
-|---|---|---|
-| `color/foreground` | Verified, unchanged | Widely bound to headline/body TEXT + VECTOR icon fills across all 4 non-empty pages; also the Link/CTA default fill/text colour. No contradicting evidence found. |
-| `color/foreground-muted` | Verified, unchanged | Dominant consumer across every page — dates, captions, standfirst copy, footer email link (`hello@jeromeabel.net`), passive metadata. Matches description exactly. |
-| `color/border` | Verified, unchanged | Binds to `Footer` instances (10 Docs + 1 Components + 8 Pages — this is the token Footer actually uses, not `surface`), `PostRow`, `SerieCard`, `PreviewTitle`, `BlogPostRows`, `ContactPreviewContent`. Matches "cards, rows, and table rails" plus footer as a further aggregate-boundary example. |
-| `color/surface-hover` | Verified, unchanged | Binds only to `state=hover` component variants, `Link/Icon`, `Link/Secondary*`, `PostRow` hover, chip `State=hover` variants — exclusively hover-labelled nodes across Components/Docs/Pages. No non-hover consumer found. |
-| `font/sans` / `font/title` / `font/mono` | Verified, unchanged | Re-confirmed the original Step 1b sweep's findings (660+/8/406 bound nodes respectively) — no new contradicting evidence in this pass. |
-| **`color/background`** | **Corrected** | Old copy claimed "never used for cards or hover states." False: `Link/CTA`'s `state=hover` COMPONENT (`2012:6180`, Components → Actions) binds `fills` to `color/background` (and `strokes` to `color/foreground`) — confirmed by direct node inspection. Code match: `Link.astro`'s `.hover-fx` reveals a `var(--color-background)` fill and flips text to `var(--color-foreground)` on `:hover`. New copy: **"Page base canvas and Link/CTA hover fill (foreground/background invert); not cards."** |
-| **`color/accent`** | **Corrected** | Old copy claimed "serie chips, active nav, and section CTAs." Only the serie-chip clause holds — real `PostMetadataTopic` `type=serie` instances bind to `color/accent` (10 Components + 28 Pages + Docs demo), matching Docs' own spec text. Nav-active and CTA claims are unsupported: `Header.astro`'s active nav link uses `text-foreground` (`menuActive` variant), and `Link.astro`'s `cta` variant uses `bg-foreground`/`text-background` — neither touches `accent` in code, and no `NavLink`/`Link/CTA` node binds to `color/accent` in Figma either. New copy: **"Accent for serie-chip icon+label only; nav/CTA use foreground, not accent."** |
-| **`color/accent-strong`** | **Corrected — flagged unverified→unused** | Reviewer's spot-check (zero Components/Pages consumers) confirmed. This sweep found the *only* Figma consumer is Docs' own self-referential "layer" annotation-tag UI (`TEXT:layer` ×4, the Chrome/Content/Hand category badges) — not a product surface. Code: `--color-accent-strong` is defined in `global.css` but no `accent-strong` Tailwind class exists anywhere in `src/`. Same status as `color/accent-hover` in the original pass: zero consumers in both Figma and code. New copy: **"Unused reserved slot: zero live consumers found; defined for future high-emphasis accent."** |
-| **`color/accent-subtle`** | **Corrected — flagged unverified→unused** | Same pattern as `color/accent-strong`. Only Figma consumer: Docs' self-referential "layer tag" FRAME (×4, category badges). No `accent-subtle` class anywhere in `src/`. New copy: **"Unused reserved slot: zero live consumers found; defined for future soft accent backdrop."** |
-| **`color/surface-raised`** | **Corrected** | Old copy claimed "behind grouped content blocks" — no grouped-content-block consumer found anywhere. Real consumers: `ThemeToggle`/`MotionToggle`'s `hover:bg-surface-raised` class (confirmed in both component files — the toggle's hover state steps up from `surface` to `surface-raised`) and a `PostMetadataTopic` instance (1 Docs + 1 Components) matching the `global.css` comment's "topic chip on a hovered row" elevation case. New copy: **"Toggle hover fill (ThemeToggle, MotionToggle) and topic-chip elevation on hovered rows."** |
-| `color/accent-hover` | No change (reviewer: minor, deferred) | Still zero consumers in Figma and code — description already states this honestly; reviewer confirmed no action required. |
+| Token                                    | Verdict                                   | Evidence                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ---------------------------------------- | ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `color/foreground`                       | Verified, unchanged                       | Widely bound to headline/body TEXT + VECTOR icon fills across all 4 non-empty pages; also the Link/CTA default fill/text colour. No contradicting evidence found.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `color/foreground-muted`                 | Verified, unchanged                       | Dominant consumer across every page — dates, captions, standfirst copy, footer email link (`hello@jeromeabel.net`), passive metadata. Matches description exactly.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `color/border`                           | Verified, unchanged                       | Binds to `Footer` instances (10 Docs + 1 Components + 8 Pages — this is the token Footer actually uses, not `surface`), `PostRow`, `SerieCard`, `PreviewTitle`, `BlogPostRows`, `ContactPreviewContent`. Matches "cards, rows, and table rails" plus footer as a further aggregate-boundary example.                                                                                                                                                                                                                                                                                                                                                      |
+| `color/surface-hover`                    | Verified, unchanged                       | Binds only to `state=hover` component variants, `Link/Icon`, `Link/Secondary*`, `PostRow` hover, chip `State=hover` variants — exclusively hover-labelled nodes across Components/Docs/Pages. No non-hover consumer found.                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `font/sans` / `font/title` / `font/mono` | Verified, unchanged                       | Re-confirmed the original Step 1b sweep's findings (660+/8/406 bound nodes respectively) — no new contradicting evidence in this pass.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| **`color/background`**                   | **Corrected**                             | Old copy claimed "never used for cards or hover states." False: `Link/CTA`'s `state=hover` COMPONENT (`2012:6180`, Components → Actions) binds `fills` to `color/background` (and `strokes` to `color/foreground`) — confirmed by direct node inspection. Code match: `Link.astro`'s `.hover-fx` reveals a `var(--color-background)` fill and flips text to `var(--color-foreground)` on `:hover`. New copy: **"Page base canvas and Link/CTA hover fill (foreground/background invert); not cards."**                                                                                                                                                    |
+| **`color/accent`**                       | **Corrected**                             | Old copy claimed "serie chips, active nav, and section CTAs." Only the serie-chip clause holds — real `PostMetadataTopic` `type=serie` instances bind to `color/accent` (10 Components + 28 Pages + Docs demo), matching Docs' own spec text. Nav-active and CTA claims are unsupported: `Header.astro`'s active nav link uses `text-foreground` (`menuActive` variant), and `Link.astro`'s `cta` variant uses `bg-foreground`/`text-background` — neither touches `accent` in code, and no `NavLink`/`Link/CTA` node binds to `color/accent` in Figma either. New copy: **"Accent for serie-chip icon+label only; nav/CTA use foreground, not accent."** |
+| **`color/accent-strong`**                | **Corrected — flagged unverified→unused** | Reviewer's spot-check (zero Components/Pages consumers) confirmed. This sweep found the _only_ Figma consumer is Docs' own self-referential "layer" annotation-tag UI (`TEXT:layer` ×4, the Chrome/Content/Hand category badges) — not a product surface. Code: `--color-accent-strong` is defined in `global.css` but no `accent-strong` Tailwind class exists anywhere in `src/`. Same status as `color/accent-hover` in the original pass: zero consumers in both Figma and code. New copy: **"Unused reserved slot: zero live consumers found; defined for future high-emphasis accent."**                                                            |
+| **`color/accent-subtle`**                | **Corrected — flagged unverified→unused** | Same pattern as `color/accent-strong`. Only Figma consumer: Docs' self-referential "layer tag" FRAME (×4, category badges). No `accent-subtle` class anywhere in `src/`. New copy: **"Unused reserved slot: zero live consumers found; defined for future soft accent backdrop."**                                                                                                                                                                                                                                                                                                                                                                        |
+| **`color/surface-raised`**               | **Corrected**                             | Old copy claimed "behind grouped content blocks" — no grouped-content-block consumer found anywhere. Real consumers: `ThemeToggle`/`MotionToggle`'s `hover:bg-surface-raised` class (confirmed in both component files — the toggle's hover state steps up from `surface` to `surface-raised`) and a `PostMetadataTopic` instance (1 Docs + 1 Components) matching the `global.css` comment's "topic chip on a hovered row" elevation case. New copy: **"Toggle hover fill (ThemeToggle, MotionToggle) and topic-chip elevation on hovered rows."**                                                                                                       |
+| `color/accent-hover`                     | No change (reviewer: minor, deferred)     | Still zero consumers in Figma and code — description already states this honestly; reviewer confirmed no action required.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
 **Net result:** 6 of the 15 descriptions were corrected (`color/background`,
 `color/surface`, `color/accent`, `color/accent-strong`,
@@ -569,23 +569,23 @@ code-side evidence — no row is presented as vetted without it.
 
 ### `## Theme token copy` — fix round 1 (final)
 
-| Token | Description | Status |
-|---|---|---|
-| `color/background` | Page base canvas and Link/CTA hover fill (foreground/background invert); not cards. | corrected |
-| `color/foreground` | Primary readable text and icon colour on standard surfaces. | verified |
-| `color/foreground-strong` | Active/current-item marker (TOC link, current serie post); not headings or body text. | verified |
-| `color/foreground-muted` | Passive metadata and helper text; 6.56:1 Light / 6.29:1 Dark on color/background. | corrected (fix round 2) |
-| `color/border` | Default aggregate boundary for cards, rows, and table rails. | verified |
-| `color/surface` | Idle fill for toggle controls (ThemeToggle, MotionToggle) and topic chips; not footer. | corrected (critical) |
-| `color/surface-hover` | Single hover tint for row/card/button hover states only. | verified |
-| `font/sans` | Default body typeface for paragraphs, nav, and UI copy site-wide (IBM Plex Sans). | verified |
-| `font/title` | Display typeface for H1s, hero headings, and card titles (Bubbler One); not body text. | verified |
-| `font/mono` | Monospace for dates, topic chips, and metadata labels (Fira Code); not prose text. | verified |
-| `color/accent` | Accent for serie-chip icon+label only; nav/CTA use foreground, not accent. | corrected |
-| `color/accent-hover` | Unused reserved slot: hover states currently reuse surface-hover, not this token. | verified (unchanged) |
-| `color/accent-strong` | Unused reserved slot: zero live consumers found; defined for future high-emphasis accent. | corrected |
-| `color/accent-subtle` | Unused reserved slot: zero live consumers found; defined for future soft accent backdrop. | corrected |
-| `color/surface-raised` | Toggle hover fill (ThemeToggle, MotionToggle) and topic-chip elevation on hovered rows. | corrected |
+| Token                     | Description                                                                               | Status                  |
+| ------------------------- | ----------------------------------------------------------------------------------------- | ----------------------- |
+| `color/background`        | Page base canvas and Link/CTA hover fill (foreground/background invert); not cards.       | corrected               |
+| `color/foreground`        | Primary readable text and icon colour on standard surfaces.                               | verified                |
+| `color/foreground-strong` | Active/current-item marker (TOC link, current serie post); not headings or body text.     | verified                |
+| `color/foreground-muted`  | Passive metadata and helper text; 6.56:1 Light / 6.29:1 Dark on color/background.         | corrected (fix round 2) |
+| `color/border`            | Default aggregate boundary for cards, rows, and table rails.                              | verified                |
+| `color/surface`           | Idle fill for toggle controls (ThemeToggle, MotionToggle) and topic chips; not footer.    | corrected (critical)    |
+| `color/surface-hover`     | Single hover tint for row/card/button hover states only.                                  | verified                |
+| `font/sans`               | Default body typeface for paragraphs, nav, and UI copy site-wide (IBM Plex Sans).         | verified                |
+| `font/title`              | Display typeface for H1s, hero headings, and card titles (Bubbler One); not body text.    | verified                |
+| `font/mono`               | Monospace for dates, topic chips, and metadata labels (Fira Code); not prose text.        | verified                |
+| `color/accent`            | Accent for serie-chip icon+label only; nav/CTA use foreground, not accent.                | corrected               |
+| `color/accent-hover`      | Unused reserved slot: hover states currently reuse surface-hover, not this token.         | verified (unchanged)    |
+| `color/accent-strong`     | Unused reserved slot: zero live consumers found; defined for future high-emphasis accent. | corrected               |
+| `color/accent-subtle`     | Unused reserved slot: zero live consumers found; defined for future soft accent backdrop. | corrected               |
+| `color/surface-raised`    | Toggle hover fill (ThemeToggle, MotionToggle) and topic-chip elevation on hovered rows.   | corrected               |
 
 All 15 descriptions are one sentence, ≤ 90 chars (max observed: 89,
 `color/accent-strong` and `color/accent-subtle`). `ds/version`
@@ -674,6 +674,7 @@ not just the 5 literally named. `color/accent-hover` and
 the F3 table.
 
 **Verification.**
+
 - Light mode: full-panel screenshot confirmed all 12 color rows show colour
   with legible alias+hex on-swatch text, the 3 font rows show plain
   readable text, all 11 updated role/usage texts render, zero JSON.
@@ -700,23 +701,23 @@ or a screenshot per set. Cheaper, same ground truth.
 
 Live audit (before any rename), all 15 sets from the Node-ID map:
 
-| Set | Property (before) | Type | Values (before) |
-|---|---|---|---|
-| NavLink | `state` | VARIANT | `active`, `default`, `hover` |
-| NavLinkHome | `state` | VARIANT | `active`, `default`, `hover` |
-| ThemeToggle | `state` | VARIANT | `dark`, `light` |
-| MotionToggle | `state` | VARIANT | `off`, `on` |
-| Link/CTA | `state` | VARIANT | `default`, `hover` |
-| Link/Secondary | `state` | VARIANT | `default`, `hover` |
-| Link/TextCTA | `state` | VARIANT | `active`, `default`, `hover` |
-| Link/Icon | `state` | VARIANT | `default`, `hover` |
-| Link/SecondarySm | `state` | VARIANT | `active`, `default`, `hover` |
-| PostMetadataTime | `type` | VARIANT | `day`, `default`, `no-date` |
-| PostMetadataTopic | `type` | VARIANT | `post`, `serie` |
-| PostCardPreviewBig | `State` | VARIANT | `default`, `hover` |
-| PostCardPreviewSmall | `State` | VARIANT | `default`, `hover` |
-| PostRow | `State`, `Variant` | VARIANT, VARIANT | `default`/`hover`; `Post`/`Serie` |
-| SerieCard | `State` | VARIANT | `default`, `hover` |
+| Set                  | Property (before)  | Type             | Values (before)                   |
+| -------------------- | ------------------ | ---------------- | --------------------------------- |
+| NavLink              | `state`            | VARIANT          | `active`, `default`, `hover`      |
+| NavLinkHome          | `state`            | VARIANT          | `active`, `default`, `hover`      |
+| ThemeToggle          | `state`            | VARIANT          | `dark`, `light`                   |
+| MotionToggle         | `state`            | VARIANT          | `off`, `on`                       |
+| Link/CTA             | `state`            | VARIANT          | `default`, `hover`                |
+| Link/Secondary       | `state`            | VARIANT          | `default`, `hover`                |
+| Link/TextCTA         | `state`            | VARIANT          | `active`, `default`, `hover`      |
+| Link/Icon            | `state`            | VARIANT          | `default`, `hover`                |
+| Link/SecondarySm     | `state`            | VARIANT          | `active`, `default`, `hover`      |
+| PostMetadataTime     | `type`             | VARIANT          | `day`, `default`, `no-date`       |
+| PostMetadataTopic    | `type`             | VARIANT          | `post`, `serie`                   |
+| PostCardPreviewBig   | `State`            | VARIANT          | `default`, `hover`                |
+| PostCardPreviewSmall | `State`            | VARIANT          | `default`, `hover`                |
+| PostRow              | `State`, `Variant` | VARIANT, VARIANT | `default`/`hover`; `Post`/`Serie` |
+| SerieCard            | `State`            | VARIANT          | `default`, `hover`                |
 
 Matches review.md's expected table exactly — zero drift. `Link/TextCTA`,
 `Link/Icon`, `Link/SecondarySm` also carry non-variant properties
@@ -759,7 +760,7 @@ deviations to log.
 section scoped instance verification to `📄 Pages` only and then claimed
 "`MotionToggle` has zero instances placed in the 8 page templates …
 verified structurally only" — worded as if that meant zero instances
-existed *anywhere*. That was wrong methodology, not just wrong wording: a
+existed _anywhere_. That was wrong methodology, not just wrong wording: a
 task reviewer swept the other 4 pages and found 3 live `MotionToggle`
 instances plus 1 `ThemeToggle` specimen instance on `📚 Docs`. Re-swept the
 whole file properly below; the renames themselves were never broken, but
@@ -773,13 +774,13 @@ the original check's scope was too narrow to support the claim it made.
 and backup pages are no longer top-level children as of Task 3's F2
 disposition work):
 
-| Page | Total instances (all types) | Matching instances (6 sets) |
-|---|---|---|
-| 📖 Cover | 2 | 0 |
-| 📚 Docs | 761 | 104 (`SerieCard` 20, `PostRow` 45, `MotionToggle` 3, `ThemeToggle` 11, `PostCardPreviewBig` 6, `PostCardPreviewSmall` 19) |
-| 📐 Decisions | 0 | 0 |
-| ❖ Components | 160 | 16 (nested instances inside `Sections` mockups) |
-| 📄 Pages | 462 | 68 (`ThemeToggle` 8, `PostCardPreviewBig` 4, `PostCardPreviewSmall` 12, `SerieCard` 12, `PostRow` 32) |
+| Page         | Total instances (all types) | Matching instances (6 sets)                                                                                               |
+| ------------ | --------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| 📖 Cover     | 2                           | 0                                                                                                                         |
+| 📚 Docs      | 761                         | 104 (`SerieCard` 20, `PostRow` 45, `MotionToggle` 3, `ThemeToggle` 11, `PostCardPreviewBig` 6, `PostCardPreviewSmall` 19) |
+| 📐 Decisions | 0                           | 0                                                                                                                         |
+| ❖ Components | 160                         | 16 (nested instances inside `Sections` mockups)                                                                           |
+| 📄 Pages     | 462                         | 68 (`ThemeToggle` 8, `PostCardPreviewBig` 4, `PostCardPreviewSmall` 12, `SerieCard` 12, `PostRow` 32)                     |
 
 **188 live instances total** across the 6 renamed sets. Each was read for
 its current property value(s) and `mainComponent.id`/name; a filter flagged
@@ -794,6 +795,7 @@ co-located `ThemeToggle` specimen is `2670:6890` (`mode=light`, mainComponent
 `16:3`). All four confirmed resolving correctly post-rename.
 
 Screenshots taken and inspected in addition to the property-level sweep:
+
 - `get_screenshot` of `❖ Components` (`461:759`) — full-page overview
   renders normally, no purple/detached-instance badges anywhere.
 - `get_screenshot` of `Home — Desktop — Light` (`2604:1741`) — `BLOG`
@@ -819,23 +821,23 @@ without stopping.
 
 Copy this table verbatim into Task 9's G2 `_Docs/DecisionCard`.
 
-| Set | Property | Values |
-|---|---|---|
-| NavLink | `state` | `default`, `hover`, `active` |
-| NavLinkHome | `state` | `default`, `hover`, `active` |
-| ThemeToggle | `mode` | `dark`, `light` |
-| MotionToggle | `mode` | `on`, `off` |
-| Link/CTA | `state` | `default`, `hover` |
-| Link/Secondary | `state` | `default`, `hover` |
-| Link/TextCTA | `state` | `default`, `hover`, `active` |
-| Link/Icon | `state` | `default`, `hover` |
-| Link/SecondarySm | `state` | `default`, `hover`, `active` |
-| PostMetadataTime | `type` | `default`, `day`, `no-date` |
-| PostMetadataTopic | `type` | `post`, `serie` |
-| PostCardPreviewBig | `state` | `default`, `hover` |
-| PostCardPreviewSmall | `state` | `default`, `hover` |
-| PostRow | `type`, `state` | `post`/`serie`; `default`/`hover` |
-| SerieCard | `state` | `default`, `hover` |
+| Set                  | Property        | Values                            |
+| -------------------- | --------------- | --------------------------------- |
+| NavLink              | `state`         | `default`, `hover`, `active`      |
+| NavLinkHome          | `state`         | `default`, `hover`, `active`      |
+| ThemeToggle          | `mode`          | `dark`, `light`                   |
+| MotionToggle         | `mode`          | `on`, `off`                       |
+| Link/CTA             | `state`         | `default`, `hover`                |
+| Link/Secondary       | `state`         | `default`, `hover`                |
+| Link/TextCTA         | `state`         | `default`, `hover`, `active`      |
+| Link/Icon            | `state`         | `default`, `hover`                |
+| Link/SecondarySm     | `state`         | `default`, `hover`, `active`      |
+| PostMetadataTime     | `type`          | `default`, `day`, `no-date`       |
+| PostMetadataTopic    | `type`          | `post`, `serie`                   |
+| PostCardPreviewBig   | `state`         | `default`, `hover`                |
+| PostCardPreviewSmall | `state`         | `default`, `hover`                |
+| PostRow              | `type`, `state` | `post`/`serie`; `default`/`hover` |
+| SerieCard            | `state`         | `default`, `hover`                |
 
 **Vocabulary (G2):** interaction states are `default | hover | active | focus`,
 lowercase, on a property named `state`. `focus` is not present as a variant
@@ -925,24 +927,24 @@ wired in as data.
 **Step 3 — 16 measurements.** Ran `node contrast.mjs` over all 8 pairs ×
 2 modes:
 
-| Pair | Mode | Ratio | Verdict |
-|---|---|---|---|
-| background / foreground | Light | 15.10:1 | AA |
-| background / foreground | Dark | 12.63:1 | AA |
-| background / foreground-strong | Light | 17.87:1 | AA |
-| background / foreground-strong | Dark | 13.71:1 | AA |
-| background / foreground-muted | Light | 6.56:1 | AA |
-| background / foreground-muted | Dark | 6.29:1 | AA |
-| background / accent | Light | 5.18:1 | AA |
-| background / accent | Dark | 8.05:1 | AA |
-| surface / foreground | Light | 12.84:1 | AA |
-| surface / foreground | Dark | 10.87:1 | AA |
-| surface / foreground-muted | Light | 5.56:1 | AA |
-| surface / foreground-muted | Dark | 5.42:1 | AA |
-| accent-subtle / accent-strong | Light | 8.66:1 | AA |
-| accent-subtle / accent-strong | Dark | 9.24:1 | AA |
-| foreground (CTA fill) / background (CTA text) | Light | 15.10:1 | AA |
-| foreground (CTA fill) / background (CTA text) | Dark | 12.63:1 | AA |
+| Pair                                          | Mode  | Ratio   | Verdict |
+| --------------------------------------------- | ----- | ------- | ------- |
+| background / foreground                       | Light | 15.10:1 | AA      |
+| background / foreground                       | Dark  | 12.63:1 | AA      |
+| background / foreground-strong                | Light | 17.87:1 | AA      |
+| background / foreground-strong                | Dark  | 13.71:1 | AA      |
+| background / foreground-muted                 | Light | 6.56:1  | AA      |
+| background / foreground-muted                 | Dark  | 6.29:1  | AA      |
+| background / accent                           | Light | 5.18:1  | AA      |
+| background / accent                           | Dark  | 8.05:1  | AA      |
+| surface / foreground                          | Light | 12.84:1 | AA      |
+| surface / foreground                          | Dark  | 10.87:1 | AA      |
+| surface / foreground-muted                    | Light | 5.56:1  | AA      |
+| surface / foreground-muted                    | Dark  | 5.42:1  | AA      |
+| accent-subtle / accent-strong                 | Light | 8.66:1  | AA      |
+| accent-subtle / accent-strong                 | Dark  | 9.24:1  | AA      |
+| foreground (CTA fill) / background (CTA text) | Light | 15.10:1 | AA      |
+| foreground (CTA fill) / background (CTA text) | Dark  | 12.63:1 | AA      |
 
 All 16 measurements pass AA (≥4.5:1); zero failures. **Finding contradicting
 the brief's prediction:** the brief expected `foreground-muted` pairs to be
@@ -994,7 +996,7 @@ AA"; `mode3` = "Dark X.XX:1 — AA". This is Task 5's swatch treatment
 (frame filled by the bound variable directly, primitive alias + hex as a
 legible text label on top) reused verbatim, except the label color is now
 literally the tested foreground token rather than an auto-picked legible
-color — appropriate here since the label color *is* the thing under test,
+color — appropriate here since the label color _is_ the thing under test,
 and it makes each row visually self-demonstrating as the brief requires.
 
 **Step 6 — verification.** `get_screenshot` of the block in ambient
@@ -1104,8 +1106,8 @@ no existing value is found anywhere in the file or `src/styles/global.css`.
 Full-text search of the Docs page found this premise only partially true:
 an existing DecisionCard instance elsewhere (`2670:6717`, `SECTION /
 Colour`, `layer=Content`) already carries a non-empty `finding` field:
-*"Focus ring: outline in accent color. Radius is element radius + 2px
-with 2px offset."* — i.e. a 2px offset value was already recorded in
+_"Focus ring: outline in accent color. Radius is element radius + 2px
+with 2px offset."_ — i.e. a 2px offset value was already recorded in
 Figma, just not built as a specimen. Separately, `src/styles/global.css`
 has no ring/outline CSS at all (only a budget-comment mentioning focus
 rings in prose); the actual code implementation lives in the Work-card
@@ -1120,7 +1122,7 @@ Resolved by using **2px offset** (matches the pre-existing Figma
 clause), **2px width** (the only concrete width evidence anywhere, from
 the code's `outline-2`), **accent color** (per the brief's explicit
 instruction and the accent-budget reservation, overriding the code's
-actual black/white). This specimen therefore documents the *intended*
+actual black/white). This specimen therefore documents the _intended_
 site-wide spec, not a transcription of the Work-cards' current
 implementation — the Work cards' 4px-offset/black-white treatment is a
 pre-existing deviation from this spec, not a second valid pattern. Not
@@ -1216,9 +1218,9 @@ stays v0.91, the file name loses its version suffix) is still recorded as
 this task's ruling; only the mechanical act of applying it inside Figma
 itself is blocked.
 
-**Step 3 — repo reference.** `CLAUDE.md` line 103's `` in
-`Magnet-DS-v1.0` (file key `ihWIWmvtQPTWgUxlrVjC2c`) `` →
-`` in `Magnet-DS` (file key `ihWIWmvtQPTWgUxlrVjC2c`) ``. Verified zero
+**Step 3 — repo reference.** `CLAUDE.md` line 103's ``in
+`Magnet-DS-v1.0` (file key `ihWIWmvtQPTWgUxlrVjC2c`)`` →
+``in `Magnet-DS` (file key `ihWIWmvtQPTWgUxlrVjC2c`)``. Verified zero
 remaining `Magnet-DS-v1.0` matches in `CLAUDE.md`.
 
 Ran the brief's grep: `grep -rn "Magnet-DS-v1.0" --include="*.md" . | grep
@@ -1226,20 +1228,20 @@ Ran the brief's grep: `grep -rn "Magnet-DS-v1.0" --include="*.md" . | grep
 prediction ("expected: only … review.md") — six matches across five files,
 not one:
 
-| File | Nature |
-|---|---|
-| `.specs/01_active/magnet-ds-review/review.md` | dated review — the brief's named exception, left as written |
-| `.specs/01_active/magnet-ds-review/plan.md` | this task's own spec text (Global Constraints line + Task 10 Step 2's instruction, both describing the rename itself) |
-| `.specs/01_active/magnet-ds-review/notes.md` | this file's own Pass-0 capture note ("name at capture time: `Magnet-DS-v1.0`") — a timestamped historical record |
-| `.superpowers/sdd/magnet-ds-review/task-10-brief.md` | this task's own input brief, quoting the old name as part of describing the decision |
-| `.superpowers/sdd/magnet-ds-review/task-3-report.md` | a prior task's completed, dated report |
+| File                                                 | Nature                                                                                                                |
+| ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `.specs/01_active/magnet-ds-review/review.md`        | dated review — the brief's named exception, left as written                                                           |
+| `.specs/01_active/magnet-ds-review/plan.md`          | this task's own spec text (Global Constraints line + Task 10 Step 2's instruction, both describing the rename itself) |
+| `.specs/01_active/magnet-ds-review/notes.md`         | this file's own Pass-0 capture note ("name at capture time: `Magnet-DS-v1.0`") — a timestamped historical record      |
+| `.superpowers/sdd/magnet-ds-review/task-10-brief.md` | this task's own input brief, quoting the old name as part of describing the decision                                  |
+| `.superpowers/sdd/magnet-ds-review/task-3-report.md` | a prior task's completed, dated report                                                                                |
 
 None of these are live/current documentation the way `CLAUDE.md` is — all
 five are dated planning/reporting artifacts (task briefs, task reports,
 the review, and this notes file's own historical capture line) that
 correctly preserve the pre-rename name as a record of what was true when
 written, exactly the same rationale the brief itself applied to
-`review.md`. `CLAUDE.md`, the one file that asserts the *current* file
+`review.md`. `CLAUDE.md`, the one file that asserts the _current_ file
 name to a future reader, is now correct and verified clean. No further
 edits made to these five files — editing them would falsify history, not
 fix a stray reference.
@@ -1255,9 +1257,9 @@ both single `textStyleId` and, for mixed-style nodes, every
 for all 13 styles.** No rebind was needed for any of them — every style
 qualified for straight deletion under the brief's rule. Deleted all 13:
 
-| Style | Consumers found | Action |
-|---|---|---|
-| Tailwind/text-9xl … text-xs (13 styles) | 0 (each) | deleted |
+| Style                                   | Consumers found | Action  |
+| --------------------------------------- | --------------- | ------- |
+| Tailwind/text-9xl … text-xs (13 styles) | 0 (each)        | deleted |
 
 **Count: 13 deleted, 0 rebound.**
 
@@ -1273,7 +1275,7 @@ same-size `Regular` sibling (`Body/4xl` doesn't exist in the ramp).
 all 10 `Body/*` styles**, not drop the weight segment from the four
 outliers. Rationale: the brief's "drop the weight" default only holds if
 the weight token is redundant. It isn't — three of the four outliers
-prove a *materially different, currently-in-use* style exists at the same
+prove a _materially different, currently-in-use_ style exists at the same
 size (same size, different real font weight). Renaming
 `Body/xs/medium` → `Body/xs` would silently collide with the existing,
 different `Body/xs` (Regular) style — an actual naming conflict, not
@@ -1286,14 +1288,14 @@ Renamed the 6 two-level styles to add an explicit `/regular` weight
 segment, matching the existing outliers' lowercase weight-token
 convention (`semibold`, `medium`):
 
-| Before | After |
-|---|---|
-| `Body/3xl` | `Body/3xl/regular` |
+| Before      | After               |
+| ----------- | ------------------- |
+| `Body/3xl`  | `Body/3xl/regular`  |
 | `Body/base` | `Body/base/regular` |
-| `Body/l` | `Body/l/regular` |
-| `Body/s` | `Body/s/regular` |
-| `Body/xl` | `Body/xl/regular` |
-| `Body/xs` | `Body/xs/regular` |
+| `Body/l`    | `Body/l/regular`    |
+| `Body/s`    | `Body/s/regular`    |
+| `Body/xl`   | `Body/xl/regular`   |
+| `Body/xs`   | `Body/xs/regular`   |
 
 Renames are name-only (style IDs unchanged), so all existing instance
 bindings kept resolving through the same IDs — no rebind, no re-check
@@ -1353,45 +1355,45 @@ One row per finding/decision, each with live `use_figma`/`get_screenshot`
 evidence gathered in this task (not carried over from earlier tasks'
 self-reports).
 
-| # | Check | Result | Evidence |
-|---|---|---|---|
-| F1 | `Home — Mobile — Light` renders at 390px, nothing outside frame, height 3120–3810 | **FAIL → FIXED → PASS** | Initial sweep: 17 nodes / up to 156px overflow (Light only; Dark clean). Root causes: (1) `NavRight`/`NavPages` instance `itemSpacing` left at Desktop values (56/40 vs Dark's 16/16); (2) `FooterContainer` instance `layoutWrap = NO_WRAP` instead of `WRAP`; (3) `HeroText` `layoutSizingHorizontal = FIXED` (576px, causing 202px bleed) on both Light and Dark — pre-existing, previously accepted debt, fixed opportunistically since it was a safe instance-level change; (4) residual 68px traced to the `Header` instance's own `paddingLeft`/`paddingRight` left at `115/115` (leftover Desktop override) vs Dark's `16/16`, squeezing `HeaderContent` to 160px instead of 358px. All 4 fixes applied as **instance-level property overrides only** — zero master-component or Desktop-template edits, zero risk to Desktop layouts. Final sweep: `outsideCount: 0` on both frames; heights Light 3504px / Dark 3504px (within 3120–3810 band); `get_screenshot` `original_width` reads exactly 390px on both (matching frame width, proving no visual overflow) |
-| F2 | Page list: only Cover, Docs, Decisions, Components, Pages (+ at most one spared backup) | **PASS** | Live `figma.root.children` read: exactly 5 pages — `📖 Cover`, `📚 Docs`, `📐 Decisions`, `❖ Components`, `📄 Pages`. No spared backup (Task 3 confirmed zero live references before deleting all 6 disposable pages) |
-| F3 | `2 Theme` descriptions: 15/15 non-empty, matching notes.md | **PASS** | Live read of `VariableCollectionId:3:2`: 15 variables, `emptyCount: 0`, every `description` string byte-for-byte matches the `## Theme token copy` table (F3 section above) |
-| F4 | Token table: no `{"r":…}` anywhere; alias + hex legible on every swatch, both modes | **PASS** | Live search of all 23 `_Docs/TokenRow` instances (found via `mainComponent.id === '2590:578'`, not name matching) on the Docs token table: zero raw `{"r":…}` color-object strings in any text node. Screenshot confirms alias + hex legible on every swatch row in both Light and Dark |
-| F5 | Property names: every set lowercase `state`/`type`; no `State`, no `Variant` | **PASS** | Live `componentPropertyDefinitions` read on all 15 sets from the Node-ID map: every set uses lowercase `state` or `type`. Zero `State`/`Variant` remaining (Task 6 renamed `PostCardPreviewBig`, `PostCardPreviewSmall`, `PostRow`, `SerieCard`; full 188-instance file-wide sweep found 0 instances still carrying a pre-rename key or out-of-vocabulary value) |
-| F6 | Components page: zero top-level component orphans; 3 Mobile sections inside `Sections` | **PASS** | Live read of `❖ Components` top level: exactly 6 items, all `SECTION` type (`Chrome`, `Actions`, `Sections`, `Typography`, `Metadata`, `Cards`) — zero orphans. `Sections`' children end `…, BlogPreviewSection — Mobile, WorkPreviewSection — Mobile, ContactPreviewSection — Mobile` — correct order, all 3 inside |
-| F7 | Metadata: `ds/*` absent from property pickers; file named `Magnet-DS`; `ds/version` = v0.91 | **PASS** (2 sub-checks live-verified; 1 sub-check unverifiable via tooling, not contradicted) | `ds/version`/`ds/last-updated` (`VariableID:2721:5`/`:6`): live read confirms `scopes: []`, `hiddenFromPublishing: true` on both — absent from every property picker and publish list, verified PASS. `ds/version` value confirmed unchanged at `"v0.91"` — verified PASS, and the version chip was not touched anywhere in this task. File name: the user manually renamed the file `Magnet-DS-v1.0` → `Magnet-DS` in the Figma UI ahead of this task (the Plugin API has no writable file-name property — confirmed exhaustively in Task 10 and re-confirmed in this task: `figma.root.name` returns the hardcoded literal `"Document"`, `Object.keys(figma.root)` exposes only `["id"]`, and no MCP tool — `whoami`, `get_metadata`, `get_libraries`, `get_design_context`, `WebFetch` on the file URL — surfaces the live display name). This is a genuine, documented, permanent tooling gap, not a discovered defect: recorded as **unverifiable**, not fabricated as PASS or FAIL |
-| F8 | Text styles: no `Tailwind/text-*` (or documented exception); uniform `Body/*` shape | **PASS** | Live `getLocalTextStylesAsync()` read: 17 styles total, 0 `Tailwind/text-*` remaining (13 deleted in Task 10, 0 consumers found across all 1778 text nodes on all 5 pages before deletion), all 10 `Body/*` styles share the uniform `Body/<size>/<weight>` 3-level shape |
-| F9 | Toggles: ThemeToggle + MotionToggle expose `mode`, not `state` | **PASS** | Live `componentPropertyDefinitions` read: `ThemeToggle` (`16:11`) property `mode`, values `dark`/`light`; `MotionToggle` (`16:12`) property `mode`, values `on`/`off`. Neither carries a `state` property |
-| F10 | Debt: `## Accepted debt` present in notes.md with both entries | **PASS** | `grep "## Accepted debt"` and content read confirm the section is present with all 3 entries: icon-mirror (deliberate), on-color tokens (deliberate), focus-ring divergence (real, unresolved — flagged as such, not disguised as a deliberate decision) |
-| G1 | Pairings block: 8 rows in Foundations, verdicts match the measured table | **PASS** | Live read of `CHAPTER / 01 Foundations` (`2670:6678`): 11 children (10 original + `G1 / Always-valid pairings` block, `2893:4234`), 8 `_Docs/TokenRow` instances, one per pair; verdict text on every row matches the 16-measurement contrast table in the G1 section above (all AA, tightest margin `background/accent` Light 5.18:1) |
-| G2 | Vocabulary: DecisionCard + focus specimen present; card matches Task 6's property table | **PASS** | Live read confirms `_Docs/DecisionCard` instance `2899:4294` present with text matching Task 6's `state`/`mode` vocabulary decision, and focus-ring specimen `2900:4303` present (2px ring / 2px offset / `color/accent`) |
-| G3 | Rejection: DecisionCard present with the revisit condition | **PASS** | Live read confirms `_Docs/DecisionCard` instance `2900:4330` present, documenting the rejected increased-contrast theme-mode proposal with its revisit condition |
+| #   | Check                                                                                       | Result                                                                                        | Evidence                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| --- | ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| F1  | `Home — Mobile — Light` renders at 390px, nothing outside frame, height 3120–3810           | **FAIL → FIXED → PASS**                                                                       | Initial sweep: 17 nodes / up to 156px overflow (Light only; Dark clean). Root causes: (1) `NavRight`/`NavPages` instance `itemSpacing` left at Desktop values (56/40 vs Dark's 16/16); (2) `FooterContainer` instance `layoutWrap = NO_WRAP` instead of `WRAP`; (3) `HeroText` `layoutSizingHorizontal = FIXED` (576px, causing 202px bleed) on both Light and Dark — pre-existing, previously accepted debt, fixed opportunistically since it was a safe instance-level change; (4) residual 68px traced to the `Header` instance's own `paddingLeft`/`paddingRight` left at `115/115` (leftover Desktop override) vs Dark's `16/16`, squeezing `HeaderContent` to 160px instead of 358px. All 4 fixes applied as **instance-level property overrides only** — zero master-component or Desktop-template edits, zero risk to Desktop layouts. Final sweep: `outsideCount: 0` on both frames; heights Light 3504px / Dark 3504px (within 3120–3810 band); `get_screenshot` `original_width` reads exactly 390px on both (matching frame width, proving no visual overflow) |
+| F2  | Page list: only Cover, Docs, Decisions, Components, Pages (+ at most one spared backup)     | **PASS**                                                                                      | Live `figma.root.children` read: exactly 5 pages — `📖 Cover`, `📚 Docs`, `📐 Decisions`, `❖ Components`, `📄 Pages`. No spared backup (Task 3 confirmed zero live references before deleting all 6 disposable pages)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| F3  | `2 Theme` descriptions: 15/15 non-empty, matching notes.md                                  | **PASS**                                                                                      | Live read of `VariableCollectionId:3:2`: 15 variables, `emptyCount: 0`, every `description` string byte-for-byte matches the `## Theme token copy` table (F3 section above)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| F4  | Token table: no `{"r":…}` anywhere; alias + hex legible on every swatch, both modes         | **PASS**                                                                                      | Live search of all 23 `_Docs/TokenRow` instances (found via `mainComponent.id === '2590:578'`, not name matching) on the Docs token table: zero raw `{"r":…}` color-object strings in any text node. Screenshot confirms alias + hex legible on every swatch row in both Light and Dark                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| F5  | Property names: every set lowercase `state`/`type`; no `State`, no `Variant`                | **PASS**                                                                                      | Live `componentPropertyDefinitions` read on all 15 sets from the Node-ID map: every set uses lowercase `state` or `type`. Zero `State`/`Variant` remaining (Task 6 renamed `PostCardPreviewBig`, `PostCardPreviewSmall`, `PostRow`, `SerieCard`; full 188-instance file-wide sweep found 0 instances still carrying a pre-rename key or out-of-vocabulary value)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| F6  | Components page: zero top-level component orphans; 3 Mobile sections inside `Sections`      | **PASS**                                                                                      | Live read of `❖ Components` top level: exactly 6 items, all `SECTION` type (`Chrome`, `Actions`, `Sections`, `Typography`, `Metadata`, `Cards`) — zero orphans. `Sections`' children end `…, BlogPreviewSection — Mobile, WorkPreviewSection — Mobile, ContactPreviewSection — Mobile` — correct order, all 3 inside                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| F7  | Metadata: `ds/*` absent from property pickers; file named `Magnet-DS`; `ds/version` = v0.91 | **PASS** (2 sub-checks live-verified; 1 sub-check unverifiable via tooling, not contradicted) | `ds/version`/`ds/last-updated` (`VariableID:2721:5`/`:6`): live read confirms `scopes: []`, `hiddenFromPublishing: true` on both — absent from every property picker and publish list, verified PASS. `ds/version` value confirmed unchanged at `"v0.91"` — verified PASS, and the version chip was not touched anywhere in this task. File name: the user manually renamed the file `Magnet-DS-v1.0` → `Magnet-DS` in the Figma UI ahead of this task (the Plugin API has no writable file-name property — confirmed exhaustively in Task 10 and re-confirmed in this task: `figma.root.name` returns the hardcoded literal `"Document"`, `Object.keys(figma.root)` exposes only `["id"]`, and no MCP tool — `whoami`, `get_metadata`, `get_libraries`, `get_design_context`, `WebFetch` on the file URL — surfaces the live display name). This is a genuine, documented, permanent tooling gap, not a discovered defect: recorded as **unverifiable**, not fabricated as PASS or FAIL                                                                                   |
+| F8  | Text styles: no `Tailwind/text-*` (or documented exception); uniform `Body/*` shape         | **PASS**                                                                                      | Live `getLocalTextStylesAsync()` read: 17 styles total, 0 `Tailwind/text-*` remaining (13 deleted in Task 10, 0 consumers found across all 1778 text nodes on all 5 pages before deletion), all 10 `Body/*` styles share the uniform `Body/<size>/<weight>` 3-level shape                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| F9  | Toggles: ThemeToggle + MotionToggle expose `mode`, not `state`                              | **PASS**                                                                                      | Live `componentPropertyDefinitions` read: `ThemeToggle` (`16:11`) property `mode`, values `dark`/`light`; `MotionToggle` (`16:12`) property `mode`, values `on`/`off`. Neither carries a `state` property                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| F10 | Debt: `## Accepted debt` present in notes.md with both entries                              | **PASS**                                                                                      | `grep "## Accepted debt"` and content read confirm the section is present with all 3 entries: icon-mirror (deliberate), on-color tokens (deliberate), focus-ring divergence (real, unresolved — flagged as such, not disguised as a deliberate decision)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| G1  | Pairings block: 8 rows in Foundations, verdicts match the measured table                    | **PASS**                                                                                      | Live read of `CHAPTER / 01 Foundations` (`2670:6678`): 11 children (10 original + `G1 / Always-valid pairings` block, `2893:4234`), 8 `_Docs/TokenRow` instances, one per pair; verdict text on every row matches the 16-measurement contrast table in the G1 section above (all AA, tightest margin `background/accent` Light 5.18:1)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| G2  | Vocabulary: DecisionCard + focus specimen present; card matches Task 6's property table     | **PASS**                                                                                      | Live read confirms `_Docs/DecisionCard` instance `2899:4294` present with text matching Task 6's `state`/`mode` vocabulary decision, and focus-ring specimen `2900:4303` present (2px ring / 2px offset / `color/accent`)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| G3  | Rejection: DecisionCard present with the revisit condition                                  | **PASS**                                                                                      | Live read confirms `_Docs/DecisionCard` instance `2900:4330` present, documenting the rejected increased-contrast theme-mode proposal with its revisit condition                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 
 **F1 fixes applied (instance-level only, both `Home — Mobile — *` frames unless noted):**
 
-| Node | Property | Before | After |
-|---|---|---|---|
-| `NavRight` instance | `itemSpacing` | 56 | 16 |
-| `NavPages` instance | `itemSpacing` | 40 | 16 |
-| `FooterContainer` instance | `layoutWrap` | `NO_WRAP` | `WRAP` |
-| `HeroText` instance (Light + Dark) | `layoutSizingHorizontal` | `FIXED` (576px) | `FILL` |
-| `Header` instance `2586:1146` (Light only) | `paddingLeft`/`paddingRight` | 115 / 115 | 16 / 16 |
+| Node                                       | Property                     | Before          | After   |
+| ------------------------------------------ | ---------------------------- | --------------- | ------- |
+| `NavRight` instance                        | `itemSpacing`                | 56              | 16      |
+| `NavPages` instance                        | `itemSpacing`                | 40              | 16      |
+| `FooterContainer` instance                 | `layoutWrap`                 | `NO_WRAP`       | `WRAP`  |
+| `HeroText` instance (Light + Dark)         | `layoutSizingHorizontal`     | `FIXED` (576px) | `FILL`  |
+| `Header` instance `2586:1146` (Light only) | `paddingLeft`/`paddingRight` | 115 / 115       | 16 / 16 |
 
 **Bonus — 44×44px touch-target audit** (`Home — Mobile — Light`/`Dark`; both frames measured identically since they share the same master components):
 
-| Target | Size (w×h) | Meets 44×44? |
-|---|---|---|
-| NavLinkHome | 128×36 | No — height |
-| NavLink ×3 (Blog/Work/About) | 37×36, 44×36, 50×36 | No — height (and one width) |
-| ThemeToggle | 36×36 | No |
-| MotionToggle | not present on mobile nav | Figma/code divergence — MotionToggle renders unconditionally in Header.astro (no mobile hiding) but is absent from the Mobile Figma templates. Not fixed here (out of Task 11's scope); recorded as debt. |
-| Footer Link/Icon ×3 (social) | 40×40 | No — 4px short each axis |
+| Target                       | Size (w×h)                | Meets 44×44?                                                                                                                                                                                              |
+| ---------------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| NavLinkHome                  | 128×36                    | No — height                                                                                                                                                                                               |
+| NavLink ×3 (Blog/Work/About) | 37×36, 44×36, 50×36       | No — height (and one width)                                                                                                                                                                               |
+| ThemeToggle                  | 36×36                     | No                                                                                                                                                                                                        |
+| MotionToggle                 | not present on mobile nav | Figma/code divergence — MotionToggle renders unconditionally in Header.astro (no mobile hiding) but is absent from the Mobile Figma templates. Not fixed here (out of Task 11's scope); recorded as debt. |
+| Footer Link/Icon ×3 (social) | 40×40                     | No — 4px short each axis                                                                                                                                                                                  |
 
 All 8 measured targets fail the 44×44px minimum. Not fixed directly: every failing target is a shared master component (`NavLink`, `NavLinkHome`, `ThemeToggle`, `Link/Icon`) also instanced on the Desktop templates — increasing master padding to fix mobile would grow the Desktop nav bar and footer icon size site-wide, an out-of-scope side effect per the brief's explicit escape hatch. Logged as a follow-up backlog item instead: `.specs/00_backlog/figma-mobile-touch-targets.md`.
 
-**Cover refresh (Step 4):** live text inventory of `📖 Cover` found the date chip (`I2694:6660;2693:9892`, parent `_Docs/Date`) already reading `"Aug 11, 2026"` — which *is* `2026-08-11` rendered in the chip's existing `Mon D, YYYY` format. No edit was needed; verified rather than blindly rewritten, to avoid a redundant mutation. The version chip (`I2694:6673;2693:9909`, parent `_Docs/Status`) was independently re-confirmed reading exactly `"v0.91"` and was not touched.
+**Cover refresh (Step 4):** live text inventory of `📖 Cover` found the date chip (`I2694:6660;2693:9892`, parent `_Docs/Date`) already reading `"Aug 11, 2026"` — which _is_ `2026-08-11` rendered in the chip's existing `Mon D, YYYY` format. No edit was needed; verified rather than blindly rewritten, to avoid a redundant mutation. The version chip (`I2694:6673;2693:9909`, parent `_Docs/Status`) was independently re-confirmed reading exactly `"v0.91"` and was not touched.
 
 **plan.md correction:** line 18's Global Constraints entry claimed the file rename "happened in Task 10." Corrected in this task — Task 10 attempted the rename programmatically and hit the Plugin API's read-only `figma.root.name` restriction (documented in F7 above); the user performed the rename manually via the Figma UI ahead of this task's dispatch.
 

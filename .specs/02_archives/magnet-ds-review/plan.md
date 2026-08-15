@@ -9,7 +9,7 @@ created: 2026-08-11
 
 **Goal:** Execute the ten findings (F1–F10) and three gap decisions (G1–G3) from [review.md](review.md) inside the Magnet-DS Figma file, leaving the file AI-library-ready and free of the one real defect.
 
-**Architecture:** Every change goes through the `use_figma` MCP tool against file key `ihWIWmvtQPTWgUxlrVjC2c`. Nothing in Figma is version-controlled, so each task's *verification* is a screenshot or metadata read, and each task's *commit* covers repo-side artifacts only (this plan's checkboxes, `notes.md`, and — in Tasks 10 and 11 — `CLAUDE.md` and the `.specs/` tree). Tasks follow review.md's suggested execution order: defect → hygiene → token copy → component vocabulary → docs additions → cleanup → gate.
+**Architecture:** Every change goes through the `use_figma` MCP tool against file key `ihWIWmvtQPTWgUxlrVjC2c`. Nothing in Figma is version-controlled, so each task's _verification_ is a screenshot or metadata read, and each task's _commit_ covers repo-side artifacts only (this plan's checkboxes, `notes.md`, and — in Tasks 10 and 11 — `CLAUDE.md` and the `.specs/` tree). Tasks follow review.md's suggested execution order: defect → hygiene → token copy → component vocabulary → docs additions → cleanup → gate.
 
 **Tech Stack:** Figma MCP (`use_figma`, `get_screenshot`, `get_metadata`, `get_design_context`, `get_variable_defs`), Node (one throwaway contrast script in the scratchpad), git for repo-side files.
 
@@ -18,7 +18,7 @@ created: 2026-08-11
 - Figma file key: `ihWIWmvtQPTWgUxlrVjC2c`. File renamed `Magnet-DS-v1.0` → `Magnet-DS`; Task 10 attempted this programmatically and hit a Plugin API limitation (no writable file-name property), so the user renamed it manually via the Figma UI ahead of Task 11.
 - **MANDATORY:** invoke the `figma:figma-use` skill before the first `use_figma` call in any session. This is a plugin requirement, not a preference.
 - ⚠️ MCP `get_metadata` page-list is known to go stale on this file. **Never trust a node ID from review.md or from this plan without re-confirming it in the Task 1 inventory.**
-- Version truth: `ds/version` stays **v0.91** (per `magnet-ds-docs-v1` decision D2 — v1.0 is reserved for the "all components and pages designed" milestone). The *file name* is the thing that is wrong; Task 10 renames it to `Magnet-DS`.
+- Version truth: `ds/version` stays **v0.91** (per `magnet-ds-docs-v1` decision D2 — v1.0 is reserved for the "all components and pages designed" milestone). The _file name_ is the thing that is wrong; Task 10 renames it to `Magnet-DS`.
 - Non-destructive: no page, style, or component is deleted before a screenshot has confirmed what it contains. This is the rule that `figma-undecided-pages` was opened to enforce.
 - Interaction-state vocabulary (G2 decision, binding on Tasks 6 and 9): `default | hover | active | focus`. Not adopted: preloading, enabled, disabled, pressed, warning, error, loading.
 - Accent budget rule 2 reserves the accent colour for focus outlines — do not spend accent on new decorative elements added by this plan.
@@ -30,9 +30,11 @@ created: 2026-08-11
 ### Task 1: Pass-0 inventory and node-ID map
 
 **Files:**
+
 - Create: `.specs/01_active/magnet-ds-review/notes.md`
 
 **Interfaces:**
+
 - Consumes: nothing (first task).
 - Produces: `notes.md` with a `## Node-ID map (Pass 0, 2026-08-11)` table — columns `| Item | Node ID | Page | Confirmed? |`. Every later task reads IDs from this map, never from review.md.
 
@@ -72,9 +74,11 @@ git commit -m "docs(specs): magnet-ds-review — Pass-0 node-ID map"
 ### Task 2: F1 — rebuild `Home — Mobile — Light`
 
 **Files:**
+
 - Modify: `.specs/01_active/magnet-ds-review/notes.md`
 
 **Interfaces:**
+
 - Consumes: Task 1 IDs for `Home — Mobile — Light`, `Home — Mobile — Dark`, and the three Mobile section components.
 - Produces: `Home — Mobile — Light` rendering clean at 390 px wide, height within ±10% of the Dark variant's 3465 px. Task 11's touch-target audit reads this frame.
 
@@ -125,10 +129,12 @@ git commit -m "docs(specs): magnet-ds-review — F1 Home Mobile Light rebuilt"
 ### Task 3: F2 — dispose of the six dead pages (closes `figma-undecided-pages`)
 
 **Files:**
+
 - Modify: `.specs/01_active/magnet-ds-review/notes.md`
 - Delete: `.specs/00_backlog/figma-undecided-pages.md`
 
 **Interfaces:**
+
 - Consumes: Task 1 page inventory.
 - Produces: a page list containing only `📖 Cover`, `📚 Docs`, `📐 Decisions`, `❖ Components`, `📄 Pages`. Records a per-page verdict in notes.md. Task 11's final sweep asserts this list.
 
@@ -138,14 +144,14 @@ git commit -m "docs(specs): magnet-ds-review — F1 Home Mobile Light rebuilt"
 
 `get_screenshot` of each of the six, one at a time. The backlog stub records real child counts — expect content, not empty pages:
 
-| Page | Id | Expected content |
-|---|---|---|
-| `Page 8` | 2678:23308 | 12 top-level frames — old typography-scale explorations, "Light tokens", "Foundation" |
-| `Page 9` | 2678:32354 | 5 frames — DS-starter template TOC (🟡 TEMPLATES/SECTIONS/COMPONENTS/FOUNDATIONS, 🚀 Welcome) |
-| `Page 11` | 2678:34657 | 33 frames — DS-starter instructions (plugins, naming conventions, giant type scales) |
-| `🗄 Backup — UI kit foundations & controls` | 2678:6692 | pre-restructure backup |
-| `🗄 Backup — Getting started & theme overview` | 2678:10236 | pre-restructure backup |
-| `🗄 Backup — Brand guidelines template` | 2678:34067 | pre-restructure backup |
+| Page                                          | Id         | Expected content                                                                              |
+| --------------------------------------------- | ---------- | --------------------------------------------------------------------------------------------- |
+| `Page 8`                                      | 2678:23308 | 12 top-level frames — old typography-scale explorations, "Light tokens", "Foundation"         |
+| `Page 9`                                      | 2678:32354 | 5 frames — DS-starter template TOC (🟡 TEMPLATES/SECTIONS/COMPONENTS/FOUNDATIONS, 🚀 Welcome) |
+| `Page 11`                                     | 2678:34657 | 33 frames — DS-starter instructions (plugins, naming conventions, giant type scales)          |
+| `🗄 Backup — UI kit foundations & controls`    | 2678:6692  | pre-restructure backup                                                                        |
+| `🗄 Backup — Getting started & theme overview` | 2678:10236 | pre-restructure backup                                                                        |
+| `🗄 Backup — Brand guidelines template`        | 2678:34067 | pre-restructure backup                                                                        |
 
 - [x] **Step 2: Check for component masters and live instances**
 
@@ -182,9 +188,11 @@ git commit -m "docs(specs): magnet-ds-review — F2 dead pages disposed, figma-u
 ### Task 4: F3 — descriptions on all 15 `2 Theme` variables
 
 **Files:**
+
 - Modify: `.specs/01_active/magnet-ds-review/notes.md`
 
 **Interfaces:**
+
 - Consumes: Task 1 variable IDs for `2 Theme`; the docs token table `PANEL / 01 Tokens Intro` (2670:6679).
 - Produces: 15/15 Theme variables with a non-empty `description`, and a `## Theme token copy` table in notes.md holding the final one-liner per token. **Task 5 rewrites the docs table from that same notes.md table** — one source, two consumers.
 
@@ -200,7 +208,7 @@ This is the #1 blocker on the figma-ai-training readiness checklist: description
 
 Create `## Theme token copy` — `| Token | Description | Source |`, one row per Theme variable, `Source` = `docs table` or `new`. Rules for each description:
 
-- One sentence, ≤ 90 chars, imperative-free — states *where it is used*, and where it is **not** when a neighbouring token is confusable.
+- One sentence, ≤ 90 chars, imperative-free — states _where it is used_, and where it is **not** when a neighbouring token is confusable.
 - Every token that F4 flags as falsely "Reserved semantic token" gets real usage copy: `font/sans`, `font/title`, `font/mono`, `color/accent-hover`, `color/foreground-strong`. To find real usage, `use_figma`-search the file for consumers of each, and cross-check `src/styles/global.css` in this repo for the code-side counterpart.
 - No description may be the string "Reserved semantic token in the Theme layer" unless a live search proves the token has zero consumers in both Figma and code.
 
@@ -224,9 +232,11 @@ git commit -m "docs(specs): magnet-ds-review — F3 Theme variable descriptions"
 ### Task 5: F4 — token table swatches replace the raw JSON
 
 **Files:**
+
 - Modify: `.specs/01_active/magnet-ds-review/notes.md`
 
 **Interfaces:**
+
 - Consumes: Task 4's `## Theme token copy` table; `PANEL / 01 Tokens Intro` (2670:6679); the `_Docs/TokenRow` master.
 - Produces: a token table whose Light/Dark cells are swatch-as-spec-cards. Task 7's pairings block reuses the same `_Docs/TokenRow` layout.
 
@@ -236,7 +246,7 @@ git commit -m "docs(specs): magnet-ds-review — F3 Theme variable descriptions"
 
 - [x] **Step 2: Rebuild each Light/Dark cell as a swatch-as-spec-card**
 
-Industry-canon §5: the swatch carries its own spec, and its text sits *on* the swatch colour so the card demonstrates its own contrast. Per cell:
+Industry-canon §5: the swatch carries its own spec, and its text sits _on_ the swatch colour so the card demonstrates its own contrast. Per cell:
 
 1. A rectangle/frame filled by the Theme variable itself (bound, not a pasted hex) — so it re-renders correctly when the page mode flips.
 2. On the swatch: the primitive alias it resolves to (e.g. `slate-50`) and the hex, in `color/foreground` or `color/background` — whichever is legible on that swatch.
@@ -266,24 +276,26 @@ git commit -m "docs(specs): magnet-ds-review — F4 token table swatches"
 ### Task 6: F5 + F9 — one property vocabulary across all component sets
 
 **Files:**
+
 - Modify: `.specs/01_active/magnet-ds-review/notes.md`
 
 **Interfaces:**
+
 - Consumes: Task 1 IDs for the 15 component sets.
 - Produces: every interaction property named lowercase `state` with values drawn from `default | hover | active | focus`; every kind-discriminator named lowercase `type`; both toggles using `mode`. Task 9's G2 DecisionCard documents this vocabulary and must match it exactly.
 
-Property **renames** are non-destructive in Figma — instances keep their bindings. Renaming a *value* is riskier; check instances after any value rename.
+Property **renames** are non-destructive in Figma — instances keep their bindings. Renaming a _value_ is riskier; check instances after any value rename.
 
 - [x] **Step 1: Audit current property names**
 
 `get_design_context` on all 15 sets. Record actual property names and values in a `## F5 — property audit` table in notes.md. Expected from review.md:
 
-| Convention | Sets |
-|---|---|
-| `state` (lowercase) — already correct | NavLink, NavLinkHome, ThemeToggle, MotionToggle, Link/CTA, Link/Secondary, Link/TextCTA, Link/Icon, Link/SecondarySm |
-| `State` (capital) — rename | PostCardPreviewBig, PostCardPreviewSmall, PostRow, SerieCard |
-| `type` (lowercase) — already correct | PostMetadataTime, PostMetadataTopic |
-| `Variant` (capital, values `Post`/`Serie`) — rename to `type` | PostRow |
+| Convention                                                    | Sets                                                                                                                 |
+| ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `state` (lowercase) — already correct                         | NavLink, NavLinkHome, ThemeToggle, MotionToggle, Link/CTA, Link/Secondary, Link/TextCTA, Link/Icon, Link/SecondarySm |
+| `State` (capital) — rename                                    | PostCardPreviewBig, PostCardPreviewSmall, PostRow, SerieCard                                                         |
+| `type` (lowercase) — already correct                          | PostMetadataTime, PostMetadataTopic                                                                                  |
+| `Variant` (capital, values `Post`/`Serie`) — rename to `type` | PostRow                                                                                                              |
 
 - [x] **Step 2: Rename `State` → `state` on the four card sets**
 
@@ -291,7 +303,7 @@ PostCardPreviewBig, PostCardPreviewSmall, PostRow, SerieCard.
 
 - [x] **Step 3: Rename PostRow's `Variant` → `type`**
 
-Values `Post` / `Serie` become lowercase `post` / `serie` to match the lowercase convention. This is a *value* rename — after it, screenshot one page template that uses PostRow and confirm the instances still resolve.
+Values `Post` / `Serie` become lowercase `post` / `serie` to match the lowercase convention. This is a _value_ rename — after it, screenshot one page template that uses PostRow and confirm the instances still resolve.
 
 - [x] **Step 4: F9 — rename the toggles' property to `mode`**
 
@@ -319,9 +331,11 @@ git commit -m "docs(specs): magnet-ds-review — F5/F9 property vocabulary norma
 ### Task 7: F6 — move the two stray Mobile components into `Sections`
 
 **Files:**
+
 - Modify: `.specs/01_active/magnet-ds-review/notes.md`
 
 **Interfaces:**
+
 - Consumes: Task 1 IDs for `Sections` (2041:484), `WorkPreviewSection — Mobile` (2829:5539), `ContactPreviewSection — Mobile` (2829:5576).
 - Produces: all three Mobile section components inside the `Sections` section. Task 11's sweep asserts zero top-level orphans on `❖ Components`.
 
@@ -351,10 +365,12 @@ git commit -m "docs(specs): magnet-ds-review — F6 mobile sections regrouped"
 ### Task 8: G1 — token pairing table in `CHAPTER / 01 Foundations`
 
 **Files:**
+
 - Create: `/tmp/claude-*/scratchpad/contrast.mjs` (throwaway, not committed)
 - Modify: `.specs/01_active/magnet-ds-review/notes.md`
 
 **Interfaces:**
+
 - Consumes: Task 4's Theme descriptions; the `_Docs/TokenRow` and `_Docs/GroupHeader` masters; resolved Light/Dark values from `get_variable_defs`.
 - Produces: one pairings block in `CHAPTER / 01 Foundations`, 8 rows, each with a computed AA verdict per mode. No new tokens — this is docs-only.
 
@@ -381,7 +397,9 @@ const ratio = (a, b) => {
 const PAIRS = [];
 for (const p of PAIRS) {
   const v = ratio(p.bg, p.fg);
-  console.log(`${p.name}\t${v.toFixed(2)}\t${v >= 4.5 ? "AA" : v >= 3 ? "AA-large" : "FAIL"}`);
+  console.log(
+    `${p.name}\t${v.toFixed(2)}\t${v >= 4.5 ? "AA" : v >= 3 ? "AA-large" : "FAIL"}`,
+  );
 }
 ```
 
@@ -391,15 +409,15 @@ Run: `node contrast.mjs`
 
 Pairs (both modes each — 16 measurements):
 
-| Background | Content |
-|---|---|
-| `color/background` | `color/foreground` |
-| `color/background` | `color/foreground-strong` |
-| `color/background` | `color/foreground-muted` |
-| `color/background` | `color/accent` |
-| `color/surface` | `color/foreground` |
-| `color/surface` | `color/foreground-muted` |
-| `color/accent-subtle` | `color/accent-strong` |
+| Background                    | Content                       |
+| ----------------------------- | ----------------------------- |
+| `color/background`            | `color/foreground`            |
+| `color/background`            | `color/foreground-strong`     |
+| `color/background`            | `color/foreground-muted`      |
+| `color/background`            | `color/accent`                |
+| `color/surface`               | `color/foreground`            |
+| `color/surface`               | `color/foreground-muted`      |
+| `color/accent-subtle`         | `color/accent-strong`         |
 | `color/foreground` (CTA fill) | `color/background` (CTA text) |
 
 Record every ratio in a `## G1 — contrast measurements` table in notes.md.
@@ -428,9 +446,11 @@ git commit -m "docs(specs): magnet-ds-review — G1 pairings block with measured
 ### Task 9: G2 + G3 — two DecisionCards and the focus specimen
 
 **Files:**
+
 - Modify: `.specs/01_active/magnet-ds-review/notes.md`
 
 **Interfaces:**
+
 - Consumes: Task 6's final property table; the `_Docs/DecisionCard` and `_Docs/SpecimenCell` masters; `📐 Decisions` page.
 - Produces: two DecisionCards in `📚 Docs` and one focus-ring specimen frame. Nothing here adds a `focus` variant to any component set.
 
@@ -472,10 +492,12 @@ git commit -m "docs(specs): magnet-ds-review — G2/G3 decision cards and focus 
 ### Task 10: F7 + F8 + F10 — metadata scopes, file rename, style cleanup, debt record
 
 **Files:**
+
 - Modify: `.specs/01_active/magnet-ds-review/notes.md`
 - Modify: `CLAUDE.md:103`
 
 **Interfaces:**
+
 - Consumes: Task 1 variable IDs for `Design System`; the text-style inventory.
 - Produces: a clean property picker, a file name that matches `ds/version`, one type vocabulary, and a written accepted-debt list. Task 11 asserts all of it.
 
@@ -491,7 +513,7 @@ Rationale, for the record: D2 reserved v1.0 for the "all components and pages de
 
 - [x] **Step 3: F7 — update the repo reference**
 
-In `CLAUDE.md` line 103, replace `` in `Magnet-DS-v1.0` (file key `ihWIWmvtQPTWgUxlrVjC2c`) `` with `` in `Magnet-DS` (file key `ihWIWmvtQPTWgUxlrVjC2c`) ``. Then `grep -rn "Magnet-DS-v1.0" --include="*.md" . | grep -v node_modules | grep -v 02_archives` — expected: only `.specs/01_active/magnet-ds-review/review.md` (a dated review, left as written).
+In `CLAUDE.md` line 103, replace ``in `Magnet-DS-v1.0` (file key `ihWIWmvtQPTWgUxlrVjC2c`)`` with ``in `Magnet-DS` (file key `ihWIWmvtQPTWgUxlrVjC2c`)``. Then `grep -rn "Magnet-DS-v1.0" --include="*.md" . | grep -v node_modules | grep -v 02_archives` — expected: only `.specs/01_active/magnet-ds-review/review.md` (a dated review, left as written).
 
 - [x] **Step 4: F8 — delete the unbound `Tailwind/text-*` styles**
 
@@ -504,7 +526,7 @@ Record the count deleted vs rebound in notes.md. These duplicate the role ramp �
 
 - [x] **Step 5: F8 — normalize the four naming outliers**
 
-`Body/xs/medium`, `Body/xl/medium`, `Body/4xl/semibold`, `Body/base/medium` carry a third name level the rest of the ramp does not. Bring them onto the dominant pattern in Task 1's text-style inventory (if the ramp is `Body/<size>`, the weight moves out of the name; if a distinct weight is genuinely needed, keep it but apply the same 3-level shape to *every* `Body/*` style). One pattern, applied uniformly — record which direction was chosen and why.
+`Body/xs/medium`, `Body/xl/medium`, `Body/4xl/semibold`, `Body/base/medium` carry a third name level the rest of the ramp does not. Bring them onto the dominant pattern in Task 1's text-style inventory (if the ramp is `Body/<size>`, the weight moves out of the name; if a distinct weight is genuinely needed, keep it but apply the same 3-level shape to _every_ `Body/*` style). One pattern, applied uniformly — record which direction was chosen and why.
 
 - [x] **Step 6: F10 — record the accepted debt** (3 bullets recorded — 2 from brief + 1 extra: Task 9's focus-ring Figma/code divergence)
 
@@ -531,10 +553,12 @@ git commit -m "docs: magnet-ds-review — F7/F8/F10 metadata scoped, file rename
 ### Task 11: Validation gate, touch-target audit, archive
 
 **Files:**
+
 - Modify: `.specs/01_active/magnet-ds-review/notes.md`
 - Move: `.specs/01_active/magnet-ds-review/` → `.specs/02_archives/magnet-ds-review/`
 
 **Interfaces:**
+
 - Consumes: everything from Tasks 2–10.
 - Produces: `## Validation gate` in notes.md — one row per finding, PASS/FAIL + evidence — ending with the literal string `GATE PASSED`. Archive is blocked until every row passes.
 
@@ -542,21 +566,21 @@ git commit -m "docs: magnet-ds-review — F7/F8/F10 metadata scoped, file rename
 
 One row per item, each with screenshot or metadata evidence:
 
-| # | Check | Expected |
-|---|---|---|
-| F1 | `Home — Mobile — Light` | renders at 390 px, nothing outside the frame, height 3120–3810 |
-| F2 | Page list | only Cover, Docs, Decisions, Components, Pages (+ at most one spared backup) |
-| F3 | `2 Theme` descriptions | 15/15 non-empty, matching notes.md |
-| F4 | Token table | no `{"r":…}` anywhere; alias + hex legible on every swatch, both modes |
-| F5 | Property names | every set: lowercase `state` / `type`; no `State`, no `Variant` |
-| F6 | Components page | zero top-level component orphans; 3 Mobile sections inside `Sections` |
-| F7 | Metadata | `ds/*` absent from property pickers; file named `Magnet-DS`; `ds/version` = v0.91 |
-| F8 | Text styles | no `Tailwind/text-*` (or documented exception); uniform `Body/*` shape |
-| F9 | Toggles | ThemeToggle + MotionToggle expose `mode`, not `state` |
-| F10 | Debt | `## Accepted debt` present in notes.md with both entries |
-| G1 | Pairings block | 8 rows in Foundations, verdicts match the measured table |
-| G2 | Vocabulary | DecisionCard + focus specimen present; card matches Task 6's property table |
-| G3 | Rejection | DecisionCard present with the revisit condition |
+| #   | Check                   | Expected                                                                          |
+| --- | ----------------------- | --------------------------------------------------------------------------------- |
+| F1  | `Home — Mobile — Light` | renders at 390 px, nothing outside the frame, height 3120–3810                    |
+| F2  | Page list               | only Cover, Docs, Decisions, Components, Pages (+ at most one spared backup)      |
+| F3  | `2 Theme` descriptions  | 15/15 non-empty, matching notes.md                                                |
+| F4  | Token table             | no `{"r":…}` anywhere; alias + hex legible on every swatch, both modes            |
+| F5  | Property names          | every set: lowercase `state` / `type`; no `State`, no `Variant`                   |
+| F6  | Components page         | zero top-level component orphans; 3 Mobile sections inside `Sections`             |
+| F7  | Metadata                | `ds/*` absent from property pickers; file named `Magnet-DS`; `ds/version` = v0.91 |
+| F8  | Text styles             | no `Tailwind/text-*` (or documented exception); uniform `Body/*` shape            |
+| F9  | Toggles                 | ThemeToggle + MotionToggle expose `mode`, not `state`                             |
+| F10 | Debt                    | `## Accepted debt` present in notes.md with both entries                          |
+| G1  | Pairings block          | 8 rows in Foundations, verdicts match the measured table                          |
+| G2  | Vocabulary              | DecisionCard + focus specimen present; card matches Task 6's property table       |
+| G3  | Rejection               | DecisionCard present with the revisit condition                                   |
 
 - [x] **Step 2: Bonus — 44 px touch-target audit**
 
