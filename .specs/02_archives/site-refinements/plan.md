@@ -22,6 +22,7 @@
 ## Decision flag (confirm before Task 11)
 
 Spec §7 relocates two portfolio entries, **flagged for user agreement**:
+
 - **La Malinette** → Selected work (gains a `featured` rank).
 - **Logariat** → Archive (loses its `featured` rank).
 
@@ -30,10 +31,12 @@ Task 11 implements exactly this. If the user disagrees, adjust the `featured` as
 ## File Structure
 
 **Created:**
+
 - `src/components/work/ArchiveTable.astro` — the Work-page archive table (Year | Project | Type | Built with | Link). One responsibility: render non-featured works as external-linked rows.
 - `src/components/about/AboutTimeline.astro` — compact 5-dot career strip on the About page (Task 15).
 
 **Modified (presentation):**
+
 - `src/components/blog/SerieCard.astro` — "Serie" → "Series".
 - `src/components/app/Footer.astro` — link order.
 - `src/components/about/AboutFacts.astro` — drop the 185-PR stat, grid → 4 cols.
@@ -50,11 +53,13 @@ Task 11 implements exactly this. If the user disagrees, adjust the `featured` as
 - `src/components/work/WorkCard.astro` — year+type kicker.
 
 **Modified (data):**
+
 - `src/content.config.ts` — add optional `updated`, `topic` (post/seriePost) and `kicker` (work).
 - `src/utils/repository.ts` — add `getArchiveWorks`; remove `getEarlierWorksByEra` + `WORK_ERAS`.
 - `src/content/work/{malinette,logariat,chimeres-orchestra,leconceptdelapreuve,portfolio}/index.md` — `featured` + `kicker` frontmatter.
 
 **Removed (orphaned):**
+
 - `src/components/blog/PostCard.astro` (last consumer was `SelectedWriting.astro`).
 - `src/components/blog/PostList.astro` + `src/components/blog/SerieList.astro` + `src/components/blog/SerieListItem.astro` (last consumer was `blog.astro`).
 
@@ -62,8 +67,8 @@ Task 11 implements exactly this. If the user disagrees, adjust the `featured` as
 
 - **§10 CV system** — separate `~/code/projects/cv` repo (Typst + YAML), per spec §10.
 - **Illustration system** — one artistic direction (palette · contrast · texture) spanning every cover/thumbnail, doubling as the OG-image pipeline. Direction to explore (user, 2026-07-18):
-  - *Blog-post thumbnails* — pick one generation path (or a hybrid): **(a)** auto SVG gradient seeded per slug/title; **(b)** art/image processing (duotone + grain over a source); **(c)** hand-drawn motifs scanned, then modified/composited by an automatic pipeline.
-  - *Work thumbnails* — keep the real project images, but run them through the **same** artistic direction (shared palette + grain/duotone post-process) so blog and work covers read as one system.
+  - _Blog-post thumbnails_ — pick one generation path (or a hybrid): **(a)** auto SVG gradient seeded per slug/title; **(b)** art/image processing (duotone + grain over a source); **(c)** hand-drawn motifs scanned, then modified/composited by an automatic pipeline.
+  - _Work thumbnails_ — keep the real project images, but run them through the **same** artistic direction (shared palette + grain/duotone post-process) so blog and work covers read as one system.
   - Open decision: which blog path, and whether the shared direction is a build-time transform vs. pre-baked assets. Defer to the illustration-system brainstorm.
 
 ---
@@ -73,6 +78,7 @@ Task 11 implements exactly this. If the user disagrees, adjust the `featured` as
 ### Task 1: Rename "Serie" → "Series" label
 
 **Files:**
+
 - Modify: `src/components/blog/SerieCard.astro:23`
 
 **Interfaces:** none changed.
@@ -111,6 +117,7 @@ git commit -m "fix(blog): rename user-facing Serie label to Series"
 ### Task 2: Reorder footer links
 
 **Files:**
+
 - Modify: `src/components/app/Footer.astro:6-13`
 
 Target order (identity → social → contact → subscribe): `GitHub · Art Portfolio · Bluesky · LinkedIn · Email · RSS`.
@@ -150,6 +157,7 @@ git commit -m "style(footer): reorder links by relationship gradient"
 ### Task 3: About page — drop 185-PR stat, fix inline-link spacing
 
 **Files:**
+
 - Modify: `src/components/about/AboutFacts.astro:2-8,11`
 - Modify: `src/components/about/AboutText.astro` (inline `<Link>` spacing)
 
@@ -228,11 +236,13 @@ git commit -m "fix(about): drop role-specific PR stat and fix inline-link spacin
 ### Task 4: Enlarge link hit areas (Link.astro)
 
 **Files:**
+
 - Modify: `src/components/ui/Link.astro:11-12,18-19`
 
 Spec §2: `default` and `secondary` text variants need ≥44px touch targets. `secondary` already has `py-4` (comfortable) — add `min-h-11`. `default` is a thin inline underline — give it a pseudo-element hit area so surrounding tap zone grows without shifting layout.
 
 **Interfaces:**
+
 - Produces: unchanged `Link` public API (`label`, `variant`, `icon`, `href`, `class`).
 
 - [ ] **Step 1: Update the `default` variant**
@@ -273,6 +283,7 @@ git commit -m "fix(ui): enlarge tap targets on default and secondary link varian
 ### Task 5: WorkMiniCard — bare tile + retina widths
 
 **Files:**
+
 - Modify: `src/components/work/WorkMiniCard.astro:19,27-28`
 - Review only: `src/components/work/WorkCard.astro:41-42`
 
@@ -328,6 +339,7 @@ git commit -m "fix(work): bare-tile WorkMiniCard with retina-safe image widths"
 ### Task 6: Hero rewrite — new copy, envelope icon, centered scroll cue
 
 **Files:**
+
 - Modify: `src/components/hero/HeroText.astro`
 - Modify: `src/components/hero/HeroSocials.astro`
 - Modify: `src/components/hero/Hero.astro`
@@ -336,6 +348,7 @@ git commit -m "fix(work): bare-tile WorkMiniCard with retina-safe image widths"
 Spec §1 + §2: H1 drops surname; new craft-focused copy; no framework names. Mailto CTA becomes an envelope icon in `HeroSocials`. The single text CTA leaves the text column and becomes a centered scroll cue at the bottom of the hero box (`↓ Start reading` → `#writing`), inside the `lg:h-[500px]` section so it stays above the fold. Add `scroll-mt-16` to `#writing`.
 
 **Interfaces:**
+
 - Consumes: `Link` (`variant="icon"`), `astro-icon` `Icon`.
 - Produces: hero markup with a single scroll anchor targeting `#writing`.
 
@@ -450,12 +463,14 @@ git commit -m "feat(hero): craft-focused copy, envelope icon, centered scroll cu
 ### Task 7: "Start here" writing section — posts as line items
 
 **Files:**
+
 - Modify: `src/components/blog/SelectedWriting.astro`
 - Remove: `src/components/blog/PostCard.astro`
 
 Spec §3 + §4: heading "Start here" (replaces "Selected Writing"); delete the redundant intro sentence; **series stay `SerieCard`**, **posts switch to `PostListItem`** (line style). `PostCard` becomes orphaned → delete.
 
 **Interfaces:**
+
 - Consumes: `getFeaturedSeries`, `getFeaturedPosts` (unchanged), `SerieCard`, `PostListItem`.
 
 - [ ] **Step 1: Rewrite SelectedWriting**
@@ -521,12 +536,14 @@ git commit -m "feat(home): rename writing section to Start here, posts as line i
 ### Task 8: Optional `updated` badge + `topic` tag on line items
 
 **Files:**
+
 - Modify: `src/content.config.ts:9-18` (PostSchema)
 - Modify: `src/components/blog/PostListItem.astro`
 
 Spec §3 (updated badge, never reorders) + §6 (optional topic tag). Both fields are **optional** — items without them render exactly as today.
 
 **Interfaces:**
+
 - Produces: `post.data.updated?: Date`, `post.data.topic?: string` on `post` and `seriePost` entries.
 
 - [ ] **Step 1: Add optional fields to PostSchema**
@@ -626,12 +643,14 @@ git commit -m "feat(blog): optional updated badge and topic tag on post line ite
 ### Task 9: Blog page — Latest-first merged list with year separators
 
 **Files:**
+
 - Modify: `src/pages/blog.astro`
 - Remove: `src/components/blog/PostList.astro`, `src/components/blog/SerieList.astro`, `src/components/blog/SerieListItem.astro`
 
 Spec §6: lead with **"Latest"** — one merged reverse-chron list (`getAllBlogPosts()`, posts + serie posts interleaved) in `PostListItem` style, with year separators (mono, muted). **"Series"** section below with the two series cards (`SerieCard`).
 
 **Interfaces:**
+
 - Consumes: `getAllBlogPosts()` → `(CollectionEntry<"post"> | CollectionEntry<"seriePost">)[]` sorted date desc; `getFeaturedSeries()`; `PostListItem`; `SerieCard`.
 
 - [ ] **Step 1: Rewrite blog.astro**
@@ -709,6 +728,7 @@ for (const post of posts) {
 
 Run: `grep -rn "PostList\b\|SerieList\b\|SerieListItem" src` — Expected: no matches after the rewrite.
 Then:
+
 ```bash
 git rm src/components/blog/PostList.astro src/components/blog/SerieList.astro src/components/blog/SerieListItem.astro
 ```
@@ -742,12 +762,14 @@ git commit -m "feat(blog): latest-first merged timeline with year separators"
 ### Task 10: Work schema `kicker` + archive query (additive only)
 
 **Files:**
+
 - Modify: `src/content.config.ts:42-63` (work schema)
 - Modify: `src/utils/repository.ts:47-54` (add `getArchiveWorks` — keep era code for now)
 
 Spec §7: add an optional `kicker` (the "Art · 2013–2019" style year+type line) to work; add a flat archive query. This task is **purely additive** — the old `getEarlierWorksByEra`/`WORK_ERAS` stay until Task 13 removes them together with their last caller (`work.astro`), so the build never has a dangling import.
 
 **Interfaces:**
+
 - Produces: `work.data.kicker?: string`; `getArchiveWorks()` → non-featured works, date desc.
 
 - [ ] **Step 1: Add optional `kicker` to the work schema**
@@ -785,6 +807,7 @@ git commit -m "feat(work): add kicker field and flat archive query"
 ### Task 11: Reassign featured works + add kickers (spec §7 — see Decision flag)
 
 **Files:**
+
 - Modify frontmatter in:
   - `src/content/work/chimeres-orchestra/index.md`
   - `src/content/work/malinette/index.md`
@@ -836,6 +859,7 @@ git commit -m "content(work): promote Malinette to selected work, demote Logaria
 ### Task 12: Show the kicker on WorkCard
 
 **Files:**
+
 - Modify: `src/components/work/WorkCard.astro:58-62`
 
 Spec §7: Selected-work cards carry a "year + type kicker".
@@ -880,12 +904,14 @@ git commit -m "feat(work): show year+type kicker on selected-work cards"
 ### Task 13: Work page — Selected work + Archive table
 
 **Files:**
+
 - Create: `src/components/work/ArchiveTable.astro`
 - Modify: `src/pages/work.astro`
 
 Spec §7: **"Selected work"** section (replaces "Featured") = `getFeaturedWorks()` in `WorkCard`. **"Archive"** table replaces the era-grouped mini-card sections: columns Year | Project | Type | Built with | Link, one line per project, external links (`live` → `website` → `git`), no detail pages linked.
 
 **Interfaces:**
+
 - Consumes: `getFeaturedWorks()`, `getArchiveWorks()` (Task 10), `WorkCard`.
 - ArchiveTable Props: `{ works: CollectionEntry<"work">[] }`.
 
@@ -1035,6 +1061,7 @@ git commit -m "feat(work): tiered Selected work + Archive table, retire era grou
 ### Task 14: Write case-study bodies for the three flagship projects
 
 **Files:**
+
 - Modify (markdown body only): `src/content/work/chimeres-orchestra/index.md`, `src/content/work/malinette/index.md`, `src/content/work/leconceptdelapreuve/index.md`
 
 Spec §7: detail pages for Selected work follow the case-study structure: **problem → constraints → process/decisions → outcome → learnings**. This is content work with no code surface; it can trail the layout. (Portfolio's own page can stay lighter — it's the "optional 4th".)
@@ -1089,12 +1116,14 @@ git commit -m "content(work): case study for Chimères Orchestra"
 ### Task 15: Compact 5-dot career timeline on the About page
 
 **Files:**
+
 - Create: `src/components/about/AboutTimeline.astro`
 - Modify: `src/components/about/AboutText.astro` (insert the component after `<AboutFacts />`)
 
-Spec §7 *(promoted from backlog at user request)*: a compact 5-dot career strip — the timeline idea at the scale where it works. Milestones derived from the bio (open-source since 2010; over a decade in software arts; web reconversion via Raccourci; now frontend at uhlive). Dates are editable content, not load-bearing.
+Spec §7 _(promoted from backlog at user request)_: a compact 5-dot career strip — the timeline idea at the scale where it works. Milestones derived from the bio (open-source since 2010; over a decade in software arts; web reconversion via Raccourci; now frontend at uhlive). Dates are editable content, not load-bearing.
 
 **Interfaces:**
+
 - Consumes: nothing (static milestone list local to the component).
 
 - [ ] **Step 1: Create AboutTimeline**
@@ -1183,7 +1212,7 @@ git commit -m "feat(about): compact 5-dot career timeline"
 
 **Spec coverage:**
 
-- §1 Hero copy → Task 6. §2 CTA/socials/scroll-mt/hit-area → Tasks 6 (cue, envelope, scroll-mt) + 4 (Link hit area). §3 "Start here" heading, drop intro, updated badge, ordering → Tasks 7 + 8. §4 series-as-cards / posts-as-line-items / "Series" label / remove PostCard → Tasks 1, 7. §5 footer order → Task 2. §6 blog flip+merge, year separators, updated badge, topic tag → Tasks 8, 9 (covers kept per constraint; illustration system is backlog, correctly omitted). §7 Selected work + Archive, kickers, retire era grouping → Tasks 10–13; §7 career strip *(promoted from backlog)* → Task 15. §8 drop 185 stat + `{" "}` spacing → Task 3. §9 WorkMiniCard bare tile + retina widths → Task 5. §10 CV → separate plan (out of scope), noted. Illustration system → separate plan (out of scope); direction captured below.
+- §1 Hero copy → Task 6. §2 CTA/socials/scroll-mt/hit-area → Tasks 6 (cue, envelope, scroll-mt) + 4 (Link hit area). §3 "Start here" heading, drop intro, updated badge, ordering → Tasks 7 + 8. §4 series-as-cards / posts-as-line-items / "Series" label / remove PostCard → Tasks 1, 7. §5 footer order → Task 2. §6 blog flip+merge, year separators, updated badge, topic tag → Tasks 8, 9 (covers kept per constraint; illustration system is backlog, correctly omitted). §7 Selected work + Archive, kickers, retire era grouping → Tasks 10–13; §7 career strip _(promoted from backlog)_ → Task 15. §8 drop 185 stat + `{" "}` spacing → Task 3. §9 WorkMiniCard bare tile + retina widths → Task 5. §10 CV → separate plan (out of scope), noted. Illustration system → separate plan (out of scope); direction captured below.
 - All spec sections map to a task; no gaps.
 
 **Placeholder scan:** No "TBD"/"handle edge cases"/"similar to Task N" — every code step carries full content. Task 14 is intentionally content-authoring (structure given, prose is the author's); it is not a code placeholder.

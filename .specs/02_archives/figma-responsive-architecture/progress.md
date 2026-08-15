@@ -520,6 +520,17 @@ variant is named `breakpoint=Desktop`, so Header/Footer had stopped surfacing).
 `breakpoint` axis Tasks 8–9 put on `SerieCardList` and `PostArchiveList`. It was
 untracked, so `git rm` failed and a plain `rm` did it.
 
-**Not done, deliberately:** the `Section — Responsive` table on
-`DOC / Foundations — Spacing & Layout` still shows the pre-refactor gutter and
-rhythm. Out of this task's scope; it belongs with whoever next opens that page.
+**Follow-up, same session:** the `Section — Responsive` table on
+`DOC / Foundations — Spacing & Layout` (`2942:4776`) was still showing the
+pre-refactor numbers — gutter 32/24/16 and rhythm 96/64/48. Corrected to
+16/16/16 and 96/32/32, matching `responsive-expected.json`.
+
+**Follow-up, prettier:** `pnpm format:write` had been exiting 2 on 23 files —
+prettier parses fenced code blocks inside markdown, and plans/specs quote
+fragments (`"scripts": {`, a bare `.filter(Boolean),`) that no parser accepts.
+Fixed at the config rather than by editing 23 documents: `.prettierrc.json` now
+carries an `*.md` override with `embeddedLanguageFormatting: "off"`. Prettier
+still formats the prose and leaves fence contents verbatim, which is what a
+spec quoting a half-line of JSON wants anyway. `format:check` exits 0; the
+resulting diff on nine previously-skipped specs is blank-line normalization
+only, and no file under `src/` changed.

@@ -137,7 +137,7 @@ return {
 
 Expected across all six pages: **29 bindings**. `overrides` is expected to be empty — the dark-frame overrides point at `VariableCollectionId:3:2` (now `2 Theme`), not at `Color Tokens`. **If any override turns up, stop and resolve it before Task 3**: rebind that frame to a `2 Theme` mode override, or keep `Color Tokens` and revise this plan.
 
-**Caveat:** the total-29 figure is Plan 2 Task 5/6's file-wide `Color Tokens` binding count and likely still holds — but the *per-page* distribution needs re-verification at execution time, since the page inventory itself changed after Plan 2 (the corrected page list above — `🗄️ Legacy` dropped, `Components (new)` added — differs from what this plan was originally drafted against, and `Components (new)`'s share of the 29 is unknown until re-dumped).
+**Caveat:** the total-29 figure is Plan 2 Task 5/6's file-wide `Color Tokens` binding count and likely still holds — but the _per-page_ distribution needs re-verification at execution time, since the page inventory itself changed after Plan 2 (the corrected page list above — `🗄️ Legacy` dropped, `Components (new)` added — differs from what this plan was originally drafted against, and `Components (new)`'s share of the 29 is unknown until re-dumped).
 
 - [ ] **Step 3: Resolve each bound variable to a hex and pick its `1 Primitives` target**
 

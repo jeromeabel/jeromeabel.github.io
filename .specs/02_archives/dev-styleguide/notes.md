@@ -62,7 +62,7 @@ Effect when rendered (verified live via `pnpm dev` + `/styleguide`):
   tokens.
 - `WorksPreview.astro` — no hard compile error (no TS-only syntax in its
   frontmatter to choke on), but a silent runtime `getCollection is not
-  defined` — the `import` never actually gets bound because it isn't
+defined` — the `import` never actually gets bound because it isn't
   hoisted from a real frontmatter block.
 
 **Fix applied (this task, 3 `work/` files only):** moved the exact same
@@ -281,7 +281,7 @@ last controller-verified run — confirms the state is stable, not stale).
 
 ### Width-canvas question — resolved
 
-Root cause (proven in the first pass): astrobook's *dashboard* route
+Root cause (proven in the first pass): astrobook's _dashboard_ route
 (`/styleguide/dashboard/...`) reserves a 300px sidebar, boxing every story
 into a fixed ~976px frame regardless of the Playwright viewport — a pure
 framing artifact, not a content difference (3 entries diffed at 0

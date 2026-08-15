@@ -32,6 +32,7 @@ created: 2026-07-21
 ## File Structure
 
 **Created:**
+
 - `scripts/figma/extract-code-tokens.mjs` — parse `src/styles/global.css` → `tokens.code.json`.
 - `scripts/figma/extract-code-tokens.test.mjs` — `node:test` for the extractor.
 - `scripts/figma/diff-tokens.mjs` — code↔Figma token diff (warn-only, adapted verbatim).
@@ -46,6 +47,7 @@ created: 2026-07-21
 - `.specs/01_active/figma-blog-fit/notes.md` — running log of residual pixel/geometry fails + one-line reasons, and the story→decorator mapping.
 
 **Modified:**
+
 - `package.json` — add `figma:verify`, `test`, `geometry:web` scripts.
 - `scripts/pixel-check.mjs` — preview routes, `waitUntil: 'load'`, 3×2 matrix, dark-theme injection.
 - `scripts/pixel-manifest.mjs` — re-anchor 11 broken selectors; store decorator assignment.
@@ -62,11 +64,13 @@ created: 2026-07-21
 ### Task 1: Deterministic code-token extractor
 
 **Files:**
+
 - Create: `scripts/figma/extract-code-tokens.mjs`
 - Test: `scripts/figma/extract-code-tokens.test.mjs`
 - Reference source (adapt): `/home/jabel/code/allo-media/frontend-ai/.claude/skills/fe-figma-verify/scripts/extract-code-tokens.mjs`
 
 **Interfaces:**
+
 - Produces: `tokens.code.json` = `{ rootPx: 16, tokens: [{ name, raw, px, class, source }] }`.
   - Color tokens: `name` = `"light/color-background"` / `"dark/color-background"`, `raw` = `"#f5ffe1"` (lowercased hex), `px` = `null`, `class` = `"color"`.
   - Font tokens: `name` = `"font-sans"`, `raw` = collapsed stack string, `class` = `"font"`.
@@ -261,6 +265,7 @@ git commit -m "feat(figma-verify): deterministic code-token extractor for global
 ### Task 2: Token diff + `pnpm figma:verify` wiring
 
 **Files:**
+
 - Create: `scripts/figma/diff-tokens.mjs` (adapt verbatim from the reference source)
 - Create: `scripts/figma/diff-tokens.test.mjs`
 - Create: `scripts/figma/token-map.json`
@@ -268,6 +273,7 @@ git commit -m "feat(figma-verify): deterministic code-token extractor for global
 - Reference: `/home/jabel/code/allo-media/frontend-ai/.claude/skills/fe-figma-verify/scripts/diff-tokens.mjs`
 
 **Interfaces:**
+
 - Consumes: `tokens.code.json` (Task 1), `tokens.figma.json` (Task 3 — dump), `token-map.json`.
 - Produces: markdown diff on stdout with sections `Missing in Figma`, `Value mismatch`, `Orphaned in Figma`, `Unmapped`. **Always exits 0** (warn-only; the human judges each finding as real-drift / expected-gap / map-update).
 - `token-map.json` shape: `{ "map": { "<code-token-name>": "<Collection>/<Mode>/<var>" }, "ignore": ["<code-token-name>", ...] }`.
@@ -486,6 +492,7 @@ git commit -m "feat(figma-verify): token diff, map skeleton, figma:verify + test
 ### Task 3: Figma token dump (interactive MCP) + first drift verdict
 
 **Files:**
+
 - Create: `scripts/figma/dump-tokens.md` (the paste-in script + procedure)
 - Modify: `scripts/figma/token-map.json` (correct paths to real Figma names)
 - Create/append: `.specs/01_active/figma-blog-fit/notes.md` (verdict log)
@@ -493,6 +500,7 @@ git commit -m "feat(figma-verify): token diff, map skeleton, figma:verify + test
 > **Interactive task — no unit test.** Gate = `pnpm figma:verify` produces a diff whose every finding is judged real-drift / expected-gap / map-update, and all real-drifts are repaired Figma-side. `use_figma` is LLM-mediated; read `/figma-use` first.
 
 **Interfaces:**
+
 - Consumes: DS file `Wf4iomVMYUXlFIBV3Z8bx4`.
 - Produces: `tokens.figma.json` = `{ collections: [{ name, modes: [..], variables: [{ name, type, value, description }] }], textStyles: [{ name, fontSize, fontName }] }`. For multi-mode collections, each variable is expanded to one entry per mode, `name` = `"<Mode>/<var>"` (so `Color/Light/background` addresses cleanly).
 
@@ -570,10 +578,12 @@ git commit -m "feat(figma-verify): batched token dump procedure; token map + dri
 ### Task 4: Width-decorator components
 
 **Files:**
+
 - Create: `src/components/styleguide/StoryContainer.astro`
 - Create: `src/components/styleguide/StorySection.astro`
 
 **Interfaces:**
+
 - Produces: two decorator components usable in `.stories.ts` as `decorators: [{ component: StoryContainer }]`. Astrobook applies decorators as nested wrappers around the story `<slot/>` (static HTML only — fine for containers).
 
 - [ ] **Step 1: Write `StoryContainer.astro`**
@@ -623,11 +633,13 @@ git commit -m "feat(styleguide): StoryContainer + StorySection width decorators"
 ### Task 5: Assign decorators per live-parent context
 
 **Files:**
+
 - Modify: manifest-covered `*.stories.ts` (attach `decorators`)
 - Modify: `scripts/pixel-manifest.mjs` (record the assignment per entry)
 - Append: `.specs/01_active/figma-blog-fit/notes.md` (the story→decorator table)
 
 **Interfaces:**
+
 - Consumes: `StoryContainer` / `StorySection` (Task 4).
 - Produces: each manifest-covered component's story renders at its live width. Full-bleed components (Header, Footer, Hero, WorksStrip) get **no** wrapper.
 
@@ -689,9 +701,11 @@ git commit -m "feat(styleguide): assign width decorators per live-parent context
 ### Task 6: Pixel-check preview routes + 3×2 matrix + dark theme
 
 **Files:**
+
 - Modify: `scripts/pixel-check.mjs`
 
 **Interfaces:**
+
 - Consumes: `scripts/pixel-manifest.mjs`, preview routes from Task 5.
 - Produces: `.pixel-report/summary.json` with a row per (component × viewport × theme).
 
@@ -761,10 +775,12 @@ git commit -m "feat(pixel-check): preview routes, 3x2 viewport/theme matrix, loa
 ### Task 7: Re-anchor broken manifest selectors + close the gate
 
 **Files:**
+
 - Modify: `scripts/pixel-manifest.mjs`
 - Append: `.specs/01_active/figma-blog-fit/notes.md`
 
 **Interfaces:**
+
 - Consumes: the Task-6 matrix run.
 - Produces: story↔live goes from 2 passes to majority-pass; every residual fail has a one-line reason in `notes.md`.
 
@@ -802,10 +818,12 @@ git commit -m "fix(pixel-check): re-anchor broken selectors; majority-pass gate 
 ### Task 8: Web geometry extractor
 
 **Files:**
+
 - Create: `scripts/figma/extract-web-geometry.mjs`
 - Modify: `package.json` (add `geometry:web` script)
 
 **Interfaces:**
+
 - Consumes: preview routes + `scripts/pixel-manifest.mjs`.
 - Produces: `geometry.web.json` = `{ "<component-id>": { "<viewport>": { "<theme>": { root: {..props}, descendants: [{sel, ...props}] } } } }`. Prop subset: `fontSize`, `fontFamily`, `fontWeight`, `paddingTop/Right/Bottom/Left`, `gap`, `color`, `backgroundColor`, `borderRadius`, `borderColor`, `width` — all as `getComputedStyle` strings (px).
 
@@ -889,12 +907,14 @@ git commit -m "feat(geometry): web-side computed-style extractor over preview ro
 ### Task 9: Figma geometry read (interactive MCP)
 
 **Files:**
+
 - Append: `scripts/figma/dump-tokens.md` (a "geometry read" section)
 - Create: `geometry.figma.json` (git-ignored)
 
 > **Interactive task — no unit test.** Gate = `geometry.figma.json` exists with the same prop subset per master as `geometry.web.json`, addressable by component name.
 
 **Interfaces:**
+
 - Produces: `geometry.figma.json` = `{ "<master-name>": { root: {..px props}, ... } }`. Same prop keys as web (converted to px: rem×16), so Task 10 diffs them directly.
 
 - [ ] **Step 1: Record the traversal script**
@@ -917,10 +937,12 @@ git commit -m "docs(geometry): figma-side geometry read procedure"
 ### Task 10: Geometry diff → repair worklist
 
 **Files:**
+
 - Create: `scripts/figma/diff-geometry.mjs`
 - Create: `scripts/figma/diff-geometry.test.mjs`
 
 **Interfaces:**
+
 - Consumes: `geometry.web.json` (Task 8), `geometry.figma.json` (Task 9).
 - Produces: markdown worklist per master of prop mismatches; px↔px comparison, tolerance 0.5px; colors compared as normalized values. Warn-only exit 0.
 
@@ -1036,6 +1058,7 @@ git commit -m "feat(geometry): web↔figma geometry diff with repair worklist"
 ### Task 11: Master repairs + per-master screenshot gate (interactive)
 
 **Files:**
+
 - Modify: Figma masters (via `use_figma`)
 - Append: `.specs/01_active/figma-blog-fit/notes.md`
 
@@ -1072,10 +1095,12 @@ git commit -m "docs(geometry): master repair log + screenshot-gate results"
 ### Task 12: Fix PostList + story so all 9 render
 
 **Files:**
+
 - Modify: `src/components/blog/PostList.astro:3`
 - Create: `src/components/blog/PostList.stories.ts`
 
 **Interfaces:**
+
 - Consumes: `getAllBlogPosts` from `src/utils/repository.ts` (verified export, lines 14-21).
 - Produces: `PostList` renders; a story exists so all 9 legacy components have a preview route.
 
@@ -1124,6 +1149,7 @@ git commit -m "fix(blog): PostList getAllPosts→getAllBlogPosts + story (legacy
 ### Task 13: Build the 🗄️ Legacy Figma page (interactive)
 
 **Files:**
+
 - Modify: Figma file (new page `🗄️ Legacy`, 9 masters)
 - Append: `.specs/01_active/figma-blog-fit/notes.md`
 
@@ -1159,6 +1185,7 @@ git commit -m "docs(legacy): 🗄️ Legacy Figma page build + geometry/screensh
 > cannot be assembled faithfully until these masters exist. This stage closes the gap.
 >
 > **Scope triage of the 25 missing (per analysis 2026-07-21):**
+>
 > - **4 = text styles, NOT masters** — `ui-h1`, `ui-h2`, `ui-p`, `ui-prose`. Covered by S0 text
 >   styles (`Title/H1`, `Heading/H2`, `Body/Base`). No build; documented in Step 0 below.
 > - **4 = utility/image plumbing, skip** — `ui-customimage`, `contact-contactimage`,
@@ -1174,6 +1201,7 @@ git commit -m "docs(legacy): 🗄️ Legacy Figma page build + geometry/screensh
 ### Task 13b: Build the 12 missing component masters (interactive)
 
 **Files:**
+
 - Modify: Figma file (`🧩 Components` page — extend existing sections / add new ones; these are
   live v3 components, so they belong on Components, **not** the 🗄️ Legacy page)
 - Append: `.specs/01_active/figma-blog-fit/notes.md`
@@ -1204,9 +1232,10 @@ use real collection content (F9). Story preview routes for reflow/content refere
 
 Same procedure for `work-archivetable`, `work-relatedwriting`, `work-workgallerycard`,
 `work-workheader`. Preview routes under `.../work/<kebab>/...` (`work-gallery-card` has `square`
-+ `video` variants — build both as a component set or note the single canonical variant chosen).
 
-- [x] **Step 3: Batch C — About + text-block masters (4)**
+- `video` variants — build both as a component set or note the single canonical variant chosen).
+
+* [x] **Step 3: Batch C — About + text-block masters (4)**
 
 Same procedure for `about-aboutfacts`, `about-abouttext`, `hero-herotext`, `contact-contacttext`.
 
@@ -1232,6 +1261,7 @@ git commit -m "docs(masters): 12 missing component masters (blog/work/about batc
 ### Task 14: 24 template frames (interactive)
 
 **Files:**
+
 - Modify: Figma file (template frames)
 - Append: `.specs/01_active/figma-blog-fit/notes.md`
 

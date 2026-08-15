@@ -25,11 +25,13 @@
 ### Task 1: Install astrobook + wire dev-only integration
 
 **Files:**
+
 - Modify: `package.json` (devDependencies)
 - Modify: `astro.config.mjs`
 - Modify: `.gitignore`
 
 **Interfaces:**
+
 - Produces: a mounted `/styleguide` route in dev; the `astrobook()` integration import used by no other task.
 
 - [x] **Step 1: Install the package**
@@ -81,10 +83,12 @@ git commit -m "chore(styleguide): add astrobook dev-only integration"
 **This is a HARD GATE.** If any check fails and no small fix exists via astrobook's `css`/`head` options, STOP and fall back to a hand-rolled `styleguide.astro` (see base design). Do not story anything else until every check below passes.
 
 **Files:**
+
 - Create: `src/components/ui/Link.stories.ts`
 - Test: manual render at `http://localhost:4321/styleguide`
 
 **Interfaces:**
+
 - Produces: the canonical story idiom (`export default { component }` + named `args` exports with `satisfies ComponentProps`) that Tasks 3–9 copy.
 
 - [x] **Step 1: Write the `Link` story**
@@ -119,6 +123,7 @@ If `Link` renders its label via a slot rather than an arg, astrobook renders the
 - [x] **Step 2: Verify the render gate (all four must pass)**
 
 Run: `pnpm dev`, open `http://localhost:4321/styleguide`, click into the `Link` stories. Confirm:
+
 - (a) **Global CSS + `@theme` tokens resolve** — the CTA pill has `bg-foreground`/`text-background` colors, not unstyled defaults.
 - (b) **`astro-icon` icons render** — the icon variant shows its glyph, not a broken box.
 - (c) **Dark mode works or is at least not broken** — toggling `.dark` on `<html>` (devtools) recolors tokens.
@@ -136,9 +141,11 @@ git commit -m "feat(styleguide): Link story + phase-1 render gate passing"
 ### Task 3: `ui/` primitive stories
 
 **Files:**
+
 - Create: `src/components/ui/H1.stories.ts`, `H2.stories.ts`, `P.stories.ts`, `Prose.stories.ts`, `LinkNavPost.stories.ts`, `CustomImage.stories.ts`, `SocialShare.stories.ts`
 
 **Interfaces:**
+
 - Consumes: story idiom from Task 2.
 
 - [x] **Step 1: Write text-primitive stories**
@@ -182,6 +189,7 @@ git commit -m "feat(styleguide): ui primitive stories"
 ### Task 4: `app/` stories
 
 **Files:**
+
 - Create: `src/components/app/Header.stories.ts`, `Footer.stories.ts`, `ThemeToggle.stories.ts`, `MotionToggle.stories.ts`
 - (Skip `SEO.astro`.)
 
@@ -209,6 +217,7 @@ git commit -m "feat(styleguide): app chrome stories"
 ### Task 5: `hero/` stories
 
 **Files:**
+
 - Create: `Hero.stories.ts`, `HeroText.stories.ts`, `HeroSocials.stories.ts`, `HeroAnimation.stories.ts`, `HeroImage.stories.ts`
 
 - [x] **Step 1: Write stories, including the dead `HeroImage`**
@@ -227,6 +236,7 @@ git commit -m "feat(styleguide): hero stories (incl. dead HeroImage)"
 ### Task 6: `about/` + `skills/` stories
 
 **Files:**
+
 - Create: `about/AboutText.stories.ts`, `AboutFacts.stories.ts`, `AboutFactsStrip.stories.ts`, `AboutStrip.stories.ts`, `AboutValues.stories.ts`, `ValueCard.stories.ts`, `skills/Skills.stories.ts`, `skills/SkillsText.stories.ts`
 
 - [x] **Step 1: Write stories**
@@ -253,6 +263,7 @@ git commit -m "feat(styleguide): about + skills stories (incl. dead AboutValues)
 ### Task 7: `work/` stories (non-variant)
 
 **Files:**
+
 - Create: `WorksStrip.stories.ts`, `ArchiveTable.stories.ts`, `WorkHeader.stories.ts`, `RelatedWriting.stories.ts`
 - (Variant cards `WorkGalleryCard`, `WorkOverlayCard`, `WorkMiniCard` are in **Plan B**.)
 
@@ -283,6 +294,7 @@ git commit -m "feat(styleguide): work non-variant stories"
 ### Task 8: `blog/` stories (non-variant)
 
 **Files:**
+
 - Create: `PostListItem.stories.ts`, `SeriePostListItem.stories.ts`, `SerieCard.stories.ts`, `SerieContents.stories.ts`, `TableOfContents.stories.ts`, `TopicChips.stories.ts`, `SelectedWriting.stories.ts`, `RelatedWork.stories.ts`
 - (Variant rows `PostRow`, `PostRowCalm` are in **Plan B**.)
 
@@ -313,6 +325,7 @@ git commit -m "feat(styleguide): blog non-variant stories"
 ### Task 9: `contact/` stories + coverage audit
 
 **Files:**
+
 - Create: `Contact.stories.ts`, `ContactText.stories.ts`, `ContactImage.stories.ts`, `ContactNoise.stories.ts`
 
 - [x] **Step 1: Write stories (incl. dead `ContactNoise`)**

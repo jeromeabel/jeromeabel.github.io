@@ -16,7 +16,7 @@
 - **Date formatting is `en-GB` everywhere** (already standardized; use existing helpers `getFormattedDate` / `getMonthYear` in `src/utils/format-date.ts`).
 - **`topic` frontmatter** is `z.string().optional()` (comma-separated); tag UIs already guard on its presence.
 - **Commit style:** conventional commits (`feat:` / `fix:` / `refactor:` / `docs:` / `chore:`), one commit per task. Sign-off line as usual.
-- **"since 2010" placement rule:** the phrase appears as a *sentence* once per page (Hero, Work). On About it lives only as the `AboutFacts` stat + the one "Open source since 2010" prose claim — never as a lead/headline.
+- **"since 2010" placement rule:** the phrase appears as a _sentence_ once per page (Hero, Work). On About it lives only as the `AboutFacts` stat + the one "Open source since 2010" prose claim — never as a lead/headline.
 
 ---
 
@@ -38,9 +38,11 @@ Files touched, by task:
 ## Task 1: Home PostRow — drop description, add arrow slide
 
 **Files:**
+
 - Modify: `src/components/blog/PostRow.astro`
 
 **Interfaces:**
+
 - Consumes: `getMonthYear` (`src/utils/format-date`), `getMinutesFromBody` (`src/utils/get-minutes-read`), `post.data.topic`. All already imported/used — no signature change.
 - Produces: nothing new; markup-only change.
 
@@ -117,10 +119,12 @@ git commit -m "feat(home): drop PostRow description, add hover arrow slide"
 ## Task 2: Blog year-rail list
 
 **Files:**
+
 - Modify: `src/components/blog/PostListItem.astro` (add optional `compact` prop)
 - Modify: `src/pages/blog.astro` (year-rail markup, drop "Latest" H2)
 
 **Interfaces:**
+
 - Consumes: `getFormattedDate`, and newly `getMonthYear` (both from `src/utils/format-date`).
 - Produces: `PostListItem` gains an optional `compact?: boolean` prop. When `compact` is true the date renders via `getMonthYear` (→ "Jul 2026") instead of `getFormattedDate` (→ "18 Jul 2026"). Default (unset) preserves current full-date behavior for all other callers.
 
@@ -206,10 +210,12 @@ git commit -m "feat(blog): year-rail list with compact month dates, drop Latest 
 ## Task 3: Work Selected — horizontal-split card, single column
 
 **Files:**
+
 - Modify: `src/components/work/WorkCard.astro` (layout rewrite, drop cross overlay)
 - Modify: `src/pages/work.astro` (Selected-work grid → single column)
 
 **Interfaces:**
+
 - Consumes: `work.data.img_preview`, `work.data.kicker`, `work.data.title`, `work.data.description`, `work.data.date`. No signature change.
 - Produces: markup-only; `WorkCard` still takes `work?: CollectionEntry<"work">`.
 
@@ -298,10 +304,12 @@ git commit -m "feat(work): horizontal-split cards in single-column Selected work
 ## Task 4: Work — "More projects" table, whole-row link
 
 **Files:**
+
 - Modify: `src/pages/work.astro` (H2 `Archive` → `More projects`)
 - Modify: `src/components/work/ArchiveTable.astro` (`align-middle`, stretched-link row, keep external Visit above the stretch)
 
 **Interfaces:**
+
 - Consumes: `works: CollectionEntry<"work">[]`, `externalUrl(...)`. Unchanged.
 - Produces: markup-only. Component filename stays `ArchiveTable.astro` (internal name — no import churn).
 
@@ -384,14 +392,16 @@ git commit -m "feat(work): rename Archive to More projects, whole-row links"
 ## Task 5: About — lead sentence, drop timeline
 
 **Files:**
+
 - Modify: `src/components/about/AboutText.astro` (add lead `<p>`, remove `AboutTimeline` import + usage)
 - Delete: `src/components/about/AboutTimeline.astro` (orphaned after this — verified sole consumer is `AboutText`)
 
 **Interfaces:**
+
 - Consumes: `AboutFacts`, `Link`, `Prose`, `H1`, `Icon`. `AboutTimeline` import removed.
 - Produces: markup-only.
 
-Add an emphasized lead directly under `<H1>About</H1>`. It carries **no "since 2010"** (the About page already states the year via the `AboutFacts` stat and the "Open source since 2010" prose claim). Approved lead copy: *"Artist turned web developer — I build things meant to be used, not just seen."* (thematic, year-free, distinct from the hero paragraph).
+Add an emphasized lead directly under `<H1>About</H1>`. It carries **no "since 2010"** (the About page already states the year via the `AboutFacts` stat and the "Open source since 2010" prose claim). Approved lead copy: _"Artist turned web developer — I build things meant to be used, not just seen."_ (thematic, year-free, distinct from the hero paragraph).
 
 - [ ] **Step 1: Remove the `AboutTimeline` import**
 
@@ -457,10 +467,12 @@ git commit -m "feat(about): add thematic lead line, remove year timeline"
 ## Task 6: Hero — tighter socials, prominent always-visible scroll cue
 
 **Files:**
+
 - Modify: `src/components/hero/HeroSocials.astro` (gap)
 - Modify: `src/components/hero/Hero.astro` (scroll-cue prominence + responsive positioning)
 
 **Interfaces:**
+
 - Consumes: `Icon` (astro-icon), `Link`. Unchanged.
 - Produces: markup-only.
 
@@ -520,11 +532,13 @@ git commit -m "feat(hero): tighten socials, make Start reading a prominent alway
 ## Task 7: Deterministic batch — WorksStrip line, serie folder icon, metadata-order verify
 
 **Files:**
+
 - Modify: `src/components/work/WorksStrip.astro` (remove the "Building since 2010" line)
 - Modify: `src/pages/blog/[serie]/index.astro` (folder icon before the serie H1)
 - Verify only (no edit expected): `src/components/work/WorkHeader.astro` metadata order; featured-work kicker format
 
 **Interfaces:**
+
 - Consumes: `Icon` (astro-icon) — already imported in the serie index page. `H2`, `Link`, `P`, `WorkMiniCard` in WorksStrip.
 - Produces: markup-only.
 
@@ -581,10 +595,12 @@ git commit -m "fix(ui): drop duplicate WorksStrip line, add folder icon to serie
 ## Task 8: Populate `topic` frontmatter (content)
 
 **Files:**
+
 - Modify: standalone post frontmatter — `src/content/post/*/index.md`
 - Modify: seriePost frontmatter — `src/content/serie/*/*/index.md`
 
 **Interfaces:**
+
 - Consumes: `topic: z.string().optional()` (already in schema; no schema change). PostRow/PostListItem already render tags when `topic` is present.
 - Produces: `topic` values enable the tag UIs shipped in Tasks 1–2.
 
@@ -594,13 +610,13 @@ git commit -m "fix(ui): drop duplicate WorksStrip line, add folder icon to serie
 
 Add a `topic:` line to each post's frontmatter (comma-separated, max 2 shown by the UI). Proposed values:
 
-| File | Proposed `topic` |
-| --- | --- |
+| File                                                            | Proposed `topic`     |
+| --------------------------------------------------------------- | -------------------- |
 | `src/content/post/adding-likes-to-a-static-astro-site/index.md` | `astro, performance` |
-| `src/content/post/api-endpoints-with-astro/index.md` | `astro, backend` |
-| `src/content/post/clickable-images-astro-markdown/index.md` | `astro, ui` |
-| `src/content/post/nuxt-clean-architecture/index.md` | `nuxt, architecture` |
-| `src/content/post/web-testing-quotes-and-tips/index.md` | `testing` |
+| `src/content/post/api-endpoints-with-astro/index.md`            | `astro, backend`     |
+| `src/content/post/clickable-images-astro-markdown/index.md`     | `astro, ui`          |
+| `src/content/post/nuxt-clean-architecture/index.md`             | `nuxt, architecture` |
+| `src/content/post/web-testing-quotes-and-tips/index.md`         | `testing`            |
 
 Example — in `src/content/post/adding-likes-to-a-static-astro-site/index.md`, add under `date:`:
 

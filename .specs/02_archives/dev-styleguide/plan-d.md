@@ -4,7 +4,7 @@
 
 **Goal:** A dev-only Playwright script that diffs each storied component against the same component on the live preview `https://deploy-preview-104--jeromeabel.netlify.app/`, asserting **strict pixel identity** (0 mismatched pixels beyond antialiasing) for every component that has a stable live-page anchor.
 
-**Architecture:** Strict identity is *earned* by eliminating every non-determinism source before capture: matching render container, fixed viewport, font/image ready-waits, animation freeze, and explicit masks for genuinely time-dependent regions. Each component with a live counterpart is declared in a manifest (story id ↔ live URL + selector + masks). The script captures both sides, normalizes, runs `pixelmatch`, and fails any component over the 0-pixel budget with a saved `expected/actual/diff` triptych. Components with no live anchor (variants not selected on live, all 9 legacy) are skipped and logged.
+**Architecture:** Strict identity is _earned_ by eliminating every non-determinism source before capture: matching render container, fixed viewport, font/image ready-waits, animation freeze, and explicit masks for genuinely time-dependent regions. Each component with a live counterpart is declared in a manifest (story id ↔ live URL + selector + masks). The script captures both sides, normalizes, runs `pixelmatch`, and fails any component over the 0-pixel budget with a saved `expected/actual/diff` triptych. Components with no live anchor (variants not selected on live, all 9 legacy) are skipped and logged.
 
 **Tech Stack:** Playwright, pixelmatch, pngjs, Node ESM script run via pnpm. Requires Plans A + B (stories to diff); Plan C legacy components are auto-skipped.
 
@@ -25,6 +25,7 @@
 ### Task 1: Install tooling + gitignore report dir
 
 **Files:**
+
 - Modify: `package.json` (devDependencies + a `pixel-check` script)
 - Modify: `.gitignore`
 
@@ -60,9 +61,11 @@ git commit -m "chore(pixel-check): add playwright + pixelmatch dev tooling"
 ### Task 2: Component anchor manifest
 
 **Files:**
+
 - Create: `scripts/pixel-manifest.mjs`
 
 **Interfaces:**
+
 - Produces: `export const MANIFEST` — array of `{ id, storyPath, liveUrl, selector, masks?, skip?, reason? }` consumed by `pixel-check.mjs`.
 
 - [x] **Step 1: Define the manifest shape and seed it**
@@ -113,9 +116,11 @@ git commit -m "feat(pixel-check): component anchor manifest"
 ### Task 3: The diff script — strict-identity capture + compare
 
 **Files:**
+
 - Create: `scripts/pixel-check.mjs`
 
 **Interfaces:**
+
 - Consumes: `MANIFEST` from `./pixel-manifest.mjs`.
 - Assumes the local astrobook dev server is running at `http://localhost:4321` (Step 4 documents starting it).
 
@@ -221,11 +226,13 @@ git commit -m "feat(pixel-check): strict-identity story-vs-live diff script"
 ### Task 4: Triage the first report + tune to green
 
 **Files:**
+
 - Modify: `scripts/pixel-manifest.mjs` (selectors/masks), story files (container wrappers)
 
 - [x] **Step 1: Categorize each fail from `.pixel-report/`**
 
 For every fail triptych, decide which bucket it is:
+
 - **Container mismatch** — story renders the component without the site's `container` wrapper (max-width/padding), so widths differ. Fix: wrap the story's component in the same container the live page uses (add a decorator/wrapper in the story, or a fixed-width container arg).
 - **Missing mask** — a genuinely dynamic region (image, canvas, date) wasn't masked. Fix: add to `masks`.
 - **Real discrepancy** — the styleguide genuinely renders the component differently (token/font/dark-mode resolution gap). This is a true finding: record it in `notes.md`; it may indicate an astrobook CSS-resolution issue to fix via astrobook's `css`/`head` config.
