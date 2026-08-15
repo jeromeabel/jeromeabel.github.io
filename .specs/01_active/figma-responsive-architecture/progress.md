@@ -246,3 +246,73 @@ Findings on record, by verdict:
 
 Task 14 is not closed — Step 5 (geometry, needs a scoping decision before it
 can even run) and the real-drift fixes above remain outstanding.
+
+## Task 14 — real-drift fixes (2026-08-15)
+
+Follow-up edit pass on the two small real-drift findings the verification sweep
+recorded but deliberately did not fix. Both fixed at the **master**, not on the
+page frames.
+
+### Fix 1 — stale `Heading/H2` text style (Step 6 finding)
+
+Root cause was narrower than the sweep recorded: the `H2` master itself is clean
+(style detached, `fontSize` bound by Task 4). The stale style is an
+**instance-level override on the nested `H2` instance inside two section
+masters**:
+
+| Master                  | Node                              | Was           |
+| ----------------------- | --------------------------------- | ------------- |
+| `BlogPreviewSection`    | `I2041:497;2041:457;2034:211`     | `Heading/H2`  |
+| `ContactPreviewSection` | `I2114:7229;2047:429;2034:211`    | `Heading/H2`  |
+
+`WorkPreviewSection`'s equivalent node carries no override, which is exactly why
+only "WORK" cascaded during Step 6.
+
+**Gotcha worth keeping:** `setTextStyleIdAsync("")` also **wipes the range
+`fontSize` variable binding** on the node. A fresh read-back after the detach
+showed `style: null` but `fontSizeVar: null` too, against `text/section-title` on
+the healthy WORK node. Detach and re-bind are two steps, not one — re-ran
+`setRangeBoundVariable(0, len, "fontSize", text/section-title)` on both nodes.
+
+**Step 6 re-run: PASS.** All three section titles now cascade 30 → 24 on
+Desktop→Tablet (`Blog` 30→24, `WORK` 30→24, `LET'S TALK` 30→24); nav-link "Blog"
+correctly stays 20. `restoredMatchesBefore: true`.
+
+### Fix 2 — `PostArchiveList` row overflow at 390 (Step 7 finding)
+
+Code is truth: `PostListItem.astro:35` is `<h3 class="flex-1 …">` inside a
+`flex-row … justify-between` anchor — the title fills remaining space and wraps;
+only the meta block hugs. Figma had the inverse: the `line` frame was `HUG` and
+its title TEXT `WIDTH_AND_HEIGHT`, so a long title grew the row past the frame.
+
+Fixed on the `PostRow` master (`2124:7937`), all four variants — `line` frame →
+`layoutSizingHorizontal: FILL`, title TEXT → `textAutoResize: HEIGHT` +
+`layoutSizingHorizontal: FILL`:
+
+| Variant                    | `line` id   | title id    |
+| -------------------------- | ----------- | ----------- |
+| `type=post, state=default` | `2123:7767` | `2123:7768` |
+| `type=serie, state=default`| `2124:7940` | `2124:7941` |
+| `type=post, state=hover`   | `2367:7171` | `2367:7172` |
+| `type=serie, state=hover`  | `2367:7178` | `2367:7179` |
+
+**Step 7 re-run:** `Blog — Mobile` and `Blog — Mobile [Dark]` now report
+`overflowCount: 0` (was 64px right on two rows). `Home — Mobile` /
+`Home — Mobile [Dark]` still show the two known expected-gap offenders
+(`BlogPreviewSection` `Content` 187px right, `ContactPreviewSection`
+`ContactContainer` 445px both sides) — unchanged, still awaiting Mobile variants.
+
+**Desktop not regressed:** `Blog — Desktop` `overflowCount: 0`; rows read title
+FILL at 833/920px, single line (28px tall), meta flush at the row's right edge —
+which is what `flex-1` + `justify-between` produces in code.
+
+### New observation — Desktop overflow audit (first time run)
+
+Step 7 as written only audits `/Mobile/` frames. Ran the same script over the
+Desktop frames for the first time: `Blog — Desktop`, `Home — Desktop [Dark]`,
+`Blog — Desktop [Dark]` are clean; `Home — Desktop` has exactly one offender —
+`layer1` (`I2586:1143;2114:7231`), a decorative GROUP inside
+`ContactPreviewSection > ContactImage (relative flex-1)`, bleeding **40px past
+the right edge**. Not touched by either fix above and not caused by them; it is a
+pre-existing decorative bleed that no prior audit covered. Verdict: needs a
+judgment call (intentional bleed vs. drift) — not fixed here.
