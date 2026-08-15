@@ -16,6 +16,77 @@ Full detail: `inventory.md`.
 
 ## Task 14 — verification sweep (2026-08-15)
 
+### Step 3 — token diff (`pnpm figma:verify`)
+
+**Map-update, not real drift.** `Missing in Figma` and `Value mismatch` both empty —
+`container-padding-inline` now matches `3 Responsive/Desktop/container/gutter` (16)
+as expected post-Task 2. `Orphaned in Figma` surfaced exactly 3: the
+`2 Theme/Dark/font/*` variables (`sans`, `title`, `mono`). Root cause:
+`token-map.json`'s `map` only pairs `font-sans-primary`/`font-title-primary`/
+`font-mono-primary` to their `2 Theme/Light/font/*` counterparts; there's no Dark
+equivalent mapping, and `orphanIgnore` has no `2 Theme/Dark/font/` prefix entry
+either. Not a Task 2–13 regression — the Dark font variables have existed
+unmapped since before this task; out of Task 14's file-edit scope to fix here.
+Flagged for Task 15: add `2 Theme/Dark/font/*` to `orphanIgnore`, or add proper
+`dark/font-*` code-token mappings if Dark ever needs a distinct font stack.
+
+### Step 4 — raw-value diff (`pnpm figma:verify-raw`)
+
+**Real finding — Pass-2 has never run at full-file scope before; result diverges
+sharply from the plan's expectation.** Dumped raw values across both ❖ Components
+(492 hits) and 📄 Pages (382 hits) — 874 total, deduped to 874 (no overlap; the two
+pages don't share node ids). `use_figma`'s 20KB per-call payload cap couldn't
+return that in one shot; worked around it with deterministic index-range slicing
+(same idempotent `page.query("*")` traversal, 9 calls of ~100 items each,
+reassembled by concatenation afterward — file untouched throughout, purely a
+tool-output workaround).
+
+Plan expected the diff to show `named-debt.json`'s `accepted` array **shrinking
+net** (the six type ramps + eight spacing fields bound in Tasks 4–5 moving from
+raw to bound). Instead:
+
+- **New raw values: 825**, not a shrinkage.
+- **Stale entries: 28** — all deleted Task 11 masters (`PAGE/POST`, `PAGE/SERIE`,
+  `PAGE/SERIE-POST` template variants, ids `118:86`…`302:3973`, plus two orphaned
+  page-template nodes `32:5`/`185:140`). These match the plan's own prediction
+  exactly ("deleted masters from Task 11 will produce several") — pruned from
+  `named-debt.json` in this pass. `accepted` now 49 (was 77).
+- **Accepted (already justified): 49** — mostly the Task 4 type-ramp text-styles
+  already on record.
+
+Root-caused the 825 "new" figure into two buckets, neither a Task 2–13
+regression:
+
+1. **232 entries (28%) are canvas-organization noise**, not shipped design-system
+   content: node ids under `2944:*`/`2952:*`/`2956:*` are the
+   `workcard-variations`, `workcard-type-explorations`, and `blogpostcard-variations`
+   exploration boards living on the ❖ Components page (unrelated
+   work-card-redesign scratch content, same session — see
+   `.specs/01_active/work-card-redesign/`). `dump-raw-values.md`'s `page.query("*")`
+   has no way to distinguish exploration scratch frames from real masters, so it
+   swept them in. These aren't design debt; they're a scope hole in the dump
+   script.
+2. **593 entries (72%) are first-time coverage**, not new drift: 213 radius + 138
+   stroke + 154 text-style + 45 fill + 43 spacing, spread across real ❖ Components
+   masters (`NavLink`, `ThemeToggle`, `Link/CTA`, `Header`, `Footer`, etc.) that
+   were never swept by Pass 2 before. Every prior `named-debt.json` entry (77
+   before this pass) came from narrow, targeted spot-checks on the `PAGE/POST` /
+   `PAGE/SERIE` detail templates on 📄 Pages — nobody had run Pass 2 across the
+   full ❖ Components masters roster until this call. No Task 12 shadow-image or
+   `Triangle`-halo hits appeared in the new set (plan flagged these as
+   known-acceptable additions if seen — they weren't, so nothing to add there).
+
+**Verdict: real finding, not fixed here.** 593 first-time hits need per-node
+design judgment (bind vs. accept-with-reason) that a verification sweep can't
+respond to responsibly by rubber-stamping — that's Task 15/backlog scope, not
+something to fabricate reasons for in bulk. Did **not** add any of the 593 to
+`named-debt.json` — only pruned the 28 confirmed-stale entries, which needed no
+judgment call. Flagged for Task 15: (a) scope `dump-raw-values.md`/Pass 2 to
+exclude exploration/scratch frames (name pattern `*-variations`/`*-explorations`,
+or move them off the ❖ Components page entirely), (b) schedule a dedicated
+triage pass over the remaining 593 ❖ Components raw values now that they're
+enumerated for the first time.
+
 ### Step 6 — acceptance test (toggle `Home — Desktop` to Tablet mode)
 
 **Real drift found — architecture hole, not fixed here.**
@@ -110,10 +181,25 @@ Task 15's doc-debt pass: `figma-verify/SKILL.md`'s Pass-1 script should resolve
 
 ### Step 9 — summary and remaining scope
 
-Steps 1–5 (the offline dump-based checks) stayed blocked this session — they need
-a manual Figma desktop **File > Export** of Magnet-DS to `~/Downloads/Magnet-DS.fig`,
-which wasn't produced. Steps 6–8 (live `use_figma` checks) are complete, with two
-real findings recorded above (Step 6: stale `textStyleId` on two H2 instances;
-Step 7: `BlogPreviewSection`/`ContactPreviewSection` mobile overflow + a
-`PostArchiveList` row-wrap bug) and one script-limitation false-negative (Step 8).
-Task 14 is not closed — Steps 1–5 and the Step 6/7 fixes remain outstanding.
+Steps 1–2 (offline `.fig` export + `figma:dump`/`figma:verify-responsive`) and
+Steps 3–4 (token diff, raw-value diff) are now complete — see above. Step 5
+(geometry diff) is still blocked: `pnpm geometry:web` produces the web side, but
+how the Figma-side `geometry.figma.json` counterpart gets produced was never
+established, and that investigation didn't happen this session. Steps 6–8 (live
+`use_figma` checks) are complete.
+
+Findings on record, by verdict:
+
+- **real-drift, unfixed**: Step 6 stale `textStyleId` on two H2 instances; Step 7
+  `PostArchiveList` row-wrap bug; Step 4's 593 first-time-swept raw values on ❖
+  Components (needs a dedicated triage pass, not fixed here).
+- **expected-gap**: Step 7 `BlogPreviewSection`/`ContactPreviewSection` mobile
+  overflow (root cause already on record from Task 1 Gate B).
+- **map-update / script-scope, not drift**: Step 3's 3 orphaned
+  `2 Theme/Dark/font/*` variables (`token-map.json` gap); Step 4's 232
+  exploration-scratch raw-value hits (Pass 2 scope hole) and 28 pruned stale
+  `named-debt.json` entries (Task 11 deletions, now removed); Step 8's
+  `hasHeader`/`hasFooter` false-negative (`mc.name` vs `mc.parent.name` bug).
+
+Task 14 is not closed — Step 5 (geometry) and the real-drift fixes above remain
+outstanding.

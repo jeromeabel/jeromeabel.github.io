@@ -1,174 +1,6 @@
 {
   "accepted": [
     {
-      "id": "32:5",
-      "name": "plus",
-      "kind": "fill",
-      "reason": "WorkOverlayCard overlay bg #000 — dark in both themes, no token benefit"
-    },
-    {
-      "id": "185:140",
-      "name": "Icon/CrossBig",
-      "kind": "stroke",
-      "reason": "cross stroke #fff — reads white on the dark overlay in both themes"
-    },
-    {
-      "id": "118:86",
-      "name": "1. Web Performance Tactics Cheatsheet",
-      "kind": "text-style",
-      "reason": "SerieContents current-item emphasis needs 16px + Medium (text-foreground-accent font-medium text-sm md:text-base) — no existing Text Style matches that size+weight pair; left unbound rather than mis-binding to Label/Meta (14px) or Body/Base (Regular)"
-    },
-    {
-      "id": "207:146",
-      "name": "description",
-      "kind": "text-style",
-      "reason": "PostRowCalm description needs 14px Regular IBM Plex Sans (text-muted line-clamp-1 text-sm) — no existing Text Style matches that exact size+weight+family combo; left unbound rather than mis-binding to Label/Meta (14px but Medium) or Body/Small (16px Regular). Fill color is correctly bound to color/muted (VariableID:3:7) — only the text-style (font-size/weight pairing) is unbound."
-    },
-    {
-      "id": "221:2706",
-      "name": "abstract",
-      "kind": "text-style",
-      "reason": "PAGE/POST abstract needs 30px Regular IBM Plex Sans — no existing Text Style matches (Heading/H2 is 30px but SemiBold, Body/Large is 24px Regular); left unbound rather than mis-binding weight or size."
-    },
-    {
-      "id": "241:2810",
-      "name": "abstract",
-      "kind": "text-style",
-      "reason": "same gap as 221:2706 (PAGE/POST 1280-Dark abstract) — 30px Regular has no matching Text Style."
-    },
-    {
-      "id": "245:2822",
-      "name": "abstract",
-      "kind": "text-style",
-      "reason": "same gap as 221:2706 (PAGE/POST 768-Light abstract) — 30px Regular has no matching Text Style."
-    },
-    {
-      "id": "246:2892",
-      "name": "abstract",
-      "kind": "text-style",
-      "reason": "same gap as 221:2706 (PAGE/POST 768-Dark abstract) — 30px Regular has no matching Text Style."
-    },
-    {
-      "id": "247:2962",
-      "name": "abstract",
-      "kind": "text-style",
-      "reason": "same gap as 221:2706 (PAGE/POST 390-Light abstract) — 30px Regular has no matching Text Style."
-    },
-    {
-      "id": "248:3093",
-      "name": "abstract",
-      "kind": "text-style",
-      "reason": "same gap as 221:2706 (PAGE/POST 390-Dark abstract) — 30px Regular has no matching Text Style."
-    },
-    {
-      "id": "247:3098",
-      "name": "mobile-toc-details",
-      "kind": "spacing",
-      "reason": "mobile-toc-details itemSpacing is 6px — no spacing scale variable matches (scale: 4/8/12/16/20/24...); left unbound rather than rounding to spacing/1 (4) or spacing/2 (8)."
-    },
-    {
-      "id": "248:3107",
-      "name": "mobile-toc-details",
-      "kind": "spacing",
-      "reason": "same gap as 247:3098 (PAGE/POST 390-Dark mobile-toc-details) — 6px itemSpacing has no matching spacing scale variable."
-    },
-    {
-      "id": "257:3107",
-      "name": "abstract",
-      "kind": "text-style",
-      "reason": "PAGE/SERIE 1280-Light abstract needs 30px Regular IBM Plex Sans — same class of gap as PAGE/POST abstract (see 221:2706); no matching Text Style."
-    },
-    {
-      "id": "263:3181",
-      "name": "abstract",
-      "kind": "text-style",
-      "reason": "same gap as 257:3107 (PAGE/SERIE 1280-Dark abstract) — 30px Regular has no matching Text Style."
-    },
-    {
-      "id": "265:3253",
-      "name": "H1",
-      "kind": "text-style",
-      "reason": "PAGE/SERIE 768-Light H1 is 48px Bubbler One Regular — larger than Title/H1 (44px); no existing Text Style matches 48px, left unbound rather than mis-binding size."
-    },
-    {
-      "id": "265:3351",
-      "name": "H1",
-      "kind": "text-style",
-      "reason": "same gap as 265:3253 (PAGE/SERIE 768-Dark H1) — 48px Bubbler One Regular has no matching Text Style."
-    },
-    {
-      "id": "270:3399",
-      "name": "H1",
-      "kind": "text-style",
-      "reason": "PAGE/SERIE 390-Light H1 is 36px Bubbler One Regular — no existing Text Style matches 36px (Title/H1 is 44px); left unbound rather than mis-binding size."
-    },
-    {
-      "id": "270:3400",
-      "name": "abstract",
-      "kind": "text-style",
-      "reason": "PAGE/SERIE 390-Light abstract is 20px Regular IBM Plex Sans — no existing Text Style matches 20px (Body/Base is 18px, Body/Large is 24px); left unbound rather than mis-binding size."
-    },
-    {
-      "id": "270:3555",
-      "name": "H1",
-      "kind": "text-style",
-      "reason": "same gap as 270:3399 (PAGE/SERIE 390-Dark H1) — 36px Bubbler One Regular has no matching Text Style."
-    },
-    {
-      "id": "270:3556",
-      "name": "abstract",
-      "kind": "text-style",
-      "reason": "same gap as 270:3400 (PAGE/SERIE 390-Dark abstract) — 20px Regular has no matching Text Style."
-    },
-    {
-      "id": "281:3545",
-      "name": "abstract",
-      "kind": "text-style",
-      "reason": "PAGE/SERIE-POST 1280-Light abstract needs 30px Regular IBM Plex Sans — same class of gap as PAGE/POST abstract (see 221:2706); no matching Text Style."
-    },
-    {
-      "id": "298:3632",
-      "name": "abstract",
-      "kind": "text-style",
-      "reason": "same gap as 281:3545 (PAGE/SERIE-POST 1280-Dark abstract) — 30px Regular has no matching Text Style."
-    },
-    {
-      "id": "299:3713",
-      "name": "abstract",
-      "kind": "text-style",
-      "reason": "same gap as 281:3545 (PAGE/SERIE-POST 768-Light abstract) — 30px Regular has no matching Text Style."
-    },
-    {
-      "id": "300:3794",
-      "name": "abstract",
-      "kind": "text-style",
-      "reason": "same gap as 281:3545 (PAGE/SERIE-POST 768-Dark abstract) — 30px Regular has no matching Text Style."
-    },
-    {
-      "id": "301:3875",
-      "name": "abstract",
-      "kind": "text-style",
-      "reason": "same gap as 281:3545 (PAGE/SERIE-POST 390-Light abstract) — 30px Regular has no matching Text Style."
-    },
-    {
-      "id": "301:4097",
-      "name": "mobile-toc-details",
-      "kind": "spacing",
-      "reason": "same gap as 247:3098 (PAGE/SERIE-POST 390-Light mobile-toc-details) — 6px itemSpacing has no matching spacing scale variable."
-    },
-    {
-      "id": "302:3958",
-      "name": "abstract",
-      "kind": "text-style",
-      "reason": "same gap as 281:3545 (PAGE/SERIE-POST 390-Dark abstract) — 30px Regular has no matching Text Style."
-    },
-    {
-      "id": "302:3973",
-      "name": "mobile-toc-details",
-      "kind": "spacing",
-      "reason": "same gap as 247:3098 (PAGE/SERIE-POST 390-Dark mobile-toc-details) — 6px itemSpacing has no matching spacing scale variable."
-    },
-    {
       "id": "2001:1303",
       "name": "Blog",
       "kind": "text-style",
@@ -516,7 +348,11 @@
     {
       "collection": "3 Responsive",
       "name": "leading/hero-body",
-      "values": { "Desktop": 30, "Tablet": 28, "Mobile": 28 },
+      "values": {
+        "Desktop": 30,
+        "Tablet": 28,
+        "Mobile": 28
+      },
       "reason": "Tailwind's size-paired default leadings (28px on text-lg and text-xl) are not on the leading/* ratio ladder, and Desktop's leading-tight resolves to 24 x 1.25 = 30. Forcing these onto a ratio primitive would change the rendering."
     }
   ]
