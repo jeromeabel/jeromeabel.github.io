@@ -87,6 +87,44 @@ or move them off the ❖ Components page entirely), (b) schedule a dedicated
 triage pass over the remaining 593 ❖ Components raw values now that they're
 enumerated for the first time.
 
+### Step 5 — geometry diff (`pnpm geometry:web` + `diff-geometry.mjs`)
+
+**Blocked — not run this session. Root cause found, execution deferred.**
+
+The plan's own Step 5 text describes comparing Home (`/`) and Blog (`/blog`)
+computed geometry against their Figma frames at 390/1280. The actual tooling
+doesn't do that: `pnpm geometry:web` (`extract-web-geometry.mjs`) reads
+`scripts/pixel-manifest.mjs` — a per-*component* astrobook-story manifest
+(~50 entries: `about-aboutfacts--grid`, `app-header--default`,
+`work-workoverlaycard--overlaycard`, etc.), not a per-*page* Home/Blog
+extraction. So Step 5 as literally written and Step 5 as actually tooled are
+two different checks.
+
+Found how `geometry.figma.json` gets produced: `scripts/figma/dump-tokens.md`
+§"Geometry read (Task 9)" (the README's `dump-bindings.md` cross-reference is
+stale — that file covers variable-binding recovery, not geometry). The
+procedure is manual: `use_figma` reads a fixed prop subset
+(`width`/`borderRadius`/`backgroundColor`/`borderTopColor`/padding+gap for
+auto-layout/`fontSize`+`fontFamily`+`fontWeight`+`color` for TEXT) per node,
+keyed by `pixel-manifest.mjs`'s `id` values, written to
+`{ "<manifestId>": { root: {...} } }`.
+
+That's the blocker: building the target list means mapping each of the ~40
+non-skipped manifest ids to a live Figma node id, and the current 34-master
+❖ Components roster (`inventory.md` §Masters) doesn't cover most of them —
+`about-*`, `contact-*`, `hero-herosocials`/`herotext`, `ui-*` (link, prose,
+p, socialshare, customimage, linknavpost), `work-workmini card`/`overlaycard`
+have no obvious 1:1 master in the current inventory. The manifest predates
+this session's Task 8–11 master consolidation; a fresh remap (or a decision
+to skip components with no master) hasn't happened.
+
+Not attempting the remap in this sweep — it's a dedicated task's worth of
+work (per-component ID lookup + judgment calls on what "no master" means),
+not a verification-sweep step. Flagged for Task 15/backlog: either (a) build
+the Home/Blog full-page geometry check the plan text actually describes, or
+(b) remap `pixel-manifest.mjs` ids to current masters and run the
+component-level check the tooling already supports.
+
 ### Step 6 — acceptance test (toggle `Home — Desktop` to Tablet mode)
 
 **Real drift found — architecture hole, not fixed here.**
@@ -183,9 +221,12 @@ Task 15's doc-debt pass: `figma-verify/SKILL.md`'s Pass-1 script should resolve
 
 Steps 1–2 (offline `.fig` export + `figma:dump`/`figma:verify-responsive`) and
 Steps 3–4 (token diff, raw-value diff) are now complete — see above. Step 5
-(geometry diff) is still blocked: `pnpm geometry:web` produces the web side, but
-how the Figma-side `geometry.figma.json` counterpart gets produced was never
-established, and that investigation didn't happen this session. Steps 6–8 (live
+(geometry diff) is still blocked, but now for a known reason rather than an
+unexplored one: the `geometry.figma.json` procedure exists
+(`dump-tokens.md` §"Geometry read"), but it targets `pixel-manifest.mjs`'s
+~40 per-component ids, most of which have no matching master in the current
+34-master ❖ Components roster — a remap or a plan-text-literal Home/Blog
+page-level check is needed first (see Step 5 above). Steps 6–8 (live
 `use_figma` checks) are complete.
 
 Findings on record, by verdict:
@@ -199,7 +240,9 @@ Findings on record, by verdict:
   `2 Theme/Dark/font/*` variables (`token-map.json` gap); Step 4's 232
   exploration-scratch raw-value hits (Pass 2 scope hole) and 28 pruned stale
   `named-debt.json` entries (Task 11 deletions, now removed); Step 8's
-  `hasHeader`/`hasFooter` false-negative (`mc.name` vs `mc.parent.name` bug).
+  `hasHeader`/`hasFooter` false-negative (`mc.name` vs `mc.parent.name` bug);
+  Step 5's manifest↔master mismatch (tooling-scope gap, not measured drift —
+  no geometry numbers were actually compared).
 
-Task 14 is not closed — Step 5 (geometry) and the real-drift fixes above remain
-outstanding.
+Task 14 is not closed — Step 5 (geometry, needs a scoping decision before it
+can even run) and the real-drift fixes above remain outstanding.
