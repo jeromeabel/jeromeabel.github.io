@@ -94,9 +94,9 @@ enumerated for the first time.
 The plan's own Step 5 text describes comparing Home (`/`) and Blog (`/blog`)
 computed geometry against their Figma frames at 390/1280. The actual tooling
 doesn't do that: `pnpm geometry:web` (`extract-web-geometry.mjs`) reads
-`scripts/pixel-manifest.mjs` — a per-*component* astrobook-story manifest
+`scripts/pixel-manifest.mjs` — a per-_component_ astrobook-story manifest
 (~50 entries: `about-aboutfacts--grid`, `app-header--default`,
-`work-workoverlaycard--overlaycard`, etc.), not a per-*page* Home/Blog
+`work-workoverlaycard--overlaycard`, etc.), not a per-_page_ Home/Blog
 extraction. So Step 5 as literally written and Step 5 as actually tooled are
 two different checks.
 
@@ -260,10 +260,10 @@ Root cause was narrower than the sweep recorded: the `H2` master itself is clean
 **instance-level override on the nested `H2` instance inside two section
 masters**:
 
-| Master                  | Node                              | Was           |
-| ----------------------- | --------------------------------- | ------------- |
-| `BlogPreviewSection`    | `I2041:497;2041:457;2034:211`     | `Heading/H2`  |
-| `ContactPreviewSection` | `I2114:7229;2047:429;2034:211`    | `Heading/H2`  |
+| Master                  | Node                           | Was          |
+| ----------------------- | ------------------------------ | ------------ |
+| `BlogPreviewSection`    | `I2041:497;2041:457;2034:211`  | `Heading/H2` |
+| `ContactPreviewSection` | `I2114:7229;2047:429;2034:211` | `Heading/H2` |
 
 `WorkPreviewSection`'s equivalent node carries no override, which is exactly why
 only "WORK" cascaded during Step 6.
@@ -289,12 +289,12 @@ Fixed on the `PostRow` master (`2124:7937`), all four variants — `line` frame 
 `layoutSizingHorizontal: FILL`, title TEXT → `textAutoResize: HEIGHT` +
 `layoutSizingHorizontal: FILL`:
 
-| Variant                    | `line` id   | title id    |
-| -------------------------- | ----------- | ----------- |
-| `type=post, state=default` | `2123:7767` | `2123:7768` |
-| `type=serie, state=default`| `2124:7940` | `2124:7941` |
-| `type=post, state=hover`   | `2367:7171` | `2367:7172` |
-| `type=serie, state=hover`  | `2367:7178` | `2367:7179` |
+| Variant                     | `line` id   | title id    |
+| --------------------------- | ----------- | ----------- |
+| `type=post, state=default`  | `2123:7767` | `2123:7768` |
+| `type=serie, state=default` | `2124:7940` | `2124:7941` |
+| `type=post, state=hover`    | `2367:7171` | `2367:7172` |
+| `type=serie, state=hover`   | `2367:7178` | `2367:7179` |
 
 **Step 7 re-run:** `Blog — Mobile` and `Blog — Mobile [Dark]` now report
 `overflowCount: 0` (was 64px right on two rows). `Home — Mobile` /
@@ -316,3 +316,104 @@ Desktop frames for the first time: `Blog — Desktop`, `Home — Desktop [Dark]`
 the right edge**. Not touched by either fix above and not caused by them; it is a
 pre-existing decorative bleed that no prior audit covered. Verdict: needs a
 judgment call (intentional bleed vs. drift) — not fixed here.
+
+## Task 14 — Step 5: geometry diff (2026-08-15)
+
+Ran, per the user's decision to do the geometry work rather than descope it.
+
+### What had to be rebuilt first
+
+`geometry.figma.json` on disk was from 2026-07-21 — 28 manifest ids mapped
+against the pre-refactor roster (`ArchiveTable`, `WorkCard`, `PostCard`… none of
+which exist now). It was regenerated from the live file, per
+`scripts/figma/dump-tokens.md` §"Geometry read".
+
+`geometry.web.json` was also regenerated (`pnpm geometry:web`, 40 non-skip
+components). Four ids returned a **null root** — their manifest selectors still
+carried the old Tailwind token names, so the diff had been silently skipping
+them:
+
+| id                                | selector fix                                                                       |
+| --------------------------------- | ---------------------------------------------------------------------------------- |
+| `blog-postlistitem--default`      | `border-muted-border hover:bg-muted-background` → `border-border hover:bg-surface` |
+| `blog-seriepostlistitem--default` | same                                                                               |
+| `work-workgallerycard--square`    | same                                                                               |
+| `ui-socialshare--default`         | `text-muted` → `text-foreground-muted`                                             |
+
+Fixed in `scripts/pixel-manifest.mjs`; re-ran → **40/40 roots resolve**. Worth
+noting the failure mode: a stale selector doesn't error, it produces `root: null`,
+and `diff-geometry.mjs` skips ids with no web root — so drift in exactly the
+component you renamed classes on is the drift you stop seeing.
+
+### Mapping — 19 of 40 ids have a Figma master
+
+The DS models Home + Blog chrome only. 19 manifest ids map 1:1 onto a live
+master (recorded with `_figma` provenance in each `geometry.figma.json` entry);
+the other **21 are not modeled in DS v3** and the diff reports them as "missing
+in Figma":
+
+`about-aboutfacts--grid`, `about-aboutstrip--default`, `about-abouttext--default`,
+`blog-relatedwork--default`, `blog-seriecontents--default`, `blog-topicchips--default`,
+`contact-contactimage--default`, `hero-herosocials--default`, `hero-herotext--default`,
+`ui-customimage--default`, `ui-linknavpost--previous`, `ui-linknavpost--next`,
+`ui-link--default`, `ui-link--external`, `ui-prose--default`, `ui-socialshare--default`,
+`work-archivetable--default`, `work-relatedwriting--default`,
+`work-workgallerycard--square`, `work-workheader--default`,
+`work-workoverlaycard--overlaycard`.
+
+Verdict: **expected-gap**, not drift. Two ids were left unmapped deliberately
+even though a plausible master exists — `hero-herotext--default` (web root is the
+bare `h1`, the `HeroText` master is the title+body wrapper) and `ui-link--default`
+/ `--external` (no unambiguous master among `Link/TextCTA` · `Link/Secondary` ·
+`Link/SecondarySm`). Mapping those would have manufactured false drift.
+
+### Two systematic effects that make most rows non-comparable
+
+Both confirmed by live read, not assumed:
+
+1. **The `❖ Components` page is pinned to `2 Theme` = Dark**
+   (`page.explicitVariableModes` → `VariableCollectionId:3:2` = `Dark`).
+   `diff-geometry.mjs` compares against web **desktop/light**. So every
+   `backgroundColor` / `borderTopColor` row (e.g. ThemeToggle web
+   `rgb(224,238,196)` vs figma `rgb(52,52,52)`) is a mode mismatch.
+   **Verdict: expected-gap.** A fair color diff needs the Figma side dumped with
+   `2 Theme` forced to Light, or the web basis switched to dark.
+2. **Padding lives one level down.** The masters put the gutter on the root and
+   the rhythm on an inner content frame; the web root element carries the rhythm
+   itself. Confirmed: `Header` root pad-x 32 → `HeaderContent` pad-y **24** (web
+   24); `Footer` root 0 → `FooterContainer` pad-y **64**, gap **32** (web 64);
+   `ContactPreviewSection` root pad-top 96 → `ContactPreviewContent` pad-y **80**
+   (web 80); `Hero` root pad-y 128 is section rhythm, `HeroContent` gap **32**
+   (web 32). **Verdict: expected-gap** — root-only comparison is the harness's
+   limitation, and the numbers agree once nesting is accounted for.
+
+`width` is likewise not comparable: web roots are measured in a styleguide story
+that stretches them to the 1280 container (1248px), while masters are authored at
+intrinsic/HUG width. Only fixed-size components (the toggles, `Link/Icon`) give a
+meaningful width row.
+
+### Real drift — 7 items, all root-level comparable, none fixed here
+
+| #   | Component                                 | Code                | Figma              |
+| --- | ----------------------------------------- | ------------------- | ------------------ |
+| 1   | `SerieCard` inner `Content`               | padding 24, gap 8   | padding 20, gap 20 |
+| 2   | `SerieCard` root                          | radius 0            | radius 8           |
+| 3   | `PostRow` root                            | pad-x 0, gap 32     | pad-x 4, gap 4     |
+| 4   | `WorkCardPreviewSmall`                    | gap 8               | gap 16             |
+| 5   | `WorkPreviewSection` (`WorksStrip`)       | gap 32 (`lg:gap-8`) | gap 48             |
+| 6   | `BlogPreviewSection` (`SelectedWriting`)  | gap 32              | gap 48             |
+| 7   | `Link/Secondary` pad-x / `Link/Icon` size | 24 / 56×56          | 20 / 40×40         |
+
+Item 7's size half is the same finding as `.specs/00_backlog/figma-mobile-touch-targets.md`
+(40px master vs the 56px the code renders) — fold it in there rather than
+duplicating.
+
+### Against the plan's stated expectation
+
+Step 5 expected "deltas **only** at the two design-§6 debt items — the header
+hamburger and the serie grid column count". Neither is visible to this harness at
+all: both are structural (a node's presence, a grid's child count), and
+`diff-geometry.mjs` only reads a root prop subset. So that expectation was
+mis-specified, and the seven items above are the real output. **Task 14 Step 5 is
+run and recorded; the seven drift items are a repair worklist, not a blocker
+resolved in this pass.**

@@ -123,7 +123,7 @@ export const MANIFEST = [
       "/styleguide/dashboard/src/components/blog/post-list-item/default",
     liveUrl: `${BASE}/blog`,
     selector:
-      'a[class="border-muted-border hover:bg-muted-background group relative flex flex-row items-center justify-between gap-8 overflow-hidden border-b py-4"]',
+      'a[class="border-border hover:bg-surface group relative flex flex-row items-center justify-between gap-8 overflow-hidden border-b py-4"]',
     masks: [],
     wrapper: "container",
   },
@@ -209,7 +209,7 @@ export const MANIFEST = [
       "/styleguide/dashboard/src/components/blog/serie-post-list-item/default",
     liveUrl: `${BASE}/blog/web-performance`,
     selector:
-      'a[class="border-muted-border hover:bg-muted-background group relative flex flex-row items-center justify-between gap-8 overflow-hidden border-b py-4 text-lg"]',
+      'a[class="border-border hover:bg-surface group relative flex flex-row items-center justify-between gap-8 overflow-hidden border-b py-4 text-lg"]',
     masks: [],
     wrapper: "container",
   },
@@ -451,7 +451,7 @@ export const MANIFEST = [
     id: "ui-socialshare--default",
     storyPath: "/styleguide/dashboard/src/components/ui/social-share/default",
     liveUrl: `${BASE}/blog/adding-likes-to-a-static-astro-site`,
-    selector: 'div[class="text-muted flex items-center gap-2"]',
+    selector: 'div[class="text-foreground-muted flex items-center gap-2"]',
     masks: [],
     wrapper: "container",
   },
@@ -495,7 +495,7 @@ export const MANIFEST = [
     // 3 equivalent card instances render on /work (workFeatured=gallery-3col-1x1);
     // pixel-check should take the first match.
     selector:
-      'a[class="border-muted-border hover:bg-muted-background group flex flex-col border outline-offset-4 outline-black focus:outline-2 dark:outline-white"]',
+      'a[class="border-border hover:bg-surface group flex flex-col border outline-offset-4 outline-black focus:outline-2 dark:outline-white"]',
     masks: ["img"],
     wrapper: "container",
   },
