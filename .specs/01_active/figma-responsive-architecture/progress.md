@@ -417,3 +417,69 @@ all: both are structural (a node's presence, a grid's child count), and
 mis-specified, and the seven items above are the real output. **Task 14 Step 5 is
 run and recorded; the seven drift items are a repair worklist, not a blocker
 resolved in this pass.**
+
+## Task 14 — Step 5 follow-up: the 7 drift items applied (2026-08-15)
+
+All seven applied to **masters only**, and every number was bound to a
+`1 Primitives` variable rather than typed raw, so the fixes add no named-debt.
+23 nodes mutated:
+
+| #   | Node(s)                                                  | Change                                              | Bound to                     |
+| --- | -------------------------------------------------------- | --------------------------------------------------- | ---------------------------- |
+| 1   | `SerieCard > Content` `2119:7598`, `2367:7195`            | padding 20→24, gap 20→8                             | `spacing/6`, `spacing/2`     |
+| 2   | `SerieCard` root `2119:7516`, `2367:7192`                 | cornerRadius 8→0                                    | `radius/none`                |
+| 3   | `PostRow` ×4 variants + their inner row frames            | root pad-x 4→0, root gap 4→32, row-frame gap 4→32   | `spacing/0`, `spacing/8`     |
+| 4   | `WorkCardPreviewSmall` `2045:378`                         | gap 16→8                                            | `spacing/2`                  |
+| 5   | `WorkPreviewSection` Desktop `2045:428` + list `2045:426` | gap 48→32, list 40→32                               | `spacing/8`                  |
+| 5b  | `WorkPreviewSection` Mobile `2970:4362` + list `2970:4364`| gap 48→16, list 40→16 (`gap-4` at mobile)           | `spacing/4`                  |
+| 6   | `BlogPreviewSection` `2041:560` + content `2041:498`      | gap 48→32, content 40→32                            | `spacing/8`                  |
+| 7   | `Link/Secondary` `2041:276`, `2041:279`                   | pad-x 20→24                                         | `spacing/6`                  |
+| 7b  | `Link/Icon size=normal` `2093:441`, `2095:445`            | 40×40→56×56                                         | `spacing/14`                 |
+
+`radius/none` and the full `radius/*` scale already existed in `1 Primitives` —
+the SerieCard radius is now a token reference, not a hardcoded 0.
+
+**Verified**: fresh Figma re-dump → `geometry.figma.json`, then
+`node scripts/figma/diff-geometry.mjs geometry.web.json geometry.figma.json`.
+All seven rows are gone from the worklist. What remains is only the three
+systematic non-comparabilities already documented above (stretched story
+`width`, padding that lives one level below the root, and `gap: normal` on
+non-flex web roots) plus the Dark page-mode color rows.
+
+### Mapping correction found while verifying: `PostRowCalm` is not `PostRow`
+
+Fixing item 3 flipped `blog-postrowcalm--calmrow` from clean to drifted, which
+exposed a bad entry in the id→master mapping. Resolved by evidence, not
+preference: all **32** instances of the `PostRow` master live in
+`Blog — {Desktop,Mobile}{,[Dark]} > … > PostArchiveList > BlogPostRows` and
+nowhere else, so the master models the **blog archive row**, which in code is
+`PostListItem.astro` (`flex-row … gap-8 py-4`, no pad-x). `PostRow.astro` /
+`PostRowCalm.astro` are a different component (`flex-col gap-1 px-1 py-4`) used
+by `SelectedWriting` and `RelatedWriting` on Home. Item 3's fix is therefore
+correct, and `blog-postrowcalm--calmrow` was dropped from the mapping — it now
+reports honestly as "missing in Figma".
+
+**New gap this surfaces**: Figma's `BlogPreviewContent` is HORIZONTAL and holds
+no `PostRow` instances, while code's `SelectedWriting` renders a 2-column grid of
+`PostRow.astro` rows. The Home writing-preview row has no master. → backlog.
+
+**Also deferred (design decision, out of Step 5's scope)**: `SerieCard` splits
+padding differently from code. Figma = root pad 0 / `Content` pad 24 (cover bleeds
+to the card edge); code = `p-4 lg:p-6` on the whole card with `gap-2` between
+cover and text. The numbers now match; the *structure* does not. Pick one
+deliberately rather than letting the prover drive it.
+
+### Verdict on the 21 unmapped manifest ids
+
+Correcting the earlier claim that they "aren't modeled in DS v3" — that was the
+result of searching only ❖ Components. A full five-page sweep finds **5 of the
+21 do exist**, as page frames and Docs specimen cells rather than as masters:
+`HeroText` (master, excluded earlier on scope grounds), `PostMetadataTopic`
+(≈ `TopicChips`), `ShareIconsRow` (≈ `SocialShare` / `HeroSocials`),
+`ContactImage (relative flex-1)`, and `PostArchiveList` (≈ `ArchiveTable`).
+The remaining ~16 (`about-*`, `Prose`, `CustomImage`, `LinkNavPost`,
+`WorkGalleryCard`, `WorkOverlayCard`, `WorkHeader`, `RelatedWork`,
+`RelatedWriting`, `SerieContents`, `ui-link` default/external) are genuinely
+absent, and the reason is scope, not oversight: DS v3 covers Home + Blog index,
+and the detail templates that would have carried prose/TOC/nav-post were deleted
+in Task 11. Not drift — a documented coverage boundary.
