@@ -4,6 +4,11 @@ created: 2026-07-28
 
 # Cover Studio — code & UX/UI review findings
 
+> **Superseded 2026-08-16.** The open items here were re-verified against
+> cover-studio `a52df69`; 24 of them are closed and two got worse. The live,
+> ordered backlog now lives **in the cover-studio repo** at `docs/BACKLOG.md`.
+> Statuses below are as of 2026-07-29 and are no longer maintained.
+
 **Status:** first pass done 2026-07-28 · fixes 1–6 landed · 7–28 open backlog ·
 second pass done 2026-07-28 (multi-agent, post fixes 1–6) · #29–#52 added below ·
 dirty-tracking/undo tranche (#29, #30, #31, #44, #50) landed 2026-07-29
