@@ -7,7 +7,14 @@ created: 2026-07-28
 > **Superseded 2026-08-16.** The open items here were re-verified against
 > cover-studio `a52df69`; 24 of them are closed and two got worse. The live,
 > ordered backlog now lives **in the cover-studio repo** at `docs/BACKLOG.md`.
-> Statuses below are as of 2026-07-29 and are no longer maintained.
+> Statuses in each item's body are as of 2026-07-29 and are no longer maintained.
+>
+> Headings carry the outcome instead. `[FIXED 2026-07-29]` is the dirty/undo
+> tranche; `[CLOSED 2026-08-16]` was verified closed by the three-surface
+> redesign; `[CLOSED 2026-08-17]` was closed by the T1 hardening tier
+> (cover-studio `64316f7`); `[PARTLY CLOSED …]` names the sub-items that
+> landed and leaves the rest to `docs/BACKLOG.md`. An unmarked heading means
+> still open there — under a new `B<n>` number.
 
 **Status:** first pass done 2026-07-28 · fixes 1–6 landed · 7–28 open backlog ·
 second pass done 2026-07-28 (multi-agent, post fixes 1–6) · #29–#52 added below ·
@@ -114,7 +121,7 @@ settings object JSON-encoded into the URL (~2–4 KB). The blog's version used P
 this reason. Works today, but it sits near URL/header limits and puts the full payload into
 every request log. Move to POST + body, or hand out a settings handle and fetch by key.
 
-### 10. No request body cap
+### [CLOSED 2026-08-17] 10. No request body cap
 
 `src/server/api.ts:52-65` — `readJson` accumulates chunks with no size limit. Loopback-only,
 so low risk, but it's two lines to bound.
@@ -125,7 +132,7 @@ so low risk, but it's two lines to bound.
 `?refresh` param on `/api/data`, or a watcher on `blogRoot/src/content`, would be cheap. Now
 documented in the README's Known limits and surfaced in the new empty state (#5).
 
-### 12. Per-entry `resolve()` in a template
+### [SUPERSEDED 2026-08-16 → B17] 12. Per-entry `resolve()` in a template
 
 `EntryRail.vue:58-63` — `isNeverRendered()` is called from the template, once per entry per
 render pass, and each call runs `resolveSettings`, which `structuredClone`s the whole
@@ -151,12 +158,12 @@ through the UI (the accent Select has fixed options), and this is a loopback sin
 — but `data/illustration.json` is git-tracked and hand-editable, so escaping the value in
 `meshSvg` is worth doing.
 
-### 16. No redo
+### [CLOSED 2026-08-16] 16. No redo
 
 `studio.ts` has a one-way snapshot stack. Ctrl+Shift+Z / Ctrl+Y needs a second stack that
 `snapshot()` clears on a fresh edit.
 
-### 17. No save conflict detection
+### [CLOSED 2026-08-17] 17. No save conflict detection
 
 `studio.ts`'s `save()` writes unconditionally. Two dev servers, or a hand-edit while the
 Studio is open, silently loses one side. A stored mtime/hash compared server-side before write
@@ -180,43 +187,43 @@ The blog repo has Prettier. Adding Prettier + `eslint-plugin-vue` here would hav
 
 ## Open — UX/UI
 
-### 20. Preview is locked to `thumb`
+### [CLOSED 2026-08-16] 20. Preview is locked to `thumb`
 
 `PreviewStage.vue`'s `PREVIEW_SIZE` is a hardcoded constant. The blog's `fx.mjs` had a size
 selector. You tune at 575×300 with no way to see `cover` or `square` short of _Render exact_
 or the Crop tab's preview boxes. Biggest functional regression from the port.
 
-### 21. No way to cancel a batch render
+### [CLOSED 2026-08-16] 21. No way to cancel a batch render
 
 `RunDrawer` deliberately leaves Run clickable so a second click surfaces the 409, but there's
 no abort. A long job means killing the dev server. `jobs.ts` holds the `ChildProcess` already
 — a `DELETE /api/job` that sends SIGTERM is most of the work.
 
-### 22. Crop editing is crammed into the 340px sidebar
+### [CLOSED 2026-08-16] 22. Crop editing is crammed into the 340px sidebar
 
 The focal-point image is the primary affordance of that tab and it's the narrowest thing on
 screen; the 280px preview boxes stack single-file. Crop wants the centre stage — swap
 `PreviewStage` out for the crop editor while that tab is active, or make it a full-width mode.
 
-### 23. Dark mode is dead code
+### [CLOSED 2026-08-16] 23. Dark mode is dead code
 
 `style.css:99` defines `@custom-variant dark`, `:181` defines the `.dark` token block, and
 components use `dark:` utilities throughout — but nothing ever puts `.dark` on `<html>` and
 `index.html` has no theme script. Either wire a toggle (+ `prefers-color-scheme` default,
 mirroring the blog's `theme.ts`) or delete the tokens.
 
-### 24. Accent options hardcoded
+### [CLOSED 2026-08-16] 24. Accent options hardcoded
 
 `TopBar.vue:102-103` hardcodes `teal` and `coral` as `<SelectItem>`s. Source of truth is
 `SETTINGS.palette.accents` — a third accent would be invisible in the UI. Derive the list.
 
-### 25. Panel state is discarded on style change
+### [CLOSED 2026-08-16] 25. Panel state is discarded on style change
 
 `ControlsPanel.vue:41` keys each group on `` `${group}:${isActive(group)}` ``, so every group
 whose active-ness flips gets remounted, throwing away the user's manual open/closed state and
 any focus inside it. Drive the dimming with a class instead of a remount.
 
-### 26. Accessibility gaps
+### [PARTLY CLOSED 2026-08-16 — b, d] 26. Accessibility gaps
 
 - Knob labels are `<span>`s with no `for` / `aria-labelledby` (`KnobRow.vue:159`) — sliders
   and inputs are unlabelled to screen readers.
@@ -228,7 +235,7 @@ any focus inside it. Drive the dimming with a class instead of a remount.
 - Blob dragging is pointer-only — no keyboard path (the MeshPanel rows are the workaround, but
   nothing says so).
 
-### 27. Silent rejection of malformed array edits
+### [CLOSED 2026-08-16] 27. Silent rejection of malformed array edits
 
 `KnobRow.vue`'s `setText()` drops an edit whose comma-split arity doesn't match the schema
 default (correct — it stops a `colorPair` collapsing to one colour), but shows nothing. The
@@ -311,7 +318,7 @@ nothing". Same feedback hole for **Render exact** (`:153-165`): no busy state; p
 and failed look identical. Fix: generation counter checked in `onload`/`onerror`, plus a
 visible pending/error state (dim + spinner, inline error strip, button busy).
 
-### 33. Crops schema rejects zoom-only records the UI legitimately writes
+### [CLOSED 2026-08-16] 33. Crops schema rejects zoom-only records the UI legitimately writes
 
 `validate.mjs:34-51` — `resolveCrop` supports partial records (focus defaults to `[0.5,0.5]`),
 and CropTab's `writeTarget`/`onZoomChange` write exactly those: zoom slider only →
@@ -323,7 +330,7 @@ crashes `pnpm render`. Also `{focus, sizes:{thumb:{zoom}}}` only passes via `dir
 passthrough, leaving size overrides unvalidated. Fix: make `focus` optional in both branches
 (and validate size-override shapes for real).
 
-### 34. Empty Run-drawer selections invert to "render everything"
+### [CLOSED 2026-08-16] 34. Empty Run-drawer selections invert to "render everything"
 
 `RunDrawer.vue:147-151` + `jobs.ts:95-97` — unchecking all styles sends `styles: []`;
 `if (body.styles?.length)` treats `[]` as _no filter_, so every style renders. Same for sizes.
@@ -345,7 +352,7 @@ arrays, or freeze-what-you-preview.
 
 ## Minor — code
 
-### 36. Job runner: stale child mutates the next job's state
+### [CLOSED 2026-08-16] 36. Job runner: stale child mutates the next job's state
 
 `jobs.ts:125-167` — child handlers close over the module-level `job` binding. Between a spawn
 failure's `error` and `close` events (separate loop turns — verified), a retry POST replaces
@@ -353,7 +360,7 @@ failure's `error` and `close` events (separate loop turns — verified), a retry
 releasing the single-job lock while its child still runs. Fix: capture `const state = job` at
 spawn, guard handlers with `if (job !== state) return`.
 
-### 37. Corrupt `.manifest.json` bricks all rendering
+### [CLOSED 2026-08-17] 37. Corrupt `.manifest.json` bricks all rendering
 
 `render.mjs:30-35` — `openManifest` parses unguarded; a truncated manifest (kill mid-write —
 `flushManifest` is a plain `writeFileSync`) makes every CLI render and studio job throw before
@@ -362,20 +369,20 @@ agree. Same family: `store.mjs:13-18,36-38` writes `illustration.json`/`crops.js
 tmp+rename, so a torn write destroys exactly the hand-tuned data the boot-refusal policy
 protects (git-tracked, so recoverable — still worth the two-line atomic write).
 
-### 38. One stray directory under blog content kills boot
+### [CLOSED 2026-08-17] 38. One stray directory under blog content kills boot
 
 `content.mjs:9-21` — `readFileSync(<dir>/index.md)` for every directory under `post/`/`work/`;
 a drafts or assets folder without `index.md` throws ENOENT into the dev-server boot and
 crashes `pnpm render`. Skip dirs without `index.md` (or guard per-entry).
 
-### 39. Header-then-read crash path in `/api/layer` and `/img`
+### [CLOSED 2026-08-17] 39. Header-then-read crash path in `/api/layer` and `/img`
 
 `api.ts:157-158, 200-209` — `writeHead(200)` before `readFileSync`; if the file vanishes in
 between (the race the comment claims to handle), the catch's second `writeHead` throws
 `ERR_HTTP_HEADERS_SENT` — in the async `/api` middleware that's an unhandled rejection (dev
 server crash). Read before writing headers.
 
-### 40. Prototype-chain lookups bypass the 404/400 guards
+### [CLOSED 2026-08-17] 40. Prototype-chain lookups bypass the 404/400 guards
 
 `render.mjs:86-87,116-117`, `api.ts:92,138-139` — `bySlug["constructor"]` /
 `STYLES["constructor"]` resolve `Object.prototype` members and pass the truthiness guards:
@@ -383,7 +390,7 @@ renders mesh PNGs for a nonexistent slug (littering `.preview/` with `.bg_undefi
 instead of 400 for the style. Loopback-only, no security impact — use `Object.hasOwn` or
 null-prototype maps.
 
-### 41. `cropBox` breaks for zoom < 1; zoom unbounded outside the UI
+### [CLOSED 2026-08-16] 41. `cropBox` breaks for zoom < 1; zoom unbounded outside the UI
 
 `geometry.mjs:13-18` — zoom 0.5 yields negative offsets + oversize boxes (verified numbers),
 zoom 0 yields `Infinity` dims → convert error. `validate.mjs:46` is bare `z.number()`; the UI
@@ -397,7 +404,7 @@ chains on the Vite main thread. Every preview refresh stalls HMR, `/api/job` pol
 drawer's progress visibly freezes), and all other requests. The job runner already shows the
 async pattern; the preview path needs it (spawn + await, plus a tiny queue).
 
-### 43. Run-drawer poll can spin forever and misses fast/failed jobs
+### [CLOSED 2026-08-16] 43. Run-drawer poll can spin forever and misses fast/failed jobs
 
 `RunDrawer.vue:104-125,142-159` — completion needs an observed `running → !running`
 transition. Two paths never produce one: `startJob`'s sync-throw guard returns
@@ -414,7 +421,7 @@ _another_ checkpoint, compounding the loss (no redo stack, #16). Also no `e.repe
 holding Ctrl+Z past an empty stack stacks "Nothing to undo" toasts per key-repeat. Guard both;
 fold into the #16 redo work.
 
-### 45. Assorted store-consistency nits
+### [PARTLY CLOSED — a 2026-08-16; c, d, e 2026-08-17; b open] 45. Assorted store-consistency nits
 
 - `savePreset` over the entry's own linked preset changes effective settings but doesn't bump
   `lastEditAt` — a previously-rendered exact overlay stays up, unflagged stale
@@ -434,7 +441,7 @@ fold into the #16 redo work.
 
 ## Major — UX
 
-### 46. Presets are a one-way door
+### [CLOSED 2026-08-16] 46. Presets are a one-way door
 
 `PresetsMenu.vue` — the Select has no "none"/unlink item and nothing else clears `entry.type`;
 trying a preset "just to see" permanently links it (escape = hand-edit `illustration.json`,
@@ -442,7 +449,7 @@ or a Ctrl+Z that per #31 may revert something else). No delete/rename either, an
 an untuned entry happily creates an empty `{}` preset with a success toast. Preset lifecycle:
 none-option, delete, rename, guard empty saves.
 
-### 47. Seed controls disagree about materialization
+### [CLOSED 2026-08-16] 47. Seed controls disagree about materialization
 
 `TopBar.vue:84-94` vs `MeshPanel.vue:80-96` — MeshPanel disables seed/reroll once blobs are
 materialized ("manual blobs — seed inactive"); TopBar's identical seed field and dice button
@@ -451,7 +458,7 @@ stay live: rerolling visibly does nothing to the mesh yet dirties the doc with a
 
 ## Minor — UX
 
-### 48. Feedback and copy nits
+### [PARTLY CLOSED 2026-08-16 — a, c, d, e] 48. Feedback and copy nits
 
 - SaveBar's "Show changes" renders the `types` row as `types: [object Object] →
 [object Object]` (`SaveBar.vue:20-22` + `studio.ts:206-212`) — summarize ("preset 'docs'
@@ -469,7 +476,7 @@ stay live: rerolling visibly does nothing to the mesh yet dirties the doc with a
   (`PreviewStage.vue:233-239`); the no-image copy in CropTab renders twice
   (`CropTab.vue:78, 277-281`).
 
-### 49. The webfont never applies
+### [CLOSED 2026-08-16] 49. The webfont never applies
 
 `style.css:2` imports family `Geist`; `:107` sets `--font-sans: 'Geist Variable'` — the name
 never matches (verified), so the app renders in fallback sans-serif and the font download is
@@ -487,7 +494,7 @@ dead weight. One-word fix.
 - CLAUDE.md/README claim a blog checkout is a hard prerequisite for `pnpm test` — no longer
   true after fix #1 (verified against `blogRoot=/nonexistent/blog`).
 
-### 51. The new logic has no tests
+### [PARTLY CLOSED 2026-08-16] 51. The new logic has no tests
 
 All store-level, none blocked by the known "no component tests" debt (#18): unified undo
 cross-domain semantics (knob → crop → undo reverts the crop), `undo()`'s boolean contract,
@@ -496,7 +503,7 @@ only exercised _incidentally_ on machines without the blog checkout), NumberInpu
 state machine (the original `0.` bug class), App boot-state branches + `fetchData`'s
 throws-on-non-2xx contract.
 
-### 52. Housekeeping
+### [CLOSED 2026-08-16] 52. Housekeeping
 
 First-pass status line said "7–26" while items ran to #28 (fixed in this edit).
 
