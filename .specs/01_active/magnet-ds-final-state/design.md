@@ -150,10 +150,10 @@ Legend: 🆕 new master · ♻ rename/merge · 📎 Figma-only · container ✅ 
 | `blog/PostMetadataTime` | `type=default\|no-date\|day` | ⬜ 📎 | |
 | `blog/PostMetadataTopic` | `type=post\|serie` | ⬜ 📎 | |
 | `blog/SerieMeta` | — | ⬜ 📎 | |
-| `blog/TableOfContents` 🆕 | — | ❌ | promote from detail template |
-| `blog/SerieContents` 🆕 | — | ❌ | promote from detail template |
-| `blog/PostNav` ♻🆕 | — | ❌ | prev/next; code `ui/LinkNavPost` renames + moves |
-| `blog/RelatedWork` 🆕 | — | ❌ | |
+| `blog/TableOfContents` ♻ | — | ❌ | existing master, rename only |
+| `blog/SerieContents` ♻ | — | ❌ | existing master, rename only |
+| `blog/PostNav` ♻ | — | ❌ | existing `LinkNavPost` master; code `ui/LinkNavPost` renames + moves |
+| `blog/RelatedWork` ♻ | — | ❌ | existing master, rename only |
 
 ### work/
 
@@ -162,8 +162,8 @@ Legend: 🆕 new master · ♻ rename/merge · 📎 Figma-only · container ✅ 
 | `work/WorkCard` ♻ | `variant=catalogue\|case × state` | ❌ | anatomy owned by the WorkCard final spec; hover gap closed |
 | `work/WorkPreview` ♻ | `breakpoint` | ✅ 16 | Home section; code `WorksPreview` rename |
 | `work/ArchiveTable` 🆕 | `breakpoint` | ❌ | /work ledger |
-| `work/WorkHeader` 🆕 | — | ❌ | detail page |
-| `work/RelatedWriting` 🆕 | — | ❌ | detail page |
+| `work/WorkHeader` ♻ | — | ❌ | existing master, rename only |
+| `work/RelatedWriting` ♻ | — | ❌ | existing master, rename only |
 
 ### home/
 
@@ -228,8 +228,11 @@ Total ≈ 42 masters across 6 domains.
 | Serie post | Post-detail stack + `blog/SerieContents` (position per current template) |
 | Work detail | `work/WorkHeader` → `ui/Prose` → `work/RelatedWriting` |
 
-Detail masters = promotion of the 4 existing templates into this shell with components
-swapped to final masters — not redesigns.
+Detail masters = **rebuilds**, not promotions: the 2026-07 detail templates
+(`PAGE/POST` etc.) were pruned from the file (confirmed 2026-08-13 — node IDs return
+null; 📄 Pages holds only Home/Blog frames). The archived build knowledge
+(`.claude/skills/figma-verify/knowledge/figma-ds-file.md`, `named-debt.json` entries)
+feeds the rebuild; layouts are not redesigned, they mirror the live routes.
 
 ### Canvas layout & rules
 
@@ -270,8 +273,9 @@ Successor of `TODO_ContainerPatternAnalysis.md`; that file dies once this ships.
 6. New masters: `work/WorkCard` catalogue/case (+ hover), `work/ArchiveTable`,
    `home/ContactPreview` mobile, `ui/Prose`, `ui/SocialShare`, detail components,
    `about/*`.
-7. Page masters: Work + About built; 4 detail templates promoted; `PageContentContainer`
-   wrapper removed; dark rows rebuilt.
+7. Page masters: Work + About built; 4 detail masters rebuilt (templates were pruned —
+   use archived build knowledge in `figma-ds-file.md`); `PageContentContainer` wrapper
+   removed; dark rows rebuilt.
 8. Docs: 5 final docs; rationale prose moved to Decisions.
 9. Cleanup: explorations archived, debris deleted.
 
