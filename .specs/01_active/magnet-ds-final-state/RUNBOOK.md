@@ -52,8 +52,8 @@ repo session.
 | [x]  | P1-T07   | NavLink + PostCard merged, 1 straggler left for P2-T04     |
 | [x]  | P1-T08   | container recipe: 16 / 1280 / centred, 1 bandless variant  |
 | [x]  | R1.5     | no debt to prune — drift was never allowlisted; commit     |
-| [ ]  | P1-T09   | **GATE** — phase-1 exit, Figma half                        |
-| [ ]  | R1.6     | **GATE** — phase-1 exit, repo half                         |
+| [x]  | P1-T09   | **GATE** — phase-1 exit, Figma half                        |
+| [x]  | R1.6     | **GATE** — phase-1 exit, repo half                         |
 
 ## Phase 2 — components
 
@@ -61,8 +61,8 @@ Do not start before R1.6 passes.
 
 | Done | Step   | What                                                               |
 | ---- | ------ | ------------------------------------------------------------------ |
-| [ ]  | P2-T01 | **GATE** — 31 existing masters present under canon names           |
-| [ ]  | P2-T02 | `ui/Link/external`                                                 |
+| [x]  | P2-T01 | **GATE** — 31 existing masters present under canon names           |
+| [x]  | P2-T02 | `ui/Link/external`                                                 |
 | [ ]  | P2-T03 | `ui/Prose`, `ui/SocialShare`                                       |
 | [ ]  | P2-T04 | `work/WorkCard` — 8 variants                                       |
 | [ ]  | R2.2   | declare T03 + T04 placeholder raws in `named-debt.json`            |

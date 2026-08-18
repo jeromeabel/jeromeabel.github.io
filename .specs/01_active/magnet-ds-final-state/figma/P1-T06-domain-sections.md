@@ -64,17 +64,21 @@ for (const name of ORDER) {
   const s = page.children.find((c) => c.type === "SECTION" && c.name === name);
   if (!s) continue;
   const kids = s.children.slice().sort((a, b) => a.name.localeCompare(b.name));
-  let rowH = 0, x = PAD, y = PAD, col = 0;
+  let rowH = 0, x = PAD, y = PAD, col = 0, maxRight = PAD, maxBottom = PAD;
   for (const k of kids) {
     k.x = x; k.y = y;
+    maxRight = Math.max(maxRight, x + k.width);
+    maxBottom = Math.max(maxBottom, y + k.height);
     rowH = Math.max(rowH, k.height);
     col++;
     if (col === COLS) { col = 0; x = PAD; y += rowH + GAP; rowH = 0; }
     else { x += Math.max(CELL, k.width) + GAP; }
   }
-  const w = PAD * 2 + COLS * CELL + (COLS - 1) * GAP;
-  const h = y + rowH + PAD;
-  s.resizeWithoutConstraints(w, Math.max(h, 400));
+  // Section box follows real content extent — the nominal 4x520 grid is only a floor.
+  // A master wider than CELL takes a wider slot, so a fixed width crops it (found in P2-T02).
+  const w = Math.max(maxRight + PAD, PAD * 2 + COLS * CELL + (COLS - 1) * GAP);
+  const h = Math.max(maxBottom + PAD, 400);
+  s.resizeWithoutConstraints(w, h);
   s.x = 0; s.y = sectionY;
   sectionY += s.height + 160;
   laid.push({ section: name, count: kids.length, w: Math.round(s.width), h: Math.round(s.height) });

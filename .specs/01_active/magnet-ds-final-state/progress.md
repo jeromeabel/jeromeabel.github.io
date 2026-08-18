@@ -570,3 +570,76 @@ removed and the four masters collapsed into two took their raw values with them.
 **Not done here:** re-baselining `named-debt.json` against current ids. That is a judgement pass
 over ~560 rows — bind or accept, one at a time — and it belongs in its own task, not inside a
 verification gate. `figma:verify-raw` is warn-only and exits 0, so it does not block phase 2.
+
+## P2-T01 — phase-2 entry gate (2026-08-18)
+
+- STATUS: **DONE** — gate passes, phase 2 open.
+- RESULT: `count: 32` · `missing: []` · `legacy: []` · `alreadyPresent: []` · `absorbSource: true`
+  · `sections: [app, ui, blog, work, hero, contact, about]`.
+- DEVIATIONS: ran the brief from the repo session (Figma MCP is attached here), not a second
+  session. Added `setCurrentPageAsync` — the brief's `loadAsync()` alone leaves `findAll` on an
+  unloaded page in `use_figma`. Also returned the section list, which the acceptance clause asks
+  about but the Step 1 snippet never collected.
+- UNBOUND: none (read-only step).
+
+**Phase-2 baseline roster** (32 masters, live ids — later briefs resolve by name, these are hints):
+
+| domain    | masters                                                                                                                                                                                    |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `app` 6   | ThemeToggle `16:11` · MotionToggle `16:12` · Footer `2969:432` · Header `2981:546` · HeaderDrawer `2981:4486` · NavLink `3093:553`                                                          |
+| `ui` 10   | Icon `461:6204` · Link/primary `2012:6179` · Link/secondary `2041:275` · Link/textLink `2041:313` · Link/iconOnly `2093:6332` · Link/inline `2350:737` · H2 `2034:213` · SectionTitle `2041:465` · H1 `2119:7406` · PageDescription `2119:7440` |
+| `blog` 9  | PostList `2977:4382` · SerieList `2980:499` · BlogPreview `3041:1977` · PostMetadataTime `2040:482` · PostMetadataTopic `2371:10414` · SerieMeta `2375:10662` · PostRow `2124:7937` · SerieCard `2367:7205` · PostCard `3093:5376` |
+| `work` 2  | WorkPreview `2970:4368` · WorkCardPreviewSmall `2045:378` (absorb source for P2-T04)                                                                                                        |
+| `hero` 3  | HeroText `2012:6142` · HeroAnimation `2012:315` · Hero `2969:412`                                                                                                                           |
+| `contact` 2 | ContactContent `131:101` · ContactPreview `2114:7281`                                                                                                                                      |
+| `about` 0 | empty section, P2-T10 fills it                                                                                                                                                             |
+
+Merge results from P1-T07 read back intact: `app/NavLink` carries `type × state` (6 variants) and
+`blog/PostCard` carries `size × breakpoint × state` (8 variants). `contact/ContactPreview` is a
+plain `COMPONENT` — P2-T06 is the brief that gives it a `breakpoint` axis.
+
+## P2-T02 — `ui/Link/external` (2026-08-18)
+
+- STATUS: **DONE**
+- RESULT: `ui/Link/external` `3103:513` in section `ui`, `state=default` / `state=hover`,
+  120×40 each. `pad [16,8,16,8]` · `radius 9999` · `gap 4` · `strokeWeight 1` ·
+  `dash [4,4]` default / `[]` hover · stroke paint bound both variants · fill bound on hover only,
+  no fill on default. Children `TEXT:Website` + `INSTANCE:icon` (`icon=arrow-up-right`, 24×24).
+  Gate D after the corrective: `overlaps []` · `cropped []` · `strays []` · `count 33`.
+- DEVIATIONS: four, all recorded below.
+- UNBOUND: **none.** Every number the brief was willing to leave raw turned out to have a
+  primitive: `spacing/1` (4) · `spacing/2` (8) · `spacing/4` (16) · `radius/full` (9999) ·
+  `text/base` (16). No `named-debt.json` entry needed.
+
+**Deviation 1 — bound what the brief allowed to stay raw.** The anatomy table offered raw 4/8/16
+and a raw 9999 radius. `1 Primitives` has all of them, so padding, gap and the four corner radii
+are bound, and the label's 16 binds to `text/base`. The acceptance clause's `UNBOUND:` escape
+hatch is unused.
+
+**Deviation 2 — kept the cloned icon instance instead of remove-then-recreate.** Step 2 told the
+runner to drop every `INSTANCE` child and append a fresh `ui/Icon`. `secondary` already carries a
+trailing `ui/Icon` instance, so it was renamed `icon`, switched via its `icon` property to
+`arrow-up-right`, resized to 24 and re-appended last. Same result, one fewer node churn, and the
+instance link is provably intact (`componentProperties.icon.value` reads back `arrow-up-right`).
+`ui/Icon` does expose a glyph property — the brief's "report it as a gap" branch does not fire.
+
+**Deviation 3 — hug, which `secondary` was not.** `secondary` is `FIXED` 152 wide
+(`min-h-11 … w-full`). `external` is `w-fit`, so both axes are set to `HUG`; the master reads back
+120×40 instead of inheriting 152×56.
+
+**Deviation 4 — the grid script was cropping masters, fixed at source.** Re-running P1-T06 Step 2
+as instructed produced **9 `cropped` masters** (`app/Header`, `app/HeaderDrawer`,
+`app/MotionToggle`, `ui/SectionTitle`, 4 `blog/*`, `hero/HeroText`). Cause: the step positions a
+master wider than `CELL` at `x += max(CELL, k.width) + GAP` but then resizes the section to a
+**fixed** `PAD*2 + COLS*CELL + 3*GAP` = 2480. A 1280-wide master in column 1 pushes column 2 to
+x=1440, whose right edge lands at 2720 — 240px outside a 2480 section. The width formula now
+takes the real content extent as its lower bound (`max(maxRight + PAD, nominal)`), height likewise,
+and `figma/P1-T06-domain-sections.md` is patched so every later brief that re-runs the step gets
+the fixed version. Sections after the fix: `app` 4038 · `ui` 2696 · `blog` 4414 · `work` 2480 ·
+`hero` 2824 · `contact` 2480 · `about` 2480 (unchanged floor where nothing exceeds the grid).
+
+This also explains the P1-T09 Gate D result: it passed on a page whose sections had been sized by
+an earlier, wider pass. The check was right; the layout step feeding it was not.
+
+**Screenshot check.** Both variants render as pills: dashed 4/4 hairline with transparent ground,
+solid hairline with `color/surface` ground on hover, arrow glyph trailing the label.
