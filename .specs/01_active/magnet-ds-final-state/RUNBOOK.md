@@ -64,8 +64,9 @@ Do not start before R1.6 passes.
 | [x]  | P2-T01 | **GATE** — 31 existing masters present under canon names           |
 | [x]  | P2-T02 | `ui/Link/external`                                                 |
 | [x]  | P2-T03 | `ui/Prose`, `ui/SocialShare` — iconOnly/small 24→32 owed to P2-T11 |
-| [x]  | P2-T04 | `work/WorkCard` — 8 variants; re-grid + Gate D still owed          |
-| [ ]  | R2.2   | read 8 `cover` fills first — bind or declare in `named-debt.json`  |
+| [x]  | P2-T04 | `work/WorkCard` — 8 variants; re-grid + Gate D verified 2026-08-19          |
+| [x]  | P2-T04b | 8 `cover` fills — all raw `#D9D9D9`, bound to `color/gray/200`     |
+| [x]  | R2.2   | **no-op** — nothing unbound to declare; verify-raw deferred to R2.4 |
 | [ ]  | P2-T05 | `work/ArchiveTable` — 3 breakpoints                                |
 | [ ]  | P2-T06 | `contact/ContactPreview` gains `breakpoint`                        |
 | [ ]  | P2-T07 | `blog/TableOfContents`, `blog/SerieContents`                       |

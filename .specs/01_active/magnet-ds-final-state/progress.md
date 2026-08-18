@@ -731,3 +731,73 @@ sizing) and Gate D before P2-T05.
 `cover.fills`, so the rectangles may be carrying Figma's default raw `#D9D9D9`. Read the 8 `cover`
 layers back: if raw, either bind them to a primitive or declare them in `named-debt.json` under
 R2.2 — placeholder art is an allowed exception at P2-T11's binding sweep, but only when declared.
+
+## P1-T06 re-run — Step 2 + Step 3 (2026-08-19)
+
+Closes **P2-T04 Deviation 4 / OPEN ITEM 1**. Ran the patched, content-driven brief.
+
+- STATUS: **DONE**
+- RESULT:
+  - Step 1 — 35 masters into 7 sections, `unhomed: []`. Section ids: `app` 3091:492 ·
+    `ui` 3091:493 · `blog` 3091:494 · `work` 3091:495 · `hero` 3091:496 · `contact` 3091:497 ·
+    `about` 3091:498.
+  - Step 2 — `app`(6) 4038×946 · `ui`(14) 2736×1917 · `blog`(9) 4414×4543 · `work`(2) 2808×1762 ·
+    `hero`(3) 2824×1536 · `contact`(2) 2480×653 · `about`(0) 2480×400.
+  - Step 3 — **GATE D PASS**: `overlaps: []`, `cropped: []`, `strays: []`, `count: 35`.
+  - Step 4 — 7 screenshots, all clean.
+- DEVIATIONS: one reported, judged a stale-brief expectation, not a Figma fault — below.
+- UNBOUND: none.
+
+**Gate D is now verified for `work/WorkCard`.** The `work` section grew 2480 → **2808** wide and
+1762 tall, i.e. the content extent formula (`max(maxRight + PAD, nominal)`) absorbed the 1248-wide
+8-variant set instead of clipping it at the 2480 floor. `cropped: []` on a section that actually
+had to stretch is the first positive proof the P2-T04 crop fix works, not just a pass on a page
+that never exceeded the grid. `ui` reads 2736 (was 2696 after the fix) — one cell wider from the
+three P2-T02/T03 masters, expected.
+
+**Count reconciles.** 35 = 31 (P2-T01 canon roster) + `ui/Link/external` + `ui/Prose` +
+`ui/SocialShare` + `work/WorkCard`. No orphan, no double-home.
+
+**Deviation — `unhomed: []` where the brief expected 5 P1-T07 stragglers + 11 `_Docs/*`.**
+Not a miss; the brief text is stale on both halves and should be read as already-satisfied:
+
+1. The 5 unhomed masters were P1-T06's own hand-off to P1-T07, and P1-T07 homed them (its own
+   entry leaves exactly **1** straggler, which P2-T04 consumed). Nothing is left to home.
+2. `_Docs/*` masters are **not on the ❖ Components page** — P1-T05 step 2 reported `docs: 0`, and
+   the note above (`strays` wording, P1-T09) already settled that empty is the right answer for a
+   page-scoped walk. The wording survived into this brief unchanged.
+
+The runner's "re-run Step 1 after P1-T07" advice does not apply — P1-T07 is closed. **Brief debt,
+not build debt:** `figma/P1-T06-domain-sections.md` still names both stale expectations, and the
+same wording is quoted by P1-T09 Step 3 and P2-T11. Fix the text at P2-T11 so the gate does not
+report a phantom shortfall a third time.
+
+## P2-T04b — `work/WorkCard` cover fills (2026-08-19)
+
+Closes **P2-T04 OPEN ITEM 2**. New brief `figma/P2-T04b-cover-fills.md` — R2.2 assumed this read
+had happened, but no brief covered it.
+
+- STATUS: **DONE**
+- RESULT:
+  - Step 1 — 8 covers, **all raw `#D9D9D9`**, none bound. 66 `color/…/(100|200|300)` primitives
+    available; `color/gray/200` (`VariableID:2014:88`) present.
+  - Step 2 — all 8 bound to `color/gray/200` via `setBoundVariableForPaint()`. Matched the
+    second `PREFER` entry, so no fall-through guess was needed.
+  - Step 3 — cold read-back, 8/8 report `boundVariableName = "color/gray/200"`:
+    `catalogue default left` 3107:531 · `catalogue default right` 3107:545 ·
+    `catalogue hover left` 3107:559 · `catalogue hover right` 3107:573 ·
+    `case default left` 3107:583 · `case default right` 3107:601 ·
+    `case hover left` 3107:619 · `case hover right` 3107:637.
+- DEVIATIONS: none.
+- UNBOUND: **none**.
+
+**The suspicion in OPEN ITEM 2 was correct** — the covers were carrying Figma's default
+`#D9D9D9`, exactly the raw value predicted, on all 8 variants. Had P2-T04 been signed off on its
+own `UNBOUND: none` report, 8 raw fills would have reached the P2-T11 binding sweep.
+
+**R2.2 is a no-op.** Placeholder art is an allowed exception *when declared*, but nothing needs
+declaring: binding beat debt on every cover, so `scripts/figma/named-debt.json` is unchanged and
+no `reason` string is owed. The raw-value proof itself (`pnpm figma:verify-raw` over a fresh
+export) is not run here — it needs a **File > Export** `.fig`, the same blocker R1.6 hit, and
+R2.4 already runs the full dump + verify + verify-raw + test as the phase-2 exit gate. Deferred
+there rather than exporting twice.
