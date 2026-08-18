@@ -67,7 +67,7 @@ Do not start before R1.6 passes.
 | [x]  | P2-T04 | `work/WorkCard` — 8 variants; re-grid + Gate D verified 2026-08-19          |
 | [x]  | P2-T04b | 8 `cover` fills — all raw `#D9D9D9`, bound to `color/gray/200`     |
 | [x]  | R2.2   | **no-op** — nothing unbound to declare; verify-raw deferred to R2.4 |
-| [ ]  | P2-T05 | `work/ArchiveTable` — 3 breakpoints                                |
+| [x]  | P2-T05 | `work/ArchiveTable` — 3 breakpoints; re-grid + Gate D verified      |
 | [ ]  | P2-T06 | `contact/ContactPreview` gains `breakpoint`                        |
 | [ ]  | P2-T07 | `blog/TableOfContents`, `blog/SerieContents`                       |
 | [ ]  | P2-T08 | `work/WorkMiniCard`, `blog/RelatedWork`, `blog/PostNav` + record 5 |

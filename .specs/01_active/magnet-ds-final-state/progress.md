@@ -801,3 +801,53 @@ no `reason` string is owed. The raw-value proof itself (`pnpm figma:verify-raw` 
 export) is not run here — it needs a **File > Export** `.fig`, the same blocker R1.6 hit, and
 R2.4 already runs the full dump + verify + verify-raw + test as the phase-2 exit gate. Deferred
 there rather than exporting twice.
+
+## P2-T05 — `work/ArchiveTable` (2026-08-19)
+
+- STATUS: **DONE**
+- RESULT: `work/ArchiveTable` `3111:5650`, COMPONENT_SET on one axis `breakpoint` =
+  `Desktop | Tablet | Mobile`. Read-back: Desktop 1248w / 5 cols · Tablet 704w / 4 cols ·
+  Mobile 358w / 3 cols. All three carry 8 body rows and a 64 `year` column.
+- DEVIATIONS: one, benign — below.
+- UNBOUND: none.
+
+**Widths agree with the P1-T08 container recipe.** Desktop 1248 = 1280 − 2×16, so the master is
+content-width, not viewport-width, and drops straight into a `container` without a nested pad.
+`year` holding 64 across all three breakpoints is right: the column is a fixed four-digit stop,
+so only the flexible columns collapse 5 → 4 → 3.
+
+**Deviation — `textDecorationStyle = "DASHED"` unavailable, hairline rectangle used instead.**
+The runner fell back to a 1px rect with `dashPattern [4, 4]`, stroke bound to `color/border`, in a
+VERTICAL frame at gap 2 under each `Project` label — which is what §Anatomy specifies for the
+fallback, so this is the brief working as written, not an improvisation. It is also the **same
+construction P2-T02 used** for `ui/Link/external`'s dashed pill (4/4 hairline), so the library
+stays internally consistent and the dashed underline remains a token-bound stroke rather than a
+text property. Worth carrying forward: no brief should assume `textDecorationStyle` exists.
+
+**OPEN ITEM — re-grid + Gate D owed again.** Desktop is **1248 wide**, over the 520 cell, and it
+has just landed in the `work` section that P1-T06's re-run left at 2808. Same condition that made
+P2-T04 Deviation 4 an open item. Re-run **P1-T06 Step 2 + Step 3** before P2-T06.
+
+## P1-T06 re-run #2 — Step 2 + Step 3 after P2-T05 (2026-08-19)
+
+Closes the P2-T05 open item.
+
+- STATUS: **DONE**
+- RESULT: Step 1 — 36 masters, `unhomed: []`. Step 2 — `app`(6) 4038×946 · `ui`(14) 2736×1917 ·
+  `blog`(9) 4414×4543 · **`work`(3) 4136×1762** · `hero`(3) 2824×1536 · `contact`(2) 2480×653 ·
+  `about`(0) 2480×400. Step 3 — **GATE D PASS**: `overlaps: []`, `cropped: []`, `strays: []`,
+  `count: 36`. Step 4 — 7 screenshots, no clipping or overlap.
+- DEVIATIONS: the same stale-brief report as the first re-run — **fixed at the brief this time**.
+- UNBOUND: none.
+
+**Count and geometry both reconcile.** 36 = 35 + `work/ArchiveTable`. The `work` section grew
+2808 → **4136** wide, absorbing a second 1248-wide master; `cropped: []` on a section that had to
+stretch twice now is the strongest evidence yet that the content-extent sizing fix holds. Every
+other section is byte-identical to the first re-run, which is the expected result — nothing
+outside `work` changed.
+
+**Brief debt paid.** The first re-run flagged the `unhomed` / `_Docs/*` wording as stale and
+deferred the fix to P2-T11; it then produced an identical phantom-shortfall report on this run, so
+`figma/P1-T06-domain-sections.md` is patched now instead: `unhomed` and `strays` are documented as
+**expected-empty**, with a note that non-empty is real drift. P1-T09 Step 3 and P2-T11 quote the
+same wording — check them at the P2-T11 gate.

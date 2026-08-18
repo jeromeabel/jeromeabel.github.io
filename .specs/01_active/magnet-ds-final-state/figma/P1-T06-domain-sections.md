@@ -43,7 +43,7 @@ for (const m of masters) {
 return { moved, unhomed, sectionIds: Object.fromEntries(ORDER.map((n) => [n, sections[n].id])) };
 ```
 
-`unhomed` must contain **only** the five P1-T07 stragglers plus the 11 `_Docs/*` masters. `_Docs/*` stays where it is — it is doc infrastructure, not a DS domain. The `about` section is created empty; P2-T10 fills it.
+`unhomed` must be **empty**. It once held the five P1-T07 stragglers and the 11 `_Docs/*` masters; P1-T07 homed the stragglers, and `_Docs/*` masters are not on this page at all (P1-T05 step 2 reported `docs: 0`). A non-empty `unhomed` today is real drift — report it.
 
 **Re-run this exact step after P1-T07** to sweep the merged masters into their sections.
 
@@ -124,7 +124,7 @@ const strays = masters.filter((m) => !m.parent || m.parent.type !== "SECTION").m
 return { overlaps, cropped, strays, count: masters.length };
 ```
 
-**Expected:** `overlaps: []`, `cropped: []`, `strays` containing only `_Docs/*`.
+**Expected:** `overlaps: []`, `cropped: []`, `strays: []` — the walk is scoped to this page and no `_Docs/*` master lives on it.
 
 The P1-T01 baseline recorded `WorkPreviewSection` overflowing its section by 90px — Step 2's `resizeWithoutConstraints` is what fixes it. If `cropped` still names `work/WorkPreview`, re-run Step 2 before doing anything else.
 
@@ -140,7 +140,7 @@ Screenshot each of the 7 sections. A section where a master is clipped by the se
 
 - 7 sections exist, in the order `app · ui · blog · work · hero · contact · about`.
 - Every `domain/*` master sits inside its own section.
-- `overlaps`, `cropped` empty; `strays` = `_Docs/*` only.
+- `overlaps`, `cropped`, `strays` all empty.
 - 7 screenshots reviewed.
 
 ---
