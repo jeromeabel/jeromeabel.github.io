@@ -94,6 +94,14 @@ about/AboutText  about/AboutFacts
 | `app/NavLink`            | `type`                        | (as merged in P1-T07) |
 | `blog/PostCard`          | `size`, `breakpoint`, `state` | (as merged in P1-T07) |
 
+## Step 3b — carried repair from P2-T03
+
+`ui/Link/iconOnly` `size=small` reads back **24×24** — that is the mobile number of live
+`iconSmall` (`h-6 w-6 lg:h-8 lg:w-8`), and this DS is built at desktop. Resize the `small` variant
+(both states) to **32×32**, keep radius `full`, 1px dashed stroke bound to `color/foreground-muted`,
+hover fill `color/surface`. `ui/SocialShare` holds instances and inherits the new size — do not edit
+it. Verify after: `ui/SocialShare` reads back with three 32×32 children.
+
 ## Step 4 — binding sweep
 
 ```js

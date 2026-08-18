@@ -643,3 +643,91 @@ an earlier, wider pass. The check was right; the layout step feeding it was not.
 
 **Screenshot check.** Both variants render as pills: dashed 4/4 hairline with transparent ground,
 solid hairline with `color/surface` ground on hover, arrow glyph trailing the label.
+
+## P2-T03 — `ui/Prose` + `ui/SocialShare` (2026-08-19)
+
+- STATUS: **DONE**
+- RESULT:
+  - `ui/Prose` `3106:2126`, 720×1043, `COMPONENT` in section `ui`. Children:
+    `TEXT:h2` (32 SemiBold, lh 35.5) · `TEXT:p` (20 Regular, lh 36) · `TEXT:h3` (27 SemiBold, lh 32) ·
+    `FRAME:list` (3 bullet items, 20 Regular) · `FRAME:blockquote` (2px rail + italic quote) ·
+    `FRAME:pre` (Fira Code 18, lh 137.5%, radius 8, pad 20) · `FRAME:inline-code-example`
+    (Fira Code 18, radius 4, pad 2/6) · `RECTANGLE:ProseImage` (720×405, radius 8,
+    drop shadow y20 r25 s-5 a0.25). All text fills bound to `color/foreground` or
+    `color/foreground-muted`; rail bound to `color/border`; pre / inline-code / image fills bound to
+    `color/surface`. Inline-link annotation node `3106:2150` beside the master.
+  - `ui/SocialShare` `3106:2141`, 138×24, `COMPONENT` in section `ui`. `TEXT:Share`
+    (16 Regular, `color/foreground-muted`) + 3 `ui/Link/iconOnly` instances
+    (`bluesky` `461:6275` · `linkedin` `461:6284` · `mail` `461:6254`). HORIZONTAL, gap 8,
+    items centered, hug both axes.
+- DEVIATIONS: three, recorded below.
+- UNBOUND: **none.**
+
+**Deviation 1 — prose scale, resolved in favour of the code.** The brief flagged a divergence
+against `design.md` (h2 30 / p 18 / h3 24 — the `prose-lg` scale) and left the call to Claude Code.
+The call: **the built numbers stand, and `design.md` needs no edit.** `design.md` carries no prose
+type scale at all (`ui/Prose` is one table row with an empty Variants cell), so there was nothing to
+contradict, and the 30 / 18 / 24 numbers the brief cites appear nowhere in `.specs/` — the brief
+carried them in from an earlier draft. Live desktop is `prose sm:prose-lg lg:prose-xl` → `prose-xl`, and every other master
+in this DS is built at desktop, so 32 / 20 / 27 is the consistent choice. A `prose-lg` Mobile
+variant is a future axis, not a correction.
+
+**Deviation 2 — `SocialShare` icons are 24×24, live desktop is 32×32.** `ui/Link/iconOnly` exposes
+`size=normal|small`; its `small` variant reads back 24×24, which is the **mobile** value of
+`iconSmall` (`h-6 w-6 lg:h-8 lg:w-8`). The runner used the variant that exists rather than
+inventing a third size — correct call for this task, but it leaves a real defect one level down:
+a phase-1 master built at the mobile number inside a desktop-only DS.
+**FIGMA DEBT — `ui/Link/iconOnly` `size=small` must be retuned 24 → 32** (`text-sm` glyph, radius
+`full`, 1px dashed `color/foreground-muted`). Fix belongs in P2-T11's sweep, before the gate counts
+variant axes; `ui/SocialShare` then inherits 32 with no edit of its own, since it holds instances.
+
+**Deviation 3 — added an inline-`code` example row.** Not in the brief's pseudocode, but inline
+`code` is a row in its own anatomy table. `FRAME:inline-code-example` fills the gap: Fira Code 18,
+`color/surface` fill, radius 4, padding 2/6.
+
+## P2-T04 — `work/WorkCard` (2026-08-19)
+
+- STATUS: **DONE**, two open items below.
+- RESULT: `work/WorkCard` `COMPONENT_SET`, 3 axes / 8 children —
+  `variant=catalogue|case` × `state=default|hover` × `side=left|right`, homed in the `work`
+  section on ❖ Components. `side` built inert on `catalogue` (both values identical clones) so the
+  matrix stays rectangular. Child order proves the axis: `side=left` → `["cover","text"]`,
+  `side=right` → `["text","cover"]`. Read-back assertions all passed — catalogue 395 wide, case
+  1248 wide; catalogue cover 395×222 default / 403×226 hover; case cover 500×281 / 510×287;
+  `textDecoration=UNDERLINE` on all 4 hover children, `NONE` on all 4 defaults. Hover coupling and
+  timing (underline + 1.02 cover, 140ms ease-out) live in the set description.
+  Screenshot: catalogue reads as a borderless stack, case rows alternate left/right, text column
+  vertically centred against the cover.
+- ARCHIVED: `work/WorkCardPreviewSmall` → `zz/WorkCardPreviewSmall (superseded by work/WorkCard,
+  2026-08-18)` on 🗄️ Archive — Components. **11 live instances still point at it** — 10 on page
+  `WorkPreviewSmallList` (`2829:5542` `2970:4366` `2045:398` `2970:4367` `2970:4365` `2045:408`
+  `2045:417` `2829:5544` `2829:5543` — 9 listed by the runner, count reported as 10) and 1 on
+  `WorkCardPreviewSmall cell` (`2670:7033`). Phase 3 replaces them; P3-T11 owns the cleanup.
+- DEVIATIONS: four, recorded below.
+- UNBOUND: reported **none**, but see open item 2 — the `cover` rectangles were never given a fill
+  by the brief's own pseudocode, so this needs a read-back before R2.2 can be called a no-op.
+
+**Deviation 1 — the shared `T()` helper was broken, fixed at source.** The brief's prelude bound
+text colour with `t.setBoundVariable("fills", fill)`. `fills` is not a `VariableBindableNodeField`;
+paint bindings go through `figma.variables.setBoundVariableForPaint()`. Runner worked around it
+locally; `figma/_prelude-components.js` is now patched, so every remaining brief that includes the
+prelude gets the working version. Earlier tasks (P2-T02, P2-T03) reported bound text fills, so their
+runners must have hit and silently fixed the same wall.
+
+**Deviation 2 — kicker enforces casing twice.** Source string written uppercase *and*
+`textCase = "UPPER"`, so an instance override cannot reintroduce lowercase. Kept.
+
+**Deviation 3 — case cells needed FIXED width.** Built with AUTO first, hugging at ~1084; corrected
+to FIXED 1248 via `primaryAxisSizingMode` so the text column fills the row. Final widths verified.
+
+**Deviation 4 — the P1-T06 grid step was not re-run.** OPEN ITEM 1. Every prior phase-2 task closed
+with a re-grid + Gate D, and P2-T02 proved the layout crops when a master exceeds the 520 cell — an
+8-child set 1248 wide has just landed in the `work` section, which sat at the 2480 floor. Gate D
+is therefore unverified for this task. Re-run **P1-T06 Step 2 + Step 3** (patched, content-driven
+sizing) and Gate D before P2-T05.
+
+**OPEN ITEM 2 — cover fills.** The anatomy says the `cover` placeholder may take a
+`1 Primitives::color/…/200` neutral, but the pseudocode in Steps 1 and 2 never assigns
+`cover.fills`, so the rectangles may be carrying Figma's default raw `#D9D9D9`. Read the 8 `cover`
+layers back: if raw, either bind them to a primitive or declare them in `named-debt.json` under
+R2.2 — placeholder art is an allowed exception at P2-T11's binding sweep, but only when declared.

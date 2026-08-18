@@ -63,9 +63,9 @@ Do not start before R1.6 passes.
 | ---- | ------ | ------------------------------------------------------------------ |
 | [x]  | P2-T01 | **GATE** — 31 existing masters present under canon names           |
 | [x]  | P2-T02 | `ui/Link/external`                                                 |
-| [ ]  | P2-T03 | `ui/Prose`, `ui/SocialShare`                                       |
-| [ ]  | P2-T04 | `work/WorkCard` — 8 variants                                       |
-| [ ]  | R2.2   | declare T03 + T04 placeholder raws in `named-debt.json`            |
+| [x]  | P2-T03 | `ui/Prose`, `ui/SocialShare` — iconOnly/small 24→32 owed to P2-T11 |
+| [x]  | P2-T04 | `work/WorkCard` — 8 variants; re-grid + Gate D still owed          |
+| [ ]  | R2.2   | read 8 `cover` fills first — bind or declare in `named-debt.json`  |
 | [ ]  | P2-T05 | `work/ArchiveTable` — 3 breakpoints                                |
 | [ ]  | P2-T06 | `contact/ContactPreview` gains `breakpoint`                        |
 | [ ]  | P2-T07 | `blog/TableOfContents`, `blog/SerieContents`                       |
@@ -73,7 +73,7 @@ Do not start before R1.6 passes.
 | [ ]  | P2-T09 | `work/WorkHeader`, `blog/PostRowCalm`, `work/RelatedWriting`       |
 | [ ]  | P2-T10 | `about/AboutFacts`, `about/AboutText`                              |
 | [ ]  | R2.3   | log the 4 phase-2 `CODE DEBT` findings                             |
-| [ ]  | P2-T11 | **GATE** — 46 / 11 / 4 roster, variant axes, Gate D                |
+| [ ]  | P2-T11 | **GATE** — roster, variant axes, Gate D, iconOnly/small 24→32      |
 | [ ]  | R2.4   | **GATE** — dump + verify + verify-raw + test, knowledge file       |
 
 ## Phase 3 — pages, docs, ship
