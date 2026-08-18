@@ -1,13 +1,18 @@
 {
   "color/brand/lime-100": "#f5ffe1",
+  "color/brand/lime-150": "#eaf5d3",
   "color/brand/lime-200": "#e0eec4",
+  "color/brand/lime-250": "#d3e3ae",
   "color/brand/lime-300": "#d1ddbb",
   "color/brand/gray-50": "#f7f7f7",
   "color/brand/gray-100": "#ececec",
+  "color/brand/gray-300": "#b0b0b0",
   "color/brand/gray-400": "#9b9b9b",
   "color/brand/gray-500": "#5b5b5b",
   "color/brand/gray-600": "#4c4c4c",
+  "color/brand/gray-650": "#3f3f3f",
   "color/brand/gray-700": "#343434",
+  "color/brand/gray-750": "#2b2b2b",
   "color/brand/gray-800": "#1e1e1e",
   "color/brand/gray-900": "#101010"
 }

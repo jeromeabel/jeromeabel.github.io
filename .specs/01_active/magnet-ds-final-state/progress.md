@@ -197,3 +197,91 @@ brand one needs the 5 hex values read off Figma. They belong to R1.3 with the
 `specs.sh` generates and stamps "do not edit by hand" — the reformat reverts on
 every regenerate. Added `.prettierignore` naming that one file. `format:check`
 is green with `INDEX.md` untouched.
+
+## Phase 1 · Task 4 — `2 Theme` audit (2026-08-18)
+
+**Step 1 — scan:** 15 variables, **1 orphan** (`color/accent-hover`, 0 node
+references and 0 cross-collection aliases), **0 duplicates**, no alias chains.
+
+**Step 2 — verdicts:** 14 × `keep`, 1 × `archive`. All seven semantic slots the
+brief pins are present and kept: `color/background`, `color/foreground`,
+`color/foreground-muted`, `color/foreground-strong`, `color/border`,
+`color/surface`, `color/surface-hover`.
+
+**Step 3 — apply:** `archived = [{ from: "color/accent-hover", to:
+"zz/color/accent-hover" }]`, `renamed = []`, `missing = []`. Nothing deleted.
+
+**Step 4 — read back cold:** `orphans: []`, `dupes: []`, `totalVars: 15`.
+
+**Deviations:** none reported.
+
+**Note on the read-back.** The brief expects the post-archive `orphans` list to
+still hold the `zz/`-prefixed name (it is retired, not referenced). The report
+returns `orphans: []`. Either the agent filtered `zz/*` out of the listing or it
+re-scanned before the rename settled — count is unchanged at 15 and the archive
+line is explicit, so the state is right either way. Confirm the `zz/` prefix is
+live during the P1-T09 gate read.
+
+**Repo side (checked here, feeds R1.3).** The archive verdict holds on the code
+side too:
+
+- `scripts/figma/token-map.json` maps it twice — `light/color-accent-hover` and
+  `dark/color-accent-hover` → `2 Theme/{Light,Dark}/color/accent-hover`. Both
+  entries now point at a name that no longer exists; R1.3 must repoint them at
+  `zz/color/accent-hover` or drop the pair.
+- `src/styles/global.css:59,82` declares `--color-accent-hover` per mode
+  (`#005f5a` light / `#00d5be` dark). **Nothing in `src/` consumes it** — no
+  `*-accent-hover` utility, no direct `var()` read. Dead in Figma and dead in
+  code. Deleting the two declarations is `CODE DEBT` for the R3.7 handoff, not
+  work for this phase.
+
+## Phase 1 · R1.3 — `token-map.json` + the three R1.2 deferrals (2026-08-18)
+
+R1.2 left three drift rows deliberately open, to close in one pass here. All
+three are now closed, and the generator reproduces `1 Primitives` exactly.
+
+**1. Decimal separator.** `build-primitives.mjs` now writes fractional spacing
+steps with an underscore — `` `spacing/${key.replace(".", "_")}` `` — so the
+four `spacing/0_5 1_5 2_5 3_5` rows match Figma. `SPACING_KEYS` stays numeric;
+only the emitted name changes, values are untouched.
+
+**2. Brand set completed.** `scripts/figma/brand-primitives.json` went 11 → 16.
+The five missing hexes were read off the tracked `tokens.figma.json` dump, not
+guessed: `lime-150 #eaf5d3`, `lime-250 #d3e3ae`, `gray-300 #b0b0b0`,
+`gray-650 #3f3f3f`, `gray-750 #2b2b2b`. File is now ordered lime-then-gray by
+ramp step.
+
+**3. Undeclared Tailwind values.** A FLOAT twin of the existing COLOR extras
+block adds `leading/7` (28), `radius/full` (9999), `radius/none` (0) — the three
+Tailwind ships as utilities without a `theme.css` custom property.
+
+**Result: `pnpm figma:primitives` emits 407, and the diff against live
+`1 Primitives` is empty in both directions.** Checked by slashifying the dump's
+451 names and removing the 44 ramps P1-T03 pruned: `fig only: []`,
+`gen only: []`. The R1.2 gap is fully closed.
+
+**`token-map.json`:** both `*/color-accent-hover` entries repointed at
+`2 Theme/{Light,Dark}/zz/color/accent-hover` after the P1-T04 archive.
+
+**`pnpm figma:verify` — read, not trusted (warn-only, always exits 0):**
+
+```
+Missing in Figma:  dark/color-accent-hover  → 2 Theme/Dark/zz/color/accent-hover
+                   light/color-accent-hover → 2 Theme/Light/zz/color/accent-hover
+Value mismatch:    none
+Orphaned in Figma: 2 Theme/{Light,Dark}/color/accent-hover
+Unmapped:          none
+```
+
+**Expected, and it is one fact reported twice.** `tokens.figma.json` is the
+2026-08-15 export — it predates P1-T04, so it still carries the pre-archive
+name. Code maps to `zz/`, the dump has the old name: missing on one side, orphan
+on the other. R1.6 takes a fresh `File > Export` and both rows disappear. Every
+other token is clean — no value mismatch, nothing unmapped.
+
+**Pre-existing test failures, not caused here.** `pnpm test` is 55/57.
+`extract-code-tokens.test.mjs` asserts a light surface of `#d1ddbb` (live
+`global.css` says `#eaf5d3`) and a semantic-color count of 7 (live count is 12).
+The extractor works; its fixtures are a stale vintage of `global.css`. Neither
+test touches anything R1.3 changed. Logged as `CODE DEBT` for the R3.7 handoff
+along with the dead `--color-accent-hover` declarations.

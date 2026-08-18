@@ -43,9 +43,9 @@ repo session.
 | [x]  | P1-T01   | Pass-0 inventory + gates A–D                               |
 | [x]  | P1-T02   | 📐 Decisions page, 4 records                               |
 | [x]  | P1-T03   | `1 Primitives` audit — 25 renamed, 0 collisions, 407 clean |
-| [ ]  | **R1.2** | `pnpm figma:primitives` + commit                           |
-| [ ]  | P1-T04   | `2 Theme` orphans, dupes, renames                          |
-| [ ]  | R1.3     | update `token-map.json`, `pnpm figma:verify`, commit       |
+| [x]  | **R1.2** | `pnpm figma:primitives` + commit — 407/399 diff triaged    |
+| [x]  | P1-T04   | `2 Theme` — 15 vars, 1 archived, 0 dupes                   |
+| [x]  | R1.3     | token-map repointed; R1.2 deferrals closed, 407 = 407      |
 | [ ]  | P1-T05   | 30 masters → `domain/Component`                            |
 | [ ]  | R1.4     | log the rename map, commit                                 |
 | [ ]  | P1-T06   | ❖ Components → 7 domain sections                           |

@@ -212,6 +212,11 @@
       "value": "#ececec"
     },
     {
+      "name": "color/brand/gray-300",
+      "type": "COLOR",
+      "value": "#b0b0b0"
+    },
+    {
       "name": "color/brand/gray-400",
       "type": "COLOR",
       "value": "#9b9b9b"
@@ -232,9 +237,19 @@
       "value": "#4c4c4c"
     },
     {
+      "name": "color/brand/gray-650",
+      "type": "COLOR",
+      "value": "#3f3f3f"
+    },
+    {
       "name": "color/brand/gray-700",
       "type": "COLOR",
       "value": "#343434"
+    },
+    {
+      "name": "color/brand/gray-750",
+      "type": "COLOR",
+      "value": "#2b2b2b"
     },
     {
       "name": "color/brand/gray-800",
@@ -252,9 +267,19 @@
       "value": "#f5ffe1"
     },
     {
+      "name": "color/brand/lime-150",
+      "type": "COLOR",
+      "value": "#eaf5d3"
+    },
+    {
       "name": "color/brand/lime-200",
       "type": "COLOR",
       "value": "#e0eec4"
+    },
+    {
+      "name": "color/brand/lime-250",
+      "type": "COLOR",
+      "value": "#d3e3ae"
     },
     {
       "name": "color/brand/lime-300",
@@ -1557,6 +1582,11 @@
       "value": "inset 0 1px 1px rgb(0 0 0 / 0.05)"
     },
     {
+      "name": "leading/7",
+      "type": "FLOAT",
+      "value": 28
+    },
+    {
       "name": "leading/loose",
       "type": "FLOAT",
       "value": 2
@@ -1627,6 +1657,11 @@
       "value": 4
     },
     {
+      "name": "radius/full",
+      "type": "FLOAT",
+      "value": 9999
+    },
+    {
       "name": "radius/lg",
       "type": "FLOAT",
       "value": 8
@@ -1635,6 +1670,11 @@
       "name": "radius/md",
       "type": "FLOAT",
       "value": 6
+    },
+    {
+      "name": "radius/none",
+      "type": "FLOAT",
+      "value": 0
     },
     {
       "name": "radius/sm",
@@ -1702,7 +1742,7 @@
       "value": 0
     },
     {
-      "name": "spacing/0.5",
+      "name": "spacing/0_5",
       "type": "FLOAT",
       "value": 2
     },
@@ -1712,7 +1752,7 @@
       "value": 4
     },
     {
-      "name": "spacing/1.5",
+      "name": "spacing/1_5",
       "type": "FLOAT",
       "value": 6
     },
@@ -1747,7 +1787,7 @@
       "value": 8
     },
     {
-      "name": "spacing/2.5",
+      "name": "spacing/2_5",
       "type": "FLOAT",
       "value": 10
     },
@@ -1772,7 +1812,7 @@
       "value": 12
     },
     {
-      "name": "spacing/3.5",
+      "name": "spacing/3_5",
       "type": "FLOAT",
       "value": 14
     },

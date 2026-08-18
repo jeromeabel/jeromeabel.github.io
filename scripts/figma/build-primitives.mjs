@@ -247,7 +247,9 @@ const SPACING_KEYS = [
   "96",
 ];
 for (const key of SPACING_KEYS) {
-  const name = `spacing/${key}`;
+  // `1 Primitives` spells fractional steps with an underscore (`spacing/0_5`):
+  // a dot reads as a decimal in Figma's variable UI and sorts badly.
+  const name = `spacing/${key.replace(".", "_")}`;
   if (seen.has(name)) continue;
   let value;
   if (key === "0") {
@@ -275,6 +277,18 @@ for (const [name, value] of [
   if (!seen.has(name)) {
     seen.add(name);
     variables.push({ name, type: "COLOR", value });
+  }
+
+// Same case, FLOAT side: Tailwind ships `rounded-none` / `rounded-full` /
+// `leading-7` as utilities without declaring a matching custom property.
+for (const [name, value] of [
+  ["leading/7", 28],
+  ["radius/full", 9999],
+  ["radius/none", 0],
+])
+  if (!seen.has(name)) {
+    seen.add(name);
+    variables.push({ name, type: "FLOAT", value });
   }
 
 variables.sort((a, b) => a.name.localeCompare(b.name));
