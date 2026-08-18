@@ -2,7 +2,7 @@
 task: P1-T07
 title: Three merges — NavLink, PostCard, Link vocabulary
 phase: 1
-status: TODO
+status: DONE (2026-08-18)
 prerequisite: P1-T06
 ---
 
@@ -16,7 +16,7 @@ Two component-set merges and one verification. After this, the five P1-T05 "stra
 
 ## Step 1 — Merge `NavLinkHome` into `NavLink` as `type=brand`
 
-Both are COMPONENT_SETs already carrying a `state` axis. Merging two _sets_ = add a `type` property to every variant name, then combine.
+Both are COMPONENT*SETs already carrying a `state` axis. Merging two \_sets* = add a `type` property to every variant name, then combine.
 
 ```js
 const page = figma.root.children.find((p) => p.name.includes("Components"));

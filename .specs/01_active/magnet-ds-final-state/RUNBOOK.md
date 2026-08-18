@@ -48,10 +48,10 @@ repo session.
 | [x]  | R1.3     | token-map repointed; R1.2 deferrals closed, 407 = 407      |
 | [x]  | P1-T05   | 29 renamed, 5 deferred to merges                           |
 | [x]  | R1.4     | log the rename map, commit                                 |
-| [ ]  | P1-T06   | ❖ Components → 7 domain sections                           |
-| [ ]  | P1-T07   | NavLink / PostCard / Link merges                           |
-| [ ]  | P1-T08   | container recipe: 16 / 1280 / centred, zero exceptions     |
-| [ ]  | R1.5     | container debt closed, commit                              |
+| [x]  | P1-T06   | ❖ Components → 7 domain sections, 5 unhomed for T07        |
+| [x]  | P1-T07   | NavLink + PostCard merged, 1 straggler left for P2-T04     |
+| [x]  | P1-T08   | container recipe: 16 / 1280 / centred, 1 bandless variant  |
+| [x]  | R1.5     | no debt to prune — drift was never allowlisted; commit     |
 | [ ]  | P1-T09   | **GATE** — phase-1 exit, Figma half                        |
 | [ ]  | R1.6     | **GATE** — phase-1 exit, repo half                         |
 

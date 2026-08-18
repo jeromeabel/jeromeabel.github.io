@@ -2,7 +2,7 @@
 task: P1-T06
 title: Re-section ❖ Components into 7 domain sections
 phase: 1
-status: TODO
+status: DONE (2026-08-18)
 prerequisite: P1-T05
 ---
 

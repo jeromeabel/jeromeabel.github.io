@@ -2,7 +2,7 @@
 task: P1-T08
 title: Container normalization — one recipe, zero exceptions
 phase: 1
-status: TODO
+status: DONE (2026-08-18) — step 4 corrective applied
 prerequisite: P1-T07
 ---
 
@@ -115,6 +115,61 @@ Any row still reading **32** is a miss. The rule is zero exceptions.
 
 - Six owners × every variant, all matching the five conditions above.
 - The full read-back table goes in the report — Claude Code pastes it into `progress.md` and uses it to prune `scripts/figma/named-debt.json` (`../repo/phase-1.md`).
+
+---
+
+## Step 4 — Corrective: cap the real band, not the first child (added after the first run)
+
+The first run bound 1280 on `children[0]` exactly as Step 2 says. For `blog/BlogPreview` and
+`work/WorkPreview` that child is an INSTANCE of `ui/SectionTitle` — a heading, not a container
+band. Their content frames (`BlogPreviewContent`, `WorkPreviewSmallList`) are `children[1]` and
+were left uncapped, so those four rows read as passing while nothing is actually constrained.
+
+`children[0]` is the wrong selector for a master whose outer frame is a **vertical** stack: there
+is no single band, every direct layout child is one. Cap them all.
+
+```js
+const cols = await figma.variables.getLocalVariableCollectionsAsync();
+const resp = cols.find((c) => c.name === "3 Responsive");
+let maxw = null;
+for (const id of resp.variableIds) {
+  const v = await figma.variables.getVariableByIdAsync(id);
+  if (v.name === "container/max-width") maxw = v;
+}
+if (!maxw) throw new Error("container/max-width missing from 3 Responsive");
+
+const OWNERS = ["blog/BlogPreview", "work/WorkPreview"];
+const out = [];
+for (const p of figma.root.children) {
+  await p.loadAsync();
+  if (p.name.startsWith("🗄️")) continue;
+  for (const name of OWNERS) {
+    const node = p.findOne((x) => (x.type === "COMPONENT" || x.type === "COMPONENT_SET") && x.name === name);
+    if (!node) continue;
+    const frames = node.type === "COMPONENT_SET" ? node.children : [node];
+    for (const f of frames) {
+      if (f.layoutMode !== "VERTICAL") { out.push({ master: name, variant: f.name, skipped: f.layoutMode }); continue; }
+      for (const child of f.children) {
+        if (!("maxWidth" in child)) continue;
+        child.maxWidth = 1280;
+        child.setBoundVariable("maxWidth", maxw);
+        child.layoutSizingHorizontal = "FILL";
+        out.push({ master: name, variant: f.name, child: child.name, type: child.type });
+      }
+      f.counterAxisAlignItems = "CENTER";
+    }
+  }
+}
+return out;
+```
+
+Then re-run Step 3's reader with `f.children[0]` replaced by **every** direct child that has
+`maxWidth`. Every one must read `1280` and carry `maxWidth` in `boundVariables`. A child that has
+no `maxWidth` property at all (a TEXT node — see `app/Header` Mobile) is reported, not forced.
+
+**Accepted structural exception:** `app/Header` Mobile has no inner band; `children[0]` is the
+TEXT node `Brand`. Outer pad-x and CENTER alignment apply, the band condition does not. Do not
+invent a wrapper frame. P1-T09 must treat this row as a pass-with-note, not a miss.
 
 ---
 

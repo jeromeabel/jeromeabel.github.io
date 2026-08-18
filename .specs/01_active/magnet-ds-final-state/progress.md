@@ -303,3 +303,125 @@ along with the dead `--color-accent-hover` declarations.
 
 `docs: 0` on ❖ Components: the 11 `_Docs/*` masters live elsewhere in the document. P1-T09
 assertion 3 counts them document-wide, so it is unaffected.
+
+---
+
+## P1-T06 — domain sections (2026-08-18)
+
+- STATUS: DONE
+- RESULT: 29 masters placed into 7 domain sections — `app` 5 (ThemeToggle, MotionToggle,
+  Footer, Header, HeaderDrawer) · `ui` 10 (Icon, Link/primary, Link/secondary, Link/textLink,
+  Link/iconOnly, Link/inline, H2, SectionTitle, H1, PageDescription) · `blog` 8 (PostList,
+  SerieList, BlogPreview, PostMetadataTime, PostMetadataTopic, SerieMeta, PostRow, SerieCard) ·
+  `work` 1 (WorkPreview) · `hero` 3 (HeroText, HeroAnimation, Hero) · `contact` 2
+  (ContactContent, ContactPreview) · `about` 0 (fills at P2-T10). The 5 P1-T07 merge sources stay
+  unhomed: `NavLink`, `NavLinkHome`, `PostCardPreviewBig`, `PostCardPreviewSmall`,
+  `WorkCardPreviewSmall`. Gate D hygiene on 34 masters: `overlaps: []`, `cropped: []`,
+  `strays: []`. 7 screenshots reviewed, all clean.
+- DEVIATIONS:
+  1. **Section width formula extended.** The brief sized sections off `CELL = 520`; `hero/Hero`
+     and `app/Header` are up to ~1400 wide and would have been cropped. Added a `maxRight` pass so
+     each section fits its widest master (`app` 4038w, `blog` 4345w).
+  2. **Old sections moved, not deleted.** Chrome / Actions / Sections / Typography / Metadata /
+     Cards relocated below the domain sections to clear overlap with the stragglers — Chrome still
+     holds 2, Cards 3, the other four are empty. The brief did not say what to do with them;
+     "nothing human-designed is ever deleted" decided it.
+- UNBOUND: none
+
+No `_Docs/*` masters live on ❖ Components, so the unhomed list is exactly the 5 P1-T07 sources —
+consistent with P1-T05's `docs: 0`.
+
+---
+
+## P1-T07 — merges (2026-08-18)
+
+- STATUS: DONE
+- RESULT: **`app/NavLink`** (`3093:553`) — `type: [page, brand] × state: [default, hover, active]`,
+  6 variants; sources `NavLink` + `NavLinkHome` removed, `broken: []`. **`blog/PostCard`**
+  (`3093:5376`) — `size: [big, small] × breakpoint: [Desktop, Mobile] × state: [default, hover]`,
+  8 variants; sources `PostCardPreviewBig` + `PostCardPreviewSmall` removed, `broken: []`. Link
+  vocabulary verified 5/5 found, 0 missing, 0 legacy. Both sets re-homed into their domain
+  sections. Gate D: `strays: [WorkCardPreviewSmall]` — expected, it is the P2-T04 absorption
+  target, so the five P1-T05 stragglers are down to one.
+- DEVIATIONS: NavLink merged clone-then-combine instead of the brief's move-then-combine — moving
+  children out of a COMPONENT_SET and recombining them in the same tick errors. Cloning keeps the
+  originals alive until the explicit removal in step 2, so nothing is destroyed on a failed
+  combine.
+- UNBOUND: none
+
+---
+
+## P1-T08 — container recipe (2026-08-18)
+
+- STATUS: PARTIAL — 10 of 11 rows pass all five conditions; 2 findings below.
+- RESULT: step 1 rebound `app/Header` (Desktop + Mobile) and `contact/ContactPreview` pad-x from
+  `spacing/8` (32) → `container/gutter` (16), read back 16/16. Step 2 across 6 owners × 11
+  variants:
+  - `app/Header` Desktop — bound `maxWidth = 1280` on `HeaderContent` (value was already 1280 but
+    unbound)
+  - `app/Footer` Desktop + Mobile — pad-x bound to gutter, `maxWidth` set + bound on
+    `FooterContainer`
+  - `hero/Hero` Desktop + Mobile — pad-x bound, `maxWidth` set + bound on `HeroContent`,
+    counterAxis MIN → CENTER
+  - `blog/BlogPreview`, `work/WorkPreview` Desktop + Mobile — pad-x bound, `maxWidth` set + bound
+    on `ui/SectionTitle`, counterAxis MIN → CENTER
+  - `contact/ContactPreview` — `maxWidth` set + bound on `ContactPreviewContent`, counterAxis MIN
+    → CENTER
+- DEVIATIONS / FINDINGS:
+  1. **`app/Header` Mobile has no inner band.** `children[0]` is the TEXT node `Brand`; `maxWidth`
+     is not settable on it. Outer pad-x and `counterAxisAlignItems = CENTER` applied, structure
+     untouched. This is the brief's own "a master with no inner band is a real finding" case — no
+     wrapper invented.
+  2. **`blog/BlogPreview` / `work/WorkPreview` capped the wrong node.** Their `children[0]` is an
+     INSTANCE of `ui/SectionTitle`, not a container band, and the brief's literal `children[0]`
+     rule bound 1280 there. The real content frames — `BlogPreviewContent` and
+     `WorkPreviewSmallList` — are `children[1]` and carry **no** `maxWidth`. So four rows read as
+     passing while the content they exist to constrain is still uncapped. **Not accepted; a
+     corrective pass is queued before P1-T09**, whose assertion uses the same `children[0]` reader
+     and would inherit the false pass.
+- UNBOUND: none. Finding 1 is a structural absence, not a raw value, so it earns no
+  `named-debt.json` entry.
+
+### P1-T08 step 4 — corrective (2026-08-18)
+
+- STATUS: DONE — 6 owners × 11 variants, every layout child now capped and bound.
+- RESULT: `blog/BlogPreview` and `work/WorkPreview` (Desktop + Mobile) each gained `maxWidth = 1280`
+  bound + FILL on their real content frames (`BlogPreviewContent`, `WorkPreviewSmallList`) alongside
+  the `ui/SectionTitle` instance the first run had capped. Full read-back:
+
+| Master                 | Variant | pad-x  | align  | capped children                             |
+| ---------------------- | ------- | ------ | ------ | ------------------------------------------- |
+| app/Header             | Desktop | 16, 16 | CENTER | HeaderContent                               |
+| app/Header             | Mobile  | 16, 16 | CENTER | — (exception: Brand TEXT, MenuButton FIXED) |
+| app/Footer             | Desktop | 16, 16 | CENTER | FooterContainer                             |
+| app/Footer             | Mobile  | 16, 16 | CENTER | FooterContainer                             |
+| hero/Hero              | Desktop | 16, 16 | CENTER | HeroContent, StartReading                   |
+| hero/Hero              | Mobile  | 16, 16 | CENTER | HeroContent, StartReading                   |
+| blog/BlogPreview       | Desktop | 16, 16 | CENTER | ui/SectionTitle, BlogPreviewContent         |
+| blog/BlogPreview       | Mobile  | 16, 16 | CENTER | ui/SectionTitle, BlogPreviewContent         |
+| work/WorkPreview       | Desktop | 16, 16 | CENTER | ui/SectionTitle, WorkPreviewSmallList       |
+| work/WorkPreview       | Mobile  | 16, 16 | CENTER | ui/SectionTitle, WorkPreviewSmallList       |
+| contact/ContactPreview | —       | 16, 16 | CENTER | ContactPreviewContent                       |
+
+Every capped child reads `maxWidth = 1280`, carries `maxWidth` in `boundVariables`, and sizes FILL.
+
+- DEVIATIONS:
+  1. **`hero/Hero` capped too**, though step 4's `OWNERS` named only blog and work. `StartReading`
+     is `children[1]` of the same kind of vertical stack and was uncapped for the same reason —
+     the principle decided it, not the list. Same fix, same result.
+  2. **`app/Header` Mobile `MenuButton` left uncapped.** It is a FIXED icon-sized button, not a
+     content band; capping it at 1280 would be meaningless. It joins the `Brand` TEXT node as the
+     row's structural exception — this variant genuinely has no band, which P1-T09 records as a
+     pass-with-note.
+- UNBOUND: none
+
+**`named-debt.json` prune (R1.5): no-op, and that is the correct outcome.** The file holds 49
+`accepted` entries, all `text-style`, plus one `variableDebt` row (`leading/hero-body`). Nothing
+allowlisted a 32px pad or an unbound `maxWidth`, so the P1-T01 Gate C finding was never
+debt-covered — it was live drift, now closed. Nothing to remove.
+
+**`pnpm figma:verify-raw` — read, not trusted.** 874 rows, all against
+`raw-values.figma.json` dated **2026-08-15**, which predates P1-T05 through P1-T08. Its findings
+still name `NavLink` / `NavLinkHome` as separate masters and use pre-rename names, so the table
+describes a document that no longer exists. Nothing in it is actionable now; R1.6 takes a fresh
+`File > Export` and re-runs both passes against it. Stale named-debt entries: _none_.

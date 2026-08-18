@@ -87,6 +87,10 @@ Phase 1 is done when all of this is true:
 - Every DS master carries a domain prefix.
 - The three merges landed with the right variant matrices.
 - `app/Header` and `contact/ContactPreview` read 16, bound to `container/gutter`.
+- Container bands: check **every** direct child carrying `maxWidth`, not `children[0]` — a
+  vertical owner has no single band (see P1-T08 step 4). Two accepted notes: `app/Header`
+  Mobile has no band at all (TEXT first child), and `ui/SectionTitle` instances are headings,
+  not bands.
 - Gate D empty; 8 screenshots reviewed.
 
 Report the **full Step 1 JSON** — Claude Code needs it verbatim to write `inventory.md §Phase-1-after` and the knowledge-file roster.

@@ -2,7 +2,7 @@
 task: P1-T04
 title: 2 Theme — orphans, duplicates, renames
 phase: 1
-status: TODO
+status: DONE (2026-08-18)
 prerequisite: P1-T03
 ---
 

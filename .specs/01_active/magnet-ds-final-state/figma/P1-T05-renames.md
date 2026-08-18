@@ -2,7 +2,7 @@
 task: P1-T05
 title: Rename all masters to domain/Component
 phase: 1
-status: TODO
+status: DONE (2026-08-18)
 prerequisite: P1-T04
 ---
 
