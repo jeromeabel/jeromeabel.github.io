@@ -38,13 +38,13 @@ test("rem values convert to pixels", () => {
 });
 
 test("unitless values stay unitless", () => {
-  assert.equal(byName["font-weight/medium"].value, 500);
+  assert.equal(byName["font/weight/medium"].value, 500);
   assert.equal(byName["leading/normal"].value, 1.5);
 });
 
 test("colour names fold into hue folders, other namespaces do not split on the leaf", () => {
   assert.equal(byName["color/blue/500"].type, "COLOR");
-  assert.ok(byName["drop-shadow/md"], "compound namespaces stay intact");
+  assert.ok(byName["drop/shadow/md"], "compound namespaces stay intact");
   assert.ok(
     !variables.some((v) => v.name.startsWith("color/blue-")),
     "hue must be a folder",

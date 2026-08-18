@@ -647,116 +647,6 @@
       "value": "#192e03"
     },
     {
-      "name": "color/mauve-100",
-      "type": "COLOR",
-      "value": "#f3f1f3"
-    },
-    {
-      "name": "color/mauve-200",
-      "type": "COLOR",
-      "value": "#e7e4e7"
-    },
-    {
-      "name": "color/mauve-300",
-      "type": "COLOR",
-      "value": "#d7d0d7"
-    },
-    {
-      "name": "color/mauve-400",
-      "type": "COLOR",
-      "value": "#a89ea9"
-    },
-    {
-      "name": "color/mauve-50",
-      "type": "COLOR",
-      "value": "#fafafa"
-    },
-    {
-      "name": "color/mauve-500",
-      "type": "COLOR",
-      "value": "#79697b"
-    },
-    {
-      "name": "color/mauve-600",
-      "type": "COLOR",
-      "value": "#594c5b"
-    },
-    {
-      "name": "color/mauve-700",
-      "type": "COLOR",
-      "value": "#463947"
-    },
-    {
-      "name": "color/mauve-800",
-      "type": "COLOR",
-      "value": "#2a212c"
-    },
-    {
-      "name": "color/mauve-900",
-      "type": "COLOR",
-      "value": "#1d161e"
-    },
-    {
-      "name": "color/mauve-950",
-      "type": "COLOR",
-      "value": "#0c090c"
-    },
-    {
-      "name": "color/mist-100",
-      "type": "COLOR",
-      "value": "#f1f3f3"
-    },
-    {
-      "name": "color/mist-200",
-      "type": "COLOR",
-      "value": "#e3e7e8"
-    },
-    {
-      "name": "color/mist-300",
-      "type": "COLOR",
-      "value": "#d0d6d8"
-    },
-    {
-      "name": "color/mist-400",
-      "type": "COLOR",
-      "value": "#9ca8ab"
-    },
-    {
-      "name": "color/mist-50",
-      "type": "COLOR",
-      "value": "#f9fbfb"
-    },
-    {
-      "name": "color/mist-500",
-      "type": "COLOR",
-      "value": "#67787c"
-    },
-    {
-      "name": "color/mist-600",
-      "type": "COLOR",
-      "value": "#4b585b"
-    },
-    {
-      "name": "color/mist-700",
-      "type": "COLOR",
-      "value": "#394447"
-    },
-    {
-      "name": "color/mist-800",
-      "type": "COLOR",
-      "value": "#22292b"
-    },
-    {
-      "name": "color/mist-900",
-      "type": "COLOR",
-      "value": "#161b1d"
-    },
-    {
-      "name": "color/mist-950",
-      "type": "COLOR",
-      "value": "#090b0c"
-    },
-    {
       "name": "color/neutral/100",
       "type": "COLOR",
       "value": "#f5f5f5"
@@ -810,61 +700,6 @@
       "name": "color/neutral/950",
       "type": "COLOR",
       "value": "#0a0a0a"
-    },
-    {
-      "name": "color/olive-100",
-      "type": "COLOR",
-      "value": "#f4f4f0"
-    },
-    {
-      "name": "color/olive-200",
-      "type": "COLOR",
-      "value": "#e8e8e3"
-    },
-    {
-      "name": "color/olive-300",
-      "type": "COLOR",
-      "value": "#d8d8d0"
-    },
-    {
-      "name": "color/olive-400",
-      "type": "COLOR",
-      "value": "#abab9c"
-    },
-    {
-      "name": "color/olive-50",
-      "type": "COLOR",
-      "value": "#fbfbf9"
-    },
-    {
-      "name": "color/olive-500",
-      "type": "COLOR",
-      "value": "#7c7c67"
-    },
-    {
-      "name": "color/olive-600",
-      "type": "COLOR",
-      "value": "#5b5b4b"
-    },
-    {
-      "name": "color/olive-700",
-      "type": "COLOR",
-      "value": "#474739"
-    },
-    {
-      "name": "color/olive-800",
-      "type": "COLOR",
-      "value": "#2b2b22"
-    },
-    {
-      "name": "color/olive-900",
-      "type": "COLOR",
-      "value": "#1d1d16"
-    },
-    {
-      "name": "color/olive-950",
-      "type": "COLOR",
-      "value": "#0c0c09"
     },
     {
       "name": "color/orange/100",
@@ -1307,61 +1142,6 @@
       "value": "#0c0a09"
     },
     {
-      "name": "color/taupe-100",
-      "type": "COLOR",
-      "value": "#f3f1f1"
-    },
-    {
-      "name": "color/taupe-200",
-      "type": "COLOR",
-      "value": "#e8e4e3"
-    },
-    {
-      "name": "color/taupe-300",
-      "type": "COLOR",
-      "value": "#d8d2d0"
-    },
-    {
-      "name": "color/taupe-400",
-      "type": "COLOR",
-      "value": "#aba09c"
-    },
-    {
-      "name": "color/taupe-50",
-      "type": "COLOR",
-      "value": "#fbfaf9"
-    },
-    {
-      "name": "color/taupe-500",
-      "type": "COLOR",
-      "value": "#7c6d67"
-    },
-    {
-      "name": "color/taupe-600",
-      "type": "COLOR",
-      "value": "#5b4f4b"
-    },
-    {
-      "name": "color/taupe-700",
-      "type": "COLOR",
-      "value": "#473c39"
-    },
-    {
-      "name": "color/taupe-800",
-      "type": "COLOR",
-      "value": "#2b2422"
-    },
-    {
-      "name": "color/taupe-900",
-      "type": "COLOR",
-      "value": "#1d1816"
-    },
-    {
-      "name": "color/taupe-950",
-      "type": "COLOR",
-      "value": "#0c0a09"
-    },
-    {
       "name": "color/teal/100",
       "type": "COLOR",
       "value": "#cbfbf1"
@@ -1652,37 +1432,37 @@
       "value": 320
     },
     {
-      "name": "drop-shadow/2xl",
+      "name": "drop/shadow/2xl",
       "type": "STRING",
       "value": "0 25px 25px rgb(0 0 0 / 0.15)"
     },
     {
-      "name": "drop-shadow/DEFAULT",
+      "name": "drop/shadow/DEFAULT",
       "type": "STRING",
       "value": "0 1px 2px rgb(0 0 0 / 0.1), 0 1px 1px rgb(0 0 0 / 0.06)"
     },
     {
-      "name": "drop-shadow/lg",
+      "name": "drop/shadow/lg",
       "type": "STRING",
       "value": "0 4px 4px rgb(0 0 0 / 0.15)"
     },
     {
-      "name": "drop-shadow/md",
+      "name": "drop/shadow/md",
       "type": "STRING",
       "value": "0 3px 3px rgb(0 0 0 / 0.12)"
     },
     {
-      "name": "drop-shadow/sm",
+      "name": "drop/shadow/sm",
       "type": "STRING",
       "value": "0 1px 2px rgb(0 0 0 / 0.15)"
     },
     {
-      "name": "drop-shadow/xl",
+      "name": "drop/shadow/xl",
       "type": "STRING",
       "value": "0 9px 7px rgb(0 0 0 / 0.1)"
     },
     {
-      "name": "drop-shadow/xs",
+      "name": "drop/shadow/xs",
       "type": "STRING",
       "value": "0 1px 1px rgb(0 0 0 / 0.05)"
     },
@@ -1692,7 +1472,7 @@
       "value": "cubic-bezier(0.4, 0, 1, 1)"
     },
     {
-      "name": "ease/in-out",
+      "name": "ease/in/out",
       "type": "STRING",
       "value": "cubic-bezier(0.4, 0, 0.2, 1)"
     },
@@ -1700,51 +1480,6 @@
       "name": "ease/out",
       "type": "STRING",
       "value": "cubic-bezier(0, 0, 0.2, 1)"
-    },
-    {
-      "name": "font-weight/black",
-      "type": "FLOAT",
-      "value": 900
-    },
-    {
-      "name": "font-weight/bold",
-      "type": "FLOAT",
-      "value": 700
-    },
-    {
-      "name": "font-weight/extrabold",
-      "type": "FLOAT",
-      "value": 800
-    },
-    {
-      "name": "font-weight/extralight",
-      "type": "FLOAT",
-      "value": 200
-    },
-    {
-      "name": "font-weight/light",
-      "type": "FLOAT",
-      "value": 300
-    },
-    {
-      "name": "font-weight/medium",
-      "type": "FLOAT",
-      "value": 500
-    },
-    {
-      "name": "font-weight/normal",
-      "type": "FLOAT",
-      "value": 400
-    },
-    {
-      "name": "font-weight/semibold",
-      "type": "FLOAT",
-      "value": 600
-    },
-    {
-      "name": "font-weight/thin",
-      "type": "FLOAT",
-      "value": 100
     },
     {
       "name": "font/mono",
@@ -1762,17 +1497,62 @@
       "value": "ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif"
     },
     {
-      "name": "inset-shadow/2xs",
+      "name": "font/weight/black",
+      "type": "FLOAT",
+      "value": 900
+    },
+    {
+      "name": "font/weight/bold",
+      "type": "FLOAT",
+      "value": 700
+    },
+    {
+      "name": "font/weight/extrabold",
+      "type": "FLOAT",
+      "value": 800
+    },
+    {
+      "name": "font/weight/extralight",
+      "type": "FLOAT",
+      "value": 200
+    },
+    {
+      "name": "font/weight/light",
+      "type": "FLOAT",
+      "value": 300
+    },
+    {
+      "name": "font/weight/medium",
+      "type": "FLOAT",
+      "value": 500
+    },
+    {
+      "name": "font/weight/normal",
+      "type": "FLOAT",
+      "value": 400
+    },
+    {
+      "name": "font/weight/semibold",
+      "type": "FLOAT",
+      "value": 600
+    },
+    {
+      "name": "font/weight/thin",
+      "type": "FLOAT",
+      "value": 100
+    },
+    {
+      "name": "inset/shadow/2xs",
       "type": "STRING",
       "value": "inset 0 1px rgb(0 0 0 / 0.05)"
     },
     {
-      "name": "inset-shadow/sm",
+      "name": "inset/shadow/sm",
       "type": "STRING",
       "value": "inset 0 2px 4px rgb(0 0 0 / 0.05)"
     },
     {
-      "name": "inset-shadow/xs",
+      "name": "inset/shadow/xs",
       "type": "STRING",
       "value": "inset 0 1px 1px rgb(0 0 0 / 0.05)"
     },
@@ -2097,31 +1877,6 @@
       "value": 1
     },
     {
-      "name": "text-shadow/2xs",
-      "type": "STRING",
-      "value": "0px 1px 0px rgb(0 0 0 / 0.15)"
-    },
-    {
-      "name": "text-shadow/lg",
-      "type": "STRING",
-      "value": "0px 1px 2px rgb(0 0 0 / 0.1), 0px 3px 2px rgb(0 0 0 / 0.1), 0px 4px 8px rgb(0 0 0 / 0.1)"
-    },
-    {
-      "name": "text-shadow/md",
-      "type": "STRING",
-      "value": "0px 1px 1px rgb(0 0 0 / 0.1), 0px 1px 2px rgb(0 0 0 / 0.1), 0px 2px 4px rgb(0 0 0 / 0.1)"
-    },
-    {
-      "name": "text-shadow/sm",
-      "type": "STRING",
-      "value": "0px 1px 0px rgb(0 0 0 / 0.075), 0px 1px 1px rgb(0 0 0 / 0.075), 0px 2px 2px rgb(0 0 0 / 0.075)"
-    },
-    {
-      "name": "text-shadow/xs",
-      "type": "STRING",
-      "value": "0px 1px 1px rgb(0 0 0 / 0.2)"
-    },
-    {
       "name": "text/2xl",
       "type": "FLOAT",
       "value": 24
@@ -2170,6 +1925,31 @@
       "name": "text/lg",
       "type": "FLOAT",
       "value": 18
+    },
+    {
+      "name": "text/shadow/2xs",
+      "type": "STRING",
+      "value": "0px 1px 0px rgb(0 0 0 / 0.15)"
+    },
+    {
+      "name": "text/shadow/lg",
+      "type": "STRING",
+      "value": "0px 1px 2px rgb(0 0 0 / 0.1), 0px 3px 2px rgb(0 0 0 / 0.1), 0px 4px 8px rgb(0 0 0 / 0.1)"
+    },
+    {
+      "name": "text/shadow/md",
+      "type": "STRING",
+      "value": "0px 1px 1px rgb(0 0 0 / 0.1), 0px 1px 2px rgb(0 0 0 / 0.1), 0px 2px 4px rgb(0 0 0 / 0.1)"
+    },
+    {
+      "name": "text/shadow/sm",
+      "type": "STRING",
+      "value": "0px 1px 0px rgb(0 0 0 / 0.075), 0px 1px 1px rgb(0 0 0 / 0.075), 0px 2px 2px rgb(0 0 0 / 0.075)"
+    },
+    {
+      "name": "text/shadow/xs",
+      "type": "STRING",
+      "value": "0px 1px 1px rgb(0 0 0 / 0.2)"
     },
     {
       "name": "text/sm",

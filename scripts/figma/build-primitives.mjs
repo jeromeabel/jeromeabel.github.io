@@ -40,6 +40,11 @@ const NAMESPACES = [
   "animate",
 ].sort((a, b) => b.length - a.length);
 
+// Tailwind 4.3 ships these stock palettes; this project uses none of them and
+// `1 Primitives` does not carry them. Dropped at generation so the Figma prune
+// stays closed instead of reappearing on every regenerate.
+const DROPPED_HUES = ["mauve", "mist", "olive", "taupe"];
+
 const HUES = [
   "red",
   "orange",
@@ -109,16 +114,24 @@ const seen = new Set();
 // rather than generating a wrong 36-entry spacing scale off a made-up base.
 let spacingBasePx = null;
 
+// Tailwind writes compound namespaces with a dash (`drop-shadow`, `font-weight`,
+// `ease-in-out`); `1 Primitives` uses slash separators throughout. Only a dash
+// before letters is a separator — a dash before digits is a ramp step, so
+// `color/brand/gray-100` and `spacing/0_5` are left alone.
+const slashify = (name) => name.replace(/-(?=[a-z]+(?:[/-]|$))/g, "/");
+
 function figmaName(prop) {
   const ns = NAMESPACES.find((n) => prop === n || prop.startsWith(n + "-"));
   if (!ns) return null;
   const leaf = prop === ns ? "DEFAULT" : prop.slice(ns.length + 1);
   if (ns === "color") {
+    if (DROPPED_HUES.some((h) => leaf === h || leaf.startsWith(h + "-")))
+      return null;
     const hue = HUES.find((h) => leaf === h || leaf.startsWith(h + "-"));
     if (hue) return `color/${hue}/${leaf.slice(hue.length + 1) || "DEFAULT"}`;
-    return `color/${leaf}`;
+    return slashify(`color/${leaf}`);
   }
-  return `${ns}/${leaf}`;
+  return slashify(`${ns}/${leaf}`);
 }
 
 for (const m of css.matchAll(/^\s*--([\w-]+):\s*([^;]+);/gm)) {
