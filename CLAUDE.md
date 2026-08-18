@@ -19,6 +19,7 @@ Personal portfolio and blog site for Jerome Abel, built with Astro 5, Tailwind C
 | `pnpm figma:verify`     | Diff code design tokens against the Figma variable dump (drift check)                          |
 | `pnpm figma:verify-raw` | Diff Figma raw (unbound) values against the `named-debt.json` allowlist                        |
 | `pnpm figma:primitives` | Regenerate `primitives.json` (Figma `1 Primitives` source) from the installed Tailwind version |
+| `pnpm figma:brief <id>` | Assemble a Magnet-DS Figma brief (resolves shared run-rules / prelude includes)                |
 | `pnpm geometry:web`     | Extract live-route computed geometry via Playwright (layout-exact prover, web side)            |
 | `pnpm test`             | Node test runner over `scripts/figma/*.test.mjs`                                               |
 

@@ -23,6 +23,7 @@ script never fails CI on its own.
 | `pnpm figma:verify`     | Extract code tokens + diff against a Figma token dump (Pass 1)                      |
 | `pnpm figma:verify-raw` | Diff a Figma raw-values dump against the `named-debt.json` allowlist (Pass 2)       |
 | `pnpm geometry:web`     | Extract live-route computed geometry via Playwright (layout-exact prover, web side) |
+| `pnpm figma:brief <id>` | Assemble a Magnet-DS Figma brief — resolves its shared includes                     |
 | `pnpm test`             | Run all `scripts/figma/**/*.test.mjs` unit tests                                    |
 
 ### pnpm figma:primitives — build-primitives.mjs
@@ -146,6 +147,26 @@ node scripts/figma/spot-check-shots.mjs [outDir]
 The four `no` rows are gitignored — regenerate/re-dump before running a verify command locally;
 CI does not run these (no Figma credentials there).
 
+## pnpm figma:brief — build-brief.mjs
+
+Sibling concern to the token pipeline: assembling the Magnet-DS migration briefs in
+`.specs/01_active/magnet-ds-final-state/figma/` for pasting into a Figma agent.
+
+The briefs share two things verbatim — the standing run rules and one of two Plugin-API helper
+preludes (`_prelude-components.js`, `_prelude-pages.js`). `use_figma` has no `import` and its
+sandbox scope resets between calls, so the prelude must accompany every paste; that is a runtime
+constraint, not a reason to store 20 copies. Briefs reference the shared parts with
+`<!-- include: _prelude-pages.js -->` and this script resolves them:
+
+```sh
+pnpm figma:brief --list        # task ids
+pnpm figma:brief P2-T04        # assembled brief on stdout
+```
+
+A `.js` include comes back wrapped in a fenced `js` block, a `.md` include inline. Exit: `0` ok · `1`
+unknown/ambiguous task id, or an include target that does not exist — a missing shared file is a
+hard error, never a silently truncated brief.
+
 ## Manual dump procedures
 
 Bindings and raw values are read through the Plugin API — reachable only via the `use_figma` MCP
@@ -167,6 +188,6 @@ baseline for `pnpm figma:verify` is 11: 3 pre-existing font rows + 8 from `3 Res
 ## Tests
 
 `pnpm test` runs every `*.test.mjs` next to its script (`build-primitives`, `extract-code-tokens`,
-`extract-fig-tokens`, `diff-tokens`, `diff-geometry`, `diff-raw-values`) via Node's built-in test
+`extract-fig-tokens`, `diff-tokens`, `diff-geometry`, `diff-raw-values`, `build-brief`) via Node's built-in test
 runner — no separate test framework. `extract-fig-tokens.test.mjs` exercises the shaping function
 against synthetic node graphs, so it needs no committed `.fig` fixture.

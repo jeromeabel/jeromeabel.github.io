@@ -11,6 +11,7 @@
     "format:write": "prettier --write .",
     "pixel-check": "node scripts/pixel-check.mjs",
     "test": "node --test scripts/figma/**/*.test.mjs",
+    "figma:brief": "node scripts/figma/build-brief.mjs",
     "figma:primitives": "node scripts/figma/build-primitives.mjs primitives.json",
     "figma:dump": "node scripts/figma/extract-fig-tokens.mjs",
     "figma:verify": "node scripts/figma/extract-code-tokens.mjs tokens.code.json && node scripts/figma/diff-tokens.mjs tokens.code.json tokens.figma.json scripts/figma/token-map.json",
