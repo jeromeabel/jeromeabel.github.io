@@ -24,19 +24,23 @@ test("light semantic colors extracted, lowercased hex", () => {
   const d = run();
   assert.equal(byName(d, "light/color-background").raw, "#f5ffe1");
   assert.equal(byName(d, "light/color-foreground").raw, "#1e1e1e");
-  assert.equal(byName(d, "light/color-surface-hover").raw, "#d1ddbb");
+  assert.equal(byName(d, "light/color-surface-hover").raw, "#eaf5d3");
+  assert.equal(byName(d, "light/color-border").raw, "#d1ddbb");
 });
 test("dark overrides extracted separately", () => {
   const d = run();
   assert.equal(byName(d, "dark/color-background").raw, "#1e1e1e");
   assert.equal(byName(d, "dark/color-foreground").raw, "#ececec");
 });
-test("all 7 semantic colors present in both modes", () => {
+test("all 12 semantic colors present in both modes", () => {
   const d = run();
   const light = d.tokens.filter((t) => t.name.startsWith("light/color-"));
   const dark = d.tokens.filter((t) => t.name.startsWith("dark/color-"));
-  assert.equal(light.length, 7);
-  assert.equal(dark.length, 7);
+  assert.equal(light.length, 12);
+  assert.equal(dark.length, 12);
+  // every light name has a dark twin — a mode-only color is drift, not a feature
+  const names = (ts, pre) => ts.map((t) => t.name.slice(pre.length)).sort();
+  assert.deepEqual(names(light, "light/color-"), names(dark, "dark/color-"));
 });
 test("font stacks extracted and whitespace-collapsed", () => {
   const d = run();

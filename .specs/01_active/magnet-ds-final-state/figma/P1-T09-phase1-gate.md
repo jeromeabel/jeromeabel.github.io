@@ -16,6 +16,53 @@ The repo half of this gate — `pnpm figma:dump` / `verify` / `verify-raw` / `ve
 
 ---
 
+## Step 0 — Corrective run (added after the first gate attempt)
+
+The first run came back **blocked** on two things. Both are fixed here, before re-inventorying.
+
+1. **`WorkCardPreviewSmall` (`2045:378`) had no domain prefix** and still sat in the legacy
+   section `Cards`. P1-T05 deferred its rename to phase 2, but `rename-map.md` arithmetic already
+   counted it as `work/WorkCardPreviewSmall`. Decision: give it the prefix now, keep the absorb
+   deferred. Assertion 1 stays absolute — no straggler exception.
+2. **Gate D reported 3 overlaps** (`app/Footer`↔`app/NavLink`,
+   `blog/BlogPreview`↔`blog/PostCard`, `blog/PostRow`↔`blog/PostCard`). Cause: P1-T07 turned
+   `app/NavLink` and `blog/PostCard` into COMPONENT_SETs, taller than the sources they replaced,
+   and **P1-T06 Step 2 was never re-run**, so the old grid coordinates stayed. Not a naming bug —
+   a stale layout.
+
+```js
+const page = figma.root.children.find((p) => p.name.includes("Components"));
+await page.loadAsync();
+await figma.setCurrentPageAsync(page);
+
+// 1 — prefix the last straggler
+const legacy = page.findOne((x) => x.id === "2045:378");
+if (!legacy) throw new Error("2045:378 not found — re-inventory before continuing");
+const before = legacy.name;
+if (before === "WorkCardPreviewSmall") legacy.name = "work/WorkCardPreviewSmall";
+
+// 2 — drop every legacy section left empty by P1-T06 (Chrome / Actions / Cards / …)
+const ORDER = ["app", "ui", "blog", "work", "hero", "contact", "about"];
+const removed = [];
+for (const c of page.children.slice()) {
+  if (c.type !== "SECTION" || ORDER.includes(c.name)) continue;
+  if (c.children.length) { removed.push({ section: c.name, kept: c.children.map((k) => k.name) }); continue; }
+  removed.push({ section: c.name, kept: [] });
+  c.remove();
+}
+return { renamed: { from: before, to: legacy.name, id: legacy.id }, sections: removed };
+```
+
+A non-empty `kept` means a master is still homed outside the seven domains — report it and stop;
+do not delete a section that holds anything.
+
+Then **re-run P1-T06 Step 1 and Step 2 verbatim**, in that order: Step 1 sweeps
+`work/WorkCardPreviewSmall` (and the two merged sets) into their sections, Step 2 re-lays every
+section on the grid, which is what clears the three overlaps. Step 1's `unhomed` must now be
+`_Docs/*` only — the five stragglers are gone.
+
+---
+
 ## Step 1 — Full Pass-0 re-inventory
 
 ```js
@@ -78,13 +125,16 @@ Re-run **P1-T06 Step 3** verbatim. Required: `overlaps: []`, `cropped: []`, `str
 
 `get_screenshot` on all 7 domain sections **and** on 📐 Decisions. Verdict per section: PASS, or what to fix. Every master fully visible, none clipped, none overlapping, consistent gaps, section order `app · ui · blog · work · hero · contact · about`.
 
+`about` is empty and that is a PASS — P1-T06 creates it, P2-T10 fills it. No other section may be empty.
+
 ## Acceptance
 
 Phase 1 is done when all of this is true:
 
 - 4 decision records exist on 📐 Decisions.
 - Both audited collections are clean; `3 Responsive` untouched.
-- Every DS master carries a domain prefix.
+- Every DS master carries a domain prefix — including `work/WorkCardPreviewSmall`, the 32nd
+  master, prefixed by Step 0 and absorbed later by P2-T04.
 - The three merges landed with the right variant matrices.
 - `app/Header` and `contact/ContactPreview` read 16, bound to `container/gutter`.
 - Container bands: check **every** direct child carrying `maxWidth`, not `children[0]` — a

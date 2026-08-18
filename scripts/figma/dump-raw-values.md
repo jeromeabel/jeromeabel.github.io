@@ -4,12 +4,17 @@ Deterministic det→LLM→det shape, same as `dump-tokens.md`: dump (Figma) →
 diff (script, warn-only) → judge only what the script flags as new.
 
 1. Read the `/figma-use` skill (required before any `use_figma` call this session).
-2. Pick scope: usually `🧩 Components` (`461:759`) + `📄 Pages` (`2558:18264`) — pass
+2. Pick scope: usually `❖ Components` (`461:759`) + `📄 Pages` (`2558:18264`) — pass
    both page IDs to `pageIds` below, or scope to one page for a narrow re-check.
-3. Run ONE `use_figma` call with the script below (per page in `pageIds` — still
-   one call, the script loops pages internally, never call `setCurrentPageAsync`
-   more than once per page inside it).
-4. Save the returned JSON to `raw-values.figma.json` at repo root.
+3. Run the script below **once per page, as parallel `use_figma` calls emitted in a
+   single message**. The `figma-use` skill allows at most one
+   `setCurrentPageAsync` per invocation, so the `pageIds` loop below cannot run as
+   written — drop the loop and hardcode one page id per call. A `use_figma` return
+   is also capped near 20 kB, so a page over ~250 rows needs `rows.slice()`
+   chunking; encoding rows as `id|nameIdx|kind` against a name dictionary roughly
+   halves the payload.
+4. Save the returned JSON to `raw-values.figma.json` at repo root (gitignored — a
+   local scratch artifact, not a committed baseline).
 5. Run `node scripts/figma/diff-raw-values.mjs raw-values.figma.json scripts/figma/named-debt.json`.
 6. Everything under "New raw values" needs a decision: bind it, or add an entry
    to `named-debt.json` with a reason (rare exceptions only — Tokenization rule).
@@ -23,6 +28,12 @@ for (const pid of pageIds) {
   if (!page) continue;
   await figma.setCurrentPageAsync(page);
   for (const n of page.query("*")) {
+    // SECTION and COMPONENT_SET carry Figma's own canvas furniture — the section
+    // tint and the dashed set border. Neither is ever rendered, so their fill /
+    // stroke / radius are not design debt. Added 2026-08-18: P1-T06 created seven
+    // domain SECTIONs and P1-T07 promoted two masters to sets, which put 67 rows
+    // of pure noise in the report.
+    if (n.type === "SECTION" || n.type === "COMPONENT_SET") continue;
     const bv = n.boundVariables || {};
     if (Array.isArray(n.fills))
       n.fills.forEach((f, i) => {
@@ -57,3 +68,16 @@ for (const pid of pageIds) {
 }
 return out;
 ```
+
+## Reading the report
+
+`named-debt.json` is keyed by **node id**, and Figma ids are not stable across
+restructuring — a merge, a reparent, or a rebuilt master mints new ids for the
+same visual node. So a large "New raw values" block after structural work means
+the allowlist keys drifted, not that new debt appeared. Check the shape of the
+list (are these the same node _names_ as the stale entries?) before treating the
+count as a regression.
+
+The allowlist has never covered the whole dump: it is a hand-picked set of
+accepted text-style exceptions, not a full baseline. A non-empty "New raw values"
+section is the normal state of this report.

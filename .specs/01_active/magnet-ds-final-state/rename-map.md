@@ -17,46 +17,52 @@ instances — they follow by id. Read-back after the run: `total: 34`, `canon: 2
 - `_Docs/*` masters are doc infrastructure, outside DS component scope — their names stay as is
   and they are not listed below.
 
-| Live name (2026-08-15 roster) | Canon name               | Verdict             |
-| ----------------------------- | ------------------------ | ------------------- |
-| `Header`                      | `app/Header`             | renamed             |
-| `Footer`                      | `app/Footer`             | renamed             |
-| `HeaderDrawer`                | `app/HeaderDrawer`       | renamed             |
-| `ThemeToggle`                 | `app/ThemeToggle`        | renamed             |
-| `MotionToggle`                | `app/MotionToggle`       | renamed             |
-| `Icon`                        | `ui/Icon`                | renamed             |
-| `H1`                          | `ui/H1`                  | renamed             |
-| `H2`                          | `ui/H2`                  | renamed             |
-| `PageDescription`             | `ui/PageDescription`     | renamed             |
-| `PreviewTitle`                | `ui/SectionTitle`        | renamed             |
-| `Link/Primary`                | `ui/Link/primary`        | renamed             |
-| `Link/Secondary`              | `ui/Link/secondary`      | renamed             |
-| `Link/SecondarySmall`         | `ui/Link/inline`         | renamed             |
-| `Link/TextLink`               | `ui/Link/textLink`       | renamed             |
-| `Link/IconOnly`               | `ui/Link/iconOnly`       | renamed             |
-| `Hero`                        | `hero/Hero`              | renamed             |
-| `HeroText`                    | `hero/HeroText`          | renamed             |
-| `HeroAnimation`               | `hero/HeroAnimation`     | renamed             |
-| `BlogPreviewSection`          | `blog/BlogPreview`       | renamed             |
-| `PostArchiveList`             | `blog/PostList`          | renamed             |
-| `SerieCardList`               | `blog/SerieList`         | renamed             |
-| `PostRow`                     | `blog/PostRow`           | renamed             |
-| `SerieCard`                   | `blog/SerieCard`         | renamed             |
-| `PostMetadataTime`            | `blog/PostMetadataTime`  | renamed             |
-| `PostMetadataTopic`           | `blog/PostMetadataTopic` | renamed             |
-| `SerieMeta`                   | `blog/SerieMeta`         | renamed             |
-| `WorkPreviewSection`          | `work/WorkPreview`       | renamed             |
-| `ContactPreviewSection`       | `contact/ContactPreview` | renamed             |
-| `ContactContent`              | `contact/ContactContent` | renamed             |
-| `NavLink`                     | `app/NavLink`            | deferred to P1-T07  |
-| `NavLinkHome`                 | `app/NavLink`            | deferred to P1-T07  |
-| `PostCardPreviewBig`          | `blog/PostCard`          | deferred to P1-T07  |
-| `PostCardPreviewSmall`        | `blog/PostCard`          | deferred to P1-T07  |
-| `WorkCardPreviewSmall`        | `work/WorkCard`          | deferred to phase 2 |
+| Live name (2026-08-15 roster) | Canon name               | Verdict                                 |
+| ----------------------------- | ------------------------ | --------------------------------------- |
+| `Header`                      | `app/Header`             | renamed                                 |
+| `Footer`                      | `app/Footer`             | renamed                                 |
+| `HeaderDrawer`                | `app/HeaderDrawer`       | renamed                                 |
+| `ThemeToggle`                 | `app/ThemeToggle`        | renamed                                 |
+| `MotionToggle`                | `app/MotionToggle`       | renamed                                 |
+| `Icon`                        | `ui/Icon`                | renamed                                 |
+| `H1`                          | `ui/H1`                  | renamed                                 |
+| `H2`                          | `ui/H2`                  | renamed                                 |
+| `PageDescription`             | `ui/PageDescription`     | renamed                                 |
+| `PreviewTitle`                | `ui/SectionTitle`        | renamed                                 |
+| `Link/Primary`                | `ui/Link/primary`        | renamed                                 |
+| `Link/Secondary`              | `ui/Link/secondary`      | renamed                                 |
+| `Link/SecondarySmall`         | `ui/Link/inline`         | renamed                                 |
+| `Link/TextLink`               | `ui/Link/textLink`       | renamed                                 |
+| `Link/IconOnly`               | `ui/Link/iconOnly`       | renamed                                 |
+| `Hero`                        | `hero/Hero`              | renamed                                 |
+| `HeroText`                    | `hero/HeroText`          | renamed                                 |
+| `HeroAnimation`               | `hero/HeroAnimation`     | renamed                                 |
+| `BlogPreviewSection`          | `blog/BlogPreview`       | renamed                                 |
+| `PostArchiveList`             | `blog/PostList`          | renamed                                 |
+| `SerieCardList`               | `blog/SerieList`         | renamed                                 |
+| `PostRow`                     | `blog/PostRow`           | renamed                                 |
+| `SerieCard`                   | `blog/SerieCard`         | renamed                                 |
+| `PostMetadataTime`            | `blog/PostMetadataTime`  | renamed                                 |
+| `PostMetadataTopic`           | `blog/PostMetadataTopic` | renamed                                 |
+| `SerieMeta`                   | `blog/SerieMeta`         | renamed                                 |
+| `WorkPreviewSection`          | `work/WorkPreview`       | renamed                                 |
+| `ContactPreviewSection`       | `contact/ContactPreview` | renamed                                 |
+| `ContactContent`              | `contact/ContactContent` | renamed                                 |
+| `NavLink`                     | `app/NavLink`            | deferred to P1-T07                      |
+| `NavLinkHome`                 | `app/NavLink`            | deferred to P1-T07                      |
+| `PostCardPreviewBig`          | `blog/PostCard`          | deferred to P1-T07                      |
+| `PostCardPreviewSmall`        | `blog/PostCard`          | deferred to P1-T07                      |
+| `WorkCardPreviewSmall`        | `work/WorkCard`          | prefixed in P1-T09, absorbed in phase 2 |
 
 29 renamed, 5 deferred. The five deferred names are merge targets, not renames: P1-T07 merges
 `NavLink`/`NavLinkHome` into `app/NavLink` and the two `PostCardPreview*` into `blog/PostCard`;
 P2-T04 absorbs `WorkCardPreviewSmall` into `work/WorkCard`, which is then archived.
+
+**P1-T09 correction.** P1-T05 left `WorkCardPreviewSmall` bare, which failed P1-T09 assertion 1
+(every ❖ Components master carries a domain prefix). Rather than carve an exception into the
+gate, P1-T09 Step 0 renames it `work/WorkCardPreviewSmall` and homes it in the `work` section —
+the interim name this file's arithmetic below already assumed. The absorb path is unchanged; only
+the lookup key moved (`P2-T04` step 5, `P2-T11` assertion 8 updated to match).
 
 **Count deviation.** The P1-T05 brief said _"Expected: 30 renames"_, but the `MAP` literal it
 shipped holds 29 keys. All 29 were found and renamed (`missing: []`), and the cold read-back

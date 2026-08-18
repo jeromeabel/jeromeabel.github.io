@@ -425,3 +425,148 @@ debt-covered — it was live drift, now closed. Nothing to remove.
 still name `NavLink` / `NavLinkHome` as separate masters and use pre-rename names, so the table
 describes a document that no longer exists. Nothing in it is actionable now; R1.6 takes a fresh
 `File > Export` and re-runs both passes against it. Stale named-debt entries: _none_.
+
+---
+
+## P1-T09 — phase-1 gate, attempt 1: **blocked**
+
+Run returned `STATUS: blocked`. Assertions 2–9 PASS; gutter bindings, container bands, the 4
+decision records and both collections all PASS. Two failures:
+
+1. **Assertion 1** — `WorkCardPreviewSmall` (`2045:378`) carries no domain prefix and still sits
+   in the legacy section `Cards`.
+2. **Gate D** — 3 overlaps: `app/Footer`↔`app/NavLink`, `blog/BlogPreview`↔`blog/PostCard`,
+   `blog/PostRow`↔`blog/PostCard`. `cropped: []`, `strays` = `_Docs/*` only.
+
+Step 4: 6/7 domain sections PASS, `blog` fails on the overlaps, `about` empty (expected — P2-T10
+fills it). 📐 Decisions PASS.
+
+### Diagnosis
+
+**Overlaps are a stale layout, not naming drift.** P1-T07 merged `NavLink`/`NavLinkHome` into the
+`app/NavLink` COMPONENT_SET and the two `PostCardPreview*` into `blog/PostCard`. Both sets are
+taller than the singletons they replaced. P1-T06 Step 1 tells you to re-run the _sweep_ after
+P1-T07 — but Step 2, the grid, was never re-run, so the merged sets grew into their neighbours at
+the old coordinates. Re-running P1-T06 Step 2 is the whole fix.
+
+**The straggler is a spec contradiction, now resolved.** `P1-T05-renames.md` deferred
+`WorkCardPreviewSmall`'s rename to P2-T04 and listed it as a known straggler; `rename-map.md`
+already counted the 32nd master as `work/WorkCardPreviewSmall`, prefix included; `P1-T09`
+assertion 1 admits no exception.
+
+### Decision — prefix now, absorb later
+
+Rename to `work/WorkCardPreviewSmall` and home it in the `work` section. Assertion 1 stays
+absolute; no straggler carve-out enters the gate, and the phase-2 arithmetic in `rename-map.md`
+becomes literally true. The absorb path is untouched — only P2-T04's lookup key moved.
+
+Repo-side edits made for it:
+
+| File                    | Change                                                                             |
+| ----------------------- | ---------------------------------------------------------------------------------- |
+| `P1-T09-phase1-gate.md` | New **Step 0** corrective: rename, drop empty legacy sections, re-run P1-T06 S1+S2 |
+| `P1-T09-phase1-gate.md` | Step 4 notes empty `about` is a PASS; acceptance names the 32nd master             |
+| `P2-T01-entry-gate.md`  | `legacy` must now be **empty**; new `absorbSource` check replaces it               |
+| `P2-T04-workcard.md`    | `findMaster` key + step 5 heading + acceptance → `work/WorkCardPreviewSmall`       |
+| `P2-T11-phase2-gate.md` | Assertion 8 name list → `work/WorkCardPreviewSmall`                                |
+| `rename-map.md`         | Row status + a P1-T09 correction note                                              |
+
+`P1-T05-renames.md` left as-is — it is a DONE record of what was true at the time.
+
+Attempt 2 runs the amended brief from Step 0. `inventory.md §Phase-1-after` still waits on the
+Step 1 JSON, which attempt 1 did not return in full.
+
+## P1-T09 — phase-1 gate, attempt 2 (2026-08-18)
+
+- STATUS: **DONE**
+- RESULT: Step 0 corrective landed; all 9 assertions PASS; Gate D clean; 8 screenshots PASS.
+- DEVIATIONS: none reported.
+- UNBOUND: none
+
+**Step 0.** `WorkCardPreviewSmall` → `work/WorkCardPreviewSmall` (`2045:378`), homed in `work`.
+Six legacy sections removed, all empty: `Chrome` `Actions` `Sections` `Typography` `Metadata`
+`Cards`. Re-running P1-T06 Step 2 cleared the three overlaps exactly as diagnosed — the merged
+COMPONENT_SETs just needed the grid recomputed around their new heights.
+
+**Counts, recomputed here against the returned JSON rather than taken on trust:** ❖ Components
+32 (`app` 6 · `ui` 10 · `blog` 9 · `work` 2 · `hero` 3 · `contact` 2 · `about` 0), `_Docs/*` 11
+(4 live + 7 archived), 📄 Pages 4, total 47. All match.
+
+**Two questions left open by earlier tasks, both closed by this read:**
+
+1. `zz/color/accent-hover` is **live** in `2 Theme` (15 vars). P1-T04's read-back returned
+   `orphans: []` and the note above asked the gate to confirm the prefix. Confirmed.
+2. Assertion 9 passes with `color/brand/gray-650`-style names still carrying a dash, which is
+   correct: R1.2 settled that a dash before letters is a separator, a dash before digits is a
+   ramp step. Only separators were converted.
+
+**One expectation worth fixing in the briefs, not in Figma.** Gate D returned `strays: []` where
+P1-T06 Step 3 / P1-T09 Step 3 both say "`strays` = `_Docs/*` only". The walk is scoped to the
+❖ Components page and no `_Docs/*` master is on it (P1-T05 step 2 already reported `docs: 0`), so
+empty is the right answer for a page-scoped check. Attempt 1 listed them because that run widened
+the walk. Left as-is for now — phase 2 gates read the same wording.
+
+`inventory.md §Phase-1-after` written from the Step 1 JSON: full 32-master roster with ids and
+both merge variant matrices, the 4 page masters, the 11 `_Docs/*`, and the post-audit collection
+table.
+
+### R1.6 — blocked on a fresh export
+
+`pnpm figma:dump` / `verify` / `verify-raw` / `verify-responsive` all read
+`tokens.figma.json` + `raw-values.figma.json` dated **2026-08-15**, which predate P1-T04→T09.
+Running them now re-reports known-stale rows (the `color/accent-hover` missing/orphan pair, 874
+raw rows naming pre-merge masters). Needs Figma **File > Export** to `~/Downloads/Magnet-DS.fig`
+before the gate can close.
+
+**`pnpm test` — 2 pre-existing failures, fixed.** `extract-code-tokens.test.mjs` asserted 7
+semantic colors per mode and `light/color-surface-hover = #d1ddbb`. Live `global.css` has **12**
+per mode and `#eaf5d3`; `#d1ddbb` is now `color-border`. Verified stale, not new: both fail on a
+clean tree at `544e33d`, and they date to `a24bd9d` (per-mode teal accent scale), which grew the
+palette without updating the test. `figma:verify` reports no value mismatch, so code and Figma
+agree — only the hardcoded expectation was behind. Updated to 12, kept the `#d1ddbb` assertion by
+repointing it at `color-border`, and added a light↔dark name-parity check so a mode-only color
+fails loudly next time. **57/57 pass.**
+
+### R1.6 — run against the 2026-08-18 export, gate closed
+
+Export landed at `~/Téléchargements/Magnet DS.fig` (the machine is French-locale; `~/Downloads`
+does not exist — `_back/Magnet DS.fig` is the stale 2026-08-15 copy, do not dump that one).
+
+| pass                      | result                                                                    |
+| ------------------------- | ------------------------------------------------------------------------- |
+| `figma:dump`              | 407 `1 Primitives` · 54 `2 Theme` · 2 `Design System` · 30 `3 Responsive` |
+| `figma:verify`            | Missing / Value mismatch / Orphaned / Unmapped — all `_none_`             |
+| `figma:verify-responsive` | all `_none_`                                                              |
+| `pnpm test`               | 57/57                                                                     |
+| `figma:verify-raw`        | 595 rows · 35 accepted · 14 stale · 560 new — see below                   |
+
+The stale `color/accent-hover` missing/orphan pair predicted after P1-T04 is gone, so `2 Theme`
+and the code tokens now agree row for row.
+
+**Pass 2 needed a live read, and the procedure was wrong in two ways.** `raw-values.figma.json`
+is not derivable from the `.fig` — it comes from a `use_figma` walk. `dump-raw-values.md` told
+the runner to loop `pageIds` inside one call, which the `figma-use` skill forbids (one
+`setCurrentPageAsync` per invocation), and a `use_figma` return truncates near 20 kB, so
+❖ Components (284 rows) and 📄 Pages (378 rows) both had to be fanned out and chunked, with rows
+encoded as `id|nameIdx|kind` against a name dictionary. Procedure updated with both constraints.
+
+**560 "new" raw values is id churn, not new debt.** `named-debt.json` is keyed by node id, and
+phase 1 minted new ids wholesale — P1-T07 merged four masters into two, P1-T06 reparented
+everything into sections, P1-T08 rebuilt container bands. The 14 stale entries are the other half
+of the same effect: they name masters (`2001:1303`, `2039:418`, …) that no longer exist under
+those ids. The allowlist never covered the dump anyway — 49 hand-picked text-style exceptions
+against an 874-row dump on 2026-08-15. A large "new" block is this report's normal state, which
+is now written down in `dump-raw-values.md` so the next reader does not mistake it for a
+regression.
+
+**One real finding, fixed at the tool.** P1-T06's seven domain SECTIONs and P1-T07's two new
+COMPONENT_SETs put 67 rows of Figma's own canvas furniture into the dump — the section tint and
+the dashed set border, neither of them rendered. The dump now skips `SECTION` and
+`COMPONENT_SET`; 662 rows → 595.
+
+Row count fell 874 → 595 overall, which is the expected shape: the legacy sections P1-T09 Step 0
+removed and the four masters collapsed into two took their raw values with them.
+
+**Not done here:** re-baselining `named-debt.json` against current ids. That is a judgement pass
+over ~560 rows — bind or accept, one at a time — and it belongs in its own task, not inside a
+verification gate. `figma:verify-raw` is warn-only and exits 0, so it does not block phase 2.

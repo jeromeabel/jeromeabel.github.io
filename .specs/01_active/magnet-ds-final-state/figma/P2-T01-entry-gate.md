@@ -54,6 +54,7 @@ return {
   missing: WANT.filter((w) => !names.includes(w)),
   alreadyPresent: TO_BUILD.filter((t) => names.includes(t)),
   legacy: names.filter((n) => !/^(app|ui|blog|work|hero|contact|about|_Docs)\//.test(n)),
+  absorbSource: names.includes("work/WorkCardPreviewSmall"),
   masters,
 };
 ```
@@ -61,7 +62,8 @@ return {
 ## Acceptance
 
 - `missing` is empty. Anything in it means phase 1 did not finish — **stop**, do not build on top of it.
-- `legacy` contains at most `WorkCardPreviewSmall` (absorbed and archived by P2-T04). Anything else is un-renamed.
+- `legacy` is **empty**. P1-T09 gave the last straggler its prefix, so an unprefixed name here is un-renamed drift.
+- `absorbSource` is `true` — `work/WorkCardPreviewSmall` is the 32nd master, deliberately absent from `WANT`; P2-T04 absorbs then archives it. `false` means it was renamed or deleted early — stop and find out where it went.
 - `alreadyPresent` is normally empty. If a `TO_BUILD` name is already there, report it — the corresponding brief will extend rather than create.
 - `count` = 32.
 

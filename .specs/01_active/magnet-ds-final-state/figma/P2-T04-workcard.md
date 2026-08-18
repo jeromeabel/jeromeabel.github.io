@@ -15,7 +15,7 @@ Biggest build of phase 2. One master, two very different anatomies behind a `var
 
 Source of truth for this anatomy is the WorkCard exploration spec (post-exploration round); everything you need is inlined below, so no repo access is required.
 
-`WorkCardPreviewSmall` (the current legacy master) is **absorbed**, not deleted — step 6 archives it.
+`work/WorkCardPreviewSmall` (the current legacy master) is **absorbed**, not deleted — step 6 archives it.
 
 <!-- include: _run-rules.md -->
 
@@ -309,12 +309,12 @@ return await home(set, "work");
 
 Then re-run the P1-T06 grid script so the `work` section relayouts around the new 1248-wide master.
 
-### Step 5 — archive `WorkCardPreviewSmall`
+### Step 5 — archive `work/WorkCardPreviewSmall`
 
 It is human-designed, so it is retired, not deleted.
 
 ```js
-const legacy = await findMaster("WorkCardPreviewSmall");
+const legacy = await findMaster("work/WorkCardPreviewSmall");
 if (!legacy) return { note: "already absorbed — nothing to archive" };
 let arch = figma.root.children.find((p) => p.name === "🗄️ Archive — Components");
 if (!arch) { arch = figma.createPage(); arch.name = "🗄️ Archive — Components"; }
@@ -351,7 +351,7 @@ Assert:
 - `work/WorkCard` is a COMPONENT_SET of 8 in the `work` section with axes `variant` / `state` / `side`.
 - Both anatomies match the inlined specs, including the real Le concept de la preuve content and its **two** artifact links.
 - Hover is underline + 1.02 cover only; the coupling and timing live in the master description.
-- `WorkCardPreviewSmall` sits on `🗄️ Archive — Components` renamed `zz/…`, not deleted.
+- `work/WorkCardPreviewSmall` sits on `🗄️ Archive — Components` renamed `zz/…`, not deleted.
 - Gate D clean on the `work` section after the re-grid.
 
 ---

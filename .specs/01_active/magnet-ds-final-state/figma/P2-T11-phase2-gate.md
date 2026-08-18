@@ -43,17 +43,17 @@ return out;
 
 ## Step 2 — the roster assertions
 
-| #   | assertion                                                                                                        | expected                                    |
-| --- | ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
-| 1   | masters on ❖ Components                                                                                          | **46**                                      |
-| 2   | `_Docs/*` masters                                                                                                | **11**                                      |
-| 3   | page masters on 📄 Pages                                                                                         | **4** (unchanged — phase 3 builds the rest) |
-| 4   | total masters                                                                                                    | **61**                                      |
-| 5   | every ❖ Components master matches `^(app\|ui\|blog\|work\|hero\|contact\|about)/`                                | 0 exceptions                                |
-| 6   | every ❖ Components master has a non-null `section` equal to its domain prefix                                    | 0 exceptions                                |
-| 7   | the `about` section is non-empty                                                                                 | 2 masters                                   |
-| 8   | no master named `WorkCardPreviewSmall`, `NavLinkHome`, `PostCardPreviewBig`, `PostCardPreviewSmall` outside `🗄️` | 0 hits                                      |
-| 9   | every COMPONENT_SET's `axes` are lowercase                                                                       | 0 exceptions                                |
+| #   | assertion                                                                                                             | expected                                    |
+| --- | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
+| 1   | masters on ❖ Components                                                                                               | **46**                                      |
+| 2   | `_Docs/*` masters                                                                                                     | **11**                                      |
+| 3   | page masters on 📄 Pages                                                                                              | **4** (unchanged — phase 3 builds the rest) |
+| 4   | total masters                                                                                                         | **61**                                      |
+| 5   | every ❖ Components master matches `^(app\|ui\|blog\|work\|hero\|contact\|about)/`                                     | 0 exceptions                                |
+| 6   | every ❖ Components master has a non-null `section` equal to its domain prefix                                         | 0 exceptions                                |
+| 7   | the `about` section is non-empty                                                                                      | 2 masters                                   |
+| 8   | no master named `work/WorkCardPreviewSmall`, `NavLinkHome`, `PostCardPreviewBig`, `PostCardPreviewSmall` outside `🗄️` | 0 hits                                      |
+| 9   | every COMPONENT_SET's `axes` are lowercase                                                                            | 0 exceptions                                |
 
 The 46 by domain: `app` 6 · `ui` 13 · `blog` 14 · `work` 6 · `hero` 3 · `contact` 2 · `about` 2.
 

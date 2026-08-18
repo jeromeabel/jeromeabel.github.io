@@ -278,3 +278,72 @@ the 6 sections.
 **Confirmed absent, as the spec requires (6 phase-2 rebuilds):**
 `TableOfContents` `SerieContents` `LinkNavPost` `RelatedWork` `WorkHeader`
 `RelatedWriting`. No phase-2 rebuild is secretly a rename.
+
+---
+
+## §Phase-1-after — roster at the P1-T09 gate (2026-08-18)
+
+Everything above this line is the **before** state, read at P1-T01. This section is the
+**after** state, returned by the P1-T09 Step 1 re-inventory. Phase 2 resolves names from here.
+
+**47 masters** = 32 on ❖ Components + 11 `_Docs/*` (4 live + 7 archived) + 4 on 📄 Pages.
+
+### ❖ Components — 32, all domain-prefixed
+
+| Section   | n   | Masters                                                                                                                                                                                                                                                                                           |
+| --------- | --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `app`     | 6   | `app/Header` `2981:546` · `app/Footer` `2969:432` · `app/NavLink` `3093:553` · `app/HeaderDrawer` `2981:4486` · `app/ThemeToggle` `16:11` · `app/MotionToggle` `16:12`                                                                                                                            |
+| `ui`      | 10  | `ui/Icon` `461:6204` · `ui/H1` `2119:7406` · `ui/H2` `2034:213` · `ui/SectionTitle` `2041:465` · `ui/PageDescription` `2119:7440` · `ui/Link/primary` `2012:6179` · `ui/Link/secondary` `2041:275` · `ui/Link/inline` `2350:737` · `ui/Link/textLink` `2041:313` · `ui/Link/iconOnly` `2093:6332` |
+| `blog`    | 9   | `blog/PostCard` `3093:5376` · `blog/PostRow` `2124:7937` · `blog/SerieCard` `2367:7205` · `blog/BlogPreview` `3041:1977` · `blog/PostList` `2977:4382` · `blog/SerieList` `2980:499` · `blog/PostMetadataTime` `2040:482` · `blog/PostMetadataTopic` `2371:10414` · `blog/SerieMeta` `2375:10662` |
+| `work`    | 2   | `work/WorkPreview` `2970:4368` · `work/WorkCardPreviewSmall` `2045:378`                                                                                                                                                                                                                           |
+| `hero`    | 3   | `hero/Hero` `2969:412` · `hero/HeroText` `2012:6142` · `hero/HeroAnimation` `2012:315`                                                                                                                                                                                                            |
+| `contact` | 2   | `contact/ContactPreview` `2114:7281` · `contact/ContactContent` `131:101`                                                                                                                                                                                                                         |
+| `about`   | 0   | empty by design — P2-T10 fills it                                                                                                                                                                                                                                                                 |
+
+The six legacy sections (`Chrome` `Actions` `Sections` `Typography` `Metadata` `Cards`) were
+removed in P1-T09 Step 0, all empty at the time. The §Sections table above is history.
+
+**Variant matrices of the merge outputs.** `app/NavLink` = 6 (`type` × `state`, `page|brand` ×
+`default|hover|active`). `blog/PostCard` = 8 (`size` × `breakpoint` × `state`).
+
+**`work/WorkCardPreviewSmall` is the 32nd**, prefixed here but not yet absorbed — P2-T04 folds it
+into `work/WorkCard`, then archives it. It is deliberately absent from the P2-T01 `WANT` list of
+31 and is checked by that gate's `absorbSource` flag instead.
+
+### 📄 Pages — 4, unchanged
+
+`Home — Desktop` `2604:1741` · `Home — Mobile` `2604:1742` · `Blog — Desktop` `2604:1744` ·
+`Blog — Mobile` `2604:1745`
+
+### `_Docs/*` — 11, unchanged
+
+Live on 📚 Docs (4): `_Docs/DecisionCard` `2590:571` · `_Docs/DoDont` `2590:588` ·
+`_Docs/Date` `2693:9890` · `_Docs/Status` `2693:9897`.
+Archived on 🗄️ Archive — Docs v1 (7): `_Docs/ChapterHeader` `_Docs/SpecimenCell`
+`_Docs/TokenRow` `_Docs/Headline` `_Docs/Paragraph` `_Docs/Divider` `_Docs/GroupHeader`.
+
+Assertion 3 counts `_Docs/*` document-wide, which is why the archived seven are in the 11.
+
+### §Variable collections — after both audits
+
+| Collection      | vars | modes                   | change since P1-T01                                       |
+| --------------- | ---- | ----------------------- | --------------------------------------------------------- |
+| `1 Primitives`  | 407  | Mode 1                  | 451 → 407: 44 unused stock ramps pruned, 25 dash→slash    |
+| `2 Theme`       | 15   | Light, Dark             | count unchanged; `color/accent-hover` → `zz/…` (archived) |
+| `3 Responsive`  | 18   | Desktop, Tablet, Mobile | frozen, untouched                                         |
+| `Design System` | 2    | Mode 1                  | exempt from audit                                         |
+
+`zz/color/accent-hover` reads live at the gate — this closes the read-back question P1-T04 left
+open. No `mauve*` / `mist*` / `olive*` / `taupe*` anywhere. No dash **separators** in
+`1 Primitives`; the surviving dashes are ramp steps (`color/brand/gray-650`), which the P1-T03
+rule keeps.
+
+### Gate D
+
+`overlaps: []` · `cropped: []` · `strays: []`.
+
+The brief expected `strays` = `_Docs/*` only; it came back **empty**. Not a regression — the
+Step 3 walk is scoped to the ❖ Components page and the 11 `_Docs/*` masters are not on it
+(P1-T05 step 2 already reported `docs: 0`). Attempt 1 listed them because that run widened the
+walk. Empty is the correct result for a page-scoped Gate D; the expectation in P1-T06 Step 3 and
+P1-T09 Step 3 is the thing that is loosely worded.
