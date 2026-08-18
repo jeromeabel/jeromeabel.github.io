@@ -285,3 +285,21 @@ other token is clean — no value mismatch, nothing unmapped.
 The extractor works; its fixtures are a stale vintage of `global.css`. Neither
 test touches anything R1.3 changed. Logged as `CODE DEBT` for the R3.7 handoff
 along with the dead `--color-accent-hover` declarations.
+
+---
+
+## P1-T05 — renames (2026-08-18)
+
+- STATUS: DONE
+- RESULT: step 1 `{ renamed: 29, missing: [] }` · step 2 cold read-back
+  `{ total: 34, canon: 29, stragglers: 5, docs: 0, unexpected: [] }`. The 5 stragglers are the
+  expected merge sources: `NavLink`, `NavLinkHome`, `PostCardPreviewBig`, `PostCardPreviewSmall`,
+  `WorkCardPreviewSmall`. Full three-column table in `rename-map.md`.
+- DEVIATIONS: the brief's prose said _"Expected: 30 renames"_ while its own `MAP` literal held 29
+  keys. All 29 found and renamed, `unexpected: []` — nothing was left behind, so the 30 is a slip
+  in the brief, not a gap in execution. Brief corrected in place. P1-T09 (32 on ❖ Components) and
+  P2-T01 (`WANT` of 31) both stay arithmetically correct against 29; see `rename-map.md`.
+- UNBOUND: none
+
+`docs: 0` on ❖ Components: the 11 `_Docs/*` masters live elsewhere in the document. P1-T09
+assertion 3 counts them document-wide, so it is unaffected.

@@ -76,7 +76,7 @@ for (const k of Object.keys(MAP))
 return out;
 ```
 
-**Expected:** 30 renames, `missing: []`.
+**Expected:** 29 renames (one per `MAP` key), `missing: []`.
 
 Names deliberately **not** in the map, and why:
 
@@ -117,7 +117,7 @@ return {
 
 - `unexpected` is empty. Anything in it is an un-renamed master — fix it before moving on.
 - `stragglers` has exactly the 5 names above.
-- `canon` has 30 entries.
+- `canon` has 29 entries.
 
 **Naming note for the report:** `Preview` in `blog/BlogPreview` / `work/WorkPreview` / `contact/ContactPreview` is the one documented semantic-role exception to the no-suffix rule. `Section` was dropped from all three.
 

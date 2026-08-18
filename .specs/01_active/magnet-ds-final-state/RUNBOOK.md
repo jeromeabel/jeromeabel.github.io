@@ -46,8 +46,8 @@ repo session.
 | [x]  | **R1.2** | `pnpm figma:primitives` + commit — 407/399 diff triaged    |
 | [x]  | P1-T04   | `2 Theme` — 15 vars, 1 archived, 0 dupes                   |
 | [x]  | R1.3     | token-map repointed; R1.2 deferrals closed, 407 = 407      |
-| [ ]  | P1-T05   | 30 masters → `domain/Component`                            |
-| [ ]  | R1.4     | log the rename map, commit                                 |
+| [x]  | P1-T05   | 29 renamed, 5 deferred to merges                           |
+| [x]  | R1.4     | log the rename map, commit                                 |
 | [ ]  | P1-T06   | ❖ Components → 7 domain sections                           |
 | [ ]  | P1-T07   | NavLink / PostCard / Link merges                           |
 | [ ]  | P1-T08   | container recipe: 16 / 1280 / centred, zero exceptions     |
