@@ -68,13 +68,13 @@ Do not start before R1.6 passes.
 | [x]  | P2-T04b | 8 `cover` fills — all raw `#D9D9D9`, bound to `color/gray/200`     |
 | [x]  | R2.2   | **no-op** — nothing unbound to declare; verify-raw deferred to R2.4 |
 | [x]  | P2-T05 | `work/ArchiveTable` — 3 breakpoints; re-grid + Gate D verified      |
-| [ ]  | P2-T06 | `contact/ContactPreview` gains `breakpoint`                        |
-| [ ]  | P2-T07 | `blog/TableOfContents`, `blog/SerieContents`                       |
+| [x]  | P2-T06 | `contact/ContactPreview` gains `breakpoint` — Desktop untouched     |
+| [x]  | P2-T07 | `blog/TableOfContents`, `blog/SerieContents` — fake `chevron-down`  |
 | [ ]  | P2-T08 | `work/WorkMiniCard`, `blog/RelatedWork`, `blog/PostNav` + record 5 |
 | [ ]  | P2-T09 | `work/WorkHeader`, `blog/PostRowCalm`, `work/RelatedWriting`       |
 | [ ]  | P2-T10 | `about/AboutFacts`, `about/AboutText`                              |
 | [ ]  | R2.3   | log the 4 phase-2 `CODE DEBT` findings                             |
-| [ ]  | P2-T11 | **GATE** — roster, variant axes, Gate D, iconOnly/small 24→32      |
+| [ ]  | P2-T11 | **GATE** — roster, axes, Gate D, iconOnly 24→32, fake `chevron-down` |
 | [ ]  | R2.4   | **GATE** — dump + verify + verify-raw + test, knowledge file       |
 
 ## Phase 3 — pages, docs, ship

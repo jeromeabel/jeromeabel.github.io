@@ -851,3 +851,78 @@ deferred the fix to P2-T11; it then produced an identical phantom-shortfall repo
 `figma/P1-T06-domain-sections.md` is patched now instead: `unhomed` and `strays` are documented as
 **expected-empty**, with a note that non-empty is real drift. P1-T09 Step 3 and P2-T11 quote the
 same wording — check them at the P2-T11 gate.
+
+## P2-T06 — `contact/ContactPreview` gains `breakpoint` (2026-08-19)
+
+- STATUS: **DONE**
+- RESULT: promoted COMPONENT `2114:7281` → COMPONENT_SET `3112:690`, axis `breakpoint` =
+  `Desktop | Mobile`. Band frame `ContactContainer` set `FILL`/`HUG`. Cold read-back:
+  Desktop 1280w, pad `[96, 16, 0, 16]`, `paddingLeft/Right → container/gutter`,
+  `paddingTop → spacing/24`; Mobile 390w, pad `[32, 16, 32, 16]`,
+  `paddingLeft/Right → container/gutter`, `paddingTop/Bottom → spacing/8`.
+  `ContactImage` **hidden, not deleted**, on Mobile only.
+- DEVIATIONS: two, both correct — below.
+- UNBOUND: none.
+
+**Desktop is untouched.** The read-back matches Step 1's pre-edit state field for field, so the
+promotion added a variant without perturbing the existing master — the thing that most often goes
+wrong when a COMPONENT becomes a COMPONENT_SET.
+
+**This is a band, not content, and that is why 390 is right.** `ContactPreview` is viewport-width
+with its own `container/gutter` padding, where `work/ArchiveTable` is content-width (358 = 390 −
+2×16). The two nest without double-padding: the band owns the gutter, the content sits inside it
+already stripped of one. Consistent with the P1-T08 recipe.
+
+**Deviation 1 — Mobile `paddingBottom` bound to `spacing/8`.** Desktop carries
+`paddingBottom = 0`, unbound; Mobile needs 32. Binding rather than typing a raw 32 is the run
+rule applied correctly.
+
+**Deviation 2 — Desktop `paddingBottom` left 0 and unbound.** Right call. Zero is the absence of
+a value, not a raw one; binding it to a `spacing/0` would invent a token to say "nothing", and it
+matches the original master. Not debt, nothing owed to `named-debt.json`.
+
+**Re-grid not run, deliberately.** The set is ~1710 wide against a `contact` section sitting at
+2480, so there is headroom and no crop risk. Per the cadence agreed after the second re-run: one
+re-grid + Gate D before the P2-T11 gate, not one per task, unless a task lands a master wide
+enough to burst its section.
+
+## P2-T07 — `blog/TableOfContents` + `blog/SerieContents` (2026-08-19)
+
+- STATUS: **DONE**
+- RESULT: `blog/TableOfContents` `3113:5417`, axis `breakpoint` = `Desktop | Mobile`
+  (Desktop `3113:660` 224×204, no stroke, no padding; Mobile `3113:692` 358×238, stroke bound
+  `color/border`, padding 16). `blog/SerieContents` `3113:5418` 720×217, 5 items, one
+  `item / current`. Both homed in the `blog` section.
+- DEVIATIONS: two — one real debt, one a non-finding.
+- UNBOUND: none.
+
+**Mobile 358 is content-width** (390 − 2×16), matching `work/ArchiveTable` and unlike
+`contact/ContactPreview`'s viewport-width band. Correct: the ToC sits inside a container, it is
+not one.
+
+**Deviation 1 — `ui/Icon` has no `chevron-down`; a `chevron-right` instance was renamed to
+`chevron-down`.** ⚠️ **This is the worst shape a placeholder can take** and it needs an explicit
+owner: the layer *name* now asserts a glyph the instance does not carry, so nothing downstream —
+not Gate D, not the P2-T11 binding sweep, not a screenshot diff — can tell it from a finished
+component. A missing icon announces itself; a mislabelled one does not. Recorded here as the
+tracking entry, and it joins `ui/Link/iconOnly size=small 24→32` on the **P2-T11 gate checklist**
+so the gate either fixes it or consciously signs it over to P3's icon-set expansion. Do not let
+P3 inherit it silently.
+
+**Deviation 2 — item 3 fitting on one line is not a finding.** The runner checked whether a long
+ToC entry wraps, found it fits at 670px effective width (h=21), and correctly reported the
+*layout* as the thing that matters: FILL width, AUTO height, no fixed-height rows. Wrapping is
+supported whether or not this sample string exercises it. Matches live `md:p-6` behaviour.
+
+**Dark-mode screenshots unverified.** The export context rendered dark identically to light. The
+bindings read back correct, so this is a screenshot-tooling limit, not a token fault — but it
+means no phase-2 master has had its dark rendering *seen*. P3-T09 builds the dark grid as
+mode-pinned instances and is the natural place to catch this; flagging so it is a decision, not
+an oversight.
+
+### Fresh `.fig` export landed
+
+`~/Téléchargements/Magnet DS.fig`, 67.8 MB, written 00:41 — one minute after P2-T07 closed. This
+is the artefact R1.6 and R2.2 both deferred to. **It is already a snapshot of a moving target:**
+P2-T08 → P2-T10 add roughly six more masters, so R2.4 needs its own export rather than this one.
+Useful now only for an early read; the gate must re-export.
