@@ -2,7 +2,7 @@
 task: P3-T04
 title: Work page master — case zigzag + archive table
 phase: 3
-status: TODO
+status: DONE
 prerequisite: P3-T03
 ---
 

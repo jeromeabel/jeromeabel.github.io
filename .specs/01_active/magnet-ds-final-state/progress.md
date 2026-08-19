@@ -1882,3 +1882,104 @@ further differences turned up** — all reported, none fixed here:
   reset (`resetOverrides()` would take the text overrides with it). Logged, not touched.
 
 **UNBOUND:** none.
+
+## P3-T03 — `Blog — Desktop` / `Blog — Mobile`, the document-type shell (2026-08-19)
+
+**TASK** P3-T03 · **STATUS** DONE — the reference document-type page; P3-T04 … P3-T08 copy this
+shape.
+
+### Step 1 — wrapper hoisted, container recipe on `PageContent`
+
+Both frames: `PageIntroContainer`, `SeriesSection`, `ArchiveSection` moved up to `PageContent`, and
+`PageContentContainer` deleted. `PageContent` now binds all six —
+`paddingLeft` / `paddingRight` → `container/gutter`, `maxWidth` → `container/max-width`,
+`itemSpacing` / `paddingTop` / `paddingBottom` → `section/rhythm-y` — with
+`counterAxisAlignItems: CENTER`. **No `PageContentContainer` survives anywhere in the file** (all
+non-archive pages swept), so the P3-T01 wrapper delta is closed by this task alone.
+
+### Step 2 — nothing to strip
+
+No section carried `container/gutter` or `container/max-width`, so the geometry could not
+double-apply. The document-type sections were already container-free; only Home-type sections own
+the recipe themselves.
+
+### Step 3 — content blocks
+
+Stack built **PageIntro → Archive → Series**. Three year groups — 2026 (3 posts), 2025 (2), 2024
+(1). Series is `ui/H2` `Series` + two `blog/SerieCard` (`Web Performance`, `My AI Journey`).
+Bindings: PageIntro `itemSpacing` → `spacing/4` · Archive `itemSpacing` → `spacing/8` · Series
+`itemSpacing` → `spacing/4`, `paddingTop` → `spacing/8` · serie grid `itemSpacing` →
+`3 Responsive::serie-list/gap`.
+
+**`blog/PostList` is a year group, not a row.** It is a COMPONENT_SET (`breakpoint=Desktop|Mobile`)
+holding a year label plus **four** `blog/PostRow` instances. So it is instanced once per *year*,
+with the surplus rows hidden — not once per post as the brief's wording implied. Any later brief
+that reaches for `blog/PostList` inherits this: four rows max per group, hide the remainder.
+
+Year label renders **IBM Plex Sans Medium 14**, not the Fira Code Bold 14 the brief described.
+Followed the master — Figma wins on styling.
+
+### `blog/PostRow` was unusable at 390 — master fixed
+
+`PostRowContent` was `HORIZONTAL` / `NO_WRAP`. `PostMetaRow` hugs at 319, so inside the 358-wide
+mobile column the title got **39 px**. Fix on the master, all four variants: `layoutWrap = WRAP`
+plus `line.minWidth = 200`. At Mobile `200 + 319 > 358` wraps; at Desktop `200 + 319 < 898` stays
+inline. Master edit the brief did not name — same call as P2's `contact/ContactPreview`: the run
+rules forbid fixing it as an instance override, so the master was the only correct place.
+
+### Order divergence — the spec amendment R3.1 already owns
+
+Spec §4 lists Series before Archive; live `/blog` renders Archive first. Built live-order and
+reported, per the brief. This is the amendment `repo/phase-3.md` R3.1 already lists for P3-T03 —
+edit `design.md` §4, do not touch the route.
+
+**UNBOUND:** `blog/PostRow` · all 4 variants · `PostRowContent > line.minWidth = 200`. Raw by
+necessity — the WRAP trigger needs a pixel floor and no variable expresses one. Carry to R3.3's
+`verify-raw` (allowlist it in `named-debt.json`, it will not resolve to a token).
+
+## P3-T04 — `Work — Desktop` / `Work — Mobile`, the case zigzag (2026-08-19)
+
+**TASK** P3-T04 · **STATUS** DONE — first page to reuse the P3-T03 document-type shell verbatim.
+
+### Step 1 — both breakpoints built
+
+`Work — Desktop` (`3144:2050`, 2539 px tall) and `Work — Mobile` (`3144:2287`, 2841 px) on the
+`Pages` page. Shell is `Header` (INSTANCE) → `PageContent` (FRAME, all six container-recipe
+bindings) → `Footer` (INSTANCE) — no `PageContentContainer`, per P3-T03.
+
+### Step 2 — zigzag verified
+
+Desktop card `side` reads `[left, right, left, right]`; Mobile is a single column so all four stay
+`left` (`side` is inert there). All 8 instances are `variant=case, state=default`.
+
+### Step 3 — hairlines
+
+3 per frame between the 4 cards — Desktop `3144:5723–5725`, Mobile `3144:5726–5728` — fill bound to
+`2 Theme::color/border`.
+
+### Step 4 — content
+
+H1 `Work`, `ui/PageDescription` per the brief, H2s `Selected projects` / `More projects`, and the
+four kicker/title pairs from the brief's table (Le concept de la preuve, Chimères Orchestra, La
+Malinette, Portfolio).
+
+### Step 5 — cold read-back
+
+Clean: `PageContent` holds all 6 bindings, `Selected` holds 4 `work/WorkCard` + 3 hairlines, and
+`work/ArchiveTable`'s `breakpoint` matches its frame on both.
+
+### `inst()` in `_prelude-pages.js` was broken once pages exist
+
+`findOne((x) => x.name === name)` matched an **INSTANCE** left behind by an earlier page before it
+reached the master, and `createInstance()` does not exist on an INSTANCE — the run crashed. Fixed in
+the shared prelude (not just this run): filter to `COMPONENT` / `COMPONENT_SET` and skip variants
+parented to a set, matching `_prelude-components.js`'s `findMaster`. P3-T05 … P3-T08 inherit the fix.
+No structural change to any node.
+
+### Live-vs-Figma divergence — deliberate, already in the brief
+
+Live `/work` renders a `WorkOverlayCard` gallery grid; Figma now holds the case zigzag. Figma leads,
+per the brief — this is a **code-debt candidate**, not a spec amendment. Carry to R3.1's divergence
+log.
+
+**UNBOUND:** none.

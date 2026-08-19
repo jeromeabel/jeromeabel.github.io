@@ -49,7 +49,15 @@ const inst = async (name, variantMatch) => {
   for (const p of figma.root.children) {
     await p.loadAsync();
     if (p.name.startsWith("🗄️")) continue;
-    const hit = p.findOne((x) => x.name === name);
+    // COMPONENT/COMPONENT_SET only — once a page is built, `findOne` would
+    // otherwise hit an INSTANCE of the same name first and `createInstance()`
+    // does not exist on it.
+    const hit = p.findOne(
+      (x) =>
+        (x.type === "COMPONENT" || x.type === "COMPONENT_SET") &&
+        x.name === name &&
+        !(x.parent && x.parent.type === "COMPONENT_SET"),
+    );
     if (!hit) continue;
     const base =
       hit.type === "COMPONENT_SET"

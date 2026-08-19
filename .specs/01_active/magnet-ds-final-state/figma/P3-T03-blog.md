@@ -2,7 +2,7 @@
 task: P3-T03
 title: Blog master — document-type PageContent, wrapper removed
 phase: 3
-status: TODO
+status: DONE
 prerequisite: P3-T01
 ---
 
