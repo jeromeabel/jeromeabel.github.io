@@ -2,7 +2,7 @@
 task: P2-T10
 title: Build about/AboutFacts and about/AboutText
 phase: 2
-status: TODO
+status: DONE (2026-08-19)
 prerequisite: P2-T02, P2-T03
 ---
 

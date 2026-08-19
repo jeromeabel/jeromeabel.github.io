@@ -2,7 +2,7 @@
 task: P2-T09
 title: Build work/WorkHeader, blog/PostRowCalm and work/RelatedWriting
 phase: 2
-status: TODO
+status: DONE (2026-08-19)
 prerequisite: P2-T02, P2-T08
 ---
 

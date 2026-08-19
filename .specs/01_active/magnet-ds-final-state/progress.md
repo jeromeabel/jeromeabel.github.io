@@ -1113,3 +1113,61 @@ carefully — `work-card-redesign` is mid-flight in `.specs/01_active/`, so P2-T
 that design settles, not before, or the rebuild gets thrown away twice.
 
 57 tests pass; all seven touched briefs reassemble via `pnpm figma:brief`.
+
+## P2-T10 — `about/AboutFacts` + `about/AboutText` (2026-08-19)
+
+- STATUS: **DONE** — the `about` section is no longer empty.
+- RESULT:
+  - `about/AboutFacts` `3119:2210` COMPONENT_SET, axis `facts` = `grid | strip`, both 832 wide.
+    `facts=grid` (57 tall) is four `FILL` columns at 190 each, root gap 24, item gap 4, value above
+    label — Bubbler One Regular 30 (letter-spacing 2%) over IBM Plex Sans Regular 14. `facts=strip`
+    (44 tall) is the `HAIR` form: root strokes `[1, 0, 1, 0]` bound to `2 Theme::color/border`, one
+    `items` child with `layoutWrap = WRAP`, gap-x 24 / gap-y 8, padding-y 12, cells in Fira Code
+    **Bold** value + Regular label — the `Bold` style exists in this file, no fallback needed. The
+    strip's shortened labels (`articles`, `downloads`) survived.
+  - `about/AboutText` `3119:2211` 832×1123, seven children in brief order: `ui/H1` INSTANCE →
+    lead TEXT → `ui/Prose` → `about/AboutFacts` (`facts=grid`) → `ui/Link/external` → `ui/Prose` →
+    `links` FRAME with two `ui/Link/secondary`.
+  - Copy verified by read-back, not by report: H1 through the text property (`Text#2119:12` = `About`),
+    CV link characters `Download CV`, prose block 1 at 245 chars with one SemiBold run
+    (`I build web applications`), prose block 2 at 981 chars with three (`Before the web`, `Teaching`,
+    `Open source since 2010`). Both Bubbler One texts read back as Bubbler One — no silent fallback.
+- Cold read-back done independently here on both ids via `use_figma` (structure, fonts, per-node
+  fill bindings, stroke weights, styled-text segments).
+- UNBOUND: none.
+
+**Layer names inside instances stay stale — read `characters`, not `name`.** The `ui/H1` instance
+still carries the layer name `Hi, I'm Jérôme!` and the CV link's TEXT is still named `Website`,
+because setting a text property or `characters` does not rename the node. A structure dump that
+prints layer names looks like step 4 never ran; it did. Noted because P3-T05/P3-T06 will hit the
+same illusion.
+
+**Deviation 1 — the CV icon is trailing, code puts it leading.** `ui/Link/external` slots its icon
+at index 1 and children of an instance cannot be reordered (`insertChild` throws), so the runner
+left it trailing and said so. Real divergence from `About.astro`, which passes an explicit leading
+`lucide:download`. Fixing it means an `iconSide` axis on `ui/Link/external`, which is a P2-T02
+change, not a P2-T10 one — carried to the P2-T11 gate as a call to make, default being to add the
+axis there rather than reopen the master now.
+
+**Deviation 2 — the 🤝 stays an emoji.** `ui/Prose`'s `p` TEXT node cannot host an inline instance,
+so `lucide:handshake` has no home in the paragraph. The brief already allowed this. No action; the
+emoji carries the intent and code keeps the icon.
+
+**Deviation 3 — `24` is a snapshot**, exactly as the brief permitted. It drifts with the post count;
+whoever refreshes the About page master in P3-T05 should re-read it rather than trust the number.
+
+**Hidden white root fills, pre-existing.** Both about masters carry an invisible `#ffffff` fill on
+the component root — the `figma.createComponent()` default. A sweep of the Components page finds 13
+masters in the same state (`ui/H1`, `ui/PageDescription`, `blog/RelatedWork`, `blog/PostNav` ×3,
+`work/ArchiveTable` ×3, `work/WorkMiniCard`, plus these three); every one of them is `visible: false`,
+so nothing renders. Not new debt and not worth a pass of its own — but `pnpm figma:verify-raw` at
+R2.4 reads paints, not visibility, so either the allowlist covers hidden paints or the check skips
+them. Flagged there.
+
+**Re-grid now owes `about` too.** Both masters sit at `0,0` inside the section, stacked on each
+other, and `about/AboutText` at 1123 tall overflows the section's 400. Same state as the P2-T08/T09
+masters — the one re-grid + Gate D before P2-T11 covers it. Widest new master is 832, inside the
+section's 2480, so no section resize is owed.
+
+**Step 6 (screenshots against live `/about`, light and dark) was not reported.** Folded into the
+P2-T11 gate's visual pass rather than re-run on its own.
