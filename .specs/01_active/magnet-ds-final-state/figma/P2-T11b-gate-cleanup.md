@@ -144,8 +144,9 @@ const F = (name, dir, opts = {}) => {
 };
 ```
 
-This is a repo edit, not a Figma one — report it as owed and Claude Code will make it. Do not
-hand-edit the prelude from inside the Figma session.
+**Already applied** in `_prelude-components.js` — this step is here so you know why frames built by
+this brief's own scripts come out transparent, and so the fix is on the record with the defect it
+prevents. Do not hand-edit the prelude from inside the Figma session.
 
 ## Step 5 — re-verify
 

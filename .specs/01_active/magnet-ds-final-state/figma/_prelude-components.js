@@ -1,5 +1,13 @@
-const F = (name, dir, opts = {}) =>
-  figma.createAutoLayout(dir, Object.assign({ name }, opts));
+const F = (name, dir, opts = {}) => {
+  const n = figma.createAutoLayout(dir, Object.assign({ name }, opts));
+  // createAutoLayout hands back Figma's default OPAQUE WHITE fill. The live site
+  // paints backgrounds on almost nothing — a layout frame is transparent unless a
+  // `bg-*` class says otherwise — and an unasked-for white slab is invisible on a
+  // light canvas and a solid block in dark. P2-T11 found 209 of them. Opt in to a
+  // surface, never inherit one.
+  if (!opts.fills) n.fills = [];
+  return n;
+};
 
 const P = (v) =>
   figma.variables.setBoundVariableForPaint(
