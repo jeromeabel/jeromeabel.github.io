@@ -2168,17 +2168,17 @@ Three verdicts are in play. **CODE DEBT** = Figma leads, code follows, feeds the
 was stale; both amendments were applied by this task, so nothing carries forward. The rest are
 recorded so the convergence topic does not re-discover them and open a change against correct code.
 
-| #   | From            | Finding                                                                                                                                   | Verdict                      |
-| --- | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- |
-| 1   | P3-T02          | Home drops `AboutStrip`, and the work strip is 3× `work/WorkCard variant=catalogue` where live renders `WorkMiniCard` + `WorkOverlayCard` | **CODE DEBT** — Figma leads  |
-| 2   | P3-T04          | Figma `/work` is the 4-card case zigzag + `work/ArchiveTable`; live is still a `WorkGalleryCard` grid                                     | **CODE DEBT** — Figma leads  |
-| 3   | P3-T03          | Live `/blog` renders **Archive before Series**; §4 listed Series first                                                                    | **SPEC AMENDMENT** — applied |
-| 4   | P3-T06          | Live puts `SocialShare` in the header meta row, `RelatedWork` before `PostNav`, and closes with an `All blog` link                        | **SPEC AMENDMENT** — applied |
-| 5   | P3-T07          | Live serie-landing list is boxless (top rule only); Figma uses the boxed `blog/SerieContents`                                             | **CODE DEBT** — Figma leads  |
-| 6   | P3-T08          | Live puts `ui/Prose` outside `.container`; Figma keeps every child in the one document-type container                                     | **no action** — intentional  |
-| 7   | P3-T06 + P3-T07 | `ui/Link/menuInactive` does not exist in Figma; both breadcrumbs fell back to `ui/Link/textLink`                                          | **brief defect** — strike it |
-| 8   | P3-T07          | `blog/SerieMeta` is one icon + one text field; live is two icon+text pairs                                                                | **Figma-side** — master gap  |
-| 9   | P3-T07          | `blog/RelatedWork` rode the clone into `Serie post — *`; the live serie-post route renders none                                           | **Figma-side** — remove it   |
+| #   | From            | Finding                                                                                                                                   | Verdict                               |
+| --- | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| 1   | P3-T02          | Home drops `AboutStrip`, and the work strip is 3× `work/WorkCard variant=catalogue` where live renders `WorkMiniCard` + `WorkOverlayCard` | **CODE DEBT** — Figma leads           |
+| 2   | P3-T04          | Figma `/work` is the 4-card case zigzag + `work/ArchiveTable`; live is still a `WorkGalleryCard` grid                                     | **CODE DEBT** — Figma leads           |
+| 3   | P3-T03          | Live `/blog` renders **Archive before Series**; §4 listed Series first                                                                    | **SPEC AMENDMENT** — applied          |
+| 4   | P3-T06          | Live puts `SocialShare` in the header meta row, `RelatedWork` before `PostNav`, and closes with an `All blog` link                        | **SPEC AMENDMENT** — applied          |
+| 5   | P3-T07          | Live serie-landing list is boxless (top rule only); Figma uses the boxed `blog/SerieContents`                                             | **CODE DEBT** — Figma leads           |
+| 6   | P3-T08          | Live puts `ui/Prose` outside `.container`; Figma keeps every child in the one document-type container                                     | **no action** — intentional           |
+| 7   | P3-T06 + P3-T07 | `ui/Link/menuInactive` does not exist in Figma; both breadcrumbs fell back to `ui/Link/textLink`                                          | **brief defect** — strike it          |
+| 8   | P3-T07          | `blog/SerieMeta` is one icon + one text field; live is two icon+text pairs                                                                | **Figma-side** — ✅ fixed at P3-T09   |
+| 9   | P3-T07          | `blog/RelatedWork` rode the clone into `Serie post — *`; the live serie-post route renders none                                           | **Figma-side** — ✅ removed at P3-T09 |
 
 **1 — Home composition.** `src/pages/index.astro:12-18` is `Hero → SelectedWriting → WorksStrip →
 AboutStrip → Contact`, and `WorksStrip.astro:18,20` renders `WorkMiniCard` + `WorkOverlayCard`.
@@ -2263,3 +2263,84 @@ Flagged in that entry "for R3.1" and parked here so they survive to P3-T11:
 - **`hero/Hero breakpoint=Mobile` drops `HeroAnimation`.** Live `Hero.astro` renders it at every
   breakpoint (`flex-col` stack on small screens). A Figma-side gap, not a Figma-leads decision —
   whoever revisits `hero/Hero` owns it.
+
+## P3-T09 — the 32-frame page grid, dark rows as mode-pinned instances (2026-08-19)
+
+**TASK** P3-T09 · **STATUS** DONE — 16 light masters + 16 dark instances, Gate D clean.
+
+### Pre-steps (carried from R3.1)
+
+1. **`blog/RelatedWork` removed** from `Serie post — Desktop` (instance `3147:6210`) and
+   `Serie post — Mobile` (`3147:6286`) — the clone artifact P3-T07 inherited from `Post — *`.
+   `src/pages/blog/[serie]/[post].astro` never imports it. Done **before** any cloning, so no dark
+   row inherited it. Closes R3.1 table row 9.
+2. **`blog/SerieMeta` (`2375:10662`) gained its second icon+text pair** — `Parts` (`3151:6651`,
+   `icon=layers` + `6 PARTS`) and `Read` (`3151:6652`, `icon=clock` + `~1H 20M READ`). Root
+   `itemSpacing` rebound `spacing/1` → `spacing/6` (24, live's `ms-6`); each pair keeps
+   `spacing/1`. All bindings inherited, no raw values. The 14 existing instance overrides survived
+   the reparent; the serie landing's packed `5 PARTS · ~1H 05M READ` was then split across the two
+   pairs. Closes R3.1 table row 8.
+
+### Step 1 — 16 light masters
+
+Twelve `FRAME`→`COMPONENT` conversions, all of which **took new ids** (`Blog — *` was already a
+component):
+
+| Route       | Desktop     | Mobile      |
+| ----------- | ----------- | ----------- |
+| Home        | `2604:1741` | `2604:1742` |
+| Blog        | `2604:1744` | `2604:1745` |
+| Work        | `3151:7307` | `3151:7308` |
+| About       | `3151:7309` | `3151:7310` |
+| Post        | `3151:7311` | `3151:7312` |
+| Serie       | `3151:7313` | `3151:7314` |
+| Serie post  | `3151:7315` | `3151:7316` |
+| Work detail | `3151:7317` | `3151:7318` |
+
+Pinning `3 Responsive=Mobile` re-resolved the Mobile masters, which had been rendering at Desktop
+mode — Work −256, About −128, Post −128, Serie −176, Serie post −152, Work detail −128. Expected.
+
+### Step 2 — 16 `[Dark]` instances
+
+One override each (the name), pinned `2 Theme=Dark` + breakpoint: Home `3151:7319` / `3151:7530`,
+Blog `3151:7700` / `3151:7880`, Work `3151:8048` / `3151:8288`, About `3151:8480` / `3151:8570`,
+Post `3151:8648` / `3151:8798`, Serie `3151:8939` / `3151:9018`, Serie post `3151:9085` /
+`3151:9240`, Work detail `3151:9386` / `3151:9508`. The four pre-existing dark frames from P3-T01
+(`2989:4642` / `4844` / `5033` / `5226`) were instances — machine output, nothing hand-drawn — so
+they were removed and recreated per the brief.
+
+### Steps 3–5 — grid, read-back, Gate D
+
+Columns `x = 0 / 1440 / 1990 / 3430` (gap 160), rows `y = 0 / 4611 / 7235 / 10248 / 12749 / 16322 /
+17620 / 21221` (gap 240); every row reads Desktop · Mobile · Desktop [Dark] · Mobile [Dark]. Cold
+read-back `drift: []`, all 16 light/dark height pairs identical. Gate D scoped to 📄 Pages:
+`overlaps: []`, `cropped: []`, `strays: []`, count **32** (16 COMPONENT + 16 INSTANCE, 0 other).
+
+### Deviations
+
+1. **50 unbound white fills cleared — not in the brief, but it blocked the task.** The first dark
+   render came back with a white body on 14 of 16 routes: the layout frames built by P3-T03…P3-T08
+   (`PageContent`, `PageIntro`, `Archive`, `Series`, `grid`, `Selected`, `More projects`,
+   `PostHeader`, `breadcrumb`, `metadata`, `Body`, `SerieHeader`, `title`, `PageLinks`) kept
+   `createFrame`'s default raw `#FFFFFF`, which paints over the mode-switched root. **Same defect
+   class as P2-T11b's 224-fill sweep, reintroduced after it ran** — the page briefs' helpers do not
+   clear the default. `fills = []` on all 50, on the light masters only, propagated to the dark
+   rows. Post-fix sweep for unbound SOLID fills on non-instance nodes across all 16 masters: `[]`.
+2. **`blog/SerieMeta`'s first icon swapped `folder` → `layers`.** Live's meta row is
+   `lucide:layers` + parts / `lucide:clock` + read (`blog/[serie]/index.astro:60-65`); the `folder`
+   icon belongs to `SerieCard`'s "Series" eyebrow, a different node.
+
+### Follow-ups this task opened
+
+- **`design.md` §4's Serie-post row needs a "minus `blog/RelatedWork`" qualifier** — R3.1 left this
+  open pending the Figma-side removal, which has now landed.
+- **12 `blog/SerieCard` / `blog/SerieList` instances now show the master default `~1H 20M READ`**
+  beside their existing `6 PARTS` — placeholder content on instances, same class as P3-T02's
+  "placeholder-uniform card content". Folded into P3-T11's sweep.
+- **`cover` rectangles stay light gray in dark rows** — they bind the `color/gray/200` _primitive_
+  (P2-T04b), which has no theme mode. Correct: real images do not invert either. Not a defect.
+
+**UNBOUND:** none introduced. Three carried-over items still unbound, now also read through their
+dark instances — `Serie — *` / `Serie post — *` / `Work detail — *` › `PageContent.itemSpacing`
+(48 / 32); `Serie post — *` › `breadcrumb` › `"Part 4 of 5".fontSize` (16); `Work detail — *` ›
+`cover.cornerRadius` (8).

@@ -2,7 +2,7 @@
 task: P3-T09
 title: Dark rows and the 32-frame grid
 phase: 3
-status: TODO
+status: DONE
 prerequisite: P3-T02 … P3-T08 (all 8 routes built)
 ---
 

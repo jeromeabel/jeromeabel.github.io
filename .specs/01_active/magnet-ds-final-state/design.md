@@ -274,12 +274,14 @@ contact/ContactPreview`).
 | About 🆕      | `about/AboutText` (facts strips inside, per live import graph)                                                                      |
 | Post detail   | PostHeader (H1 + metadata + `ui/SocialShare`) → `ui/Prose` → `blog/RelatedWork` → `blog/PostNav` → `ui/Link/secondary` (`All blog`) |
 | Serie landing | SerieHeader → `blog/SerieContents` (post rows = `blog/PostRow type=serie`)                                                          |
-| Serie post    | Post-detail stack + `blog/SerieContents` (position mirrors the live route)                                                          |
+| Serie post    | Post-detail stack **minus `blog/RelatedWork`** + `blog/SerieContents` (position mirrors the live route)                             |
 | Work detail   | `work/WorkHeader` → `ui/Prose` → `work/RelatedWriting`                                                                              |
 
 The Blog and Post-detail orders above are the **live** orders (amended at R3.1: Series follows
 Archive; `ui/SocialShare` sits in the `PostHeader` meta row, `blog/RelatedWork` precedes
-`blog/PostNav`, and a trailing `ui/Link/secondary` closes the page). Live wins on order.
+`blog/PostNav`, and a trailing `ui/Link/secondary` closes the page). Live wins on order. The
+Serie-post row subtracts `blog/RelatedWork` from that stack: `blog/[serie]/[post].astro` never
+imports it (removed from the masters at P3-T09).
 
 `PageIntro`, `PostHeader`, `SerieHeader` are **named layout frames** local to each page
 master (grouping H1 / `ui/PageDescription` / metadata instances) — not component
