@@ -2779,3 +2779,140 @@ UNBOUND: `3106:2150 prose-link-annotation > fill (#999999)` and `> text-style (I
 RE-RUN OWED: this pass verified the **19:20** export. The open-defect repair now running writes to
 the Figma file (`work/WorkCard` breakpoint axis, `ui/Prose` FILL fix), which invalidates that
 snapshot. A fresh `File > Export` + full R3.3 re-run is required before R3.6 archives.
+
+## R3.6-prep — open defect repair (2026-08-19)
+
+TASK: fix the two defects P3-T11 handed up, before R3.6 ships
+STATUS: done
+
+RESULT — **out-of-root-bounds across the 16 light masters: 103 → 1.**
+
+**Defect A — `Work — Mobile` rendered as four bare covers.** `work/WorkCard` (`3107:654`) gained a
+`breakpoint` axis (Desktop | Mobile), following the `work/ArchiveTable` / `contact/ContactPreview` /
+`blog/TableOfContents` convention. The 8 existing variants were renamed with `breakpoint=Desktop`
+appended **last** so the existing axis order — and therefore instance resolution — stayed stable;
+8 Mobile variants cloned from them. **8 → 16 variants, 4 axes**, full rectangular matrix.
+
+Mobile built to `work-card-redesign/spec.md` §2/§4/§5, not invented:
+
+- width **358** = 390 viewport − 2×16 gutter, matching `ArchiveTable breakpoint=Mobile`.
+- `case` root HORIZONTAL(64) → VERTICAL(20), children reordered `[cover, text]` on **both** sides
+  — "full card order preserved". `side` is inert on Mobile, mirroring how it is already inert on
+  `catalogue`.
+- cover FIXED 500×281 → `resize(358,201)` + `lockAspectRatio()` + `layoutSizingHorizontal = FILL`.
+- title + the three P/S/L sentences were HUG at 520/489/439 → FILL + `textAutoResize = HEIGHT`.
+- "stack + links merge to one mono line": on `catalogue` the `meta` frame became one HORIZONTAL
+  WRAP row and the `links` sub-frame was dissolved, so stack text and `↗ Live` / `↗ Repo` are
+  literal siblings in one wrapping flow. On `case`, `links` got `layoutWrap = WRAP`.
+- Mobile hover = title underline only. A FILL cover has no fixed geometry to scale, and the spec
+  requires nothing depend on hover there. Recorded in the set `description` with the side-inert rule.
+
+The four `variant=case` instances on `Work — Mobile` (`3144:2303/2321/2339/2357`) repointed to
+`breakpoint=Mobile`: that master went **68 out-of-bounds nodes → 0**, screenshot confirms four full
+stacked case cards.
+
+**Same defect one level up, found by the Home — Mobile check:** `work/WorkPreview` **already
+carried** a `breakpoint` axis, but its `breakpoint=Mobile` variant still nested three
+`breakpoint=Desktop` WorkCards — masked only because Desktop `catalogue` anatomy happens to be
+all-FILL. Repointed at the master (propagates to Home — Mobile); that specimen was also drawn at
+1280 and was resized to 390 to match `contact/ContactPreview breakpoint=Mobile`.
+**Rule: a `breakpoint` axis existing is not evidence its nested instances are wired to it.**
+
+**Defect B — responsive overflow on 9 of 16 light masters.** Root cause confirmed and fixed first.
+`ProseImage` (`3106:2125`) was FIXED 720 inside `ui/Prose`; at mobile content `x = 16` in a 390 root
+that is exactly `16 + 720 − 390 = +346`. Fixed with `lockAspectRatio()` (720×405 is exactly 16:9,
+so height follows) + `layoutSizingHorizontal = FILL`. `inline-code-example` (`3106:2120`) was FILL
+but its three HUG children summed to ~467 > 358 → `layoutWrap = WRAP` (inert at 720). Those two
+edits cleared **+346 and +93 on all four mobile document pages at once**; only then was the
+remainder re-measured.
+
+| Master               | before                                                            | after                   |
+| -------------------- | ----------------------------------------------------------------- | ----------------------- |
+| Home — Desktop       | tech-stack TEXT +6 · `layer1` GROUP +24                           | `layer1` +24 (accepted) |
+| Home — Mobile        | 3× tech-stack +37                                                 | 0                       |
+| About — Mobile       | +5                                                                | 0                       |
+| Post — Desktop       | +69                                                               | 0                       |
+| Serie post — Desktop | +69                                                               | 0                       |
+| Post — Mobile        | H1 −98 · ice +93 · ProseImage +346 · PostNav +314                 | 0                       |
+| Serie post — Mobile  | same set                                                          | 0                       |
+| Work — Mobile        | 68 nodes (defect A)                                               | 0                       |
+| Work detail — Mobile | ice +93 · ProseImage +346 · `8 min · July 2026` +36 ×2 · Link −29 | 0                       |
+| **total**            | **103 across 9 masters**                                          | **1 across 1 master**   |
+
+Remainder after the root cause, all one family — HUG text in a narrower FILL parent → FILL +
+`textAutoResize = HEIGHT`, or NO_WRAP rows that needed WRAP: `blog/PostNav` prev/next titles HUG at
+379/404 inside 258-wide FILL frames (PostNav grew 170 → 201, a real height change — titles now
+wrap); `about/AboutFacts` grid column TEXTs; WorkCard catalogue stack TEXT HUG at 411 in a 395 card;
+`ui/H1` (`2119:7401`) HUG 586 centred in a 358 FILL instance — **the master stays HUG**, so the two
+HUG hero instances are unaffected; `blog/PostRowCalm` `title-row` SPACE_BETWEEN/NO_WRAP → WRAP; six
+`ui/Link/secondary` instances pinned FIXED 154 carrying longer overridden labels ("Next: Chimères
+Orchestra" at 213px — the −29) → HUG.
+
+**Surviving +24 is deliberate:** `Home — Desktop > contact/ContactPreview > ContactImage > layer1`
+(`I2586:1143;2114:7231`). Decorative art positioned at `y = −168` — it already bleeds intentionally
+on the vertical axis, so the horizontal is the same intent. Clipping its container would cut 56px
+of artwork where a browser cuts 24, and moving hand-drawn art is not a layout fix.
+
+**GATE D:**
+
+- 📄 Pages — 32 frames, **0 strays / 0 overlaps / 0 cropped**. Gate D had never actually covered
+  this page (it is section-relative, 📄 Pages has no sections), so this was its first real run. It
+  initially found `Work — Mobile × About — Mobile` overlapping 390×677 — the taller Mobile case
+  cards — plus 3 cropped; all fixed by the re-space below.
+- ❖ Components — 46 masters (30 SET + 16 COMPONENT), **0 strays / 0 section overlaps / 0 in-section
+  overlaps / 0 out-of-section bounds**. 3 cropped remain, all `CoverContainer clips
+abstract_07_grid_landscape 1` — a cover crop doing its job.
+- Dark inheritance verified: all 16 light/dark pairs dimensionally identical (Work — Mobile
+  390×3690 | dark 390×3690). Screenshot of `Work — Mobile [Dark]` confirms the new cards inherited.
+  **No dark instance was edited.**
+
+ROSTER IMPACT: **unchanged** — 46 masters, 32 page frames. Only a variant count inside an existing
+set moved (`work/WorkCard` 8 → 16). R3.4's knowledge file keeps quoting both numbers.
+
+DEVIATIONS:
+
+1. **Grid coordinates from P3-T09/P3-T11 are now stale.** 📄 Pages rows re-spaced at a uniform 192
+   gap: Home 0 · Blog 4476 · Work 7052 · About 10934 · Post 13510 · Serie 17239 · Serie post 18489 ·
+   Work detail 22148. Columns `x = 0/1440/1990/3430` unchanged. ❖ Components sections re-fitted to
+   their children and re-spaced at a uniform 160 gap: app 0 · ui 1110 · blog 2823 · work 8582 ·
+   hero 13362 · contact 15058 · about 15872 — `work` re-gridded because WorkCard grew 1138 → 2298
+   tall. Both sets of coordinates corrected in `figma-ds-file.md` at this step.
+2. `work/WorkPreview breakpoint=Mobile` specimen resized 1280 → 390, its 3 nested WorkCards
+   repointed.
+3. Four out-of-brief defects of the same root-cause family were fixed rather than logged, each a
+   one-property fix surfaced by the sweep or Gate D: `about/AboutText > links` NO_WRAP → WRAP (it
+   regressed About — Mobile the moment the link boxes could hug, and WRAP needs a bounded width, so
+   that row went HUG → FILL); `blog/TableOfContents` active item was clipping 10px off its own
+   label → item TEXTs FILL + HEIGHT; `PostCardPreviewSmall` instances pinned FILL-vertical at
+   149/151 against 154 of content → HUG. The About — Desktop link boxes had been silently
+   overlapping for the same reason and are now correct.
+4. `Home — Desktop > layer1` left untouched — see above.
+5. Nothing human-designed was deleted. One structural removal: the `links` sub-frame inside the
+   four brand-new `catalogue … breakpoint=Mobile` clones, dissolved to execute the spec's "stack +
+   links merge to one mono line" — on machine-generated clones created in this task.
+6. No `🗄️ Archive — *` page opened. `3 Responsive` untouched. No dark instance edited.
+
+UNBOUND:
+
+- `work/WorkCard variant=case|catalogue, breakpoint=Mobile` (×8) > frame width (358) and `cover` >
+  size (358×201) — no `3 Responsive` variable holds 358 and that collection is settled, so there is
+  nothing to bind to. Same position `work/ArchiveTable` (P2-T05) and `contact/ContactPreview`
+  (P2-T06) took when they reported `UNBOUND: none` for their own Mobile masters.
+- `work/WorkPreview breakpoint=Mobile` > frame width (390) — viewport width, same reason, identical
+  to `contact/ContactPreview breakpoint=Mobile`.
+- Everything else set here is bound — 20 bindings: `spacing/5` (case Mobile root gap 20),
+  `spacing/3` (catalogue merged-row gap 12, about links wrap gap 12), `spacing/2` (wrap gaps 8),
+  `spacing/1` (wrap gaps 4 on `inline-code-example` and both `PostRowCalm` title-rows).
+- **Pre-existing, not introduced here:** all spacing/padding/radius on the 8 Desktop `work/WorkCard`
+  variants is raw (`boundVariables` carries only `strokes`/`fills`) — gaps 12/20/24/64, padTop 4,
+  radius 8, from the P2-T04 build. Left alone rather than run an unscoped binding sweep. Flagged so
+  it is logged rather than silently allowlisted.
+
+## CODE DEBT — R3.6-prep (2026-08-19)
+
+| #   | Finding                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | `src/components/work/WorkCard.astro` is marked LEGACY in-file and is **unused** — `/work` renders `WorkGalleryCard`, and `WorkCard` is reachable only through `WorksPreview.astro`, which no v3 page imports. The Figma `work/WorkCard` catalogue/case anatomy from `work-card-redesign/spec.md` **has no code counterpart at all**, so the new `breakpoint` axis has nothing to converge against until that component is built. |
+| 2   | The responsive behaviours fixed in Figma are unverified on the code side: prose image FILL + 16:9 lock, inline-code wrapping, `ui/H1` wrapping, `PostRowCalm` title/meta wrapping, TOC active-item wrapping, `ui/Link/secondary` auto-width.                                                                                                                                                                                     |
+| 3   | The DS has **no single responsive convention**: `work/ArchiveTable`, `contact/ContactPreview`, `blog/TableOfContents` and now `work/WorkCard` + `work/WorkPreview` carry breakpoint axes, while `blog/PostNav`, `work/WorkHeader`, `work/RelatedWriting` stay 720–832 FIXED and rely on flexible children. Settle in convergence.                                                                                                |
+| 4   | The 8 Desktop `work/WorkCard` variants carry raw spacing/padding/radius from P2-T04 (see UNBOUND) — a bounded binding sweep, not a redesign.                                                                                                                                                                                                                                                                                     |

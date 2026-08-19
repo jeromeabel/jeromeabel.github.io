@@ -85,8 +85,8 @@ agree. Full before→after mapping: `.specs/02_archives/magnet-ds-final-state/re
 **work (6)**
 
 - ⬍ work/WorkPreview (`2970:4368`, SET)
-- work/WorkCard (`3107:654`, SET — 8 variants, `variant` × `state` × `side`; **no `breakpoint`
-  axis** → see open defect (a))
+- ⬍ work/WorkCard (`3107:654`, SET — **16 variants**, `variant` × `state` × `side` × `breakpoint`;
+  Mobile is 358 wide, `case` goes VERTICAL with `side` inert)
 - ⬍ work/ArchiveTable (`3111:5650`, SET — 3 breakpoints)
 - work/WorkMiniCard (`3117:659`) · work/WorkHeader (`3118:680`)
 - work/RelatedWriting (`3118:5417`)
@@ -146,40 +146,50 @@ from its light master. Light masters pin `3 Responsive=Desktop|Mobile`.
 | Serie post | `3151:7315` | `3151:7316` | `3151:9085` | `3151:9240` |
 | Work detail | `3151:7317` | `3151:7318` | `3151:9386` | `3151:9508` |
 
-Grid: columns `x = 0 / 1440 / 1990 / 3430` (gap 160); rows `y = 0` Home · `4611` Blog · `7235`
-Work · `10248` About · `12749` Post · `16322` Serie · `17620` Serie post · `21221` Work detail
-(gap 240).
+Grid: columns `x = 0 / 1440 / 1990 / 3430` (gap 160); rows `y = 0` Home · `4476` Blog · `7052`
+Work · `10934` About · `13510` Post · `17239` Serie · `18489` Serie post · `22148` Work detail
+(gap 192). Rows were re-spaced at the R3.6-prep repair — the Mobile case cards made the Work /
+Post / Serie post / Work detail rows taller.
 
-## ⚠️ Open defects — the file is NOT clean
+## Responsive — how the file answers mobile
 
-Both were found at P3-T11, both deliberately **not fixed**, both handed to
-`magnet-ds-code-convergence`. A drift check that reads this file must not report the file as clean.
+Two defects lived here until the R3.6-prep repair (2026-08-19); both are **fixed**. Kept as a
+method note, because the check that found them is not the one you would reach for by default.
 
-**(a) `Work — Mobile` renders as four bare covers.** `work/WorkCard`'s axes are
-`variant` (catalogue|case) / `state` / `side` — there is **no `breakpoint` axis**. `variant=case`
-is a HORIZONTAL master built at 1248 with a FIXED 500px cover, so on `Work — Mobile` the four
-`variant=case` instances collapse the `text` column to **1px** — four gray blocks, no text. Live
-`WorkCard.astro` is marked LEGACY and offers no mobile answer either. Fixing means designing a
-mobile case variant across 8+ masters: a redesign, not a repair.
+**Run the strict out-of-root-bounds sweep, not Gate D, when auditing 📄 Pages.** Gate D is
+section-relative, and 📄 Pages has no sections — so it reports vacuously clean there. The strict
+sweep found **103** out-of-bounds nodes across 9 of the 16 light masters where Gate D found 0.
+After the repair: **1**, and that one is deliberate — `Home — Desktop > contact/ContactPreview >
+ContactImage > layer1` (`I2586:1143;2114:7231`) at +24 right is decorative art already bleeding
+intentionally at `y = −168`. Horizontal bleed is the same intent, not a layout bug.
 
-**(b) Responsive overflow on 9 of 16 light page masters.** Found by an out-of-root-bounds check
-**stricter than the official Gate D**, which is section-relative and therefore vacuously empty on
-section-less pages. Run the strict check, not Gate D, when auditing 📄 Pages.
+**One root cause explained most of it.** `ProseImage` (`3106:2125`) was FIXED 720 inside
+`ui/Prose`; at mobile content `x = 16` in a 390 root that is exactly `16 + 720 − 390 = +346`, on
+every mobile document page. Fixed with `lockAspectRatio()` (720×405 is exactly 16:9) plus
+`layoutSizingHorizontal = FILL`. `inline-code-example` (`3106:2120`) was FILL but its three HUG
+children summed past 358 → `layoutWrap = WRAP` (inert at 720). Those two edits cleared +346 and
++93 across four masters at once. **Chase the root cause before the symptoms** — the remaining
+fixes were all the same family: HUG text in a narrower FILL parent → FILL + `textAutoResize =
+HEIGHT` (`blog/PostNav` titles, `about/AboutFacts` columns, `ui/H1`, WorkCard's stack line), or
+NO_WRAP rows that needed WRAP (`blog/PostRowCalm` title-row, `about/AboutText > links`).
 
-| Master | Overflow |
-| --- | --- |
-| Home — Desktop | tech-stack TEXT +6 · ContactImage `layer1` GROUP +24 |
-| Home — Mobile | 3× tech-stack TEXT +37 |
-| About — Mobile | +5 |
-| Post — Desktop | `Optimizing Images…` +69 |
-| Serie post — Desktop | same, +69 |
-| Post — Mobile | `ui/H1` −98 left · inline-code-example +93 · ProseImage +346 · `blog/PostNav` next +314 |
-| Serie post — Mobile | same set |
-| Work — Mobile | see (a) |
-| Work detail — Mobile | inline-code-example +93 · ProseImage +346 · `8 min · July 2026` +36 ×2 · `ui/Link/secondary` −29 left |
+**`work/WorkCard` gained a `breakpoint` axis** (8 → 16 variants), built to
+`.specs/…/work-card-redesign/spec.md`: Mobile 358 wide, `case` root HORIZONTAL → VERTICAL with
+children reordered `[cover, text]` on **both** sides (so `side` is inert on Mobile, mirroring how
+it is already inert on `catalogue`), cover FILL + aspect-locked, stack and links merged into one
+wrapping mono row. Hover on Mobile is title-underline only — a FILL cover has no fixed geometry
+to scale, and the spec requires that nothing depend on hover there.
 
-`ProseImage +346` and `inline-code-example +93` repeat on **every** mobile document page — **one
-root cause** (a FIXED-width prose child that never got FILL), not four separate bugs.
+**`work/WorkPreview` had the same defect one level up**: it already carried a `breakpoint` axis,
+but its `breakpoint=Mobile` variant still nested three `breakpoint=Desktop` WorkCards. Masked
+only because the Desktop `catalogue` anatomy happens to be all-FILL. **When a set carries a
+`breakpoint` axis, check that its nested instances are pointed at the matching breakpoint** —
+the axis existing is not evidence it is wired.
+
+**There is still no single responsive convention.** `work/ArchiveTable`, `contact/ContactPreview`,
+`blog/TableOfContents`, `work/WorkCard` and `work/WorkPreview` carry breakpoint axes;
+`blog/PostNav`, `work/WorkHeader`, `work/RelatedWriting` stay 720–832 FIXED and rely on flexible
+children. Settling this belongs to `magnet-ds-code-convergence`.
 
 ## Container recipe and ownership
 
@@ -310,10 +320,11 @@ No doc references page-master ids or grid counts, so page renumbering invalidate
   `1 Primitives` re-counted live at **407** (a stale 451 was found shipping in a Docs card and
   corrected). Canvas cleaned at three levels — 6 COMPONENT_SETs had every variant stacked at
   (0,0) and two ❖ Components SECTIONs overlapped, neither visible to the section-relative Gate D;
-  all 7 sections repacked. `XP - WorkCard` renamed into the archive. **Two open defects shipped
-  unresolved**: `work/WorkCard` has no `breakpoint` axis (Work — Mobile collapses to bare covers)
-  and 9 of 16 light page masters overflow their root, with one repeating root cause (a FIXED-width
-  prose child that never got FILL).
+  all 7 sections repacked. `XP - WorkCard` renamed into the archive. Two defects found at the
+  phase-3 gate were **repaired before ship**: `work/WorkCard` gained a `breakpoint` axis (8 → 16
+  variants) and the strict out-of-root-bounds sweep went **103 → 1** across the 16 light masters,
+  mostly from one root cause — a FIXED-width prose child that never got FILL. 📄 Pages rows and
+  ❖ Components sections were re-spaced to fit the taller Mobile cards.
 - 2026-08-19 — **Phase-2 gate passed** (P2-T01→T11b + R2.4). ❖ Components **32 → 46**: fifteen
   masters built (`ui/Link/external` `ui/Prose` `ui/SocialShare` `work/WorkCard` `work/ArchiveTable`
   `blog/TableOfContents` `blog/SerieContents` `work/WorkMiniCard` `blog/RelatedWork` `blog/PostNav`
