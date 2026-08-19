@@ -33,7 +33,7 @@ VERTICAL, gap 0, width 224 fixed:
 
 1. **Label** — `On this page`, IBM Plex Sans Medium 14, **uppercase**, fill `2 Theme::color/foreground-muted`, margin-bottom 12 (use `paddingBottom` on the label or `itemSpacing` on the list wrapper — do not add a spacer rectangle).
 2. **List** — VERTICAL, gap 8. Each item is a HORIZONTAL frame with:
-   - a **2px left rail**: rectangle 2 wide, FILL height, fill bound `2 Theme::color/border`,
+   - a **2px left rail**: the item's own `strokeLeftWeight = 2` bound `2 Theme::color/border`,
    - padding-left 12 after the rail,
    - text IBM Plex Sans Regular 14, fill `foreground-muted`.
 3. **Nested children** — a child heading is the same item shape indented a further 12, inside a VERTICAL frame with padding-top 8.
@@ -109,24 +109,25 @@ const ITEMS = [
 ];
 
 const mkItem = async (label, depth, active) => {
+  // Code is `border-s-2 ps-3` on the <a>: the rail is the item's own left border,
+  // not a rectangle sibling. Depth indent lives on a wrapper, the way the nested
+  // <ol class="ps-3"> carries it in code.
   const row = F(active ? "item / active" : "item", "HORIZONTAL", { itemSpacing: 0 });
-  row.paddingLeft = depth * 12;
-  const rail = figma.createRectangle();
-  rail.name = "rail"; rail.resize(2, 20);
-  rail.fills = [P(V["2 Theme::color/border"])];
-  row.appendChild(rail);
+  HAIR(row, V["2 Theme::color/border"], ["left"], 2);
+  row.paddingLeft = 12;
   const t = await T(label, {
     size: 14,
     weight: active ? "Medium" : "Regular",
     fill: V[`2 Theme::color/${active ? "foreground-strong" : "foreground-muted"}`],
   });
-  const pad = F("pad", "HORIZONTAL", { itemSpacing: 0 });
-  pad.paddingLeft = 12;
-  row.appendChild(pad);
-  pad.appendChild(t);
-  pad.layoutSizingHorizontal = "FILL";
-  rail.layoutSizingVertical = "FILL";
-  return row;
+  row.appendChild(t);
+  t.layoutSizingHorizontal = "FILL";
+  if (!depth) return row;
+  const indent = F("indent", "HORIZONTAL", { itemSpacing: 0 });
+  indent.paddingLeft = depth * 12;
+  indent.appendChild(row);
+  row.layoutSizingHorizontal = "FILL";
+  return indent;
 };
 
 const build = async (bp) => {

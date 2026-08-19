@@ -83,14 +83,11 @@ for (const line of ["First item in a list", "Second item, a little longer", "Thi
   txt.layoutSizingHorizontal = "FILL";
 }
 
-// Blockquote — 2px left rail
-const quote = F("blockquote", "HORIZONTAL", { itemSpacing: 24 });
+// Blockquote — 2px left rail, the element's own border (code: border-l + pl)
+const quote = F("blockquote", "HORIZONTAL", { itemSpacing: 0 });
 await add(quote);
-const rail = figma.createRectangle();
-rail.resize(2, 10);
-rail.fills = [P(BORDER)];
-quote.appendChild(rail);
-rail.layoutSizingVertical = "FILL";
+HAIR(quote, BORDER, ["left"], 2);
+quote.paddingLeft = 24;
 const qt = await T("A pulled quote sits behind a two-pixel rail, not a box.", { size: 20, weight: "Italic", fill: MUTED });
 quote.appendChild(qt);
 qt.layoutSizingHorizontal = "FILL";

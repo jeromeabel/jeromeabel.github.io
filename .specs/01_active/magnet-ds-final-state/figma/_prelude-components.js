@@ -13,14 +13,14 @@ const P = (v) =>
 // rectangle child. Adds no node and survives auto-layout resizing.
 // Use a rectangle ONLY for a rule with no owner (a divider sitting between two
 // sibling instances, e.g. the column rule on Blog).
-const HAIR = (n, v, sides = ["bottom"]) => {
+const HAIR = (n, v, sides = ["bottom"], weight = 1) => {
   n.strokes = [P(v)];
   n.strokeTopWeight = 0;
   n.strokeBottomWeight = 0;
   n.strokeLeftWeight = 0;
   n.strokeRightWeight = 0;
   for (const s of sides) {
-    n[`stroke${s[0].toUpperCase()}${s.slice(1)}Weight`] = 1;
+    n[`stroke${s[0].toUpperCase()}${s.slice(1)}Weight`] = weight;
   }
   return n;
 };

@@ -1075,3 +1075,41 @@ brief now says `textCase` instead of the ambiguous word "uppercase". Fira Code r
 
 **No re-grid owed.** Widest new master is 832, inside the `work` section's 4136 after the P1-T06
 re-run. Cadence unchanged: one re-grid + Gate D before P2-T11.
+
+### Hairline sweep — every brief on `HAIR()` (2026-08-19, after P2-T09)
+
+P2-T09 adopted the recipe; this pass applies it to the **whole brief set**, run and un-run alike,
+so no brief still teaches the rectangle form. `HAIR` gained a fourth argument (`weight`, default 1)
+to carry the 2px rails.
+
+**Converted — element owns the rule:**
+
+| Brief  | Site                       | Was                                    | Now                                            |
+| ------ | -------------------------- | -------------------------------------- | ---------------------------------------------- |
+| P2-T03 | `ui/Prose` blockquote      | 2×N rect + `itemSpacing 24`            | `HAIR(quote, …, ["left"], 2)` + `paddingLeft 24` |
+| P2-T04 | `work/WorkCard` top rule   | rect child, then gap 12                | `HAIR(c, …, ["top"])` + `paddingTop 12`        |
+| P2-T04 | `work/WorkCard` meta rail  | `paddingTop 12`, then rect, then gap 8 | `HAIR(rail, …, ["top"])` + `paddingTop 12`     |
+| P2-T05 | `work/ArchiveTable` rows   | `wrap` frame + rect child              | `HAIR(row)` — the `wrap` frames are gone       |
+| P2-T07 | `blog/TableOfContents` rail| 2×N rect + `pad` frame                 | `HAIR(row, …, ["left"], 2)`, depth on a wrapper |
+| P2-T10 | `about/AboutFacts` strip   | two rects                              | `HAIR(c, …, ["top", "bottom"])`                |
+
+**Kept as rectangles — no element owns the edge**, each with the reason inline so the next reader
+does not "fix" it: P3-T03 blog column divider, P3-T06 post-header rule (sits *inside* head's bottom
+padding, not on its outer edge — a stroke would move the line), P3-T04 rules between sibling
+WorkCard instances (a stroke there would be a local instance override). Covers and `ProseImage`
+are placeholders, not rules, and were never in scope.
+
+**Two of the conversions change geometry, on purpose.** `work/WorkCard`'s two rules were modelled
+as children *after* the padding, so the rule sat 12px inside the card; `border-t` puts it on the
+outer edge with the 12 as padding underneath. P2-T05's row wrappers disappear entirely. Everything
+else is pixel-identical — the rail conversions keep the same 2px + 12px inset, and P2-T10's strip
+rules were already at the component edges.
+
+**Consequence: four shipped masters now disagree with their corrected briefs** — `ui/Prose`,
+`work/WorkCard` (8 variants), `work/ArchiveTable` (3), `blog/TableOfContents` (2). They were built
+before the rule existed. New RUNBOOK row **P2-T10b** rebuilds them on `HAIR()`; P2-T11's gate row
+now checks that rather than the earlier "default: leave". `work/WorkCard` is the one to sequence
+carefully — `work-card-redesign` is mid-flight in `.specs/01_active/`, so P2-T10b should run after
+that design settles, not before, or the rebuild gets thrown away twice.
+
+57 tests pass; all seven touched briefs reassemble via `pnpm figma:brief`.

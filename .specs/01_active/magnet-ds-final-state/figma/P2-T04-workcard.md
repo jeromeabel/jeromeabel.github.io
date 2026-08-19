@@ -45,14 +45,14 @@ Default variant: `variant=catalogue, state=default, side=left`.
 
 Everything is left-aligned, no card border, no background fill. The card _is_ the content.
 
-1. **Hairline** — 1px rectangle, FILL width, fill bound `2 Theme::color/border`. This is the top rule of the card.
+1. **Top rule** — the card's own `strokeTopWeight = 1` bound `2 Theme::color/border` (`HAIR(c, …, ["top"])`), with `paddingTop = 12` under it. Not a rectangle child: code writes `border-t` on the card itself, so the rule sits on the outer edge and the 12 is padding *inside* it.
 2. **Index row** — HORIZONTAL, FILL width, `primaryAxisAlignItems = "SPACE_BETWEEN"`, padding-top 8, padding-bottom 8.
    - left: text `01` — Fira Code Regular 12, tabular figures, fill `2 Theme::color/foreground-muted`.
    - right: text `↗` — Fira Code Regular 12, fill `2 Theme::color/foreground-muted`.
 3. **Cover** — rectangle, FILL width, aspect 16:9 (395 → 222 high), corner radius 8, **no stroke**. Fill: a placeholder `1 Primitives::color/…/200`-ish neutral is fine; name the layer `cover`.
 4. **Title** — text, IBM Plex Sans SemiBold 17, fill `2 Theme::color/foreground-strong`, FILL width.
 5. **Kicker** — text, Fira Code Regular 12, **uppercase**, letter-spacing `0.08em`, fill `2 Theme::color/foreground-muted`. Format `TYPE · YEAR`.
-6. **Meta rail** — VERTICAL, gap 8, padding-top 12, with a 1px top hairline (same rectangle recipe as step 1).
+6. **Meta rail** — VERTICAL, gap 8, with a 1px top hairline on the rail itself (`HAIR(rail, …, ["top"])`) and `padding-top 12` under it — same recipe as the card rule in step 1.
    - **stack line** — text, Fira Code Regular 12, fill `foreground-muted`, values joined with `·`.
    - **link line** — HORIZONTAL, gap 16. One text per artifact the project actually has: `↗ Live`, `↗ Repo`, `↗ Video`. Fira Code Regular 12, fill `2 Theme::color/foreground` (**not** muted — these are the only default-color text in the card).
 
@@ -128,14 +128,6 @@ const page = figma.root.children.find((p) => p.name.includes("Components"));
 await page.loadAsync();
 await figma.setCurrentPageAsync(page);
 
-const hair = () => {
-  const r = figma.createRectangle();
-  r.name = "hairline";
-  r.resize(100, 1);
-  r.fills = [P(V["2 Theme::color/border"])];
-  return r;
-};
-
 const buildCatalogue = async (state) => {
   const c = figma.createComponent();
   c.name = `variant=catalogue, state=${state}, side=left`;
@@ -145,7 +137,10 @@ const buildCatalogue = async (state) => {
   c.primaryAxisSizingMode = "AUTO";
   c.counterAxisSizingMode = "FIXED";
 
-  const h1 = hair(); c.appendChild(h1); h1.layoutSizingHorizontal = "FILL";
+  // Top rule is the card's own border-t; the 12 that followed the old rectangle
+  // child becomes the card's own padding-top.
+  HAIR(c, V["2 Theme::color/border"], ["top"]);
+  c.paddingTop = 12;
 
   const idx = F("index", "HORIZONTAL", { itemSpacing: 8 });
   c.appendChild(idx);
@@ -174,7 +169,7 @@ const buildCatalogue = async (state) => {
   c.appendChild(rail);
   rail.layoutSizingHorizontal = "FILL";
   rail.paddingTop = 12;
-  const h2r = hair(); rail.appendChild(h2r); h2r.layoutSizingHorizontal = "FILL";
+  HAIR(rail, V["2 Theme::color/border"], ["top"]);
   rail.appendChild(await T("Astro · Tailwind CSS · Astro DB · Turso · Netlify · Sharp",
     { size: 12, family: "Fira Code", fill: V["2 Theme::color/foreground-muted"] }));
   const links = F("links", "HORIZONTAL", { itemSpacing: 16 });

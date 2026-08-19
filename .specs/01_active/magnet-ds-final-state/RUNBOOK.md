@@ -73,8 +73,9 @@ Do not start before R1.6 passes.
 | [x]  | P2-T08 | `work/WorkMiniCard`, `blog/RelatedWork`, `blog/PostNav` + record 5; paint-binding sweep, 21 call sites |
 | [x]  | P2-T09 | `work/WorkHeader`, `blog/PostRowCalm`, `work/RelatedWriting`; hairline recipe → `HAIR()` per-side strokes |
 | [ ]  | P2-T10 | `about/AboutFacts`, `about/AboutText`                              |
+| [ ]  | P2-T10b | rebuild the 4 rect-hairline masters on `HAIR()` — `ui/Prose`, `work/WorkCard` (8), `work/ArchiveTable` (3), `blog/TableOfContents` (2) |
 | [ ]  | R2.3   | log the 4 phase-2 `CODE DEBT` findings                             |
-| [ ]  | P2-T11 | **GATE** — roster, axes, Gate D, iconOnly 24→32, fake `chevron-down`, raw paints from P2-T02..T07 (see R2.4 verify-raw), rectangle hairlines in WorkCard + ArchiveTable (default: leave) |
+| [ ]  | P2-T11 | **GATE** — roster, axes, Gate D, iconOnly 24→32, fake `chevron-down`, raw paints from P2-T02..T07 (see R2.4 verify-raw), rect-hairline masters rebuilt per P2-T10b |
 | [ ]  | R2.4   | **GATE** — dump + verify + verify-raw + test, knowledge file       |
 
 ## Phase 3 — pages, docs, ship

@@ -116,7 +116,7 @@ return fixed;
 
 ## Step 3 — hairlines between case rows
 
-Insert a 1px rectangle bound to `2 Theme::color/border` between consecutive cards inside `Selected` — 3 hairlines for 4 cards — each `layoutSizingHorizontal = "FILL"`. Do it in the same run as the zigzag fix if that run was needed; otherwise its own run.
+Insert a 1px rectangle bound to `2 Theme::color/border` between consecutive cards inside `Selected` — 3 hairlines for 4 cards — each `layoutSizingHorizontal = "FILL"`. Rectangle **on purpose**: these rules sit between two sibling instances and no element owns the edge, so the `HAIR()` rule in `_run-rules.md` does not apply (and a stroke on a WorkCard instance would be a local override). Do it in the same run as the zigzag fix if that run was needed; otherwise its own run.
 
 ## Step 4 — fill real copy
 

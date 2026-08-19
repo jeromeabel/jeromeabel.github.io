@@ -44,9 +44,9 @@ Widths: Desktop 1248, Tablet 704, Mobile 358 (390 − 2×16 gutter).
 
 ## Anatomy
 
-Root: VERTICAL auto-layout, no fill, no border, `itemSpacing = 0`. The table's only rules are horizontal hairlines.
+Root: VERTICAL auto-layout, no fill, no border, `itemSpacing = 0`. The table's only rules are horizontal hairlines, each carried by the row it belongs to (`HAIR`), never by a rectangle child.
 
-**Header row** — HORIZONTAL, FILL width, padding-bottom 8, with a 1px bottom hairline bound to `2 Theme::color/border`. Each cell:
+**Header row** — HORIZONTAL, FILL width, padding-bottom 8, carrying its own 1px bottom hairline bound to `2 Theme::color/border`. Each cell:
 
 - Fira Code Regular 12, **uppercase**, fill `2 Theme::color/foreground-muted`, `textAlignHorizontal = "LEFT"`, padding-right 16.
 - Labels exactly: `YEAR` · `PROJECT` · `TYPE` · `BUILT WITH` · `LINK`.
@@ -116,13 +116,6 @@ const ROWS = [
   ["2022","La Forme","Art, Software","—","—"],
 ];
 
-const hair = () => {
-  const r = figma.createRectangle();
-  r.name = "hairline"; r.resize(100, 1);
-  r.fills = [P(V["2 Theme::color/border"])];
-  return r;
-};
-
 const build = async (bp) => {
   const keys = SHOW[bp];
   const c = figma.createComponent();
@@ -132,10 +125,11 @@ const build = async (bp) => {
   c.primaryAxisSizingMode = "AUTO"; c.counterAxisSizingMode = "FIXED";
 
   const mkRow = async (cells, isHead) => {
-    const wrap = F(isHead ? "head" : "row", "VERTICAL", { itemSpacing: 0 });
-    c.appendChild(wrap); wrap.layoutSizingHorizontal = "FILL";
-    const r = F("cells", "HORIZONTAL", { itemSpacing: 0 });
-    wrap.appendChild(r); r.layoutSizingHorizontal = "FILL";
+    // The row owns its rule (code: border-b on <tr>), so no wrapper frame and no
+    // rectangle child — the row's own strokeBottomWeight.
+    const r = F(isHead ? "head" : "row", "HORIZONTAL", { itemSpacing: 0 });
+    HAIR(r, V["2 Theme::color/border"]);
+    c.appendChild(r); r.layoutSizingHorizontal = "FILL";
     r.counterAxisAlignItems = "CENTER";
     r.paddingTop = isHead ? 0 : 8; r.paddingBottom = 8;
     for (const key of keys) {
@@ -154,7 +148,6 @@ const build = async (bp) => {
       if (col.w) { cell.resize(col.w, cell.height); cell.layoutSizingHorizontal = "FIXED"; }
       else cell.layoutSizingHorizontal = "FILL";
     }
-    const h = hair(); wrap.appendChild(h); h.layoutSizingHorizontal = "FILL";
     return r;
   };
 
