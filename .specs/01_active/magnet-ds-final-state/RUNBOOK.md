@@ -92,7 +92,7 @@ Do not start before R2.4 passes.
 | [x]  | P3-T05 | `About — *` — thinnest shell: one `about/AboutText` per frame, 832 left-aligned Desktop / FILL Mobile; no deviations, no UNBOUND |
 | [x]  | P3-T06 | `Post — *` — live order built, TOC in `Body` @224 Desktop / above `Body` FILL Mobile; breadcrumb fell back to `ui/Link/textLink`; 3 §4 deltas → R3.1; no UNBOUND |
 | [x]  | P3-T07 | `Serie — *`, `Serie post — *` — 4 masters, serie-post cloned from `Post — *` (FRAME); breadcrumb again fell back to `ui/Link/textLink`; boxless-vs-boxed landing list → code debt; 2 UNBOUND (`itemSpacing` 48/32, `Part 4 of 5` 16) |
-| [ ]  | P3-T08 | `Work detail — *`                                                     |
+| [x]  | P3-T08 | `Work detail — *` — 2 masters; `WorkHeader` needed no overrides; Prose-outside-container simplified into one container recipe; 2 UNBOUND (`itemSpacing` 48/32, cover `cornerRadius` 8) |
 | [ ]  | R3.1   | log page divergences + apply the 2 `design.md` §4 amendments          |
 | [ ]  | P3-T09 | 32 frames, dark rows as mode-pinned instances                         |
 | [ ]  | P3-T10 | 📚 Docs — Getting Started + 5 foundations                             |

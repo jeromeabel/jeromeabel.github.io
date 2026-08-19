@@ -2113,3 +2113,44 @@ the P3-T04 work-grid divergence.
 
 - `Serie — Desktop` / `Serie — Mobile` › `PageContent.itemSpacing` (48 / 32) — no responsive var matches
 - `Serie post — Desktop` / `Serie post — Mobile` › `breadcrumb` › `"Part 4 of 5".fontSize` (16) — plain text node, not from a component
+
+## P3-T08 — `Work detail — *`, the project-case route (2026-08-19)
+
+**TASK** P3-T08 · **STATUS** DONE — 2 masters built.
+
+### Step 1 — build
+
+`Work detail — Desktop` (`3148:3245`), 1280×3185, `counterAxisAlign=MIN` (left-aligned 832 column).
+Stack: `work/WorkHeader` (832) → `cover` RECTANGLE (FILL) → `ui/Prose` (832) →
+`work/RelatedWriting` (832) → `PageLinks` FRAME (HUG).
+
+`Work detail — Mobile` (`3148:3380`), 390×3267, `counterAxisAlign=MIN`.
+Same stack, every child FILL: `work/WorkHeader` → `cover` → `ui/Prose` → `work/RelatedWriting` →
+`PageLinks` (HUG).
+
+### Step 2 — content
+
+`work/WorkHeader` needed **no overrides**: H1 `Le concept de la preuve`, description, the
+TYPE / DATE / STACK facts and exactly two artifact links (Demo + Code) all came through from the
+master as built in P2-T09. `PageLinks` carries `All work` + `Next: Chimères Orchestra`.
+`work/RelatedWriting` keeps the two `blog/PostRowCalm` instances it inherits from its master.
+
+### Step 3 — read-back
+
+Cold read-back verified both frames; screenshots captured.
+
+### Simplification — Prose outside the container
+
+Live puts `ui/Prose` **outside** `.container` with its own `max-width`. Figma keeps every child
+inside the document-type `PageContent` container instead — same visual result, one container recipe
+rather than two. Recorded as a deliberate Figma-side simplification, not a divergence.
+
+### Deviations
+
+1. **`PageContent.itemSpacing` overridden** from `shell()`'s `section/rhythm-y` binding (96 / 32) to
+   raw 48 / 32, per the brief's code. Same cause as P3-T07: no responsive variable maps to 48/32.
+
+**UNBOUND:**
+
+- `Work detail — Desktop` / `Work detail — Mobile` › `PageContent.itemSpacing` (48 / 32) — no responsive var for `gap-8`/`gap-12`
+- `Work detail — Desktop` / `Work detail — Mobile` › `cover.cornerRadius` (8) — raw, no radius variable exists to bind
