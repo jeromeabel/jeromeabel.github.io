@@ -1242,3 +1242,62 @@ Recorded as verified so P2-T11's Gate D does not read the hidden layers as an un
 express it, because `ui/Link/external` has a trailing-only icon slot and `insertChild` throws inside
 an instance. The fix is an `iconSide` variant axis on `ui/Link/external` (a P2-T02 master), carried
 on the P2-T11 gate row. Listed here so the convergence topic does not re-file it against the site.
+
+---
+
+## P2-T10b — rect hairlines → `HAIR()` strokes (2026-08-19)
+
+**TASK** P2-T10b · **STATUS** DONE · **UNBOUND** none
+
+**RESULT.** All 50 rectangles converted, verified cold from Figma rather than from the report.
+
+| Master                             | Converted | End state (read back)                                                                         |
+| ---------------------------------- | --------- | --------------------------------------------------------------------------------------------- |
+| `ui/Prose` `3106:2126`             | 1         | `blockquote` stroke `0,0,0,2`, `paddingLeft 24`, only `ProseImage` rect left                  |
+| `work/ArchiveTable` `3111:5650`    | 27        | 27 × `0,0,1,0`, 3 variants **h=329**, only the 24 `underline-dash` rects left                 |
+| `blog/TableOfContents` `3113:5417` | 14        | 14 × `0,0,0,2`, `paddingLeft 12`, **zero** rects left, `item / active` on `foreground-strong` |
+| `work/WorkCard` `3107:654`         | 8         | 4 root + 4 `meta`, `1,0,0,0`, `paddingTop 12`, only the 8 `cover` rects left                  |
+
+Every stroke paint bound to `2 Theme::color/border` except the two active TOC rails on
+`foreground-strong`, which is the divergence P2-T10b was also carrying (`a[aria-current]` sets
+`border-color` _and_ `color`). The TOC depth-2 items now sit in one `sublist` wrapper per variant —
+read back as `[item / active, item, sublist[item|item], item, item, item]` on both breakpoints, which
+is the `<ol ps-3>` nesting from `TableOfContents.astro:60`.
+
+### The brief was wrong about `strokesIncludedInLayout` — corrected at source
+
+The runner reported flipping `ArchiveTable` and `WorkCard` back to `false` "per brief spec". The
+brief did say that, and the brief was wrong on two counts:
+
+1. **It cost 9px.** A rectangle child in a gap-0 vertical frame occupies 1px of layout; a stroke that
+   is not in layout occupies none. Read-back caught `ArchiveTable` at **h=320** where it had been
+   329 — the conversion was supposed to be pixel-identical and was not. Flipping the 35 nodes to
+   `true` restored 329 exactly, and moved `WorkCard` catalogue 404 → 406.
+2. **It claimed a convention that does not exist.** A DS-wide survey of per-side strokes says the
+   opposite: P2-T09's own masters are already `true` — `work/WorkHeader` (3), `work/RelatedWriting`
+   (2), `blog/PostRowCalm` (2), plus `about/AboutFacts` (1) and `app/Footer`'s 2 top rules.
+
+The rule that survives: **a CSS border grows an auto-height box, so a Figma stroke standing in for
+one must be in layout.** `HAIR()` in `_prelude-components.js` now sets
+`strokesIncludedInLayout = true` itself, so no future brief can re-introduce the 1px error, and the
+P2-T10b prose was rewritten rather than left as a trap.
+
+35 nodes mutated in the follow-up (`3111:527`, `3111:540`, `3111:553`, …).
+
+### Carried to P2-T11 — 36 legacy hairlines still out of layout
+
+Pre-P2-T09 masters were built before the rule existed and still carry `inLayout=false`:
+`app/Footer` 12 bottom rules, `blog/PostList` 9, `blog/PostRow` 4, `ui/Link/inline` 3,
+`app/NavLink` 2, `blog/BlogPreview` 2, `work/WorkPreview` 2, `contact/ContactPreview` 2.
+Each is 1–2px tight against its CSS counterpart. Flip them at the gate — cheap, mechanical, and the
+last place the old convention survives.
+
+### Deviations
+
+- **`blog/TableOfContents breakpoint=Mobile`** carries a pre-existing full-box stroke
+  (`1,1,1,1`, bound `color/border`, in layout). Not part of this conversion; left untouched and
+  recorded here so P2-T11's Gate D does not read it as a stray.
+- `work/WorkCard` `meta` moved its rule 12px up onto the frame's outer edge, as the brief specified.
+  Note `WorkCard.astro` has **no** `border-t` today — the top rule and meta rail come from the
+  `work-card-redesign` spec, not from shipped code, so there is nothing to reconcile against the
+  live component until that redesign ships.

@@ -60,9 +60,10 @@ node.strokesIncludedInLayout = true;
 and keep the padding at the code's value (24 and 12). The stroke then takes layout space, the text
 lands exactly where CSS puts it, and the frame grows by the 2px the border really occupies.
 
-For the **bottom/top** conversions (`ArchiveTable`, `WorkCard`) leave `strokesIncludedInLayout` at
-its default `false` — that is what P2-T09's shipped masters do, and changing it would move every row
-by 1px for no visible gain.
+The same is true for the **bottom/top** conversions (`ArchiveTable`, `WorkCard`), and for the same
+reason: a CSS border grows an auto-height box, so a row that draws `border-b` is 1px taller than its
+content. Leaving the stroke out of layout makes every converted row 1px shorter than it was as a
+rectangle — 9px per `ArchiveTable` variant. Set the flag everywhere. `HAIR()` now does it for you.
 
 ---
 
@@ -263,7 +264,7 @@ Fresh run. Assert, for each of the four masters:
 - zero `RECTANGLE` children named `hairline` or `rail` remain;
 - every converted node has the expected per-side stroke weight and a **bound** stroke paint
   (`strokes[0].boundVariables.color`), not a raw one;
-- `ui/Prose` blockquote and every TOC item have `strokesIncludedInLayout === true`;
+- **every** converted node has `strokesIncludedInLayout === true` — side rails and top/bottom rules alike;
 - the TOC's `item / active` stroke resolves to `color/foreground-strong`, every other rail to
   `color/border`;
 - `ProseImage`, `cover` (×8) and `underline-dash` (×24) are untouched.

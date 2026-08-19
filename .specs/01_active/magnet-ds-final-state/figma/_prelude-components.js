@@ -15,6 +15,10 @@ const P = (v) =>
 // sibling instances, e.g. the column rule on Blog).
 const HAIR = (n, v, sides = ["bottom"], weight = 1) => {
   n.strokes = [P(v)];
+  // A CSS border grows an auto-height box; a Figma stroke is INSIDE and outside
+  // auto-layout unless told otherwise. Always opt in, or the element paints its
+  // rule over its own content and lands 1-2px tight.
+  n.strokesIncludedInLayout = true;
   n.strokeTopWeight = 0;
   n.strokeBottomWeight = 0;
   n.strokeLeftWeight = 0;
