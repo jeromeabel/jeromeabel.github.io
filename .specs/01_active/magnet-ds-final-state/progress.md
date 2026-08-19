@@ -2916,3 +2916,89 @@ UNBOUND:
 | 2   | The responsive behaviours fixed in Figma are unverified on the code side: prose image FILL + 16:9 lock, inline-code wrapping, `ui/H1` wrapping, `PostRowCalm` title/meta wrapping, TOC active-item wrapping, `ui/Link/secondary` auto-width.                                                                                                                                                                                     |
 | 3   | The DS has **no single responsive convention**: `work/ArchiveTable`, `contact/ContactPreview`, `blog/TableOfContents` and now `work/WorkCard` + `work/WorkPreview` carry breakpoint axes, while `blog/PostNav`, `work/WorkHeader`, `work/RelatedWriting` stay 720–832 FIXED and rely on flexible children. Settle in convergence.                                                                                                |
 | 4   | The 8 Desktop `work/WorkCard` variants carry raw spacing/padding/radius from P2-T04 (see UNBOUND) — a bounded binding sweep, not a redesign.                                                                                                                                                                                                                                                                                     |
+
+## R3.3 — full verification (re-run, post-repair, 2026-08-20)
+
+TASK: R3.3 re-run against the 20:32 export — the last gate before R3.6
+STATUS: **pass**, with one method limitation and one new finding (both below)
+
+The 19:20 export died when R3.6-prep wrote to the file. This re-run reads the fresh 20:32 export
+(68 MB). A first attempt hit the session limit partway; it had already refreshed
+`tokens.figma.json` (20:34), which this run reused. Everything else was re-run from scratch.
+
+RESULT:
+
+- **DUMP** — 4 collections, identical to pass 1: `1 Primitives` **407** (Mode 1) · `3 Responsive`
+  18×3 = 54 · `Design System` 2 · `2 Theme` 15×2 = 30. The repair's claim that it never touched
+  `3 Responsive` holds.
+- **VERIFY** — clean. Missing 0 · mismatch 0 · orphaned 0 · unmapped 0.
+- **VERIFY-RESPONSIVE** — missing 0 · mismatch 0 · extra 0.
+- **TEST** — 57 passed / 0 failed.
+- **VERIFY-RAW** — 1050 new / 36 accepted / **0 stale**, unchanged from pass 1. ⚠️ Read this
+  narrowly: `raw-values.figma.json` is the **12:34 walk, which predates the repair**, and it is not
+  produced by `figma:dump` — only the manual live walk in `dump-raw-values.md` refreshes it. So
+  these numbers describe the pre-repair file. What _was_ checked against the fresh graph: **all 36
+  accepted node ids still resolve, 0 dead**, including both `3106:2150 prose-link-annotation`
+  entries (`fill` + `text-style`) — ❖ Components was re-spaced by the repair, and node ids survived
+  it. The 15 entries pass 1 pruned stayed pruned.
+- **ROSTER** (measured from the fresh `.fig`, not from the report) — 10 canvases = 9 user pages +
+  Figma's hidden `Internal Only Canvas`. ❖ Components: 7 sections, direct children
+  6+13+14+6+3+2+2 = **46** masters, the one extra `ui` child being the `prose-link-annotation`
+  TEXT. 📄 Pages: **32** = 16 SYMBOL + 16 INSTANCE. `work/WorkCard` **16** variants across 4 axes,
+  the 8 Mobile ones all 358 wide. `work/WorkPreview breakpoint=Mobile` **390** wide.
+- **GRID** — the re-spaced coordinates in R3.6-prep's DEVIATIONS reproduce exactly: rows `y = 0`
+  Home · 4476 Blog · 7052 Work · 10934 About · 13510 Post · 17239 Serie · 18489 Serie post ·
+  22148 Work detail; columns `x = 0 / 1440 / 1990 / 3430`.
+- **BINDINGS** — real, not just claimed. All 8 `work/WorkCard breakpoint=Mobile` variants carry
+  live `variableConsumptionMap` entries resolving to `spacing/3` (12), `spacing/2` (8) and
+  `spacing/5` (20) — `2020:66`, `2020:61`, `2020:74` in the fresh graph.
+
+**METHOD LIMITATION — the strict sweep cannot be run from a `.fig`.** The plan was to re-measure
+R3.6-prep's headline 103 → 1 independently. It cannot be done offline: **a `.fig` export does not
+contain instance internals.** `Work — Mobile` has just **18** descendant nodes in the graph, max
+depth 3 — `app/Header`, `PageContent`, `app/Footer`, and a few frames — because an INSTANCE's
+children are not separate `nodeChanges` unless overridden. A bounds walk over that graph returns 0
+for all 16 masters, and that 0 is **vacuous, not a confirmation**; it stays 0 even with clipping
+suppression disabled, which is how the vacuity was caught. The 103 → 1 measurement was made live
+through the Plugin API, where instance children are traversable. Recorded so no future run reads a
+`.fig`-side 0 as a clean bill.
+
+Spot-checked live instead, via `get_screenshot` on the two masters that carried the defects:
+
+- `Work — Mobile` (`3151:7308`) — four full stacked case cards, each `cover → WEB · 2026 → title →
+PROBLEM / SOLUTION / LEARNING → 2 articles → ↗ Live`, hairline between rows, stack and links on
+  one mono line, nothing past 390. **Defect A is genuinely fixed and matches the spec.**
+- `Post — Mobile` (`3151:7312`) — prose, code block, inline code, TOC active item and `ProseImage`
+  all inside 390. **Defect B's root-cause fix holds.**
+
+NEW FINDING (see CODE DEBT below): `blog/PostNav` on mobile now fits, but wraps **mid-word** —
+"Benchm / arking a / 10,000- / Row / Table", "Optimiz / ing / Images" — and the two cards render at
+unequal heights, the Next card overhanging the Previous one. Within bounds, so every gate passes;
+visually poor. Not a regression to fix by narrowing the fix — `blog/PostNav` is one of the
+720–832 FIXED masters with **no `breakpoint` axis**, so a 21px title is being forced through a
+~170px column. The real fix is a breakpoint axis that stacks the two cards on mobile, which is a
+design decision, not a repair.
+
+DEVIATIONS: `raw-values.figma.json` was not refreshed. Doing so requires the manual live walk, and
+the repair's own additions land in kinds (`radius`/`spacing`) that have never been baselined — so a
+refresh would move the 1050 count without changing any verdict. The decisive check (do the 36
+allowlisted ids still resolve) was done against the fresh graph directly.
+
+UNBOUND: none new. R3.6-prep's two self-reported families — Mobile frame widths 358/390 and cover
+358×201 — are **not raw-value debt at all**: `verify-raw` tracks `radius`/`spacing`/`stroke`/`fill`/
+`text-style`, and node size is not among them. Its argument also checks out: no `3 Responsive`
+variable holds 358, and that collection is settled at 18 variables. Same position `work/ArchiveTable`
+(P2-T05) and `contact/ContactPreview` (P2-T06) already occupy.
+
+SHIP VERDICT: **fit to archive.** Every gate passes, both P3-T11 defects are confirmed fixed on
+live renders, and the allowlist survived the repair intact. The PostNav mobile treatment is a real
+defect but an in-bounds one, and it belongs to the responsive-convention item already queued for
+`magnet-ds-code-convergence`.
+
+## CODE DEBT — R3.3 re-run (2026-08-20)
+
+| #   | Finding                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | **`blog/PostNav` has no mobile treatment.** It is FIXED 720–832 with no `breakpoint` axis, so on `Post — Mobile` / `Serie post — Mobile` the prev/next titles wrap mid-word in a ~170px column and the two cards end up unequal heights. In bounds, so no gate catches it. Fix is a `breakpoint` axis that stacks the two cards — a design decision. Folds into the "no single responsive convention" item from R3.6-prep. |
+| 2   | **The strict out-of-root-bounds sweep is live-only.** A `.fig` export carries no instance internals, so the sweep cannot be scripted offline and a `.fig`-side 0 is vacuous. Either document it as a live-MCP-only check or, together with the `geometry.figma.json` extractor item, decide the offline prover cannot cover instance interiors at all.                                                                     |
+| 3   | **`raw-values.figma.json` has no scripted refresh.** It is the only input to `verify-raw` and only the manual `dump-raw-values.md` walk produces it, so it silently drifts behind every Figma write and the report's own STALE INPUT banner fires on mtime alone.                                                                                                                                                          |
