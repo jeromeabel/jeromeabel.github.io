@@ -7,6 +7,7 @@
 - Write to **masters** (`COMPONENT` / `COMPONENT_SET`), never to instances. Local overrides of container geometry are a defect, not a fix.
 - One batched run per step. After a write, **read back in a separate run** — geometry read in the same tick is stale.
 - **Nothing human-designed is ever deleted.** Retirement = move to an archive page.
+- **Hairlines belong to the element.** A rule an element draws on itself (code: `border-b` / `border-t`) is a per-side stroke via `HAIR(node, v, sides)` — bound with `P()`, no extra node. A 1px rectangle is only for a rule with **no owner**: a divider between two sibling instances, or a rule that must sit inside a frame's padding.
 - **No raw values.** Colors, font sizes, spacing and radii bind to variables. Anything you genuinely cannot bind goes into the report under `UNBOUND:` with its node name.
 - `3 Responsive` (18 vars) is settled. Do not add, rename or re-value anything in it.
 - The `Design System` meta collection (`ds/version`, `ds/last-updated`) is exempt from every audit and every prune.

@@ -46,7 +46,7 @@ Live is `grid-cols-2 sm:grid-cols-3 lg:grid-cols-4` — build the 4-up desktop s
 
 ### `facts=strip`
 
-HORIZONTAL, gap-x 24, gap-y 8, `layoutWrap = "WRAP"`, FILL width, padding-top/bottom 12, with a 1px hairline **above and below** bound `2 Theme::color/border` (wrap the row in a VERTICAL frame to carry both rules).
+HORIZONTAL, gap-x 24, gap-y 8, `layoutWrap = "WRAP"`, FILL width, padding-top/bottom 12, with a 1px hairline **above and below** bound `2 Theme::color/border`, carried by the component root's own `strokeTopWeight` / `strokeBottomWeight` via `HAIR(c, …, ["top", "bottom"])` — no rectangle children.
 
 Each item is a HORIZONTAL frame, gap 8, all text **Fira Code Regular 14** fill `foreground-muted`, value **Bold** and first:
 
@@ -98,13 +98,6 @@ const FACTS = [
   ["1000+", "people trained", "people trained"],
 ];
 
-const hair = () => {
-  const r = figma.createRectangle();
-  r.name = "hairline"; r.resize(100, 1);
-  r.fills = [P(V["2 Theme::color/border"])];
-  return r;
-};
-
 const buildGrid = async () => {
   const c = figma.createComponent();
   c.name = "facts=grid";
@@ -129,7 +122,8 @@ const buildStrip = async () => {
   c.layoutMode = "VERTICAL"; c.itemSpacing = 0;
   c.resize(832, 100);
   c.primaryAxisSizingMode = "AUTO"; c.counterAxisSizingMode = "FIXED";
-  const top = hair(); c.appendChild(top); top.layoutSizingHorizontal = "FILL";
+  // Both rules sit at the component's own edges — HAIR, not rectangle children.
+  HAIR(c, V["2 Theme::color/border"], ["top", "bottom"]);
   const row = F("items", "HORIZONTAL", { itemSpacing: 24 });
   row.layoutWrap = "WRAP";
   row.counterAxisSpacing = 8;
@@ -141,7 +135,6 @@ const buildStrip = async () => {
     item.appendChild(await T(value, { size: 14, family: "Fira Code", weight: "Bold", fill: V["2 Theme::color/foreground-muted"] }));
     item.appendChild(await T(shortLabel, { size: 14, family: "Fira Code", fill: V["2 Theme::color/foreground-muted"] }));
   }
-  const bot = hair(); c.appendChild(bot); bot.layoutSizingHorizontal = "FILL";
   page.appendChild(c);
   return { name: c.name, id: c.id, h: Math.round(c.height) };
 };
@@ -223,7 +216,7 @@ Prose masters usually expose a single body TEXT node. Write the paragraphs into 
 
 Fresh run. Assert:
 
-- `about/AboutFacts` is a COMPONENT_SET with 2 variants at 832 wide; `facts=grid` has 4 equal children; `facts=strip` has two hairlines and a wrapping row.
+- `about/AboutFacts` is a COMPONENT_SET with 2 variants at 832 wide; `facts=grid` has 4 equal children; `facts=strip` has top and bottom strokes on the root and a wrapping row.
 - `about/AboutText` children are, in order: INSTANCE `ui/H1`, TEXT lead, INSTANCE `ui/Prose`, INSTANCE `about/AboutFacts`, INSTANCE `ui/Link/external`, INSTANCE `ui/Prose`, FRAME `links` with 2 INSTANCEs.
 - Every fill bound; the two Bubbler One texts really are Bubbler One (read `fontName.family` back — a missing font silently falls back).
 

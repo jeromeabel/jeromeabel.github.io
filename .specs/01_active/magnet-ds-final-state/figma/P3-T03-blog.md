@@ -129,6 +129,8 @@ const build = async (name) => {
     const col = F("posts", "HORIZONTAL", { itemSpacing: 0 });
     group.appendChild(col); col.layoutSizingHorizontal = "FILL";
     if (!mobile) {
+      // Column divider between two siblings — no element owns this edge, so it
+      // stays a rectangle. Element-owned rules use HAIR() instead.
       const rule = figma.createRectangle();
       rule.name = "rule"; rule.resize(1, 20);
       rule.fills = [P(V["2 Theme::color/border"])];

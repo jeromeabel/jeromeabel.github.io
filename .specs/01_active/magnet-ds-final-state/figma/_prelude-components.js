@@ -8,6 +8,23 @@ const P = (v) =>
     v,
   );
 
+// Edge rule that belongs to the element itself — code writes `border-b` /
+// `border-t` on the same element, so it is a per-side stroke, not a 1px
+// rectangle child. Adds no node and survives auto-layout resizing.
+// Use a rectangle ONLY for a rule with no owner (a divider sitting between two
+// sibling instances, e.g. the column rule on Blog).
+const HAIR = (n, v, sides = ["bottom"]) => {
+  n.strokes = [P(v)];
+  n.strokeTopWeight = 0;
+  n.strokeBottomWeight = 0;
+  n.strokeLeftWeight = 0;
+  n.strokeRightWeight = 0;
+  for (const s of sides) {
+    n[`stroke${s[0].toUpperCase()}${s.slice(1)}Weight`] = 1;
+  }
+  return n;
+};
+
 const T = async (
   chars,
   { size = 16, weight = "Regular", family = "IBM Plex Sans", fill = null } = {},

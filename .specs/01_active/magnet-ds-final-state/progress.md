@@ -1019,3 +1019,59 @@ out so the next reader does not re-derive it.
 **No re-grid owed.** Widest new master is 720, well inside the `blog` and `work` sections after the
 P1-T06 re-run stretched `work` to 4136×1762. Per the agreed cadence: one re-grid + Gate D before
 P2-T11, not one per task.
+
+## P2-T09 — `work/WorkHeader` + `blog/PostRowCalm` + `work/RelatedWriting` (2026-08-19)
+
+- STATUS: **DONE** — three masters, one recipe change adopted at source.
+- RESULT:
+  - `work/WorkHeader` `3118:680` 832 wide (565 tall once the H1 and abstract instances carried
+    their real copy — the 526 in the runner's report predates step 2). `breadcrumb` → `ui/H1`
+    INSTANCE → `ui/PageDescription` INSTANCE → `facts` → `links` (2 × `ui/Link/external`,
+    `Demo` + `Code`, not padded to four).
+  - `blog/PostRowCalm` `3118:5416` COMPONENT_SET, axis `facts` = `plain | serie`, both 720 wide
+    (76 / 96 tall). The single-line description clamp worked — `textTruncation` /`maxLines` exist
+    on this API version, no faked shortening.
+  - `work/RelatedWriting` `3118:5417` 720 wide, `rows` holds 2 `blog/PostRowCalm` INSTANCEs in
+    serie-then-plain order. Decision record 5 from P2-T08 holds.
+  - H1 text went through `setProperties` (`Text#2119:12`); `ui/PageDescription` exposes no text
+    property, so that one is a direct TEXT edit — recorded because P3-T06/P3-T08 reuse both.
+- Cold read-back verified independently here via `get_metadata` on all three ids: structure,
+  widths and instance-vs-frame types match the report.
+- UNBOUND: none.
+
+**The one deviation is better than the brief and is now the rule.** The brief built each hairline
+as a 1px `RECTANGLE` child; the runner used the row's own `strokeBottomWeight = 1` (other sides 0)
+with the paint bound through `setBoundVariableForPaint`. That is the faithful mapping: code writes
+`border-b` on the *same element* (`PostRowCalm.astro:24`, `ArchiveTable.astro:32`,
+`WorkHeader.astro:25` via `prose-td:border-b`), so the rule belongs to the element, not to a
+sibling node. It also drops a node per row and cannot drift out of `FILL` sizing.
+
+Adopted at source rather than left as a per-task note — the rectangle recipe was leaking out of
+the superseded 2b/2d plans into every new brief:
+
+- new prelude helper `HAIR(node, v, sides = ["bottom"])` in **both** `_prelude-components.js` and
+  `_prelude-pages.js`, binding through the existing `P()`;
+- new run rule in `_run-rules.md`: element-owned rule → `HAIR`; rectangle only for a rule with **no
+  owner**;
+- P2-T09's own brief rewritten to what actually shipped — `HAIR` on the row, and the facts rows are
+  flat `label`/`value` TEXT children (the brief's `wrap` + `cells` + `lc`/`vc` wrappers are gone,
+  they existed only to host the rectangle);
+- P2-T10 `facts=strip` converted (root `["top", "bottom"]` strokes replace two rectangles);
+- P3-T03 and P3-T06 keep their rectangles **on purpose**, each now with the reason inline: the blog
+  column divider has no owning element, and the post-header rule sits *inside* head's bottom
+  padding rather than on its outer edge. Same-looking, different geometry — converting either would
+  move the line.
+
+**Two hairline recipes now coexist in shipped masters.** `work/WorkCard` (meta rail top rule) and
+`work/ArchiveTable` (header + body rows) were built with rectangles before this. Visually identical,
+structurally divergent from their `border-b`/`border-t` code. Not worth a rebuild task on its own —
+added to the P2-T11 gate row as a call to make there, with the default being *leave them*, since a
+rebuild risks the container bindings P1-T08 just re-verified.
+
+**Minor, no action.** `textCase = "UPPER"` was set explicitly on the `WORK` breadcrumb, the
+`RELATED WRITING` label and the serie chip even though the characters are already uppercase; the
+brief now says `textCase` instead of the ambiguous word "uppercase". Fira Code resolved to style
+`Regular` as the brief intended.
+
+**No re-grid owed.** Widest new master is 832, inside the `work` section's 4136 after the P1-T06
+re-run. Cadence unchanged: one re-grid + Gate D before P2-T11.

@@ -54,6 +54,8 @@ const build = async (breakpoint) => {
   if (mobile) head.layoutSizingHorizontal = "FILL";
   else { head.layoutSizingHorizontal = "FIXED"; head.resize(832, head.height); }
   head.paddingBottom = mobile ? 24 : 48;
+  // Rule sits INSIDE head's bottom padding (last child, above the 24/48 pad),
+  // not on head's outer edge — so it stays a rectangle, not HAIR().
   const rule = figma.createRectangle();
   rule.name = "hairline"; rule.resize(100, 1);
   rule.fills = [P(V["2 Theme::color/border"])];

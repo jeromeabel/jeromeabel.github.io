@@ -24,11 +24,11 @@ Everything the work-detail route needs above and below the prose. `RelatedWritin
 
 832 = 1248 × 2/3 (`lg:w-2/3`). VERTICAL, gap 32.
 
-1. **Breadcrumb** — HORIZONTAL, gap 4, `counterAxisAlignItems = "CENTER"`. Text `WORK` (IBM Plex Sans Regular 14, uppercase, fill `2 Theme::color/foreground-muted`) then a `lucide:chevron-right` icon 14×14 same fill. Nothing after the chevron — the H1 below is the current page.
+1. **Breadcrumb** — HORIZONTAL, gap 4, `counterAxisAlignItems = "CENTER"`. Text `WORK` (IBM Plex Sans Regular 14, `textCase = "UPPER"`, fill `2 Theme::color/foreground-muted`) then a `lucide:chevron-right` icon 14×14 same fill. Nothing after the chevron — the H1 below is the current page.
 2. **H1** — an instance of `ui/H1`, text `Le concept de la preuve`.
 3. **Abstract** — an instance of `ui/PageDescription`, text:
    `Building a minimal comic blog with Astro that stays almost entirely static — except for one serverless endpoint that handles votes`
-4. **Facts table** — VERTICAL, gap 0, padding-top 24. Three rows, each HORIZONTAL with a 1px **bottom** hairline bound `2 Theme::color/border`, padding-top/bottom 16:
+4. **Facts table** — VERTICAL, gap 0, padding-top 24. Three rows, each HORIZONTAL with a 1px **bottom** hairline bound `2 Theme::color/border` — carried by the row's own `strokeBottomWeight` via `HAIR()`, not a rectangle child, because code writes `border-b` on the same element. Padding-top/bottom 16, label and value are TEXT children directly (no cell wrappers):
 
    | label cell (64 fixed, SemiBold 16, `foreground-strong`) | value cell (FILL, Regular 16, `foreground`)            |
    | ------------------------------------------------------- | ------------------------------------------------------ |
@@ -46,9 +46,9 @@ Everything the work-detail route needs above and below the prose. `RelatedWritin
 
 The quiet post row. Axis `facts` = `plain` · `serie` (the serie chip is conditional in code).
 
-VERTICAL, gap 4, FILL width, padding-left/right 4, padding-top/bottom 16, 1px **bottom** hairline bound `2 Theme::color/border`. No fill, no radius.
+VERTICAL, gap 4, FILL width, padding-left/right 4, padding-top/bottom 16, 1px **bottom** hairline bound `2 Theme::color/border` (`HAIR(c, …)` on the component itself — code: `border-b` on the row). No fill, no radius.
 
-1. **Serie chip** _(only on `facts=serie`)_ — HORIZONTAL, gap 4, `counterAxisAlignItems = "CENTER"`: a `lucide:folder` icon 12×12 fill `foreground-muted`, then text Fira Code Regular 12 **uppercase** fill `foreground-muted`, format `WEB PERFORMANCE · 4/5`.
+1. **Serie chip** _(only on `facts=serie`)_ — HORIZONTAL, gap 4, `counterAxisAlignItems = "CENTER"`: a `lucide:folder` icon 12×12 fill `foreground-muted`, then text Fira Code Regular 12, `textCase = "UPPER"`, fill `foreground-muted`, format `WEB PERFORMANCE · 4/5`.
 2. **Title row** — HORIZONTAL, FILL width, `SPACE_BETWEEN`, gap 32, `counterAxisAlignItems = "BASELINE"` if available (else `"MIN"`):
    - left: title, IBM Plex Sans **Bold** 16, fill `2 Theme::color/foreground-strong` — `Optimizing Images with Astro (part 1)`
    - right: meta, Fira Code Regular 12, fill `foreground-muted` — `8 min · July 2026`
@@ -62,7 +62,7 @@ Hover in code is `hover:bg-surface-hover`. Document it in the description; do no
 
 VERTICAL, gap 16.
 
-1. **Label** — `RELATED WRITING`, IBM Plex Sans Medium 14, uppercase, fill `foreground-muted`.
+1. **Label** — `RELATED WRITING`, IBM Plex Sans Medium 14, `textCase = "UPPER"`, fill `foreground-muted`.
 2. **Rows** — VERTICAL, gap 0 (the rows' own hairlines do the separating), FILL width, holding **two** `blog/PostRowCalm` instances: one `facts=serie`, one `facts=plain`. Two, because the block must show both shapes.
 
 ---
@@ -76,13 +76,6 @@ const V = await VARS();
 const page = figma.root.children.find((p) => p.name.includes("Components"));
 await page.loadAsync();
 await figma.setCurrentPageAsync(page);
-
-const hair = () => {
-  const r = figma.createRectangle();
-  r.name = "hairline"; r.resize(100, 1);
-  r.fills = [P(V["2 Theme::color/border"])];
-  return r;
-};
 
 const c = figma.createComponent();
 c.name = "work/WorkHeader";
@@ -108,19 +101,16 @@ const ROWS = [
   ["STACK", "Astro, Tailwind CSS, Astro DB, Turso, Netlify, Sharp"],
 ];
 for (const [label, value] of ROWS) {
-  const wrap = F(label.toLowerCase(), "VERTICAL", { itemSpacing: 0 });
-  table.appendChild(wrap); wrap.layoutSizingHorizontal = "FILL";
-  const row = F("cells", "HORIZONTAL", { itemSpacing: 0 });
+  // The row owns its own rule — HAIR, not a rectangle child (code: prose-td:border-b).
+  const row = F(label.toLowerCase(), "HORIZONTAL", { itemSpacing: 0 });
   row.paddingTop = 16; row.paddingBottom = 16;
-  wrap.appendChild(row); row.layoutSizingHorizontal = "FILL";
-  const lc = F("label", "HORIZONTAL", { itemSpacing: 0 });
+  HAIR(row, V["2 Theme::color/border"]);
+  table.appendChild(row); row.layoutSizingHorizontal = "FILL";
+  const lc = await T(label, { size: 16, weight: "SemiBold", fill: V["2 Theme::color/foreground-strong"] });
   row.appendChild(lc);
-  lc.appendChild(await T(label, { size: 16, weight: "SemiBold", fill: V["2 Theme::color/foreground-strong"] }));
   lc.resize(64, lc.height); lc.layoutSizingHorizontal = "FIXED";
-  const vc = F("value", "HORIZONTAL", { itemSpacing: 0 });
+  const vc = await T(value, { size: 16, fill: V["2 Theme::color/foreground"] });
   row.appendChild(vc); vc.layoutSizingHorizontal = "FILL";
-  vc.appendChild(await T(value, { size: 16, fill: V["2 Theme::color/foreground"] }));
-  const h = hair(); wrap.appendChild(h); h.layoutSizingHorizontal = "FILL";
 }
 
 const links = F("links", "HORIZONTAL", { itemSpacing: 16 });
@@ -156,13 +146,6 @@ const page = figma.root.children.find((p) => p.name.includes("Components"));
 await page.loadAsync();
 await figma.setCurrentPageAsync(page);
 
-const hair = () => {
-  const r = figma.createRectangle();
-  r.name = "hairline"; r.resize(100, 1);
-  r.fills = [P(V["2 Theme::color/border"])];
-  return r;
-};
-
 const build = async (facts) => {
   const c = figma.createComponent();
   c.name = `facts=${facts}`;
@@ -197,7 +180,7 @@ const build = async (facts) => {
   d.textTruncation = "ENDING";
   d.maxLines = 1;
 
-  const h = hair(); c.appendChild(h); h.layoutSizingHorizontal = "FILL";
+  HAIR(c, V["2 Theme::color/border"]);
   page.appendChild(c);
   return { name: c.name, id: c.id, h: Math.round(c.height) };
 };
