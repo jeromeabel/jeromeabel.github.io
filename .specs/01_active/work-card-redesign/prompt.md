@@ -18,7 +18,7 @@ A developer portfolio + blog, one person, French, senior engineer with an art ba
 - **Blog posts are deep and recent.** They generalise internal day-job work into
   problem-shaped articles. Some are standalone, some belong to a **serie** (multi-part).
 - **Work projects are small and public.** They are formatted Problem / Solution / Learning
-  and link *down* into the blog articles. They do **not** show everything built at the day
+  and link _down_ into the blog articles. They do **not** show everything built at the day
   job — they show the public artifacts: an open-source toolkit, an art installation, a
   freelance site.
 
@@ -37,10 +37,15 @@ more immersive, borderless vs bordered, magazine/editorial grids. Push past the 
 
 Two surfaces in scope, and they may resolve differently:
 
-1. **Home `WorkPreviewSection`** — the trailer. Three entries, must not out-shout the blog
-   section that sits above it.
-2. **`/work` "Selected work" grid** — the receipts page. Same three entries, more room, a
-   recruiter-ish audience, and an `ArchiveTable` of everything else sits below it.
+1. **Home `WorkPreviewSection`** — the trailer. **Three entries**, must not out-shout the
+   blog section that sits above it.
+2. **`/work` "Selected work" grid** — the receipts page. **Four entries** (the Home three
+   plus one more), more room, a recruiter-ish audience, and an `ArchiveTable` of everything
+   else sits below it.
+
+Every variant must propose **both layouts**: Home at 3 and `/work` at 4. They may resolve
+differently (same card, different grid — or a different composition entirely), but a variant
+that only answers one count is incomplete.
 
 Out of scope: `ArchiveTable`, the work detail page, related-work on post pages.
 
@@ -69,6 +74,7 @@ Reference frame: `Home — Desktop [Dark]`, node **`2989:4642`**.
 
 **BlogPreviewSection** (`2586:1141`) — `BLOG` heading + hairline + `All posts →`. Asymmetric,
 ranked by a `featured` number where **1 is the big one**:
+
 - featured 1: large 16:9 cover, serie chip (`📁 WEB PERFORMANCE · 2/5`), large title,
   description, date.
 - the others: horizontal rows — small 16:9 thumb left, uppercase mono topic kicker
@@ -90,31 +96,33 @@ exist for this exercise.
 
 Work entries (19 total, 3 currently featured) carry:
 
-| Field | Coverage | Example |
-| --- | --- | --- |
-| `title` | 19/19 | `Malinette` |
-| `type` (**required**) | 19/19 | `Web app`, `Art`, `Open source` |
-| `date` | 19/19 | used for sort today |
-| `description` | 19/19 | one to two sentences |
-| `abstract` | most | longer |
-| `img_preview` | 19/19 | heterogeneous photos/screenshots |
-| `stack[]` | ~19/19 | `["Astro", "Tailwind", "TypeScript"]` |
-| `git` / `live` / `website` / `video` | most | external URLs |
-| `kicker` | 4/19 (all featured candidates) | `Web app · 2026`, `Art · 2013–2019`, `Open source · 2013–2021` |
-| `featured` | 3/19 | `leconceptdelapreuve: 2`, `chimeres-orchestra: 3`, `malinette: 4` |
-| `related_posts` | 2/19 | link to blog articles |
+| Field                                | Coverage                       | Example                                                           |
+| ------------------------------------ | ------------------------------ | ----------------------------------------------------------------- |
+| `title`                              | 19/19                          | `Malinette`                                                       |
+| `type` (**required**)                | 19/19                          | `Web app`, `Art`, `Open source`                                   |
+| `date`                               | 19/19                          | used for sort today                                               |
+| `description`                        | 19/19                          | one to two sentences                                              |
+| `abstract`                           | most                           | longer                                                            |
+| `img_preview`                        | 19/19                          | heterogeneous photos/screenshots                                  |
+| `stack[]`                            | ~19/19                         | `["Astro", "Tailwind", "TypeScript"]`                             |
+| `git` / `live` / `website` / `video` | most                           | external URLs                                                     |
+| `kicker`                             | 4/19 (all featured candidates) | `Web app · 2026`, `Art · 2013–2019`, `Open source · 2013–2021`    |
+| `featured`                           | 3/19                           | `leconceptdelapreuve: 2`, `chimeres-orchestra: 3`, `malinette: 4` |
+| `related_posts`                      | 2/19                           | link to blog articles                                             |
 
 Because `type` is required, the **Name / Discipline / Year** triple is free — no authoring.
 `kicker` is cheap to backfill on the featured few. `stack[]` and the external URLs are the
 signals **blog can never have**. Note `featured: 1` is currently unassigned for work, and
 work is currently sorted by date, not by `featured` — if your variant needs rank hierarchy,
-say so and it will be fixed in code.
+say so and it will be fixed in code. `/work` Selected needs **four** entries and only three
+are assigned — propose which entry takes the fourth slot (`portfolio` is the reopened
+candidate), but treat it as a proposal: the editorial loop owns the final list.
 
 Blog exclusively owns: **date, read-time, part counter, serie chip.** Do not borrow them.
 
 ## 5 · Design system constraints (non-negotiable — a variant that breaks these is dead)
 
-- **Border** — 1px, `--color-border`, structure only. A full border means *aggregate entity*
+- **Border** — 1px, `--color-border`, structure only. A full border means _aggregate entity_
   (a container of many things). **Preview cards are borderless; the image is the frame.**
   `border-2` is dead. Dashed has been removed from the library entirely.
 - **Radius** — exactly three, meaning-bound: `full` (pressable: buttons, chips, icon
@@ -129,7 +137,7 @@ Blog exclusively owns: **date, read-time, part counter, serie chip.** Do not bor
   underline. Nothing else. A work card painting itself accent collides with the serie chip's
   meaning.
 - **Hover** — **one verb per surface**, ≤150ms. For a borderless preview card the verb is
-  *title underline + slow cover scale, coupled*. Hover must never dim or tint a cover, never
+  _title underline + slow cover scale, coupled_. Hover must never dim or tint a cover, never
   turn a title accent, never move anything more than 2%. Reduced motion keeps colour, drops
   transforms.
 - **Touch** — there is no hover on touch. **Nothing essential — title, type, year — may be
@@ -159,14 +167,20 @@ Already filtered against §5.
 - **B · Numbered catalogue** — mono `01 / 02 / 03` and a hairline above each plate; caption =
   `title` + `kicker`. Index-vs-feed is the clearest structural split; `featured` already is a
   rank; mono numerals are the register the DS reserves for generated facts. Requires a
-  defensible ranking.
+  defensible ranking. Caveat from the live-site survey (`./survey.md`): numbering is
+  essentially absent on real portfolios (one plain index found in ~25 sites) — the
+  inspiration set over-represents it, so B stands on the DS argument alone, not familiarity.
 - **C · Shape flip** — work covers take a ratio distinct from blog's 16:9 (square, or 4:5).
   Pre-attentive, needs zero extra text. Costs re-crops across 19 previews and a second ratio
   system.
-- **D · Mirrored asymmetry** — work also gets a one-big layout, but the big one is a **case
-  block**: large cover + Problem / Solution / Learning + `2 articles →` + Live/Repo. Best
-  content fit; but two big blocks compete on Home, where writing is meant to lead. **Hold
-  this one for `/work` Selected.**
+- **D · Case block** — the work entry as a **case block**: large cover + Problem / Solution /
+  Learning + `2 articles →` + Live/Repo. Best content fit. **Hold it for `/work` Selected**
+  (two big blocks would compete on Home, where writing leads) and explore it in **two
+  forms**: (1) 1+3 asymmetric — but beware: the 1+N silhouette is `BlogPreviewSection`'s
+  structural signature, and a live-site survey (`./survey.md`) found 1+N on **zero of ~25
+  real portfolios**; it needs a specific argument to exist. (2) **uniform stack** — all four
+  entries as equal-weight case blocks, no hierarchy. This is the evidence-backed default:
+  the modal pattern at exactly 4 described projects in the wild (zigzag alternation common).
 - **E · Spec-sheet card** — cover plus a small mono key/value block (Year / Type / Stack /
   Links). Maximum artifact reading, zero blog overlap; risks reading as a table fragment.
 - **F · Overlay label** — discipline + year set **on** the cover, title below. Gallery feel,
@@ -180,8 +194,8 @@ create. That grammar already lives, correctly, in `ArchiveTable` on `/work`.
 **Starting recommendation to beat: B + A, with C as the strong alternative.** Numbered plates
 carrying a work-only meta rail, and a cover ratio distinct from blog's — with blog keeping
 the one-big asymmetry exclusively, because hierarchy-by-freshness is a time signal and time
-belongs to blog. Home would then read: *blog = a feature plus a feed; work = a numbered row
-of catalogue entries.* Disagree with evidence if you find better.
+belongs to blog. Home would then read: _blog = a feature plus a feed; work = a numbered row
+of catalogue entries._ Disagree with evidence if you find better.
 
 ## 7 · Inspiration set
 
@@ -206,13 +220,25 @@ single biggest reason it reads as a blog card.
 colour blocks, hover-dim overlays, boxed/bordered cards, and giant display-font numerals
 (numerals must be mono).
 
+**Live-site survey** (`./survey.md`, ~25 real portfolios, 2026-08-15) corrects the
+screenshot set on three points: 1+N asymmetry appears on zero live sites; numbering is
+essentially absent (the 6 numbered refs over-represent it); real 3–5-entry work sections
+keep descriptions to ≤2 sentences or cut them. The field splits into two families — uniform
+case-block stacks and text ledgers — and this portfolio's `/work` page (Selected +
+`ArchiveTable`) already mirrors that pair.
+
 ## 8 · Deliverables
 
 1. **4–6 variants** on `EXP / WorkCard`, each at Desktop 1280 + Mobile 390 × Light + Dark,
    fully token-bound, no new variables. Name frames
    `EXP / WorkCard — <Variant> — <Desktop|Mobile> [<Light|Dark>]`.
-2. Each variant shown **in situ**: three cards in the Home strip context (heading + hairline
-   + `All work →`), and — for at least the top two — in the `/work` Selected grid context.
+2. Each variant shown **in situ**: **three cards** in the Home strip context (heading +
+   hairline + `All work →`) for every variant, and **four cards** in the `/work` Selected
+   grid context for at least the top two. A 3-up grid does not trivially extend to 4 at
+   Desktop 1280 — 2×2, uniform stack, 1+3, and 4-col resolve differently; show the one you
+   mean. At least one explored `/work` layout must be **non-hierarchical** (no one-big cell):
+   the 1+N silhouette is blog's signature, so an asymmetric `/work` proposal needs a uniform
+   competitor to beat.
 3. **At least one variant placed directly under a copy of `BlogPreviewSection`**, so the
    Home-page adjacency can be judged. That adjacency is the actual test.
 4. **A screenshot per variant per theme.**
@@ -220,8 +246,9 @@ colour blocks, hover-dim overlays, boxed/bordered cards, and giant display-font 
    short block per variant, then a single recommendation with reasoning, then the runner-up
    and why it lost.
 6. **A code-impact note**: which components change (`WorkPreviewSection`, the work card
-   component, the `/work` Selected grid), whether a new variant set is needed, and whether
-   the `getFeaturedWorks` sort must move from date to `featured`.
+   component, the `/work` Selected grid), whether a new variant set is needed, whether the
+   `getFeaturedWorks` sort must move from date to `featured`, and how Home-3 / work-4 is
+   served (count param vs caller-side slice — today both callers get the full list).
 7. **A constraint-violations list**: anything you wanted to do that §5 forbade, and what you
    did instead. This is signal, not failure.
 
@@ -230,7 +257,8 @@ colour blocks, hover-dim overlays, boxed/bordered cards, and giant display-font 
 1. **Keep or cut the description on a work card?** Cutting it is the cheapest way to stop work
    looking like blog, but it removes the only pre-detail-page surface for the Problem/Solution
    framing. Take a position.
-2. **How does the layout behave at 3 entries and at 4?** The Selected list is not frozen.
+2. **Counts are fixed: Home = 3, `/work` Selected = 4.** Show both. State which entry you
+   would promote to the fourth `/work` slot and why.
 3. **If you use rank hierarchy, which entry earns `featured: 1`,** and does `portfolio` come
    back into Selected to fill it?
 4. **Cover treatment** — Figma currently shows gradient placeholders; the real `img_preview`

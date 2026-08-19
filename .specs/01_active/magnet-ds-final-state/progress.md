@@ -2659,3 +2659,26 @@ section) fill `#999999` — an annotation label, not a component. That is the si
 
 ⚠️ The 825 figure is much larger than the "46 white fills" previously recorded because that earlier
 number counted `#FFFFFF` only. **Do not paste 825 into `named-debt.json` as component debt.**
+
+## R3.5 — retire the superseded TODO files (2026-08-19)
+
+**TASK** R3.5 · **STATUS** DONE.
+
+**Deviation from the brief, and the reason for it.** `repo/phase-3.md` prescribes `git rm` for the
+two analysis files, which assumes they are tracked. **All three were untracked** — never committed
+— so `git rm` would have failed and a plain `rm` would have destroyed 402 lines with no history to
+recover them from. They were therefore committed first (`e9c7150`), and only then retired.
+
+Preconditions re-verified before removing anything, as the brief requires:
+
+- `TODO_ContainerPatternAnalysis.md` (88 lines) → normative in `design.md` §5 _Container ownership_
+  and in the 📚 Docs _Spacing & Layout_ doc, which P3-T10 gave both a `Container Recipe` and a
+  `Container Ownership` section.
+- `TODO_MagnetDS_ComponentArchitecture.md` (229 lines) → normative in `design.md` §3, which carries
+  the full inventory across the 7 domain subsections.
+
+`TODO - WorkCard — final spec (post-exploration round).md` (85 lines) was **not** deleted — it
+still owns live component anatomy, so it moved to `.specs/01_active/work-card-redesign/spec.md`.
+
+`.specs/01_active/` now holds four topic folders and no loose files: `blog-design-review/`,
+`editorial-v4/`, `magnet-ds-final-state/`, `work-card-redesign/`.
