@@ -28,55 +28,64 @@ https://www.figma.com/design/ihWIWmvtQPTWgUxlrVjC2c/Magnet-DS?node-id=<ID>&m=dev
 | XP - WorkCard | `3034:5541` | [open](https://www.figma.com/design/ihWIWmvtQPTWgUxlrVjC2c/Magnet-DS?node-id=3034-5541&m=dev) | scratch exploration, no masters |
 | 🗄️ Archive — Decisions | `2716:4244` | — | empty; immutable |
 | 🗄️ Archive — Docs v1 | `3039:4341` | — | 7 `_Docs/*` masters; immutable |
+| 🗄️ Archive — Components | `3107:765` | — | 1 `zz/*` retired master; immutable |
 
 Pages whose name starts with 🗄️ are **immutable** — never rename, move, reopen or delete
 anything inside them.
 
-## Component masters (47 total)
+## Component masters (62 total)
 
-Live Pass-0 re-count at the **phase-1 gate, 2026-08-18** (P1-T09). The prior 49 roster was dated
-2026-08-15 and predates the domain renames and the two merges. Counts top-level masters only —
-COMPONENT / COMPONENT_SET not nested inside a set. ⬍ marks a set carrying the
-`breakpoint=Desktop|Mobile` axis.
+Live Pass-0 re-count at the **phase-2 gate, 2026-08-19** (P2-T11 / P2-T11b). Counts top-level
+masters only — COMPONENT / COMPONENT_SET not nested inside a set — and counts `_Docs/*`
+**document-wide**, which is why the seven archived ones are inside the 11. ⬍ marks a set carrying
+the `breakpoint` axis.
+
+Phase 2 built **15** masters and retired one (`work/WorkCardPreviewSmall` → `zz/` on
+`🗄️ Archive — Components`, superseded by `work/WorkCard`), so ❖ Components went 32 → **46**.
+Formula: `46 + 11 + 4 + 1 zz/ = 62`.
 
 **Every ❖ Components master carries a domain prefix** matching its code folder:
 `app|ui|blog|work|hero|contact|about`. The prefix is also its SECTION name — name and home always
 agree. Full roster with the before→after mapping:
 `.specs/01_active/magnet-ds-final-state/rename-map.md`.
 
-### ❖ Components (32) — 7 domain sections
+### ❖ Components (46) — 7 domain sections
 
 **app (6)**
 
-- ⬍ app/Header (`2981:546`, SET)
-- ⬍ app/Footer (`2969:432`, SET)
-- app/NavLink (`3093:553`, SET — `type=page|brand` × `state=default|hover|active`)
-- app/HeaderDrawer (`2981:4486`, SET — `state=closed|open`)
-- app/ThemeToggle (`16:11`, SET)
-- app/MotionToggle (`16:12`, SET)
+- ⬍ app/Header (`2981:546`, SET) · ⬍ app/Footer (`2969:432`, SET)
+- app/NavLink (`3093:553`, SET) · app/HeaderDrawer (`2981:4486`, SET)
+- app/ThemeToggle (`16:11`, SET) · app/MotionToggle (`16:12`, SET)
 
-**ui (10)**
+**ui (13)**
 
-- ui/Icon (`461:6204`, SET — 24 icons)
+- ui/Icon (`461:6204`, SET — 25 glyphs; `chevron-down` is real since P2-T11)
 - ui/H1 (`2119:7406`) · ui/H2 (`2034:213`)
 - ui/SectionTitle (`2041:465`) · ui/PageDescription (`2119:7440`)
 - ui/Link/primary (`2012:6179`, SET) · ui/Link/secondary (`2041:275`, SET)
 - ui/Link/inline (`2350:737`, SET) · ui/Link/textLink (`2041:313`, SET)
-- ui/Link/iconOnly (`2093:6332`, SET)
+- ui/Link/iconOnly (`2093:6332`, SET — `small` is 32×32 since P2-T11)
+- **ui/Link/external** (`3103:513`, SET — `state` × `iconSide`) · **ui/Prose** (`3106:2126`)
+- **ui/SocialShare** (`3106:2141`)
 
-**blog (9)**
+**blog (14)**
 
-- ⬍ blog/PostCard (`3093:5376`, SET — `size=big|small` × `breakpoint` × `state`)
+- ⬍ blog/PostCard (`3093:5376`, SET) · ⬍ blog/BlogPreview (`3041:1977`, SET)
+- ⬍ blog/PostList (`2977:4382`, SET) · ⬍ blog/SerieList (`2980:499`, SET)
 - blog/PostRow (`2124:7937`, SET) · blog/SerieCard (`2367:7205`, SET)
-- ⬍ blog/BlogPreview (`3041:1977`, SET) · ⬍ blog/PostList (`2977:4382`, SET)
-- ⬍ blog/SerieList (`2980:499`, SET)
 - blog/PostMetadataTime (`2040:482`, SET) · blog/PostMetadataTopic (`2371:10414`, SET)
 - blog/SerieMeta (`2375:10662`)
+- ⬍ **blog/TableOfContents** (`3113:5417`, SET) · **blog/SerieContents** (`3113:5418`)
+- **blog/RelatedWork** (`3117:662`) · **blog/PostNav** (`3117:705`, SET)
+- **blog/PostRowCalm** (`3118:5416`, SET)
 
-**work (2)**
+**work (6)**
 
 - ⬍ work/WorkPreview (`2970:4368`, SET)
-- work/WorkCardPreviewSmall (`2045:378`) — legacy, absorbed into `work/WorkCard` by P2-T04
+- **work/WorkCard** (`3107:654`, SET — 8 variants; absorbed `work/WorkCardPreviewSmall`)
+- ⬍ **work/ArchiveTable** (`3111:5650`, SET — 3 breakpoints)
+- **work/WorkMiniCard** (`3117:659`) · **work/WorkHeader** (`3118:680`)
+- **work/RelatedWriting** (`3118:5417`)
 
 **hero (3)**
 
@@ -84,14 +93,20 @@ agree. Full roster with the before→after mapping:
 
 **contact (2)**
 
-- contact/ContactPreview (`2114:7281`) · contact/ContactContent (`131:101`)
+- ⬍ contact/ContactPreview (`3112:690`, SET — gained `breakpoint` in P2-T06; the id moved from
+  `2114:7281`) · contact/ContactContent (`131:101`)
 
-**about (0)** — section exists, empty until P2-T10.
+**about (2)**
+
+- **about/AboutFacts** (`3119:2210`, SET) · **about/AboutText** (`3119:2211`)
+
+Bold = built in phase 2.
 
 ### 📚 Docs — `_Docs/*` (11 document-wide)
 
 Live on 📚 Docs (4): \_Docs/DecisionCard (`2590:571`, SET) · \_Docs/DoDont (`2590:588`) ·
-\_Docs/Date (`2693:9890`, SET) · \_Docs/Status (`2693:9897`, SET).
+\_Docs/Date (`2693:9890`, SET) · \_Docs/Status (`2693:9897`, SET). The last two carry lowercase
+axes (`variant`, `status`) since P2-T11.
 
 Archived on 🗄️ Archive — Docs v1 (7): \_Docs/ChapterHeader (`2590:537`) ·
 \_Docs/SpecimenCell (`2590:542`) · \_Docs/TokenRow (`2590:578`) · \_Docs/Headline
@@ -105,8 +120,14 @@ Archived on 🗄️ Archive — Docs v1 (7): \_Docs/ChapterHeader (`2590:537`) �
 - Blog — Desktop (`2604:1744`)
 - Blog — Mobile (`2604:1745`)
 
-`blog/BlogPreview` gained its Mobile variant in the responsive work; `contact/ContactPreview` is
-still the one section master without one (P2-T06 builds it).
+Phase 3 (P3-T02 … P3-T08) builds the remaining page masters against these four.
+
+### 🗄️ Archive — Components — `zz/*` (1)
+
+- zz/WorkCardPreviewSmall (`2045:378`) — superseded by `work/WorkCard`, 2026-08-18.
+
+Retired masters keep a `zz/` prefix and move to the archive page. They are never deleted, and they
+count toward the 62.
 
 ### Container recipe
 
@@ -155,7 +176,8 @@ Mechanism: page frames pin explicit (Theme, Responsive) mode pairs. Mobile views
 mode switches over the same component graph, not hand-resized duplicate builds.
 **Numbers = tokens. Direction = variants.** Anything a number can express rides
 `3 Responsive`; a `layoutMode` flip (which no variable type can express) rides the
-`breakpoint=Desktop|Mobile` axis on the seven ⬍ masters above, switched manually.
+`breakpoint` axis on the **11** ⬍ masters above, switched manually. `work/ArchiveTable`
+carries three breakpoints, not two; the rest are `Desktop|Mobile`.
 
 `footer/link-gap` has no binding target: code nests two `<ul>` link lists
 (`gap-2 md:gap-6`), Figma keeps all four links flat inside `FooterRight`. The
@@ -163,6 +185,22 @@ variable is correct and unbound until the Footer is restructured.
 
 ## Change log
 
+- 2026-08-19 — **Phase-2 gate passed** (P2-T01→T11b + R2.4). ❖ Components **32 → 46**: fifteen
+  masters built (`ui/Link/external` `ui/Prose` `ui/SocialShare` `work/WorkCard` `work/ArchiveTable`
+  `blog/TableOfContents` `blog/SerieContents` `work/WorkMiniCard` `blog/RelatedWork` `blog/PostNav`
+  `work/WorkHeader` `blog/PostRowCalm` `work/RelatedWriting` `about/AboutFacts` `about/AboutText`)
+  and `work/WorkCardPreviewSmall` retired to `zz/` on the new `🗄️ Archive — Components` page
+  (`3107:765`). Document total **62** = 46 + 11 `_Docs/*` + 4 📄 Pages + 1 `zz/`.
+  `contact/ContactPreview` was rebuilt as a SET with a `breakpoint` axis and moved to `3112:690`.
+  `ui/Icon` gained a real `chevron-down` (25 glyphs); `ui/Link/iconOnly size=small` is 32×32.
+  Hairlines are per-side strokes with `strokesIncludedInLayout: true` across 27 masters — a CSS
+  border grows an auto-height box, so a rectangle standing in for one is wrong by construction.
+  **224 default-white frame fills cleared**: `figma.createAutoLayout()` returns an opaque white
+  fill, and the `F()` prelude helper never dropped it, so every layout frame built in phase 2
+  carried one — invisible on a light canvas, a wall of white in dark mode. Fixed at source in
+  `ad95a17`. Unbound raw values document-wide are now **1086 rows / 55 fills / 0 white**: 54 are
+  VECTOR paths inside the contact icons (path fills cannot bind to variables) and 1 is the
+  `prose-link-annotation` doc label. `figma:verify` clean, `pnpm test` 57/57.
 - 2026-08-18 — **Phase-1 gate passed** (`.specs/01_active/magnet-ds-final-state/`, P1-T01→T09).
   Masters re-counted live: **47** (32 ❖ Components + 11 `_Docs/*` + 4 📄 Pages). Every DS master
   renamed to `domain/Component` and re-sectioned into seven domain SECTIONs named for the code

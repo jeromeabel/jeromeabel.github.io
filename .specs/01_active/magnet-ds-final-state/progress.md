@@ -1576,3 +1576,100 @@ Dark mode has still never been _seen_: this run's screenshots are the light canv
 class the white fills belonged to is exactly what a light-only render hides. **P3-T09's mode-pinned
 dark grid should run early in phase 3, not last.** Nine pre-phase-2 masters still carry no
 description (owner: P3-T10). Both were logged at P2-T11 and neither was in this brief's scope.
+
+---
+
+## R2.4 — phase-2 exit gate, repo half (2026-08-19)
+
+**TASK** R2.4 · **STATUS** done — gate passes. Phase 3 is unblocked.
+
+**RESULT.** `figma:dump` 4 collections / 493 variable rows / 17 text styles · `figma:verify` clean
+on all four sections · `figma:verify-raw` **1086 rows, 55 fills, 0 white** · `pnpm test` 57/57.
+
+### Pass 1 — token drift
+
+Fresh **File > Export** (`~/Téléchargements/Magnet DS.fig`, 64.7M) → `pnpm figma:dump`. 493
+variable rows: 407 `1 Primitives` · 54 `3 Responsive` · 30 `2 Theme` · 2 `Design System`.
+`pnpm figma:verify` reports **Missing / Value mismatch / Orphaned / Unmapped all `_none_`**.
+Code and Figma agree; `1 Primitives` is still 407, unchanged since R1.3.
+
+### The gate nearly passed on a 13-hour-old file
+
+`figma:verify-raw` ran first against the checked-out `raw-values.figma.json` and returned
+`595 rows · 560 new · 35 accepted · 14 stale` — **byte-identical** to the P1-T09 baseline at
+`progress.md:541`. That is not a stable file; that is the same file.
+
+```
+raw-values.figma.json   2026-08-18 23:36   ← predates P2-T05 … P2-T11b
+tokens.figma.json       2026-08-19 12:22   ← fresh from the export
+```
+
+`tokens.figma.json` is derived from the `.fig` binary by `fig-decode.mjs`, so `figma:dump`
+refreshes it. `raw-values.figma.json` is **not** — it comes from a live `use_figma` walk per
+`scripts/figma/dump-raw-values.md`, which a `.fig` export does not touch. And `diff-raw-values.mjs`
+is warn-only by design (`process.exit(0)` on every path), so nothing objected. The gate would have
+signed off on a snapshot taken before five of the tasks it was meant to verify.
+
+**Fixed at source.** `diff-raw-values.mjs` now stats both dumps, prints
+`_raw dump <t> · token dump <t> · N rows_` as its first line, and when the raw dump is the older of
+the two emits a `> ⚠️ **STALE INPUT**` block naming the gap in hours and pointing at the walk doc.
+Still warn-only — the report is the point, and a missing token dump is not this script's problem —
+but staleness is no longer silent. Verified both ways: clean on the fresh file, fires at 12.8h on a
+`touch -d` of the old mtime.
+
+### Pass 2 — the regenerated walk
+
+Two `use_figma` walks, one per page, same script shape as `dump-raw-values.md`:
+
+| Page                     | rows     | fill   | stroke | radius | spacing | text-style | white |
+| ------------------------ | -------- | ------ | ------ | ------ | ------- | ---------- | ----- |
+| ❖ Components (`461:759`) | 708      | 19     | 48     | 114    | 148     | 379        | **0** |
+| 📄 Pages (`2558:18264`)  | 378      | 36     | 96     | 92     | 22      | 132        | **0** |
+| **total**                | **1086** | **55** | 144    | 206    | 170     | 511        | **0** |
+
+Every one of the 55 fills is accounted for, and none is white:
+
+- **54 VECTOR paths** — the bluesky / linkedin / mail glyph internals inside
+  `contact/ContactPreview`. Nine paths × 2 breakpoints on ❖ Components, × 4 page instances on
+  📄 Pages. Path fills do not bind to variables; this is a floor, not debt.
+- **1 `prose-link-annotation`** (`3106:2150`) — `rgb(153,153,153)`, a documentation label in the
+  `ui` section.
+
+This is exactly what P2-T11b predicted, measured independently. The `F()` fix (`ad95a17`) holds:
+224 default-white frame fills are gone and none came back.
+
+`figma:verify-raw` against the fresh dump: **1052 new · 34 accepted · 15 stale**. Read this the way
+P1-T09 established it (`progress.md:541`): `named-debt.json` is a hand-picked set of ~35 text-style
+exceptions keyed by **node id**, never a full baseline. Phase 2 minted new ids wholesale, so a large
+"new" block is the expected state, not a finding. The 1052 are 511 text-styles with no semantic
+local style, 206 radii, 170 spacings and 144 strokes — the ordinary unbound surface of a library
+that has not had a tokenization sweep. Re-baselining `named-debt.json` is a judgement task with its
+own scope; it does not belong inside a verification gate, and `verify-raw` exits 0.
+
+### Knowledge file rewritten
+
+`.claude/skills/figma-verify/knowledge/figma-ds-file.md`: roster re-cut from a live roll call —
+**46** on ❖ Components across seven domain sections (full ids, phase-2 builds bolded), **11**
+`_Docs/*` document-wide, **4** page masters, **1** `zz/` retired, **62** total. Added the
+`🗄️ Archive — Components` page (`3107:765`) to the page table, corrected "seven ⬍ masters" to 11
+(`work/ArchiveTable` carries three breakpoints, not two), noted `contact/ContactPreview`'s id move
+`2114:7281` → `3112:690`, and wrote the 2026-08-19 phase-2 change-log entry.
+
+### Deviations
+
+- **The `.fig` lives at `~/Téléchargements/`, not `~/Downloads/`.** `repo/phase-2.md` hardcodes the
+  English path. Cosmetic; noted so the next gate does not go hunting.
+- **`raw-values.figma.json` stays gitignored.** `dump-raw-values.md` step 4 calls it a local scratch
+  artifact, and it is: node ids churn every phase, so a committed copy would be wrong within a day.
+  The freshness guard is the durable half of this lesson, not the file.
+- **`named-debt.json` untouched.** No new intentional raw value was introduced by phase 2 — the 55
+  fills are vector internals and one annotation, neither of which is a design decision to declare.
+
+### Carried to phase 3
+
+- **Pull P3-T09 (mode-pinned dark grid) early**, not last. Every screenshot through nine gates was
+  light-canvas, which is exactly what let 224 white fills survive. A dark grid is a detector, and
+  detectors belong at the front.
+- Nine pre-phase-2 masters still carry no description (`app/Footer` `app/Header` `app/HeaderDrawer`
+  `app/NavLink` `blog/PostList` `blog/SerieList` `blog/BlogPreview` `blog/PostCard`
+  `work/WorkPreview`). Owner: P3-T10.

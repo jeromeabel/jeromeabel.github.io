@@ -77,7 +77,7 @@ Do not start before R1.6 passes.
 | [x]  | R2.3    | 5 `CODE DEBT` findings logged — 1 real (ArchiveTable hover), 2 verified-no-debt, 1 doc-only, 1 Figma-side                                                            |
 | [x]  | P2-T11  | **GATE** — 46/11/4/**62** (the +1 is the `zz/` retired master; formula was stale), Gate D clean, 10 axis rows, 4 repairs done — 3 items open                         |
 | [x]  | P2-T11b | **GATE** — `iconSide` renamed (override survived), 27-master hairline table all `inLayout`, **224** white fills cleared, raw list down to 19 (0 white), Gate D clean |
-| [ ]  | R2.4    | **GATE** — dump + verify + verify-raw + test, knowledge file                                                                                                         |
+| [x]  | R2.4    | **GATE** — verify clean, 1086 raw rows / 55 fills / **0 white**, 57/57 tests; roster 46/11/4/1/**62**; `verify-raw` gained a stale-input guard                       |
 
 ## Phase 3 — pages, docs, ship
 

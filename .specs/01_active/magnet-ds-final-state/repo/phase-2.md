@@ -47,9 +47,9 @@ These are **not** fixed here; they are collected for the `magnet-ds-code-converg
 P2-T11 does the Figma half (roster assertions, variant axes, Gate D, screenshots). Then, from a fresh **File > Export**:
 
 ```bash
-pnpm figma:dump ~/Downloads/Magnet-DS.fig
+pnpm figma:dump ~/Downloads/Magnet-DS.fig   # locale note: ~/Téléchargements/ here
 pnpm figma:verify
-pnpm figma:verify-raw
+pnpm figma:verify-raw   # needs a FRESH walk first — see below
 pnpm test
 ```
 
@@ -61,6 +61,12 @@ P2-T11b changed what `verify-raw` has to account for. The raw list is now **19 e
 breakpoints — path fills do not bind to variables). The 12-entry list P2-T11 carried forward is
 obsolete: 224 default-white frame fills were cleared and the 4 `cover` placeholders are bound to
 `color/gray/200`. If `verify-raw` reports anything white, the `F()` fix (`ad95a17`) regressed.
+
+**`figma:dump` does not refresh `raw-values.figma.json`.** That file comes from a live `use_figma`
+walk (`scripts/figma/dump-raw-values.md`), so a fresh `.fig` export leaves it exactly as it was —
+and `diff-raw-values.mjs` is warn-only, so it will report on a week-old snapshot without complaint.
+Run the walk before `verify-raw`, and read the `_raw dump … · token dump …_` header the script now
+prints: if the raw dump is older, it says so in a ⚠️ block.
 
 Update `.claude/skills/figma-verify/knowledge/figma-ds-file.md` with the 14 new masters and the final phase-2 counts (**46** on ❖ Components, **11** `_Docs/*`, **4** page masters, **1** `zz/` retired master on `🗄️ Archive — Components`, **62** total).
 
