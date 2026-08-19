@@ -2344,3 +2344,103 @@ read-back `drift: []`, all 16 light/dark height pairs identical. Gate D scoped t
 dark instances — `Serie — *` / `Serie post — *` / `Work detail — *` › `PageContent.itemSpacing`
 (48 / 32); `Serie post — *` › `breadcrumb` › `"Part 4 of 5".fontSize` (16); `Work detail — *` ›
 `cover.cornerRadius` (8).
+
+## P3-T10 — 📚 Docs: Getting Started + 5 foundations (2026-08-19)
+
+**TASK** P3-T10 · **STATUS** DONE — 6 docs final, rationale moved to 📐 Decisions.
+
+### Step 1 — inventory
+
+📚 Docs = `2736:4`, 11 children: 6 doc frames + 4 `_Docs/*` masters (`DecisionCard`
+`2590:571`, `DoDont` `2590:588`, `Date` `2693:9890`, `Status` `2693:9897`) + 1 label TEXT.
+**All six docs already existed** — the brief expected three — so step 2 became a
+completion/audit pass, not construction.
+
+### Step 2 — the six docs
+
+Final order, `x = -18000 + i*1508`, `y = -900`, all 1408 wide; read-back `overlaps: []`,
+`clipped: []`:
+
+| #   | Doc                                   | Id          | Sections                                                                                                        |
+| --- | ------------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------- |
+| 1   | Getting Started                       | `2942:4308` | Mission, Audience, Three Layers, Core Rules, Token Architecture, File Navigation                                |
+| 2   | Foundations — Color                   | `2942:4406` | Theme Tokens, Contrast Pairings, Brand Grays, Brand Limes, Design Decisions (2)                                 |
+| 3   | Foundations — Typography              | `2942:4543` | Font Families, Type Scale, **Responsive Roles** 🆕, Design Decisions (3)                                        |
+| 4   | Foundations — Spacing & Layout        | `2942:4642` | Spacing, Radius, Responsive, Effects, **Container Recipe** 🆕, **Container Ownership** 🆕, Design Decisions (5) |
+| 5   | Foundations — Responsive Architecture | `3016:4343` | The rule, Responsive tokens, Style mapping, Accepted exceptions, Design Decisions (2)                           |
+| 6   | Foundations — Motion                  | `3039:5146` | Duration Scale, Easing, **Hover Verbs** 🆕, **Reveal** 🆕, Reduced Motion, Design Decisions (2)                 |
+
+`Container Recipe` (`3157:84`) is a PROPERTY/VALUE/BOUND-TO table: gutter 16 →
+`container/gutter`, max-width 1280 → `container/max-width`, centred →
+`counterAxisAlignItems`, rhythm 96/32/32 → `section/rhythm-y`. `Container Ownership`
+(`3157:109`) carries §5's four tiers and records that `PageContentContainer` was removed
+file-wide at P3-T03. Color was reordered and its `color/accent-hover` text corrected to the
+live `zz/color/accent-hover`.
+
+### Step 3 — rationale to 📐 Decisions
+
+Four records appended to `Records` (`3067:5`), each `_Docs/Date` "19 Aug 2026" +
+`_Docs/Status` ACCEPTED + a FILL `_Docs/DecisionCard`: `theme-modes-two-only` (`3160:39`),
+`text-styles-detached` (`3160:51`), `interaction-states-four` (`3160:63`),
+`responsive-exceptions` (`3160:75`). The three source cards were then removed from Color,
+Responsive and Motion. `responsive-exceptions` was **created** to close a dangling reference
+— the Responsive doc's blurb pointed at a record that did not exist. Records now number 9.
+
+### Step 4 — `ui/Icon` description
+
+Set from measurement, not from the brief: 24×24, **2px** stroke, round cap/join, stroke bound
+to `color/foreground`. Verified across 32 strokes / 25 variants — all weight 2, all bound, 0 raw.
+
+### Defect fixed — `_Docs/DecisionCard` text clipping
+
+Not in the brief, but it blocked step 5's "no doc is cropped" check. The master's `rule` /
+`body` / `finding` TEXT layers (12 across 4 variants) were FIXED at 760px while instances
+render at 619 or narrower, clipping the right edge of **every card in every doc**.
+Pre-existing. Fixed at the master (`textAutoResize=HEIGHT` + `layoutSizingHorizontal=FILL`),
+then 42 stale per-instance width overrides cleared in the docs and 27 more on 📐 Decisions.
+
+### Deviations
+
+1. **All 6 docs already existed** — brief expected 3.
+2. **`ui/Icon` stroke is 2px, not the brief's 1.5px.** Per the brief's own instruction, the
+   description records what the master does; the discrepancy is reported here.
+3. **WorkCard hover written as `--duration-fast` 150ms underline · `--duration-slow` 400ms
+   scale · `--ease-out`.** The brief's "140ms" is not on the Motion doc's own duration scale,
+   which declares any off-scale value a defect; `work-card-redesign/design.md:132-133`
+   specifies the coupled pair without numbers.
+4. **The brief's `_Docs/TokenRow` / `_Docs/SpecimenCell` doc recipe does not match the file**
+   — `SpecimenCell` does not exist. Followed the file's own convention (auto-layout frames +
+   tables; `DecisionCard` only in Design Decisions).
+5. Body and Mono are not responsive, so their D/T/M cells read "one size at every mode".
+6. Hover-verb component names kept verbatim from the pre-existing card (pre-§3 short names) —
+   renaming is a separate sweep, logged as CODE DEBT below.
+7. The Responsive doc's accepted-exceptions **list** stayed in place (current-state
+   reference); only the acceptance rationale moved to 📐 Decisions.
+
+### CODE DEBT — 4 new findings (→ R3.7)
+
+1. **The Motion doc declares a token vocabulary the code does not have** — `--duration-fast`
+   / `--duration-base` / `--duration-slow`, `--ease-out` / `--ease-in-out` appear nowhere in
+   `src/`.
+2. `src/styles/global.css:140-141` — `.reveal` runs 1.3s, off the 150/250/400 scale.
+3. `src/components/work/WorkCard.astro:42` — `duration-1000` + `scale-105` (doc says 400ms,
+   and 1.05 exceeds the spec's slow-scale intent); `:34` adds `hover:bg-surface`, giving
+   three hover verbs where the DS allows one coupled pair.
+4. The hover-verb table still uses pre-§3 short master names (`Link/CTA`, `NavLink`, …).
+
+**UNBOUND:** every node created in the docs uses raw values, matching the established
+doc-chrome convention — the docs are an annotation layer, not a themed artifact, and no
+existing doc content binds theme tokens. `Section — Container Recipe` (`3157:84`),
+`Container Ownership` (`3157:109`), `Responsive Roles` (`3158:89`), `Hover Verbs`
+(`3159:89`), `Reveal` (`3159:134`) › `fills` (#FFFFFF); all new table rows › `fills` (gray
+0.96 zebra); all new TEXT › `fills` (black) + `fontSize` (Inter 10/12/13/18); all new frames
+› `itemSpacing` / padding (8/12/32/64/128). Nothing allowlisted.
+
+### Where the "layout frames carry no fill" rule landed
+
+The brief asked. It is now `DecisionCard 3157:134` in Spacing & Layout › Design Decisions,
+citing both sweeps (224 fills at P2-T11b, 50 at P3-T09), with the finding: _only a page root
+or a deliberately tinted surface carries a fill, and that fill binds a `2 Theme` token —
+never a literal colour._
+
+No doc references page-master ids or grid counts, so the P3-T09 renumbering invalidates nothing.

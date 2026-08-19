@@ -2,7 +2,7 @@
 task: P3-T10
 title: Docs page — Getting Started + 5 foundation docs
 phase: 3
-status: TODO
+status: DONE
 prerequisite: P3-T09
 ---
 
