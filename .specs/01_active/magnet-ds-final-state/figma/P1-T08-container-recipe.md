@@ -2,7 +2,7 @@
 task: P1-T08
 title: Container normalization — one recipe, zero exceptions
 phase: 1
-status: DONE (2026-08-18) — step 4 corrective applied
+status: DONE (2026-08-18) — step 4 corrective applied; re-verified 2026-08-19 (12 variants, after P2-T06)
 prerequisite: P1-T07
 ---
 

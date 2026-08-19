@@ -926,3 +926,46 @@ an oversight.
 is the artefact R1.6 and R2.2 both deferred to. **It is already a snapshot of a moving target:**
 P2-T08 → P2-T10 add roughly six more masters, so R2.4 needs its own export rather than this one.
 Useful now only for an early read; the gate must re-export.
+
+### P1-T08 re-run — container recipe after P2-T06 (2026-08-19)
+
+- STATUS: **DONE** — 6 owners × **12** variants, all pass, zero exceptions beyond the known
+  structural one.
+- RESULT: steps 1–3 re-applied and read back. Every owner: pad-x `[16,16]` bound to
+  `container/gutter`, inner band `maxWidth = 1280` bound to `container/max-width`,
+  `counterAxisAlignItems = CENTER`.
+
+| Master                 | Variant | pad-x  | capped band(s)                        |
+| ---------------------- | ------- | ------ | ------------------------------------- |
+| app/Header             | Desktop | 16, 16 | HeaderContent                         |
+| app/Header             | Mobile  | 16, 16 | — (structural exception, see below)   |
+| app/Footer             | Desktop | 16, 16 | FooterContainer                       |
+| app/Footer             | Mobile  | 16, 16 | FooterContainer                       |
+| hero/Hero              | Desktop | 16, 16 | HeroContent, StartReading             |
+| hero/Hero              | Mobile  | 16, 16 | HeroContent, StartReading             |
+| blog/BlogPreview       | Desktop | 16, 16 | ui/SectionTitle, BlogPreviewContent   |
+| blog/BlogPreview       | Mobile  | 16, 16 | ui/SectionTitle, BlogPreviewContent   |
+| work/WorkPreview       | Desktop | 16, 16 | ui/SectionTitle, WorkPreviewSmallList |
+| work/WorkPreview       | Mobile  | 16, 16 | ui/SectionTitle, WorkPreviewSmallList |
+| contact/ContactPreview | Desktop | 16, 16 | ContactPreviewContent                 |
+| contact/ContactPreview | Mobile  | 16, 16 | ContactPreviewContent                 |
+
+- DEVIATIONS: none. The step-4 corrective from 2026-08-18 was already in place; step 1 re-applied
+  the `container/gutter` bindings only to confirm identity, not to change anything.
+- UNBOUND: none.
+
+**11 → 12 rows: the new row is `contact/ContactPreview` Mobile, added by P2-T06.** That is the
+point of re-running this task. P2-T06 promoted the master to a `breakpoint` set, and a new variant
+is a new container that nothing had yet checked. It passes on all three conditions, so the
+breakpoint promotion carried the recipe rather than starting a fresh unbound frame — which is the
+behaviour P2-T08 → P2-T10 will keep relying on as more masters gain Mobile.
+
+**The `app/Header` Mobile exception is still the only one, and still not debt.** No inner band
+exists to cap: `children` are the TEXT `Brand` and a FIXED `MenuButton`. Unchanged since
+2026-08-18; re-confirmed rather than re-litigated. Inventing a wrapper to make the audit read
+clean would be the wrong fix.
+
+**Cadence note.** This re-run is cheap (read-only after step 1) and is worth repeating once more
+at P2-T11 if any of P2-T08 → P2-T10 touches a container owner. None of the three queued tasks
+does on paper — they add cards, nav and about blocks, not page-level bands — so the P2-T11 gate
+can treat this run as current unless that changes.

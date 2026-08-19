@@ -50,7 +50,7 @@ repo session.
 | [x]  | R1.4     | log the rename map, commit                                 |
 | [x]  | P1-T06   | ❖ Components → 7 domain sections, 5 unhomed for T07        |
 | [x]  | P1-T07   | NavLink + PostCard merged, 1 straggler left for P2-T04     |
-| [x]  | P1-T08   | container recipe: 16 / 1280 / centred, 1 bandless variant  |
+| [x]  | P1-T08   | container recipe: 16 / 1280 / centred, 1 bandless variant; re-verified 12 variants 2026-08-19 |
 | [x]  | R1.5     | no debt to prune — drift was never allowlisted; commit     |
 | [x]  | P1-T09   | **GATE** — phase-1 exit, Figma half                        |
 | [x]  | R1.6     | **GATE** — phase-1 exit, repo half                         |
