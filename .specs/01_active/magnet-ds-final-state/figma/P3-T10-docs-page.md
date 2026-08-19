@@ -56,7 +56,7 @@ Doc frames go on the page in that order, after `DOC / Getting Started`, laid out
 
 ## Step 3 — move rationale prose into Decisions
 
-For every "why" paragraph found in Step 1 that explains a **choice** rather than a **rule**: create a `_Docs/DecisionCard` instance on 📐 Decisions using the shape established in P1-T02 and P2-T08 — no text component-properties; select with `layer=All`; edit the TEXT layers `layer` / `rule` / `body` / `finding`; `_Docs/Status` at `Status=Completed` with the label overridden to `ACCEPTED`; wrap in a frame named `DECISION / <slug>`.
+For every "why" paragraph found in Step 1 that explains a **choice** rather than a **rule**: create a `_Docs/DecisionCard` instance on 📐 Decisions using the shape established in P1-T02 and P2-T08 — no text component-properties; select with `layer=All`; edit the TEXT layers `layer` / `rule` / `body` / `finding`; `_Docs/Status` at `status=Completed` (axis lowercased at the P2-T11 gate; P1-T02 and P2-T08 predate the rename) with the label overridden to `ACCEPTED`; wrap in a frame named `DECISION / <slug>`.
 
 Then remove that paragraph from the doc. Removing a paragraph whose content now lives in a decision record is a **move**, not a deletion — but only after the record exists and reads back. List every moved record's slug in your report.
 

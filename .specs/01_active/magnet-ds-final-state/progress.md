@@ -1301,3 +1301,70 @@ last place the old convention survives.
   Note `WorkCard.astro` has **no** `border-t` today — the top rule and meta rail come from the
   `work-card-redesign` spec, not from shipped code, so there is nothing to reconcile against the
   live component until that redesign ships.
+
+---
+
+## P2-T11 — first run returned a **false** gate failure (2026-08-19)
+
+**TASK** P2-T11 · **STATUS** BLOCKED → brief patched, re-run pending
+
+**RESULT.** `46 / 4 / 4 / 54` against an expected `46 / 11 / 4 / 61`. A2 and A4 both failed. Neither
+is a Figma defect: the gap is exactly **7**, and 7 is the number of `_Docs/*` masters on
+`🗄️ Archive — Docs v1`.
+
+### The brief contradicted itself
+
+Step 1's walker carried `if (p.name.startsWith("🗄️")) continue;` while assertion 2 expected the
+`_Docs/*` count **document-wide** — which is how `inventory.md:325` defines the 11 ("Assertion 3
+counts `_Docs/*` document-wide, which is why the archived seven are in the 11") and how P1-T09
+measured 11 / 47 at the phase-1 gate, its walker having no such skip. The skip was added for
+assertions 5–8, which are legitimately ❖-Components-scoped; it should never have applied to the
+counters.
+
+Fixed at source: the walker now visits every page and stamps an `archived` flag, assertions 2 and 4
+count document-wide, and 1 / 5–8 filter on that flag. The runner's numbers were right about the
+file; the file was right all along.
+
+### Three more findings the failed run surfaced
+
+**1 — the brief was stale by four tasks.** `RUNBOOK.md`'s P2-T11 row carries five owed items;
+the brief file only ever contained one (`iconOnly/small` 24→32, Step 3b). Missing: the
+`ui/Link/external` `iconSide` axis (owed by P2-T10), the fake `chevron-down` (owed by P2-T07), the
+36 legacy hairlines still `strokesIncludedInLayout=false` (owed by P2-T10b), and the `/about`
+light+dark screenshots. Had the count bug not fired, this gate would have **passed while
+incomplete** — the failure was luckier than it looked. Added as Steps 3c / 3d / 3e and a Step-6
+clause, all placed ahead of the binding sweep and Gate D because 3c and 3e move geometry.
+
+**2 — `chevron-down`: resolved at the gate, not deferred.** P2-T07 renamed a `chevron-right`
+instance to `chevron-down`; the layer name asserts a glyph the instance does not carry, which is
+undetectable downstream. Step 3d now builds the real glyph into `ui/Icon` via
+`createNodeFromSvg` and re-points every instance through the glyph property. Phase 3 does not
+inherit it.
+
+**3 — `_Docs` axis renames kept, `P3-T10` updated.** Assertion 9 reads "every COMPONENT_SET's axes
+are lowercase" with no scope, so the runner renamed `_Docs/Date` `Variant`→`variant` and
+`_Docs/Status` `Status`→`status` — reasonable under the text, but `_Docs/*` is out of DS scope per
+`P1-T05:88`, and `P3-T10-docs-page.md:59` still said `Status=Completed`. Decision: keep the
+lowercase axes (uniform document-wide), update `P3-T10` to `status=Completed`, and leave the
+already-executed P1-T02 and P2-T08 briefs as the historical record they are. Assertion 9 now states
+its scope explicitly.
+
+### What did pass
+
+Assertions 1, 3, 5–9 · all 9 variant-axis rows · Gate D three empty arrays (after the runner
+re-laid the blog / work / about sections to clear 22 overlaps and 1 crop) · descriptions on every
+phase-2 master, three of which the runner added (`hero/Hero`, `ui/Prose`, `ui/SocialShare`).
+Step 3b done: `ui/Link/iconOnly` `size=small` resized 24×24 → 32×32.
+
+`UNBOUND` from the run, carried to R2.4's `verify-raw`: `work/ArchiveTable` 165 ·
+`blog/TableOfContents` 20 · `blog/PostNav` 11 · `about/AboutFacts` 11 · `blog/RelatedWork` 8 ·
+`about/AboutText` 8 · `ui/Prose` 6 · `work/WorkHeader` 2 · `ui/H1` 1 · `ui/PageDescription` 1 ·
+`blog/SerieContents` 1 · orphan `prose-link-annotation` 1. The ArchiveTable 165 is the row
+cells/frames carrying solid fills and is the one worth a look before R2.4 signs it off.
+
+### Deviations recorded from the run
+
+- Re-laid blog / work / about sections to clear 22 overlaps and 1 crop (expected — 3e and 3c will
+  require the same re-grid again).
+- Descriptions added to `hero/Hero`, `ui/Prose`, `ui/SocialShare`.
+- `ui/Link/iconOnly` small variants 24×24 → 32×32 (this was Step 3b, not a deviation).
