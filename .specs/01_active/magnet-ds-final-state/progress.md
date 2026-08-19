@@ -2686,7 +2686,7 @@ still owns live component anatomy, so it moved to `.specs/01_active/work-card-re
 ## R3.4 — rewrite the knowledge file (2026-08-19)
 
 **TASK** R3.4 · **STATUS** DONE — `.claude/skills/figma-verify/knowledge/figma-ds-file.md`,
-101 → 218 lines. Format, heading order, table conventions and the reverse-chronological change log
+101 → 362 lines. Format, heading order, table conventions and the reverse-chronological change log
 all preserved.
 
 **Kept verbatim**: the `get_metadata` MCP gotcha, the base-URL link convention, the 18-variable
