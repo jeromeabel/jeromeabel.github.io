@@ -1460,3 +1460,119 @@ class of defect that limit hides, which is an argument for P3-T09 running earlie
 
 **4 clone artifacts** were created on `🗄️ Archive — Decisions` during step 3c and cleaned up in the
 same run. Gate D confirms `strays: []`.
+
+---
+
+## P2-T11b — gate cleanup: the three open items closed (2026-08-19)
+
+**TASK** P2-T11b · **STATUS** done — axis renamed, hairline table proven, **zero** unbound white
+fills on ❖ Components
+
+**RESULT.** Step 1 rename clean, Step 2 table returned **27** masters (not 15), Step 3 cleared
+**224** fills (predicted 209), Step 4 already applied at source, Step 5 Gate D `[] [] []`.
+
+### 1 — `iconside` → `iconSide`, and the override survived
+
+`ui/Link/external` (3103:513) renamed, values unchanged (`trailing` default, `leading`). All four
+cells re-read: `state=default, iconSide=trailing` / `state=hover, iconSide=trailing` /
+`state=default, iconSide=leading` / `state=hover, iconSide=leading`. `about/AboutText`'s CV instance
+(3119:2253) still resolves `iconSide=leading` — the axis rename did **not** re-key it, so no
+re-application was needed. The one thing this step risked did not happen.
+
+### 2 — 27 masters carry strokes, not 15, and every rule is `inLayout: true`
+
+The 15 in the brief came from P2-T11's `grew` count. The audit script counts any master containing
+a stroked node, which includes masters that contain **instances** of stroked components —
+`hero/Hero` holds `ui/Link/primary` instances, `contact/ContactPreview` holds `ui/Link/iconOnly`
+instances, and so on. Both risks the brief named are resolved:
+
+- **Risk 1 closed.** `ui/Link/iconOnly` `size=small` reads **32×32**; `ui/SocialShare`'s three
+  children (`bluesky`, `linkedin`, `mail`) read **32×32**. The `normal` variants sit at 56×56, which
+  is their size axis, not stroke growth. Step 3b stands; 3e did not undo it.
+- **Risk 2 closed, and the survey was the wrong one.** `blog/BlogPreview` and `work/WorkPreview`
+  each contribute 2 strokes, but both are `ui/SectionTitle` **instances**, and the `ui/SectionTitle`
+  master already had `strokesIncludedInLayout: true`. 3e's script found nothing to flip because
+  there was nothing to flip. P2-T10b's survey was wrong about those 4 nodes; 3e was right.
+
+Full table (name · w×h · rules · shape):
+
+| Master                   |       w×h | rules | shape                                |
+| ------------------------ | --------: | ----: | ------------------------------------ |
+| `app/Footer`             |  1654×410 |    14 | per-side (top-1, bottom-1)           |
+| `app/NavLink`            |   116×300 |     2 | per-side (bottom-2)                  |
+| `ui/Link/primary`        |   224×178 |     2 | boxed                                |
+| `ui/Link/secondary`      |   196×178 |     2 | boxed                                |
+| `ui/Link/iconOnly`       |    90×258 |     4 | boxed                                |
+| `ui/Link/inline`         |    185×31 |     3 | per-side (bottom-1)                  |
+| `ui/Link/external`       |   164×270 |     4 | boxed                                |
+| `ui/Prose`               |  720×1043 |     1 | per-side (left-2)                    |
+| `ui/SocialShare`         |    162×32 |     3 | boxed                                |
+| `blog/PostList`          | 1684×1256 |     9 | per-side (left-1, bottom-1)          |
+| `blog/SerieList`         | 1718×1175 |     6 | boxed                                |
+| `blog/BlogPreview`       | 1536×2442 |     2 | per-side (bottom-1)                  |
+| `blog/PostRow`           |   940×334 |     4 | per-side (bottom-1)                  |
+| `blog/SerieCard`         |   800×357 |     2 | boxed                                |
+| `blog/TableOfContents`   |   614×238 |    15 | per-side (left-2) + 1 boxed (Mobile) |
+| `blog/PostNav`           |   720×542 |     4 | boxed                                |
+| `blog/PostRowCalm`       |   720×188 |     2 | per-side (bottom-1)                  |
+| `work/WorkPreview`       | 1320×1602 |     2 | per-side (bottom-1)                  |
+| `work/WorkCard`          |  1248×418 |     8 | per-side (top-1)                     |
+| `work/ArchiveTable`      |  1248×329 |    27 | per-side (bottom-1)                  |
+| `work/WorkHeader`        |   832×567 |     5 | per-side (bottom-1) + 2 boxed        |
+| `work/RelatedWriting`    |   720×206 |     2 | per-side (bottom-1)                  |
+| `hero/Hero`              | 1320×1376 |     2 | boxed                                |
+| `contact/ContactContent` |   192×237 |     3 | boxed                                |
+| `contact/ContactPreview` |  1280×493 |     8 | per-side (top-1) + 6 boxed           |
+| `about/AboutFacts`       |   832×117 |     1 | per-side (top-1, bottom-1)           |
+| `about/AboutText`        |  832×1127 |     3 | boxed                                |
+
+### 3 — 224 white fills cleared, and the raw list is 19 with zero white in it
+
+Predicted 209; cleared **224**. The extra 15 are the 13 invisible master-root fills P2-T10 recorded
+plus 2 more of the same kind — invisible paints that `figma:verify-raw` still reads, so clearing
+them is the point, not a deviation.
+
+`KEPT`, all four entries with a verdict:
+
+- **`cover` × 4** (1 master `3117:660` + 3 instances inside `blog/RelatedWork`'s grid, all
+  `work/WorkMiniCard`) — already bound to `color/gray/200`, matching `work/WorkCard`'s eight from
+  P2-T04b. The exception is one rule, as intended.
+- **`prose-link-annotation`** (`3106:2150`) — a TEXT node at `rgb(153,153,153)` sitting directly in
+  the `ui` section, **not** inside `ui/Prose`. It is a doc annotation labelling the prose link
+  styling. Justified where it is; nothing to move.
+- **18 VECTOR paths** inside `contact/ContactPreview` (`path31134-3`, `path37893`, `path38333`, ×3
+  paths × 2 breakpoints) — imported SVG internals of the bluesky / linkedin / mail social icons.
+  Path fills do not bind; icon identity is managed by instance swap on `ui/Icon`. Justified raw.
+
+`UNBOUND` total: **19** (1 annotation + 18 vector paths), **0 white**. That is the list R2.4's
+`verify-raw` has to account for — it replaces the 12-entry list P2-T11 carried forward, which was
+almost entirely the white fills.
+
+### 4 — `F()` already patched
+
+Committed as `ad95a17` before the run; not hand-edited from the Figma session, as the brief required.
+Frames built by this brief's own scripts come out transparent. Phase 3's page masters inherit the fix.
+
+### 5 — re-verify
+
+Gate D `overlaps: []`, `cropped: []`, `strays: []`. Binding sweep clean per above. Screenshots of
+`work/ArchiveTable`, `blog/TableOfContents`, `blog/PostNav`, `about/AboutText` and `ui/Prose` all
+render transparent — no white slabs. `work/ArchiveTable`, which held 160 of the 209, is the one that
+changed most and it now reads as rules on nothing, which is what the live table is.
+
+### Deviations
+
+- Hairline table reports **27** masters, not 15 — instances of stroked components inside other
+  masters are counted. All `inLayout: true`.
+- **224** cleared, not 209 — the 13 invisible master-root fills plus 2 more.
+- **P1-T06 Step 2 (re-grid) was not re-run** as its own step. Gate D's three empty arrays cover the
+  same ground (no overlaps, no crops, no strays), so the outcome is verified even though the step
+  was skipped. Nothing in this run moved a master's size — the one size risk (Step 2, `iconOnly`)
+  came back unchanged at 32×32 — so there was nothing for a re-grid to fix.
+
+### Still open, unchanged by this run
+
+Dark mode has still never been _seen_: this run's screenshots are the light canvas, and the defect
+class the white fills belonged to is exactly what a light-only render hides. **P3-T09's mode-pinned
+dark grid should run early in phase 3, not last.** Nine pre-phase-2 masters still carry no
+description (owner: P3-T10). Both were logged at P2-T11 and neither was in this brief's scope.

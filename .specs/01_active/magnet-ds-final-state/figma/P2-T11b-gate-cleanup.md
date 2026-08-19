@@ -2,7 +2,7 @@
 task: P2-T11b
 title: Phase-2 gate cleanup — axis case, hairline audit, 209 white frame fills
 phase: 2
-status: TODO
+status: done
 prerequisite: P2-T11
 ---
 

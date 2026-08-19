@@ -55,6 +55,13 @@ pnpm test
 
 Read the reports. Expected end state: token diff clean, every raw value declared, tests green.
 
+P2-T11b changed what `verify-raw` has to account for. The raw list is now **19 entries, none white**:
+`prose-link-annotation` (1 TEXT node, `rgb(153,153,153)`, a doc annotation in the `ui` section) and
+**18 VECTOR paths** inside `contact/ContactPreview` (bluesky / linkedin / mail SVG internals, ×2
+breakpoints — path fills do not bind to variables). The 12-entry list P2-T11 carried forward is
+obsolete: 224 default-white frame fills were cleared and the 4 `cover` placeholders are bound to
+`color/gray/200`. If `verify-raw` reports anything white, the `F()` fix (`ad95a17`) regressed.
+
 Update `.claude/skills/figma-verify/knowledge/figma-ds-file.md` with the 14 new masters and the final phase-2 counts (**46** on ❖ Components, **11** `_Docs/*`, **4** page masters, **1** `zz/` retired master on `🗄️ Archive — Components`, **62** total).
 
 ```bash
