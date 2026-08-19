@@ -97,7 +97,7 @@ const build = async (breakpoint) => {
   if (old) old.remove();  // own debris from a previous run of this task only
   const clone = src.clone();
   clone.name = `Serie post — ${breakpoint}`;
-  const pc = clone.findOne((n) => n.name === "PageContent");
+  const pc = clone.findOne((n) => /^PageContent/.test(n.name));
   const contents = await inst("blog/SerieContents");
   const nav = pc.children.find((c) => /PostNav/.test(c.name));
   pc.insertChild(pc.children.indexOf(nav), contents);

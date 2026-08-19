@@ -85,8 +85,8 @@ Do not start before R2.4 passes.
 
 | Done | Step   | What                                                                  |
 | ---- | ------ | --------------------------------------------------------------------- |
-| [ ]  | P3-T01 | **GATE** — read-only page baseline + delta list                       |
-| [ ]  | P3-T02 | `Home — *` (Home-type `PageContent`)                                  |
+| [x]  | P3-T01 | **GATE** — 8 frames (4 masters + 4 Dark instances), 62-master roster holds; 3 deltas open: wrapper ×2, Home `paddingBottom` unbound |
+| [x]  | P3-T02 | `Home — *` — shell already full-bleed; `contact/ContactPreview` `maxWidth` bound on the master; 3 new findings for R3.1 |
 | [ ]  | P3-T03 | `Blog — *` (document-type, wrapper removed)                           |
 | [ ]  | P3-T04 | `Work — *` — case zigzag + archive table                              |
 | [ ]  | P3-T05 | `About — *`                                                           |

@@ -1673,3 +1673,212 @@ own scope; it does not belong inside a verification gate, and `verify-raw` exits
 - Nine pre-phase-2 masters still carry no description (`app/Footer` `app/Header` `app/HeaderDrawer`
   `app/NavLink` `blog/PostList` `blog/SerieList` `blog/BlogPreview` `blog/PostCard`
   `work/WorkPreview`). Owner: P3-T10.
+
+---
+
+## P3-T01 — phase-3 entry gate, page baseline (2026-08-19)
+
+**STATUS: done.** Read-only, nothing written. Two batched runs: the 📄 Pages walk (step 1) and the
+roster roll-call (step 4).
+
+### What 📄 Pages holds today
+
+Eight frames — four `COMPONENT` masters and their four `[Dark]` instances. Names already use the
+em dash the P3-T09 grid script matches on.
+
+| frame                  | type      | id          | w × h        | Theme | Responsive |
+| ---------------------- | --------- | ----------- | ------------ | ----- | ---------- |
+| `Home — Desktop`       | COMPONENT | `2604:1741` | 1280 × 2745  | Light | Desktop    |
+| `Home — Mobile`        | COMPONENT | `2604:1742` | 390 × 4061   | Light | Mobile     |
+| `Blog — Desktop`       | COMPONENT | `2604:1744` | 1280 × 1802  | Light | Desktop    |
+| `Blog — Mobile`        | COMPONENT | `2604:1745` | 390 × 4491   | Light | Mobile     |
+| `Home — Desktop [Dark]` | INSTANCE  | `2989:4642` | 1280 × 2745  | Dark  | Desktop    |
+| `Home — Mobile [Dark]`  | INSTANCE  | `2989:4844` | 390 × 4061   | Dark  | Mobile     |
+| `Blog — Desktop [Dark]` | INSTANCE  | `2989:5033` | 1280 × 1802  | Dark  | Desktop    |
+| `Blog — Mobile [Dark]`  | INSTANCE  | `2989:5226` | 390 × 4491   | Dark  | Mobile     |
+
+Every frame carries **both** mode pins explicitly — `2 Theme` (`3:2`) and `3 Responsive`
+(`2245:42`). Nothing inherits.
+
+### `PageContent (slot)` bindings
+
+| frame           | pad-x  | maxWidth | bound                                                     |
+| --------------- | ------ | -------- | --------------------------------------------------------- |
+| Home (both bps) | 0 / 0  | none     | `itemSpacing`, `paddingTop`                               |
+| Blog (both bps) | 16 /16 | 1280     | `paddingLeft/Right`, `paddingTop/Bottom`, `maxWidth`      |
+
+Home is full-bleed with its four section instances (`hero/Hero`, `blog/BlogPreview`,
+`work/WorkPreview`, `contact/ContactPreview`) carrying their own containers — the Home-type recipe,
+already right. Blog carries the container on `PageContent` — the document-type recipe, also right —
+but then puts a second one inside it.
+
+`app/Header` and `app/Footer` instances are consistent across all eight: pad 16, maxWidth 1280,
+their own container, Footer with a bound `strokes`.
+
+### The five deltas — three apply, two do not
+
+| delta                                              | applies | evidence                                                                     |
+| -------------------------------------------------- | ------- | ---------------------------------------------------------------------------- |
+| `PageContentContainer` wrapper exists              | **yes** | 4 hits: `2586:1164` (Blog Desktop), `2586:1181` (Blog Mobile), + 2 in the Dark instances |
+| Home frame contains an `AboutStrip`                | no      | Home's four children are Hero / BlogPreview / WorkPreview / ContactPreview   |
+| a Dark frame that is a FRAME not an INSTANCE       | no      | all four Dark frames are already `INSTANCE`                                  |
+| `PageContent` padding 32 / unbound / no `maxWidth` | **yes** | Home binds `paddingTop` but **not `paddingBottom`** — rhythm-y is half-bound |
+| a frame missing an explicit `3 Responsive` pin     | no      | all eight pin both collections                                               |
+
+The wrapper count is 4, not 2: the two masters own the real wrappers, the two Dark instances mirror
+them (`I2989:5033;2586:1164`, `I2989:5226;2586:1181`). Removing the masters' wrappers in P3-T03
+takes the instance copies with them — no separate cleanup.
+
+The Home `paddingBottom` gap is a new finding, not one the brief predicted in that wording. Both
+page types are supposed to bind `section/rhythm-y` on `itemSpacing`, `paddingTop` **and**
+`paddingBottom`. Home binds two of three; Blog binds all. **Owner: P3-T02**, which rebuilds Home's
+`PageContent` anyway.
+
+### Roster — 46/11 holds
+
+Live roll-call, `findAllWithCriteria` filtered to sets plus non-variant components:
+
+| page                              | id          | masters |
+| --------------------------------- | ----------- | ------- |
+| ❖ Components                      | `461:759`   | **46**  |
+| 📄 Pages                          | `2558:18264`| 4       |
+| 📚 Docs                           | `2736:4`    | 4       |
+| 🗄️ Archive — Docs v1 (CHAPTERs)  | `3039:4341` | 7       |
+| 🗄️ Archive — Components          | `3107:765`  | 1       |
+| **total**                         |             | **62**  |
+
+46 on ❖ Components across the seven domain sections, 11 `_Docs/*` document-wide (4 live + 7 in the
+v1 archive), 4 page masters, 1 `zz/` retired — **62**, matching R2.4 exactly. No master went
+missing between the phase-2 gate and now; the library is intact and phase 3 can build against it.
+
+### The eight routes
+
+Four of the sixteen light frames exist (`Home`, `Blog` × 2 breakpoints). **Twelve remain**:
+`Work` `About` `Post` `Serie` `Serie post` `Work detail`, each × Desktop + Mobile. P3-T09 then
+mirrors all sixteen into Dark, for the 32-frame grid.
+
+### Noted for P3-T11
+
+`XP - WorkCard` (`3034:5541`) is a live exploration page holding 0 masters. It is the archive
+candidate P3-T11 names — recorded here so the sweep does not have to rediscover it.
+
+### Deviations
+
+- **Step 4 read wider than the brief asked.** The brief says re-run `P2-T11` step 1; the roll-call
+  here walks every page and reports per-page master counts. Same assertion, more evidence, and it
+  is what surfaced the `XP - WorkCard` page. Read-only either way.
+
+**UNBOUND:** none — nothing was written.
+
+## P3-T02 — `Home — Desktop` / `Home — Mobile` (2026-08-19)
+
+**STATUS: done**, with one write. Both frames already carried the Home-type recipe; the brief's
+steps 1, 2 and 4 were satisfied before the run. The only real defect the pass found was on a
+**component master**, not on the pages: `contact/ContactPreview` held its `maxWidth` as a raw
+`1280` on both variant roots.
+
+### Name mismatch — the brief would have STOPped
+
+The brief resolves the shell by `findOne(n => n.name === "PageContent")`. The node is called
+**`PageContent (slot)`** on both Home frames (`2586:1139` Desktop, `2586:1147` Mobile), so the
+strict equality throws `PageContent missing`. Matched on `/^PageContent/` instead. Every phase-3
+brief that touches a page shell inherits this — P3-T03 onward must use the prefix match.
+
+### Step 1 — the shell was already full-bleed
+
+| frame          | pad (T R B L) | maxWidth | itemSpacing bound to     | sizing        |
+| -------------- | ------------- | -------- | ------------------------ | ------------- |
+| `Home — Desktop` | `0 0 0 0`   | `null`   | `3 Responsive::section/rhythm-y` | FILL / HUG |
+| `Home — Mobile`  | `0 0 0 0`   | `null`   | `3 Responsive::section/rhythm-y` | FILL / HUG |
+
+Children on both: `app/Header` (INSTANCE) → `PageContent (slot)` (FRAME) → `app/Footer` (INSTANCE).
+No `AboutStrip` node anywhere in either frame (`findAll` count 0) — the composition was already the
+four-section one, so nothing was removed.
+
+### The P3-T01 `paddingBottom` finding does not reproduce — and should not
+
+P3-T01 recorded Home as binding `paddingTop` but not `paddingBottom`, owner P3-T02. The cold read
+shows **neither** bound: padding is `0` on all four sides with only `itemSpacing` bound. That is
+the correct Home-type state, not a gap:
+
+- `src/pages/index.astro` puts no vertical padding on the page wrapper.
+- `Hero` owns `my-16 md:my-32`, `<main>` owns `mb-32`, `Contact` owns its own vertical padding.
+
+Binding `paddingTop`/`paddingBottom` to `section/rhythm-y` here would double the rhythm at both
+ends against live. **Closed as not-a-defect**; the document-type `shell()` helper keeps binding all
+three, which stays right for Blog and the detail pages.
+
+### Step 2 — four sections, right order, breakpoints already pinned
+
+`hero/Hero` → `blog/BlogPreview` → `work/WorkPreview` → `contact/ContactPreview`, all `INSTANCE`,
+on both frames. Every one exposes a `breakpoint` axis and every one was already pinned to its
+frame's breakpoint (`Desktop` on `2604:1741`, `Mobile` on `2604:1742`) — including the
+`contact/ContactPreview` Mobile variant P2-T06 built. No detached section, so no re-instancing.
+
+### Step 3 — each section owns its container; one was half-bound
+
+The recipe sits on the **section instance root**, not on an inner band (a first read that walked
+the subtree for a node matching `/container/i` picked up leaf frames like `HeroTextContainer` and
+was misleading — the root is the band).
+
+| section                 | padL/R | maxWidth | align  | before                              |
+| ----------------------- | ------ | -------- | ------ | ----------------------------------- |
+| `hero/Hero`             | 16/16  | 1280     | CENTER | fully bound                         |
+| `blog/BlogPreview`      | 16/16  | 1280     | CENTER | fully bound                         |
+| `work/WorkPreview`      | 16/16  | 1280     | CENTER | fully bound                         |
+| `contact/ContactPreview`| 16/16  | 1280     | CENTER | **`maxWidth` raw, gutter bound**    |
+
+`contact/ContactPreview` bound its gutter at the root but carried `maxWidth` as an unbound `1280`
+there, with the `container/max-width` binding one level down on `ContactPreviewContent`. Same
+computed geometry, half-bound recipe. Fixed on the **master** (`3112:690`), both variants —
+`2114:7281` (Desktop) and `3112:636` (Mobile) now bind `maxWidth` to
+`3 Responsive::container/max-width`. The inner band's binding was left alone; it is what actually
+draws the section's rule, so it is not redundant.
+
+`PageContent (slot)` shows `[0,0]` padding and a null `maxWidth` on both frames — the two Home-type
+conditions hold together.
+
+### Step 4 — `work/WorkPreview` already carries the three catalogue cards
+
+Skipped as the brief allows. The master (`2970:4368`) holds, on both variants, a
+`WorkPreviewSmallList` band with three `work/WorkCard` instances at
+`variant=catalogue, state=default, side=left`, gap 40 — `HORIZONTAL` on Desktop, `VERTICAL` on
+Mobile. Content is the real featured order: `01 Le concept de la preuve / WEB · 2026`,
+`02 Chimères Orchestra / ART · 2013–2019`, `03 La Malinette / OPEN SOURCE · 2013–2021`.
+
+### Step 5 — cold read-back + screenshots
+
+Fresh run, all assertions true on both frames: shell children in order, `PageContent (slot)` full
+bleed with bound rhythm, four sections in the fixed order all `INSTANCE`, breakpoints pinned, three
+cards with the right titles, `AboutStrip` count 0. Desktop shot full-frame; Mobile shot per section
+(the 390 × 4371 frame renders 63 px wide at any usable cap).
+
+The two intended divergences from live `/` are visible and correct: no `AboutStrip`, and the work
+strip is three catalogue cards rather than the `WorkMiniCard` / `WorkOverlayCard` grid. **Three
+further differences turned up** — all reported, none fixed here:
+
+1. **`work/WorkCard` catalogue overflows at 390.** The tech-stack line
+   (`Astro · Tailwind CSS · Astro DB · Turso · Netlify · S3`) is clipped at the card's right edge on
+   `Home — Mobile`, and the `↗ Live ↗ Repo` row sits flush under the clip. A Mobile card-content
+   rule (wrap, truncate, or drop the stack) is missing. Owner: the WorkCard spec, via P3-T04.
+2. **Card content is placeholder-uniform.** All three cards repeat the same stack line and the same
+   `↗ Live ↗ Repo` pair — wrong for `Chimères Orchestra` (an art project, no repo) and for
+   `La Malinette`. Content debt on the `work/WorkCard` instances, not a layout defect.
+3. **Mobile `hero/Hero` drops `HeroAnimation`.** The Mobile variant is text + `Start reading` only;
+   live `Hero.astro` renders `HeroAnimation` at every breakpoint (`flex-col` stack on small
+   screens). Figma-side gap, not a deliberate Figma-leads decision — owner: whoever revisits
+   `hero/Hero`, flagged here for R3.1.
+
+### Deviations
+
+- **Shell resolved by prefix**, not exact name (see above). Structural, not a design change.
+- **One master edited that the brief did not name.** `contact/ContactPreview` `maxWidth`; step 3
+  asserts the binding, and the run rules forbid fixing it as an instance override, so the master was
+  the only correct place.
+- **Steps 1, 2 and 4 wrote nothing** — the frames already met them. Verified by read, not assumed.
+- **`Home — Mobile`'s `contact/ContactPreview` carries a local `paddingTop` override** bound to
+  `3 Responsive::section/rhythm-y` where the master binds `1 Primitives::spacing/8`. Both resolve to
+  32 at Mobile, so there is no visual difference, and the Plugin API has no per-property override
+  reset (`resetOverrides()` would take the text overrides with it). Logged, not touched.
+
+**UNBOUND:** none.

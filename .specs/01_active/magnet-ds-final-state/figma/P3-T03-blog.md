@@ -51,7 +51,7 @@ const out = [];
 for (const name of ["Blog — Desktop", "Blog — Mobile"]) {
   const frame = page.children.find((c) => c.name === name);
   if (!frame) throw new Error(`${name} missing`);
-  const pc = frame.findOne((n) => n.name === "PageContent");
+  const pc = frame.findOne((n) => /^PageContent/.test(n.name));
   const wrapper = pc.findOne((n) => n.name === "PageContentContainer");
   const hoisted = [];
   if (wrapper) {
@@ -101,7 +101,7 @@ const YEARS = [
 
 const build = async (name) => {
   const frame = page.children.find((c) => c.name === name);
-  const pc = frame.findOne((n) => n.name === "PageContent");
+  const pc = frame.findOne((n) => /^PageContent/.test(n.name));
   const mobile = name.includes("Mobile");
   for (const c of pc.children.slice()) c.remove();  // rebuilt below from instances
 
