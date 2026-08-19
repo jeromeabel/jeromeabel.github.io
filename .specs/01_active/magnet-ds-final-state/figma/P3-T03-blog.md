@@ -122,7 +122,7 @@ const build = async (name) => {
     y.fontName = { family: "Fira Code", style: "Bold" };
     y.fontSize = 14;
     y.characters = year;
-    y.setBoundVariable("fills", V["2 Theme::color/foreground"]);
+    y.fills = [P(V["2 Theme::color/foreground"])];
     group.appendChild(y);
     if (!mobile) { y.resize(48, y.height); y.layoutSizingHorizontal = "FIXED"; }
 
@@ -131,7 +131,7 @@ const build = async (name) => {
     if (!mobile) {
       const rule = figma.createRectangle();
       rule.name = "rule"; rule.resize(1, 20);
-      rule.setBoundVariable("fills", V["2 Theme::color/border"]);
+      rule.fills = [P(V["2 Theme::color/border"])];
       col.appendChild(rule); rule.layoutSizingVertical = "FILL";
     }
     const inner = F("rows", "VERTICAL", { itemSpacing: 0 });

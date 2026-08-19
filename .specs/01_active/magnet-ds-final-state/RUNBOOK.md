@@ -70,11 +70,11 @@ Do not start before R1.6 passes.
 | [x]  | P2-T05 | `work/ArchiveTable` — 3 breakpoints; re-grid + Gate D verified      |
 | [x]  | P2-T06 | `contact/ContactPreview` gains `breakpoint` — Desktop untouched     |
 | [x]  | P2-T07 | `blog/TableOfContents`, `blog/SerieContents` — fake `chevron-down`  |
-| [ ]  | P2-T08 | `work/WorkMiniCard`, `blog/RelatedWork`, `blog/PostNav` + record 5 |
+| [x]  | P2-T08 | `work/WorkMiniCard`, `blog/RelatedWork`, `blog/PostNav` + record 5; paint-binding sweep, 21 call sites |
 | [ ]  | P2-T09 | `work/WorkHeader`, `blog/PostRowCalm`, `work/RelatedWriting`       |
 | [ ]  | P2-T10 | `about/AboutFacts`, `about/AboutText`                              |
 | [ ]  | R2.3   | log the 4 phase-2 `CODE DEBT` findings                             |
-| [ ]  | P2-T11 | **GATE** — roster, axes, Gate D, iconOnly 24→32, fake `chevron-down` |
+| [ ]  | P2-T11 | **GATE** — roster, axes, Gate D, iconOnly 24→32, fake `chevron-down`, raw paints from P2-T02..T07 (see R2.4 verify-raw) |
 | [ ]  | R2.4   | **GATE** — dump + verify + verify-raw + test, knowledge file       |
 
 ## Phase 3 — pages, docs, ship

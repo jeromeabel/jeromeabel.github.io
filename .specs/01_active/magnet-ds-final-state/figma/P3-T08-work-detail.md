@@ -55,7 +55,7 @@ const build = async (breakpoint) => {
   const cover = figma.createRectangle();
   cover.name = "cover"; cover.cornerRadius = 8;
   cover.resize(mobile ? 358 : 1280, mobile ? 201 : 720);
-  cover.setBoundVariable("fills", V["2 Theme::color/surface"]);
+  cover.fills = [P(V["2 Theme::color/surface"])];
   pc.appendChild(cover); cover.layoutSizingHorizontal = "FILL";
 
   const prose = await inst("ui/Prose");

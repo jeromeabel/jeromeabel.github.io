@@ -969,3 +969,53 @@ clean would be the wrong fix.
 at P2-T11 if any of P2-T08 → P2-T10 touches a container owner. None of the three queued tasks
 does on paper — they add cards, nav and about blocks, not page-level bands — so the P2-T11 gate
 can treat this run as current unless that changes.
+
+## P2-T08 — `work/WorkMiniCard` + `blog/RelatedWork` + `blog/PostNav` (2026-08-19)
+
+- STATUS: **DONE** — three masters and decision record 5.
+- RESULT:
+  - `work/WorkMiniCard` `3117:659` 224×253, cover square (w === h).
+  - `blog/RelatedWork` `3117:662` h=287, three `INSTANCE:work/WorkMiniCard` children — instances,
+    not detached FRAMEs, so the `inst()` guard held.
+  - `blog/PostNav` `3117:705`, axis `type` = `both | prev-only | next-only`, 3 variants, 720 wide,
+    cells 344 each — the single-neighbour variants keep one 344 cell rather than stretching it.
+  - `DECISION / related-block-children` `3117:706` 1040×311, record 5 on 📐 Decisions.
+- DEVIATIONS: two reported, one a brief bug, one a brief self-contradiction. Both fixed at source.
+- UNBOUND: none.
+
+**Deviation 1 — `setBoundVariable("strokes", …)` does not bind paints.** The runner is right, and
+this is **the third task to hit the same wall**: P2-T04 hit it on `fills`, P2-T04b spent a whole
+corrective task rebinding the 8 raw `#D9D9D9` covers it left behind, and the fix went into `T()`
+in `_prelude-components.js` only. Every other call site kept the broken form. So the lesson was
+recorded but not *propagated* — the exact failure mode P2-T04b's own note warned about.
+
+Swept the whole brief set: **21 bad calls across 12 files**. All rewritten to a new prelude helper
+
+```js
+const P = (v) =>
+  figma.variables.setBoundVariableForPaint(
+    { type: "SOLID", color: { r: 0, g: 0, b: 0 } }, "color", v,
+  );
+```
+
+`n.setBoundVariable("fills", V[...])` → `n.fills = [P(V[...])]`, same for `strokes`. `P` is now in
+both `_prelude-components.js` and `_prelude-pages.js`, and `T()` uses it instead of inlining the
+call. Un-run briefs fixed: **P2-T09 (2), P2-T10 (1), P3-T03 (2), P3-T06 (2), P3-T08 (1)**, plus
+`_prelude-pages.js` (page-root background fill — would have failed on the first P3 page).
+
+**⚠️ Consequence for already-run masters.** P2-T02, P2-T03, P2-T04, P2-T05 and P2-T07 ran with the
+broken call in their briefs (10 call sites). Their reports all said `UNBOUND: none` — and P2-T04's
+did too, right before P2-T04b found 8 raw fills. **A clean report is not evidence here**, because
+the failure is silent from the runner's point of view. `pnpm figma:verify-raw` at **R2.4** catches
+raw values mechanically against the allowlist and is the correct net; added to the P2-T11 gate row
+so the gate does not wave it through on the strength of the reports.
+
+**Deviation 2 — not a deviation; the brief contradicted itself.** Prose said the next cell is
+`counterAxisAlignItems = "MAX"`; the step-3 code said `primaryAxisAlignItems = "MAX"`. The cell is
+HORIZONTAL, so the primary axis *is* the horizontal one and the code was right — the runner
+followed the code and explained why. Prose corrected in the brief, with the axis reasoning spelled
+out so the next reader does not re-derive it.
+
+**No re-grid owed.** Widest new master is 720, well inside the `blog` and `work` sections after the
+P1-T06 re-run stretched `work` to 4136×1762. Per the agreed cadence: one re-grid + Gate D before
+P2-T11, not one per task.

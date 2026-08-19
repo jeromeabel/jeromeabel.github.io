@@ -67,8 +67,8 @@ for (const variant of (set.type === "COMPONENT_SET" ? set.children : [set])) {
   variant.strokeAlign = "INSIDE";
   const hover = /state=hover/i.test(variant.name);
   variant.dashPattern = hover ? [] : [4, 4];
-  variant.setBoundVariable("strokes", V["2 Theme::color/foreground"]);
-  if (hover) variant.setBoundVariable("fills", V["2 Theme::color/surface"]);
+  variant.strokes = [P(V["2 Theme::color/foreground"])];
+  if (hover) variant.fills = [P(V["2 Theme::color/surface"])];
   else variant.fills = [];
 }
 return { id: set.id, name: set.name, variants: (set.type === "COMPONENT_SET" ? set.children : [set]).map((c) => c.name) };
@@ -86,7 +86,7 @@ for (const variant of (set.type === "COMPONENT_SET" ? set.children : [set])) {
   if (label) {
     await figma.loadFontAsync(label.fontName);
     label.characters = "Website";
-    label.setBoundVariable("fills", V["2 Theme::color/foreground"]);
+    label.fills = [P(V["2 Theme::color/foreground"])];
   }
   // Remove any leading icon inherited from `secondary`, append the trailing one.
   for (const c of variant.children.slice())

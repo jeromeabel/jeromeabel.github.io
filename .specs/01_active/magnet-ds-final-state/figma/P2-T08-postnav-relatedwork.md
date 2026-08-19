@@ -2,7 +2,7 @@
 task: P2-T08
 title: Build blog/PostNav and blog/RelatedWork (+ decision record 5)
 phase: 2
-status: TODO
+status: DONE (2026-08-19)
 prerequisite: P2-T01
 ---
 
@@ -67,7 +67,7 @@ Root: HORIZONTAL, gap 32, FILL width, `primaryAxisAlignItems = "SPACE_BETWEEN"`,
 Each cell is **half width** (`w-1/2`), HORIZONTAL, gap 12, `counterAxisAlignItems = "CENTER"`, padding 16/24 (`p-3 lg:px-4 lg:py-6`), 1px stroke bound `2 Theme::color/border`, no radius, no fill.
 
 - **prev cell** — a `lucide:arrow-left` icon **leading**, then a VERTICAL gap-4 text column.
-- **next cell** — text column first, then a `lucide:arrow-right` icon **trailing**; the whole cell is `counterAxisAlignItems = "MAX"`-aligned so the text sits right.
+- **next cell** — text column first, then a `lucide:arrow-right` icon **trailing**; the whole cell is `primaryAxisAlignItems = "MAX"`-aligned so the text sits right (the cell is HORIZONTAL, so the primary axis is the horizontal one — `counterAxisAlignItems` stays `CENTER`).
 
 Text column, both cells:
 
@@ -173,7 +173,7 @@ const cell = async (kind, title) => {
   c.paddingLeft = c.paddingRight = 24;
   c.paddingTop = c.paddingBottom = 24;
   c.strokeWeight = 1;
-  c.setBoundVariable("strokes", V["2 Theme::color/border"]);
+  c.strokes = [P(V["2 Theme::color/border"])];
   const col = F("text", "VERTICAL", { itemSpacing: 4 });
   col.appendChild(await T(kind === "prev" ? "Previous" : "Next", {
     size: 16, fill: V["2 Theme::color/foreground-muted"] }));

@@ -113,7 +113,7 @@ const mkItem = async (label, depth, active) => {
   row.paddingLeft = depth * 12;
   const rail = figma.createRectangle();
   rail.name = "rail"; rail.resize(2, 20);
-  rail.setBoundVariable("fills", V["2 Theme::color/border"]);
+  rail.fills = [P(V["2 Theme::color/border"])];
   row.appendChild(rail);
   const t = await T(label, {
     size: 14,
@@ -141,7 +141,7 @@ const build = async (bp) => {
     c.paddingTop = c.paddingBottom = c.paddingLeft = c.paddingRight = 16;
     c.cornerRadius = 8;
     c.strokeWeight = 1;
-    c.setBoundVariable("strokes", V["2 Theme::color/border"]);
+    c.strokes = [P(V["2 Theme::color/border"])];
     const sum = F("summary", "HORIZONTAL", { itemSpacing: 8 });
     c.appendChild(sum); sum.layoutSizingHorizontal = "FILL";
     sum.primaryAxisAlignItems = "SPACE_BETWEEN";
@@ -209,7 +209,7 @@ c.primaryAxisSizingMode = "AUTO"; c.counterAxisSizingMode = "FIXED";
 c.paddingTop = c.paddingBottom = c.paddingLeft = c.paddingRight = 24;
 c.cornerRadius = 8;
 c.strokeWeight = 1;
-c.setBoundVariable("strokes", V["2 Theme::color/border"]);
+c.strokes = [P(V["2 Theme::color/border"])];
 
 c.appendChild(await T("IN THIS SERIES — WEB PERFORMANCE", {
   size: 14, weight: "Medium", fill: V["2 Theme::color/foreground-muted"] }));

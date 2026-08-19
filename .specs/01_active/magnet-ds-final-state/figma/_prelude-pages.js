@@ -8,6 +8,13 @@ const PAGES = async (match) => {
 const F = (name, dir, opts = {}) =>
   figma.createAutoLayout(dir, Object.assign({ name }, opts));
 
+const P = (v) =>
+  figma.variables.setBoundVariableForPaint(
+    { type: "SOLID", color: { r: 0, g: 0, b: 0 } },
+    "color",
+    v,
+  );
+
 const VARS = async () => {
   const cols = await figma.variables.getLocalVariableCollectionsAsync();
   const map = { _cols: {} };
@@ -54,7 +61,7 @@ const shell = async (name, breakpoint, V) => {
   root.resize(breakpoint === "Mobile" ? 390 : 1280, 100);
   root.layoutSizingHorizontal = "FIXED";
   root.primaryAxisSizingMode = "AUTO";
-  root.setBoundVariable("fills", V["2 Theme::color/background"]);
+  root.fills = [P(V["2 Theme::color/background"])];
   const header = await inst(
     "app/Header",
     new RegExp(`breakpoint=${breakpoint}`),

@@ -132,7 +132,7 @@ const hair = () => {
   const r = figma.createRectangle();
   r.name = "hairline";
   r.resize(100, 1);
-  r.setBoundVariable("fills", V["2 Theme::color/border"]);
+  r.fills = [P(V["2 Theme::color/border"])];
   return r;
 };
 

@@ -56,7 +56,7 @@ const build = async (breakpoint) => {
   head.paddingBottom = mobile ? 24 : 48;
   const rule = figma.createRectangle();
   rule.name = "hairline"; rule.resize(100, 1);
-  rule.setBoundVariable("fills", V["2 Theme::color/border"]);
+  rule.fills = [P(V["2 Theme::color/border"])];
 
   const crumb = F("breadcrumb", "HORIZONTAL", { itemSpacing: 4 });
   head.appendChild(crumb);
@@ -78,7 +78,7 @@ const build = async (breakpoint) => {
   const cover = figma.createRectangle();
   cover.name = "cover"; cover.cornerRadius = 8;
   cover.resize(mobile ? 358 : 1280, mobile ? 201 : 720);
-  cover.setBoundVariable("fills", V["2 Theme::color/surface"]);
+  cover.fills = [P(V["2 Theme::color/surface"])];
   pc.appendChild(cover); cover.layoutSizingHorizontal = "FILL";
 
   // 3+4. TOC placement differs by breakpoint

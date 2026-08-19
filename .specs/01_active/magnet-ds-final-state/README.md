@@ -9,7 +9,7 @@ created: 2026-08-18
 **Order of work:** `RUNBOOK.md` (every Figma brief and repo step in one list, with the cursor).
 **Log:** `progress.md` (what each executed task wrote and read back).
 
-This topic is executed as **31 Figma briefs** plus **3 repo-side files**. Every brief an agent receives is self-contained: run rules, helper JS, full layout anatomy with real copy, pasteable Plugin API code. A Figma agent working inside `Magnet-DS` (`ihWIWmvtQPTWgUxlrVjC2c`) needs **no repo access** to execute one.
+This topic is executed as **32 Figma briefs** plus **3 repo-side files**. Every brief an agent receives is self-contained: run rules, helper JS, full layout anatomy with real copy, pasteable Plugin API code. A Figma agent working inside `Magnet-DS` (`ihWIWmvtQPTWgUxlrVjC2c`) needs **no repo access** to execute one.
 
 The parts every brief shares live in one place and are pulled in at assembly time:
 

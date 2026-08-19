@@ -1,6 +1,13 @@
 const F = (name, dir, opts = {}) =>
   figma.createAutoLayout(dir, Object.assign({ name }, opts));
 
+const P = (v) =>
+  figma.variables.setBoundVariableForPaint(
+    { type: "SOLID", color: { r: 0, g: 0, b: 0 } },
+    "color",
+    v,
+  );
+
 const T = async (
   chars,
   { size = 16, weight = "Regular", family = "IBM Plex Sans", fill = null } = {},
@@ -12,10 +19,7 @@ const T = async (
   t.characters = chars;
   // fills is NOT a VariableBindableNodeField — paint bindings go through
   // setBoundVariableForPaint (setBoundVariable("fills", …) throws).
-  if (fill) {
-    const base = { type: "SOLID", color: { r: 0, g: 0, b: 0 } };
-    t.fills = [figma.variables.setBoundVariableForPaint(base, "color", fill)];
-  }
+  if (fill) t.fills = [P(fill)];
   return t;
 };
 
