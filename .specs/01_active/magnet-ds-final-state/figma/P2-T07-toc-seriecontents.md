@@ -37,7 +37,7 @@ VERTICAL, gap 0, width 224 fixed:
    - padding-left 12 after the rail,
    - text IBM Plex Sans Regular 14, fill `foreground-muted`.
 3. **Nested children** — a child heading is the same item shape indented a further 12, inside a VERTICAL frame with padding-top 8.
-4. **Active item** — one item per master shows the active state: fill `2 Theme::color/foreground-strong` and font weight **Medium** (500). The rail stays `color/border` — only the text changes. Name that layer `item / active` so it is findable.
+4. **Active item** — one item per master shows the active state: fill `2 Theme::color/foreground-strong` and font weight **Medium** (500). The rail goes `color/foreground-strong` too — `a[data-toc-link][aria-current]` sets both `color` and `border-color` (`TableOfContents.astro:73-77`). Name that layer `item / active` so it is findable.
 
 Real content (from the live serie post `Optimizing Images with Astro (part 1)`):
 
@@ -113,7 +113,11 @@ const mkItem = async (label, depth, active) => {
   // not a rectangle sibling. Depth indent lives on a wrapper, the way the nested
   // <ol class="ps-3"> carries it in code.
   const row = F(active ? "item / active" : "item", "HORIZONTAL", { itemSpacing: 0 });
-  HAIR(row, V["2 Theme::color/border"], ["left"], 2);
+  // Active rail follows `a[aria-current] { border-color: foreground-strong }`.
+  HAIR(row, V[`2 Theme::color/${active ? "foreground-strong" : "border"}`], ["left"], 2);
+  // Stroke inside layout, or the 12 is measured from the outer edge and the
+  // label lands 2px left of where `border-s-2 ps-3` puts it.
+  row.strokesIncludedInLayout = true;
   row.paddingLeft = 12;
   const t = await T(label, {
     size: 14,

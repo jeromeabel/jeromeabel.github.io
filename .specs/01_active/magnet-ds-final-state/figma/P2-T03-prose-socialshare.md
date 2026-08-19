@@ -87,6 +87,9 @@ for (const line of ["First item in a list", "Second item, a little longer", "Thi
 const quote = F("blockquote", "HORIZONTAL", { itemSpacing: 0 });
 await add(quote);
 HAIR(quote, BORDER, ["left"], 2);
+// A stroke is INSIDE and outside auto-layout by default, so padding would be
+// measured from the outer edge and the text would sit 2px tighter than CSS.
+quote.strokesIncludedInLayout = true;
 quote.paddingLeft = 24;
 const qt = await T("A pulled quote sits behind a two-pixel rail, not a box.", { size: 20, weight: "Italic", fill: MUTED });
 quote.appendChild(qt);

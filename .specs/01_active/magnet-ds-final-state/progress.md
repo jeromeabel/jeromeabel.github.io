@@ -1171,3 +1171,35 @@ section's 2480, so no section resize is owed.
 
 **Step 6 (screenshots against live `/about`, light and dark) was not reported.** Folded into the
 P2-T11 gate's visual pass rather than re-run on its own.
+
+### P2-T10b brief written (2026-08-19)
+
+`pnpm figma:brief P2-T10b` had no brief behind it — the RUNBOOK row existed, the file did not.
+Written now from a live audit of the four masters rather than from the sweep table, which is how the
+counts got sharper: **50 rectangles**, not four sites — `ui/Prose` 1, `work/ArchiveTable` 27
+(3 breakpoints × head + 8 rows), `blog/TableOfContents` 14 (2 × 7 items), `work/WorkCard` 8
+(4 `catalogue` variants × card rule + `meta` rail; the `case` variants have none). Every one is
+already bound to `2 Theme::color/border`, so the task is structural only.
+
+**The audit found three things the sweep table did not.**
+
+1. **Side rules need `strokesIncludedInLayout = true`.** A Figma stroke is `INSIDE` and outside
+   auto-layout by default, so padding is measured from the outer edge and the stroke paints over it —
+   text lands 2px tighter than `border-s-2 ps-3`, where the padding sits *inside* the border. Set the
+   flag on the two left-rail conversions (`ui/Prose` blockquote, TOC items) and keep the code's
+   padding. Bottom/top rules keep the default `false`: that is what P2-T09's shipped masters do, and
+   flipping it would move every `ArchiveTable` row by 1px for nothing. `P2-T03` and `P2-T07` were
+   patched to teach this, so a future re-run does not rebuild the 2px error.
+2. **The TOC active rail is the wrong colour.** `a[data-toc-link][aria-current]` sets *both* `color`
+   and `border-color` to `foreground-strong` (`TableOfContents.astro:73-77`); the master binds the
+   active rail to `color/border` like every other item, and P2-T07's prose explicitly said to. Both
+   the brief and the master are wrong; P2-T10b fixes the master, P2-T07 is corrected at source.
+3. **`underline-dash` is correct as a rectangle** and is now called out as out-of-scope in writing.
+   It is the dashed link underline in the archive table (`border-b border-dashed border-current`) —
+   already a stroke-bearing rect with `dashPattern [4, 4]` and no fill, and Figma's TEXT underline
+   cannot be dashed. Same for `ProseImage` and the 8 `cover` rects: placeholders, not rules.
+
+**Step 4 (`work/WorkCard`) is gated in the brief**, not merely footnoted — `work-card-redesign` is
+still in flight, and the runner is told to report `SKIPPED` rather than convert twice. The `meta`
+rail is the only conversion in the task that moves a line: 12px up, onto `meta`'s outer edge, which
+is where `border-t` draws it.

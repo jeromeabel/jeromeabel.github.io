@@ -65,6 +65,7 @@ Repo: `repo/phase-1.md` (R1.1 before P1-T01; R1.2–R1.5 interleaved; R1.6 is th
 | `figma/P2-T08-postnav-relatedwork.md`       | `work/WorkMiniCard`, `blog/RelatedWork`, `blog/PostNav` + decision record 5 |
 | `figma/P2-T09-workheader-relatedwriting.md` | `work/WorkHeader`, `blog/PostRowCalm`, `work/RelatedWriting`                |
 | `figma/P2-T10-about-masters.md`             | `about/AboutFacts`, `about/AboutText`                                       |
+| `figma/P2-T10b-hairline-rebuild.md`         | rebuild 4 rect-hairline masters on `HAIR()` — 50 rectangles                 |
 | `figma/P2-T11-phase2-gate.md`               | **GATE** — 46 / 11 / 4 roster, variant axes, Gate D                         |
 
 Repo: `repo/phase-2.md`.
