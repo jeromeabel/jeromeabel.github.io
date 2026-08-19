@@ -1983,3 +1983,33 @@ per the brief — this is a **code-debt candidate**, not a spec amendment. Carry
 log.
 
 **UNBOUND:** none.
+
+## P3-T05 — `About — Desktop` / `About — Mobile`, the thinnest shell (2026-08-19)
+
+**TASK** P3-T05 · **STATUS** DONE — brief followed verbatim, no deviations.
+
+### Step 1 — both breakpoints built
+
+`About — Desktop` (`3145:2105`) and `About — Mobile` (`3145:2574`) on the `Pages` page. Shell is the
+P3-T03 document type unchanged: `app/Header` (INSTANCE) → `PageContent` (FRAME) → `app/Footer`
+(INSTANCE), no `PageContentContainer`. Exactly one `about/AboutText` instance per frame at
+`facts=grid` — nothing composed at page level, as the brief demands.
+
+### Step 2 — text column constrained
+
+Desktop: `about/AboutText` `layoutSizingHorizontal = FIXED`, width 832, and `pc.counterAxisAlignItems
+= MIN` so the column sits left inside the 1280 container (the live `lg:w-2/3`). Mobile:
+`layoutSizingHorizontal = FILL`, `pc.counterAxisAlignItems = CENTER` left as the container recipe set
+it. The MIN override was applied after `container(pc, V)`, per the brief's warning.
+
+### Step 3 — cold read-back
+
+Both frames read Header → PageContent → Footer. `PageContent` carries all six container-recipe
+bindings — `itemSpacing` and `paddingTop/Bottom` = `section/rhythm-y`, `paddingLeft/Right` =
+`container/gutter`, `maxWidth` = `container/max-width`. Desktop 832 left-aligned ✓, Mobile FILL
+centred ✓.
+
+No divergence from live `/about` to carry to R3.1 — the page is a single `<AboutText />` on both
+sides.
+
+**UNBOUND:** none.

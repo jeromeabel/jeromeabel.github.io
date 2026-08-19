@@ -89,7 +89,7 @@ Do not start before R2.4 passes.
 | [x]  | P3-T02 | `Home — *` — shell already full-bleed; `contact/ContactPreview` `maxWidth` bound on the master; 3 new findings for R3.1 |
 | [x]  | P3-T03 | `Blog — *` — wrapper gone file-wide, 6 bindings on `PageContent`; `blog/PostRow` WRAP fix on the master (1 UNBOUND: `minWidth` 200) |
 | [x]  | P3-T04 | `Work — *` — case zigzag + archive table, 3 hairlines per frame; `inst()` prelude fix (masters only); live-grid divergence → code debt |
-| [ ]  | P3-T05 | `About — *`                                                           |
+| [x]  | P3-T05 | `About — *` — thinnest shell: one `about/AboutText` per frame, 832 left-aligned Desktop / FILL Mobile; no deviations, no UNBOUND |
 | [ ]  | P3-T06 | `Post — *` — the detail shell T07/T08 reuse                           |
 | [ ]  | P3-T07 | `Serie — *`, `Serie post — *`                                         |
 | [ ]  | P3-T08 | `Work detail — *`                                                     |
