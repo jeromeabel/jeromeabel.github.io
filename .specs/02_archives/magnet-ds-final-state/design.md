@@ -1,4 +1,5 @@
 ---
+shipped: 2026-08-20
 title: Magnet-DS final state — docs, foundations, components, pages
 created: 2026-08-17
 status: design — approved section by section in brainstorming session; verified against live Figma 2026-08-17 (MCP Pass-0 inventory + variables dump)
