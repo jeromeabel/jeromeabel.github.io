@@ -2013,3 +2013,45 @@ No divergence from live `/about` to carry to R3.1 — the page is a single `<Abo
 sides.
 
 **UNBOUND:** none.
+
+## P3-T06 — `Post — Desktop` / `Post — Mobile`, the detail shell (2026-08-19)
+
+**TASK** P3-T06 · **STATUS** DONE — live order built, three spec deltas reported not resolved.
+
+### Step 1 — both breakpoints built
+
+`Post — Desktop` (`3146:2642`) and `Post — Mobile` (`3146:2792`) on the `Pages` page. Stacks under
+`PageContent`:
+
+- Desktop — `FRAME:PostHeader` → `RECTANGLE:cover` → `FRAME:Body` → `INSTANCE:blog/RelatedWork` →
+  `INSTANCE:blog/PostNav` → `INSTANCE:ui/Link/secondary`
+- Mobile — `FRAME:PostHeader` → `RECTANGLE:cover` → `INSTANCE:blog/TableOfContents` → `FRAME:Body` →
+  `INSTANCE:blog/RelatedWork` → `INSTANCE:blog/PostNav` → `INSTANCE:ui/Link/secondary`
+
+Only the two named layout frames (`PostHeader`, `Body`) and the cover rectangle are non-instances,
+as the acceptance demands.
+
+### Step 2 — TOC placement per breakpoint
+
+Desktop puts `blog/TableOfContents breakpoint=Desktop` **inside** `Body` at 224 FIXED (the live
+`w-56` sticky aside). Mobile puts `blog/TableOfContents breakpoint=Mobile` **above** `Body` at FILL
+(the live `<details>` box). Correct variant on each side, verified in the cold read-back.
+
+### Deviation — `ui/Link/menuInactive` does not exist
+
+The rename map produced no `menuInactive`; the breadcrumb link uses `ui/Link/textLink`, the nearest
+muted nav link, per the brief's fallback clause.
+
+### Three spec deltas for R3.1
+
+The brief's "live wins on order" call, reported rather than silently resolved. `design.md` §4 lists
+`PostHeader → Prose → SocialShare → PostNav → RelatedWork`; live and the built masters do:
+
+1. `ui/SocialShare` sits **inside** the `PostHeader` meta row, not standalone after `Prose`.
+2. `blog/RelatedWork` comes **before** `blog/PostNav`, not after.
+3. A trailing `ui/Link/secondary` (`All blog`) closes the page — absent from the spec entirely.
+
+All three are **spec-amendment candidates**, not code debt: the live route is right and §4 is stale.
+Carry to R3.1 alongside the P3-T03 order amendment.
+
+**UNBOUND:** none.

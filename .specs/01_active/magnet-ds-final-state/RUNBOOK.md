@@ -90,7 +90,7 @@ Do not start before R2.4 passes.
 | [x]  | P3-T03 | `Blog — *` — wrapper gone file-wide, 6 bindings on `PageContent`; `blog/PostRow` WRAP fix on the master (1 UNBOUND: `minWidth` 200) |
 | [x]  | P3-T04 | `Work — *` — case zigzag + archive table, 3 hairlines per frame; `inst()` prelude fix (masters only); live-grid divergence → code debt |
 | [x]  | P3-T05 | `About — *` — thinnest shell: one `about/AboutText` per frame, 832 left-aligned Desktop / FILL Mobile; no deviations, no UNBOUND |
-| [ ]  | P3-T06 | `Post — *` — the detail shell T07/T08 reuse                           |
+| [x]  | P3-T06 | `Post — *` — live order built, TOC in `Body` @224 Desktop / above `Body` FILL Mobile; breadcrumb fell back to `ui/Link/textLink`; 3 §4 deltas → R3.1; no UNBOUND |
 | [ ]  | P3-T07 | `Serie — *`, `Serie post — *`                                         |
 | [ ]  | P3-T08 | `Work detail — *`                                                     |
 | [ ]  | R3.1   | log page divergences + apply the 2 `design.md` §4 amendments          |
