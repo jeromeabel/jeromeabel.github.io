@@ -266,16 +266,20 @@ contact/ContactPreview`).
 
 ### Masters — content stacks
 
-| Master        | PageContent children                                                                                   |
-| ------------- | ------------------------------------------------------------------------------------------------------ |
-| Home          | 4 section instances (above)                                                                            |
-| Blog          | PageIntro (H1 + PageDescription) → Series (H2 + `blog/SerieList`) → Archive (`blog/PostList` per year) |
-| Work 🆕       | PageIntro → Selected: 4× `work/WorkCard variant=case` zigzag → `work/ArchiveTable`                     |
-| About 🆕      | `about/AboutText` (facts strips inside, per live import graph)                                         |
-| Post detail   | PostHeader (H1 + metadata) → `ui/Prose` → `ui/SocialShare` → `blog/PostNav` → `blog/RelatedWork`       |
-| Serie landing | SerieHeader → `blog/SerieContents` (post rows = `blog/PostRow type=serie`)                             |
-| Serie post    | Post-detail stack + `blog/SerieContents` (position mirrors the live route)                             |
-| Work detail   | `work/WorkHeader` → `ui/Prose` → `work/RelatedWriting`                                                 |
+| Master        | PageContent children                                                                                                                |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Home          | 4 section instances (above)                                                                                                         |
+| Blog          | PageIntro (H1 + PageDescription) → Archive (`blog/PostList` per year) → Series (H2 + `blog/SerieList`)                              |
+| Work 🆕       | PageIntro → Selected: 4× `work/WorkCard variant=case` zigzag → `work/ArchiveTable`                                                  |
+| About 🆕      | `about/AboutText` (facts strips inside, per live import graph)                                                                      |
+| Post detail   | PostHeader (H1 + metadata + `ui/SocialShare`) → `ui/Prose` → `blog/RelatedWork` → `blog/PostNav` → `ui/Link/secondary` (`All blog`) |
+| Serie landing | SerieHeader → `blog/SerieContents` (post rows = `blog/PostRow type=serie`)                                                          |
+| Serie post    | Post-detail stack + `blog/SerieContents` (position mirrors the live route)                                                          |
+| Work detail   | `work/WorkHeader` → `ui/Prose` → `work/RelatedWriting`                                                                              |
+
+The Blog and Post-detail orders above are the **live** orders (amended at R3.1: Series follows
+Archive; `ui/SocialShare` sits in the `PostHeader` meta row, `blog/RelatedWork` precedes
+`blog/PostNav`, and a trailing `ui/Link/secondary` closes the page). Live wins on order.
 
 `PageIntro`, `PostHeader`, `SerieHeader` are **named layout frames** local to each page
 master (grouping H1 / `ui/PageDescription` / metadata instances) — not component

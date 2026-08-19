@@ -1686,26 +1686,26 @@ roster roll-call (step 4).
 Eight frames — four `COMPONENT` masters and their four `[Dark]` instances. Names already use the
 em dash the P3-T09 grid script matches on.
 
-| frame                  | type      | id          | w × h        | Theme | Responsive |
-| ---------------------- | --------- | ----------- | ------------ | ----- | ---------- |
-| `Home — Desktop`       | COMPONENT | `2604:1741` | 1280 × 2745  | Light | Desktop    |
-| `Home — Mobile`        | COMPONENT | `2604:1742` | 390 × 4061   | Light | Mobile     |
-| `Blog — Desktop`       | COMPONENT | `2604:1744` | 1280 × 1802  | Light | Desktop    |
-| `Blog — Mobile`        | COMPONENT | `2604:1745` | 390 × 4491   | Light | Mobile     |
-| `Home — Desktop [Dark]` | INSTANCE  | `2989:4642` | 1280 × 2745  | Dark  | Desktop    |
-| `Home — Mobile [Dark]`  | INSTANCE  | `2989:4844` | 390 × 4061   | Dark  | Mobile     |
-| `Blog — Desktop [Dark]` | INSTANCE  | `2989:5033` | 1280 × 1802  | Dark  | Desktop    |
-| `Blog — Mobile [Dark]`  | INSTANCE  | `2989:5226` | 390 × 4491   | Dark  | Mobile     |
+| frame                   | type      | id          | w × h       | Theme | Responsive |
+| ----------------------- | --------- | ----------- | ----------- | ----- | ---------- |
+| `Home — Desktop`        | COMPONENT | `2604:1741` | 1280 × 2745 | Light | Desktop    |
+| `Home — Mobile`         | COMPONENT | `2604:1742` | 390 × 4061  | Light | Mobile     |
+| `Blog — Desktop`        | COMPONENT | `2604:1744` | 1280 × 1802 | Light | Desktop    |
+| `Blog — Mobile`         | COMPONENT | `2604:1745` | 390 × 4491  | Light | Mobile     |
+| `Home — Desktop [Dark]` | INSTANCE  | `2989:4642` | 1280 × 2745 | Dark  | Desktop    |
+| `Home — Mobile [Dark]`  | INSTANCE  | `2989:4844` | 390 × 4061  | Dark  | Mobile     |
+| `Blog — Desktop [Dark]` | INSTANCE  | `2989:5033` | 1280 × 1802 | Dark  | Desktop    |
+| `Blog — Mobile [Dark]`  | INSTANCE  | `2989:5226` | 390 × 4491  | Dark  | Mobile     |
 
 Every frame carries **both** mode pins explicitly — `2 Theme` (`3:2`) and `3 Responsive`
 (`2245:42`). Nothing inherits.
 
 ### `PageContent (slot)` bindings
 
-| frame           | pad-x  | maxWidth | bound                                                     |
-| --------------- | ------ | -------- | --------------------------------------------------------- |
-| Home (both bps) | 0 / 0  | none     | `itemSpacing`, `paddingTop`                               |
-| Blog (both bps) | 16 /16 | 1280     | `paddingLeft/Right`, `paddingTop/Bottom`, `maxWidth`      |
+| frame           | pad-x  | maxWidth | bound                                                |
+| --------------- | ------ | -------- | ---------------------------------------------------- |
+| Home (both bps) | 0 / 0  | none     | `itemSpacing`, `paddingTop`                          |
+| Blog (both bps) | 16 /16 | 1280     | `paddingLeft/Right`, `paddingTop/Bottom`, `maxWidth` |
 
 Home is full-bleed with its four section instances (`hero/Hero`, `blog/BlogPreview`,
 `work/WorkPreview`, `contact/ContactPreview`) carrying their own containers — the Home-type recipe,
@@ -1717,13 +1717,13 @@ their own container, Footer with a bound `strokes`.
 
 ### The five deltas — three apply, two do not
 
-| delta                                              | applies | evidence                                                                     |
-| -------------------------------------------------- | ------- | ---------------------------------------------------------------------------- |
+| delta                                              | applies | evidence                                                                                 |
+| -------------------------------------------------- | ------- | ---------------------------------------------------------------------------------------- |
 | `PageContentContainer` wrapper exists              | **yes** | 4 hits: `2586:1164` (Blog Desktop), `2586:1181` (Blog Mobile), + 2 in the Dark instances |
-| Home frame contains an `AboutStrip`                | no      | Home's four children are Hero / BlogPreview / WorkPreview / ContactPreview   |
-| a Dark frame that is a FRAME not an INSTANCE       | no      | all four Dark frames are already `INSTANCE`                                  |
-| `PageContent` padding 32 / unbound / no `maxWidth` | **yes** | Home binds `paddingTop` but **not `paddingBottom`** — rhythm-y is half-bound |
-| a frame missing an explicit `3 Responsive` pin     | no      | all eight pin both collections                                               |
+| Home frame contains an `AboutStrip`                | no      | Home's four children are Hero / BlogPreview / WorkPreview / ContactPreview               |
+| a Dark frame that is a FRAME not an INSTANCE       | no      | all four Dark frames are already `INSTANCE`                                              |
+| `PageContent` padding 32 / unbound / no `maxWidth` | **yes** | Home binds `paddingTop` but **not `paddingBottom`** — rhythm-y is half-bound             |
+| a frame missing an explicit `3 Responsive` pin     | no      | all eight pin both collections                                                           |
 
 The wrapper count is 4, not 2: the two masters own the real wrappers, the two Dark instances mirror
 them (`I2989:5033;2586:1164`, `I2989:5226;2586:1181`). Removing the masters' wrappers in P3-T03
@@ -1738,14 +1738,14 @@ page types are supposed to bind `section/rhythm-y` on `itemSpacing`, `paddingTop
 
 Live roll-call, `findAllWithCriteria` filtered to sets plus non-variant components:
 
-| page                              | id          | masters |
-| --------------------------------- | ----------- | ------- |
-| ❖ Components                      | `461:759`   | **46**  |
-| 📄 Pages                          | `2558:18264`| 4       |
-| 📚 Docs                           | `2736:4`    | 4       |
-| 🗄️ Archive — Docs v1 (CHAPTERs)  | `3039:4341` | 7       |
-| 🗄️ Archive — Components          | `3107:765`  | 1       |
-| **total**                         |             | **62**  |
+| page                            | id           | masters |
+| ------------------------------- | ------------ | ------- |
+| ❖ Components                    | `461:759`    | **46**  |
+| 📄 Pages                        | `2558:18264` | 4       |
+| 📚 Docs                         | `2736:4`     | 4       |
+| 🗄️ Archive — Docs v1 (CHAPTERs) | `3039:4341`  | 7       |
+| 🗄️ Archive — Components         | `3107:765`   | 1       |
+| **total**                       |              | **62**  |
 
 46 on ❖ Components across the seven domain sections, 11 `_Docs/*` document-wide (4 live + 7 in the
 v1 archive), 4 page masters, 1 `zz/` retired — **62**, matching R2.4 exactly. No master went
@@ -1786,10 +1786,10 @@ brief that touches a page shell inherits this — P3-T03 onward must use the pre
 
 ### Step 1 — the shell was already full-bleed
 
-| frame          | pad (T R B L) | maxWidth | itemSpacing bound to     | sizing        |
-| -------------- | ------------- | -------- | ------------------------ | ------------- |
-| `Home — Desktop` | `0 0 0 0`   | `null`   | `3 Responsive::section/rhythm-y` | FILL / HUG |
-| `Home — Mobile`  | `0 0 0 0`   | `null`   | `3 Responsive::section/rhythm-y` | FILL / HUG |
+| frame            | pad (T R B L) | maxWidth | itemSpacing bound to             | sizing     |
+| ---------------- | ------------- | -------- | -------------------------------- | ---------- |
+| `Home — Desktop` | `0 0 0 0`     | `null`   | `3 Responsive::section/rhythm-y` | FILL / HUG |
+| `Home — Mobile`  | `0 0 0 0`     | `null`   | `3 Responsive::section/rhythm-y` | FILL / HUG |
 
 Children on both: `app/Header` (INSTANCE) → `PageContent (slot)` (FRAME) → `app/Footer` (INSTANCE).
 No `AboutStrip` node anywhere in either frame (`findAll` count 0) — the composition was already the
@@ -1821,12 +1821,12 @@ The recipe sits on the **section instance root**, not on an inner band (a first 
 the subtree for a node matching `/container/i` picked up leaf frames like `HeroTextContainer` and
 was misleading — the root is the band).
 
-| section                 | padL/R | maxWidth | align  | before                              |
-| ----------------------- | ------ | -------- | ------ | ----------------------------------- |
-| `hero/Hero`             | 16/16  | 1280     | CENTER | fully bound                         |
-| `blog/BlogPreview`      | 16/16  | 1280     | CENTER | fully bound                         |
-| `work/WorkPreview`      | 16/16  | 1280     | CENTER | fully bound                         |
-| `contact/ContactPreview`| 16/16  | 1280     | CENTER | **`maxWidth` raw, gutter bound**    |
+| section                  | padL/R | maxWidth | align  | before                           |
+| ------------------------ | ------ | -------- | ------ | -------------------------------- |
+| `hero/Hero`              | 16/16  | 1280     | CENTER | fully bound                      |
+| `blog/BlogPreview`       | 16/16  | 1280     | CENTER | fully bound                      |
+| `work/WorkPreview`       | 16/16  | 1280     | CENTER | fully bound                      |
+| `contact/ContactPreview` | 16/16  | 1280     | CENTER | **`maxWidth` raw, gutter bound** |
 
 `contact/ContactPreview` bound its gutter at the root but carried `maxWidth` as an unbound `1280`
 there, with the `container/max-width` binding one level down on `ContactPreviewContent`. Same
@@ -1912,7 +1912,7 @@ Bindings: PageIntro `itemSpacing` → `spacing/4` · Archive `itemSpacing` → `
 `3 Responsive::serie-list/gap`.
 
 **`blog/PostList` is a year group, not a row.** It is a COMPONENT_SET (`breakpoint=Desktop|Mobile`)
-holding a year label plus **four** `blog/PostRow` instances. So it is instanced once per *year*,
+holding a year label plus **four** `blog/PostRow` instances. So it is instanced once per _year_,
 with the surplus rows hidden — not once per post as the brief's wording implied. Any later brief
 that reaches for `blog/PostList` inherits this: four rows max per group, hide the remainder.
 
@@ -2154,3 +2154,112 @@ rather than two. Recorded as a deliberate Figma-side simplification, not a diver
 
 - `Work detail — Desktop` / `Work detail — Mobile` › `PageContent.itemSpacing` (48 / 32) — no responsive var for `gap-8`/`gap-12`
 - `Work detail — Desktop` / `Work detail — Mobile` › `cover.cornerRadius` (8) — raw, no radius variable exists to bind
+
+---
+
+## CODE DEBT — phase 3 (R3.1, 2026-08-19)
+
+The page-side divergence log, consolidated from P3-T02 … P3-T08. Same rule as R2.3: collected,
+**not fixed**. Every row was re-checked against live code today — the verdict column is the outcome
+of that check, not the brief's guess.
+
+Three verdicts are in play. **CODE DEBT** = Figma leads, code follows, feeds the
+`magnet-ds-code-convergence` stub opened at R3.7. **SPEC AMENDMENT** = live leads, `design.md` §4
+was stale; both amendments were applied by this task, so nothing carries forward. The rest are
+recorded so the convergence topic does not re-discover them and open a change against correct code.
+
+| #   | From            | Finding                                                                                                                                   | Verdict                      |
+| --- | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- |
+| 1   | P3-T02          | Home drops `AboutStrip`, and the work strip is 3× `work/WorkCard variant=catalogue` where live renders `WorkMiniCard` + `WorkOverlayCard` | **CODE DEBT** — Figma leads  |
+| 2   | P3-T04          | Figma `/work` is the 4-card case zigzag + `work/ArchiveTable`; live is still a `WorkGalleryCard` grid                                     | **CODE DEBT** — Figma leads  |
+| 3   | P3-T03          | Live `/blog` renders **Archive before Series**; §4 listed Series first                                                                    | **SPEC AMENDMENT** — applied |
+| 4   | P3-T06          | Live puts `SocialShare` in the header meta row, `RelatedWork` before `PostNav`, and closes with an `All blog` link                        | **SPEC AMENDMENT** — applied |
+| 5   | P3-T07          | Live serie-landing list is boxless (top rule only); Figma uses the boxed `blog/SerieContents`                                             | **CODE DEBT** — Figma leads  |
+| 6   | P3-T08          | Live puts `ui/Prose` outside `.container`; Figma keeps every child in the one document-type container                                     | **no action** — intentional  |
+| 7   | P3-T06 + P3-T07 | `ui/Link/menuInactive` does not exist in Figma; both breadcrumbs fell back to `ui/Link/textLink`                                          | **brief defect** — strike it |
+| 8   | P3-T07          | `blog/SerieMeta` is one icon + one text field; live is two icon+text pairs                                                                | **Figma-side** — master gap  |
+| 9   | P3-T07          | `blog/RelatedWork` rode the clone into `Serie post — *`; the live serie-post route renders none                                           | **Figma-side** — remove it   |
+
+**1 — Home composition.** `src/pages/index.astro:12-18` is `Hero → SelectedWriting → WorksStrip →
+AboutStrip → Contact`, and `WorksStrip.astro:18,20` renders `WorkMiniCard` + `WorkOverlayCard`.
+Figma's `Home — *` is the four-section composition with three catalogue cards (P3-T02 read back
+`AboutStrip` count 0). Neither half is new vocabulary: §7 already carries "Remove `AboutStrip` from
+Home page composition" and the WorkCard final spec already owns `catalogue`/`case` +
+`getFeaturedWorks(limit)`. The debt is the wiring, not the design.
+
+**2 — Work zigzag.** `src/pages/work.astro:42` maps `selected` onto `WorkGalleryCard` inside a grid;
+Figma holds four `work/WorkCard variant=case` in a left/right zigzag with 3 hairlines. (P3-T04's
+entry said `WorkOverlayCard` — that component is the Home strip's; the `/work` grid is
+`WorkGalleryCard`, which is on §7's archive-not-delete list either way.) This is the largest item in
+the R3.7 handoff — a route rebuild, not a rename — and should be sized apart from the CVA renames.
+
+**3 — Blog order.** `src/pages/blog.astro:43` (archive rows) precedes `:54` (`<H2>Series</H2>`).
+`design.md` §4's Blog row now reads `PageIntro → Archive → Series`. The route is untouched.
+
+**4 — Post order.** All three deltas confirmed in `src/pages/blog/[id].astro`: `SocialShare` at
+`:93` sits inside the `<header>` meta row, `RelatedWork` at `:133` precedes the `LinkNavPost` pair
+at `:139`/`:146`, and `:155-162` is a trailing `Link variant="secondary" label="All blog"`. §4's
+Post-detail row now reads `PostHeader (H1 + metadata + ui/SocialShare) → ui/Prose →
+blog/RelatedWork → blog/PostNav → ui/Link/secondary (All blog)`, with a short note under the table
+recording that Blog and Post-detail follow live order.
+
+**5 — boxless serie list.** `src/pages/blog/[serie]/index.astro:68-70` is a bare
+`<div class="border-border border-t">` wrapping `SeriePostListItem` rows — one rule, no box. Figma
+uses the bordered `blog/SerieContents`, as the brief specified. Figma leads. This one rides along
+with §7's `SeriePostListItem → blog/PostRow type=serie` collapse; do not schedule it separately.
+
+**6 — Prose outside the container.** No action, either side. Live's `Prose` carries its own
+`max-width` outside `.container`; Figma's single document-type container produces the same box.
+Recorded as a deliberate simplification so a later reader does not "restore" a second container
+level that P3-T03 spent a whole task removing.
+
+**7 — `ui/Link/menuInactive`.** Recommendation: **strike it from the briefs, add nothing to Figma.**
+§3's `ui/Link/*` vocabulary is six sub-sets (`primary`, `secondary`, `external`, `inline`,
+`textLink`, `iconOnly`) and `menuInactive` is not one of them; §7 assigns `menuActive/menuInactive`
+to `app/NavLink` states. Adding a seventh sub-set now would push new vocabulary into a spec that is
+one step from archive and contradict §3 and §7 at once. The `ui/Link/textLink` fallback that both
+P3-T06 and P3-T07 shipped stands, and the P3-T07 brief's STOP clause is dead — the tasks are done.
+No Figma edit was made.
+
+One residual for R3.7, not for this file: code uses `variant="menuInactive"` at four breadcrumb call
+sites **outside** the header — `WorkHeader.astro:15`, `blog/[id].astro:68`,
+`blog/[serie]/index.astro:47`, `blog/[serie]/[post].astro:87,94` — so §7's "express NavLink states"
+is not the whole story. The muted-nav-link role exists off-header; the convergence topic decides
+whether those four become `textLink` or whether `app/NavLink` grows a breadcrumb usage. File it
+under §7's existing `Link` CVA bullet rather than as a new item.
+
+**8 — `blog/SerieMeta`.** Live `blog/[serie]/index.astro:60-65` is two icon+text pairs —
+`lucide:layers` + `{parts} parts`, then `lucide:clock` (`ms-6`) + `{readLabel}`. The master has a
+single icon + a single text field, so P3-T07 packed both stats into it as
+`5 PARTS · ~1H 05M READ`. Same class as R2.3 item 5: **not code debt — the code is right and the
+master is the one that cannot express it.** Recommendation: give `blog/SerieMeta` a second
+icon+text pair on the master before P3-T11's hygiene sweep reads the single field as finished; do
+not patch it with an instance override on the serie frames.
+
+**9 — `blog/RelatedWork` on the serie post.** Verified: `src/pages/blog/[serie]/[post].astro` never
+imports `RelatedWork` — only `blog/[id].astro:2,133` does. The instance on
+`Serie post — Desktop` / `Serie post — Mobile` is a clone artifact from `Post — *`, not a live
+feature. Recommendation: **remove it from both serie-post masters at P3-T09**, which already touches
+every page frame. Figma-side, no code debt, no spec amendment.
+
+This leaves one wording risk a human should close. With amendment 4 applied, §4's "Post-detail
+stack" now contains `blog/RelatedWork`, and §4's Serie-post row inherits that stack by reference —
+so §4 currently implies a `RelatedWork` the live serie-post route does not have. R3.1 was scoped to
+the Blog and Post-detail rows only and did not touch the Serie-post row. Either the P3-T09 removal
+lands and §4's Serie-post row gains a "minus `blog/RelatedWork`" qualifier, or someone decides Figma
+leads here too and it becomes a tenth row of this table. **Open.**
+
+### Also carried from P3-T02 — Figma-side, none of it code debt
+
+Flagged in that entry "for R3.1" and parked here so they survive to P3-T11:
+
+- **`work/WorkCard variant=catalogue` clips at 390.** The tech-stack line overflows the card's right
+  edge on `Home — Mobile` and the `↗ Live ↗ Repo` row sits under the clip. A Mobile content rule
+  (wrap, truncate, or drop the stack) is missing on the master. Owner: the WorkCard final spec,
+  which R3.5 moves to `.specs/01_active/work-card-redesign/spec.md`.
+- **Placeholder-uniform card content.** All three Home catalogue cards repeat one stack line and one
+  `↗ Live ↗ Repo` pair — wrong for `Chimères Orchestra` and `La Malinette`. Content debt on the
+  instances, not a layout defect.
+- **`hero/Hero breakpoint=Mobile` drops `HeroAnimation`.** Live `Hero.astro` renders it at every
+  breakpoint (`flex-col` stack on small screens). A Figma-side gap, not a Figma-leads decision —
+  whoever revisits `hero/Hero` owns it.
