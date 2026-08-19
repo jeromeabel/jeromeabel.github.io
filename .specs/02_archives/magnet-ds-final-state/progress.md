@@ -3002,3 +3002,41 @@ defect but an in-bounds one, and it belongs to the responsive-convention item al
 | 1   | **`blog/PostNav` has no mobile treatment.** It is FIXED 720–832 with no `breakpoint` axis, so on `Post — Mobile` / `Serie post — Mobile` the prev/next titles wrap mid-word in a ~170px column and the two cards end up unequal heights. In bounds, so no gate catches it. Fix is a `breakpoint` axis that stacks the two cards — a design decision. Folds into the "no single responsive convention" item from R3.6-prep. |
 | 2   | **The strict out-of-root-bounds sweep is live-only.** A `.fig` export carries no instance internals, so the sweep cannot be scripted offline and a `.fig`-side 0 is vacuous. Either document it as a live-MCP-only check or, together with the `geometry.figma.json` extractor item, decide the offline prover cannot cover instance interiors at all.                                                                     |
 | 3   | **`raw-values.figma.json` has no scripted refresh.** It is the only input to `verify-raw` and only the manual `dump-raw-values.md` walk produces it, so it silently drifts behind every Figma write and the report's own STALE INPUT banner fires on mtime alone.                                                                                                                                                          |
+
+## R3.7 — code-convergence backlog seeded (2026-08-20)
+
+`.specs/00_backlog/magnet-ds-code-convergence.md` — 117 lines, `Size: L` (the stub's default `S`
+was wrong: it carries three route rebuilds).
+
+Seeded from `design.md` §7 plus every `CODE DEBT` row logged in phases 2 and 3, grouped so the
+sizeable work is separable from the mechanical work:
+
+- **Route rebuilds** — `/work` zigzag + `ArchiveTable`, Home four-section composition, boxless
+  serie landing list. Ordering call recorded: **build `work/WorkCard` first**. `WorkCard.astro` is
+  marked LEGACY and is unimported by any v3 page, so the Figma master's `catalogue`/`case` anatomy
+  and its `breakpoint` axis have no code counterpart — the other two have nothing to build on
+  until it exists. Spec already written at `.specs/01_active/work-card-redesign/spec.md`.
+- **Renames and collapses** — the §7 `Link` CVA vocabulary, `PostRow` collapse, the Home-section
+  duplicate pairs, and the 13-component archive-not-delete list, carried verbatim.
+- **Responsive** — leads with the fact that the DS has **no single convention** (5 masters carry
+  `breakpoint` axes, 3 rely on flexible children), then the `blog/PostNav` mobile wrap deferred at
+  R3.6, then the 6 R3.6-prep Figma fixes that were never checked against the site.
+- **Tokens** — `surface/50` hover (P2-T05), the declared-but-absent duration/ease vocabulary, the
+  1.3s `.reveal`, `WorkCard.astro`'s three hover verbs, dead `--color-accent-hover`, and the 8
+  Desktop WorkCard variants still carrying raw spacing from P2-T04.
+- **Tooling** — the three holes in the offline prover: `geometry.figma.json` cannot refresh, the
+  strict sweep is live-MCP-only (a `.fig` carries no instance internals), `raw-values.figma.json`
+  has no scripted refresh.
+- **Figma-side leftovers** — the missing 3rd `SerieCard`, its unrendered date range, the two LEGACY
+  headers, the Motion doc's pre-§3 master names.
+
+Cross-referenced rather than duplicated: `figma-raw-value-triage` already owns baselining the
+never-baselined raw-value kinds; `figma-mobile-section-variants` and `figma-mobile-touch-targets`
+are folded into the responsive-convention item instead of running separately.
+
+Closes with a **Not debt** list — five findings re-checked against live code and found correct
+(related-block compact children, `WorkHeader` link labels, `ContactPreview` Mobile hiding rather
+than deleting the illustration, `ui/Prose` outside `.container` on work detail, and
+`ui/Link/menuInactive` never having existed) — so a future pass does not re-file them.
+
+**Phase 3 complete. `magnet-ds-final-state` is closed.**
