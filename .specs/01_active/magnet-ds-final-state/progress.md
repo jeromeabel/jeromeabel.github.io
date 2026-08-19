@@ -2682,3 +2682,37 @@ still owns live component anatomy, so it moved to `.specs/01_active/work-card-re
 
 `.specs/01_active/` now holds four topic folders and no loose files: `blog-design-review/`,
 `editorial-v4/`, `magnet-ds-final-state/`, `work-card-redesign/`.
+
+## R3.4 — rewrite the knowledge file (2026-08-19)
+
+**TASK** R3.4 · **STATUS** DONE — `.claude/skills/figma-verify/knowledge/figma-ds-file.md`,
+101 → 218 lines. Format, heading order, table conventions and the reverse-chronological change log
+all preserved.
+
+**Kept verbatim**: the `get_metadata` MCP gotcha, the base-URL link convention, the 18-variable
+responsive resolved-values table, the responsive mechanism paragraph ("Numbers = tokens. Direction
+= variants." + 11 ⬍ masters), the `footer/link-gap` unbound note, and all four prior change-log
+entries — the phase-1/2 ones trimmed only of superseded totals.
+
+**Rewritten to final state**: 9-row pages table (incl. `🗄️ Archive — XP - WorkCard` `3034:5541`)
+with the Docs-vs-Decisions boundary rule; the **46**-master roster grouped by the 7 domain sections,
+replacing the obsolete "62 total" formula; the full 8-route × 4-column 📄 Pages id table; the
+collections table at **407** / 15 / 18 / 2 with all four ids and an explicit "407, not 451" note;
+the container recipe extended with the normative ownership rule, the P3-T03 `PageContentContainer`
+removal and the "layout frames carry no fill" rule; a new unbound-values section naming
+`prose-link-annotation` as the one genuine item and warning against pasting 825 into
+`named-debt.json`; and a new 📚 Docs section listing the 6 doc frames and 9 📐 Decisions records.
+
+**Two additions that matter beyond bookkeeping:**
+
+1. A **⚠️ Open defects — the file is NOT clean** section, deliberately placed _above_ the token
+   tables so a drift check cannot miss it: the `work/WorkCard` missing-`breakpoint` defect and the
+   9-of-16 overflow table, with the note that the latter was found by a check **stricter than
+   Gate D** (which is section-relative, and vacuously empty on section-less pages).
+2. An **"Other COMPONENT populations (outside the 46)"** block — 4 live `_Docs/*`, 7 archived
+   `_Docs/*`, 16 page masters, 1 `zz/` — with an explicit warning that P3-T11 reported **no**
+   document-wide total, so these must not be summed and quoted as measured. The stale-formula
+   failure mode has now bitten twice (P2-T11's roster arithmetic, the 451 in a Docs card).
+
+**Note:** the master node ids in the roster are carried from the phase-2 map and labelled as hints
+per the file's own convention — P3-T11 only repositioned nodes, so they should hold.
