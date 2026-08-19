@@ -444,8 +444,8 @@ fills it). 📐 Decisions PASS.
 ### Diagnosis
 
 **Overlaps are a stale layout, not naming drift.** P1-T07 merged `NavLink`/`NavLinkHome` into the
-`app/NavLink` COMPONENT*SET and the two `PostCardPreview*` into `blog/PostCard`. Both sets are
-taller than the singletons they replaced. P1-T06 Step 1 tells you to re-run the \_sweep* after
+`app/NavLink` COMPONENT*SET and the two `PostCardPreview*`into`blog/PostCard`. Both sets are
+taller than the singletons they replaced. P1-T06 Step 1 tells you to re-run the \_sweep\* after
 P1-T07 — but Step 2, the grid, was never re-run, so the merged sets grew into their neighbours at
 the old coordinates. Re-running P1-T06 Step 2 is the whole fix.
 
@@ -1911,8 +1911,8 @@ Bindings: PageIntro `itemSpacing` → `spacing/4` · Archive `itemSpacing` → `
 `itemSpacing` → `spacing/4`, `paddingTop` → `spacing/8` · serie grid `itemSpacing` →
 `3 Responsive::serie-list/gap`.
 
-**`blog/PostList` is a year group, not a row.** It is a COMPONENT_SET (`breakpoint=Desktop|Mobile`)
-holding a year label plus **four** `blog/PostRow` instances. So it is instanced once per _year_,
+**`blog/PostList` is a year group, not a row.** It is a COMPONENT*SET (`breakpoint=Desktop|Mobile`)
+holding a year label plus **four** `blog/PostRow` instances. So it is instanced once per \_year*,
 with the surplus rows hidden — not once per post as the brief's wording implied. Any later brief
 that reaches for `blog/PostList` inherits this: four rows max per group, hide the remainder.
 
@@ -2444,3 +2444,218 @@ or a deliberately tinted surface carries a fill, and that fill binds a `2 Theme`
 never a literal colour._
 
 No doc references page-master ids or grid counts, so the P3-T09 renumbering invalidates nothing.
+
+## R3.2 — refresh the pixel manifest (2026-08-19)
+
+**TASK** R3.2 · **STATUS** DONE — 62 entries checked, 37 live / 25 skipped, 0 null roots.
+
+All 62 entries verified against current `src/`: every `storyPath` maps to a real `*.stories.ts`
+export, and every selector was resolved live at 1280px on **both** the astrobook story route (via
+`pnpm geometry:web`) and the `liveUrl` (a throwaway Playwright pass, since
+`extract-web-geometry.mjs` only visits story routes while `pixel-check.mjs` uses `liveUrl`).
+
+**Fixed selectors: none needed.** The spec's premise — "selectors that changed" — did not hold on
+inspection: `src/` last changed at `7c79d08` (2026-08-06) while the manifest was last refreshed at
+`37be90e` (2026-08-15), so no drift had accumulated. Verified rather than assumed.
+
+**Marked `skip: true` with reasons, no entry deleted:** `about-aboutstrip--default`,
+`work-workgallerycard--square`, `work-workoverlaycard--overlaycard`. The stale reason on the
+already-skipped `work-workgallerycard--video` ("variant not selected") was rewritten to record
+retirement. Each reason says **"no Figma master"**, not "not on live" — retirement here is
+Figma-side and all these code files still exist and still render.
+
+Components that were only **renamed** were deliberately not skipped, checked one by one against
+`rename-map.md` + §7: `PostListItem` / `SeriePostListItem` → `blog/PostRow`, `SelectedWriting` →
+`blog/BlogPreview`, `WorksStrip` → `work/WorkPreview`, `TopicChips` → `blog/PostMetadataTopic`,
+`LinkNavPost` → `blog/PostNav`, `P` → `ui/PageDescription`, `Contact` / `ContactText` →
+`contact/ContactPreview` / `ContactContent`. The canon Figma name for each is now recorded in a new
+header block so the Figma-side geometry keys match.
+
+### Correction — two entries wrongly retired, caught by P3-T11's roster
+
+R3.2 first skipped `blog-postrowcalm--calmrow` and `work-workminicard--minicard` on the strength of
+`design.md` §3's "Retired" list. **P3-T11's live roster contradicts that**: both masters exist.
+Phase 2 built them deliberately — `blog/RelatedWork` composes `work/WorkMiniCard` (P2-T08) and
+`work/RelatedWriting` composes `blog/PostRowCalm` (P2-T09). They are sub-components of a canon
+master, not explorations. Both entries were restored to live with their original
+`storyPath` / `selector` / `liveUrl` recovered from `HEAD`, and **`design.md` §3 + §7 amended** to
+strike them from the Retired list. Final: 37 live / 25 skipped.
+
+**Null-root check clean** — `geometry.web.json`, 37 entries, 0 null roots across all 3 viewports ×
+2 themes. Manifest validated programmatically: no duplicate ids, no `skip` without a `reason`, no
+live entry missing `storyPath` / `selector` / `liveUrl`.
+
+### Notes
+
+- Three entries stay live despite having **no Figma master by design** (`ui-customimage--default`,
+  `hero-herosocials--default`, `contact-contactimage--default` — code-only wrappers per §3).
+  `diff-geometry.mjs` will report them as "missing in Figma"; documented in the header so R3.3 does
+  not misread it as drift.
+- `geometry.web.json` is gitignored (`.gitignore:38`), so only `scripts/pixel-manifest.mjs` shows
+  in the diff.
+- The dev server was already running (`astro dev`, pid 33238) and was left running.
+- **`geometry.figma.json` is still the 2026-08-15 dump** (18 keys) and still holds keys for the
+  retired components — it needs a fresh Figma-side dump before `diff-geometry.mjs` means anything.
+  R3.3 territory.
+
+## P3-T11 — archive, final roster, hygiene + bindings (2026-08-19)
+
+**TASK** P3-T11 · **STATUS** DONE — last Figma step. Roster **46**, Pages **32**, canvas clean at
+all three levels.
+
+### Steps 1–2 — page classification and archiving
+
+Nine pages, live. Keep: 📖 Cover · 📐 Decisions · 📚 Docs · ❖ Components · 📄 Pages.
+Archive: 🗄️ Archive — Decisions (empty) · Docs v1 · Components · **XP - WorkCard**.
+One page moved: `XP - WorkCard` (`3034:5541`) renamed `🗄️ Archive — XP - WorkCard` and appended to
+the page list. **Nothing deleted anywhere.** No stray or debris nodes on any keeper page.
+
+### Step 2b — P3-T09's placeholder carry-forward, resolved
+
+P3-T09's description was imprecise: only **8** of the 12 `blog/SerieMeta` instances carried the
+`~1H 20M READ` master default (4 light SerieCards on Blog Desktop/Mobile + their dark mirrors). The
+4 serie-header instances already read `5 PARTS` / `~1H 05M READ` — but that read time was itself
+wrong. The My AI Journey card was also duplicating Web Performance's description **and** date
+(P3-T02's placeholder-uniform class again). 14 TEXT edits on light masters only, values computed
+from live content via `reading-time` @120 WPM to match `getSerieStats`:
+
+| Serie           | Parts | Read    | Dates        |
+| --------------- | ----- | ------- | ------------ |
+| Web Performance | 5     | ~1H 41M | Mar–Jul 2026 |
+| My AI Journey   | 2     | 41 MIN  | Dec 2025     |
+
+### Step 4 — canvas hygiene: two defect classes Gate D cannot see
+
+Gate D (section-**relative** overlaps / cropped / strays) was already empty on all four keeper
+pages. The screenshot review the brief mandates caught two things it structurally cannot:
+
+1. **6 of 30 COMPONENT_SETs had every variant stacked at (0,0)** — invisible to a section-relative
+   check, visually broken on canvas: `app/HeaderDrawer` (2), `ui/Link/inline` (6),
+   `work/WorkPreview` (2), `work/WorkCard` (8), `work/ArchiveTable` (3),
+   `contact/ContactPreview` (2). Re-flowed into wrapped rows (gap 80, padding preserved), sets
+   resized. Variant repositioning touches no instance, property or variant resolution.
+2. **SECTIONS overlapped each other on ❖ Components** — `blog` ∩ `work` by 462px, `work` ∩ `hero`
+   by 485px. Pre-existing; Gate D checks children _within_ a section, never sections themselves.
+   All 7 sections' children repacked into wrapped rows (pad 80, gap 80, wrap 4200), sorted by
+   existing (y,x) so reading order survives, sections resized and re-stacked at `x=0`, gap 160.
+
+Cold read-back, all three levels: `sectionOverlaps []` · `childOverlaps {}` · `setOverlaps {}` ·
+`cropped []` · `strays []`.
+
+Also fixed: `_Docs/DoDont` (`2590:588`) `counterAxisSizingMode` AUTO → height 100→180, clearing an
+80px clip on its `do`/`dont` panels (0 instances existed, zero downstream impact); and the 📚 Docs
+"Token Architecture" card (`2942:4372`) said **451** variables for `1 Primitives` where the live
+count is **407** — corrected, and it would otherwise have shipped straight into the knowledge file.
+
+### Step 4b — the white-fill regression check
+
+Re-run file-wide: 📄 Pages **0**, ❖ Components **0** fills (7 white _strokes_, all SECTION chrome).
+📚 Docs and 📐 Decisions carry white only as doc chrome (P3-T10 convention). Both earlier sweeps
+(224 at P2-T11b, 50 at P3-T09) hold — **no regression**.
+
+### ROSTER — 46 masters, live-counted
+
+| Section   | n      | Masters                                                                                                                                                                                        |
+| --------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `app`     | 6      | ThemeToggle · MotionToggle · Footer · Header · HeaderDrawer · NavLink                                                                                                                          |
+| `ui`      | 13     | Icon · Link/{primary,secondary,textLink,iconOnly,inline,external} · H1 · H2 · SectionTitle · PageDescription · Prose · SocialShare                                                             |
+| `blog`    | 14     | PostList · SerieList · BlogPreview · PostMetadataTime · PostMetadataTopic · SerieMeta · PostRow · SerieCard · PostCard · TableOfContents · SerieContents · RelatedWork · PostNav · PostRowCalm |
+| `work`    | 6      | WorkPreview · WorkCard · ArchiveTable · WorkMiniCard · WorkHeader · RelatedWriting                                                                                                             |
+| `hero`    | 3      | HeroText · HeroAnimation · Hero                                                                                                                                                                |
+| `contact` | 2      | ContactContent · ContactPreview                                                                                                                                                                |
+| `about`   | 2      | AboutFacts · AboutText                                                                                                                                                                         |
+| **TOTAL** | **46** |                                                                                                                                                                                                |
+
+Plus 4 `_Docs/*` masters on 📚 Docs, outside the domain sections and outside the 46
+(`DecisionCard`, `DoDont`, `Date`, `Status`). One non-master node lives in a section:
+`prose-link-annotation` (TEXT, `ui`) — an annotation label, counted in `ui`'s 14 children but not
+in its 13 masters. Local styles: 17 text · 0 paint · 2 effect.
+
+### PAGES — 9 pages, 32 frames
+
+Order: 📖 Cover · 📐 Decisions (1 `Records` frame, 9 records) · 📚 Docs (6 DOC + 4 `_Docs` + 1
+label) · ❖ Components (7 sections, 46 masters) · 📄 Pages (32) · 🗄️ Archive — Decisions · Docs v1 ·
+Components · XP - WorkCard.
+
+📄 Pages = 8 routes × 4 columns = **32** — 16 COMPONENT light masters + 16 mode-pinned `[Dark]`
+INSTANCE mirrors. Columns `x = 0 / 1440 / 1990 / 3430`; rows `y = 0` Home · `4611` Blog · `7235`
+Work · `10248` About · `12749` Post · `16322` Serie · `17620` Serie post · `21221` Work detail.
+
+### COLLECTIONS
+
+| Collection      | Vars    | Modes                     | Id                             |
+| --------------- | ------- | ------------------------- | ------------------------------ |
+| `1 Primitives`  | **407** | Mode 1                    | `VariableCollectionId:2013:2`  |
+| `2 Theme`       | 15      | Light / Dark              | `VariableCollectionId:3:2`     |
+| `3 Responsive`  | 18      | Desktop / Tablet / Mobile | `VariableCollectionId:2245:42` |
+| `Design System` | 2       | 1 — audit-exempt          | `VariableCollectionId:2721:4`  |
+
+407, not 451. Recount, not carry-forward.
+
+### Deviations
+
+1. **Went beyond the literal brief on step 4 and _fixed_ the stacked variant sets and the
+   section-level overlaps**, plus the section repack the grown sets forced. Step 4 says in as many
+   words that "a geometry pass can be clean while the canvas reads as broken", and this is the last
+   Figma task. All of it is repositioning and resizing of containers — nothing deleted, no
+   property, binding or variant axis touched, no instance affected. Pure geometry, reversible.
+2. **NOT FIXED — `work/WorkCard` has no `breakpoint` axis, so `Work — Mobile` is broken.** See the
+   open-defect section below.
+3. **NOT FIXED — responsive overflow on 9 of 16 light page masters.** See below.
+4. Did not screenshot all 8 📄 Pages rows and all 6 doc frames individually — geometry read-back
+   covers every frame; spot-checks were Blog — Desktop, Post — Mobile, and the three repacked
+   sections.
+
+### ⚠️ Two open defects, handed up — these are the ship blockers
+
+**(a) `Work — Mobile` renders as four bare covers.** `work/WorkCard`'s axes are
+`variant` (catalogue|case) / `state` / `side` — there is **no `breakpoint` axis**. `variant=case`
+is a HORIZONTAL master built at 1248 with a FIXED 500px cover, so on `Work — Mobile` the four
+instances collapse the `text` column to 1px: screenshot shows four gray blocks, no text. Live
+`WorkCard.astro` is marked LEGACY and R3.1 already records "Figma leads" for `/work`, so the code
+offers no mobile answer either. Fixing means designing a mobile case variant across 8+ masters — a
+redesign, out of scope for the final task.
+
+**(b) Responsive overflow on 9 of 16 light page masters**, found by an out-of-root-bounds check
+stricter than the official Gate D (which is section-relative, and therefore vacuously empty on
+section-less pages):
+
+| Master               | Overflow                                                                                              |
+| -------------------- | ----------------------------------------------------------------------------------------------------- |
+| Home — Desktop       | tech-stack TEXT +6 · ContactImage `layer1` GROUP +24                                                  |
+| Home — Mobile        | 3× tech-stack TEXT +37                                                                                |
+| About — Mobile       | +5                                                                                                    |
+| Post — Desktop       | `Optimizing Images…` +69                                                                              |
+| Serie post — Desktop | same, +69                                                                                             |
+| Post — Mobile        | `ui/H1` −98 left · inline-code-example +93 · ProseImage +346 · `blog/PostNav` next +314               |
+| Serie post — Mobile  | same set                                                                                              |
+| Work — Mobile        | see (a)                                                                                               |
+| Work detail — Mobile | inline-code-example +93 · ProseImage +346 · `8 min · July 2026` +36 ×2 · `ui/Link/secondary` −29 left |
+
+The `ProseImage +346` and `inline-code-example +93` repeat on **every** mobile document page — one
+root cause (a FIXED-width prose child that never got FILL), not four.
+
+### CODE DEBT — 3 new findings (→ R3.7)
+
+1. Figma `/blog` renders 2 `SerieCard`s; live `blog.astro` maps **all** series (3 live). Figma is
+   one card short.
+2. The Figma `blog/SerieCard` master carries a date-range TEXT node that live `SerieCard.astro`
+   never renders — a Figma-only element.
+3. `SerieCard.astro` and `WorkCard.astro` are both headed "LEGACY — main-only, not wired into any
+   v3 page".
+
+### UNBOUND — one genuine item file-wide
+
+| Page         | Paints             | Verdict                                                                                                                                                                                          |
+| ------------ | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| ❖ Components | 92                 | 66 decorative `hero/*` + `contact/*` art layers (documented exception) · 14 SECTION chrome · 11 `#8A38F5` COMPONENT_SET dashed borders (Figma's own, not authored, not bindable) · **1 genuine** |
+| 📄 Pages     | 66                 | 100% the same decorative art layers. **Zero** unbound paints on any product surface; `#FFFFFF` raw count 0                                                                                       |
+| 📚 Docs      | 825 / 614 distinct | All doc chrome per the P3-T10 convention                                                                                                                                                         |
+| 📐 Decisions | 28                 | `#FFFFFF` ×19 card plates, `#3B934E` ×9 status pills — doc chrome                                                                                                                                |
+
+The **one genuine unbound value in the whole file** is `prose-link-annotation` (TEXT, `ui`
+section) fill `#999999` — an annotation label, not a component. That is the single new
+`named-debt.json` entry R3.3 has to decide on.
+
+⚠️ The 825 figure is much larger than the "46 white fills" previously recorded because that earlier
+number counted `#FFFFFF` only. **Do not paste 825 into `named-debt.json` as component debt.**

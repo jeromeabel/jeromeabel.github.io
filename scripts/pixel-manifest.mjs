@@ -21,6 +21,39 @@ const BASE = "http://localhost:4321";
 //   homePosts:    "calm-rows"
 //   worksStrip:   "overlay-card"
 //   aboutFacts:   "grid"
+//
+// ---------------------------------------------------------------------------
+// R3.2 refresh (magnet-ds-final-state, 2026-08-19)
+// ---------------------------------------------------------------------------
+// Re-verified every entry against the current src/ with the dev server up:
+// all 40 then-live storyPath+selector pairs resolved on BOTH the astrobook
+// story route and the liveUrl (src/ last changed 2026-08-06; the manifest was
+// refreshed 2026-08-15 — no selector drift since). No selector needed a fix.
+//
+// Five entries were newly marked `skip` because Magnet-DS retired the component
+// (design.md §3 "Retired" / §7): AboutStrip, PostRowCalm, WorkGalleryCard,
+// WorkMiniCard, WorkOverlayCard. Retirement is Figma-side — the code files are
+// archived, not deleted, and most still render live — so the reason on each
+// entry says "no Figma master", not "not on live". Entries are never deleted:
+// the id is a historical key.
+//
+// Renamed-but-NOT-retired (per rename-map.md + design.md §7). These stay live;
+// the Figma-side geometry dump must key them by the manifest id below, and the
+// canon master name is noted here so the two sides stay matchable:
+//   blog-postlistitem--default      -> blog/PostRow  type=post
+//   blog-seriepostlistitem--default -> blog/PostRow  type=serie
+//   blog-selectedwriting--default   -> blog/BlogPreview
+//   blog-topicchips--default        -> blog/PostMetadataTopic
+//   ui-linknavpost--previous|next   -> blog/PostNav
+//   ui-p--default                   -> ui/PageDescription
+//   contact-contact--default        -> contact/ContactPreview
+//   contact-contacttext--default    -> contact/ContactContent
+//   work-worksstrip--default        -> work/WorkPreview
+//
+// Kept live with no Figma master by design (code-only wrappers/subs — design.md
+// §3): ui-customimage--default, hero-herosocials--default,
+// contact-contactimage--default. diff-geometry.mjs reports these as "missing in
+// Figma"; that is expected, not drift.
 
 export const MANIFEST = [
   // ---------------------------------------------------------------------
@@ -42,12 +75,13 @@ export const MANIFEST = [
   },
   {
     id: "about-aboutstrip--default",
-    storyPath: "/styleguide/dashboard/src/components/about/about-strip/default",
-    liveUrl: `${BASE}/`,
-    selector:
-      'section[class="reveal reveal-bottom container flex flex-col gap-6 lg:gap-8"]',
-    masks: [],
-    wrapper: "none",
+    skip: true,
+    // Selector + storyPath still resolve on live (`/`), but Magnet-DS drops
+    // AboutStrip from the Home composition (design.md §3 "Retired", §7) and no
+    // Figma master remains, so there is nothing to diff against. Entry kept:
+    // the id is a historical key. Code file is archived, not deleted.
+    reason:
+      "retired by magnet-ds-final-state — dropped from the Home composition, no Figma master (design.md §3/§7)",
   },
   {
     id: "about-abouttext--default",
@@ -132,6 +166,10 @@ export const MANIFEST = [
     storyPath:
       "/styleguide/dashboard/src/components/blog/post-row-calm/calm-row",
     liveUrl: `${BASE}/`,
+    // NOT retired. design.md §3's "Retired" list is stale for this one:
+    // P2-T09 built the `blog/PostRowCalm` Figma master because
+    // `work/RelatedWriting` composes it. Master confirmed live in the P3-T11
+    // roster, so it has a Figma counterpart to diff. Amended at R3.2/P3-T11.
     // "adding-likes-to-a-static-astro-site" is not one of the current 4
     // "Latest" posts (verified live: curl `/` and grep the calm-row hrefs -
     // they are web-performance/05-images-part-2, 04-images-part-1,
@@ -489,20 +527,18 @@ export const MANIFEST = [
   },
   {
     id: "work-workgallerycard--square",
-    storyPath:
-      "/styleguide/dashboard/src/components/work/work-gallery-card/square",
-    liveUrl: `${BASE}/work`,
-    // 3 equivalent card instances render on /work (workFeatured=gallery-3col-1x1);
-    // pixel-check should take the first match.
-    selector:
-      'a[class="border-border hover:bg-surface group flex flex-col border outline-offset-4 outline-black focus:outline-2 dark:outline-white"]',
-    masks: ["img"],
-    wrapper: "container",
+    skip: true,
+    // Still rendered live on /work (workFeatured=gallery-3col-1x1) and the
+    // selector still resolves, but WorkGalleryCard is an archived exploration
+    // (design.md §3 "Retired") — the canon master is `work/WorkCard`.
+    reason:
+      "retired by magnet-ds-final-state — archived exploration, no Figma master; canon master is work/WorkCard (design.md §3)",
   },
   {
     id: "work-workgallerycard--video",
     skip: true,
-    reason: "variant not selected on live (workFeatured=gallery-3col-1x1)",
+    reason:
+      "retired by magnet-ds-final-state — archived exploration, no Figma master (was also a non-selected variant: workFeatured=gallery-3col-1x1)",
   },
   {
     id: "work-workheader--default",
@@ -514,9 +550,12 @@ export const MANIFEST = [
   },
   {
     id: "work-workminicard--minicard",
-    // NOT variant-skipped: WorkMiniCard is hardcoded (unconditionally, not
-    // VARIANTS-gated) inside blog/RelatedWork.astro, independent of the
-    // worksStrip variant selection used by WorksStrip.astro.
+    // NOT retired, and NOT variant-skipped. design.md §3's "Retired" list is
+    // stale here: P2-T08 built the `work/WorkMiniCard` Figma master because
+    // `blog/RelatedWork` composes it, and P3-T11's roster confirms it live.
+    // WorkMiniCard is hardcoded (unconditionally, not VARIANTS-gated) inside
+    // blog/RelatedWork.astro, independent of the worksStrip variant selection
+    // used by WorksStrip.astro.
     storyPath:
       "/styleguide/dashboard/src/components/work/work-mini-card/mini-card",
     liveUrl: `${BASE}/blog/api-endpoints-with-astro`,
@@ -527,13 +566,12 @@ export const MANIFEST = [
   },
   {
     id: "work-workoverlaycard--overlaycard",
-    storyPath:
-      "/styleguide/dashboard/src/components/work/work-overlay-card/overlay-card",
-    liveUrl: `${BASE}/`,
-    selector:
-      'a[class="group relative block aspect-square overflow-hidden outline-offset-4 outline-black focus:outline-2 dark:outline-white"]',
-    masks: ["img"],
-    wrapper: "container",
+    skip: true,
+    // Still rendered live on `/` (worksStrip=overlay-card) and the selector
+    // still resolves, but WorkOverlayCard is an archived exploration
+    // (design.md §3 "Retired") — the canon master is `work/WorkCard`.
+    reason:
+      "retired by magnet-ds-final-state — archived exploration, no Figma master; canon master is work/WorkCard (design.md §3)",
   },
   {
     id: "work-workspreview--default",

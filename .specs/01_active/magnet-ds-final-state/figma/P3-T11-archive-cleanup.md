@@ -2,7 +2,7 @@
 task: P3-T11
 title: Archive explorations, final roster and hygiene sweep
 phase: 3
-status: TODO
+status: DONE
 prerequisite: P3-T10
 ---
 

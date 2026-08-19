@@ -157,7 +157,7 @@ Violations are migration findings, same rank as naming drift — fixed in step 3
 | ------------------ | ------------------------------------------------- | ----- | ---------------------------------- |
 | `app/Header`       | `breakpoint=desktop\|mobile`                      | ✅ 16 | 32→16 normalization                |
 | `app/Footer`       | `breakpoint`                                      | ✅ 16 |                                    |
-| `app/NavLink` ♻    | `type=page\|brand × state=default\|hover\|active` | ⬜ 📎 | merges NavLinkHome as `type=brand` |
+| `app/NavLink` ♻   | `type=page\|brand × state=default\|hover\|active` | ⬜ 📎 | merges NavLinkHome as `type=brand` |
 | `app/HeaderDrawer` | `state=closed\|open`                              | ⬜ 📎 |                                    |
 | `app/ThemeToggle`  | `mode=light\|dark`                                | ⬜    |                                    |
 | `app/MotionToggle` | `mode=on\|off`                                    | ⬜    |                                    |
@@ -170,7 +170,7 @@ Violations are migration findings, same rank as naming drift — fixed in step 3
 | `ui/Icon`            | `icon=…` (24)                                                                                                                                                                                                                                                                                                | annotation: 24×24 grid, stroke rules                                                                                        |
 | `ui/H1`, `ui/H2`     | —                                                                                                                                                                                                                                                                                                            |                                                                                                                             |
 | `ui/PageDescription` | —                                                                                                                                                                                                                                                                                                            | 📎 code = `P` usage                                                                                                         |
-| `ui/SectionTitle` ♻  | —                                                                                                                                                                                                                                                                                                            | was PreviewTitle; H2 + textLink row                                                                                         |
+| `ui/SectionTitle` ♻ | —                                                                                                                                                                                                                                                                                                            | was PreviewTitle; H2 + textLink row                                                                                         |
 | `ui/Prose` 🆕        | —                                                                                                                                                                                                                                                                                                            | markdown-body specimen for detail pages                                                                                     |
 | `ui/SocialShare` 🆕  | —                                                                                                                                                                                                                                                                                                            | detail pages                                                                                                                |
 | `ui/CustomImage`     | —                                                                                                                                                                                                                                                                                                            | **no Figma master** — code-only behavior wrapper (LQIP, fade-in); images appear as plain fills/content inside other masters |
@@ -179,12 +179,12 @@ Violations are migration findings, same rank as naming drift — fixed in step 3
 
 | Final name                | Variants                               | Ctr   | Notes                                                                                                                                                       |
 | ------------------------- | -------------------------------------- | ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `blog/PostCard` ♻         | `size=big\|small × state × breakpoint` | ❌    | merges PostCardPreviewBig + Small; `big` identical across breakpoints                                                                                       |
+| `blog/PostCard` ♻        | `size=big\|small × state × breakpoint` | ❌    | merges PostCardPreviewBig + Small; `big` identical across breakpoints                                                                                       |
 | `blog/PostRow`            | `type=post\|serie × state`             | ❌    | absorbs code `PostListItem` (live /blog archive rows → `type=post`) and `SeriePostListItem` (live serie landing rows → `type=serie`); see §7                |
 | `blog/SerieCard`          | `state`                                | ❌    |                                                                                                                                                             |
-| `blog/BlogPreview` ♻      | `breakpoint`                           | ✅ 16 | Home section; was BlogPreviewSection                                                                                                                        |
-| `blog/SerieList` ♻        | `breakpoint`                           | ❌    | was SerieCardList; wrapper of `blog/SerieCard` instances. Code `SerieList.astro` exists but is unused and renders retired `SerieListItem` — converges in §7 |
-| `blog/PostList` ♻         | `breakpoint`                           | ❌    | was PostArchiveList; wrapper of `blog/PostRow type=post` instances. Live `blog.astro` renders `PostListItem` directly — converges in §7                     |
+| `blog/BlogPreview` ♻     | `breakpoint`                           | ✅ 16 | Home section; was BlogPreviewSection                                                                                                                        |
+| `blog/SerieList` ♻       | `breakpoint`                           | ❌    | was SerieCardList; wrapper of `blog/SerieCard` instances. Code `SerieList.astro` exists but is unused and renders retired `SerieListItem` — converges in §7 |
+| `blog/PostList` ♻        | `breakpoint`                           | ❌    | was PostArchiveList; wrapper of `blog/PostRow type=post` instances. Live `blog.astro` renders `PostListItem` directly — converges in §7                     |
 | `blog/PostMetadataTime`   | `type=default\|no-date\|day`           | ⬜ 📎 |                                                                                                                                                             |
 | `blog/PostMetadataTopic`  | `type=post\|serie`                     | ⬜    | not 📎 — code file exists as `TopicChips.astro`; renames in §7                                                                                              |
 | `blog/SerieMeta`          | —                                      | ⬜ 📎 |                                                                                                                                                             |
@@ -197,8 +197,8 @@ Violations are migration findings, same rank as naming drift — fixed in step 3
 
 | Final name               | Variants                          | Ctr   | Notes                                                                                                                                                                             |
 | ------------------------ | --------------------------------- | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `work/WorkCard` ♻        | `variant=catalogue\|case × state` | ❌    | anatomy owned by the WorkCard final spec (incl. sub `WorkCardImage`); hover gap closed. Rename source = live `WorkCardPreviewSmall` master (absorbed as `variant=catalogue` base) |
-| `work/WorkPreview` ♻     | `breakpoint`                      | ✅ 16 | Home section; code `WorksPreview` rename                                                                                                                                          |
+| `work/WorkCard` ♻       | `variant=catalogue\|case × state` | ❌    | anatomy owned by the WorkCard final spec (incl. sub `WorkCardImage`); hover gap closed. Rename source = live `WorkCardPreviewSmall` master (absorbed as `variant=catalogue` base) |
+| `work/WorkPreview` ♻    | `breakpoint`                      | ✅ 16 | Home section; code `WorksPreview` rename                                                                                                                                          |
 | `work/ArchiveTable` 🆕   | `breakpoint`                      | ❌    | /work ledger                                                                                                                                                                      |
 | `work/WorkHeader` 🆕     | —                                 | ❌    | rebuild — master pruned with the detail templates                                                                                                                                 |
 | `work/RelatedWriting` 🆕 | —                                 | ❌    | rebuild — master pruned with the detail templates                                                                                                                                 |
@@ -213,10 +213,10 @@ Violations are migration findings, same rank as naming drift — fixed in step 3
 
 ### contact/
 
-| Final name                 | Variants                 | Ctr   | Notes                                                                                                                 |
-| -------------------------- | ------------------------ | ----- | --------------------------------------------------------------------------------------------------------------------- |
+| Final name                  | Variants                 | Ctr   | Notes                                                                                                                 |
+| --------------------------- | ------------------------ | ----- | --------------------------------------------------------------------------------------------------------------------- |
 | `contact/ContactPreview` ♻ | `breakpoint` (🆕 mobile) | ✅ 16 | 32→16; mobile-variant gap closed; code `Contact` renames (§7)                                                         |
-| `contact/ContactContent`   | —                        | ❌    | sub; code `ContactText` converges (§7). `ContactImage` + `ContactNoise` render as layers inside — no separate masters |
+| `contact/ContactContent`    | —                        | ❌    | sub; code `ContactText` converges (§7). `ContactImage` + `ContactNoise` render as layers inside — no separate masters |
 
 ### about/
 
@@ -226,8 +226,11 @@ Document-page container rule.
 
 ### Retired (archived, never deleted — marked in Decisions)
 
-Explorations: `WorkOverlayCard`, `WorkGalleryCard`, `WorkMiniCard`, `PostRowCalm`,
-WorkCard exploration boards.
+Explorations: `WorkOverlayCard`, `WorkGalleryCard`, WorkCard exploration boards.
+~~`WorkMiniCard`~~, ~~`PostRowCalm`~~ — **struck at R3.2/P3-T11**: both were retired on paper
+but phase 2 built Figma masters for them anyway, because `blog/RelatedWork` composes
+`work/WorkMiniCard` (P2-T08) and `work/RelatedWriting` composes `blog/PostRowCalm` (P2-T09).
+P3-T11's live roster confirms both. They are sub-components of a canon master, not explorations.
 Code orphans (imported by nothing): `AboutValues`, `ValueCard`, `Skills`, `SkillsText`;
 transitively unused: `SerieListItem` (only reachable via unused `SerieList` chain),
 `SeriePostCard` (only used by the archived `BlogPreview` twin).
@@ -386,7 +389,7 @@ size=small`, `default→inline`; `menuActive/menuInactive` express NavLink state
 - `LinkNavPost → PostNav` (moves ui→blog).
 - Remove `AboutStrip` from Home page composition.
 - Archive (not delete) retired components: `WorkOverlayCard`, `WorkGalleryCard`,
-  `WorkMiniCard`, `PostRowCalm`, `PostListItem`, `SeriePostListItem`,
+  `PostListItem`, `SeriePostListItem`,
   `SelectedWriting`, `WorksStrip`, `AboutStrip`, `AboutValues`, `ValueCard`,
   `Skills`, `SkillsText`, `SerieListItem`, `SeriePostCard`.
 - WorkCard catalogue/case + `getFeaturedWorks(limit)` — already specced in the WorkCard
