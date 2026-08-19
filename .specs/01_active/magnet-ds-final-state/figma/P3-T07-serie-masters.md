@@ -2,7 +2,7 @@
 task: P3-T07
 title: Serie-landing and Serie-post masters
 phase: 3
-status: TODO
+status: DONE
 prerequisite: P3-T06
 ---
 

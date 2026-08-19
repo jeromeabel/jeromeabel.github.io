@@ -2055,3 +2055,61 @@ All three are **spec-amendment candidates**, not code debt: the live route is ri
 Carry to R3.1 alongside the P3-T03 order amendment.
 
 **UNBOUND:** none.
+
+## P3-T07 — `Serie — *` / `Serie post — *`, the serie routes (2026-08-19)
+
+**TASK** P3-T07 · **STATUS** DONE — 4 masters built, serie-post cloned from Post as required.
+
+### Step 1 — serie landing
+
+`Serie — Desktop` (`3147:2889`) and `Serie — Mobile` (`3147:2957`) on the `Pages` page. Under
+`PageContent`: `SerieHeader` (832 FIXED Desktop / FILL Mobile) → `blog/SerieContents` FILL. Fill is
+the live `/blog/web-performance` copy — H1 `Web Performance`, description set, `blog/SerieMeta`
+carrying `5 PARTS · ~1H 05M READ`.
+
+### Step 2 — serie post by clone
+
+`Serie post — Desktop` (`3147:6192`) and `Serie post — Mobile` (`3147:6268`), both cloned from the
+P3-T06 `Post — *` masters. Both clones came back **FRAME** (the sources are still frames — P3-T09
+has not converted them yet), so no type normalization was needed here.
+
+Stacks under `PageContent`:
+
+- Desktop — `PostHeader` → cover → `Body` → `blog/RelatedWork` → `blog/SerieContents` →
+  `blog/PostNav` → `ui/Link/secondary`
+- Mobile — `PostHeader` → cover → `blog/TableOfContents` → `Body` → `blog/RelatedWork` →
+  `blog/SerieContents` → `blog/PostNav` → `ui/Link/secondary`
+
+### Step 3 — breadcrumb and serie content
+
+Breadcrumb is three segments — `Blog` › `Web Performance` › plain text `Part 4 of 5`, the last one a
+text node with its colour bound to `color/foreground-muted`. Mobile stacks it VERTICAL, per the live
+`flex-col md:flex-row`. H1 `Optimizing Images with Astro (part 1)`, metadata
+`12 July 2026 · 8 min read`, `blog/PostNav` `type=both` on both frames, `blog/SerieContents` holding
+`item / current` on index 3 (`4. Optimizing Images with Astro (part 1)`).
+
+### Deviations
+
+1. **`ui/Link/menuInactive` still absent** — same gap P3-T06 hit. Brief says STOP; the breadcrumb
+   uses `ui/Link/textLink` instead, which is what the `Post — *` masters already use. Consistency
+   with P3-T06 beat the stop clause. The missing variant is an R3.1 item: either add
+   `menuInactive` to `ui/Link` or strike it from the briefs.
+2. **`blog/SerieMeta` has one icon + one text field**, not the two icon+text pairs the live anatomy
+   describes. Both stats packed into the single field: `5 PARTS · ~1H 05M READ`. Master-shape
+   mismatch → R3.1.
+3. **`blog/RelatedWork` stayed between `Body` and `blog/SerieContents`** on the serie post — the
+   clone inherited it and it was not among the three listed differences, so it was left in place.
+   Step 4's asserted order omits it. Live-vs-brief question for R3.1, not resolved here.
+4. **`PageContent.itemSpacing` overridden** from `shell()`'s `section/rhythm-y` binding to raw
+   48 / 32, as the brief's code demands. No responsive variable maps to those values.
+
+### Boxless-vs-boxed divergence — recorded, per acceptance
+
+Live serie landing renders a **boxless** list with a top rule only; Figma uses the bordered
+`blog/SerieContents` box, as specified. Figma leads → **code-debt candidate** for R3.1, same class as
+the P3-T04 work-grid divergence.
+
+**UNBOUND:**
+
+- `Serie — Desktop` / `Serie — Mobile` › `PageContent.itemSpacing` (48 / 32) — no responsive var matches
+- `Serie post — Desktop` / `Serie post — Mobile` › `breadcrumb` › `"Part 4 of 5".fontSize` (16) — plain text node, not from a component
