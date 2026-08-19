@@ -55,7 +55,7 @@ pnpm test
 
 Read the reports. Expected end state: token diff clean, every raw value declared, tests green.
 
-Update `.claude/skills/figma-verify/knowledge/figma-ds-file.md` with the 15 new masters and the final phase-2 counts (**46** on ❖ Components, **11** `_Docs/*`, **4** page masters, **61** total).
+Update `.claude/skills/figma-verify/knowledge/figma-ds-file.md` with the 14 new masters and the final phase-2 counts (**46** on ❖ Components, **11** `_Docs/*`, **4** page masters, **1** `zz/` retired master on `🗄️ Archive — Components`, **62** total).
 
 ```bash
 pnpm format:write

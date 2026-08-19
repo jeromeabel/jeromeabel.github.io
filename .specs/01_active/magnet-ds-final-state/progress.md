@@ -444,8 +444,8 @@ fills it). 📐 Decisions PASS.
 ### Diagnosis
 
 **Overlaps are a stale layout, not naming drift.** P1-T07 merged `NavLink`/`NavLinkHome` into the
-`app/NavLink` COMPONENT_SET and the two `PostCardPreview*` into `blog/PostCard`. Both sets are
-taller than the singletons they replaced. P1-T06 Step 1 tells you to re-run the _sweep_ after
+`app/NavLink` COMPONENT*SET and the two `PostCardPreview*` into `blog/PostCard`. Both sets are
+taller than the singletons they replaced. P1-T06 Step 1 tells you to re-run the \_sweep* after
 P1-T07 — but Step 2, the grid, was never re-run, so the merged sets grew into their neighbours at
 the old coordinates. Re-running P1-T06 Step 2 is the whole fix.
 
@@ -1368,3 +1368,95 @@ cells/frames carrying solid fills and is the one worth a look before R2.4 signs 
   require the same re-grid again).
 - Descriptions added to `hero/Hero`, `ui/Prose`, `ui/SocialShare`.
 - `ui/Link/iconOnly` small variants 24×24 → 32×32 (this was Step 3b, not a deviation).
+
+---
+
+## P2-T11 — run 2, and the three things it left open (2026-08-19)
+
+**TASK** P2-T11 · **STATUS** PARTIAL — nine assertions and ten axis rows pass, three items open,
+carried to **P2-T11b**
+
+**RESULT.** `46 / 11 / 4 / 62`. Gate D `[] [] []`. All ten variant-axis rows match, including the
+new `ui/Link/external` axis. All 14 new phase-2 masters and all 5 rebuilt masters described.
+
+### Assertion 4 was 62, and 62 is right
+
+The runner reported `62` against an expected `61` and named the cause correctly: the `+1` is
+`zz/WorkCardPreviewSmall (superseded by work/WorkCard, 2026-08-18)` on `🗄️ Archive — Components`.
+`P2-T04-workcard.md:319` retired it there under the `zz/` rule, after this gate's `46 + 11 + 4`
+formula was written. So the archived population is eight, not seven, and the formula was one task
+stale. Not a deviation — a correct read of a wrong expectation, the second one this gate has caught.
+Fixed in the brief and in `repo/phase-2.md` (which also still said "15 new masters"; it is 14, from
+32 → 46).
+
+### The four carried repairs
+
+- **3b** `ui/Link/iconOnly` `size=small` 32×32 — verified, radius `full`, dashed stroke bound to
+  `color/foreground-muted`, `ui/SocialShare` children 32×32.
+- **3c** `ui/Link/external` gained the axis, 4 cells (`state` × icon side), `trailing` default at
+  122×42, and `about/AboutText`'s CV instance reads `leading`. P2-T10's divergence is closed.
+- **3d** a real `chevron-down` built into `ui/Icon` (25 glyphs now), stroke bound to
+  `color/foreground`, the one fake instance in `blog/TableOfContents breakpoint=Mobile` re-pointed.
+  The mislabelled-glyph debt does not reach phase 3.
+- **3e** 50 hairlines flipped, not the predicted 36 — see below.
+
+### Open 1 — the axis is `iconside`, not `iconSide`
+
+The runner lowercased the compound to satisfy assertion 9, which said "every COMPONENT_SET's axes
+are lowercase" with no further definition. Reasonable under the text; wrong for the file. Assertion
+9 exists to catch Figma's `Variant` / `Property 1` defaults and the `_Docs/Status` case — it is
+about the **initial** letter, not a ban on camelCase, and `iconside` is now the only all-lowercase
+compound axis in the document and does not match the prop name in code. Assertion 9 reworded;
+rename carried to P2-T11b, which also re-reads the instance override, since renaming an axis re-keys
+them.
+
+### Open 2 — 50 flips across 15 masters, and no `grew` table
+
+The 36 came from P2-T10b's survey, which counted **per-side** hairlines. 3e's script matches any
+node with a non-zero stroke weight and `strokesIncludedInLayout === false`, which also catches
+**full-box** strokes on buttons and toggles — hence 18 extras in `ui/Link/*`, `app/ThemeToggle`,
+`app/MotionToggle`, `ui/Icon`, `ui/SectionTitle`. Almost certainly correct, and the rule holds for
+both shapes (a CSS border grows an auto-height box whether it runs one side or four). But the report
+says "11 masters grew in height" without saying which, and two things need proving before this is
+signed:
+
+1. `ui/Link/iconOnly` was resized to 32×32 in **the same run** and carries a full-box dashed stroke.
+   If that stroke went into layout on a HUG frame, the master is 34×34 and step 3b is silently
+   undone by step 3e.
+2. `blog/BlogPreview` and `work/WorkPreview` contributed **0** where the survey said 2 each. A
+   survey wrong about four nodes may be wrong about others.
+
+### Open 3 — 209 white frame fills, and the suggested fix is also wrong
+
+`_prelude-components.js`'s `F()` is `figma.createAutoLayout(...)`, which returns Figma's default
+**opaque white** fill, and the helper never clears it. Every layout frame built by every phase-2
+brief carries one: `work/ArchiveTable` 160 · `blog/TableOfContents` 20 · `about/AboutFacts` 9 ·
+`blog/PostNav` 8 · `ui/Prose` 6 · `about/AboutText` 5 · `blog/SerieContents` 1 · `blog/RelatedWork`
+1 = 209, plus the four cover placeholders and one annotation to make the sweep's 213 + 1.
+
+The report proposes clearing **or** binding to `color/surface`. Only clearing is right. Checked
+against the code: `ArchiveTable.astro` has `hover:bg-surface/50` on `tr` and no base background;
+`TableOfContents.astro`, `PostNav.astro`, `AboutFacts.astro` (a bare `<dl class="grid …">`),
+`AboutText`, `SerieContents`, `RelatedWork` and `Prose` have no `bg-*` at all. Binding them would
+paint 209 raised slabs the live site does not have.
+
+This is a **dark-mode defect at scale** and the reason it survived nine gates is structural: white
+frames are invisible against a light canvas, and Step 6's dark render has come back identical to
+light since P2-T07, so no screenshot has ever shown them. `work/ArchiveTable` in dark is currently a
+solid white table. Carried to P2-T11b along with the `F()` fix that stops phase 3 rebuilding all of
+it — phase 3 assembles page masters from the same helper.
+
+### Not blocking, logged as debt
+
+**Nine pre-phase-2 masters carry no description**: `app/Footer`, `app/Header`, `app/HeaderDrawer`,
+`app/NavLink`, `blog/PostList`, `blog/SerieList`, `blog/BlogPreview`, `blog/PostCard`,
+`work/WorkPreview`. The gate only ever required phase-2 masters, so this passes as written — but
+these nine are the oldest masters in the file and the ones whose behaviour is least recorded
+anywhere. Natural owner is P3-T10 (the docs page), not a pass of its own.
+
+**Dark mode still unseen.** `about/AboutText` and `about/AboutFacts` render identically in dark;
+handed to P3-T09's mode-pinned dark grid, as P2-T07 and P2-T10 both flagged. Open 3 is exactly the
+class of defect that limit hides, which is an argument for P3-T09 running earlier rather than last.
+
+**4 clone artifacts** were created on `🗄️ Archive — Decisions` during step 3c and cleaned up in the
+same run. Gate D confirms `strays: []`.

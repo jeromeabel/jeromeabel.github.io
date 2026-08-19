@@ -1,6 +1,6 @@
 ---
 task: P2-T11
-title: Phase-2 gate — 61-master roster + hygiene
+title: Phase-2 gate — 62-master roster + hygiene
 phase: 2
 status: TODO
 prerequisite: P2-T02 … P2-T10
@@ -49,22 +49,30 @@ and 4 count document-wide (that is how P1-T09 measured 11 / 47); assertions 1 an
 
 ## Step 2 — the roster assertions
 
-| #   | assertion                                                                                                             | expected                                    |
-| --- | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
-| 1   | masters on ❖ Components                                                                                               | **46**                                      |
+| #   | assertion                                                                                                             | expected                                               |
+| --- | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| 1   | masters on ❖ Components                                                                                               | **46**                                                 |
 | 2   | `_Docs/*` masters, **document-wide**                                                                                  | **11** = 4 live on 📚 Docs + 7 on 🗄️ Archive — Docs v1 |
-| 3   | page masters on 📄 Pages                                                                                              | **4** (unchanged — phase 3 builds the rest) |
-| 4   | total masters, **document-wide** (archive included)                                                                    | **61** = 46 + 11 + 4                        |
-| 5   | every ❖ Components master matches `^(app\|ui\|blog\|work\|hero\|contact\|about)/`                                     | 0 exceptions                                |
-| 6   | every ❖ Components master has a non-null `section` equal to its domain prefix                                         | 0 exceptions                                |
-| 7   | the `about` section is non-empty                                                                                      | 2 masters                                   |
-| 8   | no master named `work/WorkCardPreviewSmall`, `NavLinkHome`, `PostCardPreviewBig`, `PostCardPreviewSmall` outside `🗄️` | 0 hits                                      |
-| 9   | every non-archived COMPONENT_SET's `axes` are lowercase                                                               | 0 exceptions                                |
+| 3   | page masters on 📄 Pages                                                                                              | **4** (unchanged — phase 3 builds the rest)            |
+| 4   | total masters, **document-wide** (archive included)                                                                   | **62** = 46 + 11 + 4 + 1 `zz/` retired                 |
+| 5   | every ❖ Components master matches `^(app\|ui\|blog\|work\|hero\|contact\|about)/`                                     | 0 exceptions                                           |
+| 6   | every ❖ Components master has a non-null `section` equal to its domain prefix                                         | 0 exceptions                                           |
+| 7   | the `about` section is non-empty                                                                                      | 2 masters                                              |
+| 8   | no master named `work/WorkCardPreviewSmall`, `NavLinkHome`, `PostCardPreviewBig`, `PostCardPreviewSmall` outside `🗄️` | 0 hits                                                 |
+| 9   | no non-archived COMPONENT_SET axis name starts with an uppercase letter                                               | 0 exceptions                                           |
 
-Assertions 1 and 5–8 read only masters with `archived === false`; the archived seven are counted by
+The `+1` in assertion 4 is `zz/WorkCardPreviewSmall (superseded by work/WorkCard, 2026-08-18)` on
+`🗄️ Archive — Components`, retired by `P2-T04` step 6 — archived, not deleted, per the `zz/` rule.
+It is why assertion 8 passes: the retired name exists, and it exists only inside `🗄️`.
+
+Assertions 1 and 5–8 read only masters with `archived === false`; the archived eight are counted by
 2 and 4 and inspected by nothing else. Assertion 9 covers ❖ Components **and** the four live
 `_Docs/*` sets: `_Docs/Date` is `variant` and `_Docs/Status` is `status` (renamed at this gate —
 `P3-T10` step 3 was updated to match). The archived seven are plain `COMPONENT`s with no axes.
+
+Assertion 9 is about the **initial** letter — it exists to catch Figma's `Variant` / `Property 1`
+defaults and the `Status` case above, not to ban camelCase. `iconSide` passes; `IconSide` does not.
+Axis names follow the same convention as the rest of the DS, which is the repo's prop naming.
 
 The 46 by domain: `app` 6 · `ui` 13 · `blog` 14 · `work` 6 · `hero` 3 · `contact` 2 · `about` 2.
 
@@ -149,6 +157,7 @@ detect — this gate resolves it rather than passing it to phase 3.
 
    Match the sibling cells exactly: same frame size, same stroke binding to the theme variable they
    use, same layer naming. A glyph that renders but is unbound is a Step-4 finding.
+
 3. Re-point every instance currently **named** `chevron-down` — `blog/TableOfContents`
    `breakpoint=Mobile` and any in `blog/SerieContents` — through the glyph property, then confirm
    `componentProperties` reads back `chevron-down`. Report how many instances were re-pointed.
@@ -266,7 +275,7 @@ Every master built in phase 2 carries a description (the `described` flag from s
 - Every phase-2 master has a description.
 - Raw fills/strokes limited to the four deliberate exceptions, everything else reported.
 
-Report the four counts (46 / 11 / 4 / 61), the axis table verdicts, the four repair verdicts, the Gate D arrays and the raw-binding list. Phase 3 starts only after this report comes back clean.
+Report the four counts (46 / 11 / 4 / 62), the axis table verdicts, the four repair verdicts, the Gate D arrays and the raw-binding list. Phase 3 starts only after this report comes back clean.
 
 ---
 

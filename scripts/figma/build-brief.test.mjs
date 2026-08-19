@@ -69,6 +69,6 @@ test("resolves a real brief by task id with no markers left behind", () => {
 test("--list reports every brief with its task id", () => {
   const lines = run(["--list"]).trim().split("\n");
   // 31 planned + P2-T04b (cover fills) + P2-T10b (hairline rebuild), both 2026-08-19
-  assert.equal(lines.length, 33);
+  assert.equal(lines.length, 34);
   assert.match(lines[0], /^P1-T01\s+P1-T01-inventory-gates\.md$/);
 });
