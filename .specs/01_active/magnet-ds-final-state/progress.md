@@ -584,15 +584,15 @@ verification gate. `figma:verify-raw` is warn-only and exits 0, so it does not b
 
 **Phase-2 baseline roster** (32 masters, live ids — later briefs resolve by name, these are hints):
 
-| domain    | masters                                                                                                                                                                                    |
-| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `app` 6   | ThemeToggle `16:11` · MotionToggle `16:12` · Footer `2969:432` · Header `2981:546` · HeaderDrawer `2981:4486` · NavLink `3093:553`                                                          |
-| `ui` 10   | Icon `461:6204` · Link/primary `2012:6179` · Link/secondary `2041:275` · Link/textLink `2041:313` · Link/iconOnly `2093:6332` · Link/inline `2350:737` · H2 `2034:213` · SectionTitle `2041:465` · H1 `2119:7406` · PageDescription `2119:7440` |
-| `blog` 9  | PostList `2977:4382` · SerieList `2980:499` · BlogPreview `3041:1977` · PostMetadataTime `2040:482` · PostMetadataTopic `2371:10414` · SerieMeta `2375:10662` · PostRow `2124:7937` · SerieCard `2367:7205` · PostCard `3093:5376` |
-| `work` 2  | WorkPreview `2970:4368` · WorkCardPreviewSmall `2045:378` (absorb source for P2-T04)                                                                                                        |
-| `hero` 3  | HeroText `2012:6142` · HeroAnimation `2012:315` · Hero `2969:412`                                                                                                                           |
-| `contact` 2 | ContactContent `131:101` · ContactPreview `2114:7281`                                                                                                                                      |
-| `about` 0 | empty section, P2-T10 fills it                                                                                                                                                             |
+| domain      | masters                                                                                                                                                                                                                                         |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `app` 6     | ThemeToggle `16:11` · MotionToggle `16:12` · Footer `2969:432` · Header `2981:546` · HeaderDrawer `2981:4486` · NavLink `3093:553`                                                                                                              |
+| `ui` 10     | Icon `461:6204` · Link/primary `2012:6179` · Link/secondary `2041:275` · Link/textLink `2041:313` · Link/iconOnly `2093:6332` · Link/inline `2350:737` · H2 `2034:213` · SectionTitle `2041:465` · H1 `2119:7406` · PageDescription `2119:7440` |
+| `blog` 9    | PostList `2977:4382` · SerieList `2980:499` · BlogPreview `3041:1977` · PostMetadataTime `2040:482` · PostMetadataTopic `2371:10414` · SerieMeta `2375:10662` · PostRow `2124:7937` · SerieCard `2367:7205` · PostCard `3093:5376`              |
+| `work` 2    | WorkPreview `2970:4368` · WorkCardPreviewSmall `2045:378` (absorb source for P2-T04)                                                                                                                                                            |
+| `hero` 3    | HeroText `2012:6142` · HeroAnimation `2012:315` · Hero `2969:412`                                                                                                                                                                               |
+| `contact` 2 | ContactContent `131:101` · ContactPreview `2114:7281`                                                                                                                                                                                           |
+| `about` 0   | empty section, P2-T10 fills it                                                                                                                                                                                                                  |
 
 Merge results from P1-T07 read back intact: `app/NavLink` carries `type × state` (6 variants) and
 `blog/PostCard` carries `size × breakpoint × state` (8 variants). `contact/ContactPreview` is a
@@ -699,7 +699,7 @@ variant axes; `ui/SocialShare` then inherits 32 with no edit of its own, since i
   Screenshot: catalogue reads as a borderless stack, case rows alternate left/right, text column
   vertically centred against the cover.
 - ARCHIVED: `work/WorkCardPreviewSmall` → `zz/WorkCardPreviewSmall (superseded by work/WorkCard,
-  2026-08-18)` on 🗄️ Archive — Components. **11 live instances still point at it** — 10 on page
+2026-08-18)` on 🗄️ Archive — Components. **11 live instances still point at it** — 10 on page
   `WorkPreviewSmallList` (`2829:5542` `2970:4366` `2045:398` `2970:4367` `2970:4365` `2045:408`
   `2045:417` `2829:5544` `2829:5543` — 9 listed by the runner, count reported as 10) and 1 on
   `WorkCardPreviewSmall cell` (`2670:7033`). Phase 3 replaces them; P3-T11 owns the cleanup.
@@ -714,7 +714,7 @@ locally; `figma/_prelude-components.js` is now patched, so every remaining brief
 prelude gets the working version. Earlier tasks (P2-T02, P2-T03) reported bound text fills, so their
 runners must have hit and silently fixed the same wall.
 
-**Deviation 2 — kicker enforces casing twice.** Source string written uppercase *and*
+**Deviation 2 — kicker enforces casing twice.** Source string written uppercase _and_
 `textCase = "UPPER"`, so an instance override cannot reintroduce lowercase. Kept.
 
 **Deviation 3 — case cells needed FIXED width.** Built with AUTO first, hugging at ~1084; corrected
@@ -795,7 +795,7 @@ had happened, but no brief covered it.
 `#D9D9D9`, exactly the raw value predicted, on all 8 variants. Had P2-T04 been signed off on its
 own `UNBOUND: none` report, 8 raw fills would have reached the P2-T11 binding sweep.
 
-**R2.2 is a no-op.** Placeholder art is an allowed exception *when declared*, but nothing needs
+**R2.2 is a no-op.** Placeholder art is an allowed exception _when declared_, but nothing needs
 declaring: binding beat debt on every cover, so `scripts/figma/named-debt.json` is unchanged and
 no `reason` string is owed. The raw-value proof itself (`pnpm figma:verify-raw` over a fresh
 export) is not run here — it needs a **File > Export** `.fig`, the same blocker R1.6 hit, and
@@ -902,7 +902,7 @@ not one.
 
 **Deviation 1 — `ui/Icon` has no `chevron-down`; a `chevron-right` instance was renamed to
 `chevron-down`.** ⚠️ **This is the worst shape a placeholder can take** and it needs an explicit
-owner: the layer *name* now asserts a glyph the instance does not carry, so nothing downstream —
+owner: the layer _name_ now asserts a glyph the instance does not carry, so nothing downstream —
 not Gate D, not the P2-T11 binding sweep, not a screenshot diff — can tell it from a finished
 component. A missing icon announces itself; a mislabelled one does not. Recorded here as the
 tracking entry, and it joins `ui/Link/iconOnly size=small 24→32` on the **P2-T11 gate checklist**
@@ -911,12 +911,12 @@ P3 inherit it silently.
 
 **Deviation 2 — item 3 fitting on one line is not a finding.** The runner checked whether a long
 ToC entry wraps, found it fits at 670px effective width (h=21), and correctly reported the
-*layout* as the thing that matters: FILL width, AUTO height, no fixed-height rows. Wrapping is
+_layout_ as the thing that matters: FILL width, AUTO height, no fixed-height rows. Wrapping is
 supported whether or not this sample string exercises it. Matches live `md:p-6` behaviour.
 
 **Dark-mode screenshots unverified.** The export context rendered dark identically to light. The
 bindings read back correct, so this is a screenshot-tooling limit, not a token fault — but it
-means no phase-2 master has had its dark rendering *seen*. P3-T09 builds the dark grid as
+means no phase-2 master has had its dark rendering _seen_. P3-T09 builds the dark grid as
 mode-pinned instances and is the natural place to catch this; flagging so it is a decision, not
 an oversight.
 
@@ -987,7 +987,7 @@ can treat this run as current unless that changes.
 this is **the third task to hit the same wall**: P2-T04 hit it on `fills`, P2-T04b spent a whole
 corrective task rebinding the 8 raw `#D9D9D9` covers it left behind, and the fix went into `T()`
 in `_prelude-components.js` only. Every other call site kept the broken form. So the lesson was
-recorded but not *propagated* — the exact failure mode P2-T04b's own note warned about.
+recorded but not _propagated_ — the exact failure mode P2-T04b's own note warned about.
 
 Swept the whole brief set: **21 bad calls across 12 files**. All rewritten to a new prelude helper
 
@@ -1012,7 +1012,7 @@ so the gate does not wave it through on the strength of the reports.
 
 **Deviation 2 — not a deviation; the brief contradicted itself.** Prose said the next cell is
 `counterAxisAlignItems = "MAX"`; the step-3 code said `primaryAxisAlignItems = "MAX"`. The cell is
-HORIZONTAL, so the primary axis *is* the horizontal one and the code was right — the runner
+HORIZONTAL, so the primary axis _is_ the horizontal one and the code was right — the runner
 followed the code and explained why. Prose corrected in the brief, with the axis reasoning spelled
 out so the next reader does not re-derive it.
 
@@ -1042,7 +1042,7 @@ P2-T11, not one per task.
 **The one deviation is better than the brief and is now the rule.** The brief built each hairline
 as a 1px `RECTANGLE` child; the runner used the row's own `strokeBottomWeight = 1` (other sides 0)
 with the paint bound through `setBoundVariableForPaint`. That is the faithful mapping: code writes
-`border-b` on the *same element* (`PostRowCalm.astro:24`, `ArchiveTable.astro:32`,
+`border-b` on the _same element_ (`PostRowCalm.astro:24`, `ArchiveTable.astro:32`,
 `WorkHeader.astro:25` via `prose-td:border-b`), so the rule belongs to the element, not to a
 sibling node. It also drops a node per row and cannot drift out of `FILL` sizing.
 
@@ -1058,14 +1058,14 @@ the superseded 2b/2d plans into every new brief:
   they existed only to host the rectangle);
 - P2-T10 `facts=strip` converted (root `["top", "bottom"]` strokes replace two rectangles);
 - P3-T03 and P3-T06 keep their rectangles **on purpose**, each now with the reason inline: the blog
-  column divider has no owning element, and the post-header rule sits *inside* head's bottom
+  column divider has no owning element, and the post-header rule sits _inside_ head's bottom
   padding rather than on its outer edge. Same-looking, different geometry — converting either would
   move the line.
 
 **Two hairline recipes now coexist in shipped masters.** `work/WorkCard` (meta rail top rule) and
 `work/ArchiveTable` (header + body rows) were built with rectangles before this. Visually identical,
 structurally divergent from their `border-b`/`border-t` code. Not worth a rebuild task on its own —
-added to the P2-T11 gate row as a call to make there, with the default being *leave them*, since a
+added to the P2-T11 gate row as a call to make there, with the default being _leave them_, since a
 rebuild risks the container bindings P1-T08 just re-verified.
 
 **Minor, no action.** `textCase = "UPPER"` was set explicitly on the `WORK` breadcrumb, the
@@ -1084,23 +1084,23 @@ to carry the 2px rails.
 
 **Converted — element owns the rule:**
 
-| Brief  | Site                       | Was                                    | Now                                            |
-| ------ | -------------------------- | -------------------------------------- | ---------------------------------------------- |
-| P2-T03 | `ui/Prose` blockquote      | 2×N rect + `itemSpacing 24`            | `HAIR(quote, …, ["left"], 2)` + `paddingLeft 24` |
-| P2-T04 | `work/WorkCard` top rule   | rect child, then gap 12                | `HAIR(c, …, ["top"])` + `paddingTop 12`        |
-| P2-T04 | `work/WorkCard` meta rail  | `paddingTop 12`, then rect, then gap 8 | `HAIR(rail, …, ["top"])` + `paddingTop 12`     |
-| P2-T05 | `work/ArchiveTable` rows   | `wrap` frame + rect child              | `HAIR(row)` — the `wrap` frames are gone       |
-| P2-T07 | `blog/TableOfContents` rail| 2×N rect + `pad` frame                 | `HAIR(row, …, ["left"], 2)`, depth on a wrapper |
-| P2-T10 | `about/AboutFacts` strip   | two rects                              | `HAIR(c, …, ["top", "bottom"])`                |
+| Brief  | Site                        | Was                                    | Now                                              |
+| ------ | --------------------------- | -------------------------------------- | ------------------------------------------------ |
+| P2-T03 | `ui/Prose` blockquote       | 2×N rect + `itemSpacing 24`            | `HAIR(quote, …, ["left"], 2)` + `paddingLeft 24` |
+| P2-T04 | `work/WorkCard` top rule    | rect child, then gap 12                | `HAIR(c, …, ["top"])` + `paddingTop 12`          |
+| P2-T04 | `work/WorkCard` meta rail   | `paddingTop 12`, then rect, then gap 8 | `HAIR(rail, …, ["top"])` + `paddingTop 12`       |
+| P2-T05 | `work/ArchiveTable` rows    | `wrap` frame + rect child              | `HAIR(row)` — the `wrap` frames are gone         |
+| P2-T07 | `blog/TableOfContents` rail | 2×N rect + `pad` frame                 | `HAIR(row, …, ["left"], 2)`, depth on a wrapper  |
+| P2-T10 | `about/AboutFacts` strip    | two rects                              | `HAIR(c, …, ["top", "bottom"])`                  |
 
 **Kept as rectangles — no element owns the edge**, each with the reason inline so the next reader
-does not "fix" it: P3-T03 blog column divider, P3-T06 post-header rule (sits *inside* head's bottom
+does not "fix" it: P3-T03 blog column divider, P3-T06 post-header rule (sits _inside_ head's bottom
 padding, not on its outer edge — a stroke would move the line), P3-T04 rules between sibling
 WorkCard instances (a stroke there would be a local instance override). Covers and `ProseImage`
 are placeholders, not rules, and were never in scope.
 
 **Two of the conversions change geometry, on purpose.** `work/WorkCard`'s two rules were modelled
-as children *after* the padding, so the rule sat 12px inside the card; `border-t` puts it on the
+as children _after_ the padding, so the rule sat 12px inside the card; `border-t` puts it on the
 outer edge with the 12 as padding underneath. P2-T05's row wrappers disappear entirely. Everything
 else is pixel-identical — the rail conversions keep the same 2px + 12px inset, and P2-T10's strip
 rules were already at the component edges.
@@ -1185,12 +1185,12 @@ already bound to `2 Theme::color/border`, so the task is structural only.
 
 1. **Side rules need `strokesIncludedInLayout = true`.** A Figma stroke is `INSIDE` and outside
    auto-layout by default, so padding is measured from the outer edge and the stroke paints over it —
-   text lands 2px tighter than `border-s-2 ps-3`, where the padding sits *inside* the border. Set the
+   text lands 2px tighter than `border-s-2 ps-3`, where the padding sits _inside_ the border. Set the
    flag on the two left-rail conversions (`ui/Prose` blockquote, TOC items) and keep the code's
    padding. Bottom/top rules keep the default `false`: that is what P2-T09's shipped masters do, and
    flipping it would move every `ArchiveTable` row by 1px for nothing. `P2-T03` and `P2-T07` were
    patched to teach this, so a future re-run does not rebuild the 2px error.
-2. **The TOC active rail is the wrong colour.** `a[data-toc-link][aria-current]` sets *both* `color`
+2. **The TOC active rail is the wrong colour.** `a[data-toc-link][aria-current]` sets _both_ `color`
    and `border-color` to `foreground-strong` (`TableOfContents.astro:73-77`); the master binds the
    active rail to `color/border` like every other item, and P2-T07's prose explicitly said to. Both
    the brief and the master are wrong; P2-T10b fixes the master, P2-T07 is corrected at source.
@@ -1203,3 +1203,42 @@ already bound to `2 Theme::color/border`, so the task is structural only.
 still in flight, and the runner is told to report `SKIPPED` rather than convert twice. The `meta`
 rail is the only conversion in the task that moves a line: 12px up, onto `meta`'s outer edge, which
 is where `border-t` draws it.
+
+---
+
+## CODE DEBT — phase 2 (R2.3, 2026-08-19)
+
+Collected, **not fixed**. These feed the `magnet-ds-code-convergence` backlog stub opened at R3.7.
+Each was re-checked against live code today; the verdict column is the outcome of that check, not
+the brief's guess.
+
+| #   | From   | Finding                                                                                                               | Verdict                  |
+| --- | ------ | --------------------------------------------------------------------------------------------------------------------- | ------------------------ |
+| 1   | P2-T05 | `work/ArchiveTable` row hover binds `2 Theme::color/surface`; code is `hover:bg-surface/50` (`ArchiveTable.astro:32`) | **real debt**            |
+| 2   | P2-T08 | Related blocks use compact children (`work/WorkMiniCard`, `blog/PostRowCalm`), not the page's own cards               | documentation only       |
+| 3   | P2-T09 | `work/WorkHeader` link labels `website→Website`, `live→Demo`, `git→Code`, `video→Video`                               | **verified, no debt**    |
+| 4   | P2-T06 | `contact/ContactPreview breakpoint=Mobile` hides illustration + noise rather than deleting                            | **verified, no debt**    |
+| 5   | P2-T10 | `about/AboutText` CV link renders its icon trailing; code puts it leading via an explicit `icon` prop                 | **Figma-side**, not code |
+
+**1 — ArchiveTable row hover.** Figma has no half-step for `color/surface`, so the master binds the
+full token and the hover reads heavier than the site. Figma did not invent a token, and code is not
+wrong either: the convergence topic decides whether `2 Theme` gains a `color/surface-subtle`
+(alpha-50 of `surface`) or the code drops to the flat token. Do not patch either side here — a
+half-step added now would ship an unused variable into the phase-2 exit gate.
+
+**2 — related-block children.** Decision record 5 `related-block-children` on 📐 Decisions is the
+durable artifact; the code already matches it. Nothing to change, and it is listed only so the
+convergence topic does not "discover" it a second time and open a change against matching code.
+
+**3 — WorkHeader labels.** Confirmed at `WorkHeader.astro:42-48`, exactly the four-way mapping the
+master encodes, `website` additionally guarded by its own conditional. Phase 3 can build the
+Work-detail master on this mapping without re-reading the component.
+
+**4 — ContactPreview Mobile.** Confirmed at `ContactImage.astro:5` — `hidden … sm:block`, i.e. the
+node exists in the DOM and is display-hidden, which is what a hidden layer in the variant models.
+Recorded as verified so P2-T11's Gate D does not read the hidden layers as an unfinished variant.
+
+**5 — CV link icon side.** Not code debt: the code is right and the master is the one that cannot
+express it, because `ui/Link/external` has a trailing-only icon slot and `insertChild` throws inside
+an instance. The fix is an `iconSide` variant axis on `ui/Link/external` (a P2-T02 master), carried
+on the P2-T11 gate row. Listed here so the convergence topic does not re-file it against the site.

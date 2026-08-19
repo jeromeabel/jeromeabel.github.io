@@ -10,15 +10,15 @@ prerequisite: P2-T09 (HAIR recipe), P2-T10
 
 P2-T09 established the rule: **a rule an element draws on itself is a per-side stroke on that
 element, not a 1px rectangle child.** The whole brief set was swept onto `HAIR()` right after. Four
-masters were built *before* the rule existed and still carry rectangle hairlines, so they now
+masters were built _before_ the rule existed and still carry rectangle hairlines, so they now
 disagree with their own corrected briefs:
 
-| Master                  | Site                          | Rects | Target                                                    |
-| ----------------------- | ----------------------------- | ----- | --------------------------------------------------------- |
-| `ui/Prose`              | `blockquote > rail`           | 1     | `HAIR(bq, border, ["left"], 2)` + `paddingLeft 24`         |
-| `work/ArchiveTable`     | `head`/`row` bottom rules     | 27    | `HAIR(node, border, ["bottom"])` — 3 variants × (1 + 8)    |
-| `blog/TableOfContents`  | `item > rail`                 | 14    | `HAIR(item, …, ["left"], 2)` + `paddingLeft 12` + wrapper  |
-| `work/WorkCard`         | card top rule + `meta` rail   | 8     | `HAIR(node, …, ["top"])` + `paddingTop 12` — 4 catalogue   |
+| Master                 | Site                        | Rects | Target                                                    |
+| ---------------------- | --------------------------- | ----- | --------------------------------------------------------- |
+| `ui/Prose`             | `blockquote > rail`         | 1     | `HAIR(bq, border, ["left"], 2)` + `paddingLeft 24`        |
+| `work/ArchiveTable`    | `head`/`row` bottom rules   | 27    | `HAIR(node, border, ["bottom"])` — 3 variants × (1 + 8)   |
+| `blog/TableOfContents` | `item > rail`               | 14    | `HAIR(item, …, ["left"], 2)` + `paddingLeft 12` + wrapper |
+| `work/WorkCard`        | card top rule + `meta` rail | 8     | `HAIR(node, …, ["top"])` + `paddingTop 12` — 4 catalogue  |
 
 **50 rectangles in scope.** Every one is currently bound to `2 Theme::color/border`, so this is a
 structural change, not a colour one.
@@ -26,7 +26,7 @@ structural change, not a colour one.
 **Explicitly out of scope — leave these rectangles alone:**
 
 - `ui/Prose > ProseImage` and `work/WorkCard > cover` — placeholders for images, not rules.
-- `work/ArchiveTable > row > cells > proj > underline-dash` (24 of them) — a *dashed* rule under
+- `work/ArchiveTable > row > cells > proj > underline-dash` (24 of them) — a _dashed_ rule under
   link text (`border-b border-dashed border-current`, `ArchiveTable.astro:39,57`). It is already
   a stroke-bearing rectangle with `dashPattern [4, 4]` and no fill, and Figma's TEXT underline
   cannot be dashed. Correct as built.
@@ -47,7 +47,7 @@ master being rebuilt in place. No master, page or variant is deleted by this tas
 ## The one thing to get right: side rules need `strokesIncludedInLayout`
 
 A Figma stroke defaults to `strokeAlign = "INSIDE"` and is **not** part of auto-layout, so it paints
-*over* the frame's inner edge and the padding is measured from the outer edge. CSS does the
+_over_ the frame's inner edge and the padding is measured from the outer edge. CSS does the
 opposite: `border-s-2 ps-3` puts the text at `2 + 12 = 14` from the outer edge, because padding sits
 inside the border.
 
@@ -206,19 +206,20 @@ for (const variant of toc.children) {
 return report;
 ```
 
-If `insertChild` throws on the component (it does inside *instances*, not inside masters — you are
+If `insertChild` throws on the component (it does inside _instances_, not inside masters — you are
 writing to the master here), stop and report rather than appending the wrapper at the end: order is
 the whole point.
 
 ---
 
-## Step 4 — `work/WorkCard` — **gated, do not run blindly**
+## Step 4 — `work/WorkCard` — **cleared 2026-08-19, run it**
 
-`work-card-redesign` is in flight in `.specs/01_active/`. If that design has not settled, this step
-is **SKIPPED** — converting now means converting again after the redesign lands. Check with the
-person running the task; if in doubt, skip and say so in the report.
+This step was gated on `work-card-redesign`. It is now cleared: the final spec is written
+(`.specs/01_active/TODO - WorkCard — final spec (post-exploration round).md`, direction B+A merged)
+and the master already matches it. A hairline conversion survives copy and spacing changes, so
+nothing here has to be redone if editorial sign-off moves text around.
 
-When it is cleared, the four `catalogue` variants each hold two rules:
+The four `catalogue` variants each hold two rules:
 
 - root (VERTICAL, gap 12, no padding): `RECTANGLE:hairline` at index 0 → `HAIR(root, …, ["top"])`
   and `paddingTop = 12`. **Pixel-identical** — the rule was already at the top edge.
@@ -298,10 +299,10 @@ ran — the work cards.
 
 ## Acceptance
 
-- 50 rectangles gone (42 if step 4 is skipped), replaced by per-side strokes on the owning element.
+- 50 rectangles gone, replaced by per-side strokes on the owning element.
 - Every stroke paint bound to `2 Theme::color/border`, except the TOC active rail on
   `color/foreground-strong`.
-- `ui/Prose` and `blog/TableOfContents` text sits where it sat before (2px tolerance is *not*
+- `ui/Prose` and `blog/TableOfContents` text sits where it sat before (2px tolerance is _not_
   acceptable — that is what `strokesIncludedInLayout` is for).
 - `work/ArchiveTable` variant heights unchanged.
 - The `pad` wrapper frames are gone from the TOC and the depth-2 items live in one `sublist`.
@@ -317,7 +318,7 @@ Paste this block back into Claude Code so `progress.md` can be written:
 TASK: P2-T10b
 STATUS: done | partial | blocked
 RESULT: <the JSON each step returned, trimmed to the interesting fields>
-STEP 4: run | SKIPPED (work-card-redesign still in flight)
+STEP 4: converted <n> of 8
 DEVIATIONS: <anything you did differently from this brief, and why>
 UNBOUND: <raw values left unbound, with node names — or "none">
 ```

@@ -37,46 +37,46 @@ repo session.
 
 ## Phase 1 — foundations
 
-| Done | Step     | What                                                       |
-| ---- | -------- | ---------------------------------------------------------- |
-| [x]  | R1.1     | create `inventory.md` + `progress.md`                      |
-| [x]  | P1-T01   | Pass-0 inventory + gates A–D                               |
-| [x]  | P1-T02   | 📐 Decisions page, 4 records                               |
-| [x]  | P1-T03   | `1 Primitives` audit — 25 renamed, 0 collisions, 407 clean |
-| [x]  | **R1.2** | `pnpm figma:primitives` + commit — 407/399 diff triaged    |
-| [x]  | P1-T04   | `2 Theme` — 15 vars, 1 archived, 0 dupes                   |
-| [x]  | R1.3     | token-map repointed; R1.2 deferrals closed, 407 = 407      |
-| [x]  | P1-T05   | 29 renamed, 5 deferred to merges                           |
-| [x]  | R1.4     | log the rename map, commit                                 |
-| [x]  | P1-T06   | ❖ Components → 7 domain sections, 5 unhomed for T07        |
-| [x]  | P1-T07   | NavLink + PostCard merged, 1 straggler left for P2-T04     |
+| Done | Step     | What                                                                                          |
+| ---- | -------- | --------------------------------------------------------------------------------------------- |
+| [x]  | R1.1     | create `inventory.md` + `progress.md`                                                         |
+| [x]  | P1-T01   | Pass-0 inventory + gates A–D                                                                  |
+| [x]  | P1-T02   | 📐 Decisions page, 4 records                                                                  |
+| [x]  | P1-T03   | `1 Primitives` audit — 25 renamed, 0 collisions, 407 clean                                    |
+| [x]  | **R1.2** | `pnpm figma:primitives` + commit — 407/399 diff triaged                                       |
+| [x]  | P1-T04   | `2 Theme` — 15 vars, 1 archived, 0 dupes                                                      |
+| [x]  | R1.3     | token-map repointed; R1.2 deferrals closed, 407 = 407                                         |
+| [x]  | P1-T05   | 29 renamed, 5 deferred to merges                                                              |
+| [x]  | R1.4     | log the rename map, commit                                                                    |
+| [x]  | P1-T06   | ❖ Components → 7 domain sections, 5 unhomed for T07                                           |
+| [x]  | P1-T07   | NavLink + PostCard merged, 1 straggler left for P2-T04                                        |
 | [x]  | P1-T08   | container recipe: 16 / 1280 / centred, 1 bandless variant; re-verified 12 variants 2026-08-19 |
-| [x]  | R1.5     | no debt to prune — drift was never allowlisted; commit     |
-| [x]  | P1-T09   | **GATE** — phase-1 exit, Figma half                        |
-| [x]  | R1.6     | **GATE** — phase-1 exit, repo half                         |
+| [x]  | R1.5     | no debt to prune — drift was never allowlisted; commit                                        |
+| [x]  | P1-T09   | **GATE** — phase-1 exit, Figma half                                                           |
+| [x]  | R1.6     | **GATE** — phase-1 exit, repo half                                                            |
 
 ## Phase 2 — components
 
 Do not start before R1.6 passes.
 
-| Done | Step   | What                                                               |
-| ---- | ------ | ------------------------------------------------------------------ |
-| [x]  | P2-T01 | **GATE** — 31 existing masters present under canon names           |
-| [x]  | P2-T02 | `ui/Link/external`                                                 |
-| [x]  | P2-T03 | `ui/Prose`, `ui/SocialShare` — iconOnly/small 24→32 owed to P2-T11 |
-| [x]  | P2-T04 | `work/WorkCard` — 8 variants; re-grid + Gate D verified 2026-08-19          |
-| [x]  | P2-T04b | 8 `cover` fills — all raw `#D9D9D9`, bound to `color/gray/200`     |
-| [x]  | R2.2   | **no-op** — nothing unbound to declare; verify-raw deferred to R2.4 |
-| [x]  | P2-T05 | `work/ArchiveTable` — 3 breakpoints; re-grid + Gate D verified      |
-| [x]  | P2-T06 | `contact/ContactPreview` gains `breakpoint` — Desktop untouched     |
-| [x]  | P2-T07 | `blog/TableOfContents`, `blog/SerieContents` — fake `chevron-down`  |
-| [x]  | P2-T08 | `work/WorkMiniCard`, `blog/RelatedWork`, `blog/PostNav` + record 5; paint-binding sweep, 21 call sites |
-| [x]  | P2-T09 | `work/WorkHeader`, `blog/PostRowCalm`, `work/RelatedWriting`; hairline recipe → `HAIR()` per-side strokes |
-| [x]  | P2-T10 | `about/AboutFacts`, `about/AboutText` — CV icon trailing, `iconSide` call owed to P2-T11 |
-| [ ]  | P2-T10b | rebuild the 4 rect-hairline masters on `HAIR()` — 50 rects; `ui/Prose` 1, `work/ArchiveTable` 27, `blog/TableOfContents` 14, `work/WorkCard` 8 (gated on `work-card-redesign`) |
-| [ ]  | R2.3   | log the 4 phase-2 `CODE DEBT` findings                             |
-| [ ]  | P2-T11 | **GATE** — roster, axes, Gate D, iconOnly 24→32, fake `chevron-down`, raw paints from P2-T02..T07 (see R2.4 verify-raw), rect-hairline masters rebuilt per P2-T10b, `ui/Link/external` `iconSide` axis, `/about` light+dark screenshots |
-| [ ]  | R2.4   | **GATE** — dump + verify + verify-raw + test, knowledge file       |
+| Done | Step    | What                                                                                                                                                                                                                                    |
+| ---- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [x]  | P2-T01  | **GATE** — 31 existing masters present under canon names                                                                                                                                                                                |
+| [x]  | P2-T02  | `ui/Link/external`                                                                                                                                                                                                                      |
+| [x]  | P2-T03  | `ui/Prose`, `ui/SocialShare` — iconOnly/small 24→32 owed to P2-T11                                                                                                                                                                      |
+| [x]  | P2-T04  | `work/WorkCard` — 8 variants; re-grid + Gate D verified 2026-08-19                                                                                                                                                                      |
+| [x]  | P2-T04b | 8 `cover` fills — all raw `#D9D9D9`, bound to `color/gray/200`                                                                                                                                                                          |
+| [x]  | R2.2    | **no-op** — nothing unbound to declare; verify-raw deferred to R2.4                                                                                                                                                                     |
+| [x]  | P2-T05  | `work/ArchiveTable` — 3 breakpoints; re-grid + Gate D verified                                                                                                                                                                          |
+| [x]  | P2-T06  | `contact/ContactPreview` gains `breakpoint` — Desktop untouched                                                                                                                                                                         |
+| [x]  | P2-T07  | `blog/TableOfContents`, `blog/SerieContents` — fake `chevron-down`                                                                                                                                                                      |
+| [x]  | P2-T08  | `work/WorkMiniCard`, `blog/RelatedWork`, `blog/PostNav` + record 5; paint-binding sweep, 21 call sites                                                                                                                                  |
+| [x]  | P2-T09  | `work/WorkHeader`, `blog/PostRowCalm`, `work/RelatedWriting`; hairline recipe → `HAIR()` per-side strokes                                                                                                                               |
+| [x]  | P2-T10  | `about/AboutFacts`, `about/AboutText` — CV icon trailing, `iconSide` call owed to P2-T11                                                                                                                                                |
+| [ ]  | P2-T10b | rebuild the 4 rect-hairline masters on `HAIR()` — 50 rects; `ui/Prose` 1, `work/ArchiveTable` 27, `blog/TableOfContents` 14, `work/WorkCard` 8                                                                                          |
+| [x]  | R2.3    | 5 `CODE DEBT` findings logged — 1 real (ArchiveTable hover), 2 verified-no-debt, 1 doc-only, 1 Figma-side                                                                                                                               |
+| [ ]  | P2-T11  | **GATE** — roster, axes, Gate D, iconOnly 24→32, fake `chevron-down`, raw paints from P2-T02..T07 (see R2.4 verify-raw), rect-hairline masters rebuilt per P2-T10b, `ui/Link/external` `iconSide` axis, `/about` light+dark screenshots |
+| [ ]  | R2.4    | **GATE** — dump + verify + verify-raw + test, knowledge file                                                                                                                                                                            |
 
 ## Phase 3 — pages, docs, ship
 

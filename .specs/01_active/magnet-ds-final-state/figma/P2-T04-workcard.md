@@ -45,7 +45,7 @@ Default variant: `variant=catalogue, state=default, side=left`.
 
 Everything is left-aligned, no card border, no background fill. The card _is_ the content.
 
-1. **Top rule** — the card's own `strokeTopWeight = 1` bound `2 Theme::color/border` (`HAIR(c, …, ["top"])`), with `paddingTop = 12` under it. Not a rectangle child: code writes `border-t` on the card itself, so the rule sits on the outer edge and the 12 is padding *inside* it.
+1. **Top rule** — the card's own `strokeTopWeight = 1` bound `2 Theme::color/border` (`HAIR(c, …, ["top"])`), with `paddingTop = 12` under it. Not a rectangle child: code writes `border-t` on the card itself, so the rule sits on the outer edge and the 12 is padding _inside_ it.
 2. **Index row** — HORIZONTAL, FILL width, `primaryAxisAlignItems = "SPACE_BETWEEN"`, padding-top 8, padding-bottom 8.
    - left: text `01` — Fira Code Regular 12, tabular figures, fill `2 Theme::color/foreground-muted`.
    - right: text `↗` — Fira Code Regular 12, fill `2 Theme::color/foreground-muted`.
