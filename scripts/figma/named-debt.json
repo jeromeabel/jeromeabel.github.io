@@ -1,48 +1,6 @@
 {
   "accepted": [
     {
-      "id": "2001:1303",
-      "name": "Blog",
-      "kind": "text-style",
-      "reason": "IBM Plex Sans Medium 18 — no matching semantic local text style",
-      "loggedAt": "2026-08-06"
-    },
-    {
-      "id": "2001:1489",
-      "name": "Blog",
-      "kind": "text-style",
-      "reason": "IBM Plex Sans Medium 18 — no matching semantic local text style",
-      "loggedAt": "2026-08-06"
-    },
-    {
-      "id": "2001:1311",
-      "name": "Blog",
-      "kind": "text-style",
-      "reason": "IBM Plex Sans Medium 18 — no matching semantic local text style",
-      "loggedAt": "2026-08-06"
-    },
-    {
-      "id": "2001:1314",
-      "name": "Jérôme Abel",
-      "kind": "text-style",
-      "reason": "IBM Plex Sans Medium 22 — no matching semantic local text style",
-      "loggedAt": "2026-08-06"
-    },
-    {
-      "id": "2001:1487",
-      "name": "Jérôme Abel",
-      "kind": "text-style",
-      "reason": "IBM Plex Sans Medium 22 — no matching semantic local text style",
-      "loggedAt": "2026-08-06"
-    },
-    {
-      "id": "2001:1316",
-      "name": "Jérôme Abel",
-      "kind": "text-style",
-      "reason": "IBM Plex Sans Medium 22 — no matching semantic local text style",
-      "loggedAt": "2026-08-06"
-    },
-    {
       "id": "I2001:1642;2001:1487",
       "name": "Jérôme Abel",
       "kind": "text-style",
@@ -246,69 +204,6 @@
       "loggedAt": "2026-08-06"
     },
     {
-      "id": "I2038:853;2371:10416",
-      "name": "Web Performance · 2/5",
-      "kind": "text-style",
-      "reason": "Fira Code Regular 11 — no matching semantic local text style",
-      "loggedAt": "2026-08-06"
-    },
-    {
-      "id": "2034:195",
-      "name": "Exploring a Data-Driven Approach to Web Performance",
-      "kind": "text-style",
-      "reason": "IBM Plex Sans SemiBold 32 — no matching semantic local text style",
-      "loggedAt": "2026-08-06"
-    },
-    {
-      "id": "I2385:7135;2371:10416",
-      "name": "Web Performance · 2/5",
-      "kind": "text-style",
-      "reason": "Fira Code Regular 11 — no matching semantic local text style",
-      "loggedAt": "2026-08-06"
-    },
-    {
-      "id": "2385:7136",
-      "name": "Exploring a Data-Driven Approach to Web Performance",
-      "kind": "text-style",
-      "reason": "IBM Plex Sans SemiBold 32 — no matching semantic local text style",
-      "loggedAt": "2026-08-06"
-    },
-    {
-      "id": "I2039:417;2371:10379",
-      "name": "Full-stack",
-      "kind": "text-style",
-      "reason": "Fira Code Regular 11 — no matching semantic local text style",
-      "loggedAt": "2026-08-06"
-    },
-    {
-      "id": "2039:418",
-      "name": "Adding API Endpoints to an Astro Project",
-      "kind": "text-style",
-      "reason": "IBM Plex Sans SemiBold 18 — no matching semantic local text style",
-      "loggedAt": "2026-08-06"
-    },
-    {
-      "id": "I2385:7145;2371:10379",
-      "name": "Full-stack",
-      "kind": "text-style",
-      "reason": "Fira Code Regular 11 — no matching semantic local text style",
-      "loggedAt": "2026-08-06"
-    },
-    {
-      "id": "2385:7146",
-      "name": "Adding API Endpoints to an Astro Project",
-      "kind": "text-style",
-      "reason": "IBM Plex Sans SemiBold 18 — no matching semantic local text style",
-      "loggedAt": "2026-08-06"
-    },
-    {
-      "id": "2045:373",
-      "name": "Web app · 2026",
-      "kind": "text-style",
-      "reason": "Fira Code Medium 11 — no matching semantic local text style",
-      "loggedAt": "2026-08-06"
-    },
-    {
       "id": "I2045:417;2045:373",
       "name": "Web app · 2026",
       "kind": "text-style",
@@ -342,6 +237,20 @@
       "kind": "text-style",
       "reason": "IBM Plex Sans SemiBold 18 — no matching semantic local text style",
       "loggedAt": "2026-08-06"
+    },
+    {
+      "id": "3106:2150",
+      "name": "prose-link-annotation",
+      "kind": "fill",
+      "reason": "Annotation label on ❖ Components, not a component: #999999 muted gray deliberately kept off the theme ramp so the note reads as canvas documentation rather than as a ui/Prose specimen. Same doc-chrome convention as 📚 Docs / 📐 Decisions (P3-T10). Only genuine unbound paint file-wide (P3-T11 sweep).",
+      "loggedAt": "2026-08-19"
+    },
+    {
+      "id": "3106:2150",
+      "name": "prose-link-annotation",
+      "kind": "text-style",
+      "reason": "Same node, same reason — IBM Plex Sans Italic 14 annotation body. No semantic local text style exists for canvas annotations, and minting one for a single label would put doc chrome into the component vocabulary.",
+      "loggedAt": "2026-08-19"
     }
   ],
   "variableDebt": [

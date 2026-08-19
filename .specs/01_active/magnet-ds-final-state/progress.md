@@ -2716,3 +2716,66 @@ removal and the "layout frames carry no fill" rule; a new unbound-values section
 
 **Note:** the master node ids in the roster are carried from the phase-2 map and labelled as hints
 per the file's own convention — P3-T11 only repositioned nodes, so they should hold.
+
+## R3.3 — full verification (pass 1, 2026-08-19)
+
+TASK: R3.3 — dump, verify, verify-raw, verify-responsive, test
+STATUS: **pass** — but see RE-RUN OWED below
+
+RESULT:
+
+- **DUMP** — `pnpm figma:dump "~/Téléchargements/Magnet DS.fig"` (19:20 export) → 4 collections,
+  493 variable rows, 17 text styles. `1 Primitives` **407** (Mode 1) · `2 Theme` 15×2 = 30 ·
+  `3 Responsive` 18×3 = 54 · `Design System` 2. Confirms 407, not the 451 the docs used to claim.
+- **Roster cross-check from the fresh `.fig` node graph** (via `fig-decode.mjs`; the dump itself
+  carries only variables + text styles): 10 canvases = 9 user pages + Figma's hidden
+  `Internal Only Canvas`; ❖ Components 7 sections, 6+13+14+6+3+2+2 = **46** masters;
+  📄 Pages **32** = 16 SYMBOL light + 16 INSTANCE dark. Every P3-T11 number reproduces.
+  Only non-master node inside a domain section is the `prose-link-annotation` TEXT in `ui`.
+- **VERIFY** — clean. 34 code tokens; missing 0, mismatch 0, orphaned 0, unmapped 0.
+- **VERIFY-RAW** — 1086 rows. Before 1052 new / 34 accepted / 15 stale → after **1050 / 36 / 0**.
+  - 15 stale pruned (`accepted` 49 → 36, `variableDebt` untouched), each resolved against the fresh
+    graph first: 4 instance-path ids gone entirely, 11 alive only on the hidden `Internal Only
+Canvas` (deleted `NavLink`, `NavLinkHome`, `PostCardPreviewBig`, `PostCardPreviewSmall`) or on
+    `🗄️ Archive — Components` (`zz/WorkCardPreviewSmall`). None on a keeper page.
+  - 2 added, both `3106:2150` `prose-link-annotation` — see DECISION.
+  - The 1050 remaining "new" rows are **not** new debt: `text-style` 476 · `radius` 206 ·
+    `spacing` 170 · `stroke` 144 · `fill` 54. The 198 fill/stroke rows are 100 % `path*`/`ellipse*`
+    SVG art (`#000000` fill, `#f3f3f3` stroke) — the documented decorative `hero/*` + `contact/*`
+    exception; ❖ Components carries exactly 67 unbound paints (19 fill + 48 stroke), 66 of them
+    those art paths. radius/spacing/text-style have never been baselined; `named-debt.json` has
+    only ever held hand-picked `text-style` exceptions, and `dump-raw-values.md` says a non-empty
+    New section is the normal state. Not bulk-allowlisted.
+  - The **STALE INPUT** banner (`raw-values.figma.json` 12:34 vs token dump 19:22) is an mtime
+    artifact: the raw dump is same-day, the 12:22 token dump it paired with gave byte-identical
+    collection counts, and the fill/stroke picture re-derived from the fresh export matches.
+    P3-T11's post-dump work was geometry re-flow + TEXT string edits — neither creates or clears
+    an unbound paint.
+- **VERIFY-RESPONSIVE** — exact. 18 variables × Desktop/Tablet/Mobile; missing 0, mismatch 0, extra 0.
+- **TEST** — 57 passed / 0 failed, re-run after the `named-debt.json` edit. `prettier --check` clean.
+- **GEOMETRY** — `geometry.figma.json` did **not** refresh (still 2026-08-15, 18 keys). `figma:dump`
+  writes only `tokens.figma.json`; no script derives geometry from a `.fig`. So `diff-geometry.mjs`
+  stays not-meaningful: 173 rows, 19 "missing in Figma" and 154 property mismatches. The 3 by-design
+  code-only wrappers are among the 19 as R3.2 predicted, but so are 16 others that _do_ have masters
+  and are simply absent from the 4-day-old dump; and the 154 mismatches compare web-**light** against
+  Figma-**dark** values. No drift signal. → R3.7 backlog line: write a `.fig`-side geometry extractor
+  (`fig-decode.mjs` already exposes sizes, transforms, paddings, paints).
+
+DECISION — `prose-link-annotation` (`3106:2150`): **allowlisted, not bound.** Two `named-debt.json`
+entries (`fill` + `text-style`), each with a reason. The node's own text is _"prose a — 1px dashed
+bottom border, no-underline, solid on hover. Not representable on a text run; see Link.astro variant
+default."_ — a note **about** a component, not a component, rendering on no product surface. Binding
+would need either a theme token for "annotation gray" (minting DS vocabulary for one label) or reuse
+of a real text token (making the note read as a specimen). It carries a second unbound row
+(`text-style`) that P3-T11's paint-only sweep could not see; both covered so the node is fully
+accounted for rather than half-allowlisted.
+
+DEVIATIONS: `dump.err.log` (300 B, untracked, not gitignored — a stderr redirect from the 12:22 dump)
+would have been swept in by R3.6's `git add -A`. Deleted; `*.err.log` added to `.gitignore`.
+
+UNBOUND: `3106:2150 prose-link-annotation > fill (#999999)` and `> text-style (IBM Plex Sans Italic
+14)` — both allowlisted with reasons above. Zero other genuine unbound values file-wide.
+
+RE-RUN OWED: this pass verified the **19:20** export. The open-defect repair now running writes to
+the Figma file (`work/WorkCard` breakpoint axis, `ui/Prose` FILL fix), which invalidates that
+snapshot. A fresh `File > Export` + full R3.3 re-run is required before R3.6 archives.

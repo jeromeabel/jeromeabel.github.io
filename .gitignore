@@ -48,3 +48,6 @@ images/*
 !images/custom/
 !images/crops.json
 !images/illustration.json
+
+# stderr captures from one-off script runs
+*.err.log
