@@ -13,6 +13,10 @@ description: >
 
 File `ihWIWmvtQPTWgUxlrVjC2c`. Deterministic scripts measure, you judge the delta.
 **Code is truth for token/geometry values; Figma is truth for nothing in this diff.**
+This skill measures **values**. Structural health of the file — naming, component/variant
+structure, descriptions, canvas readability, docs coverage — is the `design-expert` skill's
+[figma-ds-health.md](../design-expert/references/figma-ds-health.md) rubric; §5.8 there delegates
+value equality back here. Run both for a full audit.
 Node IDs + page map live in [knowledge/figma-ds-file.md](knowledge/figma-ds-file.md) —
 read it first, but re-inventory by name (Pass 0) before trusting any ID.
 

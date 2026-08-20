@@ -1,6 +1,6 @@
 ---
 name: design-expert
-description: Use when designing, changing, or reviewing UI for this site — cards, chips, badges, hover states, accent colors, borders, metadata display, topic/serie taxonomy, responsive layout — or when reviewing Figma frames (Blog Design System v1.0) for Home, Blog, Work, or About pages. Also use before adding any new component or visual variant, when unsure whether an element should be teal, boxed, bordered, or uppercase, and when working on Figma variable collections, token architecture, design-system documentation, or preparing the library for Figma AI.
+description: Use when designing, changing, or reviewing UI for this site — cards, chips, badges, hover states, accent colors, borders, metadata display, topic/serie taxonomy, responsive layout — or when reviewing Figma frames (Blog Design System v1.0) for Home, Blog, Work, or About pages. Also use before adding any new component or visual variant, when unsure whether an element should be teal, boxed, bordered, or uppercase, and when working on Figma variable collections, token architecture, design-system documentation, or preparing the library for Figma AI. Also use when auditing whether the Figma DS file is healthy — naming, component structure, props/variants, token bindings, page/canvas readability, docs coverage — see references/figma-ds-health.md for the rubric that defines "good".
 ---
 
 # Design Expert
@@ -40,6 +40,7 @@ See [references/taxonomy.md](references/taxonomy.md). Summary: one `topic` enum 
 | [references/ds-documentation.md](references/ds-documentation.md) | Structuring, writing, or reviewing design-system documentation (Figma docs pages or web): IA/chapter order, page chunking, token tables, light/dark policy, decision records, cover/status — 5-cluster web survey (2026-08-06) |
 | [references/industry-canon.md](references/industry-canon.md) | Needing the industry baseline: HIG foundations (a11y numbers, type/weight hierarchy, motion restraint), Uber Base token model (families/roles/types, naming grammar, component-doc anatomy, patterns boundary), what makes benchmark systems (Carbon/Polaris), doc-writing style, presentation techniques — distilled 2026-08-08. **Knowledge, not settled decisions** — project rules win on conflict |
 | [references/figma-variables-method.md](references/figma-variables-method.md) | Touching Figma variable collections (architecture, naming, modes, ramps, jumper variables, dark-mode workflow) or considering Plugin API tooling for token sync/audit (`figma.variables` surface, what plugins can't do, drift-toolchain opportunities) |
+| [references/figma-ds-health.md](references/figma-ds-health.md) | Auditing the health of the Magnet-DS Figma file, or making any claim that part of it is "good"/"healthy" — 8 dimensions (file structure, naming, component structure, props/variants, tokens, docs, canvas readability, cover), each rule with a pass bar, severity, and check script; plus the verdict scale and the accepted-debt list. Structural health only — value drift belongs to `figma-verify` |
 | [references/figma-ai-training.md](references/figma-ai-training.md) | Preparing the Figma library for AI generation (Figma AI skills workflow, library-readiness checklist, prompting patterns and ROI) |
 
 **Long-form post writing** → use the `blog-post` skill, not this one.
@@ -54,6 +55,8 @@ See [references/taxonomy.md](references/taxonomy.md). Summary: one `topic` enum 
 - Mock data realistic (no repeated titles/descriptions — they hide layout bugs like unequal text lengths)?
 - Responsive story stated for each grid (1920 → 1024 → 640)?
 - Copy: concrete, no marketing abstractions, numbers have context?
+
+**Auditing the Figma file itself** (not a single design) → follow [references/figma-ds-health.md](references/figma-ds-health.md). Every finding must cite a rule number; anything on its accepted-debt list or in `.specs/00_backlog/` is reported as known, never re-counted.
 
 ## Common Mistakes
 

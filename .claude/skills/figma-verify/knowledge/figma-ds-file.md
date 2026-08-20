@@ -17,7 +17,7 @@ get_metadata without nodeId may return a stale page subset. Do not use it as the
 source of truth for document structure. For reliable inventory, run a use_figma
 Pass 0 that enumerates figma.root.children and loads each page.
 
-## Pages (9)
+## Pages (8)
 
 Base URL for links:
 https://www.figma.com/design/ihWIWmvtQPTWgUxlrVjC2c/Magnet-DS?node-id=<ID>&m=dev
@@ -26,8 +26,7 @@ https://www.figma.com/design/ihWIWmvtQPTWgUxlrVjC2c/Magnet-DS?node-id=<ID>&m=dev
 | Page | ID | Link | Contents |
 | --- | --- | --- | --- |
 | 📖 Cover | `0:1` | [open](https://www.figma.com/design/ihWIWmvtQPTWgUxlrVjC2c/Magnet-DS?node-id=0-1&m=dev) | public entry card |
-| 📐 Decisions | `3067:4` | [open](https://www.figma.com/design/ihWIWmvtQPTWgUxlrVjC2c/Magnet-DS?node-id=3067-4&m=dev) | 1 `Records` frame (`3067:5`), **9 records** |
-| 📚 Docs | `2736:4` | [open](https://www.figma.com/design/ihWIWmvtQPTWgUxlrVjC2c/Magnet-DS?node-id=2736-4&m=dev) | 6 DOC frames + 4 `_Docs/*` masters + 1 label TEXT |
+| 📚 Docs | `2736:4` | [open](https://www.figma.com/design/ihWIWmvtQPTWgUxlrVjC2c/Magnet-DS?node-id=2736-4&m=dev) | **7 DOC frames** (6 foundations + `DOC / Decision Log` `3205:74`) + 4 `_Docs/*` masters + 1 label TEXT |
 | ❖ Components | `461:759` | [open](https://www.figma.com/design/ihWIWmvtQPTWgUxlrVjC2c/Magnet-DS?node-id=461-759&m=dev) | **7 sections, 46 masters** |
 | 📄 Pages | `2558:18264` | [open](https://www.figma.com/design/ihWIWmvtQPTWgUxlrVjC2c/Magnet-DS?node-id=2558-18264&m=dev) | **32 frames** = 8 routes × 4 columns |
 | 🗄️ Archive — Decisions | `2716:4244` | — | empty; immutable |
@@ -39,9 +38,13 @@ Pages whose name starts with 🗄️ are **immutable** — never rename, move, r
 anything inside them. `XP - WorkCard` was renamed into the archive at P3-T11; nothing was deleted
 anywhere in the migration.
 
-**Docs vs Decisions boundary.** 📐 Decisions is **append-only and dated** — it holds rationale
-(why a call was made, when, by whom). 📚 Docs is **current-state reference, edited in place** —
-it holds what is true now. Never move a dated record into Docs; never leave rationale in Docs.
+**Current-state vs rationale boundary.** The split is by *frame*, not by page — both live on
+📚 Docs since 2026-08-20 (record `decision-log-in-docs`, superseding `docs-decisions-boundary`).
+The six foundation DOC frames are **current-state reference, edited in place**: they hold what is
+true now. `DOC / Decision Log` (`3205:74`) is **append-only and dated**: it holds why a call was
+made and when. Never restate a rule in the log; never leave dated rationale in a foundation frame.
+A reversal is a **new record that supersedes** the old one — the superseded record stays on canvas
+with its `record-meta` line switched to `SUPERSEDED by <slug>`, never edited or deleted.
 
 ## Component masters — ❖ Components (46), 7 domain sections
 
@@ -223,6 +226,12 @@ auto-height box, so a rectangle standing in for one is wrong by construction.
 | 3 Responsive | `VariableCollectionId:2245:42` | Desktop (`2245:0`), Tablet (`2245:1`), Mobile (`2245:2`) | 18 |
 | Design System | `VariableCollectionId:2721:4` | 1 mode | 2 — **audit-exempt** |
 
+`Design System` is **file metadata, not a token layer**: two STRING variables (`ds/version`,
+`ds/last-updated`, scope `TEXT_CONTENT`) bound to the 📖 Cover chips via *character* bindings, so
+the cover cannot drift from the file. Never bind a component to them; never add design values
+there. Documented on canvas in `DOC / Getting Started` → Token Architecture (card
+`DESIGN SYSTEM — metadata, not a token layer`) and in each variable's description.
+
 `1 Primitives` is **407, not 451** — 451 is the pre-prune figure and it survived in a 📚 Docs card
 until P3-T11 corrected it. Recount, not carry-forward.
 
@@ -274,7 +283,6 @@ exception class:
 | ❖ Components | 92 | 66 decorative `hero/*` + `contact/*` art layers · 14 SECTION chrome · 11 `#8A38F5` COMPONENT_SET dashed borders (Figma's own, not authored, not bindable) · **1 genuine** |
 | 📄 Pages | 66 | 100% the same decorative art layers. **Zero** on any product surface; raw `#FFFFFF` count 0 |
 | 📚 Docs | 825 / 614 distinct | all doc chrome — the docs are an annotation layer, not a themed artifact |
-| 📐 Decisions | 28 | `#FFFFFF` ×19 card plates, `#3B934E` ×9 status pills — doc chrome |
 
 ⚠️ The 825 figure dwarfs the older "46 white fills" because that number counted `#FFFFFF` only.
 **Do not paste 825 into `named-debt.json` as component debt.**
@@ -299,15 +307,34 @@ Doc recipe: auto-layout frames + tables. `_Docs/DecisionCard` appears **only** i
 blocks. `_Docs/SpecimenCell` and `_Docs/TokenRow` are archived (Docs v1) — do not follow older
 briefs that still name them.
 
-📐 Decisions `Records` (`3067:5`) holds **9** records, each `_Docs/Date` + `_Docs/Status` +
-a FILL `_Docs/DecisionCard`: CONTAINER-16, NAMING-DOMAIN-COMPONENT, DARK-INSTANCES,
-DOCS-DECISIONS-BOUNDARY, theme-modes-two-only (`3160:39`), text-styles-detached (`3160:51`),
-interaction-states-four (`3160:63`), responsive-exceptions (`3160:75`), and the
-layout-frames-carry-no-fill card (`3157:134`, homed in Spacing & Layout).
+`DOC / Decision Log` (`3205:74`) holds a `Records` wrapper (`3206:74`) with **10** records.
+Each record is a `record-meta` line (Fira Code 12, `YYYY-MM-DD · STATUS · slug`) above a FILL
+`_Docs/DecisionCard`: container-16 (`3067:6`), naming-domain-component (`3067:5276`),
+dark-instances (`3067:5288`), docs-decisions-boundary (`3067:5300`, **superseded**),
+related-block-children (`3117:706`), theme-modes-two-only (`3160:39`),
+text-styles-detached (`3160:51`), interaction-states-four (`3160:63`),
+responsive-exceptions (`3160:75`), decision-log-in-docs (`3207:110`). The
+layout-frames-carry-no-fill card (`3157:134`) stays homed in Spacing & Layout.
+
+The card's `layer tag` is **hidden on records** — it names which layer a rule governs
+(CHROME / CONTENT / HAND / ALL, baked per variant) and must never be overridden to carry a record
+slug; the slug belongs in `record-meta`. `_Docs/Date` and `_Docs/Status` are **cover-only** (one
+instance each on 📖 Cover, IBM Plex Sans Medium 30) — never use them for record metadata, which is
+the mono-12 metadata layer.
 
 No doc references page-master ids or grid counts, so page renumbering invalidates nothing.
 
 ## Change log
+
+- 2026-08-20 — **📐 Decisions folded into 📚 Docs.** The page was removed; its `Records` frame moved
+  in as `DOC / Decision Log` (`3205:74`), the file's 7th DOC frame. Pages 9 → 8. Three defects
+  repaired at the source: the `_Docs/DecisionCard` `layer` TEXT was `FIXED` at 22px so any slug
+  longer than `ALL` wrapped into a vertical column (now HUG); records were overriding that layer
+  tag with record slugs, overloading one slot with two meanings (tag hidden on records, slug moved
+  to a mono-12 `record-meta` line); and each record carried cover-scale `_Docs/Date` + `_Docs/Status`
+  chips at 30px, which are file-metadata stamps, not record metadata (removed — those components
+  are now cover-only). New record `decision-log-in-docs` (`3207:110`) supersedes
+  `docs-decisions-boundary`, which is the first live use of the supersede mechanism.
 
 - 2026-08-19 — **Magnet-DS final state shipped**
   (`.specs/02_archives/magnet-ds-final-state/`). Three phases: foundations

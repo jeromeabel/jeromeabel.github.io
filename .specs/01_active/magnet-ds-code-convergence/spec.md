@@ -105,7 +105,7 @@ children. Settle which is the rule, then apply it. Overlaps `figma-mobile-sectio
 Each was re-checked against live code during the DS work and found **correct**:
 
 - **Related-block children** use compact children (`WorkMiniCard`, `PostRowCalm`), not the page's
-  own cards. Decision record 5 on 📐 Decisions is the durable artifact; code already matches.
+  own cards. Decision record `related-block-children` in `DOC / Decision Log` (📚 Docs) is the durable artifact; code already matches.
 - **`WorkHeader` link labels** `website→Website`, `live→Demo`, `git→Code`, `video→Video` —
   `WorkHeader.astro:42-48`.
 - **`ContactPreview` Mobile** hides the illustration rather than deleting it — `ContactImage.astro:5`
