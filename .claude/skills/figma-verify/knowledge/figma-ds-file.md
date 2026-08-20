@@ -303,7 +303,12 @@ Six doc frames, `x = -18000 + i*1508`, `y = -900`, all 1408 wide:
 | 5 | Foundations — Responsive Architecture | `3016:4343` | The rule, Responsive tokens, Style mapping, Accepted exceptions, Design Decisions |
 | 6 | Foundations — Motion | `3039:5146` | Duration Scale, Easing, Hover Verbs, Reveal, Reduced Motion, Design Decisions |
 
-Doc recipe: auto-layout frames + tables. `_Docs/DecisionCard` appears **only** in Design Decisions
+Doc recipe: auto-layout frames + tables. Every DOC frame opens with the same chrome — frame padding
+0 / gap 0, `_Status` and `Divider` inset 32, `Content` padded 64 with a 24 gap, then sections that
+carry their own 32px top/bottom padding. Header type is normative: title **Inter Medium 36 /
+line-height 125 %** (HUG), subtitle **Inter Regular 18 / line-height 32px** at a fixed 600 width.
+A title line-height below the font size clips descenders in node-bounds renders — never set one.
+`_Docs/DecisionCard` appears **only** in Design Decisions
 blocks. `_Docs/SpecimenCell` and `_Docs/TokenRow` are archived (Docs v1) — do not follow older
 briefs that still name them.
 
@@ -325,6 +330,18 @@ the mono-12 metadata layer.
 No doc references page-master ids or grid counts, so page renumbering invalidates nothing.
 
 ## Change log
+
+- 2026-08-20 — **DOC headers de-cropped and normalized.** All six 36px DOC titles sat in a **32px**
+  fixed line-height box (ratio 0.89), so descenders (`g`, `p`, `y`) were cut flat wherever the node
+  was rendered to its own bounds — `Decision Log` (`3205:81`), `Getting Started` (`2942:4315`),
+  `Color` (`2942:4413`), `Typography` (`2942:4550`), `Spacing & Layout` (`2942:4649`),
+  `Responsive Architecture` (`3016:4350`) now use 125 % (`leading/tight`), 32 → 45px.
+  `DOC / Foundations — Motion` (`3039:5146`) was the odd frame out on every header axis and was
+  aligned to canon: title 32 Semi Bold AUTO FILL → 36 Medium 125 % HUG, subtitle 14 AUTO FILL-width
+  → 18 / 32px at 600, `Content` padding 0/48 gap 8 → 64 gap 24, `_Status` + `Divider` inset 48 → 32,
+  frame padding 48/64 and gap 48 → 0 with its six sections given the standard 32px top/bottom
+  padding (frame 2411 → 2171 tall). A full-page sweep now finds **0** TEXT nodes on 📚 Docs whose
+  line-height is smaller than their font size.
 
 - 2026-08-20 — **📐 Decisions folded into 📚 Docs.** The page was removed; its `Records` frame moved
   in as `DOC / Decision Log` (`3205:74`), the file's 7th DOC frame. Pages 9 → 8. Three defects
