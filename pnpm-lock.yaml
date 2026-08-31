@@ -31,7 +31,7 @@ importers:
         version: 1.2.2
       '@iconify-json/lucide':
         specifier: ^1.2.117
-        version: 1.2.124
+        version: 1.2.126
       '@tailwindcss/vite':
         specifier: ^4.3.2
         version: 4.3.3(vite@8.2.2(@types/node@26.1.1)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.0))
@@ -641,8 +641,8 @@ packages:
   '@iconify-json/fa6-brands@1.2.6':
     resolution: {integrity: sha512-twL3X4KWcxAhbc1vz/mIDsVr+CAItk1/EIfxKUVQtpv6O4eydk5KNYqTZWdvJNHGInUgd6vKg21aWfVgb5DXEg==}
 
-  '@iconify-json/lucide@1.2.124':
-    resolution: {integrity: sha512-mO6JyBVNER7uXEkW2bXiN9Rrm6w91IXxwnNmIMbu2KZX0ZPcVZH1xDUTw94pryxESUIpBhinkOUIZIav+TA9ng==}
+  '@iconify-json/lucide@1.2.126':
+    resolution: {integrity: sha512-Fl3OfR71yeWLrlTLp6C4W5W3rJJDWH9/e70mjtq9VAldYDxvHh149JMNPz7foTeLLTE2Paynnp2aYKVL9rgF5Q==}
 
   '@iconify/tools@4.2.0':
     resolution: {integrity: sha512-WRxPva/ipxYkqZd1+CkEAQmd86dQmrwH0vwK89gmp2Kh2WyyVw57XbPng0NehP3x4V1LzLsXUneP1uMfTMZmUA==}
@@ -3921,6 +3921,10 @@ packages:
     resolution: {integrity: sha512-qcJu88Q2IWqJsDD529JKMdwGm/dvInW4HvQnRwiH9JtihJvzGOscDtHE3x1pBKeUOTysQ8kVmLnJ2kJu7yhcGA==}
     engines: {node: '>=12'}
 
+  picomatch@4.0.7:
+    resolution: {integrity: sha512-qcJu88Q2IWqJsDD529JKMdwGm/dvInW4HvQnRwiH9JtihJvzGOscDtHE3x1pBKeUOTysQ8kVmLnJ2kJu7yhcGA==}
+    engines: {node: '>=12'}
+
   picoquery@2.5.0:
     resolution: {integrity: sha512-j1kgOFxtaCyoFCkpoYG2Oj3OdGakadO7HZ7o5CqyRazlmBekKhbDoUnNnXASE07xSY4nDImWZkrZv7toSxMi/g==}
 
@@ -5337,7 +5341,7 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/lucide@1.2.124':
+  '@iconify-json/lucide@1.2.126':
     dependencies:
       '@iconify/types': 2.0.0
 
@@ -8989,6 +8993,9 @@ snapshots:
   picomatch@2.3.2: {}
 
   picomatch@4.0.7: {}
+
+  picomatch@4.0.7:
+    optional: true
 
   picoquery@2.5.0: {}
 
