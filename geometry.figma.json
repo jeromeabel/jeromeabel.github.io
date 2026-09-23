@@ -1,0 +1,296 @@
+{
+  "app-header--default": {
+    "root": {
+      "width": "1536px",
+      "borderRadius": "0px",
+      "paddingTop": "0px",
+      "paddingRight": "32px",
+      "paddingBottom": "0px",
+      "paddingLeft": "32px",
+      "gap": "8px"
+    },
+    "_figma": {
+      "name": "Header",
+      "variant": "breakpoint=Desktop",
+      "id": "2001:1669",
+      "type": "COMPONENT"
+    }
+  },
+  "app-footer--default": {
+    "root": {
+      "width": "1536px",
+      "borderRadius": "0px",
+      "borderTopColor": "rgb(76, 76, 76)",
+      "paddingTop": "0px",
+      "paddingRight": "0px",
+      "paddingBottom": "0px",
+      "paddingLeft": "0px",
+      "gap": "0px"
+    },
+    "_figma": {
+      "name": "Footer",
+      "variant": "breakpoint=Desktop",
+      "id": "2099:2560",
+      "type": "COMPONENT"
+    }
+  },
+  "app-themetoggle--default": {
+    "root": {
+      "width": "36px",
+      "borderRadius": "9999px",
+      "backgroundColor": "rgb(52, 52, 52)",
+      "paddingTop": "8px",
+      "paddingRight": "8px",
+      "paddingBottom": "8px",
+      "paddingLeft": "8px",
+      "gap": "0px"
+    },
+    "_figma": {
+      "name": "ThemeToggle",
+      "variant": "mode=light",
+      "id": "16:3",
+      "type": "COMPONENT"
+    }
+  },
+  "app-motiontoggle--default": {
+    "root": {
+      "width": "36px",
+      "borderRadius": "9999px",
+      "backgroundColor": "rgb(52, 52, 52)",
+      "paddingTop": "8px",
+      "paddingRight": "8px",
+      "paddingBottom": "8px",
+      "paddingLeft": "8px",
+      "gap": "0px"
+    },
+    "_figma": {
+      "name": "MotionToggle",
+      "variant": "mode=on",
+      "id": "16:7",
+      "type": "COMPONENT"
+    }
+  },
+  "hero-hero--default": {
+    "root": {
+      "width": "1280px",
+      "borderRadius": "0px",
+      "paddingTop": "128px",
+      "paddingRight": "0px",
+      "paddingBottom": "128px",
+      "paddingLeft": "0px",
+      "gap": "0px"
+    },
+    "_figma": {
+      "name": "Hero",
+      "variant": "breakpoint=Desktop",
+      "id": "2012:6305",
+      "type": "COMPONENT"
+    }
+  },
+  "ui-h1--default": {
+    "root": {
+      "width": "361px",
+      "borderRadius": "0px",
+      "paddingTop": "0px",
+      "paddingRight": "0px",
+      "paddingBottom": "0px",
+      "paddingLeft": "0px",
+      "gap": "8px"
+    },
+    "_figma": { "name": "H1", "variant": null, "id": "2119:7406", "type": "COMPONENT" }
+  },
+  "ui-h2--default": {
+    "root": {
+      "width": "87px",
+      "borderRadius": "0px",
+      "paddingTop": "0px",
+      "paddingRight": "0px",
+      "paddingBottom": "0px",
+      "paddingLeft": "0px",
+      "gap": "32px"
+    },
+    "_figma": { "name": "H2", "variant": null, "id": "2034:213", "type": "COMPONENT" }
+  },
+  "ui-p--default": {
+    "root": {
+      "width": "576px",
+      "borderRadius": "0px",
+      "paddingTop": "0px",
+      "paddingRight": "0px",
+      "paddingBottom": "0px",
+      "paddingLeft": "0px",
+      "gap": "8px"
+    },
+    "_figma": { "name": "PageDescription", "variant": null, "id": "2119:7440", "type": "COMPONENT" }
+  },
+  "contact-contact--default": {
+    "root": {
+      "width": "1940px",
+      "borderRadius": "0px",
+      "paddingTop": "96px",
+      "paddingRight": "32px",
+      "paddingBottom": "0px",
+      "paddingLeft": "32px",
+      "gap": "0px"
+    },
+    "_figma": {
+      "name": "ContactPreviewSection",
+      "variant": null,
+      "id": "2114:7281",
+      "type": "COMPONENT"
+    }
+  },
+  "contact-contacttext--default": {
+    "root": {
+      "width": "192px",
+      "borderRadius": "0px",
+      "paddingTop": "0px",
+      "paddingRight": "0px",
+      "paddingBottom": "0px",
+      "paddingLeft": "0px",
+      "gap": "32px"
+    },
+    "_figma": { "name": "ContactContent", "variant": null, "id": "131:101", "type": "COMPONENT" }
+  },
+  "blog-seriecard--default": {
+    "root": {
+      "width": "380px",
+      "borderRadius": "0px",
+      "borderTopColor": "rgb(76, 76, 76)",
+      "paddingTop": "0px",
+      "paddingRight": "0px",
+      "paddingBottom": "0px",
+      "paddingLeft": "0px",
+      "gap": "0px"
+    },
+    "_figma": {
+      "name": "SerieCard",
+      "variant": "state=default",
+      "id": "2119:7516",
+      "type": "COMPONENT"
+    }
+  },
+  "blog-postlistitem--default": {
+    "root": {
+      "width": "898px",
+      "borderRadius": "0px",
+      "borderTopColor": "rgb(76, 76, 76)",
+      "paddingTop": "16px",
+      "paddingRight": "0px",
+      "paddingBottom": "16px",
+      "paddingLeft": "0px",
+      "gap": "32px"
+    },
+    "_figma": {
+      "name": "PostRow",
+      "variant": "type=post, state=default",
+      "id": "2124:7936",
+      "type": "COMPONENT"
+    }
+  },
+  "blog-seriepostlistitem--default": {
+    "root": {
+      "width": "898px",
+      "borderRadius": "0px",
+      "borderTopColor": "rgb(76, 76, 76)",
+      "paddingTop": "16px",
+      "paddingRight": "0px",
+      "paddingBottom": "16px",
+      "paddingLeft": "0px",
+      "gap": "32px"
+    },
+    "_figma": {
+      "name": "PostRow",
+      "variant": "type=serie, state=default",
+      "id": "2124:7938",
+      "type": "COMPONENT"
+    }
+  },
+  "work-workminicard--minicard": {
+    "root": {
+      "width": "300px",
+      "borderRadius": "0px",
+      "paddingTop": "0px",
+      "paddingRight": "0px",
+      "paddingBottom": "0px",
+      "paddingLeft": "0px",
+      "gap": "8px"
+    },
+    "_figma": {
+      "name": "WorkCardPreviewSmall",
+      "variant": null,
+      "id": "2045:378",
+      "type": "COMPONENT"
+    }
+  },
+  "ui-link--iconbutton": {
+    "root": {
+      "width": "56px",
+      "borderRadius": "9999px",
+      "borderTopColor": "rgb(176, 176, 176)",
+      "paddingTop": "0px",
+      "paddingRight": "0px",
+      "paddingBottom": "0px",
+      "paddingLeft": "0px",
+      "gap": "0px"
+    },
+    "_figma": {
+      "name": "Link/Icon",
+      "variant": "size=normal, state=default",
+      "id": "2093:441",
+      "type": "COMPONENT"
+    }
+  },
+  "ui-link--secondary": {
+    "root": {
+      "width": "152px",
+      "borderRadius": "9999px",
+      "borderTopColor": "rgb(176, 176, 176)",
+      "paddingTop": "16px",
+      "paddingRight": "24px",
+      "paddingBottom": "16px",
+      "paddingLeft": "24px",
+      "gap": "8px"
+    },
+    "_figma": {
+      "name": "Link/Secondary",
+      "variant": "state=default",
+      "id": "2041:276",
+      "type": "COMPONENT"
+    }
+  },
+  "work-worksstrip--default": {
+    "root": {
+      "width": "1280px",
+      "borderRadius": "0px",
+      "paddingTop": "0px",
+      "paddingRight": "0px",
+      "paddingBottom": "0px",
+      "paddingLeft": "0px",
+      "gap": "32px"
+    },
+    "_figma": {
+      "name": "WorkPreviewSection",
+      "variant": "breakpoint=Desktop",
+      "id": "2045:428",
+      "type": "COMPONENT"
+    }
+  },
+  "blog-selectedwriting--default": {
+    "root": {
+      "width": "185px",
+      "borderRadius": "0px",
+      "paddingTop": "0px",
+      "paddingRight": "0px",
+      "paddingBottom": "0px",
+      "paddingLeft": "0px",
+      "gap": "32px"
+    },
+    "_figma": {
+      "name": "BlogPreviewSection",
+      "variant": null,
+      "id": "2041:560",
+      "type": "COMPONENT"
+    }
+  }
+}

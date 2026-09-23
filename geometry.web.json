@@ -1,0 +1,4072 @@
+{
+  "about-aboutfacts--grid": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "24px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "1248px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "24px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "1248px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "24px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "736px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "24px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "736px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "24px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "358px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "24px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "358px"
+        }
+      }
+    }
+  },
+  "about-abouttext--default": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "32px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "832px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "32px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "832px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "32px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "736px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "32px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "736px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "24px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "358px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "24px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "358px"
+        }
+      }
+    }
+  },
+  "app-footer--default": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "64px",
+          "paddingRight": "0px",
+          "paddingBottom": "64px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(91, 91, 91)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(91, 91, 91)",
+          "width": "1280px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "64px",
+          "paddingRight": "0px",
+          "paddingBottom": "64px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(176, 176, 176)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(176, 176, 176)",
+          "width": "1280px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "64px",
+          "paddingRight": "0px",
+          "paddingBottom": "64px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(91, 91, 91)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(91, 91, 91)",
+          "width": "768px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "64px",
+          "paddingRight": "0px",
+          "paddingBottom": "64px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(176, 176, 176)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(176, 176, 176)",
+          "width": "768px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "32px",
+          "paddingRight": "0px",
+          "paddingBottom": "32px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(91, 91, 91)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(91, 91, 91)",
+          "width": "390px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "32px",
+          "paddingRight": "0px",
+          "paddingBottom": "32px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(176, 176, 176)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(176, 176, 176)",
+          "width": "390px"
+        }
+      }
+    }
+  },
+  "app-header--default": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "24px",
+          "paddingRight": "0px",
+          "paddingBottom": "24px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "1280px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "24px",
+          "paddingRight": "0px",
+          "paddingBottom": "24px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "1280px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "0px",
+          "paddingBottom": "16px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "768px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "0px",
+          "paddingBottom": "16px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "768px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "0px",
+          "paddingBottom": "16px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "390px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "0px",
+          "paddingBottom": "16px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "390px"
+        }
+      }
+    }
+  },
+  "app-motiontoggle--default": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "8px",
+          "paddingRight": "8px",
+          "paddingBottom": "8px",
+          "paddingLeft": "8px",
+          "gap": "normal",
+          "color": "rgb(91, 91, 91)",
+          "backgroundColor": "rgb(224, 238, 196)",
+          "borderRadius": "3.35544e+07px",
+          "borderTopColor": "rgb(91, 91, 91)",
+          "width": "36px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "8px",
+          "paddingRight": "8px",
+          "paddingBottom": "8px",
+          "paddingLeft": "8px",
+          "gap": "normal",
+          "color": "rgb(176, 176, 176)",
+          "backgroundColor": "rgb(52, 52, 52)",
+          "borderRadius": "3.35544e+07px",
+          "borderTopColor": "rgb(176, 176, 176)",
+          "width": "36px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "8px",
+          "paddingRight": "8px",
+          "paddingBottom": "8px",
+          "paddingLeft": "8px",
+          "gap": "normal",
+          "color": "rgb(91, 91, 91)",
+          "backgroundColor": "rgb(224, 238, 196)",
+          "borderRadius": "3.35544e+07px",
+          "borderTopColor": "rgb(91, 91, 91)",
+          "width": "36px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "8px",
+          "paddingRight": "8px",
+          "paddingBottom": "8px",
+          "paddingLeft": "8px",
+          "gap": "normal",
+          "color": "rgb(176, 176, 176)",
+          "backgroundColor": "rgb(52, 52, 52)",
+          "borderRadius": "3.35544e+07px",
+          "borderTopColor": "rgb(176, 176, 176)",
+          "width": "36px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "8px",
+          "paddingRight": "8px",
+          "paddingBottom": "8px",
+          "paddingLeft": "8px",
+          "gap": "normal",
+          "color": "rgb(91, 91, 91)",
+          "backgroundColor": "rgb(224, 238, 196)",
+          "borderRadius": "3.35544e+07px",
+          "borderTopColor": "rgb(91, 91, 91)",
+          "width": "36px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "8px",
+          "paddingRight": "8px",
+          "paddingBottom": "8px",
+          "paddingLeft": "8px",
+          "gap": "normal",
+          "color": "rgb(176, 176, 176)",
+          "backgroundColor": "rgb(52, 52, 52)",
+          "borderRadius": "3.35544e+07px",
+          "borderTopColor": "rgb(176, 176, 176)",
+          "width": "36px"
+        }
+      }
+    }
+  },
+  "app-themetoggle--default": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "8px",
+          "paddingRight": "8px",
+          "paddingBottom": "8px",
+          "paddingLeft": "8px",
+          "gap": "normal",
+          "color": "rgb(91, 91, 91)",
+          "backgroundColor": "rgb(224, 238, 196)",
+          "borderRadius": "3.35544e+07px",
+          "borderTopColor": "rgb(91, 91, 91)",
+          "width": "36px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "8px",
+          "paddingRight": "8px",
+          "paddingBottom": "8px",
+          "paddingLeft": "8px",
+          "gap": "normal",
+          "color": "rgb(176, 176, 176)",
+          "backgroundColor": "rgb(52, 52, 52)",
+          "borderRadius": "3.35544e+07px",
+          "borderTopColor": "rgb(176, 176, 176)",
+          "width": "36px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "8px",
+          "paddingRight": "8px",
+          "paddingBottom": "8px",
+          "paddingLeft": "8px",
+          "gap": "normal",
+          "color": "rgb(91, 91, 91)",
+          "backgroundColor": "rgb(224, 238, 196)",
+          "borderRadius": "3.35544e+07px",
+          "borderTopColor": "rgb(91, 91, 91)",
+          "width": "36px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "8px",
+          "paddingRight": "8px",
+          "paddingBottom": "8px",
+          "paddingLeft": "8px",
+          "gap": "normal",
+          "color": "rgb(176, 176, 176)",
+          "backgroundColor": "rgb(52, 52, 52)",
+          "borderRadius": "3.35544e+07px",
+          "borderTopColor": "rgb(176, 176, 176)",
+          "width": "36px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "8px",
+          "paddingRight": "8px",
+          "paddingBottom": "8px",
+          "paddingLeft": "8px",
+          "gap": "normal",
+          "color": "rgb(91, 91, 91)",
+          "backgroundColor": "rgb(224, 238, 196)",
+          "borderRadius": "3.35544e+07px",
+          "borderTopColor": "rgb(91, 91, 91)",
+          "width": "36px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "8px",
+          "paddingRight": "8px",
+          "paddingBottom": "8px",
+          "paddingLeft": "8px",
+          "gap": "normal",
+          "color": "rgb(176, 176, 176)",
+          "backgroundColor": "rgb(52, 52, 52)",
+          "borderRadius": "3.35544e+07px",
+          "borderTopColor": "rgb(176, 176, 176)",
+          "width": "36px"
+        }
+      }
+    }
+  },
+  "blog-postlistitem--default": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "0px",
+          "paddingBottom": "16px",
+          "paddingLeft": "0px",
+          "gap": "32px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(209, 221, 187)",
+          "width": "1248px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "0px",
+          "paddingBottom": "16px",
+          "paddingLeft": "0px",
+          "gap": "32px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(76, 76, 76)",
+          "width": "1248px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "0px",
+          "paddingBottom": "16px",
+          "paddingLeft": "0px",
+          "gap": "32px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(209, 221, 187)",
+          "width": "736px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "0px",
+          "paddingBottom": "16px",
+          "paddingLeft": "0px",
+          "gap": "32px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(76, 76, 76)",
+          "width": "736px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "0px",
+          "paddingBottom": "16px",
+          "paddingLeft": "0px",
+          "gap": "32px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(209, 221, 187)",
+          "width": "358px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "0px",
+          "paddingBottom": "16px",
+          "paddingLeft": "0px",
+          "gap": "32px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(76, 76, 76)",
+          "width": "358px"
+        }
+      }
+    }
+  },
+  "blog-postrowcalm--calmrow": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "4px",
+          "paddingBottom": "16px",
+          "paddingLeft": "4px",
+          "gap": "4px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(209, 221, 187)",
+          "width": "1248px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "4px",
+          "paddingBottom": "16px",
+          "paddingLeft": "4px",
+          "gap": "4px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(76, 76, 76)",
+          "width": "1248px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "4px",
+          "paddingBottom": "16px",
+          "paddingLeft": "4px",
+          "gap": "4px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(209, 221, 187)",
+          "width": "736px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "4px",
+          "paddingBottom": "16px",
+          "paddingLeft": "4px",
+          "gap": "4px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(76, 76, 76)",
+          "width": "736px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "4px",
+          "paddingBottom": "16px",
+          "paddingLeft": "4px",
+          "gap": "4px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(209, 221, 187)",
+          "width": "358px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "4px",
+          "paddingBottom": "16px",
+          "paddingLeft": "4px",
+          "gap": "4px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(76, 76, 76)",
+          "width": "358px"
+        }
+      }
+    }
+  },
+  "blog-relatedwork--default": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "16px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "1248px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "16px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "1248px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "16px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "736px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "16px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "736px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "16px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "358px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "16px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "358px"
+        }
+      }
+    }
+  },
+  "blog-selectedwriting--default": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "16px",
+          "paddingBottom": "0px",
+          "paddingLeft": "16px",
+          "gap": "32px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "1280px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "16px",
+          "paddingBottom": "0px",
+          "paddingLeft": "16px",
+          "gap": "32px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "1280px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "16px",
+          "paddingBottom": "0px",
+          "paddingLeft": "16px",
+          "gap": "16px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "768px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "16px",
+          "paddingBottom": "0px",
+          "paddingLeft": "16px",
+          "gap": "16px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "768px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "16px",
+          "paddingBottom": "0px",
+          "paddingLeft": "16px",
+          "gap": "16px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "390px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "16px",
+          "paddingBottom": "0px",
+          "paddingLeft": "16px",
+          "gap": "16px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "390px"
+        }
+      }
+    }
+  },
+  "blog-seriecard--default": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "24px",
+          "paddingRight": "24px",
+          "paddingBottom": "24px",
+          "paddingLeft": "24px",
+          "gap": "8px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(209, 221, 187)",
+          "width": "1248px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "24px",
+          "paddingRight": "24px",
+          "paddingBottom": "24px",
+          "paddingLeft": "24px",
+          "gap": "8px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(76, 76, 76)",
+          "width": "1248px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "16px",
+          "paddingBottom": "16px",
+          "paddingLeft": "16px",
+          "gap": "8px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(209, 221, 187)",
+          "width": "736px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "16px",
+          "paddingBottom": "16px",
+          "paddingLeft": "16px",
+          "gap": "8px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(76, 76, 76)",
+          "width": "736px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "16px",
+          "paddingBottom": "16px",
+          "paddingLeft": "16px",
+          "gap": "8px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(209, 221, 187)",
+          "width": "358px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "16px",
+          "paddingBottom": "16px",
+          "paddingLeft": "16px",
+          "gap": "8px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(76, 76, 76)",
+          "width": "358px"
+        }
+      }
+    }
+  },
+  "blog-seriecontents--default": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "24px",
+          "paddingRight": "24px",
+          "paddingBottom": "24px",
+          "paddingLeft": "24px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "8px",
+          "borderTopColor": "rgb(209, 221, 187)",
+          "width": "1248px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "24px",
+          "paddingRight": "24px",
+          "paddingBottom": "24px",
+          "paddingLeft": "24px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "8px",
+          "borderTopColor": "rgb(76, 76, 76)",
+          "width": "1248px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "24px",
+          "paddingRight": "24px",
+          "paddingBottom": "24px",
+          "paddingLeft": "24px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "8px",
+          "borderTopColor": "rgb(209, 221, 187)",
+          "width": "736px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "24px",
+          "paddingRight": "24px",
+          "paddingBottom": "24px",
+          "paddingLeft": "24px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "8px",
+          "borderTopColor": "rgb(76, 76, 76)",
+          "width": "736px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "16px",
+          "paddingBottom": "16px",
+          "paddingLeft": "16px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "8px",
+          "borderTopColor": "rgb(209, 221, 187)",
+          "width": "358px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "16px",
+          "paddingBottom": "16px",
+          "paddingLeft": "16px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "8px",
+          "borderTopColor": "rgb(76, 76, 76)",
+          "width": "358px"
+        }
+      }
+    }
+  },
+  "blog-seriepostlistitem--default": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "18px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "0px",
+          "paddingBottom": "16px",
+          "paddingLeft": "0px",
+          "gap": "32px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(209, 221, 187)",
+          "width": "1248px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "18px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "0px",
+          "paddingBottom": "16px",
+          "paddingLeft": "0px",
+          "gap": "32px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(76, 76, 76)",
+          "width": "1248px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "18px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "0px",
+          "paddingBottom": "16px",
+          "paddingLeft": "0px",
+          "gap": "32px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(209, 221, 187)",
+          "width": "736px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "18px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "0px",
+          "paddingBottom": "16px",
+          "paddingLeft": "0px",
+          "gap": "32px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(76, 76, 76)",
+          "width": "736px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "18px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "0px",
+          "paddingBottom": "16px",
+          "paddingLeft": "0px",
+          "gap": "32px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(209, 221, 187)",
+          "width": "358px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "18px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "0px",
+          "paddingBottom": "16px",
+          "paddingLeft": "0px",
+          "gap": "32px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(76, 76, 76)",
+          "width": "358px"
+        }
+      }
+    }
+  },
+  "blog-topicchips--default": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "12px",
+          "fontFamily": "\"Fira Code\", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace",
+          "fontWeight": "400",
+          "paddingTop": "2px",
+          "paddingRight": "8px",
+          "paddingBottom": "2px",
+          "paddingLeft": "8px",
+          "gap": "normal",
+          "color": "rgb(91, 91, 91)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(209, 221, 187)",
+          "width": "54.0156px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "12px",
+          "fontFamily": "\"Fira Code\", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace",
+          "fontWeight": "400",
+          "paddingTop": "2px",
+          "paddingRight": "8px",
+          "paddingBottom": "2px",
+          "paddingLeft": "8px",
+          "gap": "normal",
+          "color": "rgb(176, 176, 176)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(76, 76, 76)",
+          "width": "54.0156px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "12px",
+          "fontFamily": "\"Fira Code\", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace",
+          "fontWeight": "400",
+          "paddingTop": "2px",
+          "paddingRight": "8px",
+          "paddingBottom": "2px",
+          "paddingLeft": "8px",
+          "gap": "normal",
+          "color": "rgb(91, 91, 91)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(209, 221, 187)",
+          "width": "54.0156px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "12px",
+          "fontFamily": "\"Fira Code\", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace",
+          "fontWeight": "400",
+          "paddingTop": "2px",
+          "paddingRight": "8px",
+          "paddingBottom": "2px",
+          "paddingLeft": "8px",
+          "gap": "normal",
+          "color": "rgb(176, 176, 176)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(76, 76, 76)",
+          "width": "54.0156px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "12px",
+          "fontFamily": "\"Fira Code\", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace",
+          "fontWeight": "400",
+          "paddingTop": "2px",
+          "paddingRight": "8px",
+          "paddingBottom": "2px",
+          "paddingLeft": "8px",
+          "gap": "normal",
+          "color": "rgb(91, 91, 91)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(209, 221, 187)",
+          "width": "54.0156px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "12px",
+          "fontFamily": "\"Fira Code\", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace",
+          "fontWeight": "400",
+          "paddingTop": "2px",
+          "paddingRight": "8px",
+          "paddingBottom": "2px",
+          "paddingLeft": "8px",
+          "gap": "normal",
+          "color": "rgb(176, 176, 176)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(76, 76, 76)",
+          "width": "54.0156px"
+        }
+      }
+    }
+  },
+  "contact-contactimage--default": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "1248px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "1248px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "736px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "736px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "auto"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "auto"
+        }
+      }
+    }
+  },
+  "contact-contact--default": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "20px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "80px",
+          "paddingRight": "0px",
+          "paddingBottom": "80px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(209, 221, 187)",
+          "width": "1280px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "20px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "80px",
+          "paddingRight": "0px",
+          "paddingBottom": "80px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(76, 76, 76)",
+          "width": "1280px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "20px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "80px",
+          "paddingRight": "0px",
+          "paddingBottom": "80px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(209, 221, 187)",
+          "width": "768px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "20px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "80px",
+          "paddingRight": "0px",
+          "paddingBottom": "80px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(76, 76, 76)",
+          "width": "768px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "20px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "32px",
+          "paddingRight": "0px",
+          "paddingBottom": "32px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(209, 221, 187)",
+          "width": "390px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "20px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "32px",
+          "paddingRight": "0px",
+          "paddingBottom": "32px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(76, 76, 76)",
+          "width": "390px"
+        }
+      }
+    }
+  },
+  "contact-contacttext--default": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "32px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "1248px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "32px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "1248px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "32px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "736px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "32px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "736px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "32px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "358px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "32px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "358px"
+        }
+      }
+    }
+  },
+  "hero-herosocials--default": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "16px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "1248px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "16px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "1248px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "12px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "736px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "12px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "736px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "12px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "358px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "12px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "358px"
+        }
+      }
+    }
+  },
+  "hero-hero--default": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "16px",
+          "paddingBottom": "0px",
+          "paddingLeft": "16px",
+          "gap": "32px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "1280px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "16px",
+          "paddingBottom": "0px",
+          "paddingLeft": "16px",
+          "gap": "32px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "1280px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "16px",
+          "paddingBottom": "0px",
+          "paddingLeft": "16px",
+          "gap": "32px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "768px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "16px",
+          "paddingBottom": "0px",
+          "paddingLeft": "16px",
+          "gap": "32px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "768px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "16px",
+          "paddingBottom": "0px",
+          "paddingLeft": "16px",
+          "gap": "32px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "390px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "16px",
+          "paddingBottom": "0px",
+          "paddingLeft": "16px",
+          "gap": "32px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "390px"
+        }
+      }
+    }
+  },
+  "hero-herotext--default": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "48px",
+          "fontFamily": "\"Bubbler One\", ui-serif, Georgia, Cambria, \"Times New Roman\", Times, serif",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "1248px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "48px",
+          "fontFamily": "\"Bubbler One\", ui-serif, Georgia, Cambria, \"Times New Roman\", Times, serif",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "1248px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "36px",
+          "fontFamily": "\"Bubbler One\", ui-serif, Georgia, Cambria, \"Times New Roman\", Times, serif",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "736px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "36px",
+          "fontFamily": "\"Bubbler One\", ui-serif, Georgia, Cambria, \"Times New Roman\", Times, serif",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "736px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "24px",
+          "fontFamily": "\"Bubbler One\", ui-serif, Georgia, Cambria, \"Times New Roman\", Times, serif",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "358px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "24px",
+          "fontFamily": "\"Bubbler One\", ui-serif, Georgia, Cambria, \"Times New Roman\", Times, serif",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "358px"
+        }
+      }
+    }
+  },
+  "ui-customimage--default": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "1248px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "1248px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "736px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "736px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "358px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "358px"
+        }
+      }
+    }
+  },
+  "ui-h1--default": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "60px",
+          "fontFamily": "\"Bubbler One\", ui-serif, Georgia, Cambria, \"Times New Roman\", Times, serif",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "1248px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "60px",
+          "fontFamily": "\"Bubbler One\", ui-serif, Georgia, Cambria, \"Times New Roman\", Times, serif",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "1248px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "48px",
+          "fontFamily": "\"Bubbler One\", ui-serif, Georgia, Cambria, \"Times New Roman\", Times, serif",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "736px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "48px",
+          "fontFamily": "\"Bubbler One\", ui-serif, Georgia, Cambria, \"Times New Roman\", Times, serif",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "736px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "36px",
+          "fontFamily": "\"Bubbler One\", ui-serif, Georgia, Cambria, \"Times New Roman\", Times, serif",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "358px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "36px",
+          "fontFamily": "\"Bubbler One\", ui-serif, Georgia, Cambria, \"Times New Roman\", Times, serif",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "358px"
+        }
+      }
+    }
+  },
+  "ui-h2--default": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "30px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "600",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "1248px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "30px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "600",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "1248px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "24px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "600",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "736px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "24px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "600",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "736px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "20px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "600",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "358px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "20px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "600",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "358px"
+        }
+      }
+    }
+  },
+  "ui-linknavpost--previous": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "20px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "24px",
+          "paddingRight": "16px",
+          "paddingBottom": "24px",
+          "paddingLeft": "16px",
+          "gap": "12px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(209, 221, 187)",
+          "width": "624px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "20px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "24px",
+          "paddingRight": "16px",
+          "paddingBottom": "24px",
+          "paddingLeft": "16px",
+          "gap": "12px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(76, 76, 76)",
+          "width": "624px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "20px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px",
+          "gap": "12px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(209, 221, 187)",
+          "width": "368px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "20px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px",
+          "gap": "12px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(76, 76, 76)",
+          "width": "368px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px",
+          "gap": "12px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(209, 221, 187)",
+          "width": "179px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px",
+          "gap": "12px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(76, 76, 76)",
+          "width": "179px"
+        }
+      }
+    }
+  },
+  "ui-linknavpost--next": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "20px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "24px",
+          "paddingRight": "16px",
+          "paddingBottom": "24px",
+          "paddingLeft": "16px",
+          "gap": "12px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(209, 221, 187)",
+          "width": "624px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "20px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "24px",
+          "paddingRight": "16px",
+          "paddingBottom": "24px",
+          "paddingLeft": "16px",
+          "gap": "12px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(76, 76, 76)",
+          "width": "624px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "20px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px",
+          "gap": "12px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(209, 221, 187)",
+          "width": "368px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "20px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px",
+          "gap": "12px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(76, 76, 76)",
+          "width": "368px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px",
+          "gap": "12px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(209, 221, 187)",
+          "width": "179px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px",
+          "gap": "12px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(76, 76, 76)",
+          "width": "179px"
+        }
+      }
+    }
+  },
+  "ui-link--default": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "85.8281px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "85.8281px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "85.8281px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "85.8281px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "85.8281px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "85.8281px"
+        }
+      }
+    }
+  },
+  "ui-link--iconbutton": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "30px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "3.35544e+07px",
+          "borderTopColor": "rgb(91, 91, 91)",
+          "width": "56px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "30px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "3.35544e+07px",
+          "borderTopColor": "rgb(176, 176, 176)",
+          "width": "56px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "20px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "3.35544e+07px",
+          "borderTopColor": "rgb(91, 91, 91)",
+          "width": "40px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "20px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "3.35544e+07px",
+          "borderTopColor": "rgb(176, 176, 176)",
+          "width": "40px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "20px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "3.35544e+07px",
+          "borderTopColor": "rgb(91, 91, 91)",
+          "width": "40px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "20px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "3.35544e+07px",
+          "borderTopColor": "rgb(176, 176, 176)",
+          "width": "40px"
+        }
+      }
+    }
+  },
+  "ui-link--secondary": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "20px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "24px",
+          "paddingBottom": "16px",
+          "paddingLeft": "24px",
+          "gap": "8px",
+          "color": "rgb(30, 30, 30)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "3.35544e+07px",
+          "borderTopColor": "rgb(30, 30, 30)",
+          "width": "186.875px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "20px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "24px",
+          "paddingBottom": "16px",
+          "paddingLeft": "24px",
+          "gap": "8px",
+          "color": "rgb(236, 236, 236)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "3.35544e+07px",
+          "borderTopColor": "rgb(236, 236, 236)",
+          "width": "186.875px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "20px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "24px",
+          "paddingBottom": "16px",
+          "paddingLeft": "24px",
+          "gap": "8px",
+          "color": "rgb(30, 30, 30)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "3.35544e+07px",
+          "borderTopColor": "rgb(30, 30, 30)",
+          "width": "186.875px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "20px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "24px",
+          "paddingBottom": "16px",
+          "paddingLeft": "24px",
+          "gap": "8px",
+          "color": "rgb(236, 236, 236)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "3.35544e+07px",
+          "borderTopColor": "rgb(236, 236, 236)",
+          "width": "186.875px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "20px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "24px",
+          "paddingBottom": "16px",
+          "paddingLeft": "24px",
+          "gap": "8px",
+          "color": "rgb(30, 30, 30)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "3.35544e+07px",
+          "borderTopColor": "rgb(30, 30, 30)",
+          "width": "186.875px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "20px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingRight": "24px",
+          "paddingBottom": "16px",
+          "paddingLeft": "24px",
+          "gap": "8px",
+          "color": "rgb(236, 236, 236)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "3.35544e+07px",
+          "borderTopColor": "rgb(236, 236, 236)",
+          "width": "186.875px"
+        }
+      }
+    }
+  },
+  "ui-link--external": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "gap": "4px",
+          "color": "rgb(30, 30, 30)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "3.35544e+07px",
+          "borderTopColor": "rgb(30, 30, 30)",
+          "width": "146.609px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "gap": "4px",
+          "color": "rgb(236, 236, 236)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "3.35544e+07px",
+          "borderTopColor": "rgb(236, 236, 236)",
+          "width": "146.609px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "gap": "4px",
+          "color": "rgb(30, 30, 30)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "3.35544e+07px",
+          "borderTopColor": "rgb(30, 30, 30)",
+          "width": "146.609px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "gap": "4px",
+          "color": "rgb(236, 236, 236)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "3.35544e+07px",
+          "borderTopColor": "rgb(236, 236, 236)",
+          "width": "146.609px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "gap": "4px",
+          "color": "rgb(30, 30, 30)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "3.35544e+07px",
+          "borderTopColor": "rgb(30, 30, 30)",
+          "width": "146.609px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "gap": "4px",
+          "color": "rgb(236, 236, 236)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "3.35544e+07px",
+          "borderTopColor": "rgb(236, 236, 236)",
+          "width": "146.609px"
+        }
+      }
+    }
+  },
+  "ui-prose--default": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "20px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "oklch(0.374 0.01 67.558)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "oklch(0.374 0.01 67.558)",
+          "width": "743.594px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "20px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "oklch(0.869 0.005 56.366)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "oklch(0.869 0.005 56.366)",
+          "width": "743.594px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "18px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "oklch(0.374 0.01 67.558)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "oklch(0.374 0.01 67.558)",
+          "width": "669.234px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "18px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "oklch(0.869 0.005 56.366)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "oklch(0.869 0.005 56.366)",
+          "width": "669.234px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "oklch(0.374 0.01 67.558)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "oklch(0.374 0.01 67.558)",
+          "width": "358px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "oklch(0.869 0.005 56.366)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "oklch(0.869 0.005 56.366)",
+          "width": "358px"
+        }
+      }
+    }
+  },
+  "ui-p--default": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "30px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "1248px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "30px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "1248px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "24px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "736px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "24px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "736px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "20px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "358px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "20px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "358px"
+        }
+      }
+    }
+  },
+  "ui-socialshare--default": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "8px",
+          "color": "rgb(91, 91, 91)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(91, 91, 91)",
+          "width": "1248px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "8px",
+          "color": "rgb(176, 176, 176)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(176, 176, 176)",
+          "width": "1248px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "8px",
+          "color": "rgb(91, 91, 91)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(91, 91, 91)",
+          "width": "736px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "8px",
+          "color": "rgb(176, 176, 176)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(176, 176, 176)",
+          "width": "736px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "8px",
+          "color": "rgb(91, 91, 91)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(91, 91, 91)",
+          "width": "358px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "8px",
+          "color": "rgb(176, 176, 176)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(176, 176, 176)",
+          "width": "358px"
+        }
+      }
+    }
+  },
+  "work-archivetable--default": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "1248px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "1248px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "736px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "736px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "14px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "358px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "14px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "normal",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "358px"
+        }
+      }
+    }
+  },
+  "work-relatedwriting--default": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "16px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "1248px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "16px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "1248px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "16px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "736px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "16px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "736px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "16px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "358px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "16px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "358px"
+        }
+      }
+    }
+  },
+  "work-workheader--default": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "32px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "832px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "32px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "832px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "16px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "736px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "16px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "736px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "16px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "358px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "16px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "358px"
+        }
+      }
+    }
+  },
+  "work-workminicard--minicard": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "8px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "405.328px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "8px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "405.328px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "8px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "234.656px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "8px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "234.656px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "8px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "171px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "gap": "8px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "171px"
+        }
+      }
+    }
+  },
+  "work-worksstrip--default": {
+    "desktop": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "16px",
+          "paddingBottom": "0px",
+          "paddingLeft": "16px",
+          "gap": "32px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "1280px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "16px",
+          "paddingBottom": "0px",
+          "paddingLeft": "16px",
+          "gap": "32px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "1280px"
+        }
+      }
+    },
+    "tablet": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "16px",
+          "paddingBottom": "0px",
+          "paddingLeft": "16px",
+          "gap": "16px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "768px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "16px",
+          "paddingBottom": "0px",
+          "paddingLeft": "16px",
+          "gap": "16px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "768px"
+        }
+      }
+    },
+    "mobile": {
+      "light": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "16px",
+          "paddingBottom": "0px",
+          "paddingLeft": "16px",
+          "gap": "16px",
+          "color": "rgb(0, 0, 0)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(0, 0, 0)",
+          "width": "390px"
+        }
+      },
+      "dark": {
+        "root": {
+          "fontSize": "16px",
+          "fontFamily": "system-ui, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingRight": "16px",
+          "paddingBottom": "0px",
+          "paddingLeft": "16px",
+          "gap": "16px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "width": "390px"
+        }
+      }
+    }
+  }
+}

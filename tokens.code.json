@@ -1,0 +1,243 @@
+{
+  "rootPx": 16,
+  "tokens": [
+    {
+      "name": "dark/color-accent",
+      "raw": "#00bba7",
+      "px": null,
+      "class": "color",
+      "source": "global.css @variant dark"
+    },
+    {
+      "name": "dark/color-accent-hover",
+      "raw": "#00d5be",
+      "px": null,
+      "class": "color",
+      "source": "global.css @variant dark"
+    },
+    {
+      "name": "dark/color-accent-strong",
+      "raw": "#46ecd5",
+      "px": null,
+      "class": "color",
+      "source": "global.css @variant dark"
+    },
+    {
+      "name": "dark/color-accent-subtle",
+      "raw": "#022f2e",
+      "px": null,
+      "class": "color",
+      "source": "global.css @variant dark"
+    },
+    {
+      "name": "dark/color-background",
+      "raw": "#1e1e1e",
+      "px": null,
+      "class": "color",
+      "source": "global.css @variant dark"
+    },
+    {
+      "name": "dark/color-border",
+      "raw": "#4c4c4c",
+      "px": null,
+      "class": "color",
+      "source": "global.css @variant dark"
+    },
+    {
+      "name": "dark/color-foreground",
+      "raw": "#ececec",
+      "px": null,
+      "class": "color",
+      "source": "global.css @variant dark"
+    },
+    {
+      "name": "dark/color-foreground-muted",
+      "raw": "#b0b0b0",
+      "px": null,
+      "class": "color",
+      "source": "global.css @variant dark"
+    },
+    {
+      "name": "dark/color-foreground-strong",
+      "raw": "#f7f7f7",
+      "px": null,
+      "class": "color",
+      "source": "global.css @variant dark"
+    },
+    {
+      "name": "dark/color-surface",
+      "raw": "#343434",
+      "px": null,
+      "class": "color",
+      "source": "global.css @variant dark"
+    },
+    {
+      "name": "dark/color-surface-hover",
+      "raw": "#2b2b2b",
+      "px": null,
+      "class": "color",
+      "source": "global.css @variant dark"
+    },
+    {
+      "name": "dark/color-surface-raised",
+      "raw": "#3f3f3f",
+      "px": null,
+      "class": "color",
+      "source": "global.css @variant dark"
+    },
+    {
+      "name": "light/color-accent",
+      "raw": "#00786f",
+      "px": null,
+      "class": "color",
+      "source": "global.css @theme"
+    },
+    {
+      "name": "light/color-accent-hover",
+      "raw": "#005f5a",
+      "px": null,
+      "class": "color",
+      "source": "global.css @theme"
+    },
+    {
+      "name": "light/color-accent-strong",
+      "raw": "#0b4f4a",
+      "px": null,
+      "class": "color",
+      "source": "global.css @theme"
+    },
+    {
+      "name": "light/color-accent-subtle",
+      "raw": "#f0fdfa",
+      "px": null,
+      "class": "color",
+      "source": "global.css @theme"
+    },
+    {
+      "name": "light/color-background",
+      "raw": "#f5ffe1",
+      "px": null,
+      "class": "color",
+      "source": "global.css @theme"
+    },
+    {
+      "name": "light/color-border",
+      "raw": "#d1ddbb",
+      "px": null,
+      "class": "color",
+      "source": "global.css @theme"
+    },
+    {
+      "name": "light/color-foreground",
+      "raw": "#1e1e1e",
+      "px": null,
+      "class": "color",
+      "source": "global.css @theme"
+    },
+    {
+      "name": "light/color-foreground-muted",
+      "raw": "#5b5b5b",
+      "px": null,
+      "class": "color",
+      "source": "global.css @theme"
+    },
+    {
+      "name": "light/color-foreground-strong",
+      "raw": "#101010",
+      "px": null,
+      "class": "color",
+      "source": "global.css @theme"
+    },
+    {
+      "name": "light/color-surface",
+      "raw": "#e0eec4",
+      "px": null,
+      "class": "color",
+      "source": "global.css @theme"
+    },
+    {
+      "name": "light/color-surface-hover",
+      "raw": "#eaf5d3",
+      "px": null,
+      "class": "color",
+      "source": "global.css @theme"
+    },
+    {
+      "name": "light/color-surface-raised",
+      "raw": "#d3e3ae",
+      "px": null,
+      "class": "color",
+      "source": "global.css @theme"
+    },
+    {
+      "name": "font-mono",
+      "raw": "\"Fira Code\", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace",
+      "px": null,
+      "class": "font",
+      "source": "global.css @theme"
+    },
+    {
+      "name": "font-mono-primary",
+      "raw": "Fira Code",
+      "px": null,
+      "class": "font",
+      "source": "global.css @theme"
+    },
+    {
+      "name": "font-sans",
+      "raw": "\"IBM Plex Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+      "px": null,
+      "class": "font",
+      "source": "global.css @theme"
+    },
+    {
+      "name": "font-sans-primary",
+      "raw": "IBM Plex Sans",
+      "px": null,
+      "class": "font",
+      "source": "global.css @theme"
+    },
+    {
+      "name": "font-title",
+      "raw": "\"Bubbler One\", ui-serif, Georgia, Cambria, \"Times New Roman\", Times, serif",
+      "px": null,
+      "class": "font",
+      "source": "global.css @theme"
+    },
+    {
+      "name": "font-title-primary",
+      "raw": "Bubbler One",
+      "px": null,
+      "class": "font",
+      "source": "global.css @theme"
+    },
+    {
+      "name": "container-max-width",
+      "raw": "var(--breakpoint-xl)",
+      "px": 1280,
+      "class": "px-css",
+      "source": "global.css @utility container"
+    },
+    {
+      "name": "container-padding-inline",
+      "raw": "1rem",
+      "px": 16,
+      "class": "px-css",
+      "source": "global.css @utility container"
+    },
+    {
+      "name": "spacing-section",
+      "raw": "2rem",
+      "px": 32,
+      "class": "px-css",
+      "source": "global.css @theme"
+    },
+    {
+      "name": "spacing-section-lg",
+      "raw": "6rem",
+      "px": 96,
+      "class": "px-css",
+      "source": "global.css @theme"
+    }
+  ]
+}

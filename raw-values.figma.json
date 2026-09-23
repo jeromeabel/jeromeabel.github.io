@@ -1,0 +1,6518 @@
+[
+  {
+    "id": "16:3",
+    "name": "mode=light",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "16:5",
+    "name": "mode=dark",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "16:7",
+    "name": "mode=on",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "16:9",
+    "name": "mode=off",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I2001:1642;2001:1487",
+    "name": "Jérôme Abel",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2001:1645;2001:1303",
+    "name": "Blog",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2001:1646;2001:1303",
+    "name": "Blog",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2001:1647;2001:1303",
+    "name": "Blog",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "2001:1648",
+    "name": "ThemeToggle",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "2981:4477",
+    "name": "Brand",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "2981:4478",
+    "name": "MenuButton",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "I2981:4487;2001:1303",
+    "name": "Blog",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2981:4489;2001:1303",
+    "name": "Blog",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2981:4491;2001:1303",
+    "name": "Blog",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2981:4493;2001:1303",
+    "name": "Blog",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "2981:4495",
+    "name": "Toggles",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "2981:4496",
+    "name": "ThemeToggle",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "2981:4500",
+    "name": "MotionToggle",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "3093:542",
+    "name": "Blog",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3093:544",
+    "name": "Blog",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3093:546",
+    "name": "Blog",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3093:548",
+    "name": "Jérôme Abel",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3093:550",
+    "name": "Jérôme Abel",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3093:552",
+    "name": "Jérôme Abel",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3106:2150",
+    "name": "prose-link-annotation",
+    "page": "❖ Components",
+    "kind": "fill"
+  },
+  {
+    "id": "3106:2150",
+    "name": "prose-link-annotation",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "2012:6178",
+    "name": "state=default",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "2012:6173",
+    "name": "Start reading",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "2012:6180",
+    "name": "state=hover",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "2012:6182",
+    "name": "Start reading",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "2041:276",
+    "name": "state=default",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "2041:278",
+    "name": "All posts",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "2041:279",
+    "name": "state=hover",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "2041:281",
+    "name": "All posts",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "2041:312",
+    "name": "state=default",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "2041:319",
+    "name": "state=hover",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "2041:324",
+    "name": "state=active",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "2093:441",
+    "name": "size=normal, state=default",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "2095:445",
+    "name": "size=normal, state=hover",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "2095:452",
+    "name": "size=small, state=default",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "2095:462",
+    "name": "size=small, state=hover",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "2097:682",
+    "name": "size=big, state=default",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "2097:683",
+    "name": "hello@jeromeabel.net",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "2097:684",
+    "name": "size=big, state=hover",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "2097:685",
+    "name": "hello@jeromeabel.net",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "2097:686",
+    "name": "size=big, state=active",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "2097:687",
+    "name": "hello@jeromeabel.net",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "2034:211",
+    "name": "Blog",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "2041:465",
+    "name": "ui/SectionTitle",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "I2041:457;2034:211",
+    "name": "Blog",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "2041:450",
+    "name": "Link/TextLink",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "2119:7401",
+    "name": "Hi, I'm Jérôme!",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3103:514",
+    "name": "state=default, iconSide=trailing",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "3103:515",
+    "name": "Website",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3103:517",
+    "name": "state=hover, iconSide=trailing",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "3103:518",
+    "name": "Website",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3128:5478",
+    "name": "state=default, iconSide=leading",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "3128:5478",
+    "name": "state=default, iconSide=leading",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3128:5482",
+    "name": "Website",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3128:5483",
+    "name": "state=hover, iconSide=leading",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "3128:5483",
+    "name": "state=hover, iconSide=leading",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3128:5487",
+    "name": "Website",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3106:2126",
+    "name": "ui/Prose",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3106:2102",
+    "name": "h2",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3106:2103",
+    "name": "p",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3106:2104",
+    "name": "h3",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3106:2105",
+    "name": "list",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3106:2106",
+    "name": "item",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3106:2107",
+    "name": "•",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3106:2108",
+    "name": "First item in a list",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3106:2109",
+    "name": "item",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3106:2110",
+    "name": "•",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3106:2111",
+    "name": "Second item, a little longer",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3106:2112",
+    "name": "item",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3106:2113",
+    "name": "•",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3106:2114",
+    "name": "Third item",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3106:2117",
+    "name": "quote-text",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3106:2118",
+    "name": "pre",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "3106:2119",
+    "name": "code",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3106:2120",
+    "name": "inline-code-example",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3106:2121",
+    "name": "Inline code looks like",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3106:2122",
+    "name": "inline-code",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "3106:2123",
+    "name": "variable",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3106:2124",
+    "name": "inside a sentence.",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3106:2125",
+    "name": "ProseImage",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "3106:2141",
+    "name": "ui/SocialShare",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3106:2128",
+    "name": "Share",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3106:2129",
+    "name": "bluesky",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "3106:2133",
+    "name": "linkedin",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "3106:2137",
+    "name": "mail",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "2124:8011",
+    "name": "breakpoint=Desktop",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "I2123:7673;2124:7943;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2123:7674;2124:7928",
+    "name": "PostMetadataTopic",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I2123:7674;2124:7928;2371:10379",
+    "name": "Full-stack",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2123:7675;2124:7943;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2123:7676;2124:7943;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "2977:4375",
+    "name": "breakpoint=Mobile",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "I2977:4378;2124:7943;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2977:4379;2124:7928",
+    "name": "PostMetadataTopic",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I2977:4379;2124:7928;2371:10379",
+    "name": "Full-stack",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2977:4380;2124:7943;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2977:4381;2124:7943;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2119:7517;2119:7502",
+    "name": "CoverContainer",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I2119:7543;2119:7502",
+    "name": "CoverContainer",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I2119:7530;2119:7502",
+    "name": "CoverContainer",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I2980:496;2119:7502",
+    "name": "CoverContainer",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I2980:497;2119:7502",
+    "name": "CoverContainer",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I2980:498;2119:7502",
+    "name": "CoverContainer",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "2041:497",
+    "name": "ui/SectionTitle",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "I2041:497;2041:457;2034:211",
+    "name": "Blog",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2041:497;2041:450",
+    "name": "Link/TextLink",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I2041:500;2034:188",
+    "name": "CoverContainer",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I2041:500;2038:853;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2041:502;2039:413",
+    "name": "CoverContainer",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I2041:502;2039:417",
+    "name": "blog/PostMetadataTopic",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I2041:502;2039:417;2371:10379",
+    "name": "Full-stack",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2041:502;2039:418",
+    "name": "Adding API Endpoints to an Astro Project",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2041:503;2039:413",
+    "name": "CoverContainer",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I2041:503;2039:417",
+    "name": "blog/PostMetadataTopic",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I2041:503;2039:417;2371:10379",
+    "name": "Full-stack",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2041:503;2039:418",
+    "name": "Adding API Endpoints to an Astro Project",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2041:504;2039:413",
+    "name": "CoverContainer",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I2041:504;2039:417",
+    "name": "blog/PostMetadataTopic",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I2041:504;2039:417;2371:10379",
+    "name": "Full-stack",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2041:504;2039:418",
+    "name": "Adding API Endpoints to an Astro Project",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3041:1918",
+    "name": "breakpoint=Mobile",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3041:1919",
+    "name": "ui/SectionTitle",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "I3041:1919;2041:457;2034:211",
+    "name": "Blog",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I3041:1919;2041:450",
+    "name": "Link/TextLink",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "3041:1921",
+    "name": "PostCardsRow",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "I3041:1922;2034:188",
+    "name": "CoverContainer",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I3041:1922;2038:853;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I3041:1924;2970:420",
+    "name": "CoverContainer",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I3041:1924;2970:424",
+    "name": "blog/PostMetadataTopic",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I3041:1924;2970:424;2371:10379",
+    "name": "Full-stack",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I3041:1924;2970:425",
+    "name": "Adding API Endpoints to an Astro Project",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I3041:1925;2970:420",
+    "name": "CoverContainer",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I3041:1925;2970:424",
+    "name": "blog/PostMetadataTopic",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I3041:1925;2970:424;2371:10379",
+    "name": "Full-stack",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I3041:1925;2970:425",
+    "name": "Adding API Endpoints to an Astro Project",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I3041:1926;2970:420",
+    "name": "CoverContainer",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I3041:1926;2970:424",
+    "name": "blog/PostMetadataTopic",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I3041:1926;2970:424;2371:10379",
+    "name": "Full-stack",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I3041:1926;2970:425",
+    "name": "Adding API Endpoints to an Astro Project",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "2371:10413",
+    "name": "type=post",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "2371:10379",
+    "name": "Full-stack",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "2124:7928",
+    "name": "PostMetadataTopic",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I2124:7928;2371:10379",
+    "name": "Full-stack",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2124:7943;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "2367:7174",
+    "name": "PostMetadataTopic",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I2367:7174;2371:10379",
+    "name": "Full-stack",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2367:7181;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "2119:7502",
+    "name": "CoverContainer",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "2367:7193",
+    "name": "CoverContainer",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "3093:5305",
+    "name": "CoverContainer",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I3093:5309;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3093:5310",
+    "name": "Exploring a Data-Driven Approach to Web Performance",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3093:5314",
+    "name": "CoverContainer",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I3093:5318;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3093:5319",
+    "name": "Exploring a Data-Driven Approach to Web Performance",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3093:5323",
+    "name": "CoverContainer",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I3093:5327;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3093:5328",
+    "name": "Exploring a Data-Driven Approach to Web Performance",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3093:5332",
+    "name": "CoverContainer",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I3093:5336;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3093:5337",
+    "name": "Exploring a Data-Driven Approach to Web Performance",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3093:5341",
+    "name": "CoverContainer",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "3093:5345",
+    "name": "blog/PostMetadataTopic",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I3093:5345;2371:10379",
+    "name": "Full-stack",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3093:5346",
+    "name": "Adding API Endpoints to an Astro Project",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3093:5350",
+    "name": "CoverContainer",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "3093:5354",
+    "name": "blog/PostMetadataTopic",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I3093:5354;2371:10379",
+    "name": "Full-stack",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3093:5355",
+    "name": "Adding API Endpoints to an Astro Project",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3093:5359",
+    "name": "CoverContainer",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "3093:5363",
+    "name": "blog/PostMetadataTopic",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I3093:5363;2371:10379",
+    "name": "Full-stack",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3093:5364",
+    "name": "Adding API Endpoints to an Astro Project",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3093:5368",
+    "name": "CoverContainer",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "3093:5372",
+    "name": "blog/PostMetadataTopic",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I3093:5372;2371:10379",
+    "name": "Full-stack",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3093:5373",
+    "name": "Adding API Endpoints to an Astro Project",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3113:662",
+    "name": "label",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3113:663",
+    "name": "list",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3113:667",
+    "name": "Why images dominate the payload",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3113:671",
+    "name": "Formats",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3123:5440",
+    "name": "sublist",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3113:675",
+    "name": "AVIF and WebP",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3113:679",
+    "name": "When JPEG still wins",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3113:683",
+    "name": "Responsive sizes",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3113:687",
+    "name": "Lazy loading and LQIP",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3113:691",
+    "name": "Results",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3113:692",
+    "name": "breakpoint=Mobile",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "3113:692",
+    "name": "breakpoint=Mobile",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3113:693",
+    "name": "summary",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3113:694",
+    "name": "label",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3113:698",
+    "name": "list",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3113:702",
+    "name": "Why images dominate the payload",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3113:706",
+    "name": "Formats",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3123:5441",
+    "name": "sublist",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3113:710",
+    "name": "AVIF and WebP",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3113:714",
+    "name": "When JPEG still wins",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3113:718",
+    "name": "Responsive sizes",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3113:722",
+    "name": "Lazy loading and LQIP",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3113:726",
+    "name": "Results",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3113:5418",
+    "name": "blog/SerieContents",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "3113:5418",
+    "name": "blog/SerieContents",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3113:5419",
+    "name": "label",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3113:5420",
+    "name": "list",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3113:5421",
+    "name": "item",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3113:5422",
+    "name": "item",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3113:5423",
+    "name": "item",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3113:5424",
+    "name": "item / current",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3113:5425",
+    "name": "item",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3117:662",
+    "name": "blog/RelatedWork",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3117:663",
+    "name": "RELATED WORK",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3117:664",
+    "name": "grid",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3117:665",
+    "name": "work/WorkMiniCard",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "I3117:665;3117:660",
+    "name": "cover",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I3117:665;3117:661",
+    "name": "Le concept de la preuve",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3117:668",
+    "name": "work/WorkMiniCard",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "I3117:668;3117:660",
+    "name": "cover",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I3117:668;3117:661",
+    "name": "Le concept de la preuve",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3117:671",
+    "name": "work/WorkMiniCard",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "I3117:671;3117:660",
+    "name": "cover",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I3117:671;3117:661",
+    "name": "Le concept de la preuve",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3117:674",
+    "name": "type=both",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3117:675",
+    "name": "prev",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3117:676",
+    "name": "text",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3117:677",
+    "name": "Previous",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3117:678",
+    "name": "Benchmarking a 10,000-Row Table",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3117:682",
+    "name": "next",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3117:683",
+    "name": "text",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3117:684",
+    "name": "Next",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3117:685",
+    "name": "Optimizing Images with Astro (part 2)",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3117:689",
+    "name": "type=prev-only",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3117:690",
+    "name": "prev",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3117:691",
+    "name": "text",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3117:692",
+    "name": "Previous",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3117:693",
+    "name": "Benchmarking a 10,000-Row Table",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3117:697",
+    "name": "type=next-only",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3117:698",
+    "name": "next",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3117:699",
+    "name": "text",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3117:700",
+    "name": "Next",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3117:701",
+    "name": "Optimizing Images with Astro (part 2)",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3118:5401",
+    "name": "facts=plain",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3118:5402",
+    "name": "title-row",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3118:5403",
+    "name": "Optimizing Images with Astro (part 1)",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3118:5404",
+    "name": "8 min · July 2026",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3118:5405",
+    "name": "How Astro's image pipeline turns a 2 MB hero into 80 KB without a build step of your own.",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3118:5406",
+    "name": "facts=serie",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3118:5407",
+    "name": "serie",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3118:5411",
+    "name": "WEB PERFORMANCE · 4/5",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3118:5412",
+    "name": "title-row",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3118:5413",
+    "name": "Optimizing Images with Astro (part 1)",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3118:5414",
+    "name": "8 min · July 2026",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3118:5415",
+    "name": "How Astro's image pipeline turns a 2 MB hero into 80 KB without a build step of your own.",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "2041:487",
+    "name": "ui/SectionTitle",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "I2041:487;2041:457;2034:211",
+    "name": "Blog",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2041:487;2041:450",
+    "name": "Link/TextLink",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I2045:417;2045:358",
+    "name": "CoverContainer",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I2045:417;2045:373",
+    "name": "Web app · 2026",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2045:398;2045:358",
+    "name": "CoverContainer",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I2045:398;2045:373",
+    "name": "Web app · 2026",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2045:408;2045:358",
+    "name": "CoverContainer",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I2045:408;2045:373",
+    "name": "Web app · 2026",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "2970:4363",
+    "name": "ui/SectionTitle",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "I2970:4363;2041:457;2034:211",
+    "name": "Blog",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2970:4363;2041:450",
+    "name": "Link/TextLink",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I2970:4365;2045:358",
+    "name": "CoverContainer",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I2970:4365;2045:373",
+    "name": "Web app · 2026",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2970:4366;2045:358",
+    "name": "CoverContainer",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I2970:4366;2045:373",
+    "name": "Web app · 2026",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2970:4367;2045:358",
+    "name": "CoverContainer",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I2970:4367;2045:373",
+    "name": "Web app · 2026",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:526",
+    "name": "variant=catalogue, state=default, side=left",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:528",
+    "name": "index",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:529",
+    "name": "01",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:530",
+    "name": "↗",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:531",
+    "name": "cover",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "3107:532",
+    "name": "Le concept de la preuve",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:533",
+    "name": "WEB · 2026",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:534",
+    "name": "meta",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:536",
+    "name": "Astro · Tailwind CSS · Astro DB · Turso · Netlify · Sharp",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:537",
+    "name": "links",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:538",
+    "name": "↗ Live",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:539",
+    "name": "↗ Repo",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:540",
+    "name": "variant=catalogue, state=default, side=right",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:542",
+    "name": "index",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:543",
+    "name": "01",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:544",
+    "name": "↗",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:545",
+    "name": "cover",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "3107:546",
+    "name": "Le concept de la preuve",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:547",
+    "name": "WEB · 2026",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:548",
+    "name": "meta",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:550",
+    "name": "Astro · Tailwind CSS · Astro DB · Turso · Netlify · Sharp",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:551",
+    "name": "links",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:552",
+    "name": "↗ Live",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:553",
+    "name": "↗ Repo",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:554",
+    "name": "variant=catalogue, state=hover, side=left",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:556",
+    "name": "index",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:557",
+    "name": "01",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:558",
+    "name": "↗",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:559",
+    "name": "cover",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "3107:560",
+    "name": "Le concept de la preuve",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:561",
+    "name": "WEB · 2026",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:562",
+    "name": "meta",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:564",
+    "name": "Astro · Tailwind CSS · Astro DB · Turso · Netlify · Sharp",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:565",
+    "name": "links",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:566",
+    "name": "↗ Live",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:567",
+    "name": "↗ Repo",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:568",
+    "name": "variant=catalogue, state=hover, side=right",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:570",
+    "name": "index",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:571",
+    "name": "01",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:572",
+    "name": "↗",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:573",
+    "name": "cover",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "3107:574",
+    "name": "Le concept de la preuve",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:575",
+    "name": "WEB · 2026",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:576",
+    "name": "meta",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:578",
+    "name": "Astro · Tailwind CSS · Astro DB · Turso · Netlify · Sharp",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:579",
+    "name": "links",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:580",
+    "name": "↗ Live",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:581",
+    "name": "↗ Repo",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:582",
+    "name": "variant=case, state=default, side=left",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:583",
+    "name": "cover",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "3107:584",
+    "name": "text",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:585",
+    "name": "WEB · 2026",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:586",
+    "name": "Le concept de la preuve",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:587",
+    "name": "facts",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:588",
+    "name": "problem",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:589",
+    "name": "PROBLEM",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:590",
+    "name": "A comic blog needs a vote button, and a vote button usually drags in a whole backend.",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:591",
+    "name": "solution",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:592",
+    "name": "SOLUTION",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:593",
+    "name": "Everything ships static except one serverless endpoint that writes votes to Turso.",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:594",
+    "name": "learning",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:595",
+    "name": "LEARNING",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:596",
+    "name": "The cheapest architecture is the one where exactly one thing is dynamic.",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:597",
+    "name": "links",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:598",
+    "name": "2 articles →",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:599",
+    "name": "↗ Live",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:600",
+    "name": "variant=case, state=default, side=right",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:602",
+    "name": "text",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:603",
+    "name": "WEB · 2026",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:604",
+    "name": "Le concept de la preuve",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:605",
+    "name": "facts",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:606",
+    "name": "problem",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:607",
+    "name": "PROBLEM",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:608",
+    "name": "A comic blog needs a vote button, and a vote button usually drags in a whole backend.",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:609",
+    "name": "solution",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:610",
+    "name": "SOLUTION",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:611",
+    "name": "Everything ships static except one serverless endpoint that writes votes to Turso.",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:612",
+    "name": "learning",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:613",
+    "name": "LEARNING",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:614",
+    "name": "The cheapest architecture is the one where exactly one thing is dynamic.",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:615",
+    "name": "links",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:616",
+    "name": "2 articles →",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:617",
+    "name": "↗ Live",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:601",
+    "name": "cover",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "3107:618",
+    "name": "variant=case, state=hover, side=left",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:619",
+    "name": "cover",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "3107:620",
+    "name": "text",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:621",
+    "name": "WEB · 2026",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:622",
+    "name": "Le concept de la preuve",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:623",
+    "name": "facts",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:624",
+    "name": "problem",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:625",
+    "name": "PROBLEM",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:626",
+    "name": "A comic blog needs a vote button, and a vote button usually drags in a whole backend.",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:627",
+    "name": "solution",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:628",
+    "name": "SOLUTION",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:629",
+    "name": "Everything ships static except one serverless endpoint that writes votes to Turso.",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:630",
+    "name": "learning",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:631",
+    "name": "LEARNING",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:632",
+    "name": "The cheapest architecture is the one where exactly one thing is dynamic.",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:633",
+    "name": "links",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:634",
+    "name": "2 articles →",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:635",
+    "name": "↗ Live",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:636",
+    "name": "variant=case, state=hover, side=right",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:638",
+    "name": "text",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:639",
+    "name": "WEB · 2026",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:640",
+    "name": "Le concept de la preuve",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:641",
+    "name": "facts",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:642",
+    "name": "problem",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:643",
+    "name": "PROBLEM",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:644",
+    "name": "A comic blog needs a vote button, and a vote button usually drags in a whole backend.",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:645",
+    "name": "solution",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:646",
+    "name": "SOLUTION",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:647",
+    "name": "Everything ships static except one serverless endpoint that writes votes to Turso.",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:648",
+    "name": "learning",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:649",
+    "name": "LEARNING",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:650",
+    "name": "The cheapest architecture is the one where exactly one thing is dynamic.",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:651",
+    "name": "links",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3107:652",
+    "name": "2 articles →",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:653",
+    "name": "↗ Live",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3107:637",
+    "name": "cover",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "3111:529",
+    "name": "year",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:531",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:533",
+    "name": "type",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:535",
+    "name": "stack",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:537",
+    "name": "link",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:542",
+    "name": "year",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:545",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3111:544",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:546",
+    "name": "type",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:548",
+    "name": "stack",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:550",
+    "name": "link",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:555",
+    "name": "year",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:558",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3111:557",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:559",
+    "name": "type",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:561",
+    "name": "stack",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:563",
+    "name": "link",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:568",
+    "name": "year",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:571",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3111:570",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:572",
+    "name": "type",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:574",
+    "name": "stack",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:576",
+    "name": "link",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:581",
+    "name": "year",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:584",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3111:583",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:585",
+    "name": "type",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:587",
+    "name": "stack",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:589",
+    "name": "link",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:594",
+    "name": "year",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:597",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3111:596",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:598",
+    "name": "type",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:600",
+    "name": "stack",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:602",
+    "name": "link",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:607",
+    "name": "year",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:610",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3111:609",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:611",
+    "name": "type",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:613",
+    "name": "stack",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:615",
+    "name": "link",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:620",
+    "name": "year",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:623",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3111:622",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:624",
+    "name": "type",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:626",
+    "name": "stack",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:628",
+    "name": "link",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:633",
+    "name": "year",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:636",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3111:635",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:637",
+    "name": "type",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:639",
+    "name": "stack",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:641",
+    "name": "link",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:647",
+    "name": "year",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:649",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:651",
+    "name": "type",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:653",
+    "name": "link",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:658",
+    "name": "year",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:661",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3111:660",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:662",
+    "name": "type",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:664",
+    "name": "link",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:669",
+    "name": "year",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:672",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3111:671",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:673",
+    "name": "type",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:675",
+    "name": "link",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:680",
+    "name": "year",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:683",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3111:682",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:684",
+    "name": "type",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:686",
+    "name": "link",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:691",
+    "name": "year",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:694",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3111:693",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:695",
+    "name": "type",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:697",
+    "name": "link",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:702",
+    "name": "year",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:705",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3111:704",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:706",
+    "name": "type",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:708",
+    "name": "link",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:713",
+    "name": "year",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:716",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3111:715",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:717",
+    "name": "type",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:719",
+    "name": "link",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:724",
+    "name": "year",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:727",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3111:726",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:728",
+    "name": "type",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:730",
+    "name": "link",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:735",
+    "name": "year",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:738",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3111:737",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:739",
+    "name": "type",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:741",
+    "name": "link",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:747",
+    "name": "year",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:749",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:751",
+    "name": "link",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:756",
+    "name": "year",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:759",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3111:758",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:760",
+    "name": "link",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:765",
+    "name": "year",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:768",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3111:767",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:769",
+    "name": "link",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:774",
+    "name": "year",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:777",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3111:776",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:778",
+    "name": "link",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:783",
+    "name": "year",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:786",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3111:785",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:787",
+    "name": "link",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:792",
+    "name": "year",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:795",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3111:794",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:796",
+    "name": "link",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:801",
+    "name": "year",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:804",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3111:803",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:805",
+    "name": "link",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:810",
+    "name": "year",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:813",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3111:812",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:814",
+    "name": "link",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:819",
+    "name": "year",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:822",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3111:821",
+    "name": "proj",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3111:823",
+    "name": "link",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3117:659",
+    "name": "work/WorkMiniCard",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3117:660",
+    "name": "cover",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "3117:661",
+    "name": "Le concept de la preuve",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3118:680",
+    "name": "work/WorkHeader",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3118:681",
+    "name": "breadcrumb",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3118:682",
+    "name": "WORK",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I3118:686;2119:7401",
+    "name": "Hi, I'm Jérôme!",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3118:692",
+    "name": "TYPE",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3118:693",
+    "name": "Web, Comics",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3118:695",
+    "name": "DATE",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3118:696",
+    "name": "February 2026",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3118:698",
+    "name": "STACK",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3118:699",
+    "name": "Astro, Tailwind CSS, Astro DB, Turso, Netlify, Sharp",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3118:700",
+    "name": "links",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3118:701",
+    "name": "ui/Link/external",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I3118:701;3103:515",
+    "name": "Website",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3118:706",
+    "name": "ui/Link/external",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I3118:706;3103:515",
+    "name": "Website",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3118:5417",
+    "name": "work/RelatedWriting",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3118:5418",
+    "name": "RELATED WRITING",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3118:5420",
+    "name": "blog/PostRowCalm",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "I3118:5420;3118:5407",
+    "name": "serie",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "I3118:5420;3118:5411",
+    "name": "WEB PERFORMANCE · 4/5",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I3118:5420;3118:5412",
+    "name": "title-row",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "I3118:5420;3118:5413",
+    "name": "Optimizing Images with Astro (part 1)",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I3118:5420;3118:5414",
+    "name": "8 min · July 2026",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I3118:5420;3118:5415",
+    "name": "How Astro's image pipeline turns a 2 MB hero into 80 KB without a build step of your own.",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3118:5430",
+    "name": "blog/PostRowCalm",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "I3118:5430;3118:5402",
+    "name": "title-row",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "I3118:5430;3118:5403",
+    "name": "Optimizing Images with Astro (part 1)",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I3118:5430;3118:5404",
+    "name": "8 min · July 2026",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I3118:5430;3118:5405",
+    "name": "How Astro's image pipeline turns a 2 MB hero into 80 KB without a build step of your own.",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2119:7410;2119:7401",
+    "name": "Hi, I'm Jérôme!",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "2012:221",
+    "name": "I’m a Frontend engineer, shipping web apps and writing about it. I used to build robot drummers.",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2012:6158;2119:7410;2119:7401",
+    "name": "Hi, I'm Jérôme!",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2012:6158;2012:221",
+    "name": "I’m a Frontend engineer, shipping web apps and writing about it. I used to build robot drummers.",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "2012:6299",
+    "name": "ui/Link/primary",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I2012:6299;2012:6173",
+    "name": "Start reading",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2969:408;2119:7410;2119:7401",
+    "name": "Hi, I'm Jérôme!",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2969:408;2012:221",
+    "name": "I’m a Frontend engineer, shipping web apps and writing about it. I used to build robot drummers.",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "2969:411",
+    "name": "ui/Link/primary",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I2969:411;2012:6173",
+    "name": "Start reading",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "2097:658",
+    "name": "Link/SecondarySmall",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I2097:658;2097:685",
+    "name": "hello@jeromeabel.net",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "2097:829",
+    "name": "ui/Link/iconOnly",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "2097:834",
+    "name": "ui/Link/iconOnly",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "2097:840",
+    "name": "ui/Link/iconOnly",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I2114:7229;2047:429;2034:211",
+    "name": "Blog",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2114:7229;2097:658",
+    "name": "Link/SecondarySmall",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I2114:7229;2097:658;2097:685",
+    "name": "hello@jeromeabel.net",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2114:7229;2097:829",
+    "name": "ui/Link/iconOnly",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I2114:7229;2097:834",
+    "name": "ui/Link/iconOnly",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I2114:7229;2097:840",
+    "name": "ui/Link/iconOnly",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "2114:7233",
+    "name": "path31134-3",
+    "page": "❖ Components",
+    "kind": "fill"
+  },
+  {
+    "id": "2114:7233",
+    "name": "path31134-3",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "2114:7234",
+    "name": "path31138-7",
+    "page": "❖ Components",
+    "kind": "fill"
+  },
+  {
+    "id": "2114:7234",
+    "name": "path31138-7",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "2114:7235",
+    "name": "path31140-8",
+    "page": "❖ Components",
+    "kind": "fill"
+  },
+  {
+    "id": "2114:7235",
+    "name": "path31140-8",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "2114:7236",
+    "name": "path43710-9",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "2114:7237",
+    "name": "path43712-7",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "2114:7238",
+    "name": "path43714-8",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "2114:7239",
+    "name": "path43716-5",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "2114:7240",
+    "name": "path24756-4-2",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "2114:7242",
+    "name": "path37893",
+    "page": "❖ Components",
+    "kind": "fill"
+  },
+  {
+    "id": "2114:7242",
+    "name": "path37893",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "2114:7243",
+    "name": "path37895",
+    "page": "❖ Components",
+    "kind": "fill"
+  },
+  {
+    "id": "2114:7243",
+    "name": "path37895",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "2114:7244",
+    "name": "path37897",
+    "page": "❖ Components",
+    "kind": "fill"
+  },
+  {
+    "id": "2114:7244",
+    "name": "path37897",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "2114:7245",
+    "name": "path37899",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "2114:7246",
+    "name": "path37901",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "2114:7247",
+    "name": "path37903",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "2114:7248",
+    "name": "path37905",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "2114:7249",
+    "name": "ellipse37909",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "2114:7251",
+    "name": "path38333",
+    "page": "❖ Components",
+    "kind": "fill"
+  },
+  {
+    "id": "2114:7251",
+    "name": "path38333",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "2114:7252",
+    "name": "path38335",
+    "page": "❖ Components",
+    "kind": "fill"
+  },
+  {
+    "id": "2114:7252",
+    "name": "path38335",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "2114:7253",
+    "name": "path38337",
+    "page": "❖ Components",
+    "kind": "fill"
+  },
+  {
+    "id": "2114:7253",
+    "name": "path38337",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "2114:7254",
+    "name": "path38339",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "2114:7255",
+    "name": "path38341",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "2114:7256",
+    "name": "path38343",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "2114:7257",
+    "name": "path38345",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "2114:7258",
+    "name": "ellipse38349",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "3112:638",
+    "name": "ContactContainer",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "I3112:639;2047:429;2034:211",
+    "name": "Blog",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I3112:639;2097:658",
+    "name": "Link/SecondarySmall",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I3112:639;2097:658;2097:685",
+    "name": "hello@jeromeabel.net",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I3112:639;2097:829",
+    "name": "ui/Link/iconOnly",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I3112:639;2097:834",
+    "name": "ui/Link/iconOnly",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I3112:639;2097:840",
+    "name": "ui/Link/iconOnly",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "3112:643",
+    "name": "path31134-3",
+    "page": "❖ Components",
+    "kind": "fill"
+  },
+  {
+    "id": "3112:643",
+    "name": "path31134-3",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "3112:644",
+    "name": "path31138-7",
+    "page": "❖ Components",
+    "kind": "fill"
+  },
+  {
+    "id": "3112:644",
+    "name": "path31138-7",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "3112:645",
+    "name": "path31140-8",
+    "page": "❖ Components",
+    "kind": "fill"
+  },
+  {
+    "id": "3112:645",
+    "name": "path31140-8",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "3112:646",
+    "name": "path43710-9",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "3112:647",
+    "name": "path43712-7",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "3112:648",
+    "name": "path43714-8",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "3112:649",
+    "name": "path43716-5",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "3112:650",
+    "name": "path24756-4-2",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "3112:652",
+    "name": "path37893",
+    "page": "❖ Components",
+    "kind": "fill"
+  },
+  {
+    "id": "3112:652",
+    "name": "path37893",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "3112:653",
+    "name": "path37895",
+    "page": "❖ Components",
+    "kind": "fill"
+  },
+  {
+    "id": "3112:653",
+    "name": "path37895",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "3112:654",
+    "name": "path37897",
+    "page": "❖ Components",
+    "kind": "fill"
+  },
+  {
+    "id": "3112:654",
+    "name": "path37897",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "3112:655",
+    "name": "path37899",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "3112:656",
+    "name": "path37901",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "3112:657",
+    "name": "path37903",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "3112:658",
+    "name": "path37905",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "3112:659",
+    "name": "ellipse37909",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "3112:661",
+    "name": "path38333",
+    "page": "❖ Components",
+    "kind": "fill"
+  },
+  {
+    "id": "3112:661",
+    "name": "path38333",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "3112:662",
+    "name": "path38335",
+    "page": "❖ Components",
+    "kind": "fill"
+  },
+  {
+    "id": "3112:662",
+    "name": "path38335",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "3112:663",
+    "name": "path38337",
+    "page": "❖ Components",
+    "kind": "fill"
+  },
+  {
+    "id": "3112:663",
+    "name": "path38337",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "3112:664",
+    "name": "path38339",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "3112:665",
+    "name": "path38341",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "3112:666",
+    "name": "path38343",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "3112:667",
+    "name": "path38345",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "3112:668",
+    "name": "ellipse38349",
+    "page": "❖ Components",
+    "kind": "stroke"
+  },
+  {
+    "id": "3119:2183",
+    "name": "facts=grid",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3119:2184",
+    "name": "coding since",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3119:2185",
+    "name": "2010",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3119:2186",
+    "name": "coding since",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3119:2187",
+    "name": "articles published",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3119:2188",
+    "name": "24",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3119:2189",
+    "name": "articles published",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3119:2190",
+    "name": "Malinette downloads",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3119:2191",
+    "name": "5000+",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3119:2192",
+    "name": "Malinette downloads",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3119:2193",
+    "name": "people trained",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3119:2194",
+    "name": "1000+",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3119:2195",
+    "name": "people trained",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3119:2197",
+    "name": "items",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3119:2198",
+    "name": "coding since",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3119:2199",
+    "name": "2010",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3119:2200",
+    "name": "coding since",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3119:2201",
+    "name": "articles",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3119:2202",
+    "name": "24",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3119:2203",
+    "name": "articles",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3119:2204",
+    "name": "downloads",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3119:2205",
+    "name": "5000+",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3119:2206",
+    "name": "downloads",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3119:2207",
+    "name": "people trained",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3119:2208",
+    "name": "1000+",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3119:2209",
+    "name": "people trained",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3119:2211",
+    "name": "about/AboutText",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "I3119:2212;2119:7401",
+    "name": "Hi, I'm Jérôme!",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3119:2214",
+    "name": "Artist turned web developer — I build things meant to be used, not just seen.",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3119:2215",
+    "name": "ui/Prose",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "I3119:2215;3106:2103",
+    "name": "p",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3119:2240",
+    "name": "about/AboutFacts",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "I3119:2240;3119:2184",
+    "name": "coding since",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "I3119:2240;3119:2185",
+    "name": "2010",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I3119:2240;3119:2186",
+    "name": "coding since",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I3119:2240;3119:2187",
+    "name": "articles published",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "I3119:2240;3119:2188",
+    "name": "24",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I3119:2240;3119:2189",
+    "name": "articles published",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I3119:2240;3119:2190",
+    "name": "Malinette downloads",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "I3119:2240;3119:2191",
+    "name": "5000+",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I3119:2240;3119:2192",
+    "name": "Malinette downloads",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I3119:2240;3119:2193",
+    "name": "people trained",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "I3119:2240;3119:2194",
+    "name": "1000+",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I3119:2240;3119:2195",
+    "name": "people trained",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3119:2253",
+    "name": "ui/Link/external",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "3119:2253",
+    "name": "ui/Link/external",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "I3119:2253;3128:5482",
+    "name": "Website",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3119:2258",
+    "name": "ui/Prose",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "I3119:2258;3106:2103",
+    "name": "p",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3119:2283",
+    "name": "links",
+    "page": "❖ Components",
+    "kind": "spacing"
+  },
+  {
+    "id": "3119:2284",
+    "name": "ui/Link/secondary",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I3119:2284;2041:278",
+    "name": "All posts",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "3119:2289",
+    "name": "ui/Link/secondary",
+    "page": "❖ Components",
+    "kind": "radius"
+  },
+  {
+    "id": "I3119:2289;2041:278",
+    "name": "All posts",
+    "page": "❖ Components",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1138;2001:1642;2001:1487",
+    "name": "Jérôme Abel",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1138;2001:1645;2001:1303",
+    "name": "Blog",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1138;2001:1646;2001:1303",
+    "name": "Blog",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1138;2001:1647;2001:1303",
+    "name": "Blog",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1138;2001:1648",
+    "name": "ThemeToggle",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1140;2012:6158;2119:7410;2119:7401",
+    "name": "Hi, I'm Jérôme!",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1140;2012:6158;2012:221",
+    "name": "I’m a Frontend engineer, shipping web apps and writing about it. I used to build robot drummers.",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1140;2012:6299",
+    "name": "ui/Link/primary",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1140;2012:6299;2012:6173",
+    "name": "Start reading",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1141;2041:497",
+    "name": "ui/SectionTitle",
+    "page": "📄 Pages",
+    "kind": "spacing"
+  },
+  {
+    "id": "I2586:1141;2041:497;2041:457;2034:211",
+    "name": "Blog",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1141;2041:497;2041:450",
+    "name": "Link/TextLink",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1141;2041:500;2034:188",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1141;2041:500;2038:853;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1141;2041:502;2039:413",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1141;2041:502;2039:417",
+    "name": "blog/PostMetadataTopic",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1141;2041:502;2039:417;2371:10379",
+    "name": "Full-stack",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1141;2041:502;2039:418",
+    "name": "Adding API Endpoints to an Astro Project",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1141;2041:503;2039:413",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1141;2041:503;2039:417",
+    "name": "blog/PostMetadataTopic",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1141;2041:503;2039:417;2371:10379",
+    "name": "Full-stack",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1141;2041:503;2039:418",
+    "name": "Adding API Endpoints to an Astro Project",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1141;2041:504;2039:413",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1141;2041:504;2039:417",
+    "name": "blog/PostMetadataTopic",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1141;2041:504;2039:417;2371:10379",
+    "name": "Full-stack",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1141;2041:504;2039:418",
+    "name": "Adding API Endpoints to an Astro Project",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1142;2041:487",
+    "name": "ui/SectionTitle",
+    "page": "📄 Pages",
+    "kind": "spacing"
+  },
+  {
+    "id": "I2586:1142;2041:487;2041:457;2034:211",
+    "name": "Blog",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1142;2041:487;2041:450",
+    "name": "Link/TextLink",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1142;2045:417;2045:358",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1142;2045:417;2045:373",
+    "name": "Web app · 2026",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1142;2045:398;2045:358",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1142;2045:398;2045:373",
+    "name": "Web app · 2026",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1142;2045:408;2045:358",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1142;2045:408;2045:373",
+    "name": "Web app · 2026",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1143;2114:7229;2047:429;2034:211",
+    "name": "Blog",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1143;2114:7229;2097:658",
+    "name": "Link/SecondarySmall",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1143;2114:7229;2097:658;2097:685",
+    "name": "hello@jeromeabel.net",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1143;2114:7229;2097:829",
+    "name": "ui/Link/iconOnly",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1143;2114:7229;2097:834",
+    "name": "ui/Link/iconOnly",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1143;2114:7229;2097:840",
+    "name": "ui/Link/iconOnly",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1143;2114:7233",
+    "name": "path31134-3",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2586:1143;2114:7233",
+    "name": "path31134-3",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1143;2114:7234",
+    "name": "path31138-7",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2586:1143;2114:7234",
+    "name": "path31138-7",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1143;2114:7235",
+    "name": "path31140-8",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2586:1143;2114:7235",
+    "name": "path31140-8",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1143;2114:7236",
+    "name": "path43710-9",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1143;2114:7237",
+    "name": "path43712-7",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1143;2114:7238",
+    "name": "path43714-8",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1143;2114:7239",
+    "name": "path43716-5",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1143;2114:7240",
+    "name": "path24756-4-2",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1143;2114:7242",
+    "name": "path37893",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2586:1143;2114:7242",
+    "name": "path37893",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1143;2114:7243",
+    "name": "path37895",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2586:1143;2114:7243",
+    "name": "path37895",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1143;2114:7244",
+    "name": "path37897",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2586:1143;2114:7244",
+    "name": "path37897",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1143;2114:7245",
+    "name": "path37899",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1143;2114:7246",
+    "name": "path37901",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1143;2114:7247",
+    "name": "path37903",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1143;2114:7248",
+    "name": "path37905",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1143;2114:7249",
+    "name": "ellipse37909",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1143;2114:7251",
+    "name": "path38333",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2586:1143;2114:7251",
+    "name": "path38333",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1143;2114:7252",
+    "name": "path38335",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2586:1143;2114:7252",
+    "name": "path38335",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1143;2114:7253",
+    "name": "path38337",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2586:1143;2114:7253",
+    "name": "path38337",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1143;2114:7254",
+    "name": "path38339",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1143;2114:7255",
+    "name": "path38341",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1143;2114:7256",
+    "name": "path38343",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1143;2114:7257",
+    "name": "path38345",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1143;2114:7258",
+    "name": "ellipse38349",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1146;2981:4477",
+    "name": "Brand",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1146;2981:4478",
+    "name": "MenuButton",
+    "page": "📄 Pages",
+    "kind": "spacing"
+  },
+  {
+    "id": "I2586:1148;2969:408;2119:7410;2119:7401",
+    "name": "Hi, I'm Jérôme!",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1148;2969:408;2012:221",
+    "name": "I’m a Frontend engineer, shipping web apps and writing about it. I used to build robot drummers.",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1148;2969:411",
+    "name": "ui/Link/primary",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1148;2969:411;2012:6173",
+    "name": "Start reading",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1149;3041:1919",
+    "name": "ui/SectionTitle",
+    "page": "📄 Pages",
+    "kind": "spacing"
+  },
+  {
+    "id": "I2586:1149;3041:1919;2041:457;2034:211",
+    "name": "Blog",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1149;3041:1919;2041:450",
+    "name": "Link/TextLink",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1149;3041:1921",
+    "name": "PostCardsRow",
+    "page": "📄 Pages",
+    "kind": "spacing"
+  },
+  {
+    "id": "I2586:1149;3041:1922;2034:188",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1149;3041:1922;2038:853;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1149;3041:1924;2970:420",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1149;3041:1924;2970:424",
+    "name": "blog/PostMetadataTopic",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1149;3041:1924;2970:424;2371:10379",
+    "name": "Full-stack",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1149;3041:1924;2970:425",
+    "name": "Adding API Endpoints to an Astro Project",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1149;3041:1925;2970:420",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1149;3041:1925;2970:424",
+    "name": "blog/PostMetadataTopic",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1149;3041:1925;2970:424;2371:10379",
+    "name": "Full-stack",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1149;3041:1925;2970:425",
+    "name": "Adding API Endpoints to an Astro Project",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1149;3041:1926;2970:420",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1149;3041:1926;2970:424",
+    "name": "blog/PostMetadataTopic",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1149;3041:1926;2970:424;2371:10379",
+    "name": "Full-stack",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1149;3041:1926;2970:425",
+    "name": "Adding API Endpoints to an Astro Project",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1150;2970:4363",
+    "name": "ui/SectionTitle",
+    "page": "📄 Pages",
+    "kind": "spacing"
+  },
+  {
+    "id": "I2586:1150;2970:4363;2041:457;2034:211",
+    "name": "Blog",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1150;2970:4363;2041:450",
+    "name": "Link/TextLink",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1150;2970:4365;2045:358",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1150;2970:4365;2045:373",
+    "name": "Web app · 2026",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1150;2970:4366;2045:358",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1150;2970:4366;2045:373",
+    "name": "Web app · 2026",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1150;2970:4367;2045:358",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1150;2970:4367;2045:373",
+    "name": "Web app · 2026",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1151;2114:7229;2047:429;2034:211",
+    "name": "Blog",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1151;2114:7229;2097:658",
+    "name": "Link/SecondarySmall",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1151;2114:7229;2097:658;2097:685",
+    "name": "hello@jeromeabel.net",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1151;2114:7229;2097:829",
+    "name": "ui/Link/iconOnly",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1151;2114:7229;2097:834",
+    "name": "ui/Link/iconOnly",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1151;2114:7229;2097:840",
+    "name": "ui/Link/iconOnly",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1151;2114:7233",
+    "name": "path31134-3",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2586:1151;2114:7233",
+    "name": "path31134-3",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1151;2114:7234",
+    "name": "path31138-7",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2586:1151;2114:7234",
+    "name": "path31138-7",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1151;2114:7235",
+    "name": "path31140-8",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2586:1151;2114:7235",
+    "name": "path31140-8",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1151;2114:7236",
+    "name": "path43710-9",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1151;2114:7237",
+    "name": "path43712-7",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1151;2114:7238",
+    "name": "path43714-8",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1151;2114:7239",
+    "name": "path43716-5",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1151;2114:7240",
+    "name": "path24756-4-2",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1151;2114:7242",
+    "name": "path37893",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2586:1151;2114:7242",
+    "name": "path37893",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1151;2114:7243",
+    "name": "path37895",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2586:1151;2114:7243",
+    "name": "path37895",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1151;2114:7244",
+    "name": "path37897",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2586:1151;2114:7244",
+    "name": "path37897",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1151;2114:7245",
+    "name": "path37899",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1151;2114:7246",
+    "name": "path37901",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1151;2114:7247",
+    "name": "path37903",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1151;2114:7248",
+    "name": "path37905",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1151;2114:7249",
+    "name": "ellipse37909",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1151;2114:7251",
+    "name": "path38333",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2586:1151;2114:7251",
+    "name": "path38333",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1151;2114:7252",
+    "name": "path38335",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2586:1151;2114:7252",
+    "name": "path38335",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1151;2114:7253",
+    "name": "path38337",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2586:1151;2114:7253",
+    "name": "path38337",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1151;2114:7254",
+    "name": "path38339",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1151;2114:7255",
+    "name": "path38341",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1151;2114:7256",
+    "name": "path38343",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1151;2114:7257",
+    "name": "path38345",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1151;2114:7258",
+    "name": "ellipse38349",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2586:1162;2001:1642;2001:1487",
+    "name": "Jérôme Abel",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1162;2001:1645;2001:1303",
+    "name": "Blog",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1162;2001:1646;2001:1303",
+    "name": "Blog",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1162;2001:1647;2001:1303",
+    "name": "Blog",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1162;2001:1648",
+    "name": "ThemeToggle",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "2586:1165",
+    "name": "PageIntroContainer",
+    "page": "📄 Pages",
+    "kind": "spacing"
+  },
+  {
+    "id": "I2586:1167;2119:7401",
+    "name": "Hi, I'm Jérôme!",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1170;2034:211",
+    "name": "Blog",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1171;2119:7517;2119:7502",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1171;2119:7543;2119:7502",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1171;2119:7530;2119:7502",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1173;2034:211",
+    "name": "Blog",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "2586:1174",
+    "name": "ArchiveList",
+    "page": "📄 Pages",
+    "kind": "spacing"
+  },
+  {
+    "id": "I2586:1175;2123:7673;2124:7943;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1175;2123:7674;2124:7928",
+    "name": "PostMetadataTopic",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1175;2123:7674;2124:7928;2371:10379",
+    "name": "Full-stack",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1175;2123:7675;2124:7943;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1175;2123:7676;2124:7943;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1176;2123:7673;2124:7943;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1176;2123:7674;2124:7928",
+    "name": "PostMetadataTopic",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1176;2123:7674;2124:7928;2371:10379",
+    "name": "Full-stack",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1176;2123:7675;2124:7943;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1176;2123:7676;2124:7943;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1179;2981:4477",
+    "name": "Brand",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1179;2981:4478",
+    "name": "MenuButton",
+    "page": "📄 Pages",
+    "kind": "spacing"
+  },
+  {
+    "id": "2586:1182",
+    "name": "PageIntroContainer",
+    "page": "📄 Pages",
+    "kind": "spacing"
+  },
+  {
+    "id": "I2586:1184;2119:7401",
+    "name": "Hi, I'm Jérôme!",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1187;2034:211",
+    "name": "Blog",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1188;2980:496;2119:7502",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1188;2980:497;2119:7502",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1188;2980:498;2119:7502",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1190;2034:211",
+    "name": "Blog",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "2586:1191",
+    "name": "ArchiveList",
+    "page": "📄 Pages",
+    "kind": "spacing"
+  },
+  {
+    "id": "I2586:1192;2977:4378;2124:7943;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1192;2977:4379;2124:7928",
+    "name": "PostMetadataTopic",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1192;2977:4379;2124:7928;2371:10379",
+    "name": "Full-stack",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1192;2977:4380;2124:7943;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1192;2977:4381;2124:7943;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1193;2977:4378;2124:7943;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1193;2977:4379;2124:7928",
+    "name": "PostMetadataTopic",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2586:1193;2977:4379;2124:7928;2371:10379",
+    "name": "Full-stack",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1193;2977:4380;2124:7943;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2586:1193;2977:4381;2124:7943;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4642;2586:1138;2001:1642;2001:1487",
+    "name": "Jérôme Abel",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4642;2586:1138;2001:1645;2001:1303",
+    "name": "Blog",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4642;2586:1138;2001:1646;2001:1303",
+    "name": "Blog",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4642;2586:1138;2001:1647;2001:1303",
+    "name": "Blog",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4642;2586:1138;2001:1648",
+    "name": "ThemeToggle",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4642;2586:1140;2012:6158;2119:7410;2119:7401",
+    "name": "Hi, I'm Jérôme!",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4642;2586:1140;2012:6158;2012:221",
+    "name": "I’m a Frontend engineer, shipping web apps and writing about it. I used to build robot drummers.",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4642;2586:1140;2012:6299",
+    "name": "ui/Link/primary",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4642;2586:1140;2012:6299;2012:6173",
+    "name": "Start reading",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4642;2586:1141;2041:497",
+    "name": "ui/SectionTitle",
+    "page": "📄 Pages",
+    "kind": "spacing"
+  },
+  {
+    "id": "I2989:4642;2586:1141;2041:497;2041:457;2034:211",
+    "name": "Blog",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4642;2586:1141;2041:497;2041:450",
+    "name": "Link/TextLink",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4642;2586:1141;2041:500;2034:188",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4642;2586:1141;2041:500;2038:853;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4642;2586:1141;2041:502;2039:413",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4642;2586:1141;2041:502;2039:417",
+    "name": "blog/PostMetadataTopic",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4642;2586:1141;2041:502;2039:417;2371:10379",
+    "name": "Full-stack",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4642;2586:1141;2041:502;2039:418",
+    "name": "Adding API Endpoints to an Astro Project",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4642;2586:1141;2041:503;2039:413",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4642;2586:1141;2041:503;2039:417",
+    "name": "blog/PostMetadataTopic",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4642;2586:1141;2041:503;2039:417;2371:10379",
+    "name": "Full-stack",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4642;2586:1141;2041:503;2039:418",
+    "name": "Adding API Endpoints to an Astro Project",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4642;2586:1141;2041:504;2039:413",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4642;2586:1141;2041:504;2039:417",
+    "name": "blog/PostMetadataTopic",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4642;2586:1141;2041:504;2039:417;2371:10379",
+    "name": "Full-stack",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4642;2586:1141;2041:504;2039:418",
+    "name": "Adding API Endpoints to an Astro Project",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4642;2586:1142;2041:487",
+    "name": "ui/SectionTitle",
+    "page": "📄 Pages",
+    "kind": "spacing"
+  },
+  {
+    "id": "I2989:4642;2586:1142;2041:487;2041:457;2034:211",
+    "name": "Blog",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4642;2586:1142;2041:487;2041:450",
+    "name": "Link/TextLink",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4642;2586:1142;2045:417;2045:358",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4642;2586:1142;2045:417;2045:373",
+    "name": "Web app · 2026",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4642;2586:1142;2045:398;2045:358",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4642;2586:1142;2045:398;2045:373",
+    "name": "Web app · 2026",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4642;2586:1142;2045:408;2045:358",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4642;2586:1142;2045:408;2045:373",
+    "name": "Web app · 2026",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7229;2047:429;2034:211",
+    "name": "Blog",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7229;2097:658",
+    "name": "Link/SecondarySmall",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7229;2097:658;2097:685",
+    "name": "hello@jeromeabel.net",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7229;2097:829",
+    "name": "ui/Link/iconOnly",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7229;2097:834",
+    "name": "ui/Link/iconOnly",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7229;2097:840",
+    "name": "ui/Link/iconOnly",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7233",
+    "name": "path31134-3",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7233",
+    "name": "path31134-3",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7234",
+    "name": "path31138-7",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7234",
+    "name": "path31138-7",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7235",
+    "name": "path31140-8",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7235",
+    "name": "path31140-8",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7236",
+    "name": "path43710-9",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7237",
+    "name": "path43712-7",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7238",
+    "name": "path43714-8",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7239",
+    "name": "path43716-5",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7240",
+    "name": "path24756-4-2",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7242",
+    "name": "path37893",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7242",
+    "name": "path37893",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7243",
+    "name": "path37895",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7243",
+    "name": "path37895",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7244",
+    "name": "path37897",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7244",
+    "name": "path37897",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7245",
+    "name": "path37899",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7246",
+    "name": "path37901",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7247",
+    "name": "path37903",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7248",
+    "name": "path37905",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7249",
+    "name": "ellipse37909",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7251",
+    "name": "path38333",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7251",
+    "name": "path38333",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7252",
+    "name": "path38335",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7252",
+    "name": "path38335",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7253",
+    "name": "path38337",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7253",
+    "name": "path38337",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7254",
+    "name": "path38339",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7255",
+    "name": "path38341",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7256",
+    "name": "path38343",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7257",
+    "name": "path38345",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4642;2586:1143;2114:7258",
+    "name": "ellipse38349",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4844;2586:1146;2981:4477",
+    "name": "Brand",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4844;2586:1146;2981:4478",
+    "name": "MenuButton",
+    "page": "📄 Pages",
+    "kind": "spacing"
+  },
+  {
+    "id": "I2989:4844;2586:1148;2969:408;2119:7410;2119:7401",
+    "name": "Hi, I'm Jérôme!",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4844;2586:1148;2969:408;2012:221",
+    "name": "I’m a Frontend engineer, shipping web apps and writing about it. I used to build robot drummers.",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4844;2586:1148;2969:411",
+    "name": "ui/Link/primary",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4844;2586:1148;2969:411;2012:6173",
+    "name": "Start reading",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4844;2586:1149;3041:1919",
+    "name": "ui/SectionTitle",
+    "page": "📄 Pages",
+    "kind": "spacing"
+  },
+  {
+    "id": "I2989:4844;2586:1149;3041:1919;2041:457;2034:211",
+    "name": "Blog",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4844;2586:1149;3041:1919;2041:450",
+    "name": "Link/TextLink",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4844;2586:1149;3041:1921",
+    "name": "PostCardsRow",
+    "page": "📄 Pages",
+    "kind": "spacing"
+  },
+  {
+    "id": "I2989:4844;2586:1149;3041:1922;2034:188",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4844;2586:1149;3041:1922;2038:853;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4844;2586:1149;3041:1924;2970:420",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4844;2586:1149;3041:1924;2970:424",
+    "name": "blog/PostMetadataTopic",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4844;2586:1149;3041:1924;2970:424;2371:10379",
+    "name": "Full-stack",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4844;2586:1149;3041:1924;2970:425",
+    "name": "Adding API Endpoints to an Astro Project",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4844;2586:1149;3041:1925;2970:420",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4844;2586:1149;3041:1925;2970:424",
+    "name": "blog/PostMetadataTopic",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4844;2586:1149;3041:1925;2970:424;2371:10379",
+    "name": "Full-stack",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4844;2586:1149;3041:1925;2970:425",
+    "name": "Adding API Endpoints to an Astro Project",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4844;2586:1149;3041:1926;2970:420",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4844;2586:1149;3041:1926;2970:424",
+    "name": "blog/PostMetadataTopic",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4844;2586:1149;3041:1926;2970:424;2371:10379",
+    "name": "Full-stack",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4844;2586:1149;3041:1926;2970:425",
+    "name": "Adding API Endpoints to an Astro Project",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4844;2586:1150;2970:4363",
+    "name": "ui/SectionTitle",
+    "page": "📄 Pages",
+    "kind": "spacing"
+  },
+  {
+    "id": "I2989:4844;2586:1150;2970:4363;2041:457;2034:211",
+    "name": "Blog",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4844;2586:1150;2970:4363;2041:450",
+    "name": "Link/TextLink",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4844;2586:1150;2970:4365;2045:358",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4844;2586:1150;2970:4365;2045:373",
+    "name": "Web app · 2026",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4844;2586:1150;2970:4366;2045:358",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4844;2586:1150;2970:4366;2045:373",
+    "name": "Web app · 2026",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4844;2586:1150;2970:4367;2045:358",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4844;2586:1150;2970:4367;2045:373",
+    "name": "Web app · 2026",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7229;2047:429;2034:211",
+    "name": "Blog",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7229;2097:658",
+    "name": "Link/SecondarySmall",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7229;2097:658;2097:685",
+    "name": "hello@jeromeabel.net",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7229;2097:829",
+    "name": "ui/Link/iconOnly",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7229;2097:834",
+    "name": "ui/Link/iconOnly",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7229;2097:840",
+    "name": "ui/Link/iconOnly",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7233",
+    "name": "path31134-3",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7233",
+    "name": "path31134-3",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7234",
+    "name": "path31138-7",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7234",
+    "name": "path31138-7",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7235",
+    "name": "path31140-8",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7235",
+    "name": "path31140-8",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7236",
+    "name": "path43710-9",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7237",
+    "name": "path43712-7",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7238",
+    "name": "path43714-8",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7239",
+    "name": "path43716-5",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7240",
+    "name": "path24756-4-2",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7242",
+    "name": "path37893",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7242",
+    "name": "path37893",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7243",
+    "name": "path37895",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7243",
+    "name": "path37895",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7244",
+    "name": "path37897",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7244",
+    "name": "path37897",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7245",
+    "name": "path37899",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7246",
+    "name": "path37901",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7247",
+    "name": "path37903",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7248",
+    "name": "path37905",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7249",
+    "name": "ellipse37909",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7251",
+    "name": "path38333",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7251",
+    "name": "path38333",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7252",
+    "name": "path38335",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7252",
+    "name": "path38335",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7253",
+    "name": "path38337",
+    "page": "📄 Pages",
+    "kind": "fill"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7253",
+    "name": "path38337",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7254",
+    "name": "path38339",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7255",
+    "name": "path38341",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7256",
+    "name": "path38343",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7257",
+    "name": "path38345",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:4844;2586:1151;2114:7258",
+    "name": "ellipse38349",
+    "page": "📄 Pages",
+    "kind": "stroke"
+  },
+  {
+    "id": "I2989:5033;2586:1162;2001:1642;2001:1487",
+    "name": "Jérôme Abel",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:5033;2586:1162;2001:1645;2001:1303",
+    "name": "Blog",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:5033;2586:1162;2001:1646;2001:1303",
+    "name": "Blog",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:5033;2586:1162;2001:1647;2001:1303",
+    "name": "Blog",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:5033;2586:1162;2001:1648",
+    "name": "ThemeToggle",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:5033;2586:1165",
+    "name": "PageIntroContainer",
+    "page": "📄 Pages",
+    "kind": "spacing"
+  },
+  {
+    "id": "I2989:5033;2586:1167;2119:7401",
+    "name": "Hi, I'm Jérôme!",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:5033;2586:1170;2034:211",
+    "name": "Blog",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:5033;2586:1171;2119:7517;2119:7502",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:5033;2586:1171;2119:7543;2119:7502",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:5033;2586:1171;2119:7530;2119:7502",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:5033;2586:1173;2034:211",
+    "name": "Blog",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:5033;2586:1174",
+    "name": "ArchiveList",
+    "page": "📄 Pages",
+    "kind": "spacing"
+  },
+  {
+    "id": "I2989:5033;2586:1175;2123:7673;2124:7943;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:5033;2586:1175;2123:7674;2124:7928",
+    "name": "PostMetadataTopic",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:5033;2586:1175;2123:7674;2124:7928;2371:10379",
+    "name": "Full-stack",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:5033;2586:1175;2123:7675;2124:7943;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:5033;2586:1175;2123:7676;2124:7943;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:5033;2586:1176;2123:7673;2124:7943;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:5033;2586:1176;2123:7674;2124:7928",
+    "name": "PostMetadataTopic",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:5033;2586:1176;2123:7674;2124:7928;2371:10379",
+    "name": "Full-stack",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:5033;2586:1176;2123:7675;2124:7943;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:5033;2586:1176;2123:7676;2124:7943;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:5226;2586:1179;2981:4477",
+    "name": "Brand",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:5226;2586:1179;2981:4478",
+    "name": "MenuButton",
+    "page": "📄 Pages",
+    "kind": "spacing"
+  },
+  {
+    "id": "I2989:5226;2586:1182",
+    "name": "PageIntroContainer",
+    "page": "📄 Pages",
+    "kind": "spacing"
+  },
+  {
+    "id": "I2989:5226;2586:1184;2119:7401",
+    "name": "Hi, I'm Jérôme!",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:5226;2586:1187;2034:211",
+    "name": "Blog",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:5226;2586:1188;2980:496;2119:7502",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:5226;2586:1188;2980:497;2119:7502",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:5226;2586:1188;2980:498;2119:7502",
+    "name": "CoverContainer",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:5226;2586:1190;2034:211",
+    "name": "Blog",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:5226;2586:1191",
+    "name": "ArchiveList",
+    "page": "📄 Pages",
+    "kind": "spacing"
+  },
+  {
+    "id": "I2989:5226;2586:1192;2977:4378;2124:7943;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:5226;2586:1192;2977:4379;2124:7928",
+    "name": "PostMetadataTopic",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:5226;2586:1192;2977:4379;2124:7928;2371:10379",
+    "name": "Full-stack",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:5226;2586:1192;2977:4380;2124:7943;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:5226;2586:1192;2977:4381;2124:7943;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:5226;2586:1193;2977:4378;2124:7943;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:5226;2586:1193;2977:4379;2124:7928",
+    "name": "PostMetadataTopic",
+    "page": "📄 Pages",
+    "kind": "radius"
+  },
+  {
+    "id": "I2989:5226;2586:1193;2977:4379;2124:7928;2371:10379",
+    "name": "Full-stack",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:5226;2586:1193;2977:4380;2124:7943;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  },
+  {
+    "id": "I2989:5226;2586:1193;2977:4381;2124:7943;2371:10416",
+    "name": "Web Performance · 2/5",
+    "page": "📄 Pages",
+    "kind": "text-style"
+  }
+]

@@ -1,0 +1,3135 @@
+{
+  "collections": [
+    {
+      "name": "1 Primitives",
+      "modes": [
+        "Mode 1"
+      ],
+      "variables": [
+        {
+          "name": "color/amber/200",
+          "type": "COLOR",
+          "value": "#fee685",
+          "description": ""
+        },
+        {
+          "name": "breakpoint/md",
+          "type": "FLOAT",
+          "value": 768,
+          "description": ""
+        },
+        {
+          "name": "breakpoint/xl",
+          "type": "FLOAT",
+          "value": 1280,
+          "description": ""
+        },
+        {
+          "name": "color/brand/gray-800",
+          "type": "COLOR",
+          "value": "#1e1e1e",
+          "description": "Brand extension — not derivable from Tailwind. Source: scripts/figma/brand-primitives.json"
+        },
+        {
+          "name": "color/brand/lime-100",
+          "type": "COLOR",
+          "value": "#f5ffe1",
+          "description": "Brand extension — not derivable from Tailwind. Source: scripts/figma/brand-primitives.json"
+        },
+        {
+          "name": "breakpoint/sm",
+          "type": "FLOAT",
+          "value": 640,
+          "description": ""
+        },
+        {
+          "name": "color/amber/300",
+          "type": "COLOR",
+          "value": "#ffd230",
+          "description": ""
+        },
+        {
+          "name": "color/amber/100",
+          "type": "COLOR",
+          "value": "#fef3c6",
+          "description": ""
+        },
+        {
+          "name": "color/brand/gray-900",
+          "type": "COLOR",
+          "value": "#101010",
+          "description": "Brand extension — not derivable from Tailwind. Source: scripts/figma/brand-primitives.json"
+        },
+        {
+          "name": "color/brand/lime-200",
+          "type": "COLOR",
+          "value": "#e0eec4",
+          "description": "Brand extension — not derivable from Tailwind. Source: scripts/figma/brand-primitives.json"
+        },
+        {
+          "name": "color/indigo/600",
+          "type": "COLOR",
+          "value": "#4f39f6",
+          "description": ""
+        },
+        {
+          "name": "color/emerald/100",
+          "type": "COLOR",
+          "value": "#d0fae5",
+          "description": ""
+        },
+        {
+          "name": "color/cyan/950",
+          "type": "COLOR",
+          "value": "#053345",
+          "description": ""
+        },
+        {
+          "name": "color/fuchsia/400",
+          "type": "COLOR",
+          "value": "#ed6aff",
+          "description": ""
+        },
+        {
+          "name": "color/fuchsia/300",
+          "type": "COLOR",
+          "value": "#f4a8ff",
+          "description": ""
+        },
+        {
+          "name": "color/brand/lime-300",
+          "type": "COLOR",
+          "value": "#d1ddbb",
+          "description": "Brand extension — not derivable from Tailwind. Source: scripts/figma/brand-primitives.json"
+        },
+        {
+          "name": "color/fuchsia/700",
+          "type": "COLOR",
+          "value": "#a800b7",
+          "description": ""
+        },
+        {
+          "name": "color/emerald/200",
+          "type": "COLOR",
+          "value": "#a4f4cf",
+          "description": ""
+        },
+        {
+          "name": "color/cyan/500",
+          "type": "COLOR",
+          "value": "#00b8db",
+          "description": ""
+        },
+        {
+          "name": "color/cyan/100",
+          "type": "COLOR",
+          "value": "#cefafe",
+          "description": ""
+        },
+        {
+          "name": "color/cyan/600",
+          "type": "COLOR",
+          "value": "#0092b8",
+          "description": ""
+        },
+        {
+          "name": "color/cyan/700",
+          "type": "COLOR",
+          "value": "#007595",
+          "description": ""
+        },
+        {
+          "name": "color/indigo/300",
+          "type": "COLOR",
+          "value": "#a3b3ff",
+          "description": ""
+        },
+        {
+          "name": "color/indigo/50",
+          "type": "COLOR",
+          "value": "#eef2ff",
+          "description": ""
+        },
+        {
+          "name": "color/fuchsia/800",
+          "type": "COLOR",
+          "value": "#8a0194",
+          "description": ""
+        },
+        {
+          "name": "color/cyan/800",
+          "type": "COLOR",
+          "value": "#005f78",
+          "description": ""
+        },
+        {
+          "name": "color/emerald/300",
+          "type": "COLOR",
+          "value": "#5ee9b5",
+          "description": ""
+        },
+        {
+          "name": "color/indigo/400",
+          "type": "COLOR",
+          "value": "#7c86ff",
+          "description": ""
+        },
+        {
+          "name": "color/cyan/50",
+          "type": "COLOR",
+          "value": "#ecfeff",
+          "description": ""
+        },
+        {
+          "name": "color/cyan/200",
+          "type": "COLOR",
+          "value": "#a2f4fd",
+          "description": ""
+        },
+        {
+          "name": "color/cyan/400",
+          "type": "COLOR",
+          "value": "#00d3f2",
+          "description": ""
+        },
+        {
+          "name": "color/indigo/700",
+          "type": "COLOR",
+          "value": "#432dd7",
+          "description": ""
+        },
+        {
+          "name": "color/indigo/500",
+          "type": "COLOR",
+          "value": "#615fff",
+          "description": ""
+        },
+        {
+          "name": "color/cyan/900",
+          "type": "COLOR",
+          "value": "#104e64",
+          "description": ""
+        },
+        {
+          "name": "color/fuchsia/50",
+          "type": "COLOR",
+          "value": "#fdf4ff",
+          "description": ""
+        },
+        {
+          "name": "color/fuchsia/500",
+          "type": "COLOR",
+          "value": "#e12afb",
+          "description": ""
+        },
+        {
+          "name": "color/fuchsia/600",
+          "type": "COLOR",
+          "value": "#c800de",
+          "description": ""
+        },
+        {
+          "name": "color/red/200",
+          "type": "COLOR",
+          "value": "#ffc9c9",
+          "description": ""
+        },
+        {
+          "name": "color/neutral/600",
+          "type": "COLOR",
+          "value": "#525252",
+          "description": ""
+        },
+        {
+          "name": "color/neutral/500",
+          "type": "COLOR",
+          "value": "#737373",
+          "description": ""
+        },
+        {
+          "name": "color/orange/300",
+          "type": "COLOR",
+          "value": "#ffb86a",
+          "description": ""
+        },
+        {
+          "name": "color/neutral/700",
+          "type": "COLOR",
+          "value": "#404040",
+          "description": ""
+        },
+        {
+          "name": "color/neutral/100",
+          "type": "COLOR",
+          "value": "#f5f5f5",
+          "description": ""
+        },
+        {
+          "name": "color/neutral/200",
+          "type": "COLOR",
+          "value": "#e5e5e5",
+          "description": ""
+        },
+        {
+          "name": "color/neutral/300",
+          "type": "COLOR",
+          "value": "#d4d4d4",
+          "description": ""
+        },
+        {
+          "name": "color/purple/800",
+          "type": "COLOR",
+          "value": "#6e11b0",
+          "description": ""
+        },
+        {
+          "name": "color/purple/950",
+          "type": "COLOR",
+          "value": "#3c0366",
+          "description": ""
+        },
+        {
+          "name": "color/sky/700",
+          "type": "COLOR",
+          "value": "#0069a8",
+          "description": ""
+        },
+        {
+          "name": "color/sky/900",
+          "type": "COLOR",
+          "value": "#024a70",
+          "description": ""
+        },
+        {
+          "name": "color/orange/400",
+          "type": "COLOR",
+          "value": "#ff8904",
+          "description": ""
+        },
+        {
+          "name": "color/neutral/400",
+          "type": "COLOR",
+          "value": "#a1a1a1",
+          "description": ""
+        },
+        {
+          "name": "color/neutral/800",
+          "type": "COLOR",
+          "value": "#262626",
+          "description": ""
+        },
+        {
+          "name": "color/purple/900",
+          "type": "COLOR",
+          "value": "#59168b",
+          "description": ""
+        },
+        {
+          "name": "color/red/300",
+          "type": "COLOR",
+          "value": "#ffa2a2",
+          "description": ""
+        },
+        {
+          "name": "color/red/100",
+          "type": "COLOR",
+          "value": "#ffe2e2",
+          "description": ""
+        },
+        {
+          "name": "color/neutral/50",
+          "type": "COLOR",
+          "value": "#fafafa",
+          "description": ""
+        },
+        {
+          "name": "color/orange/100",
+          "type": "COLOR",
+          "value": "#ffedd4",
+          "description": ""
+        },
+        {
+          "name": "color/orange/200",
+          "type": "COLOR",
+          "value": "#ffd6a7",
+          "description": ""
+        },
+        {
+          "name": "color/sky/800",
+          "type": "COLOR",
+          "value": "#00598a",
+          "description": ""
+        },
+        {
+          "name": "color/sky/950",
+          "type": "COLOR",
+          "value": "#052f4a",
+          "description": ""
+        },
+        {
+          "name": "color/yellow/600",
+          "type": "COLOR",
+          "value": "#d08700",
+          "description": ""
+        },
+        {
+          "name": "color/stone/200",
+          "type": "COLOR",
+          "value": "#e7e5e4",
+          "description": ""
+        },
+        {
+          "name": "color/stone/100",
+          "type": "COLOR",
+          "value": "#f5f5f4",
+          "description": ""
+        },
+        {
+          "name": "color/slate/100",
+          "type": "COLOR",
+          "value": "#f1f5f9",
+          "description": ""
+        },
+        {
+          "name": "color/stone/300",
+          "type": "COLOR",
+          "value": "#d6d3d1",
+          "description": ""
+        },
+        {
+          "name": "color/slate/600",
+          "type": "COLOR",
+          "value": "#45556c",
+          "description": ""
+        },
+        {
+          "name": "color/slate/200",
+          "type": "COLOR",
+          "value": "#e2e8f0",
+          "description": ""
+        },
+        {
+          "name": "color/slate/700",
+          "type": "COLOR",
+          "value": "#314158",
+          "description": ""
+        },
+        {
+          "name": "color/slate/800",
+          "type": "COLOR",
+          "value": "#1d293d",
+          "description": ""
+        },
+        {
+          "name": "color/yellow/300",
+          "type": "COLOR",
+          "value": "#ffdf20",
+          "description": ""
+        },
+        {
+          "name": "color/yellow/50",
+          "type": "COLOR",
+          "value": "#fefce8",
+          "description": ""
+        },
+        {
+          "name": "container/xs",
+          "type": "FLOAT",
+          "value": 320,
+          "description": ""
+        },
+        {
+          "name": "drop/shadow/DEFAULT",
+          "type": "STRING",
+          "value": "0 1px 2px rgb(0 0 0 / 0.1), 0 1px 1px rgb(0 0 0 / 0.06)",
+          "description": ""
+        },
+        {
+          "name": "color/slate/900",
+          "type": "COLOR",
+          "value": "#0f172b",
+          "description": ""
+        },
+        {
+          "name": "color/stone/400",
+          "type": "COLOR",
+          "value": "#a6a09b",
+          "description": ""
+        },
+        {
+          "name": "color/yellow/400",
+          "type": "COLOR",
+          "value": "#fdc700",
+          "description": ""
+        },
+        {
+          "name": "color/slate/500",
+          "type": "COLOR",
+          "value": "#62748e",
+          "description": ""
+        },
+        {
+          "name": "color/slate/300",
+          "type": "COLOR",
+          "value": "#cad5e2",
+          "description": ""
+        },
+        {
+          "name": "color/slate/50",
+          "type": "COLOR",
+          "value": "#f8fafc",
+          "description": ""
+        },
+        {
+          "name": "color/yellow/700",
+          "type": "COLOR",
+          "value": "#a65f00",
+          "description": ""
+        },
+        {
+          "name": "color/yellow/500",
+          "type": "COLOR",
+          "value": "#f0b100",
+          "description": ""
+        },
+        {
+          "name": "color/slate/950",
+          "type": "COLOR",
+          "value": "#020618",
+          "description": ""
+        },
+        {
+          "name": "drop/shadow/2xl",
+          "type": "STRING",
+          "value": "0 25px 25px rgb(0 0 0 / 0.15)",
+          "description": ""
+        },
+        {
+          "name": "drop/shadow/lg",
+          "type": "STRING",
+          "value": "0 4px 4px rgb(0 0 0 / 0.15)",
+          "description": ""
+        },
+        {
+          "name": "shadow/md",
+          "type": "STRING",
+          "value": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+          "description": ""
+        },
+        {
+          "name": "font/weight/extralight",
+          "type": "FLOAT",
+          "value": 200,
+          "description": ""
+        },
+        {
+          "name": "font/weight/extrabold",
+          "type": "FLOAT",
+          "value": 800,
+          "description": ""
+        },
+        {
+          "name": "font/weight/semibold",
+          "type": "FLOAT",
+          "value": 600,
+          "description": ""
+        },
+        {
+          "name": "shadow/2xs",
+          "type": "STRING",
+          "value": "0 1px rgb(0 0 0 / 0.05)",
+          "description": ""
+        },
+        {
+          "name": "shadow/inner",
+          "type": "STRING",
+          "value": "inset 0 2px 4px 0 rgb(0 0 0 / 0.05)",
+          "description": ""
+        },
+        {
+          "name": "spacing/56",
+          "type": "FLOAT",
+          "value": 224,
+          "description": ""
+        },
+        {
+          "name": "spacing/60",
+          "type": "FLOAT",
+          "value": 240,
+          "description": ""
+        },
+        {
+          "name": "font/weight/thin",
+          "type": "FLOAT",
+          "value": 100,
+          "description": ""
+        },
+        {
+          "name": "shadow/DEFAULT",
+          "type": "STRING",
+          "value": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+          "description": ""
+        },
+        {
+          "name": "shadow/sm",
+          "type": "STRING",
+          "value": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+          "description": ""
+        },
+        {
+          "name": "shadow/lg",
+          "type": "STRING",
+          "value": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+          "description": ""
+        },
+        {
+          "name": "font/weight/light",
+          "type": "FLOAT",
+          "value": 300,
+          "description": ""
+        },
+        {
+          "name": "font/weight/medium",
+          "type": "FLOAT",
+          "value": 500,
+          "description": ""
+        },
+        {
+          "name": "font/weight/normal",
+          "type": "FLOAT",
+          "value": 400,
+          "description": ""
+        },
+        {
+          "name": "spacing/6",
+          "type": "FLOAT",
+          "value": 24,
+          "description": ""
+        },
+        {
+          "name": "spacing/64",
+          "type": "FLOAT",
+          "value": 256,
+          "description": ""
+        },
+        {
+          "name": "text/shadow/xs",
+          "type": "STRING",
+          "value": "0px 1px 1px rgb(0 0 0 / 0.2)",
+          "description": ""
+        },
+        {
+          "name": "text/shadow/sm",
+          "type": "STRING",
+          "value": "0px 1px 0px rgb(0 0 0 / 0.075), 0px 1px 1px rgb(0 0 0 / 0.075), 0px 2px 2px rgb(0 0 0 / 0.075)",
+          "description": ""
+        },
+        {
+          "name": "tracking/normal",
+          "type": "FLOAT",
+          "value": 0,
+          "description": "Reference only — do not bind (Figma coerces bound letter-spacing to px)."
+        },
+        {
+          "name": "text/xs",
+          "type": "FLOAT",
+          "value": 12,
+          "description": ""
+        },
+        {
+          "name": "spacing/7",
+          "type": "FLOAT",
+          "value": 28,
+          "description": ""
+        },
+        {
+          "name": "tracking/wider",
+          "type": "FLOAT",
+          "value": 5,
+          "description": "Reference only — do not bind (Figma coerces bound letter-spacing to px)."
+        },
+        {
+          "name": "text/2xl",
+          "type": "FLOAT",
+          "value": 24,
+          "description": ""
+        },
+        {
+          "name": "spacing/DEFAULT",
+          "type": "FLOAT",
+          "value": 4,
+          "description": ""
+        },
+        {
+          "name": "spacing/72",
+          "type": "FLOAT",
+          "value": 288,
+          "description": ""
+        },
+        {
+          "name": "spacing/px",
+          "type": "FLOAT",
+          "value": 1,
+          "description": ""
+        },
+        {
+          "name": "text/shadow/2xs",
+          "type": "STRING",
+          "value": "0px 1px 0px rgb(0 0 0 / 0.15)",
+          "description": ""
+        },
+        {
+          "name": "radius/none",
+          "type": "FLOAT",
+          "value": 0,
+          "description": ""
+        },
+        {
+          "name": "leading/7",
+          "type": "FLOAT",
+          "value": 28,
+          "description": ""
+        },
+        {
+          "name": "tracking/widest",
+          "type": "FLOAT",
+          "value": 10,
+          "description": "Reference only — do not bind (Figma coerces bound letter-spacing to px)."
+        },
+        {
+          "name": "text/shadow/lg",
+          "type": "STRING",
+          "value": "0px 1px 2px rgb(0 0 0 / 0.1), 0px 3px 2px rgb(0 0 0 / 0.1), 0px 4px 8px rgb(0 0 0 / 0.1)",
+          "description": ""
+        },
+        {
+          "name": "text/3xl",
+          "type": "FLOAT",
+          "value": 30,
+          "description": ""
+        },
+        {
+          "name": "radius/full",
+          "type": "FLOAT",
+          "value": 9999,
+          "description": ""
+        },
+        {
+          "name": "spacing/96",
+          "type": "FLOAT",
+          "value": 384,
+          "description": ""
+        },
+        {
+          "name": "spacing/8",
+          "type": "FLOAT",
+          "value": 32,
+          "description": ""
+        },
+        {
+          "name": "spacing/9",
+          "type": "FLOAT",
+          "value": 36,
+          "description": ""
+        },
+        {
+          "name": "text/shadow/md",
+          "type": "STRING",
+          "value": "0px 1px 1px rgb(0 0 0 / 0.1), 0px 1px 2px rgb(0 0 0 / 0.1), 0px 2px 4px rgb(0 0 0 / 0.1)",
+          "description": ""
+        },
+        {
+          "name": "tracking/tight",
+          "type": "FLOAT",
+          "value": -2.5,
+          "description": "Reference only — do not bind (Figma coerces bound letter-spacing to px)."
+        },
+        {
+          "name": "tracking/tighter",
+          "type": "FLOAT",
+          "value": -5,
+          "description": "Reference only — do not bind (Figma coerces bound letter-spacing to px)."
+        },
+        {
+          "name": "tracking/wide",
+          "type": "FLOAT",
+          "value": 2.5,
+          "description": "Reference only — do not bind (Figma coerces bound letter-spacing to px)."
+        },
+        {
+          "name": "spacing/80",
+          "type": "FLOAT",
+          "value": 320,
+          "description": ""
+        },
+        {
+          "name": "text/4xl",
+          "type": "FLOAT",
+          "value": 36,
+          "description": ""
+        },
+        {
+          "name": "text/5xl",
+          "type": "FLOAT",
+          "value": 48,
+          "description": ""
+        },
+        {
+          "name": "text/6xl",
+          "type": "FLOAT",
+          "value": 60,
+          "description": ""
+        },
+        {
+          "name": "text/7xl",
+          "type": "FLOAT",
+          "value": 72,
+          "description": ""
+        },
+        {
+          "name": "text/8xl",
+          "type": "FLOAT",
+          "value": 96,
+          "description": ""
+        },
+        {
+          "name": "text/9xl",
+          "type": "FLOAT",
+          "value": 128,
+          "description": ""
+        },
+        {
+          "name": "text/base",
+          "type": "FLOAT",
+          "value": 16,
+          "description": ""
+        },
+        {
+          "name": "text/lg",
+          "type": "FLOAT",
+          "value": 18,
+          "description": ""
+        },
+        {
+          "name": "text/sm",
+          "type": "FLOAT",
+          "value": 14,
+          "description": ""
+        },
+        {
+          "name": "text/xl",
+          "type": "FLOAT",
+          "value": 20,
+          "description": ""
+        },
+        {
+          "name": "color/brand/gray-300",
+          "type": "COLOR",
+          "value": "#b0b0b0",
+          "description": "Brand extension — not derivable from Tailwind. Source: scripts/figma/brand-primitives.json"
+        },
+        {
+          "name": "color/brand/gray-650",
+          "type": "COLOR",
+          "value": "#3f3f3f",
+          "description": "Brand extension — not derivable from Tailwind. Source: scripts/figma/brand-primitives.json"
+        },
+        {
+          "name": "color/brand/gray-750",
+          "type": "COLOR",
+          "value": "#2b2b2b",
+          "description": "Brand extension — not derivable from Tailwind. Source: scripts/figma/brand-primitives.json"
+        },
+        {
+          "name": "color/brand/lime-150",
+          "type": "COLOR",
+          "value": "#eaf5d3",
+          "description": "Brand extension — not derivable from Tailwind. Source: scripts/figma/brand-primitives.json"
+        },
+        {
+          "name": "color/brand/lime-250",
+          "type": "COLOR",
+          "value": "#d3e3ae",
+          "description": "Brand extension — not derivable from Tailwind. Source: scripts/figma/brand-primitives.json"
+        },
+        {
+          "name": "drop/shadow/md",
+          "type": "STRING",
+          "value": "0 3px 3px rgb(0 0 0 / 0.12)",
+          "description": ""
+        },
+        {
+          "name": "drop/shadow/sm",
+          "type": "STRING",
+          "value": "0 1px 2px rgb(0 0 0 / 0.15)",
+          "description": ""
+        },
+        {
+          "name": "drop/shadow/xl",
+          "type": "STRING",
+          "value": "0 9px 7px rgb(0 0 0 / 0.1)",
+          "description": ""
+        },
+        {
+          "name": "drop/shadow/xs",
+          "type": "STRING",
+          "value": "0 1px 1px rgb(0 0 0 / 0.05)",
+          "description": ""
+        },
+        {
+          "name": "ease/in",
+          "type": "STRING",
+          "value": "cubic-bezier(0.4, 0, 1, 1)",
+          "description": ""
+        },
+        {
+          "name": "ease/in/out",
+          "type": "STRING",
+          "value": "cubic-bezier(0.4, 0, 0.2, 1)",
+          "description": ""
+        },
+        {
+          "name": "ease/out",
+          "type": "STRING",
+          "value": "cubic-bezier(0, 0, 0.2, 1)",
+          "description": ""
+        },
+        {
+          "name": "font/weight/black",
+          "type": "FLOAT",
+          "value": 900,
+          "description": ""
+        },
+        {
+          "name": "font/weight/bold",
+          "type": "FLOAT",
+          "value": 700,
+          "description": ""
+        },
+        {
+          "name": "shadow/xl",
+          "type": "STRING",
+          "value": "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+          "description": ""
+        },
+        {
+          "name": "font/mono",
+          "type": "STRING",
+          "value": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',\n    monospace",
+          "description": ""
+        },
+        {
+          "name": "shadow/xs",
+          "type": "STRING",
+          "value": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+          "description": ""
+        },
+        {
+          "name": "font/sans",
+          "type": "STRING",
+          "value": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', Arial,\n    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'",
+          "description": ""
+        },
+        {
+          "name": "spacing/0",
+          "type": "FLOAT",
+          "value": 0,
+          "description": ""
+        },
+        {
+          "name": "font/serif",
+          "type": "STRING",
+          "value": "ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif",
+          "description": ""
+        },
+        {
+          "name": "spacing/0_5",
+          "type": "FLOAT",
+          "value": 2,
+          "description": ""
+        },
+        {
+          "name": "inset/shadow/2xs",
+          "type": "STRING",
+          "value": "inset 0 1px rgb(0 0 0 / 0.05)",
+          "description": ""
+        },
+        {
+          "name": "spacing/1",
+          "type": "FLOAT",
+          "value": 4,
+          "description": ""
+        },
+        {
+          "name": "inset/shadow/sm",
+          "type": "STRING",
+          "value": "inset 0 2px 4px rgb(0 0 0 / 0.05)",
+          "description": ""
+        },
+        {
+          "name": "spacing/1_5",
+          "type": "FLOAT",
+          "value": 6,
+          "description": ""
+        },
+        {
+          "name": "inset/shadow/xs",
+          "type": "STRING",
+          "value": "inset 0 1px 1px rgb(0 0 0 / 0.05)",
+          "description": ""
+        },
+        {
+          "name": "spacing/10",
+          "type": "FLOAT",
+          "value": 40,
+          "description": ""
+        },
+        {
+          "name": "leading/loose",
+          "type": "FLOAT",
+          "value": 2,
+          "description": ""
+        },
+        {
+          "name": "spacing/11",
+          "type": "FLOAT",
+          "value": 44,
+          "description": ""
+        },
+        {
+          "name": "leading/normal",
+          "type": "FLOAT",
+          "value": 1.5,
+          "description": ""
+        },
+        {
+          "name": "spacing/12",
+          "type": "FLOAT",
+          "value": 48,
+          "description": ""
+        },
+        {
+          "name": "leading/relaxed",
+          "type": "FLOAT",
+          "value": 1.625,
+          "description": ""
+        },
+        {
+          "name": "spacing/14",
+          "type": "FLOAT",
+          "value": 56,
+          "description": ""
+        },
+        {
+          "name": "leading/snug",
+          "type": "FLOAT",
+          "value": 1.375,
+          "description": ""
+        },
+        {
+          "name": "spacing/16",
+          "type": "FLOAT",
+          "value": 64,
+          "description": ""
+        },
+        {
+          "name": "leading/tight",
+          "type": "FLOAT",
+          "value": 1.25,
+          "description": ""
+        },
+        {
+          "name": "spacing/2",
+          "type": "FLOAT",
+          "value": 8,
+          "description": ""
+        },
+        {
+          "name": "perspective/distant",
+          "type": "FLOAT",
+          "value": 1200,
+          "description": ""
+        },
+        {
+          "name": "spacing/2_5",
+          "type": "FLOAT",
+          "value": 10,
+          "description": ""
+        },
+        {
+          "name": "perspective/dramatic",
+          "type": "FLOAT",
+          "value": 100,
+          "description": ""
+        },
+        {
+          "name": "spacing/20",
+          "type": "FLOAT",
+          "value": 80,
+          "description": ""
+        },
+        {
+          "name": "perspective/midrange",
+          "type": "FLOAT",
+          "value": 800,
+          "description": ""
+        },
+        {
+          "name": "spacing/24",
+          "type": "FLOAT",
+          "value": 96,
+          "description": ""
+        },
+        {
+          "name": "perspective/near",
+          "type": "FLOAT",
+          "value": 300,
+          "description": ""
+        },
+        {
+          "name": "spacing/28",
+          "type": "FLOAT",
+          "value": 112,
+          "description": ""
+        },
+        {
+          "name": "perspective/normal",
+          "type": "FLOAT",
+          "value": 500,
+          "description": ""
+        },
+        {
+          "name": "spacing/3",
+          "type": "FLOAT",
+          "value": 12,
+          "description": ""
+        },
+        {
+          "name": "radius/2xl",
+          "type": "FLOAT",
+          "value": 16,
+          "description": ""
+        },
+        {
+          "name": "spacing/3_5",
+          "type": "FLOAT",
+          "value": 14,
+          "description": ""
+        },
+        {
+          "name": "radius/3xl",
+          "type": "FLOAT",
+          "value": 24,
+          "description": ""
+        },
+        {
+          "name": "spacing/32",
+          "type": "FLOAT",
+          "value": 128,
+          "description": ""
+        },
+        {
+          "name": "radius/4xl",
+          "type": "FLOAT",
+          "value": 32,
+          "description": ""
+        },
+        {
+          "name": "spacing/36",
+          "type": "FLOAT",
+          "value": 144,
+          "description": ""
+        },
+        {
+          "name": "radius/DEFAULT",
+          "type": "FLOAT",
+          "value": 4,
+          "description": ""
+        },
+        {
+          "name": "spacing/4",
+          "type": "FLOAT",
+          "value": 16,
+          "description": ""
+        },
+        {
+          "name": "radius/lg",
+          "type": "FLOAT",
+          "value": 8,
+          "description": ""
+        },
+        {
+          "name": "spacing/40",
+          "type": "FLOAT",
+          "value": 160,
+          "description": ""
+        },
+        {
+          "name": "radius/md",
+          "type": "FLOAT",
+          "value": 6,
+          "description": ""
+        },
+        {
+          "name": "spacing/44",
+          "type": "FLOAT",
+          "value": 176,
+          "description": ""
+        },
+        {
+          "name": "radius/sm",
+          "type": "FLOAT",
+          "value": 4,
+          "description": ""
+        },
+        {
+          "name": "spacing/48",
+          "type": "FLOAT",
+          "value": 192,
+          "description": ""
+        },
+        {
+          "name": "radius/xl",
+          "type": "FLOAT",
+          "value": 12,
+          "description": ""
+        },
+        {
+          "name": "spacing/5",
+          "type": "FLOAT",
+          "value": 20,
+          "description": ""
+        },
+        {
+          "name": "radius/xs",
+          "type": "FLOAT",
+          "value": 2,
+          "description": ""
+        },
+        {
+          "name": "spacing/52",
+          "type": "FLOAT",
+          "value": 208,
+          "description": ""
+        },
+        {
+          "name": "shadow/2xl",
+          "type": "STRING",
+          "value": "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+          "description": ""
+        },
+        {
+          "name": "color/slate/400",
+          "type": "COLOR",
+          "value": "#90a1b9",
+          "description": ""
+        },
+        {
+          "name": "color/stone/50",
+          "type": "COLOR",
+          "value": "#fafaf9",
+          "description": ""
+        },
+        {
+          "name": "color/stone/500",
+          "type": "COLOR",
+          "value": "#79716b",
+          "description": ""
+        },
+        {
+          "name": "color/stone/600",
+          "type": "COLOR",
+          "value": "#57534d",
+          "description": ""
+        },
+        {
+          "name": "color/stone/700",
+          "type": "COLOR",
+          "value": "#44403b",
+          "description": ""
+        },
+        {
+          "name": "color/stone/800",
+          "type": "COLOR",
+          "value": "#292524",
+          "description": ""
+        },
+        {
+          "name": "color/stone/900",
+          "type": "COLOR",
+          "value": "#1c1917",
+          "description": ""
+        },
+        {
+          "name": "color/stone/950",
+          "type": "COLOR",
+          "value": "#0c0a09",
+          "description": ""
+        },
+        {
+          "name": "color/yellow/800",
+          "type": "COLOR",
+          "value": "#894b00",
+          "description": ""
+        },
+        {
+          "name": "color/yellow/900",
+          "type": "COLOR",
+          "value": "#733e0a",
+          "description": ""
+        },
+        {
+          "name": "color/teal/100",
+          "type": "COLOR",
+          "value": "#cbfbf1",
+          "description": ""
+        },
+        {
+          "name": "color/yellow/950",
+          "type": "COLOR",
+          "value": "#432004",
+          "description": ""
+        },
+        {
+          "name": "color/teal/200",
+          "type": "COLOR",
+          "value": "#96f7e4",
+          "description": ""
+        },
+        {
+          "name": "color/zinc/100",
+          "type": "COLOR",
+          "value": "#f4f4f5",
+          "description": ""
+        },
+        {
+          "name": "color/teal/300",
+          "type": "COLOR",
+          "value": "#46ecd5",
+          "description": ""
+        },
+        {
+          "name": "color/zinc/200",
+          "type": "COLOR",
+          "value": "#e4e4e7",
+          "description": ""
+        },
+        {
+          "name": "color/teal/400",
+          "type": "COLOR",
+          "value": "#00d5be",
+          "description": ""
+        },
+        {
+          "name": "color/zinc/300",
+          "type": "COLOR",
+          "value": "#d4d4d8",
+          "description": ""
+        },
+        {
+          "name": "color/teal/50",
+          "type": "COLOR",
+          "value": "#f0fdfa",
+          "description": ""
+        },
+        {
+          "name": "color/zinc/400",
+          "type": "COLOR",
+          "value": "#9f9fa9",
+          "description": ""
+        },
+        {
+          "name": "color/teal/500",
+          "type": "COLOR",
+          "value": "#00bba7",
+          "description": ""
+        },
+        {
+          "name": "color/zinc/50",
+          "type": "COLOR",
+          "value": "#fafafa",
+          "description": ""
+        },
+        {
+          "name": "color/teal/600",
+          "type": "COLOR",
+          "value": "#009689",
+          "description": ""
+        },
+        {
+          "name": "color/zinc/500",
+          "type": "COLOR",
+          "value": "#71717b",
+          "description": ""
+        },
+        {
+          "name": "color/teal/700",
+          "type": "COLOR",
+          "value": "#00786f",
+          "description": ""
+        },
+        {
+          "name": "color/zinc/600",
+          "type": "COLOR",
+          "value": "#52525c",
+          "description": ""
+        },
+        {
+          "name": "color/teal/800",
+          "type": "COLOR",
+          "value": "#005f5a",
+          "description": ""
+        },
+        {
+          "name": "color/zinc/700",
+          "type": "COLOR",
+          "value": "#3f3f46",
+          "description": ""
+        },
+        {
+          "name": "color/teal/900",
+          "type": "COLOR",
+          "value": "#0b4f4a",
+          "description": ""
+        },
+        {
+          "name": "color/zinc/800",
+          "type": "COLOR",
+          "value": "#27272a",
+          "description": ""
+        },
+        {
+          "name": "color/teal/950",
+          "type": "COLOR",
+          "value": "#022f2e",
+          "description": ""
+        },
+        {
+          "name": "color/zinc/900",
+          "type": "COLOR",
+          "value": "#18181b",
+          "description": ""
+        },
+        {
+          "name": "color/violet/100",
+          "type": "COLOR",
+          "value": "#ede9fe",
+          "description": ""
+        },
+        {
+          "name": "color/zinc/950",
+          "type": "COLOR",
+          "value": "#09090b",
+          "description": ""
+        },
+        {
+          "name": "color/violet/200",
+          "type": "COLOR",
+          "value": "#ddd6ff",
+          "description": ""
+        },
+        {
+          "name": "container/2xl",
+          "type": "FLOAT",
+          "value": 672,
+          "description": ""
+        },
+        {
+          "name": "color/violet/300",
+          "type": "COLOR",
+          "value": "#c4b4ff",
+          "description": ""
+        },
+        {
+          "name": "container/2xs",
+          "type": "FLOAT",
+          "value": 288,
+          "description": ""
+        },
+        {
+          "name": "color/violet/400",
+          "type": "COLOR",
+          "value": "#a684ff",
+          "description": ""
+        },
+        {
+          "name": "container/3xl",
+          "type": "FLOAT",
+          "value": 768,
+          "description": ""
+        },
+        {
+          "name": "color/violet/50",
+          "type": "COLOR",
+          "value": "#f5f3ff",
+          "description": ""
+        },
+        {
+          "name": "container/3xs",
+          "type": "FLOAT",
+          "value": 256,
+          "description": ""
+        },
+        {
+          "name": "color/violet/500",
+          "type": "COLOR",
+          "value": "#8e51ff",
+          "description": ""
+        },
+        {
+          "name": "container/4xl",
+          "type": "FLOAT",
+          "value": 896,
+          "description": ""
+        },
+        {
+          "name": "color/violet/600",
+          "type": "COLOR",
+          "value": "#7f22fe",
+          "description": ""
+        },
+        {
+          "name": "container/5xl",
+          "type": "FLOAT",
+          "value": 1024,
+          "description": ""
+        },
+        {
+          "name": "color/violet/700",
+          "type": "COLOR",
+          "value": "#7008e7",
+          "description": ""
+        },
+        {
+          "name": "container/6xl",
+          "type": "FLOAT",
+          "value": 1152,
+          "description": ""
+        },
+        {
+          "name": "color/violet/800",
+          "type": "COLOR",
+          "value": "#5d0ec0",
+          "description": ""
+        },
+        {
+          "name": "container/7xl",
+          "type": "FLOAT",
+          "value": 1280,
+          "description": ""
+        },
+        {
+          "name": "color/violet/900",
+          "type": "COLOR",
+          "value": "#4d179a",
+          "description": ""
+        },
+        {
+          "name": "container/lg",
+          "type": "FLOAT",
+          "value": 512,
+          "description": ""
+        },
+        {
+          "name": "color/violet/950",
+          "type": "COLOR",
+          "value": "#2f0d68",
+          "description": ""
+        },
+        {
+          "name": "container/md",
+          "type": "FLOAT",
+          "value": 448,
+          "description": ""
+        },
+        {
+          "name": "color/white",
+          "type": "COLOR",
+          "value": "#ffffff",
+          "description": ""
+        },
+        {
+          "name": "container/sm",
+          "type": "FLOAT",
+          "value": 384,
+          "description": ""
+        },
+        {
+          "name": "color/yellow/100",
+          "type": "COLOR",
+          "value": "#fef9c2",
+          "description": ""
+        },
+        {
+          "name": "container/xl",
+          "type": "FLOAT",
+          "value": 576,
+          "description": ""
+        },
+        {
+          "name": "color/yellow/200",
+          "type": "COLOR",
+          "value": "#fff085",
+          "description": ""
+        },
+        {
+          "name": "color/neutral/900",
+          "type": "COLOR",
+          "value": "#171717",
+          "description": ""
+        },
+        {
+          "name": "color/neutral/950",
+          "type": "COLOR",
+          "value": "#0a0a0a",
+          "description": ""
+        },
+        {
+          "name": "color/red/400",
+          "type": "COLOR",
+          "value": "#ff6467",
+          "description": ""
+        },
+        {
+          "name": "color/orange/50",
+          "type": "COLOR",
+          "value": "#fff7ed",
+          "description": ""
+        },
+        {
+          "name": "color/red/50",
+          "type": "COLOR",
+          "value": "#fef2f2",
+          "description": ""
+        },
+        {
+          "name": "color/orange/500",
+          "type": "COLOR",
+          "value": "#ff6900",
+          "description": ""
+        },
+        {
+          "name": "color/red/500",
+          "type": "COLOR",
+          "value": "#fb2c36",
+          "description": ""
+        },
+        {
+          "name": "color/orange/600",
+          "type": "COLOR",
+          "value": "#f54900",
+          "description": ""
+        },
+        {
+          "name": "color/red/600",
+          "type": "COLOR",
+          "value": "#e7000b",
+          "description": ""
+        },
+        {
+          "name": "color/orange/700",
+          "type": "COLOR",
+          "value": "#ca3500",
+          "description": ""
+        },
+        {
+          "name": "color/red/700",
+          "type": "COLOR",
+          "value": "#c10007",
+          "description": ""
+        },
+        {
+          "name": "color/orange/800",
+          "type": "COLOR",
+          "value": "#9f2d00",
+          "description": ""
+        },
+        {
+          "name": "color/red/800",
+          "type": "COLOR",
+          "value": "#9f0712",
+          "description": ""
+        },
+        {
+          "name": "color/orange/900",
+          "type": "COLOR",
+          "value": "#7e2a0c",
+          "description": ""
+        },
+        {
+          "name": "color/red/900",
+          "type": "COLOR",
+          "value": "#82181a",
+          "description": ""
+        },
+        {
+          "name": "color/orange/950",
+          "type": "COLOR",
+          "value": "#441306",
+          "description": ""
+        },
+        {
+          "name": "color/red/950",
+          "type": "COLOR",
+          "value": "#460809",
+          "description": ""
+        },
+        {
+          "name": "color/pink/100",
+          "type": "COLOR",
+          "value": "#fce7f3",
+          "description": ""
+        },
+        {
+          "name": "color/rose/100",
+          "type": "COLOR",
+          "value": "#ffe4e6",
+          "description": ""
+        },
+        {
+          "name": "color/pink/200",
+          "type": "COLOR",
+          "value": "#fccee8",
+          "description": ""
+        },
+        {
+          "name": "color/rose/200",
+          "type": "COLOR",
+          "value": "#ffccd3",
+          "description": ""
+        },
+        {
+          "name": "color/pink/300",
+          "type": "COLOR",
+          "value": "#fda5d5",
+          "description": ""
+        },
+        {
+          "name": "color/rose/300",
+          "type": "COLOR",
+          "value": "#ffa1ad",
+          "description": ""
+        },
+        {
+          "name": "color/pink/400",
+          "type": "COLOR",
+          "value": "#fb64b6",
+          "description": ""
+        },
+        {
+          "name": "color/rose/400",
+          "type": "COLOR",
+          "value": "#ff637e",
+          "description": ""
+        },
+        {
+          "name": "color/pink/50",
+          "type": "COLOR",
+          "value": "#fdf2f8",
+          "description": ""
+        },
+        {
+          "name": "color/rose/50",
+          "type": "COLOR",
+          "value": "#fff1f2",
+          "description": ""
+        },
+        {
+          "name": "color/pink/500",
+          "type": "COLOR",
+          "value": "#f6339a",
+          "description": ""
+        },
+        {
+          "name": "color/rose/500",
+          "type": "COLOR",
+          "value": "#ff2056",
+          "description": ""
+        },
+        {
+          "name": "color/pink/600",
+          "type": "COLOR",
+          "value": "#e60076",
+          "description": ""
+        },
+        {
+          "name": "color/rose/600",
+          "type": "COLOR",
+          "value": "#ec003f",
+          "description": ""
+        },
+        {
+          "name": "color/pink/700",
+          "type": "COLOR",
+          "value": "#c6005c",
+          "description": ""
+        },
+        {
+          "name": "color/rose/700",
+          "type": "COLOR",
+          "value": "#c70036",
+          "description": ""
+        },
+        {
+          "name": "color/pink/800",
+          "type": "COLOR",
+          "value": "#a3004c",
+          "description": ""
+        },
+        {
+          "name": "color/rose/800",
+          "type": "COLOR",
+          "value": "#a50036",
+          "description": ""
+        },
+        {
+          "name": "color/pink/900",
+          "type": "COLOR",
+          "value": "#861043",
+          "description": ""
+        },
+        {
+          "name": "color/rose/900",
+          "type": "COLOR",
+          "value": "#8b0836",
+          "description": ""
+        },
+        {
+          "name": "color/pink/950",
+          "type": "COLOR",
+          "value": "#510424",
+          "description": ""
+        },
+        {
+          "name": "color/rose/950",
+          "type": "COLOR",
+          "value": "#4d0218",
+          "description": ""
+        },
+        {
+          "name": "color/purple/100",
+          "type": "COLOR",
+          "value": "#f3e8ff",
+          "description": ""
+        },
+        {
+          "name": "color/sky/100",
+          "type": "COLOR",
+          "value": "#dff2fe",
+          "description": ""
+        },
+        {
+          "name": "color/purple/200",
+          "type": "COLOR",
+          "value": "#e9d4ff",
+          "description": ""
+        },
+        {
+          "name": "color/sky/200",
+          "type": "COLOR",
+          "value": "#b8e6fe",
+          "description": ""
+        },
+        {
+          "name": "color/purple/300",
+          "type": "COLOR",
+          "value": "#dab2ff",
+          "description": ""
+        },
+        {
+          "name": "color/sky/300",
+          "type": "COLOR",
+          "value": "#74d4ff",
+          "description": ""
+        },
+        {
+          "name": "color/purple/400",
+          "type": "COLOR",
+          "value": "#c27aff",
+          "description": ""
+        },
+        {
+          "name": "color/sky/400",
+          "type": "COLOR",
+          "value": "#00bcff",
+          "description": ""
+        },
+        {
+          "name": "color/purple/50",
+          "type": "COLOR",
+          "value": "#faf5ff",
+          "description": ""
+        },
+        {
+          "name": "color/sky/50",
+          "type": "COLOR",
+          "value": "#f0f9ff",
+          "description": ""
+        },
+        {
+          "name": "color/purple/500",
+          "type": "COLOR",
+          "value": "#ad46ff",
+          "description": ""
+        },
+        {
+          "name": "color/sky/500",
+          "type": "COLOR",
+          "value": "#00a6f4",
+          "description": ""
+        },
+        {
+          "name": "color/purple/600",
+          "type": "COLOR",
+          "value": "#9810fa",
+          "description": ""
+        },
+        {
+          "name": "color/sky/600",
+          "type": "COLOR",
+          "value": "#0084d1",
+          "description": ""
+        },
+        {
+          "name": "color/purple/700",
+          "type": "COLOR",
+          "value": "#8200db",
+          "description": ""
+        },
+        {
+          "name": "color/cyan/300",
+          "type": "COLOR",
+          "value": "#53eafd",
+          "description": ""
+        },
+        {
+          "name": "color/emerald/400",
+          "type": "COLOR",
+          "value": "#00d492",
+          "description": ""
+        },
+        {
+          "name": "color/emerald/50",
+          "type": "COLOR",
+          "value": "#ecfdf5",
+          "description": ""
+        },
+        {
+          "name": "color/emerald/500",
+          "type": "COLOR",
+          "value": "#00bc7d",
+          "description": ""
+        },
+        {
+          "name": "color/emerald/600",
+          "type": "COLOR",
+          "value": "#009966",
+          "description": ""
+        },
+        {
+          "name": "color/emerald/700",
+          "type": "COLOR",
+          "value": "#007a55",
+          "description": ""
+        },
+        {
+          "name": "color/emerald/800",
+          "type": "COLOR",
+          "value": "#006045",
+          "description": ""
+        },
+        {
+          "name": "color/emerald/900",
+          "type": "COLOR",
+          "value": "#004f3b",
+          "description": ""
+        },
+        {
+          "name": "color/emerald/950",
+          "type": "COLOR",
+          "value": "#002c22",
+          "description": ""
+        },
+        {
+          "name": "color/fuchsia/100",
+          "type": "COLOR",
+          "value": "#fae8ff",
+          "description": ""
+        },
+        {
+          "name": "color/fuchsia/200",
+          "type": "COLOR",
+          "value": "#f6cfff",
+          "description": ""
+        },
+        {
+          "name": "color/indigo/800",
+          "type": "COLOR",
+          "value": "#372aac",
+          "description": ""
+        },
+        {
+          "name": "color/fuchsia/900",
+          "type": "COLOR",
+          "value": "#721378",
+          "description": ""
+        },
+        {
+          "name": "color/indigo/900",
+          "type": "COLOR",
+          "value": "#312c85",
+          "description": ""
+        },
+        {
+          "name": "color/fuchsia/950",
+          "type": "COLOR",
+          "value": "#4b004f",
+          "description": ""
+        },
+        {
+          "name": "color/indigo/950",
+          "type": "COLOR",
+          "value": "#1e1a4d",
+          "description": ""
+        },
+        {
+          "name": "color/gray/100",
+          "type": "COLOR",
+          "value": "#f3f4f6",
+          "description": ""
+        },
+        {
+          "name": "color/lime/100",
+          "type": "COLOR",
+          "value": "#ecfcca",
+          "description": ""
+        },
+        {
+          "name": "color/gray/200",
+          "type": "COLOR",
+          "value": "#e5e7eb",
+          "description": ""
+        },
+        {
+          "name": "color/lime/200",
+          "type": "COLOR",
+          "value": "#d8f999",
+          "description": ""
+        },
+        {
+          "name": "color/gray/300",
+          "type": "COLOR",
+          "value": "#d1d5dc",
+          "description": ""
+        },
+        {
+          "name": "color/lime/300",
+          "type": "COLOR",
+          "value": "#bbf451",
+          "description": ""
+        },
+        {
+          "name": "color/gray/400",
+          "type": "COLOR",
+          "value": "#99a1af",
+          "description": ""
+        },
+        {
+          "name": "color/lime/400",
+          "type": "COLOR",
+          "value": "#9ae600",
+          "description": ""
+        },
+        {
+          "name": "color/gray/50",
+          "type": "COLOR",
+          "value": "#f9fafb",
+          "description": ""
+        },
+        {
+          "name": "color/lime/50",
+          "type": "COLOR",
+          "value": "#f7fee7",
+          "description": ""
+        },
+        {
+          "name": "color/gray/500",
+          "type": "COLOR",
+          "value": "#6a7282",
+          "description": ""
+        },
+        {
+          "name": "color/lime/500",
+          "type": "COLOR",
+          "value": "#7ccf00",
+          "description": ""
+        },
+        {
+          "name": "color/gray/600",
+          "type": "COLOR",
+          "value": "#4a5565",
+          "description": ""
+        },
+        {
+          "name": "color/lime/600",
+          "type": "COLOR",
+          "value": "#5ea500",
+          "description": ""
+        },
+        {
+          "name": "color/gray/700",
+          "type": "COLOR",
+          "value": "#364153",
+          "description": ""
+        },
+        {
+          "name": "color/lime/700",
+          "type": "COLOR",
+          "value": "#497d00",
+          "description": ""
+        },
+        {
+          "name": "color/gray/800",
+          "type": "COLOR",
+          "value": "#1e2939",
+          "description": ""
+        },
+        {
+          "name": "color/lime/800",
+          "type": "COLOR",
+          "value": "#3c6300",
+          "description": ""
+        },
+        {
+          "name": "color/gray/900",
+          "type": "COLOR",
+          "value": "#101828",
+          "description": ""
+        },
+        {
+          "name": "color/lime/900",
+          "type": "COLOR",
+          "value": "#35530e",
+          "description": ""
+        },
+        {
+          "name": "color/gray/950",
+          "type": "COLOR",
+          "value": "#030712",
+          "description": ""
+        },
+        {
+          "name": "color/lime/950",
+          "type": "COLOR",
+          "value": "#192e03",
+          "description": ""
+        },
+        {
+          "name": "color/green/100",
+          "type": "COLOR",
+          "value": "#dcfce7",
+          "description": ""
+        },
+        {
+          "name": "color/green/200",
+          "type": "COLOR",
+          "value": "#b9f8cf",
+          "description": ""
+        },
+        {
+          "name": "color/green/300",
+          "type": "COLOR",
+          "value": "#7bf1a8",
+          "description": ""
+        },
+        {
+          "name": "color/green/400",
+          "type": "COLOR",
+          "value": "#05df72",
+          "description": ""
+        },
+        {
+          "name": "color/green/50",
+          "type": "COLOR",
+          "value": "#f0fdf4",
+          "description": ""
+        },
+        {
+          "name": "color/green/500",
+          "type": "COLOR",
+          "value": "#00c950",
+          "description": ""
+        },
+        {
+          "name": "color/green/600",
+          "type": "COLOR",
+          "value": "#00a63e",
+          "description": ""
+        },
+        {
+          "name": "color/green/700",
+          "type": "COLOR",
+          "value": "#008236",
+          "description": ""
+        },
+        {
+          "name": "color/green/800",
+          "type": "COLOR",
+          "value": "#016630",
+          "description": ""
+        },
+        {
+          "name": "color/green/900",
+          "type": "COLOR",
+          "value": "#0d542b",
+          "description": ""
+        },
+        {
+          "name": "color/green/950",
+          "type": "COLOR",
+          "value": "#032e15",
+          "description": ""
+        },
+        {
+          "name": "color/indigo/100",
+          "type": "COLOR",
+          "value": "#e0e7ff",
+          "description": ""
+        },
+        {
+          "name": "color/indigo/200",
+          "type": "COLOR",
+          "value": "#c6d2ff",
+          "description": ""
+        },
+        {
+          "name": "color/amber/400",
+          "type": "COLOR",
+          "value": "#ffb900",
+          "description": ""
+        },
+        {
+          "name": "color/amber/50",
+          "type": "COLOR",
+          "value": "#fffbeb",
+          "description": ""
+        },
+        {
+          "name": "color/amber/500",
+          "type": "COLOR",
+          "value": "#fe9a00",
+          "description": ""
+        },
+        {
+          "name": "color/amber/600",
+          "type": "COLOR",
+          "value": "#e17100",
+          "description": ""
+        },
+        {
+          "name": "color/amber/700",
+          "type": "COLOR",
+          "value": "#bb4d00",
+          "description": ""
+        },
+        {
+          "name": "color/amber/800",
+          "type": "COLOR",
+          "value": "#973c00",
+          "description": ""
+        },
+        {
+          "name": "color/amber/900",
+          "type": "COLOR",
+          "value": "#7b3306",
+          "description": ""
+        },
+        {
+          "name": "color/amber/950",
+          "type": "COLOR",
+          "value": "#461901",
+          "description": ""
+        },
+        {
+          "name": "color/black",
+          "type": "COLOR",
+          "value": "#000000",
+          "description": ""
+        },
+        {
+          "name": "color/blue/100",
+          "type": "COLOR",
+          "value": "#dbeafe",
+          "description": ""
+        },
+        {
+          "name": "color/blue/200",
+          "type": "COLOR",
+          "value": "#bedbff",
+          "description": ""
+        },
+        {
+          "name": "color/blue/300",
+          "type": "COLOR",
+          "value": "#8ec5ff",
+          "description": ""
+        },
+        {
+          "name": "animate/bounce",
+          "type": "STRING",
+          "value": "bounce 1s infinite",
+          "description": ""
+        },
+        {
+          "name": "color/blue/400",
+          "type": "COLOR",
+          "value": "#51a2ff",
+          "description": ""
+        },
+        {
+          "name": "animate/ping",
+          "type": "STRING",
+          "value": "ping 1s cubic-bezier(0, 0, 0.2, 1) infinite",
+          "description": ""
+        },
+        {
+          "name": "color/blue/50",
+          "type": "COLOR",
+          "value": "#eff6ff",
+          "description": ""
+        },
+        {
+          "name": "animate/pulse",
+          "type": "STRING",
+          "value": "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+          "description": ""
+        },
+        {
+          "name": "color/blue/500",
+          "type": "COLOR",
+          "value": "#2b7fff",
+          "description": ""
+        },
+        {
+          "name": "animate/spin",
+          "type": "STRING",
+          "value": "spin 1s linear infinite",
+          "description": ""
+        },
+        {
+          "name": "color/blue/600",
+          "type": "COLOR",
+          "value": "#155dfc",
+          "description": ""
+        },
+        {
+          "name": "aspect/video",
+          "type": "STRING",
+          "value": "16 / 9",
+          "description": ""
+        },
+        {
+          "name": "color/blue/700",
+          "type": "COLOR",
+          "value": "#1447e6",
+          "description": ""
+        },
+        {
+          "name": "blur/2xl",
+          "type": "FLOAT",
+          "value": 40,
+          "description": ""
+        },
+        {
+          "name": "color/blue/800",
+          "type": "COLOR",
+          "value": "#193cb8",
+          "description": ""
+        },
+        {
+          "name": "blur/3xl",
+          "type": "FLOAT",
+          "value": 64,
+          "description": ""
+        },
+        {
+          "name": "color/blue/900",
+          "type": "COLOR",
+          "value": "#1c398e",
+          "description": ""
+        },
+        {
+          "name": "blur/DEFAULT",
+          "type": "FLOAT",
+          "value": 8,
+          "description": ""
+        },
+        {
+          "name": "color/blue/950",
+          "type": "COLOR",
+          "value": "#162456",
+          "description": ""
+        },
+        {
+          "name": "blur/lg",
+          "type": "FLOAT",
+          "value": 16,
+          "description": ""
+        },
+        {
+          "name": "color/brand/gray-100",
+          "type": "COLOR",
+          "value": "#ececec",
+          "description": "Brand extension — not derivable from Tailwind. Source: scripts/figma/brand-primitives.json"
+        },
+        {
+          "name": "blur/md",
+          "type": "FLOAT",
+          "value": 12,
+          "description": ""
+        },
+        {
+          "name": "color/brand/gray-400",
+          "type": "COLOR",
+          "value": "#9b9b9b",
+          "description": "Brand extension — not derivable from Tailwind. Source: scripts/figma/brand-primitives.json"
+        },
+        {
+          "name": "blur/sm",
+          "type": "FLOAT",
+          "value": 8,
+          "description": ""
+        },
+        {
+          "name": "color/brand/gray-50",
+          "type": "COLOR",
+          "value": "#f7f7f7",
+          "description": "Brand extension — not derivable from Tailwind. Source: scripts/figma/brand-primitives.json"
+        },
+        {
+          "name": "blur/xl",
+          "type": "FLOAT",
+          "value": 24,
+          "description": ""
+        },
+        {
+          "name": "color/brand/gray-500",
+          "type": "COLOR",
+          "value": "#5b5b5b",
+          "description": "Brand extension — not derivable from Tailwind. Source: scripts/figma/brand-primitives.json"
+        },
+        {
+          "name": "blur/xs",
+          "type": "FLOAT",
+          "value": 4,
+          "description": ""
+        },
+        {
+          "name": "color/brand/gray-600",
+          "type": "COLOR",
+          "value": "#4c4c4c",
+          "description": "Brand extension — not derivable from Tailwind. Source: scripts/figma/brand-primitives.json"
+        },
+        {
+          "name": "breakpoint/2xl",
+          "type": "FLOAT",
+          "value": 1536,
+          "description": ""
+        },
+        {
+          "name": "color/brand/gray-700",
+          "type": "COLOR",
+          "value": "#343434",
+          "description": "Brand extension — not derivable from Tailwind. Source: scripts/figma/brand-primitives.json"
+        },
+        {
+          "name": "breakpoint/lg",
+          "type": "FLOAT",
+          "value": 1024,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "3 Responsive",
+      "modes": [
+        "Desktop",
+        "Tablet",
+        "Mobile"
+      ],
+      "variables": [
+        {
+          "name": "Desktop/container/max-width",
+          "type": "FLOAT",
+          "value": 1280,
+          "description": ""
+        },
+        {
+          "name": "Tablet/container/max-width",
+          "type": "FLOAT",
+          "value": 1280,
+          "description": ""
+        },
+        {
+          "name": "Mobile/container/max-width",
+          "type": "FLOAT",
+          "value": 1280,
+          "description": ""
+        },
+        {
+          "name": "Desktop/container/gutter",
+          "type": "FLOAT",
+          "value": 16,
+          "description": ""
+        },
+        {
+          "name": "Tablet/container/gutter",
+          "type": "FLOAT",
+          "value": 16,
+          "description": ""
+        },
+        {
+          "name": "Mobile/container/gutter",
+          "type": "FLOAT",
+          "value": 16,
+          "description": ""
+        },
+        {
+          "name": "Desktop/text/page-title",
+          "type": "FLOAT",
+          "value": 60,
+          "description": ""
+        },
+        {
+          "name": "Tablet/text/page-title",
+          "type": "FLOAT",
+          "value": 48,
+          "description": ""
+        },
+        {
+          "name": "Mobile/text/page-title",
+          "type": "FLOAT",
+          "value": 36,
+          "description": ""
+        },
+        {
+          "name": "Desktop/text/section-title",
+          "type": "FLOAT",
+          "value": 30,
+          "description": ""
+        },
+        {
+          "name": "Tablet/text/section-title",
+          "type": "FLOAT",
+          "value": 24,
+          "description": ""
+        },
+        {
+          "name": "Mobile/text/section-title",
+          "type": "FLOAT",
+          "value": 20,
+          "description": ""
+        },
+        {
+          "name": "Desktop/text/hero-title",
+          "type": "FLOAT",
+          "value": 48,
+          "description": ""
+        },
+        {
+          "name": "Tablet/text/hero-title",
+          "type": "FLOAT",
+          "value": 36,
+          "description": ""
+        },
+        {
+          "name": "Mobile/text/hero-title",
+          "type": "FLOAT",
+          "value": 24,
+          "description": ""
+        },
+        {
+          "name": "Desktop/text/hero-body",
+          "type": "FLOAT",
+          "value": 24,
+          "description": ""
+        },
+        {
+          "name": "Tablet/text/hero-body",
+          "type": "FLOAT",
+          "value": 20,
+          "description": ""
+        },
+        {
+          "name": "Mobile/text/hero-body",
+          "type": "FLOAT",
+          "value": 18,
+          "description": ""
+        },
+        {
+          "name": "Desktop/text/nav-link",
+          "type": "FLOAT",
+          "value": 20,
+          "description": ""
+        },
+        {
+          "name": "Tablet/text/nav-link",
+          "type": "FLOAT",
+          "value": 20,
+          "description": ""
+        },
+        {
+          "name": "Mobile/text/nav-link",
+          "type": "FLOAT",
+          "value": 16,
+          "description": ""
+        },
+        {
+          "name": "Desktop/leading/hero-body",
+          "type": "FLOAT",
+          "value": 30,
+          "description": ""
+        },
+        {
+          "name": "Tablet/leading/hero-body",
+          "type": "FLOAT",
+          "value": 28,
+          "description": ""
+        },
+        {
+          "name": "Mobile/leading/hero-body",
+          "type": "FLOAT",
+          "value": 28,
+          "description": ""
+        },
+        {
+          "name": "Desktop/header/padding-y",
+          "type": "FLOAT",
+          "value": 24,
+          "description": ""
+        },
+        {
+          "name": "Tablet/header/padding-y",
+          "type": "FLOAT",
+          "value": 16,
+          "description": ""
+        },
+        {
+          "name": "Mobile/header/padding-y",
+          "type": "FLOAT",
+          "value": 16,
+          "description": ""
+        },
+        {
+          "name": "Desktop/header/nav-gap",
+          "type": "FLOAT",
+          "value": 40,
+          "description": ""
+        },
+        {
+          "name": "Tablet/header/nav-gap",
+          "type": "FLOAT",
+          "value": 24,
+          "description": ""
+        },
+        {
+          "name": "Mobile/header/nav-gap",
+          "type": "FLOAT",
+          "value": 16,
+          "description": ""
+        },
+        {
+          "name": "Desktop/footer/padding-y",
+          "type": "FLOAT",
+          "value": 64,
+          "description": ""
+        },
+        {
+          "name": "Tablet/footer/padding-y",
+          "type": "FLOAT",
+          "value": 64,
+          "description": ""
+        },
+        {
+          "name": "Mobile/footer/padding-y",
+          "type": "FLOAT",
+          "value": 32,
+          "description": ""
+        },
+        {
+          "name": "Desktop/footer/gap",
+          "type": "FLOAT",
+          "value": 32,
+          "description": ""
+        },
+        {
+          "name": "Tablet/footer/gap",
+          "type": "FLOAT",
+          "value": 32,
+          "description": ""
+        },
+        {
+          "name": "Mobile/footer/gap",
+          "type": "FLOAT",
+          "value": 24,
+          "description": ""
+        },
+        {
+          "name": "Desktop/footer/link-gap",
+          "type": "FLOAT",
+          "value": 24,
+          "description": ""
+        },
+        {
+          "name": "Tablet/footer/link-gap",
+          "type": "FLOAT",
+          "value": 24,
+          "description": ""
+        },
+        {
+          "name": "Mobile/footer/link-gap",
+          "type": "FLOAT",
+          "value": 8,
+          "description": ""
+        },
+        {
+          "name": "Desktop/footer/inner-gap",
+          "type": "FLOAT",
+          "value": 32,
+          "description": ""
+        },
+        {
+          "name": "Tablet/footer/inner-gap",
+          "type": "FLOAT",
+          "value": 32,
+          "description": ""
+        },
+        {
+          "name": "Mobile/footer/inner-gap",
+          "type": "FLOAT",
+          "value": 16,
+          "description": ""
+        },
+        {
+          "name": "Desktop/hero/text-gap",
+          "type": "FLOAT",
+          "value": 16,
+          "description": ""
+        },
+        {
+          "name": "Tablet/hero/text-gap",
+          "type": "FLOAT",
+          "value": 16,
+          "description": ""
+        },
+        {
+          "name": "Mobile/hero/text-gap",
+          "type": "FLOAT",
+          "value": 8,
+          "description": ""
+        },
+        {
+          "name": "Desktop/serie-list/gap",
+          "type": "FLOAT",
+          "value": 32,
+          "description": ""
+        },
+        {
+          "name": "Tablet/serie-list/gap",
+          "type": "FLOAT",
+          "value": 16,
+          "description": ""
+        },
+        {
+          "name": "Mobile/serie-list/gap",
+          "type": "FLOAT",
+          "value": 16,
+          "description": ""
+        },
+        {
+          "name": "Desktop/section/rhythm-y",
+          "type": "FLOAT",
+          "value": 96,
+          "description": ""
+        },
+        {
+          "name": "Tablet/section/rhythm-y",
+          "type": "FLOAT",
+          "value": 32,
+          "description": ""
+        },
+        {
+          "name": "Mobile/section/rhythm-y",
+          "type": "FLOAT",
+          "value": 32,
+          "description": ""
+        },
+        {
+          "name": "Desktop/viewport/width",
+          "type": "FLOAT",
+          "value": 1280,
+          "description": ""
+        },
+        {
+          "name": "Tablet/viewport/width",
+          "type": "FLOAT",
+          "value": 768,
+          "description": ""
+        },
+        {
+          "name": "Mobile/viewport/width",
+          "type": "FLOAT",
+          "value": 390,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "Design System",
+      "modes": [
+        "Mode 1"
+      ],
+      "variables": [
+        {
+          "name": "ds/version",
+          "type": "STRING",
+          "value": "v0.91",
+          "description": ""
+        },
+        {
+          "name": "ds/last-updated",
+          "type": "STRING",
+          "value": "2026-08-16",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "2 Theme",
+      "modes": [
+        "Light",
+        "Dark"
+      ],
+      "variables": [
+        {
+          "name": "Light/color/border",
+          "type": "COLOR",
+          "value": "#d1ddbb",
+          "description": "Default aggregate boundary for cards, rows, and table rails."
+        },
+        {
+          "name": "Dark/color/border",
+          "type": "COLOR",
+          "value": "#4c4c4c",
+          "description": "Default aggregate boundary for cards, rows, and table rails."
+        },
+        {
+          "name": "Light/color/background",
+          "type": "COLOR",
+          "value": "#f5ffe1",
+          "description": "Page base canvas and Link/CTA hover fill (foreground/background invert); not cards."
+        },
+        {
+          "name": "Dark/color/background",
+          "type": "COLOR",
+          "value": "#1e1e1e",
+          "description": "Page base canvas and Link/CTA hover fill (foreground/background invert); not cards."
+        },
+        {
+          "name": "Light/color/surface",
+          "type": "COLOR",
+          "value": "#e0eec4",
+          "description": "Idle fill for toggle controls (ThemeToggle, MotionToggle) and topic chips; not footer."
+        },
+        {
+          "name": "Dark/color/surface",
+          "type": "COLOR",
+          "value": "#343434",
+          "description": "Idle fill for toggle controls (ThemeToggle, MotionToggle) and topic chips; not footer."
+        },
+        {
+          "name": "Light/color/surface-hover",
+          "type": "COLOR",
+          "value": "#eaf5d3",
+          "description": "Single hover tint for row/card/button hover states only."
+        },
+        {
+          "name": "Dark/color/surface-hover",
+          "type": "COLOR",
+          "value": "#2b2b2b",
+          "description": "Single hover tint for row/card/button hover states only."
+        },
+        {
+          "name": "Light/color/foreground-muted",
+          "type": "COLOR",
+          "value": "#5b5b5b",
+          "description": "Passive metadata and helper text; 6.56:1 Light / 6.29:1 Dark on color/background."
+        },
+        {
+          "name": "Dark/color/foreground-muted",
+          "type": "COLOR",
+          "value": "#b0b0b0",
+          "description": "Passive metadata and helper text; 6.56:1 Light / 6.29:1 Dark on color/background."
+        },
+        {
+          "name": "Light/color/foreground",
+          "type": "COLOR",
+          "value": "#1e1e1e",
+          "description": "Primary readable text and icon colour on standard surfaces."
+        },
+        {
+          "name": "Dark/color/foreground",
+          "type": "COLOR",
+          "value": "#ececec",
+          "description": "Primary readable text and icon colour on standard surfaces."
+        },
+        {
+          "name": "Light/color/foreground-strong",
+          "type": "COLOR",
+          "value": "#101010",
+          "description": "Active/current-item marker (TOC link, current serie post); not headings or body text."
+        },
+        {
+          "name": "Dark/color/foreground-strong",
+          "type": "COLOR",
+          "value": "#f7f7f7",
+          "description": "Active/current-item marker (TOC link, current serie post); not headings or body text."
+        },
+        {
+          "name": "Light/color/accent",
+          "type": "COLOR",
+          "value": "#00786f",
+          "description": "Accent for serie-chip icon+label only; nav/CTA use foreground, not accent."
+        },
+        {
+          "name": "Dark/color/accent",
+          "type": "COLOR",
+          "value": "#00bba7",
+          "description": "Accent for serie-chip icon+label only; nav/CTA use foreground, not accent."
+        },
+        {
+          "name": "Light/zz/color/accent-hover",
+          "type": "COLOR",
+          "value": "#005f5a",
+          "description": "Retired 2026-08-18 — zero references at the phase-1 audit. Do not bind."
+        },
+        {
+          "name": "Dark/zz/color/accent-hover",
+          "type": "COLOR",
+          "value": "#00d5be",
+          "description": "Retired 2026-08-18 — zero references at the phase-1 audit. Do not bind."
+        },
+        {
+          "name": "Light/color/accent-strong",
+          "type": "COLOR",
+          "value": "#0b4f4a",
+          "description": "Unused reserved slot: zero live consumers found; defined for future high-emphasis accent."
+        },
+        {
+          "name": "Dark/color/accent-strong",
+          "type": "COLOR",
+          "value": "#46ecd5",
+          "description": "Unused reserved slot: zero live consumers found; defined for future high-emphasis accent."
+        },
+        {
+          "name": "Light/color/accent-subtle",
+          "type": "COLOR",
+          "value": "#f0fdfa",
+          "description": "Unused reserved slot: zero live consumers found; defined for future soft accent backdrop."
+        },
+        {
+          "name": "Dark/color/accent-subtle",
+          "type": "COLOR",
+          "value": "#022f2e",
+          "description": "Unused reserved slot: zero live consumers found; defined for future soft accent backdrop."
+        },
+        {
+          "name": "Light/color/surface-raised",
+          "type": "COLOR",
+          "value": "#d3e3ae",
+          "description": "Toggle hover fill (ThemeToggle, MotionToggle) and topic-chip elevation on hovered rows."
+        },
+        {
+          "name": "Dark/color/surface-raised",
+          "type": "COLOR",
+          "value": "#3f3f3f",
+          "description": "Toggle hover fill (ThemeToggle, MotionToggle) and topic-chip elevation on hovered rows."
+        },
+        {
+          "name": "Light/font/sans",
+          "type": "STRING",
+          "value": "IBM Plex Sans",
+          "description": "Default body typeface for paragraphs, nav, and UI copy site-wide (IBM Plex Sans)."
+        },
+        {
+          "name": "Dark/font/sans",
+          "type": "STRING",
+          "value": "IBM Plex Sans",
+          "description": "Default body typeface for paragraphs, nav, and UI copy site-wide (IBM Plex Sans)."
+        },
+        {
+          "name": "Light/font/title",
+          "type": "STRING",
+          "value": "Bubbler One",
+          "description": "Display typeface for H1s, hero headings, and card titles (Bubbler One); not body text."
+        },
+        {
+          "name": "Dark/font/title",
+          "type": "STRING",
+          "value": "Bubbler One",
+          "description": "Display typeface for H1s, hero headings, and card titles (Bubbler One); not body text."
+        },
+        {
+          "name": "Light/font/mono",
+          "type": "STRING",
+          "value": "Fira Code",
+          "description": "Monospace for dates, topic chips, and metadata labels (Fira Code); not prose text."
+        },
+        {
+          "name": "Dark/font/mono",
+          "type": "STRING",
+          "value": "Fira Code",
+          "description": "Monospace for dates, topic chips, and metadata labels (Fira Code); not prose text."
+        }
+      ]
+    }
+  ],
+  "textStyles": [
+    {
+      "name": "Body/4xl/semibold",
+      "fontSize": 36,
+      "fontName": {
+        "family": "IBM Plex Sans",
+        "style": "SemiBold"
+      }
+    },
+    {
+      "name": "Body/xl/medium",
+      "fontSize": 20,
+      "fontName": {
+        "family": "IBM Plex Sans",
+        "style": "Medium"
+      }
+    },
+    {
+      "name": "Body/base/regular",
+      "fontSize": 16,
+      "fontName": {
+        "family": "IBM Plex Sans",
+        "style": "Regular"
+      }
+    },
+    {
+      "name": "Hero/Title",
+      "fontSize": 48,
+      "fontName": {
+        "family": "Bubbler One",
+        "style": "Regular"
+      }
+    },
+    {
+      "name": "Body/s/regular",
+      "fontSize": 14,
+      "fontName": {
+        "family": "IBM Plex Sans",
+        "style": "Regular"
+      }
+    },
+    {
+      "name": "Body/xs/regular",
+      "fontSize": 12,
+      "fontName": {
+        "family": "IBM Plex Sans",
+        "style": "Regular"
+      }
+    },
+    {
+      "name": "Label/Meta",
+      "fontSize": 14,
+      "fontName": {
+        "family": "IBM Plex Sans",
+        "style": "Medium"
+      }
+    },
+    {
+      "name": "Chip/Mono",
+      "fontSize": 12,
+      "fontName": {
+        "family": "Fira Code",
+        "style": "Regular"
+      }
+    },
+    {
+      "name": "Body/l/regular",
+      "fontSize": 18,
+      "fontName": {
+        "family": "IBM Plex Sans",
+        "style": "Regular"
+      }
+    },
+    {
+      "name": "Heading/H1",
+      "fontSize": 60,
+      "fontName": {
+        "family": "Bubbler One",
+        "style": "Regular"
+      }
+    },
+    {
+      "name": "Heading/H3",
+      "fontSize": 22,
+      "fontName": {
+        "family": "IBM Plex Sans",
+        "style": "SemiBold"
+      }
+    },
+    {
+      "name": "Body/xl/regular",
+      "fontSize": 20,
+      "fontName": {
+        "family": "IBM Plex Sans",
+        "style": "Regular"
+      }
+    },
+    {
+      "name": "Body/3xl/regular",
+      "fontSize": 30,
+      "fontName": {
+        "family": "IBM Plex Sans",
+        "style": "Regular"
+      }
+    },
+    {
+      "name": "Code/Base",
+      "fontSize": 14,
+      "fontName": {
+        "family": "Fira Code",
+        "style": "Regular"
+      }
+    },
+    {
+      "name": "Body/base/medium",
+      "fontSize": 16,
+      "fontName": {
+        "family": "IBM Plex Sans",
+        "style": "Medium"
+      }
+    },
+    {
+      "name": "Heading/H2",
+      "fontSize": 30,
+      "fontName": {
+        "family": "IBM Plex Sans",
+        "style": "SemiBold"
+      }
+    },
+    {
+      "name": "Body/xs/medium",
+      "fontSize": 12,
+      "fontName": {
+        "family": "IBM Plex Sans",
+        "style": "Medium"
+      }
+    }
+  ]
+}
